@@ -82,6 +82,7 @@
 			font-size: 18px;
 			margin-bottom: 12px;
 		}
+		
 
 	</style>
 </head>
@@ -89,7 +90,7 @@
 	<%@ include file="restHead.jsp" %>
 	<div id="outer2">
 		<iframe src="restMenubar.jsp"></iframe>
-		<div id="content">
+		<div id="content" >
 			<!-- 컨텐츠 작성부 -->
 			
 			<div id="area1">
@@ -138,6 +139,7 @@
 	<script>
 		$(function(){
 			$('#title').text("");
+			$('#menu1').css("background-color", "lightgray");
 		})
 	</script>
 </body>
