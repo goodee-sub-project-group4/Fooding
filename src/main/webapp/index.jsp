@@ -8,9 +8,7 @@
 </head>
 <body>
 
-	<a href="<%= request.getContextPath() + "/main.bo" %>">지도 api</a>
 	<%@ include file="views/common/head.jsp" %>
-	
 
 </body>
 </html>

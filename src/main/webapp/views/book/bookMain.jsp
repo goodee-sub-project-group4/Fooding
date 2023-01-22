@@ -16,21 +16,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	694ae779a7a7935c84a1e22edd5c5d87"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
 <style>
-    .wrap{width: 1200px; margin: auto;}
-    .header div{border: 1px solid black;} 
-    #header1-padding, #header2-padding, #header3-padding{
-        float:left;
-        box-sizing: border-box;
-        padding: 5px;
-        height: 150px;
-    }
-    #header1-padding, #header3-padding{width: 25%;}
-    #header2-padding{width: 50%;}
-    #header1, #header2, #header3{height: 100%;}
-    #header3-1, #header3-2{box-sizing: border-box; width: 100%; height: 50%;}
-    #header-line{width:100%; float: left; box-sizing: border-box; padding: 20px;}
-    #header-line>div{height:3px; background-color: black;}
-    
+    .wrap{width: 1200px; margin: auto;} 
     /* 컨텐트 전체 영역 */
     .content div{border: 1px solid black;}
     .content{width: 1200px; margin: auto; box-sizing: border-box; float: left;}
@@ -116,30 +102,10 @@
 </style>
 </head>
 <body>
+
+	<%@ include file="/views/common/head.jsp" %>
+	
     <div class="wrap">
-        <div class="header">
-            <div id="header1-padding">
-                <div id="header1">
-
-                </div>
-            </div>
-            <div id="header2-padding">
-                <div id="header2">
-            </div>
-
-            </div>
-            <div id="header3-padding">
-                <div id="header3">
-                    <div id="header3-1"></div>
-                    <div id="header3-2"></div>
-                </div>
-            </div>
-        </div>
-        <div id="header-line">
-            <div></div>
-        </div>    
-
-
         <div class="content">
             <div id="content1-padding">
                 <div id="content1">
