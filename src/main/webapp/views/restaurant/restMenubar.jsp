@@ -6,6 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+    #pageName {
+        margin: 0;
+        font-size: 25px;
+    }
     #menu {
         border-width: 0px 2px 2px 2px;
         border-color: rgb(104, 104, 104);
@@ -17,7 +21,7 @@
         box-sizing:border-box;
         position:absolute;
         left:10px;
-        top:10px;
+        top:100px;
         z-index: 100;
     }
     #menu ul, #menu2-detail ul, #menu3-detail ul {
@@ -59,7 +63,7 @@
         box-sizing: border-box;
         position:absolute;
         left:208px;
-        top:70px;
+        top:160px;
         display:none;
     }
 
@@ -74,7 +78,7 @@
         box-sizing: border-box;
         position:absolute;
         left:208px;
-        top:130px;
+        top:220px;
         display:none;
     }
 
@@ -84,6 +88,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
+    <br>
+    <h2 id="pageName">업체 페이지</h2>
     <div id="menu">
         <ul>
             <li id="menu1">예약관리<span>></span></li>

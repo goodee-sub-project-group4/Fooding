@@ -32,7 +32,7 @@
 	</style>
 </head>
 <body>
-	<%@ include file="restMypageHead.jsp" %>
+	<%@ include file="restHead.jsp" %>
 	<div id="outer2">
 		<iframe src="restMenubar.jsp"></iframe>
 		<div id="content">
@@ -41,5 +41,10 @@
 			
 		</div>
 	</div>
+	<script>
+		$(function(){
+			$('#title').text("변경할 제목 입력");
+		})
+	</script>
 </body>
 </html>
