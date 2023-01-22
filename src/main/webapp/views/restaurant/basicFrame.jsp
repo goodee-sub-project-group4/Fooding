@@ -21,7 +21,7 @@
 			position: absolute;
 		}
 		#content {
-			border: 3px solid blue;
+			/* border: 3px solid blue; */
 			width:950px;
 			display: inline-block;
 			box-sizing: border-box;

@@ -40,15 +40,15 @@
 		#area1 {
 			height:400px
 		}
-		#area1 h3 {
+		#area1 h3, #area2 h3, #area3 h3 {
 			font-size: 24px;
 			font-weight: 700;
 			margin-bottom: 20px;
 			display: inline-block;
 		}
-		#area1 span {
+		.more {
 			float:right;
-			margin-top:5px;
+			margin-top:25px;
 			font-size: 17px;
 		}
 		#area1 span img {
@@ -66,23 +66,27 @@
 			margin:auto;
 			height: 80px;
 			margin-top: 12px;
-
+		}
+		#area2 .alert, #area3 .alert {
+			width:350px;
+			height:150px;
+			display:inline-block;
+			margin-right: 30px;
 		}
 		#area2, #area3 {
-			height:200px			
+			height:280px;
+			padding:30px;			
+		}
+		#badge1 {
+			background-color: crimson;
+			font-size: 18px;
+			margin-bottom: 12px;
 		}
 
 	</style>
 </head>
 <body>
 	<%@ include file="restHead.jsp" %>
-	<div class="container">
-		<h2>Badges</h2>
-		<a href="#">News <span class="badge">5</span></a><br>
-		<a href="#">Comments <span class="badge">10</span></a><br>
-		<a href="#">Updates <span class="badge">2</span></a>
-	  </div>
-	  
 	<div id="outer2">
 		<iframe src="restMenubar.jsp"></iframe>
 		<div id="content">
@@ -90,8 +94,8 @@
 			
 			<div id="area1">
 				<div>
-					<h3>신규예약건</h3>
-					<span>더보기 <img src="../../resources/images/more.png" width="25"></span>
+					<h3>신규예약건 </h3> <span id="badge1" class="badge">2</span>
+					<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
 					<div class="alert alert-secondary">
 						<strong>Success!</strong> Indicates a successful or positive action.
 					</div>
@@ -103,11 +107,31 @@
 					</div>
 				</div>
 				<div>
-					<h3>이달의 스케줄</h3>
+					<h3>이달의 스케줄 </h3> <span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
 				</div>
 			</div>
-			<div id="area2"></div>
-			<div id="area3"></div>
+			<div id="area2">
+				<h3>미답변문의</h3> <span id="badge1" class="badge">4</span>
+				<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
+				<br clear="both">
+				<div class="alert alert-secondary">
+					<strong>Success!</strong> Indicates a successful or positive action.
+				</div>
+				<div class="alert alert-secondary">
+					<strong>Success!</strong> Indicates a successful or positive action.
+				</div>
+			</div>
+			<div id="area3">
+				<h3>리뷰</h3> <span id="badge1" class="badge">5</span>
+				<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
+				<br clear="both">
+				<div class="alert alert-secondary">
+					<strong>Success!</strong> Indicates a successful or positive action.
+				</div>
+				<div class="alert alert-secondary">
+					<strong>Success!</strong> Indicates a successful or positive action.
+				</div>
+			</div>
 			
 		</div>
 	</div>

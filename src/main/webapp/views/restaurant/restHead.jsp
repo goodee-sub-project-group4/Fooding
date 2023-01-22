@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 부트스트랩 Badges 효과 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <style>
     #outer {
         width:1200px;
@@ -20,9 +23,7 @@
         /* border:5px solid pink; */
     }
     #outer>div {
-        display: inline-block;
-        
-        
+        display: inline-block;        
         margin-top: 30px;
         box-sizing: border-box;
     }
@@ -45,6 +46,10 @@
     #div3 img {
         margin-bottom: 20px;
         margin-left:10px
+    }
+    #title {
+        font-size: 30px;
+        font-weight: 400;
     }
     
 
