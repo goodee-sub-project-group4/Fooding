@@ -10,6 +10,7 @@
             border-width: 0px 2px 2px 2px;
             border-color: black;
             border-style: solid;
+            background-color: white;
             width: 200px;
             height: 300px;
             float:left;
@@ -17,8 +18,8 @@
             position:absolute;
             left:10px;
             top:10px;
+            z-index: 100;
         }
-
         #menu ul, #menu3-detail ul, #menu4-detail ul {
             list-style-type: none;
             margin: 0;
@@ -26,7 +27,6 @@
             width:100%;
             height:100%;
         }
-
         #menu li, #menu3-detail li, #menu4-detail li {
             border-top-width: 2px;
             border-top-color: black;
@@ -37,10 +37,20 @@
             height:60px;
             font-size: 17px;
             line-height: 40px;
+            
         }
 
         span {
             float: right;
+        }
+        li:hover {
+            background-color: lightgrey;
+            cursor: pointer;
+        }
+        #menu5:hover {
+            border-bottom-width : 2px;
+            border-bottom-color: black;
+            border-bottom-style: solid;
         }
 
         #menu3-detail {
@@ -53,7 +63,7 @@
             float:left;
             box-sizing: border-box;
             position:absolute;
-            left:208px;
+            left:206px;
             top:130px;
             display:none;
         }
@@ -68,10 +78,11 @@
             float:left;
             box-sizing: border-box;
             position:absolute;
-            left:208px;
+            left:206px;
             top:70px;
             display:none;
         }
+
         
 
     </style>
@@ -95,7 +106,7 @@
         </ul>
     </div>
     
-    <div id="menu4-detail">
+    <div id="menu4-detail" class="detail">
         <ul>
             <li>회원<span>></span></li>
             <li>업체<span>></span></li>
@@ -105,22 +116,20 @@
 
     <script>
         $(function(){
-            /*
-            $('#menu3').click(function(){
-                if( $('#menu3-detail').css("display") == "none") {
-                    $('#menu3-detail').css("display", "block");
-                } else {
-                    $('#menu3-detail').css("display", "none");
-                }
-            })*/
-
             $('li').click(function(){
-                let detailId = $(this).attr("id")+"-detail";
-                if($('#'+detailId).css("display") == "none") {
+                /*클릭시 배경색 효과주기*/
+                $(this).siblings().css("background-color","");
+                $(this).css("background-color","lightgray");
+                /*디테일 메뉴를 띄우고 닫게 하는 기능*/
+                let detailId = '#'+$(this).attr("id")+"-detail";
+                if(detailId.classList == null) {
                     $('.detail').css("display","none");
-                    $('#'+detailId).css("display", "block")
+                }
+                if($(detailId).css("display") == "none") {
+                    $('.detail').css("display","none");
+                    $(detailId).css("display", "block")
                 }else {
-                    $('#'+detailId).css("display","none")
+                    $(detailId).css("display","none")
                 }
             })
 
