@@ -5,10 +5,41 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+		/* ↓↓↓ 기본골격용 스타일들 */
+		#outer2 {
+			width:1200px;
+			height: 800px;
+			position: relative;
+			margin:auto;
+		}			
+		#outer2>iframe {
+			border-width:0px;
+			width:100%;
+			height: 100%;
+			z-index: 1000;
+			position: absolute;
+		}
+		#content {
+			border: 3px solid blue;
+			width:950px;
+			display: inline-block;
+			box-sizing: border-box;
+			position:absolute;
+			right:10px;
+		}
+		/* ↓↓↓ 컨텐츠용 스타일 */
+	</style>
 </head>
 <body>
-	<%@ include file="../common/restAdminMypageHead.jsp" %>
-	<h2>아래에 문구</h2>
-
+	<%@ include file="restMypageHead.jsp" %>
+	<div id="outer2">
+		<iframe src="restMenubar.jsp"></iframe>
+		<div id="content">
+			<!-- 컨텐츠 작성부 -->
+			
+			
+		</div>
+	</div>
 </body>
 </html>

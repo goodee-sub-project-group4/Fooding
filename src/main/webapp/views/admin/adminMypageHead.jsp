@@ -22,8 +22,8 @@
     }
     #outer>div {
         display: inline-block;
-        margin-right: 130px;
-        margin-left: 130px;
+        margin-right: 100px;
+        margin-left: 100px;
         margin-top: 30px;
         box-sizing: border-box;
     }

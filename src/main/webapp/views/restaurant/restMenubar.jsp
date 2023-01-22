@@ -12,7 +12,7 @@
         border-style: solid;
         background-color: white;
         width: 200px;
-        height: 302px;
+        height: 182px;
         float:left;
         box-sizing:border-box;
         position:absolute;
@@ -20,14 +20,14 @@
         top:10px;
         z-index: 100;
     }
-    #menu ul, #menu3-detail ul, #menu4-detail ul {
+    #menu ul, #menu2-detail ul, #menu3-detail ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
         width:100%;
         height:100%;
     }
-    #menu li, #menu3-detail li, #menu4-detail li {
+    #menu li, #menu2-detail li, #menu3-detail li {
         border-top-width: 2px;
         border-top-color: rgb(104, 104, 104);
         border-top-style: solid;
@@ -39,33 +39,31 @@
         line-height: 40px;
         
     }
-
-    span {
-        float: right;
-    }
     li:hover {
-        background-color: lightgrey;
+        background-color: lightgray;
         cursor: pointer;
     }
 
-    
+    li span {
+        float: right;
+    }
 
-    #menu3-detail {
+    #menu2-detail {
         background-color: white;
         border-width: 0px 2px 2px 2px;
         border-color: rgb(104, 104, 104);
         border-style: solid;
         width: 200px;
-        height: 122px;
+        height: 362px;
         float:left;
         box-sizing: border-box;
         position:absolute;
-        left:206px;
-        top:130px;
+        left:208px;
+        top:70px;
         display:none;
     }
 
-    #menu4-detail {
+    #menu3-detail {
         background-color: white;
         border-width: 0px 2px 2px 2px;
         border-color: rgb(104, 104, 104);
@@ -75,8 +73,8 @@
         float:left;
         box-sizing: border-box;
         position:absolute;
-        left:206px;
-        top:70px;
+        left:208px;
+        top:130px;
         display:none;
     }
 
@@ -88,35 +86,38 @@
 <body>
     <div id="menu">
         <ul>
-            <li id="menu1">회원관리<span>></span></li>
-            <li id="menu2">업체관리<span>></span></li>
-            <li id="menu3">사이트관리<span>></span></li>
-            <li id="menu4">고객센터 관리<span>></span></li>
-            <li id="menu5">리뷰관리<span>></span></li>
+            <li id="menu1">예약관리<span>></span></li>
+            <li id="menu2">매장관리<span>></span></li>
+            <li id="menu3">고객센터<span>></span></li>
+        </ul>
+    </div>
+    
+    <div id="menu2-detail" class="detail">
+        <ul>
+            <li>달력설정<span>></span></li>
+            <li>매장정보<span>></span></li>
+            <li>메뉴정보<span>></span></li>
+            <li>문의답변<span>></span></li>
+            <li>리뷰<span>></span></li>
+            <li>정산<span>></span></li>
         </ul>
     </div>
     
     <div id="menu3-detail" class="detail">
         <ul>
-            <li>메인 배너<span>></span></li>
-            <li>이용 약관<span>></span></li>
-        </ul>
-    </div>
-    
-    <div id="menu4-detail" class="detail">
-        <ul>
-            <li>회원<span>></span></li>
-            <li>업체<span>></span></li>
-            <li>업체 등록 요청<span>></span></li>
+            <li>공지사항<span>></span></li>
+            <li>FAQ<span>></span></li>
+            <li>1:1문의<span>></span></li>
         </ul>
     </div>
 
     <script>
         $(function(){
+
             $('li').click(function(){
                 /*클릭시 배경색 효과주기*/
                 $(this).siblings().css("background-color","");
-                $(this).css("background-color","lightgray");
+                $(this).css("background-color","lightgrey");
 
                 /*디테일 메뉴를 띄우고 닫게 하는 기능*/
                 let detailId = '#'+$(this).attr("id")+"-detail";
@@ -124,10 +125,14 @@
                     $('.detail').css("display","none");
                 }
                 if($(detailId).css("display") == "none") {
-                    $(detailId).css("display", "block");
-                }
+                    $('.detail').css("display","none");
+                    $(detailId).css("display", "block")
+                } 
             })
+
+            
         })
+
 
         
     </script>
