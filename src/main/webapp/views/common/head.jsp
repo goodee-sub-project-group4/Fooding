@@ -24,7 +24,7 @@
     .wrap{width: 1200px; margin:auto;}
 
     /* 헤드바 */
-    .header div{ border:1px solid black;}
+    .header div{}
     #header1-padding, #header2-padding, #header3-padding{float:left; box-sizing: border-box; padding: 5px; height: 150px;}
     /* 헤드바 왼쪽, 오른쪽 영역 */
     #header1-padding, #header3-padding{width: 25%;}
@@ -33,20 +33,26 @@
     /* 헤드바 높이 */
     #header1, #header2, #header3{height: 100%;}
 
+    /* 헤드바 왼쪽 영역 */
+    #img-logo { padding:5px; margin:20px;}
+
     /* 헤드바 가운데 영역 */
-    #search {text-align: center;  height:50px; line-height:25px; right:80px; padding:10px; position:absolute; top:50px;}
+    #search {text-align: center;  height:60px; line-height:25px; right:80px; padding:10px; position:absolute; top:40px;}
+    #search input {height:40px; border-radius:3px;;}
 
     /* 헤드바 오른쪽 영역 */
     #header3-1, #header3-3 {width: 100%; height: 25%; box-sizing: border-box; text-align: right; color:black;}
+    #header3-1 a {text-decoration:none;}
     #header3-2 {width:100%; height:50%; text-align:center; position:relative; cursor: pointer;}
-    #header3-2 > #part1 {width:30%; height:60px; line-height:50px; position:absolute; left:40px;}
-    #header3-2 > #part2 {width:30%; height:60px; line-height:50px; position:absolute; left:100px;}
-    #header3-2 > #part3 {width:30%; height:60px; line-height:50px; position:absolute; left:160px;}
+    #header3-2 > #part1 {width:30%; height:60px; line-height:50px; position:absolute; left:60px;}
+    #header3-2 > #part2 {width:30%; height:60px; line-height:50px; position:absolute; left:120px;}
+    #header3-2 > #part3 {width:30%; height:60px; line-height:50px; position:absolute; left:180px;}
     /* 헤드바 오른쪽 하이퍼링크 */
     #header3-1 a {color:black; font-size:small;}
     /* 헤드바 오른쪽 메뉴 */
     #header3-1 button {border:none; background:white; font-size:small;}
 
+    /* 밑라인 */
     .line { width:1200px; height:1px; background-color:rgb(231, 229, 229);}
 
 </style>
@@ -58,7 +64,7 @@
         <div class="header">
             <!-- 헤더바1 로고 -->
             <div id="header1-padding">
-                <div id="header1"><img src="resources/image/logo.png" width="40" height="40"></div>
+                <div id="header1"><img id="img-logo" src="resources/images/logo.png" width="240" height="80"></div>
             </div>
 
             <!-- 헤더바2 검색창 -->
@@ -66,7 +72,7 @@
                 <form action="" id="header2-search">
                     <!-- 돋보기 클릭시 검색가능 -->
                     <div id="search">
-                        <input type="text" name="keyword" size="45">&nbsp;<img src="resources/image/search.png" width="30" height="30" >
+                        <input type="text" name="keyword" size="45">&nbsp;&nbsp;<img src="resources/images/search.png" width="25" height="25" >
                     </div>
                 </form>
             </div>
@@ -122,9 +128,9 @@
                     <!-- 헤더바3-2 -->
                     <div id="header3-2">
                         <!-- 각 이미지 클릭시 찜하기, (최근 본 게시물,) 리뷰페이지로 이동가능 -->
-                        <div id="part1"><img src="resources/image/heart.png" width="35" height="35"></div>
-                        <div id="part2"><img src="resources/image/alert.png" width="40" height="40"></div>
-                        <div id="part3"><img src="resources/image/review.png" width="35" height="35"></div>
+                        <div id="part1"><img src="resources/images/heart.png" width="27" height="27"></div>
+                        <div id="part2"><img src="resources/images/alert.png" width="35" height="35"></div>
+                        <div id="part3"><img src="resources/images/review.png" width="30" height="30"></div>
                     </div>
 
                     <div id="header3-3"></div>
@@ -136,7 +142,8 @@
         </div>
         
     </div>
-    <br><br><br><br><br><br>
+
+    <br><br><br><br><br>
 
     <hr class="line">
 
