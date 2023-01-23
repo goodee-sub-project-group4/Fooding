@@ -27,7 +27,7 @@
 	
     <div id="content2-padding">
         <div id="selectList">
-            <b>예약/결제 내역조회</b>
+            <b>예약/결제내역 조회</b>
             <br>
             <select name="selectDate" id="selectDate">
                 <option value="oneM" >1개월</option>
