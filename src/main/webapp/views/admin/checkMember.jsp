@@ -39,7 +39,7 @@
     }
     #sButton{
         border: 1px solid gray;
-        background-color: ;
+        /* background-color: ; */
         border-radius: 4px;
         width: 50px;
         height: 33px;

@@ -28,7 +28,6 @@
 			position: absolute;
 		}
 		#content {
-			/* border: 3px solid blue; */
 			width:950px;
 			display: inline-block;
 			box-sizing: border-box;
@@ -40,7 +39,6 @@
 			display: inline-block;
 		}
 		#content>div {
-			/* border: 3px solid green; */
 			width:100%;
 			box-sizing:border-box;
 		}
@@ -65,7 +63,6 @@
 		#area1>div {
 			width:50%;
 			height:100%;
-			/* border: 3px solid pink; */
 			box-sizing: border-box;
 			float:left;
 			padding:30px;
@@ -151,6 +148,10 @@
 		$(function(){
 			$('#title').text("");
 			$('#menu1').css("background-color", "lightgray");
+
+
+			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
+			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"20px"});
 		})
 	</script>
 </body>
