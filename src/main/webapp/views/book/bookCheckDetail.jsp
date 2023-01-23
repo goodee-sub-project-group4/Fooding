@@ -45,6 +45,16 @@
 
 	<div id="detail-main">
         <b id="detail-head1">&nbsp;&nbsp;예약/결제내역 상세조회</b>
+		<!-- 예약 취소 -->
+		<!-- <b style="font-size: 30px; color: crimson;">취소 처리된 예약입니다</b>
+		<br><br> -->
+			<!-- 업체 취소 -->
+			<!-- <b style="font-size: 20px;">&lt;취소 사유 : 업체 취소&gt;</b> -->
+			<!-- 사용자 취소 -->
+			<!-- <b style="font-size: 20px;">&lt;취소 사유 : 사용자 취소&gt;</b> -->
+
+		<!-- 이용 완료 -->
+		<!-- <b style="font-size: 30px; color: dodgerblue;">이용 완료된 예약입니다</b> -->
 		<b id="detail-head2">no. &nbsp; (예약번호) &nbsp;&nbsp;/&nbsp;&nbsp; 결제일시 &nbsp; 2023.01.01 &nbsp;&nbsp;</b>
         <hr style="display: block; margin-top: 5px; margin-bottom: 30px; background: black; height: 2px;">
 		<div id="detail-content1">
@@ -141,8 +151,11 @@
 			</table>
 			<br>
 			<div style="background-color: whitesmoke; width: 100%; height: 50px; line-height: 50px; float: left;">
-				<div style="width: 50%; float: left; font-size: 25px;">합 계</div>
+				<div style="width: 50%; float: left; font-size: 25px;">결제 금액</div>
 				<div style="width: 50%; float: right; text-align: right; font-size: 25px;">37,000 원</div>
+				<!-- 결제 취소 -->
+				<!-- <div style="width: 50%; float: left; font-size: 25px;">결제 취소</div>
+				<div style="width: 50%; float: right; text-align: right; font-size: 25px;">37,000 원</div> -->
 			</div>
 		</div>
 		<div style="width: 100%; height: 150px; margin-top: 50px;">

@@ -51,8 +51,9 @@
         #review-content7 button {height:35px;}
         
         /* 페이징 */
-        .container {margin-left:0px;}
-        .container a {margin-top:70px; color:red; }
+        #paging {margin-top: 50px;}
+        .container a {color:red; }
+        .pagination {justify-content: center;}        
 
     </style>
     
@@ -111,19 +112,19 @@
             <div id="review-content6">2023.01.23</div>
             <div id="review-content7"><button type="button" class="btn btn-danger">수정</button></div>
         </div>
-        
-    </div>
-    <div class="container">                  
-            <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-            </ul>
+        <div id="paging">
+            <div class="container">                  
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+                </ul>
+            </div>
         </div>
-    
+    </div>
 </body>
 </html>
