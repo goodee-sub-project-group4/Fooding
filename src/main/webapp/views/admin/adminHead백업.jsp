@@ -20,7 +20,6 @@
         height:150px;
         margin:auto;
         box-sizing: border-box;
-<<<<<<< HEAD
     }
     #title {
         font-size: 30px;
@@ -32,29 +31,16 @@
         box-sizing: border-box;
     }
     /* div1 = 로고영역 */
-=======
-        /* border:5px solid pink; */
-    }
-    #outer>div {
-        display: inline-block;        
-        margin-top: 30px;
-        box-sizing: border-box;
-    }
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
     #div1 {
         position: relative;
         bottom: 5px;
     }
-<<<<<<< HEAD
     /* div2 = 타이틀문구 영역 */
-=======
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
     #div2 {
         margin-right: 100px;
         margin-left: 100px;
         width:500px
     }
-<<<<<<< HEAD
     /* div3 = 로그아웃, 프로필 영역 */
     #div3 span {
         margin:5px;
@@ -69,28 +55,6 @@
         margin-bottom: 20px;
         margin-left:10px
     }  
-=======
-    #div3 a{
-        text-decoration:none; color:black; font-size:12px;
-    }
-    #div3 span {
-        margin:5px;
-    }        
-    #div3 h4 {
-        display: inline-block;
-        margin-top: 30px;
-    }
-    #div3 img {
-        margin-bottom: 20px;
-        margin-left:10px
-    }
-    #title {
-        font-size: 30px;
-        font-weight: 400;
-    }
-    
-
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
 </style>
 </head>
 <body>
@@ -102,7 +66,6 @@
             <h3 id="title" width="500">페이지마다 수정되는 타이틀</h3>
         </div>
         <div id="div3">
-<<<<<<< HEAD
             <span>로그아웃</span>
             <span> | </span>
             <h4> 관리자01 님 </h4>
@@ -110,16 +73,5 @@
         </div>
         <hr>
     </div> 
-=======
-            <a href="">로그아웃</a>
-            <span> | </span>
-            <h4> 관리자01 님</h4>
-            <img src="../../resources/images/userIcon.png" width="50">
-        </div>
-        <hr>
-    </div>
-    
-
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
 </body>
 </html>
