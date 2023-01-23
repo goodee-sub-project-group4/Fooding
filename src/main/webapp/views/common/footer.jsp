@@ -55,7 +55,7 @@
 </head>
 <body>
     <!--푸터-->
-    <div id="footer-line">
+    <div id="footer-line" width="1200">
         <div></div>
     </div> 
     <div class="footer">
