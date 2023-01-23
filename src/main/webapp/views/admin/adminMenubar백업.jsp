@@ -6,14 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    
     #menu {
         border-width: 0px 2px 2px 2px;
         border-color: gray;
         border-style: solid;
         background-color: white;
         width: 200px;
-        height: 182px;
+        height: 302px;
         float:left;
         box-sizing:border-box;
         position:absolute;
@@ -21,14 +20,14 @@
         top:100px;
         z-index: 100;
     }
-    #menu ul, #menu2-detail ul, #menu3-detail ul {
+    #menu ul, #menu3-detail ul, #menu4-detail ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
         width:100%;
         height:100%;
     }
-    #menu li, #menu2-detail li, #menu3-detail li {
+    #menu li, #menu3-detail li, #menu4-detail li {
         border-top-width: 2px;
         border-top-color: gray;
         border-top-style: solid;
@@ -40,29 +39,16 @@
         line-height: 40px;
         
     }
-    li:hover {
-        background-color: lightgray;
-        cursor: pointer;
-    }
 
     li span {
         float: right;
     }
-
-    #menu2-detail {
-        background-color: white;
-        border-width: 0px 2px 2px 2px;
-        border-color: gray;
-        border-style: solid;
-        width: 200px;
-        height: 362px;
-        float:left;
-        box-sizing: border-box;
-        position:absolute;
-        left:208px;
-        top:160px;
-        display:none;
+    li:hover {
+        background-color: lightgrey;
+        cursor: pointer;
     }
+
+    
 
     #menu3-detail {
         background-color: white;
@@ -70,7 +56,7 @@
         border-color: gray;
         border-style: solid;
         width: 200px;
-        height: 182px;
+        height: 122px;
         float:left;
         box-sizing: border-box;
         position:absolute;
@@ -79,48 +65,62 @@
         display:none;
     }
 
+    #menu4-detail {
+        background-color: white;
+        border-width: 0px 2px 2px 2px;
+        border-color:  gray;
+        border-style: solid;
+        width: 200px;
+        height: 182px;
+        float:left;
+        box-sizing: border-box;
+        position:absolute;
+        left:208px;
+        top:280px;
+        display:none;
+    }
+    
     #page-name { 
         margin: 0;
         font-weight: 600;
         color: rgb(71, 71, 71);
     }
+
     
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
     <br>
-    <h2 id="page-name">업체 페이지</h2>
+    <h2 id="page-name">관리자 페이지</h2>
     <div id="menu">
         <ul>
-            <li id="menu1">예약관리<span>></span></li>
-            <li id="menu2">매장관리<span>></span></li>
-            <li id="menu3">고객센터<span>></span></li>
-        </ul>
-    </div>
-    
-    <div id="menu2-detail" class="detail">
-        <ul>
-            <li>달력설정<span>></span></li>
-            <li>매장정보<span>></span></li>
-            <li>메뉴정보<span>></span></li>
-            <li>문의답변<span>></span></li>
-            <li>리뷰<span>></span></li>
-            <li>정산<span>></span></li>
+            <li id="menu1">회원관리<span>></span></li>
+            <li id="menu2">업체관리<span>></span></li>
+            <li id="menu3">사이트관리<span>></span></li>
+            <li id="menu4">고객센터 관리<span>></span></li>
+            <li id="menu5">리뷰관리<span>></span></li>
         </ul>
     </div>
     
     <div id="menu3-detail" class="detail">
         <ul>
-            <li>공지사항<span>></span></li>
-            <li>FAQ<span>></span></li>
-            <li>1:1문의<span>></span></li>
+            <li>메인 배너<span>></span></li>
+            <li>이용 약관<span>></span></li>
+        </ul>
+    </div>
+    
+    <div id="menu4-detail" class="detail">
+        <ul>
+            <li>회원<span>></span></li>
+            <li>업체<span>></span></li>
+            <li>업체 등록 요청<span>></span></li>
         </ul>
     </div>
 
     <script>
         $(function(){
-
             $('li').click(function(){
                 /*클릭시 배경색 효과주기*/
                 $(this).siblings().css("background-color","");
@@ -136,11 +136,7 @@
                     $(detailId).css("display", "block")
                 } 
             })
-
-            
-            
         })
-
 
         
     </script>

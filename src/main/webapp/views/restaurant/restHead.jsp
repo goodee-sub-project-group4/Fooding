@@ -20,37 +20,44 @@
         height:150px;
         margin:auto;
         box-sizing: border-box;
-        /* border:5px solid pink; */
     }
+    #title {
+        font-size: 30px;
+        font-weight: 600;
+        color: rgb(71, 71, 71);
+    }
+    
     #outer>div {
         display: inline-block;        
-        margin-top: 30px;
+        margin-top: 40px;
         box-sizing: border-box;
     }
+    /* div1 = 로고영역 */
     #div1 {
         position: relative;
         bottom: 5px;
     }
+    /* div2 = 타이틀문구 영역 */
     #div2 {
         margin-right: 100px;
         margin-left: 100px;
         width:500px
     }
+    /* div3 = 로그아웃, 프로필 영역 */
     #div3 span {
         margin:5px;
     }        
-    #div3 h4 {
+    #div3 h4 { 
+        width : 100px;
+        height : 50px;
         display: inline-block;
-        margin-top: 30px;
+        margin-top: 20px;
     }
-    #div3 img {
+    #div3 img { 
         margin-bottom: 20px;
         margin-left:10px
     }
-    #title {
-        font-size: 30px;
-        font-weight: 400;
-    }
+    
     
 
 </style>
@@ -66,7 +73,7 @@
         <div id="div3">
             <span>로그아웃</span>
             <span> | </span>
-            <h4> 업체01 님</h4>
+            <h4> 업체01 님 </h4>
             <img src="../../resources/images/userIcon.png" width="50">
         </div>
         <hr>

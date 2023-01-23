@@ -20,8 +20,14 @@
 			z-index: 1000;
 			position: absolute;
 		}
+		#menubar {
+			border-width:0px;
+			width:100%;
+			height: 100%;
+			z-index: 1000;
+			position: absolute;
+		}
 		#content {
-			/* border: 3px solid blue; */
 			width:950px;
 			display: inline-block;
 			box-sizing: border-box;
@@ -33,7 +39,6 @@
 			display: inline-block;
 		}
 		#content>div {
-			/* border: 3px solid green; */
 			width:100%;
 			box-sizing:border-box;
 		}
@@ -46,6 +51,7 @@
 			margin-bottom: 20px;
 			display: inline-block;
 		}
+		/*더보기버튼*/
 		.more {
 			float:right;
 			margin-top:25px;
@@ -57,7 +63,6 @@
 		#area1>div {
 			width:50%;
 			height:100%;
-			/* border: 3px solid pink; */
 			box-sizing: border-box;
 			float:left;
 			padding:30px;
@@ -89,7 +94,10 @@
 <body>
 	<%@ include file="restHead.jsp" %>
 	<div id="outer2">
-		<iframe src="restMenubar.jsp"></iframe>
+		<!-- <iframe src="restMenubar.jsp"></iframe> -->
+		<div id="menubar">
+			<%@ include file="restMenubar.jsp" %>
+		</div>
 		<div id="content" >
 			<!-- 컨텐츠 작성부 -->
 			
@@ -140,6 +148,10 @@
 		$(function(){
 			$('#title').text("");
 			$('#menu1').css("background-color", "lightgray");
+
+
+			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
+			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"20px"});
 		})
 	</script>
 </body>
