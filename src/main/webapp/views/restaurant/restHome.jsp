@@ -13,13 +13,6 @@
 			position: relative;
 			margin:auto;
 		}			
-		#outer2>iframe {
-			border-width:0px;
-			width:100%;
-			height: 100%;
-			z-index: 1000;
-			position: absolute;
-		}
 		
 		#content {
 			width:950px;
@@ -34,6 +27,11 @@
 			z-index: 1000;
 			position: absolute;
 		}
+		#footer {
+			width:1200px;
+			margin:auto;
+		}
+
 		/* ↓↓↓ 컨텐츠용 스타일 */
 		#content {
 			display: inline-block;
@@ -51,13 +49,13 @@
 			margin-bottom: 20px;
 			display: inline-block;
 		}
-		/*더보기버튼*/
-		.more {
+		
+		.more { /*더보기버튼*/
 			float:right;
 			margin-top:25px;
 			font-size: 17px;
 		}
-		#area1 span img {
+		#area1 span img { /*더보기버튼*/
 			margin-bottom:5px;
 		}
 		#area1>div {
@@ -71,23 +69,27 @@
 			margin:auto;
 			height: 80px;
 			margin-top: 12px;
+			background-color:whitesmoke;
+			border-color: whitesmoke;
 		}
 		#area2 .alert, #area3 .alert {
 			width:350px;
 			height:150px;
 			display:inline-block;
 			margin-right: 30px;
+			background-color:whitesmoke;
+			border-color: whitesmoke;
 		}
 		#area2, #area3 {
 			height:280px;
 			padding:30px;			
 		}
-		#badge1 {
+		.badge {
 			background-color: crimson;
 			font-size: 18px;
-			margin-bottom: 12px;
+			position:relative;
+			bottom:4px;
 		}
-		
 
 	</style>
 	
@@ -105,7 +107,7 @@
 			<div id="area1">
 				<div>
 					
-					<h3>신규예약건 </h3> <span id="badge1" class="badge">2</span>
+					<h3>신규예약건 </h3> <span class="badge">2</span>
 					<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
 					
 					<div class="alert alert-secondary">
@@ -121,10 +123,11 @@
 				</div>
 				<div>
 					<h3>이달의 스케줄 </h3> <span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
+
 				</div>
 			</div>
 			<div id="area2">
-				<h3>미답변문의</h3> <span id="badge1" class="badge">4</span>
+				<h3>미답변문의</h3> <span class="badge">4</span>
 				<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<div class="alert alert-secondary">
@@ -135,7 +138,7 @@
 				</div>
 			</div>
 			<div id="area3">
-				<h3>리뷰</h3> <span id="badge1" class="badge">5</span>
+				<h3>리뷰</h3> <span class="badge">5</span>
 				<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<div class="alert alert-secondary">
@@ -148,6 +151,11 @@
 			
 		</div>
 	</div>
+	<br clear="both">
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div id="footer">
+		<%@ include file="../common/footer.jsp" %>
+	</div>	
 	<script>
 		$(function(){
 			$('#title').text("");

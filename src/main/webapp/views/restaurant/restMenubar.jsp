@@ -9,7 +9,7 @@
     
     #menu {
         border-width: 0px 2px 2px 2px;
-        border-color: gray;
+        border-color: whitesmoke;
         border-style: solid;
         background-color: white;
         width: 200px;
@@ -30,7 +30,7 @@
     }
     #menu li, #menu2-detail li, #menu3-detail li {
         border-top-width: 2px;
-        border-top-color: gray;
+        border-top-color: whitesmoke;
         border-top-style: solid;
         padding: 10px;
         box-sizing: border-box;
@@ -41,7 +41,7 @@
         
     }
     li:hover {
-        background-color: lightgray;
+        background-color: whitesmoke;
         cursor: pointer;
     }
 
@@ -52,7 +52,7 @@
     #menu2-detail {
         background-color: white;
         border-width: 0px 2px 2px 2px;
-        border-color: gray;
+        border-color: whitesmoke;
         border-style: solid;
         width: 200px;
         height: 362px;
@@ -67,7 +67,7 @@
     #menu3-detail {
         background-color: white;
         border-width: 0px 2px 2px 2px;
-        border-color: gray;
+        border-color: whitesmoke;
         border-style: solid;
         width: 200px;
         height: 182px;
@@ -120,23 +120,32 @@
 
     <script>
         $(function(){
-
-            $('li').click(function(){
+            let flag = 0;
+            $('li').click(function(flag){
                 /*클릭시 배경색 효과주기*/
                 $(this).siblings().css("background-color","");
-                $(this).css("background-color","lightgrey");
+                $(this).css("background-color","whitesmoke");
+                $(this).siblings().css("color","");
+                $(this).css("color","rgb(221,45,45)");
+                $(this).siblings().children().css("color","");
+                $(this).children().css("color","rgb(221,45,45)");
 
                 /*디테일 메뉴를 띄우고 닫게 하는 기능*/
                 let detailId = '#'+$(this).attr("id")+"-detail";
                 if(detailId.classList == null) {
                     $('.detail').css("display","none");
                 }
-                if($(detailId).css("display") == "none") {
-                    $('.detail').css("display","none");
-                    $(detailId).css("display", "block")
-                } 
-            })
+        
+                    if($(detailId).css("display") == "none") {
+                        $('.detail').css("display","none");
+                        $(detailId).css("display", "block");
+                    }
+                
+                
+                
 
+                
+            })
             
             
         })

@@ -27,6 +27,10 @@
 			z-index: 1000;
 			position: absolute;
 		}
+		#footer {
+			width:1200px;
+			margin:auto;
+		}
 		/* ↓↓↓ 컨텐츠용 스타일 */
 	</style>
 </head>
@@ -43,12 +47,15 @@
 			
 		</div>
 	</div>
+	<br><br><br><br><br><br><br>
+	<div id="footer">
+		<%@ include file="../common/footer.jsp" %>
+	</div>	
 	<script>
 		$(function(){
 			// Head.jsp 내의 요소, #title의 문구를 변경한다.
 			$('#title').text("변경할 제목 입력");
-			// Menubar.jsp 내의 요소, 메뉴를 클릭한 효과를 준다(배경색 진하게)
-			$('#메뉴아이디').click();
+			
 
 			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
 			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"5px"});
