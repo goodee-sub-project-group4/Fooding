@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<style>
-		/* ↓↓↓ 기본골격용 스타일들 (수정할필요X) */
+		/* ↓↓↓ 기본골격용 스타일들 (수정할필요X)*/
 		#outer2 {
 			width:1200px;
 			height: 800px;
@@ -31,11 +31,12 @@
 	</style>
 </head>
 <body>
-	
-	<%@ include file="restHead.jsp" %>
+	<!-- adminHead 삽입 -->
+	<%@ include file="adminHead.jsp" %>
 	<div id="outer2">
 		<div id="menubar">
-			<%@ include file="restMenubar.jsp" %>
+			<!-- adminMenuber 삽입 -->
+			<%@ include file="adminMenubar.jsp" %>
 		</div>
 		<div id="content">
 			<!-- 컨텐츠 작성부 -->
@@ -50,9 +51,11 @@
 			// Menubar.jsp 내의 요소, 메뉴를 클릭한 효과를 준다(배경색 진하게)
 			$('#메뉴아이디').click();
 
+
+
+			
 			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
 			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"20px"});
-
 		})
 	</script>
 </body>

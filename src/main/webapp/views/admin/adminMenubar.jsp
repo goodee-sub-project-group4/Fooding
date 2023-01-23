@@ -8,7 +8,7 @@
 <style>
     #menu {
         border-width: 0px 2px 2px 2px;
-        border-color: rgb(104, 104, 104);
+        border-color: gray;
         border-style: solid;
         background-color: white;
         width: 200px;
@@ -17,7 +17,7 @@
         box-sizing:border-box;
         position:absolute;
         left:10px;
-        top:10px;
+        top:100px;
         z-index: 100;
     }
     #menu ul, #menu3-detail ul, #menu4-detail ul {
@@ -29,7 +29,7 @@
     }
     #menu li, #menu3-detail li, #menu4-detail li {
         border-top-width: 2px;
-        border-top-color: rgb(104, 104, 104);
+        border-top-color: gray;
         border-top-style: solid;
         padding: 10px;
         box-sizing: border-box;
@@ -40,7 +40,7 @@
         
     }
 
-    span {
+    li span {
         float: right;
     }
     li:hover {
@@ -53,30 +53,30 @@
     #menu3-detail {
         background-color: white;
         border-width: 0px 2px 2px 2px;
-        border-color: rgb(104, 104, 104);
+        border-color: gray;
         border-style: solid;
         width: 200px;
         height: 122px;
         float:left;
         box-sizing: border-box;
         position:absolute;
-        left:206px;
-        top:130px;
+        left:208px;
+        top:220px;
         display:none;
     }
 
     #menu4-detail {
         background-color: white;
         border-width: 0px 2px 2px 2px;
-        border-color: rgb(104, 104, 104);
+        border-color:  gray;
         border-style: solid;
         width: 200px;
         height: 182px;
         float:left;
         box-sizing: border-box;
         position:absolute;
-        left:206px;
-        top:70px;
+        left:208px;
+        top:280px;
         display:none;
     }
 
@@ -86,6 +86,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
+    <br>
+    <h2 id="page-name">관리자 페이지</h2>
     <div id="menu">
         <ul>
             <li id="menu1">회원관리<span>></span></li>
@@ -116,7 +118,7 @@
             $('li').click(function(){
                 /*클릭시 배경색 효과주기*/
                 $(this).siblings().css("background-color","");
-                $(this).css("background-color","lightgray");
+                $(this).css("background-color","lightgrey");
 
                 /*디테일 메뉴를 띄우고 닫게 하는 기능*/
                 let detailId = '#'+$(this).attr("id")+"-detail";
@@ -124,8 +126,9 @@
                     $('.detail').css("display","none");
                 }
                 if($(detailId).css("display") == "none") {
-                    $(detailId).css("display", "block");
-                }
+                    $('.detail').css("display","none");
+                    $(detailId).css("display", "block")
+                } 
             })
         })
 

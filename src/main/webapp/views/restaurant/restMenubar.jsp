@@ -6,13 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    #pageName {
-        margin: 0;
-        font-size: 25px;
-    }
+    
     #menu {
         border-width: 0px 2px 2px 2px;
-        border-color: rgb(104, 104, 104);
+        border-color: gray;
         border-style: solid;
         background-color: white;
         width: 200px;
@@ -33,7 +30,7 @@
     }
     #menu li, #menu2-detail li, #menu3-detail li {
         border-top-width: 2px;
-        border-top-color: rgb(104, 104, 104);
+        border-top-color: gray;
         border-top-style: solid;
         padding: 10px;
         box-sizing: border-box;
@@ -55,7 +52,7 @@
     #menu2-detail {
         background-color: white;
         border-width: 0px 2px 2px 2px;
-        border-color: rgb(104, 104, 104);
+        border-color: gray;
         border-style: solid;
         width: 200px;
         height: 362px;
@@ -70,7 +67,7 @@
     #menu3-detail {
         background-color: white;
         border-width: 0px 2px 2px 2px;
-        border-color: rgb(104, 104, 104);
+        border-color: gray;
         border-style: solid;
         width: 200px;
         height: 182px;
@@ -82,14 +79,14 @@
         display:none;
     }
 
+    #page-name { margin: 0; }
     
 
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
     <br>
-    <h2 id="pageName">업체 페이지</h2>
+    <h2 id="page-name">업체 페이지</h2>
     <div id="menu">
         <ul>
             <li id="menu1">예약관리<span>></span></li>

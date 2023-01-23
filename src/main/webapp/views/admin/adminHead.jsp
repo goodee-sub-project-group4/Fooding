@@ -54,10 +54,7 @@
     #div3 img { 
         margin-bottom: 20px;
         margin-left:10px
-    }
-    
-    
-
+    }  
 </style>
 </head>
 <body>
@@ -71,12 +68,10 @@
         <div id="div3">
             <span>로그아웃</span>
             <span> | </span>
-            <h4> 업체01 님 </h4>
+            <h4> 관리자01 님 </h4>
             <img src="../../resources/images/userIcon.png" width="50">
         </div>
         <hr>
-    </div>
-    
-
+    </div> 
 </body>
 </html>
