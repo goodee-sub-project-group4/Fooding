@@ -104,13 +104,11 @@
 <body>
 	<%@ include file="restHead.jsp" %>
 	<div id="outer2">
-		<!-- <iframe src="restMenubar.jsp"></iframe> -->
 		<div id="menubar">
 			<%@ include file="restMenubar.jsp" %>
 		</div>
 		<div id="content" class="container">
 			<!-- 컨텐츠 작성부 -->
-			<br><br><br><br><br>
 			<br><br><br><br><br>
            
                 <select id="select">

@@ -23,8 +23,10 @@
     }
     #title {
         font-size: 30px;
-        font-weight: 400;
+        font-weight: 600;
+        color: rgb(71, 71, 71);
     }
+    
     #outer>div {
         display: inline-block;        
         margin-top: 40px;

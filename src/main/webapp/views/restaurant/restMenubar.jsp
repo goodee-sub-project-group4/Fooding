@@ -79,7 +79,11 @@
         display:none;
     }
 
-    #page-name { margin: 0; }
+    #page-name { 
+        margin: 0;
+        font-weight: 600;
+        color: rgb(71, 71, 71);
+    }
     
 
 </style>
