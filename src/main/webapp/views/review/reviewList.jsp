@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰</title>
+<title>리뷰리스트</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,74 +18,112 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	<style>
+        /* 리뷰바상단 */
+        #content2-padding {width: 900px; height: 1000px; margin:auto; margin-top: 45px; padding: 20px; box-sizing:border-box; float: left;}
+        /* #content2-padding div {border:1px solid green;} */
+        #review-area {width: 100%; height: 135px; font-size: 30px; margin-bottom: 30px; text-align: center;}
+        #revise-btn {width:10%; margin-left:774px; margin-top:65px;}
+        #revise-btn button {width:60px; height:35px; padding:3px;}
 
-    <style>
-        .outer {border:1px solid black; width:1200px; height:1500px; position:relative;}
-        .review-area {border:1px solid black; width:75%; height:1500px; margin:1px; position:absolute; right:1px;}
-        /* ìë¨ ìì­ */
-        .review-head { border:1px solid black; width:100%; height:170px; margin:auto;}
-        .review-head1-1 { border:1px solid black; width:80%; height:70px; position:absolute; left:5px; top:90px;}
-        .review-head1-2 { border:1px solid black; width:15%; height: 70px; position:absolute; right:5px; top:90px;}
-        /* ë´ê° ì´ ë¦¬ë·°ë¬¸êµ¬, ë²í¼ */
-        .review-head1-1 h2 {width:250px; font-weight:500; position:absolute; left:5px; top:20px;}
-        .review-head1-2 button {width:60px; height:30px; padding:3px; position:absolute; right:10px; top:40px;}
+        /* 타이틀 */
+        #review-title {height:60px; border-bottom:1px solid black; border-top:1px solid black; position:relative; text-align:center; font-weight: 600;}
+        #review-title1 {height:100%; width:5%;}
+        #review-title2 {height:100%; width:5%; position:absolute; top:0px; left:5%; padding-top:14px;}
+        #review-title3 {height:100%; width:55%; position:absolute; top:0px; left:10%; padding-top:14px;}
+        #review-title4 {height:100%; width:10%; position:absolute; top:0px; left:65%; padding-top:14px;}
+        #review-title5 {height:100%; width:15%; position:absolute; top:0px; left:75%; padding-top:14px;}
+        #review-title6 {height:100%; width:10%; position:absolute; top:0px; left:90%;}
        
-        /* ìì½ëª ë´ì© */
-        #content-box {width:300px; height:170px; position:absolute; left:280px; padding:15px; margin:5px;}
-        #content-box div {margin:5px; padding-top:5px;}
-        #res-name {height:30%; font-weight:600;}
-        #review-content {height:60%;}
-        
-        /* ê¸ì¨ìì¹ ê°ì´ë°ë¡ íê¸°ìí´ì */
-        #star, #date {padding-top:70px; text-align: center;}
-        #no {padding-top:80px;}
-        #button  { padding-top:65px; position:absolute; right:3px;}
-        #button button {width:60px; height:30px; padding:3px;}
-        #img {padding:20px; position:absolute; left:120px; }
+        /* 내용틀 */
+        #review-content {height:180px; border-bottom:1px solid black; position:relative;}
+        #review-content1 {height:100%; width:5%; text-align:center; padding-top:70px;}
+        #review-content2 {height:100%; width:5%; position:absolute; top:0px; left:5%; text-align:center; padding-top:70px;}
+        #review-content3 {height:100%; width:20%; position:absolute; top:0px; left:10%;text-align:center; padding-top:20px;}
+        #review-content4 {height:100%; width:35%; position:absolute; top:0px; left:30%;}
+        #review-content5 {height:100%; width:10%; position:absolute; top:0px; left:65%; text-align:center; padding-top:70px;}
+        #review-content6 {height:100%; width:15%; position:absolute; top:0px; left:75%; text-align:center; padding-top:70px;}
+        #review-content7 {height:100%; width:10%; position:absolute; top:0px; left:90%; text-align:center; padding-top:65px;}
 
+        /* 내용 */
+        #review-content4-1 {height:30%; padding:20px; padding-top:40px; font-weight:600;}
+        #review-content4-2 {height:70%; padding:20px; color:rgb(86, 86, 86);}
+        #review-content7 button {height:35px;}
         
+        /* 페이징 */
+        .container {margin-left:0px;}
+        .container a {margin-top:70px; color:red; }
 
     </style>
+    
 </head>
 <body>
 
-    <div class="outer">
-        <div class="review-area">
-            <div class="review-head">
-                <div class="review-head1-1"><h2>내가 쓴 리뷰</h2></div>
-                <div class="review-head1-2"><button type="button" class="btn btn-outline-danger">삭제</button></div>
-            </div>
+	<%@ include file="/views/common/head.jsp" %>
+	<%@ include file="/views/common/myPageSidebar.jsp" %>
 
-            <table class="table">
-                <thead>
-                    <tr align="center">
-                        <th width="80">번호</th>
-                        <th colspan="2" width="500">예약명</th>
-                        <th width="100">별점</th>
-                        <th width="100">작성일</th>
-                        <th width="100">버튼</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td id="no"><input type="checkbox" style="width:17px; height:17px;"><span> 3</span></td>
-                        <td id="img"><img src="C:\Users\lbn06\Desktop\ì¤ë¸\KakaoTalk_20230109_214834302.jpg" width="120" height="160"></td>
-                        <td>
-                            <div id="content-box">
-                                <div id="res-name">식당이름</div>
-                                <div id="review-content">리뷰내용</div>
-                            </div>
-                        </td>
-                        <td id="star"><p>별점</p></td>
-                        <td id="date"><p>작성일</p></td>
-                        <td id="button"><button type="button" class="btn btn-outline-danger">수정</button></td>
-                    </tr>
-                </tbody>
-
-            </table>
-
+    <div id="content2-padding">
+        <div id="review-area">
+            <b>내가 쓴 리뷰</b>
+            <div id="revise-btn"><button type="button" class="btn btn-outline-danger">삭제</button></div>
         </div>
+        <div id="review-title">
+            <div id="review-title1"></div>
+            <div id="review-title2">번호</div>
+            <div id="review-title3">예약명</div>
+            <div id="review-title4">별점</div>
+            <div id="review-title5">작성일</div>
+            <div id="review-title6"></div>
+        </div>
+        <div id="review-content">
+            <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
+            <div id="review-content2">3</div>
+            <div id="review-content3"><img src="C:\Users\lbn06\Desktop\오븐\KakaoTalk_20230123_223422687.jpg" width="120" height="140"></div>
+            <div id="review-content4">
+                <div id="review-content4-1">식당이름</div>
+                <div id="review-content4-2">리뷰내용</div>
+            </div>
+            <div id="review-content5">★ 4.5</div>
+            <div id="review-content6">2023.01.23</div>
+            <div id="review-content7"><button type="button" class="btn btn-danger">수정</button></div>
+        </div>
+        <div id="review-content">
+            <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
+            <div id="review-content2">2</div>
+            <div id="review-content3"><img src="C:\Users\lbn06\Desktop\오븐\KakaoTalk_20230123_223422687.jpg" width="120" height="140"></div>
+            <div id="review-content4">
+                <div id="review-content4-1">식당이름</div>
+                <div id="review-content4-2">리뷰내용</div>
+            </div>
+            <div id="review-content5">★ 4.5</div>
+            <div id="review-content6">2023.01.23</div>
+            <div id="review-content7"><button type="button" class="btn btn-danger">수정</button></div>
+        </div>
+        <div id="review-content">
+            <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
+            <div id="review-content2">1</div>
+            <div id="review-content3"><img src="C:\Users\lbn06\Desktop\오븐\KakaoTalk_20230123_223422687.jpg" width="120" height="140"></div>
+            <div id="review-content4">
+                <div id="review-content4-1">식당이름</div>
+                <div id="review-content4-2">리뷰내용</div>
+            </div>
+            <div id="review-content5">★ 4.5</div>
+            <div id="review-content6">2023.01.23</div>
+            <div id="review-content7"><button type="button" class="btn btn-danger">수정</button></div>
+        </div>
+        
     </div>
+    <div class="container">                  
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+            </ul>
+        </div>
     
 </body>
 </html>
