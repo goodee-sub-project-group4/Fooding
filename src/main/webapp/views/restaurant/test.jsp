@@ -5,22 +5,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<style>
-		/* ↓↓↓ 기본골격용 스타일들 */
-		#outer2 {
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!--제이쿼리-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 부트스트랩 Badges 효과 위해 바꾼 구문-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+    <style>
+/* ↓↓↓ 기본골격용 스타일들 */
+        #outer2 {
 			width:1200px;
 			height: 800px;
 			position: relative;
 			margin:auto;
-		}			
+		} 			
 		#outer2>iframe {
 			border-width:0px;
 			width:100%;
 			height: 100%;
 			z-index: 1000;
 			position: absolute;
+		} 
+		#menubar {
+			border-width:0px;
+			width:100%;
+			height: 100%;
+			/* z-index: 400; */
+			position: absolute;
 		}
-		
 		#content {
 			width:950px;
 			display: inline-block;
@@ -28,13 +42,7 @@
 			position:absolute;
 			right:10px;
 		}
-		#menubar {
-			width:200px;
-			height: 100%;
-			z-index: 1000;
-			position: absolute;
-		}
-		/* ↓↓↓ 컨텐츠용 스타일 */
+		/* ↓↓↓ 컨텐츠용 스타일  */
 		#content {
 			display: inline-block;
 		}
@@ -51,7 +59,7 @@
 			margin-bottom: 20px;
 			display: inline-block;
 		}
-		/*더보기버튼*/
+		/* 더보기버튼 */
 		.more {
 			float:right;
 			margin-top:25px;
@@ -86,23 +94,25 @@
 			background-color: crimson;
 			font-size: 18px;
 			margin-bottom: 12px;
-		}
-		
+        }
 
-	</style>
-	
+		
+    </style>
 </head>
 <body>
-
-	<%@ include file="restHead.jsp" %>
-	
-	<div id="outer2">
+    
+    <%@ include file="restHead.jsp" %>
+    <div id="outer2">
 		<div id="menubar">
 			<%@ include file="restMenubar.jsp" %>
 		</div>
+		<button class="btn btn-danger">버튼2</button>
 		<div id="content">
-			<!-- 컨텐츠 작성부 -->			
+			<!-- 컨텐츠 작성부 -->
+			<button class="btn btn-danger">버튼3</button>
+			
 			<div id="area1">
+				<button class="btn btn-danger">버튼4</button>
 				<div>
 					
 					<h3>신규예약건 </h3> <span id="badge1" class="badge">2</span>
@@ -110,13 +120,14 @@
 					
 					<div class="alert alert-secondary">
 						<strong>Success!</strong> Indicates a successful or positive action.
-						<button type="button" class="btn btn-outline-danger">조회</button>
+						
 					</div>
 					<div class="alert alert-secondary">
 						<strong>Success!</strong> Indicates a successful or positive action.
 					</div>
 					<div class="alert alert-secondary">
 						<strong>Success!</strong> Indicates a successful or positive action.
+                        <button class="btn btn-danger">버튼4</button>
 					</div>
 				</div>
 				<div>
@@ -148,13 +159,14 @@
 			
 		</div>
 	</div>
-	<script>
+    <script>
 		$(function(){
 			$('#title').text("");
+			$('#menu1').css("background-color", "lightgray");
 
 
 			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
-			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"5px"});
+			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"20px"});
 		})
 	</script>
 </body>

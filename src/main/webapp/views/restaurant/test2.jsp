@@ -13,19 +13,19 @@
 			position: relative;
 			margin:auto;
 		}			
+		#menubar {
+			border-width:0px;
+			width:100%;
+			height: 100%;
+			z-index: 1000;
+			position: absolute;
+		}
 		#content {
 			width:950px;
 			display: inline-block;
 			box-sizing: border-box;
 			position:absolute;
 			right:10px;
-		}
-		#menubar {
-			border-width:0px;
-			width:200px;
-			height: 100%;
-			z-index: 1000;
-			position: absolute;
 		}
 		/* ↓↓↓ 컨텐츠용 스타일 */
 	</style>

@@ -13,27 +13,19 @@
 			position: relative;
 			margin:auto;
 		}			
-		/*#outer2>iframe {
-			border-width:0px;
-			width:100%;
-			height: 100%;
-			z-index: 1000;
-			position: absolute;
-		}*/
-		#menubar {
-			border-width:0px;
-			width:100%;
-			height: 100%;
-			z-index: 1000;
-			position: absolute;
-		}
+		
 		#content {
-			/* border: 3px solid blue; */
 			width:950px;
 			display: inline-block;
 			box-sizing: border-box;
 			position:absolute;
 			right:10px;
+		}
+		#menubar {
+			width: 200px;
+			height: 100%;
+			z-index: 1000;
+			position: absolute;
 		}
 		/* ↓↓↓ 컨텐츠용 스타일 */
 		table td, table th {
@@ -99,6 +91,7 @@
         padding-left: 60px;
         text-align: left;
     }
+	
 	</style>
 </head>
 <body>
@@ -272,8 +265,9 @@
 			$('#menu1').click();
 
 			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
-			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"20px"});
+			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"5px"});
 		})
+		
 	</script>
 </body>
 </html>
