@@ -13,11 +13,7 @@
     }
     #menu {
         border-width: 0px 2px 2px 2px;
-<<<<<<< HEAD
-        border-color: gray;
-=======
         border-color: whitesmoke;
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
         border-style: solid;
         background-color: white;
         width: 200px;
@@ -53,13 +49,10 @@
         line-height: 40px;
         
     }
-<<<<<<< HEAD
 
     li span {
         float: right;
     }
-=======
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
     li:hover {
         background-color: whitesmoke;
         cursor: pointer;
@@ -73,11 +66,7 @@
     #menu3-detail {
         background-color: white;
         border-width: 0px 2px 2px 2px;
-<<<<<<< HEAD
-        border-color: gray;
-=======
         border-color: whitesmoke;
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
         border-style: solid;
         width: 200px;
         height: 122px;
@@ -97,11 +86,7 @@
     #menu4-detail {
         background-color: white;
         border-width: 0px 2px 2px 2px;
-<<<<<<< HEAD
-        border-color:  gray;
-=======
         border-color: whitesmoke;
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
         border-style: solid;
         width: 200px;
         height: 242px;
@@ -146,11 +131,7 @@
 </head>
 <body>
     <br>
-<<<<<<< HEAD
-    <h2 id="page-name">관리자 페이지</h2>
-=======
     <h2 id="pageName">관리자 페이지</h2>
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
     <div id="menu">
         <ul>
             <li id="menu1"><a href="">회원 관리<span>></span></a></li>
@@ -190,15 +171,11 @@
             $('li').click(function(){
                 /*클릭시 배경색 효과주기*/
                 $(this).siblings().css("background-color","");
-<<<<<<< HEAD
-                $(this).css("background-color","lightgrey");
-=======
                 $(this).css("background-color","whitesmoke");
                 $(this).siblings().css("color","");
                 $(this).css("color","rgb(221,45,45)");
                 $(this).siblings().children().css("color","");
                 $(this).children().css("color","rgb(221,45,45)");
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
 
                 /*디테일 메뉴를 띄우고 닫게 하는 기능*/
                 let detailId = '#'+$(this).attr("id")+"-detail";
@@ -207,11 +184,7 @@
                 }
                 if($(detailId).css("display") == "none") {
                     $('.detail').css("display","none");
-<<<<<<< HEAD
-                    $(detailId).css("display", "block")
-=======
                     $(detailId).css("display","block")
->>>>>>> 3efb957cd685bfde314175f13719ec98987f944b
                 } 
             })
 

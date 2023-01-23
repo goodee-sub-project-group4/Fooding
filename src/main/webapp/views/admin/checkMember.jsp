@@ -14,7 +14,26 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
        
+    #outer2 {
+        width:1200px;
+        height: 800px;
+        position: relative;
+        margin:auto;
+    }			
     
+    #content {
+        width:950px;
+        display: inline-block;
+        box-sizing: border-box;
+        position:absolute;
+        right:10px;
+    }
+    #menubar {
+        width: 200px;
+        height: 100%;
+        z-index: 1000;
+        position: absolute;
+    }
     /* ↓↓↓ 컨텐츠용 스타일 */
     table td, table th {
         margin:auto;
@@ -87,10 +106,12 @@
 </style>
 </head>
 <body>
-	<%@ include file="adminBasicFrame.jsp" %>
-	
-		
-		<div id=content class="container">
+	<%@ include file="adminHead.jsp" %>
+	<div id="outer2">
+		<div id="menubar">
+			<%@ include file="adminMenubar.jsp" %>
+		</div>
+		<div id="content" class="container">
             
 
 			<!-- 컨텐츠 작성부 -->
