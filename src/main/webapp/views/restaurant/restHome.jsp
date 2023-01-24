@@ -52,7 +52,6 @@
 		
 		.more { /*더보기버튼*/
 			float:right;
-			margin-top:25px;
 			font-size: 17px;
 		}
 		#area1 span img { /*더보기버튼*/
@@ -90,6 +89,13 @@
 			position:relative;
 			bottom:4px;
 		}
+		
+		#calendar-area {
+			/* border:1px solid pink; */
+			width:100%;
+			margin-top: 30px;
+		}
+		
 
 	</style>
 	
@@ -105,8 +111,7 @@
 		<div id="content">
 			<!-- 컨텐츠 작성부 -->			
 			<div id="area1">
-				<div>
-					
+				<div>					
 					<h3>신규예약건 </h3> <span class="badge">2</span>
 					<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
 					
@@ -123,6 +128,9 @@
 				</div>
 				<div>
 					<h3>이달의 스케줄 </h3> <span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
+					<div id="calendar-area" align="center">
+						<%@ include file="calendarSmall.jsp" %>
+					</div>
 
 				</div>
 			</div>
