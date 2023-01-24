@@ -6,11 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    #pageName {
-        margin: 0;
-        font-size: 25px;
-        margin-left: 10px;
-    }
+
     #menu {
         border-width: 0px 2px 2px 2px;
         border-color: whitesmoke;
@@ -123,7 +119,13 @@
         display: block;
     }
 
-
+    #page-name { 
+        margin: 0;
+        font-weight: 600;
+        color: rgb(71, 71, 71);
+        font-size: 28px;
+        margin-left: 10px;
+    }
     
 
 </style>
@@ -131,7 +133,7 @@
 </head>
 <body>
     <br>
-    <h2 id="pageName">관리자 페이지</h2>
+    <h2 id="page-name">관리자 페이지</h2>
     <div id="menu">
         <ul>
             <li id="menu1"><a href="">회원 관리<span>></span></a></li>
@@ -144,24 +146,24 @@
     
     <div id="menu3-detail" class="detail">
         <ul>
-            <li><a href="">메인 배너<span>></span></a></li>
-            <li><a href="">이용약관<span>></span></a></li>
+            <li id="menu3-detail-1"><a href="">메인 배너<span>></span></a></li>
+            <li id="menu3-detail-2"><a href="">이용약관<span>></span></a></li>
         </ul>
     </div>
 
     <div id="menu4-detail" class="detail">
         <ul>
-            <li><a href="">공지사항<span>></span></a></li>
-            <li><a href="">FAQ<span>></span></a></li>
-            <li><a href="">1:1 문의<span>></span></a></li>
-            <li><a href="">업체 등록 요청<span>></span></a></li>
+            <li id="menu4-detail-1"><a href="">공지사항<span>></span></a></li>
+            <li id="menu4-detail-2"><a href="">FAQ<span>></span></a></li>
+            <li id="menu4-detail-3"><a href="">1:1 문의<span>></span></a></li>
+            <li id="menu4-detail-4"><a href="">업체 등록 요청<span>></span></a></li>
         </ul>
     </div>
 
     <div id="menu5-detail" class="detail">
         <ul>
-            <li><a href="">리뷰 신고<span>></span></a></li>
-            <li><a href="">업체 신고<span>></span></a></li>
+            <li id="menu5-detail-1"><a href="">리뷰 신고<span>></span></a></li>
+            <li id="menu5-detail-2"><a href="">업체 신고<span>></span></a></li>
         </ul>
     </div>
 
@@ -188,7 +190,7 @@
                 } 
             })
 
-            
+
         })
 
 
