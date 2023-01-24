@@ -48,7 +48,7 @@
         #input-code span {color:rgb(253, 55, 55); font-size:12px; margin:20px;}
         /* 오 */
         #resend-btn {height:100%; width: 95px; float: left;}
-        #resend-btn button {width:90px; height:50px; margin:2px; margin-top:32px;}
+        #resend-btn button {width:95px; height:50px; margin:2px; margin-top:32px;}
         /* 확인버튼 */
         #verify-btn {text-align:center; height:16%;}
         #verify-btn input {width:90%; height:50px; margin-top:30px;}

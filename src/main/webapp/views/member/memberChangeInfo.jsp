@@ -18,8 +18,8 @@
 
     <style>
         #content2-padding {width:900px; height: 800px; margin: auto; margin-top: 45px; padding: 20px; box-sizing:border-box; float:left;}
-        /* #content2-padding div {border:1px solid green;} */
-        #change-area {width: 100%; height: 135px; font-size: 30px; text-align: center; 
+        #content2-padding div {border:1px solid green;}
+        #change-area {width: 100%; height: 135px; font-size: 30px; text-align: center; padding-top:20px;
             display: inline-block; border-bottom:1px solid black;}
         #change-infomation {width:800px; margin: auto;}
         /* 첫번째 칸 */
@@ -51,6 +51,7 @@
 
 	<div id="content2-padding">
         <div id="change-area">
+            
             <b>개인 정보 수정</b>
         </div>
         <div id="change-infomation">

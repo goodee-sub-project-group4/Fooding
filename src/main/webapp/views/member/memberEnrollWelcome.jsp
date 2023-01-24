@@ -24,7 +24,7 @@
 </head>
 <body>
 	<br><br>
-    <div id="pic"><img src="C:\Users\lbn06\Desktop\오븐\check.png" width="55" height="55" align="center" id="pic"></div>
+    <div id="pic"><img src="../../resources/images/check.png" width="55" height="55" align="center" id="pic"></div>
     <br>
     <hr width="600">
     <br>
