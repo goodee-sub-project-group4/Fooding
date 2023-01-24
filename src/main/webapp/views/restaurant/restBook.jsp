@@ -36,7 +36,7 @@
 		table td, table th {
         margin:auto;
         text-align: center;
-        line-height: 25px;     
+        line-height: 33px;     
         }
         .select {
             border: 1px solid gray;
