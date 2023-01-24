@@ -41,7 +41,7 @@
         .wrap{width: 1200px; margin: auto;} 
         /* 컨텐트 전체 영역 */
         .content div{border: 1px solid black;}
-        .content{width: 1200px; margin: auto; box-sizing: border-box; float: left;}
+        .content{width: 1200px; margin: auto; box-sizing: border-box; float: left; position: relative;}
         #content1, #content2, #content3{box-sizing: border-box; height: 100%;}
         #content1-padding, #content2-padding, #content3-padding{float: left; margin: auto; padding: 5px; box-sizing: border-box;}
 
@@ -112,8 +112,8 @@
         #book-title{height: 70px; line-height: 70px; text-align: center;}
         /* 예약 날짜 */
         #book-menu1, #book-menu2, #book-menu3, #book-menu4{height: 70px; text-align: center; line-height: 70px;}
-        /* 메뉴 슬라이드 */
-        .slide-detail{width: 100%; height: 550px; margin-top:5px; padding: 5px; box-sizing: border-box;
+        /* 슬라이드 */
+        .slide-detail{width: 100%; height: 550px; margin-top:5px; padding: 5px; box-sizing: border-box; overflow: auto;
             /* display: none; */
         }
         /* 달력 */
@@ -128,23 +128,29 @@
         .fc table{font-size: 15px;}
         .fc .fc-daygrid-day-top{flex-direction: row; padding-left: 5px;}
         .fc .fc-daygrid-day-number{padding: 0; text-align: left;}
-
         /* 달력 테이블 가로 사이즈 */
-        .fc table{
-            table-layout: auto;
-        }
-        .fc-view > table{  
-            min-width: 0;
-            width: auto;
-        }
-        .fc-axis{
-            min-width:20px; /*the width of times column*/
-            width:20px; /*the width of times column*/
-        }
-        .fc-day,.fc-resource-cell,.fc-content-col{
-            min-width:20px;
-            width:48px;
-        }
+        .fc table{table-layout: auto;}
+        .fc-view > table{min-width: 0; width: auto;}
+        .fc-axis{min-width:20px; width:20px;}
+        .fc-day,.fc-resource-cell,.fc-content-col{min-width:20px; width:48px;}
+
+        /* 예약시간 */
+        .book-time{width: 100%; height: 50px; font-size: 30px;}
+        .book-time-btn{width: 75px; height: 50px; margin-bottom: 5px;}
+
+        /* 메뉴선택 창 */
+        #menu-select{width: 600px; height: 800px; background-color: rgba(128, 128, 128, 0.913); position: fixed; left: 800px; top: 200px; padding: 15px;}
+        #menu-select-background{width: 570px; height: 770px; margin: auto; background-color: white; padding-top: 20px; }
+        #menu-select-border1{width: 550px; height: 450px; margin: auto; margin-bottom: 10px; border: 1px solid gray; padding: 15px;}
+        #menu-selectView1{width: 520px; height: 420px; margin: auto; overflow: auto;}
+        .menu-detail{width: 100%; height: 150px; margin-bottom: 5px; background-color: whitesmoke;}
+        .menu-detail > img{width: 150px; height: 150px; display: block; float: left; padding: 5px;}
+        .menu-datail1{width: 275px; height: 150px; float: left; padding: 5px; }
+        .menu-datail2{width: 75px; height: 150px; float: left; padding: 5px;}
+        .btn.btn-secondary.btn-sm{margin-left: 18px; margin-top: 50px; height: 40px;}
+
+        /* 금액 창 */
+        #menu-select-border2{width: 550px; height: 270px; margin: auto; border: 1px solid gray; padding: 15px;}
     </style>
 </head>
 <body>
@@ -379,37 +385,142 @@
                 <br>
                 <div id="content3-3">
                     <div>
-                        <div id="book-title">
-                            업체명
-
-                        </div>
+                        <div id="book-title">업체명</div>
                     </div>
                     <br>
-                    <div id="book-menu1" class="menu-slide">
-                        (달)월 (일)일 (요일)요일
-                    </div>
+                    <div id="book-menu1" class="menu-slide">(달)월 (일)일 (요일)요일</div>
                     <div class="slide-detail">
                         <div id='calendar'></div>
                     </div>
-
-                        
-
-                    
-
-
-
-
-
-
-
-                    <div id="book-menu2" class="menu-slide">
-                        시간 선택
-                    </div>
+                    <div id="book-menu2" class="menu-slide">시간 선택</div>
                     <div class="slide-detail">
-
+                        <div class="book-time">&nbsp;&nbsp;오전</div>
+                        <button class="book-time-btn">00:00</button>
+                        <button class="book-time-btn">00:30</button>
+                        <button class="book-time-btn">01:00</button>
+                        <button class="book-time-btn">01:30</button>
+                        <button class="book-time-btn">02:00</button>
+                        <button class="book-time-btn">02:30</button>
+                        <button class="book-time-btn">03:00</button>
+                        <button class="book-time-btn">03:30</button>
+                        <button class="book-time-btn">00:00</button>
+                        <button class="book-time-btn">00:30</button>
+                        <button class="book-time-btn">01:00</button>
+                        <button class="book-time-btn">01:30</button>
+                        <button class="book-time-btn">02:00</button>
+                        <button class="book-time-btn">02:30</button>
+                        <button class="book-time-btn">03:00</button>
+                        <button class="book-time-btn">03:30</button>
+                        <br><br><br>
+                        <div class="book-time">&nbsp;&nbsp;오후</div>
+                        <button class="book-time-btn">12:00</button>
+                        <button class="book-time-btn">12:30</button>
+                        <button class="book-time-btn">13:00</button>
+                        <button class="book-time-btn">13:30</button>
+                        <button class="book-time-btn">14:00</button>
+                        <button class="book-time-btn">14:30</button>
+                        <button class="book-time-btn">15:00</button>
+                        <button class="book-time-btn">15:30</button>
+                        <button class="book-time-btn">12:00</button>
+                        <button class="book-time-btn">12:30</button>
+                        <button class="book-time-btn">13:00</button>
+                        <button class="book-time-btn">13:30</button>
+                        <button class="book-time-btn">14:00</button>
+                        <button class="book-time-btn">14:30</button>
+                        <button class="book-time-btn">15:00</button>
+                        <button class="book-time-btn">15:30</button>
+                        <button class="book-time-btn">12:00</button>
+                        <button class="book-time-btn">12:30</button>
+                        <button class="book-time-btn">13:00</button>
+                        <button class="book-time-btn">13:30</button>
+                        <button class="book-time-btn">14:00</button>
+                        <button class="book-time-btn">14:30</button>
+                        <button class="book-time-btn">15:00</button>
+                        <button class="book-time-btn">15:30</button>
+                        <button class="book-time-btn">12:00</button>
+                        <button class="book-time-btn">12:30</button>
+                        <button class="book-time-btn">13:00</button>
+                        <button class="book-time-btn">13:30</button>
+                        <button class="book-time-btn">14:00</button>
+                        <button class="book-time-btn">14:30</button>
+                        <button class="book-time-btn">15:00</button>
+                        <button class="book-time-btn">15:30</button>
                     </div>
-                    <div id="book-menu3">
-                        메뉴 선택
+                    <div id="book-menu3" onclick="menubox();">메뉴 선택</div>
+                    <div id="menu-select">
+                        <div id="menu-select-background">
+                            <div id="menu-select-border1">
+                                <div id="menu-selectView1">
+                                    <div class="menu-detail">
+                                        <img src="" alt="">
+                                        <div class="menu-datail1">
+                                            <div style="font-weight: 1000; font-size: 20px;">도쿄 수제 함바그 고젠</div>
+                                            <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
+                                            <div style="font-size: 13px; height: 80px; overflow: hidden;">함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴
+                                            함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴</div>
+                                        </div>
+                                        <div class="menu-datail2">
+                                            <button type="button" class="btn btn-secondary btn-sm">추가</button>
+                                        </div>
+                                    </div>
+                                    <div class="menu-detail">
+                                        <img src="" alt="">
+                                        <div class="menu-datail1">
+                                            <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
+                                            <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
+
+                                            <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
+                                        </div>
+                                        <div class="menu-datail2">
+                                            <button type="button" class="btn btn-secondary btn-sm">추가</button>
+                                        </div>
+                                    </div>
+                                    <div class="menu-detail">
+                                        <img src="" alt="">
+                                        <div class="menu-datail1">
+                                            <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
+                                            <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
+                                            <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
+                                        </div>
+                                        <div class="menu-datail2">
+                                            <button type="button" class="btn btn-secondary btn-sm">추가</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="menu-select-border2">
+                                <table>
+                                    <tr>
+                                        <th style="width: 250px; text-align: center;">주문내역</th>
+                                        <th style="width: 125px; text-align: center;">수량</th>
+                                        <th style="width: 145px; text-align: center;">금액</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><hr></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1. 도쿄 수제 함바그 고젠</td>
+                                        <td><button style="width: 30px;">-</button><input type="text" style="width: 40px; text-align: center;" value="1"><button style="width: 30px;">+</button></td>
+                                        <td style="text-align: right;" >12,000원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2. 치킨 스테이크 고젠</td>
+                                        <td><button style="width: 30px;">-</button><input type="text" style="width: 40px; text-align: center;" value="1"><button style="width: 30px;">+</button></td>
+                                        <td style="text-align: right;">12,000원</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="font-weight: 700; font-size: 25px;">총액</td>
+                                        <td style="text-align: right; font-weight: 600; font-size: 20px; color: brown;">25,000원</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><hr></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="font-size: 7px; text-align: right;">* 결제 완료 시 적립금 1% 적립</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                     <div id="book-menu4">
                         예약인원
@@ -455,7 +566,9 @@
                 })
             })
 
-            $()
+            function menubox(){
+
+            }
         </script>
         <div id="footer">
         </div>

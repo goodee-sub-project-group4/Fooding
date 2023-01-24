@@ -129,7 +129,7 @@
                 <div class="left">
                     <!--카테고리-->
                     <select id="select">
-                        <option value="">문의유형</option>
+                        <option value="">처리결과</option>
                         <option value="">미답변</option>
                         <option value="">답변</option>
                     </select>
