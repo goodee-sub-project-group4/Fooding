@@ -21,7 +21,7 @@
 	<style>
         /* 리뷰바상단 */
         #content2-padding {width: 900px; height: 1000px; margin:auto; margin-top: 45px; padding: 20px; box-sizing:border-box; float: left;}
-        /* #content2-padding div {border:1px solid green;} */
+        /*#content2-padding div {border:1px solid green;}*/
         #review-area {width: 100%; height: 135px; font-size: 30px; margin-bottom: 30px; text-align: center;}
         #revise-btn {width:10%; margin-left:774px; margin-top:65px;}
         #revise-btn button {width:60px; height:35px; padding:3px;}

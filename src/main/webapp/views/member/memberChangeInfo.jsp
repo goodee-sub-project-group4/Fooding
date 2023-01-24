@@ -51,7 +51,6 @@
 
 	<div id="content2-padding">
         <div id="change-area">
-            
             <b>개인 정보 수정</b>
         </div>
         <div id="change-infomation">

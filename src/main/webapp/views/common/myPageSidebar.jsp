@@ -17,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
     /* 전체 */
-    #content1-padding{float: left; margin: auto; padding: 5px; box-sizing:border-box; width: 25%; height: 1200px;}
+    #content1-padding {float: left; margin: auto; padding: 5px; box-sizing:border-box; width: 25%; height: 1200px;}
     #content1{box-sizing: border-box; height: 100%;}
     #content1-1 {height: 120px; box-sizing: border-box; padding:60px 60px 10px 60px;}
     #content1-2 {height: 450px; box-sizing: border-box; padding:40px;}

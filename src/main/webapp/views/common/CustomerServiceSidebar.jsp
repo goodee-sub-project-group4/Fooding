@@ -17,11 +17,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <style>
-    .wrap{width: 1200px; margin: auto;}
-    .content { width: 1200px; margin: auto; box-sizing: border-box; float: left;}
-    #content1-padding,  #content2-padding {float: left; margin: auto; padding: 5px; box-sizing:border-box;}
-    #content1-padding {width: 25%; height: 1200px;}
-    #content1 {box-sizing: border-box; height: 100%;}
+    #content1-padding {float: left; margin: auto; padding: 5px; box-sizing:border-box; width: 25%; height: 1200px;}
+    #content1{box-sizing: border-box; height: 100%;}
     #content1-1 {height: 120px; box-sizing: border-box; padding:60px 60px 10px 60px;}
     #content1-2 {height: 450px; box-sizing: border-box; padding:40px;}
     #content1-3 {height: 100px;}
@@ -37,7 +34,6 @@
         border-radius: 0px 50px 50px 0px;
         font-weight:500;
     }
-    #content1-3 div:hover { background-color:rgb(251, 249, 249); cursor: pointer;}
 
     </style>
 </head>
@@ -52,9 +48,7 @@
                         <div>FAQ<span class="arrow">></span></div>
                         <div>1 : 1 문의<span class="arrow">></span></div> 
                     </div>
-                    <div id="content1-3">
-                        <div>도움이 필요하신가요?<br>1 : 1 문의하기 ></div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
