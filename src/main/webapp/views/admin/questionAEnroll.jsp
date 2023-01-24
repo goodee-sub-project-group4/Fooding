@@ -47,42 +47,48 @@
         padding-top: 10px;
     }
 
-    #questionTitle {
-        width: 700px;
+    #select{
         height: 40px;
-        padding: 20px; 
-        border-radius: 50px;
+        padding-left: 15px;
+        border-radius: 6px;
+    }
+
+    #qCategory, #qTitle, #qContent, #qImg, #aContent{
         /*그냥 border-radius 하면 적용안됨*/
         border-collapse: collapse;
         border-radius: 5px;
         border-style: hidden;
         box-shadow: 0 0 0 1px gray;
-    }
-
-    #questionContent{
-        width: 700px;
-        height: 400px;
         box-sizing: border-box;
-        padding: 20px;
-        border-radius: 50px;
-        border-collapse: collapse;
-        border-radius: 5px;
-        border-style: hidden;
-        box-shadow: 0 0 0 1px gray;
+        width: 700px; 
     }
 
-    #answerContent{
-        width: 700px;
+    #qCategory, #qTitle{
+        padding: 10px; 
+        padding-left: 20px;         
+    }
+
+    #qContent{
         height: 400px;
-        box-sizing: border-box;
         padding: 20px;
-        border-radius: 50px;
-        border-collapse: collapse;
-        border-radius: 5px;
-        border-style: hidden;
-        box-shadow: 0 0 0 1px gray;
     }
 
+    #qImg{
+        height: 250px;
+        text-align: center;
+    }
+
+    img{
+        margin: 8px;
+    }
+
+    #aContent{
+        padding: 20px;
+    }
+
+    #enroll-answer textarea{
+        resize: none;
+    }
 
 
 </style>
@@ -103,22 +109,37 @@
                 <table>  
                     <tr>
                         <th width="70">문의</th>
-                        <td id="questionTitle">
+                        <td id="qCategory">
+                            기존 카테고리 유형
+                        </td>
+                    </tr>
+                    <tr><td height="15px"></td></tr>
+                    <tr>
+                        <th></th>              
+                        <td id="qTitle">
                             기존 문의 제목
                         </td>
                     </tr>
-                    <tr><td><br></td></tr>
+                    <tr><td height="15px"></td></tr>
                     <tr>
                         <th></th>
-                        <td id="questionContent">
+                        <td id="qContent">
                             기존 문의 내용
+                        </td>
+                    </tr>
+                    <tr><td height="15px"></td></tr>
+                    <tr>
+                        <th></th>
+                        <td id="qImg">
+                            <img src="../../resources/images/chicken.jpg" width="320" height="210">
+                            <img src="../../resources/images/chicken.jpg" width="320" height="210">
                         </td>
                     </tr>
                     <tr><td><br><br></td></tr>
                     <tr>
                         <th>답변</th>
-                        <td>
-                            <textarea name="" id="answerContent" cols="30" rows="10"></textarea>
+                        <td colspan="2">
+                            <textarea name="" id="aContent" cols="30" rows="10"></textarea>
                         </td>
                     </tr>
                 </table>
