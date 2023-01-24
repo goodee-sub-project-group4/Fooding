@@ -102,11 +102,11 @@
 </head>
 <body>
 
-	<%@ include file="restHead.jsp" %>
+	<%@ include file="head.jsp" %>
 	
 	<div id="outer2">
 		<div id="menubar">
-			<%@ include file="restMenubar.jsp" %>
+			<%@ include file="menubar.jsp" %>
 		</div>
 		<div id="content">
 			<!-- 컨텐츠 작성부 -->			

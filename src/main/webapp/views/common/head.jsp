@@ -24,7 +24,6 @@
     .wrap{width: 1200px; margin:auto;}
 
     /* 헤드바 */
-    .header div{}
     #header1-padding, #header2-padding, #header3-padding{float:left; box-sizing: border-box; padding: 5px; height: 150px;}
     /* 헤드바 왼쪽, 오른쪽 영역 */
     #header1-padding, #header3-padding{width: 25%;}
@@ -64,7 +63,7 @@
         <div class="header">
             <!-- 헤더바1 로고 -->
             <div id="header1-padding">
-                <div id="header1"><img id="img-logo" src=" ../../resources/images/logo.png" width="240" height="80"></div>
+                <div id="header1"><img id="img-logo" src="/Fooding/resources/images/logo.png" width="240" height="80"></div>
             </div>
 
             <!-- 헤더바2 검색창 -->
@@ -72,7 +71,7 @@
                 <form action="" id="header2-search">
                     <!-- 돋보기 클릭시 검색가능 -->
                     <div id="search">
-                        <input type="text" name="keyword" size="45">&nbsp;&nbsp;<img src=" ../../resources/images/search.png" width="25" height="25" >
+                        <input type="text" name="keyword" size="45">&nbsp;&nbsp;<img src="/Fooding/resources/images/search.png" width="25" height="25" >
                     </div>
                 </form>
             </div>
@@ -128,9 +127,9 @@
                     <!-- 헤더바3-2 -->
                     <div id="header3-2">
                         <!-- 각 이미지 클릭시 찜하기, (최근 본 게시물,) 리뷰페이지로 이동가능 -->
-                        <div id="part1"><img src=" ../../resources/images/heart.png" width="27" height="27"></div>
-                        <div id="part2"><img src=" ../../resources/images/alert.png" width="35" height="35"></div>
-                        <div id="part3"><img src=" ../../resources/images/review.png" width="30" height="30"></div>
+                        <div id="part1"><img src="/Fooding/resources/images/heart.png" width="27" height="27"></div>
+                        <div id="part2"><img src="/Fooding/resources/images/alert.png" width="35" height="35"></div>
+                        <div id="part3"><img src="/Fooding/resources/images/review.png" width="30" height="30"></div>
                     </div>
 
                     <div id="header3-3"></div>

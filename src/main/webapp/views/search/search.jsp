@@ -190,7 +190,7 @@
                         <div id="ctLocal">
                             <!-- 지역 카테고리 시작(퍼옴)-->
                             <script language='javascript'>
-                                <!--
+                                
                                     var cnt = new Array();
                                     cnt[0] = new Array('전체');
                                     cnt[1] = new Array('전체','강남구','강동구','강북구','강서구','관악구','광진구','구로구','금천구','노원구','도봉구','동대문구','동작구','마포구','서대문구','서초구','성동구','성북구','송파구','양천구','영등포구','용산구','은평구','종로구','중구','중랑구');
@@ -222,7 +222,7 @@
                                             sel.options[i] = new Option(cnt[add][i], cnt[add][i]);
                                         }         
                                     }
-                                //-->
+                                
                             </script>
                             <form name=form method=post action=$PHP_SELF>
                                 시/도: 

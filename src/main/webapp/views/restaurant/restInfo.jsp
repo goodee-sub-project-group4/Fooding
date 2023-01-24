@@ -61,10 +61,10 @@
 </head>
 <body>
 	
-	<%@ include file="restHead.jsp" %>
+	<%@ include file="head.jsp" %>
 	<div id="outer2">
 		<div id="menubar">
-			<%@ include file="restMenubar.jsp" %>
+			<%@ include file="menubar.jsp" %>
 		</div>
 		<div id="content">
 			<!-- 컨텐츠 작성부 -->
@@ -132,8 +132,10 @@
 	<script>
 		$(function(){
 			// Head.jsp 내의 요소, #title의 문구를 변경한다.
-			$('#title').text("매장관리 > 매장정보");
-			
+			$('#title').text("매장정보");
+			$('#menu2-detail').find('li').eq(1).click();
+            $('#menu2').css("background-color","whitesmoke");
+            $('#menu2').css("color","rgb(221,45,45)");
 
 			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
 			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"5px"});
