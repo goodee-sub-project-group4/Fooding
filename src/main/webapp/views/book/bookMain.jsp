@@ -3,100 +3,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<!-- Kakao map API -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	694ae779a7a7935c84a1e22edd5c5d87"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 지도 API -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	694ae779a7a7935c84a1e22edd5c5d87"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+    <!-- 달력 API -->
+    <link href='resources/fullcalendar/main.css' rel='stylesheet'/>
+    <script src='resources/fullcalendar/main.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                height: '500px',
+                headerToobar: {
+                    left: 'prev,next today',
+                    center: 'title'
+                },
+                locale: 'ko',
+                eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
+                    console.log(obj);
+                },
+                eventChange: function(obj) { // 이벤트가 수정되면 발생하는 이벤트
+                    console.log(obj);
+                },
+                eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
+                    console.log(obj);
+                },
+            });
+            calendar.render();
+        });
+    </script>
+    <style>
+        .wrap{width: 1200px; margin: auto;} 
+        /* 컨텐트 전체 영역 */
+        .content div{border: 1px solid black;}
+        .content{width: 1200px; margin: auto; box-sizing: border-box; float: left;}
+        #content1, #content2, #content3{box-sizing: border-box; height: 100%;}
+        #content1-padding, #content2-padding, #content3-padding{float: left; margin: auto; padding: 5px; box-sizing: border-box;}
 
+        /* 컨텐트 왼쪽 영역 */
+        #content1-padding{width: 20%; height: 500px;}
+        /* 지역 카테고리 */
+        #content1-1{height: 30%; box-sizing: border-box;}
+        /* 음식 카테고리 */
+        #content1-2{height: 70%; box-sizing: border-box;}
 
-<style>
-    .wrap{width: 1200px; margin: auto;} 
-    /* 컨텐트 전체 영역 */
-    .content div{border: 1px solid black;}
-    .content{width: 1200px; margin: auto; box-sizing: border-box; float: left;}
-    #content1, #content2, #content3{box-sizing: border-box; height: 100%;}
-    #content1-padding, #content2-padding, #content3-padding{float: left; margin: auto; padding: 5px; box-sizing: border-box;}
+        /* 컨텐트 가운데 영역 */
+        #content2-padding{width: 50%; height: 100%;}
+        /* 컨텐트 가운데 전체 높이 */
+        #content2{height: 2450px;}
+        #content2-1{height: 1050px;}
+        #content2-1 div{box-sizing: border-box;}
+        
+        /* 업체 사진 */
+        #thumbnail{height: 350px;}
+        /* 업체 정보 */
+        #content-main{width: 100%; padding: 5px; height: 700px; float: left;}
+        /* 업체명 (조회/리뷰/별점) */
+        #main1{width: 100%; height: 100px;}
+        /* 업체세부정보 + 메뉴 */
+        #main2{width: 100%; height: 600px;}
+        #main2 div{float: left;}
+        #main2-1, #main2-3{width: 25%;}
+        #main2-2, #main2-4{width: 75%;}
+        #main2-1, #main2-2{height: 200px;}
+        #main2-3, #main2-4{height: 400px;}
+        #main2-4{overflow: auto;}
+        /* 메뉴 */
+        .menu{width: 50%; padding: 3px; text-align: center;}
+        .menu img{width: 180px; height: 100px;}
 
-    /* 컨텐트 왼쪽 영역 */
-    #content1-padding{width: 20%; height: 500px;}
-    /* 지역 카테고리 */
-    #content1-1{height: 30%; box-sizing: border-box;}
-    /* 음식 카테고리 */
-    #content1-2{height: 70%; box-sizing: border-box;}
+        /* 리뷰 */
+        #content2-2{margin-top: 50px; height: 1270px; overflow: auto}
+        #content2-2 div{box-sizing: border-box;}
+        #review-head{height: 50px;}
+        .review-content{width: 100%;}
+        .review-content div{float: left;}
+        .review-content1-1{width: 20%; height: 50px;}
+        /* 리뷰 제목 */
+        .review-content1-2{width: 80%; height: 50px;}
+        /* 리뷰 작성자 */
+        .review-content2-1{width: 20%; height: 355px;}
+        .review-content2-2{width: 80%; height: 355px;}
+        /* 리뷰 내용 */
+        .review-text{width: 100%; height: 200px;}
+        /* 리뷰 사진 */
+        .review-picture{width: 100%; height: 150px; padding: 10px; text-align: center;}
+        .review-picture img{width: 30%; height: 120px;}
+        /* 리뷰 페이징 */
+        .paging{height: 50px; text-align: center; padding-top: 20px;}
 
-    /* 컨텐트 가운데 영역 */
-    #content2-padding{width: 50%; height: 100%;}
-    /* 컨텐트 가운데 전체 높이 */
-    #content2{height: 2450px;}
-    #content2-1{height: 1050px;}
-    #content2-1 div{box-sizing: border-box;}
-    
-    /* 업체 사진 */
-    #thumbnail{height: 350px;}
-    /* 업체 정보 */
-    #content-main{width: 100%; padding: 5px; height: 700px; float: left;}
-    /* 업체명 (조회/리뷰/별점) */
-    #main1{width: 100%; height: 100px;}
-    /* 업체세부정보 + 메뉴 */
-    #main2{width: 100%; height: 600px;}
-    #main2 div{float: left;}
-    #main2-1, #main2-3{width: 25%;}
-    #main2-2, #main2-4{width: 75%;}
-    #main2-1, #main2-2{height: 200px;}
-    #main2-3, #main2-4{height: 400px;}
-    #main2-4{overflow: auto;}
-    /* 메뉴 */
-    .menu{width: 50%; padding: 3px; text-align: center;}
-    .menu img{width: 180px; height: 100px;}
+        /* 컨텐트 오른쪽 영역 */
+        #content3-padding{width: 30%; height: 465px;}
+        /* 지도 */
+        #map{height: 350px; box-sizing: border-box;}
+        /* 예약 펼치기 버튼 */
+        #content3-2{height: 100px; box-sizing: border-box;}
+        #book-btn{width: 100%; height: 100%; border: none; font-size: 3em; box-sizing: border-box;}
+        #content3-3{display: none;}
 
-    /* 리뷰 */
-    #content2-2{margin-top: 50px; height: 1270px; overflow: auto}
-    #content2-2 div{box-sizing: border-box;}
-    #review-head{height: 50px;}
-    .review-content{width: 100%;}
-    .review-content div{float: left;}
-    .review-content1-1{width: 25%; height: 50px;}
-    /* 리뷰 제목 */
-    .review-content1-2{width: 75%; height: 50px;}
-    /* 리뷰 작성자 */
-    .review-content2-1{width: 25%; height: 355px;}
-    .review-content2-2{width: 75%; height: 355px;}
-    /* 리뷰 내용 */
-    .review-text{width: 100%; height: 200px;}
-    /* 리뷰 사진 */
-    .review-picture{width: 100%; height: 150px; padding: 10px; text-align: center;}
-    .review-picture img{width: 30%; height: 120px;}
-    /* 리뷰 페이징 */
-    .paging{height: 50px; text-align: center; padding-top: 20px;}
+        /* 예약 내용 */
+        #content3-3{width: 100%; height: 1500px;}
+        /* 예약 업체명 */
+        #book-title{height: 70px; line-height: 70px; text-align: center;}
+        /* 예약 날짜 */
+        #book-menu1, #book-menu2, #book-menu3, #book-menu4{height: 70px; text-align: center; line-height: 70px;}
+        /* 메뉴 슬라이드 */
+        .slide-detail{width: 100%; height: 550px; margin-top:5px; padding: 5px; box-sizing: border-box;
+            /* display: none; */
+        }
+        /* 달력 */
+        .fc .fc-toolbar{display: block;}
+        .fc .fc-toolbar-title{width: 335px;}
+        #fc-dom-1{width: 100%; height: 45px; display: block; float: left; margin: auto;}
+        .fc-toolbar-chunk{width: 140px; float: left; margin-left: 25px;}
+        .fc-today-button{width: 50px;}
+        .fc .fc-button {height: 35px; padding: 0; font-size: small;}
+        .fc .fc-button-group>.fc-button{width: 30px;}
+        .fc-scroller{overflow: auto;}
+        .fc table{font-size: 15px;}
+        .fc .fc-daygrid-day-top{flex-direction: row; padding-left: 5px;}
+        .fc .fc-daygrid-day-number{padding: 0; text-align: left;}
 
-    /* 컨텐트 오른쪽 영역 */
-    #content3-padding{width: 30%; height: 465px;}
-    /* 지도 */
-    #map{height: 350px; box-sizing: border-box;}
-    /* 예약 펼치기 버튼 */
-    #content3-2{height: 100px; box-sizing: border-box;}
-    #book-btn{width: 100%; height: 100%; border: none; font-size: 3em; box-sizing: border-box;}
-    #content3-3{display: none;}
-
-    /* 예약 내용 */
-    #content3-3{width: 100%; height: 1500px;}
-    /* 예약 업체명 */
-    #book-title{height: 70px; line-height: 70px; text-align: center;}
-    /* 예약 날짜 */
-    #book-menu1, #book-menu2, #book-menu3, #book-menu4{height: 70px; text-align: center; line-height: 70px;}
-    /* 메뉴 슬라이드 */
-    .slide-detail{
-        width: 100%;
-        height: 300px;
-        margin-top:5px;
-        padding: 10px;
-        box-sizing: border-box;
-        display: none;
-    }
-</style>
+        /* 달력 테이블 가로 사이즈 */
+        .fc table{
+            table-layout: auto;
+        }
+        .fc-view > table{  
+            min-width: 0;
+            width: auto;
+        }
+        .fc-axis{
+            min-width:20px; /*the width of times column*/
+            width:20px; /*the width of times column*/
+        }
+        .fc-day,.fc-resource-cell,.fc-content-col{
+            min-width:20px;
+            width:48px;
+        }
+    </style>
 </head>
 <body>
 
@@ -127,25 +176,37 @@
                                 조회수 / 리뷰수 / 별점
                             </div>
                             <div id="main2">
-                                <div id="main2-1">
-                                    사업자명<br>
-                                    사업자등록번호<br>
-                                    주소<br>
-                                    업종<br>
-                                    주차<br>
-                                    영업시간<br>
-                                    브레이크타임<br>
-                                </div>
-                                <!-- 업체 정보 데이터-->
-                                <div id="main2-2">
-                                    사업자명<br>
-                                    사업자등록번호<br>
-                                    주소<br>
-                                    업종<br>
-                                    주차<br>
-                                    영업시간<br>
-                                    브레이크타임<br>
-                                </div>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <th style="width: 25%;;">사업자명</th>
+                                        <td style="width: 75%;">사업자명</td>
+                                    </tr>
+                                    <tr>
+                                        <th>영업시간</th>
+                                        <td>영업시간</td>
+                                    </tr>
+                                    <tr>
+                                        <th>브레이크 타임</th>
+                                        <td>브레이크 타임</td>
+                                    </tr>
+                                    <tr>
+                                        <th>주차</th>
+                                        <td>주차</td>
+                                    </tr>
+                                    <tr>
+                                        <th>주소</th>
+                                        <td>주소</td>
+                                    </tr>
+                                    <tr>
+                                        <th>업종</th>
+                                        <td>업종</td>
+                                    </tr>
+                                    <tr>
+                                        <th>사업자등록번호</th>
+                                        <td>사업자등록번호</td>
+                                    </tr>
+                                </table>
+
                                 <div id="main2-3">
                                     메뉴
                                 </div>
@@ -328,8 +389,19 @@
                         (달)월 (일)일 (요일)요일
                     </div>
                     <div class="slide-detail">
-   
+                        <div id='calendar'></div>
                     </div>
+
+                        
+
+                    
+
+
+
+
+
+
+
                     <div id="book-menu2" class="menu-slide">
                         시간 선택
                     </div>
@@ -382,6 +454,8 @@
                 }
                 })
             })
+
+            $()
         </script>
         <div id="footer">
         </div>
