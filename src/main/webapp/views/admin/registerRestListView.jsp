@@ -53,22 +53,25 @@
         line-height: 25px;     
     }
 
-    /*라디오 버튼*/
-    input{
-        accent-color: rgb(221,45,45);
-    }
-    label{
-        color: dimgray
+    tbody>tr:hover{
+        cursor: pointer;   
     }
 
-    /*삭제 버튼*/
-    #deleteNotice{
-        float: right;    
-        font-size: 15px;
-        width: 70px;
+
+    /*카테고리*/
+    #select{
+        border: 1px solid gray;
+        border-radius: 4px;
+        width: 100px;
         height: 33px;
     }
-    /*등록 버튼*/
+
+    /*체크 버튼*/
+    input{
+        accent-color: rgb(221,45,45);
+    }   
+    
+    /*삭제 버튼*/
     #insertNotice{
         float: right;
         font-size: 15px;
@@ -97,112 +100,103 @@
 			<!-- 컨텐츠 작성부 -->
             <br><br>
             <form action="">
-                <div class="right">
-                    <!--회원/업체-->
-                    <input type="radio" id="member" name="selectNotice" value="M" checked>
-                    <label for="member">회원</label>&nbsp&nbsp
-                    <input type="radio" id="restaurant" name="selectNotice" value="R">
-                    <label for="restaurant">업체</label>
-                    &nbsp&nbsp&nbsp&nbsp
 
-                    <!--등록 삭제-->
-                    <button type="button" class="btn btn-outline-danger btn-sm" id="deleteNotice">삭제</button>
-                    <a class="btn btn-danger btn-sm" id="insertNotice">등록</a>
+                <!--카테고리-->
+                <select id="select">
+                    <option value="">상태</option>
+                    <option value="">미확인</option>
+                    <option value="">승인</option>
+                    <option value="">승인대기</option>
+                    <option value="">반려</option>
+                </select>
+
+                <div class="right">
+                    <!--삭제-->
+                    <a class="btn btn-danger btn-sm" id="insertNotice">삭제</a>
                     <br> <br>
                 </div>
 
-                <!--공지사항 표-->
+                <!--등록요청 표-->
                 <table class="table">
                     <thead>
                         <tr>
                             <th><input type="checkbox"></th>
                             <th>번호</th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>조회수</th>
                             <th>작성일</th>
+                            <th>업체명</th>
+                            <th>처리상태</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td id="noticeTitle">2023.01.22</td>
+                            <td>미오 도쿄 다이닝</td>
+                            <td>미확인</td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td id="noticeTitle">2023.01.22</td>
+                            <td>미오 도쿄 다이닝</td>
+                            <td>미확인</td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td id="noticeTitle">2023.01.22</td>
+                            <td>미오 도쿄 다이닝</td>
+                            <td>미확인</td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td id="noticeTitle">2023.01.22</td>
+                            <td>미오 도쿄 다이닝</td>
+                            <td>미확인</td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td id="noticeTitle">2023.01.22</td>
+                            <td>미오 도쿄 다이닝</td>
+                            <td>미확인</td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td id="noticeTitle">2023.01.22</td>
+                            <td>미오 도쿄 다이닝</td>
+                            <td>미확인</td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td id="noticeTitle">2023.01.22</td>
+                            <td>미오 도쿄 다이닝</td>
+                            <td>미확인</td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td id="noticeTitle">2023.01.22</td>
+                            <td>미오 도쿄 다이닝</td>
+                            <td>미확인</td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td id="noticeTitle">2023.01.22</td>
+                            <td>미오 도쿄 다이닝</td>
+                            <td>미확인</td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
                             <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td id="noticeTitle">2023.01.22</td>
+                            <td>미오 도쿄 다이닝</td>
+                            <td>미확인</td>
                         </tr>
                         
                     </tbody>	
@@ -234,11 +228,14 @@
 	
 	<script>
 		$(function(){
-			$('#title').text("공지사항");
-			$('#menu4-detail-1').click();
+			$('#title').text("업체 등록 요청");
+			$('#menu4-detail-4').click();
             $('#menu4').css("background-color","whitesmoke");
             $('#menu4').css("color","rgb(221,45,45)");
 		})
+
+        
+
 
 	</script>
 </body>

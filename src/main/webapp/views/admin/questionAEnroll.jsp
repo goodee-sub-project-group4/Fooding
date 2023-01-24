@@ -136,8 +136,8 @@
 	
 	<script>
 		$(function(){
-			$('#title').text("공지사항");
-			$('#menu4-detail-1').click();
+			$('#title').text("1 : 1 문의");
+			$('#menu4-detail-3').click();
             $('#menu4').css("background-color","whitesmoke");
             $('#menu4').css("color","rgb(221,45,45)");
 		})

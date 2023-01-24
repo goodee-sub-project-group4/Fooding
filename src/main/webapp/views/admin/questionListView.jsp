@@ -281,11 +281,7 @@
             $('#menu4').css("background-color","whitesmoke");
             $('#menu4').css("color","rgb(221,45,45)");
 		})
-
-        $('.my-select').selectpicker();
         
-
-
 	</script>
 </body>
 </html>
