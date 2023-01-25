@@ -85,23 +85,18 @@
 			<br>
             <div id="post-info">
                 <span>작성일</span><label>2022/12/30</label><br>
-                <span>작성자Id</span><label>user01</label><br>
-                <span>문의유형</span><label>이용문의</label><br>
                 <span>처리결과</span><label>미답변</label><br>
-            </div>
+            </div><br>
 
             <div id="post-qna">
                 <h4>제목</h4>
                 <input type="text" value="주차관련해서 문의가 있습니다." readonly><br><br>
                 <h4>내용</h4>
                 <textarea cols="30" rows="10" readonly>예약했는데 차량주차가 2대필요합니다</textarea><br><br>
-                <form action="">
-                    <h4>답변</h4>
-                    <textarea cols="30" rows="10"></textarea>
-                    <br><br>
-                    <button class="btn btn-danger">답변하기</button>
-                    <button class="btn btn-secondary">초기화</button>
-                </form>
+                <h4>답변</h4>
+                <textarea cols="30" rows="10" readonly>예약했는데 차량주차가 2대필요합니다</textarea>
+                <br><br>
+                <button class="btn btn-secondary">목록</button>
             </div>
 
             
@@ -123,11 +118,10 @@
 	</div>	
 	<script>
 		$(function(){
-			// Head.jsp 내의 요소, #title의 문구를 변경한다.
-			$('#title').text("문의답변");
-			$('#menu2-detail').find('li').eq(3).click();
-            $('#menu2').css("background-color","whitesmoke");
-            $('#menu2').css("color","rgb(221,45,45)");
+			$('#title').text("1:1문의");
+			$('#menu3-detail').find('li').eq(2).click();
+            $('#menu3').css("background-color","whitesmoke");
+            $('#menu3').css("color","rgb(221,45,45)");
 
 			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
 			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"5px"});

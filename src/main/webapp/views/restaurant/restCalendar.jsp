@@ -110,7 +110,7 @@
 			<button type="button" class="btn btn-outline-danger">예약불가 변경</button>
 			<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-list">예약내역 보기</button><br>
 			<div id="prev-area">
-				<img src="../../resources/images/prevButton.png" width="60">
+				<img src="resources/images/prevButton.png" width="60">
 			</div>
 			<div id="calendar-outer">
 				<div id="week">
@@ -169,7 +169,7 @@
 				</div>
 			</div>
 			<div id="next-area">
-				<img src="../../resources/images/nextButton.png" width="60">
+				<img src="resources/images/nextButton.png" width="60">
 			</div>
 		</div>
 	</div>

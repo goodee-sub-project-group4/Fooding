@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Insert title here</title>
+<title>Fooding</title>
 
 <!-- 부트스트랩 사용하기 -->
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"> -->
@@ -74,7 +74,7 @@
 <body>
     <div id="outer" align="center">
         <div id="div1">
-            <img src="../../resources/images/logo.png" width="190">
+            <img src="resources/images/logo.png" width="190">
         </div>
         <div id="div2">
             <h3 id="title" width="500">페이지마다 수정되는 타이틀</h3>
@@ -83,7 +83,7 @@
             <span>로그아웃</span>
             <span> | </span>
             <h4> 업체01 님 </h4>
-            <img src="../../resources/images/userIcon.png" width="50">
+            <img src="resources/images/userIcon.png" width="50">
         </div>
         <hr>
     </div>

@@ -95,7 +95,7 @@
 						<input type="text" value="기존입력값"><br>
 					</div>
 					<div class="photo" align="center">
-						<img src="../../resources/images/forTest.png" class="rounded" width="200" height="150"><br>
+						<img src="resources/images/forTest.png" class="rounded" width="200" height="150"><br>
 						<button type="button" class="btn btn-outline-danger">사진등록</button>
 					</div>
 				</div>
@@ -113,7 +113,7 @@
 						<input type="text" value="기존입력값"><br>
 					</div>
 					<div class="photo" align="center">
-						<img src="../../resources/images/forTest.png" class="rounded" width="200" height="150"><br>
+						<img src="resources/images/forTest.png" class="rounded" width="200" height="150"><br>
 						<button type="button" class="btn btn-outline-danger">사진등록</button>
 					</div>
 				</div>
@@ -131,7 +131,7 @@
 						<input type="text" value="기존입력값"><br>
 					</div>
 					<div class="photo" align="center">
-						<img src="../../resources/images/forTest.png" class="rounded" width="200" height="150"><br>
+						<img src="resources/images/forTest.png" class="rounded" width="200" height="150"><br>
 						<button type="button" class="btn btn-outline-danger">사진등록</button>
 					</div>
 				</div>
