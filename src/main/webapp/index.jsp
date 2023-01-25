@@ -50,7 +50,7 @@
     height: 250px;
   	}
 	
-    #area2, #area3, #area4 { /* 리뷰순,지역별,가격순*/
+    #area2, #area3, #area4 { /* 리뷰, 별점, 지역*/
         /* border: 2px solid pink; */
         box-sizing: border-box;
         margin:auto;
@@ -133,7 +133,7 @@
 
 		    </div><br>
 		    <div id="area2" align="center">
-		        <h2>리뷰순 best ></h2>
+		        <h2>리뷰 best ></h2>
 		        <div class="restaurant">
 		            <img src="/Fooding/resources/images/forTest.png"><br>
 		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
@@ -151,7 +151,7 @@
 		        </div>
 		    </div>
 		    <div id="area3" align="center">
-		        <h2>지역별 best ></h2>
+		        <h2>별점 best ></h2>
 		        <div class="restaurant">
 		            <img src="/Fooding/resources/images/forTest.png"><br>
 		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
@@ -169,7 +169,7 @@
 		        </div>
 		    </div>
 		    <div id="area4" align="center">
-		        <h2>가격순 best ></h2>
+		        <h2>지역별 best ></h2>
 		        <div class="restaurant">
 		            <img src="/Fooding/resources/images/forTest.png"><br>
 		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>

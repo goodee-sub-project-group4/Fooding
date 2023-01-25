@@ -50,11 +50,11 @@
 			display: inline-block;
 		}
 		
-		.more { /*더보기버튼*/
+		.more { /*더보기 큰버튼*/
 			float:right;
 			font-size: 17px;
 		}
-		#area1 span img { /*더보기버튼*/
+		#area1 span img { /*더보기 큰버튼*/
 			margin-bottom:5px;
 		}
 		#area1>div {
@@ -78,6 +78,7 @@
 			margin-right: 30px;
 			background-color:whitesmoke;
 			border-color: whitesmoke;
+			padding:20px;
 		}
 		#area2, #area3 {
 			height:280px;
@@ -95,7 +96,47 @@
 			width:100%;
 			margin-top: 30px;
 		}
+
+		.user { /*신규예약건-유저아이콘*/
+			width:50px;
+			margin-left:10px
+		}
+		.alert button { /*신규예약건-조회버튼*/
+			margin-left: 10px;
+			/* line-height: 100%; */
+			position: relative;
+			bottom:2px;
+		}
+		.book-date { /*신규예약건-예약날짜*/
+			font-weight: 700;
+			color:rgb(77, 77, 77);
+			margin-left: 10px;
+		}
+		.booker { /*신규예약건-예약자*/
+			margin-left: 10px;			
+		}
+		#area2 p, #area3 p { /* . . . . . */
+			display: inline-block;
+			font-size: 100;
+			font-weight: 900;
+			color:rgb(69, 69, 69);
+			position: relative;
+			bottom:20px;
+		}
 		
+		.title {
+			font-weight: 900;
+			color:rgb(69, 69, 69);
+		}
+		.content {
+			display: inline-block;
+			margin-top: 10px;
+		}
+		.create-date {
+			float:right;
+			margin-top: 10px;
+		}
+
 
 	</style>
 	
@@ -116,14 +157,25 @@
 					<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
 					
 					<div class="alert alert-secondary">
-						<strong>Success!</strong> Indicates a successful or positive action.
-						<button type="button" class="btn btn-outline-danger">조회</button>
+						<img class="user" src="/Fooding/resources/images/userIcon3.png">
+						<span class="book-date">2023-02-07 15:00</span>
+						<span class="booker">강개순</span>
+						<span>(3명)</span>
+						<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button>
 					</div>
 					<div class="alert alert-secondary">
-						<strong>Success!</strong> Indicates a successful or positive action.
+						<img class="user" src="/Fooding/resources/images/userIcon3.png">
+						<span class="book-date">2023-02-07 15:00</span>
+						<span class="booker">강백호</span>
+						<span>(5명)</span>
+						<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button>
 					</div>
 					<div class="alert alert-secondary">
-						<strong>Success!</strong> Indicates a successful or positive action.
+						<img class="user" src="/Fooding/resources/images/userIcon3.png">
+						<span class="book-date">2023-02-07 15:00</span>
+						<span class="booker">서태웅</span>
+						<span>(1명)</span>
+						<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button>
 					</div>
 				</div>
 				<div>
@@ -139,22 +191,28 @@
 				<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<div class="alert alert-secondary">
-					<strong>Success!</strong> Indicates a successful or positive action.
+					<span class="title">애견 동반 가능한가요?</span><br>
+					<span class="content">문의/리뷰 내용...어쩌고저쩌고<br>두줄까지표현가능</span><br>
+					<span class="create-date">2023-01-01</span>
 				</div>
 				<div class="alert alert-secondary">
-					<strong>Success!</strong> Indicates a successful or positive action.
+					<span class="title">애견 동반 가능한가요?</span><br>
+					<span class="content">문의/리뷰 내용...어쩌고저쩌고<br>두줄까지표현가능</span><br>
+					<span class="create-date">2023-01-01</span>
 				</div>
+				<p>. . . . .</p>
 			</div>
 			<div id="area3">
-				<h3>리뷰</h3> <span class="badge">5</span>
+				<h3>리뷰</h3> <span class="badge">1</span>
 				<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<div class="alert alert-secondary">
-					<strong>Success!</strong> Indicates a successful or positive action.
+					<span class="title">애견 동반 가능한가요?</span><br>
+					<span class="content">문의/리뷰 내용...어쩌고저쩌고<br>두줄까지표현가능</span><br>
+					<span class="create-date">2023-01-01</span>
 				</div>
-				<div class="alert alert-secondary">
-					<strong>Success!</strong> Indicates a successful or positive action.
-				</div>
+				
+				<p>. . . . .</p>
 			</div>
 			
 		</div>

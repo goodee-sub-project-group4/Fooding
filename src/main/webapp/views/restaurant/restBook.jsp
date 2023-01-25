@@ -61,13 +61,35 @@
             width: 150px;
             height: 33px;
             margin-left: 6px;
-        }
-        
+        }        
         #search-option {
             float: right;
         }
-    
-    
+
+        /* 예약상세조회(모달) */
+        .modal-content {
+            height:1000px;
+        }
+        .modal-header h4  {
+            font-weight: 800;
+        }
+        .modal-body h3 {
+        	font-size:16px;
+        	font-weight:600;
+        }
+        .modal-body .table {
+        	font-size:14px;
+        }
+        .modal-body th {
+            color:rgb(97, 97, 97);
+        }
+        .modal-body button {
+        	width:80px;
+        }
+        .modal-body span {
+        	color:crimson;
+        	font-size:12px;
+        }
 
 	
 	</style>
@@ -123,7 +145,7 @@
                         <td>2023/01/23</td>
                         <td>15:00</td>
                         <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -133,7 +155,7 @@
                         <td>2023/01/23</td>
                         <td>15:00</td>
                         <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -143,7 +165,7 @@
                         <td>2023/01/23</td>
                         <td>15:00</td>
                         <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -153,7 +175,7 @@
                         <td>2023/01/23</td>
                         <td>15:00</td>
                         <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -163,7 +185,7 @@
                         <td>2023/01/23</td>
                         <td>15:00</td>
                         <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -173,7 +195,7 @@
                         <td>2023/01/23</td>
                         <td>15:00</td>
                         <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -183,7 +205,7 @@
                         <td>2023/01/23</td>
                         <td>15:00</td>
                         <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -193,7 +215,7 @@
                         <td>2023/01/23</td>
                         <td>15:00</td>
                         <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -203,7 +225,7 @@
                         <td>2023/01/23</td>
                         <td>15:00</td>
                         <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                     <tr>
                         <td>10</td>
@@ -213,13 +235,130 @@
                         <td>2023/01/23</td>
                         <td>15:00</td>
                         <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                 </tbody>	
 			</table>
 		</div>
 		
 	</div>
+
+
+    <!-- The Modal -->
+    <div class="modal" id="book-detail">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+        
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4>예약상세조회</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+        
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <br>
+                    <h3>예약정보</h3>
+                    <table class="table table-sm">
+                        <tr class="table-secondary">
+                            <th>예약번호</th>
+                            <th>예약날짜</th>
+                            <th>예약시간</th>
+                            <th>예약인원</th>
+                        </tr>
+                        <tr class="table-light">
+                            <td>12</td>
+                            <td>2023-02-15</td>
+                            <td>15:00</td>
+                            <td>2</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <h3>예약자정보</h3>
+                    <table class="table table-sm">
+                        <tr class="table-secondary">
+                            <th>이름</th>
+                            <th>연락처</th>
+                            <th>이메일</th>
+                            <th>요청사항</th>
+                        </tr>
+                        <tr class="table-light">
+                            <td>강백호</td>
+                            <td>010-9999-9999</td>
+                            <td>fooding@gmail.com</td>
+                            <td>주차관련해서 문의드렸는데 확인부탁드립니다.</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <h3>주문내역</h3>
+                    <table class="table table-sm">
+                        <tr class="table-secondary">
+                            <th>메뉴</th>
+                            <th>수량</th>
+                            <th>단가</th>
+                            <th>금액</th>
+                        </tr>
+                        <tr class="table-light">
+                            <td>시금치파스타</td>
+                            <td>1</td>
+                            <td>19000</td>
+                            <td>19000</td>
+                        </tr>
+                        <tr class="table-light">
+                            <td>먹물파스타</td>
+                            <td>1</td>
+                            <td>22000</td>
+                            <td>22000</td>
+                        </tr>
+                        <tr class="table-light">
+                            <td>콜라</td>
+                            <td>2</td>
+                            <td>2000</td>
+                            <td>4000</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <h3>결제정보</h3>
+                    <table class="table table-sm">
+                        <tr class="table-secondary">
+                            <th>결제시간</th>
+                            <th>결제수단</th>
+                            <th>결제금액</th>
+                        </tr>
+                        <tr class="table-light">
+                            <td>23-01-07 15:30:25</td>
+                            <td>카드</td>
+                            <td>45000</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <h3>예약상태</h3>
+                    <form action="">
+                        <select name="" id="">
+                            <option value="">예약완료</option>
+                            <option value="">취소</option>
+                            <option value="">이용완료</option>
+                        </select>
+                        <button type="button" class="btn btn-danger">저장</button>
+                        <button type="reset" class="btn btn-secondary">취소</button>
+                    </form>
+                    <span>*예약상태는 변경 후 되돌릴 수 없으니 신중히 선택해주세요.</span>
+                    
+                    
+
+                </div>
+        
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+
+
     <br><br><br><br><br><br><br>
     <div id="footer">
 		<%@ include file="../common/footer.jsp" %>
