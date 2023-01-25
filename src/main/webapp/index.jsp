@@ -26,8 +26,10 @@
         position: relative;
         left:26px;
     }
+	/*<!--부트스트랩으로 기능구현 어려우면 다씨 써야되니까 지우지 말기!-->*/
+	/*
     #banner {
-        width:100%;
+        width:400%;
         height: 250px;
         margin:auto;
     }
@@ -41,7 +43,14 @@
         right:10px;
         bottom:100px;
     }
-    #area2, #area3, #area4 { /* 리뷰순,지역별,가격순*/
+	*/
+	/*메인배너 부트스트랩*/
+	.carousel-inner img {
+    width: 791.47px;
+    height: 250px;
+  	}
+	
+    #area2, #area3, #area4 { /* 리뷰, 별점, 지역*/
         /* border: 2px solid pink; */
         box-sizing: border-box;
         margin:auto;
@@ -82,12 +91,49 @@
 	<div class="wrap">
 		<div id="main-area">
 		    <div id="area1">
-		        <img id="prevButton" src="/Fooding/resources/images/prevButton.png" width="50">
+				<!--부트스트랩으로 기능 구현 어려우면 다씨 써야되니까 지우지 말기!-->
+		        <!-- <img id="prevButton" src="/Fooding/resources/images/prevButton.png" width="50">
 		        <img id="banner" src="/Fooding/resources/images/forTest.png">
-		        <img id="nextButton" src="/Fooding/resources/images/nextButton.png" width="50">
+		        <img id="nextButton" src="/Fooding/resources/images/nextButton.png" width="50"> -->
+
+				<!--메인배너 부트스트랩-->
+				<div id="demo" class="carousel slide" data-ride="carousel">
+
+					<!-- Indicators -->
+					<ul class="carousel-indicators">
+						<li data-target="#demo" data-slide-to="0" class="active"></li>
+						<li data-target="#demo" data-slide-to="1"></li>
+						<li data-target="#demo" data-slide-to="2"></li>
+					</ul>
+					
+					<!-- The slideshow -->
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="/Fooding/resources/images/forTest.png" alt="" width="791.47" height="250">
+						</div>
+						<div class="carousel-item">
+							<img src="/Fooding/resources/images/forTest.png" alt="" width="791.47" height="250">
+						</div>
+						<div class="carousel-item">
+							<img src="/Fooding/resources/images/forTest.png" alt="" width="791.47" height="250">
+						</div>
+						
+					</div>
+					
+					<!-- Left and right controls -->
+					<a class="carousel-control-prev" href="#demo" data-slide="prev">
+						<span class="carousel-control-prev-icon"></span>
+					</a>
+					<a class="carousel-control-next" href="#demo" data-slide="next">
+					 	<span class="carousel-control-next-icon"></span>
+					</a>
+				</div>
+
+
+
 		    </div><br>
 		    <div id="area2" align="center">
-		        <h2>리뷰순 best ></h2>
+		        <h2>리뷰 best ></h2>
 		        <div class="restaurant">
 		            <img src="/Fooding/resources/images/forTest.png"><br>
 		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
@@ -105,7 +151,7 @@
 		        </div>
 		    </div>
 		    <div id="area3" align="center">
-		        <h2>지역별 best ></h2>
+		        <h2>별점 best ></h2>
 		        <div class="restaurant">
 		            <img src="/Fooding/resources/images/forTest.png"><br>
 		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
@@ -123,7 +169,7 @@
 		        </div>
 		    </div>
 		    <div id="area4" align="center">
-		        <h2>가격순 best ></h2>
+		        <h2>지역별 best ></h2>
 		        <div class="restaurant">
 		            <img src="/Fooding/resources/images/forTest.png"><br>
 		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
