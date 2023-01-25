@@ -63,7 +63,7 @@
             float: right;
         }
 		.answer-yet {
-			color:royalblue;
+			color: dodgerblue;
 		}
 	</style>
 </head>

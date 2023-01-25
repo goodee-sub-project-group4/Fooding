@@ -54,15 +54,11 @@
 		#select{
 			border: 1px solid gray;
 			border-radius: 4px;
-			width: 100px;
+			width: 130px;
 			height: 33px;
 			float:right;
 		}
-		/*페이징바*/
-		.pagination a{
-			color:rgb(221,45,45);
-		}
-
+		
 		/*표...상단*/
 		.listTitle{
 			margin-left: 32px;
