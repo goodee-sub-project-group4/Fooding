@@ -40,6 +40,7 @@
     <style>
         /* 컨텐트 전체 영역 */
         /* .content div{border: 1px solid black;} */
+        .wrap{position: relative;}
         #content1, #content2, #content3{box-sizing: border-box; height: 100%;}
         #content1-padding, #content2-padding, #content3-padding{float: left; margin: auto; padding: 5px; box-sizing: border-box;}
 
@@ -105,7 +106,7 @@
         #book-menu1, #book-menu2, #book-menu3, #book-menu4{height: 70px; text-align: center; line-height: 70px;}
         /* 슬라이드 */
         .slide-detail{width: 100%; height: 550px; margin-top:5px; padding: 5px; box-sizing: border-box; overflow: auto;
-            /* display: none; */
+            display: none;
         }
         /* 달력 */
         .fc .fc-toolbar{display: block;}
@@ -130,18 +131,18 @@
         .book-time-btn{width: 75px; height: 50px; margin-bottom: 5px;}
 
         /* 메뉴선택 창 */
-        #menu-select{width: 600px; height: 800px; background-color: rgba(128, 128, 128, 0.913); position: fixed; left: 800px; top: 200px; padding: 15px;}
-        #menu-select-background{width: 570px; height: 770px; margin: auto; background-color: white; padding-top: 20px; }
+        .menu-select{width: 600px; height: 830px; background-color: rgba(128, 128, 128, 0.913); padding: 15px; position: absolute; left: 150px; right: 0; top: 550px; bottom: 0px; display: none;}
+        #menu-select-background{width: 570px; height: 800px; margin: auto; background-color: white; padding-top: 20px; }
         #menu-select-border1{width: 550px; height: 450px; margin: auto; margin-bottom: 10px; border: 1px solid gray; padding: 15px;}
         #menu-selectView1{width: 520px; height: 420px; margin: auto; overflow: auto;}
         .menu-detail{width: 100%; height: 150px; margin-bottom: 5px; background-color: whitesmoke;}
         .menu-detail > img{width: 150px; height: 150px; display: block; float: left; padding: 5px;}
         .menu-datail1{width: 275px; height: 150px; float: left; padding: 5px; }
-        .menu-datail2{width: 75px; height: 150px; float: left; padding: 5px;}
-        .btn.btn-secondary.btn-sm{margin-left: 18px; margin-top: 50px; height: 40px;}
+        .menu-datail2{width: 70px; height: 150px; float: left; padding: 5px;}
+        .btn.btn-secondary.btn-sm{margin-left: 13px; margin-top: 50px; height: 40px;}
 
         /* 금액 창 */
-        #menu-select-border2{width: 550px; height: 270px; margin: auto; border: 1px solid gray; padding: 15px;}
+        #menu-select-border2{width: 550px; height: 250px; margin: auto; border: 1px solid gray; padding: 15px;}
     </style>
 </head>
 <body>
@@ -428,79 +429,93 @@
                         <button class="book-time-btn">15:00</button>
                         <button class="book-time-btn">15:30</button>
                     </div>
-                    <div id="book-menu3" onclick="menubox();">메뉴 선택</div>
-                    <div id="menu-select">
-                        <div id="menu-select-background">
-                            <div id="menu-select-border1">
-                                <div id="menu-selectView1">
-                                    <div class="menu-detail">
-                                        <img src="" alt="">
-                                        <div class="menu-datail1">
-                                            <div style="font-weight: 1000; font-size: 20px;">도쿄 수제 함바그 고젠</div>
-                                            <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
-                                            <div style="font-size: 13px; height: 80px; overflow: hidden;">함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴
-                                            함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴</div>
+                    <div id="book-menu3">메뉴 선택</div>
+                    <div class="menu-fixed" >
+                        <div class="menu-select">
+                            <div id="menu-select-background">
+                                <div id="menu-select-border1">
+                                    <div id="menu-selectView1">
+                                        <div class="menu-detail">
+                                            <img src="" alt="">
+                                            <div class="menu-datail1">
+                                                <div style="font-weight: 1000; font-size: 20px;">도쿄 수제 함바그 고젠</div>
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
+                                                <div style="font-size: 13px; height: 80px; overflow: hidden;">함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴
+                                                함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴</div>
+                                            </div>
+                                            <div class="menu-datail2">
+                                                <button type="button" class="btn btn-secondary btn-sm">추가</button>
+                                            </div>
                                         </div>
-                                        <div class="menu-datail2">
-                                            <button type="button" class="btn btn-secondary btn-sm">추가</button>
-                                        </div>
-                                    </div>
-                                    <div class="menu-detail">
-                                        <img src="" alt="">
-                                        <div class="menu-datail1">
-                                            <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
-                                            <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
+                                        <div class="menu-detail">
+                                            <img src="" alt="">
+                                            <div class="menu-datail1">
+                                                <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
 
-                                            <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
+                                                <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
+                                            </div>
+                                            <div class="menu-datail2">
+                                                <button type="button" class="btn btn-secondary btn-sm">추가</button>
+                                            </div>
                                         </div>
-                                        <div class="menu-datail2">
-                                            <button type="button" class="btn btn-secondary btn-sm">추가</button>
-                                        </div>
-                                    </div>
-                                    <div class="menu-detail">
-                                        <img src="" alt="">
-                                        <div class="menu-datail1">
-                                            <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
-                                            <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
-                                            <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
-                                        </div>
-                                        <div class="menu-datail2">
-                                            <button type="button" class="btn btn-secondary btn-sm">추가</button>
+                                        <div class="menu-detail">
+                                            <img src="" alt="">
+                                            <div class="menu-datail1">
+                                                <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
+                                                <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
+                                            </div>
+                                            <div class="menu-datail2">
+                                                <button type="button" class="btn btn-secondary btn-sm">추가</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="menu-select-border2">
-                                <table>
-                                    <tr>
-                                        <th style="width: 250px; text-align: center;">주문내역</th>
-                                        <th style="width: 125px; text-align: center;">수량</th>
-                                        <th style="width: 145px; text-align: center;">금액</th>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"><hr></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1. 도쿄 수제 함바그 고젠</td>
-                                        <td><button style="width: 30px;">-</button><input type="text" style="width: 40px; text-align: center;" value="1"><button style="width: 30px;">+</button></td>
-                                        <td style="text-align: right;" >12,000원</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2. 치킨 스테이크 고젠</td>
-                                        <td><button style="width: 30px;">-</button><input type="text" style="width: 40px; text-align: center;" value="1"><button style="width: 30px;">+</button></td>
-                                        <td style="text-align: right;">12,000원</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="font-weight: 700; font-size: 25px;">총액</td>
-                                        <td style="text-align: right; font-weight: 600; font-size: 20px; color: brown;">25,000원</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"><hr></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" style="font-size: 7px; text-align: right;">* 결제 완료 시 적립금 1% 적립</td>
-                                    </tr>
-                                </table>
+                                <div id="menu-select-border2">
+                                    <table>
+                                        <tr>
+                                            <th style="width: 250px; text-align: center;">주문내역</th>
+                                            <th style="width: 125px; text-align: center;">수량</th>
+                                            <th style="width: 145px; text-align: center;">금액</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3"><hr></td>
+                                        </tr>
+                                        <tr class="menu-choice">
+                                            <td>1. 도쿄 수제 함바그 고젠</td>
+                                            <td>
+                                                <button class="minus" style="width: 30px;">-</button>
+                                                <input class="quantity" type="text" style="width: 40px; text-align: center;" value="1">
+                                                <button class="plus" style="width: 30px;">+</button>
+                                            </td>
+                                            <td style="text-align: right;" >12,000원</td>
+                                        </tr>
+                                        <tr class="menu-choice">
+                                            <td>2. 치킨 스테이크 고젠</td>
+                                            <td>
+                                                <button class="minus" style="width: 30px;">-</button>
+                                                <input class="quantity" type="text" style="width: 40px; text-align: center;" value="1">
+                                                <button class="plus" style="width: 30px;">+</button>
+                                            </td>
+                                            <td style="text-align: right;">12,000원</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="font-weight: 700; font-size: 25px;">총액</td>
+                                            <td style="text-align: right; font-weight: 600; font-size: 20px; color: brown;">25,000원</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3"><hr></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="font-size: 8px; text-align: right;">* 결제 완료 시 적립금 1% 적립</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style="width: 300px; height: 50px; margin: auto; padding-top: 10px;">
+                                    <button id="check" style="float: left; width: 100px;" type="button" class="btn btn-primary btn-lg">확인</button>
+                                    <button id="cancel" style="float: right; width: 100px;" type="button" class="btn btn-secondary btn-lg">취소</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -524,33 +539,55 @@
         <script>
             // 예약 버튼 활성화/비활성화
             $(function(){
-                $("#book-btn").click(function(){
-                    if($("#content3-3").css('display') == "none"){
-                        $("#content3-3").css('display', 'block')
+                $('#book-btn').click(function(){
+                    if($('#content3-3').css('display') == 'none'){
+                        $('#content3-3').css('display', 'block')
                     }else{
-                        $("#content3-3").css('display', 'none')
+                        $('#content3-3').css('display', 'none')
                     }
-                })
-            })
+                });
+            });
 
             // 예약날짜, 시간, 메뉴 슬라이드 효과
-
             $(function(){
-                $(".menu-slide").click(function(){
+                $('.menu-slide').click(function(){
                 const $slide = $(this).next();
                 if($slide.css('display') == 'none'){
-
                     $(this).siblings('.slide-detail').slideUp();
                     $slide.slideDown(); 
                 }else{
                     $slide.slideUp();
                 }
-                })
-            })
+                });
+            });
+            $('#book-menu3').click(function(){
+                if($('#book-menu1').css('display') == 'block' || $('#book-menu2').css('display') == 'block'){
+                    $('#book-menu1').next().slideUp();
+                    $('#book-menu2').next().slideUp();
+                }
+                $('.menu-select').css('display', 'block');
+            });
 
-            function menubox(){
+            // 메뉴 추가, 수량 추가
 
-            }
+            $('.minus').click(function(){
+                const minus = parseInt($(this).next().val()) -1;
+                if($(this).next().val() > 1){
+                    $(this).next().val(minus);
+                }else{
+                    $(this).parents('tr.menu-choice').attr('style', 'display: none');
+                    console.log($(this).parents('tr.menu-choice'));
+                }
+            });
+            $('.plus').click(function(){
+                const plus = parseInt($(this).prev().val()) +1;
+                $(this).prev().val(plus);
+            });
+
+            // 메뉴 취소 버튼
+            $('#cancel').click(function(){
+                $('.menu-select').css('display', 'none');
+            });
         </script>
         <%@ include file="/views/common/footer.jsp" %>
     </div>
