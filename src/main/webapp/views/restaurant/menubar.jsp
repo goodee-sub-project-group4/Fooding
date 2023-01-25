@@ -105,7 +105,7 @@
             <li>매장정보<span>></span></li>
             <li>메뉴정보<span>></span></li>
             <li>문의답변<span>></span></li>
-            <li>리뷰<span>></span></li>
+            <li>리뷰관리<span>></span></li>
             <li>정산<span>></span></li>
         </ul>
     </div>

@@ -39,7 +39,8 @@
 		table td, table th {
 			margin:auto;
 			text-align: center;
-			line-height: 33px;     
+			vertical-align: middle;  
+            line-height: 33px;   
         }
 		table th {
 			color:rgb(85, 85, 85);

@@ -36,8 +36,9 @@
 		/* ↓↓↓ 컨텐츠용 스타일 */
 		table td, table th {
             margin:auto;
-            text-align: center;
-            line-height: 33px;     
+            text-align: center;    
+            vertical-align: middle;
+            line-height: 33px;
         }
         table th {
 			color:rgb(85, 85, 85);
