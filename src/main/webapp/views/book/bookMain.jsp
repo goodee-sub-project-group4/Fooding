@@ -140,7 +140,8 @@
         .menu-datail1{width: 275px; height: 150px; float: left; padding: 5px; }
         .menu-datail2{width: 70px; height: 150px; float: left; padding: 5px;}
         .btn.btn-secondary.btn-sm{margin-left: 13px; margin-top: 50px; height: 40px;}
-
+        /* 인풋 number 증감 화살표 제거 */
+        input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin: 0;}
         /* 금액 창 */
         #menu-select-border2{width: 550px; max-height: 400px; overflow: auto; margin: auto; border: 1px solid gray; padding: 15px;}
         .minus{width: 30px;}
@@ -442,7 +443,7 @@
                                             <img src="" alt="">
                                             <div class="menu-datail1">
                                                 <div style="font-weight: 1000; font-size: 20px;">도쿄 수제 함바그 고젠</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>12,000</b>원</div>
                                                 <div style="font-size: 13px; height: 80px; overflow: hidden;">함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴
                                                 함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴</div>
                                             </div>
@@ -454,7 +455,7 @@
                                             <img src="" alt="">
                                             <div class="menu-datail1">
                                                 <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">13,000원</div>
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>13,000</b>원</div>
                                                 <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
                                             </div>
                                             <div class="menu-datail2">
@@ -465,7 +466,7 @@
                                             <img src="" alt="">
                                             <div class="menu-datail1">
                                                 <div style="font-weight: 1000; font-size: 20px;">경양식 돈까스</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">10,000원</div>
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>10,000</b>원</div>
                                                 <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
                                             </div>
                                             <div class="menu-datail2">
@@ -488,9 +489,10 @@
                                         </thead>
                                         <tbody>
                                         </tbody>
+                                        <tfoot>
                                         <tr>
                                             <td colspan="2" style="font-weight: 700; font-size: 25px;">총액</td>
-                                            <td style="text-align: right; font-weight: 600; font-size: 20px; color: brown;">25,000원</td>
+                                            <td id="sum" style="text-align: right; font-weight: 600; font-size: 20px; color: brown;"></td>
                                         </tr>
                                         <tr>
                                             <td colspan="3"><hr></td>
@@ -498,6 +500,7 @@
                                         <tr>
                                             <td colspan="3" style="font-size: 8px; text-align: right;">* 결제 완료 시 적립금 1% 적립</td>
                                         </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                                 <div style="width: 300px; height: 50px; margin: auto; padding-top: 10px;">
@@ -555,39 +558,71 @@
                 }
                 $('.menu-select').css('display', 'block');
             });
-            
+
             // 메뉴 추가
+            let sum = 0;
+            // const result = "";
+            let regex = /[^0-9]/g;
             $('.btn.btn-secondary.btn-sm.add').click(function(){
                 const addMenu = $(this).parent().prev().children();
-                const tableData = [];
-                for()
-                   if(addMenu.eq(0).text() != ) 
-                }
-                $('#menu-select-border2 tbody:first').append(
-                    '<tr class="menu-choice">'
-                    + '<td>' + addMenu.eq(0).text() + '</td>'
-                    + '<td>'
-                    +    '<button class="minus">-</button> '
-                    +   '<input class="quantity" type="number" value="1"> '
-                    +   '<button class="plus">+</button> '
-                    + '</td>'
-                    + '<td style="text-align: right;" >' + addMenu.eq(1).text() + '</td>'
-                    + '</tr>'
+                const table = $('#menu-select-border2>table>tbody>tr').length;
+                const tableData = $('#menu-select-border2>table>tbody>tr').text();
+                
+                if(table == 0) {
+                        $('#menu-select-border2 tbody:first').append(
+                        '<tr class="menu-choice">'
+                        + '<td>' + addMenu.eq(0).text() + '</td>'
+                        + '<td>'
+                        +    '<button class="minus">-</button> '
+                        +   '<input class="quantity" type="number" value="1"> '
+                        +   '<button class="plus">+</button> '
+                        + '</td>'
+                        + '<td style="text-align: right;" >' + addMenu.eq(1).text() + '</td>'
+                        + '</tr>'
                     );
+                }else if(tableData.indexOf(addMenu.eq(0).text()) < 0){
+                    $('#menu-select-border2 tbody:first').append(
+                        '<tr class="menu-choice">'
+                        + '<td>' + addMenu.eq(0).text() + '</td>'
+                        + '<td>'
+                        +    '<button class="minus">-</button> '
+                        +   '<input class="quantity" type="number" value="1"> '
+                        +   '<button class="plus">+</button> '
+                        + '</td>'
+                        + '<td style="text-align: right;" >' + addMenu.eq(1).text() + '</td>'
+                        + '</tr>'
+                    );  
+                }
+                sum += parseInt(addMenu.eq(1).text().replace(regex, ''));
+                return sum;
             });
-            
+
             // 수량 추가, 삭제
             $(document).on('click', '.minus', function(){
                 const minus = parseInt($(this).next().val()) -1;
                 if($(this).next().val() > 1){
                     $(this).next().val(minus);
                 }else{
-                    $(this).parents('tr.menu-choice').attr('style', 'display: none');
+                    $(this).parents('tr.menu-choice').remove();
                 }
             });
             $(document).on('click', '.plus', function(){
                 const plus = parseInt($(this).prev().val()) +1;
                 $(this).prev().val(plus);
+            });
+            $(document).on('keyup', '.quantity', function(){
+                if($(this).val() == '0'){
+                    $(this).parents('tr.menu-choice').remove();
+                }
+            });
+
+            // 총액 천 단위 콤마
+            $(function(){
+                $('.btn.btn-secondary.btn-sm.add').click(function(sum){
+                    console.log(sum.result);
+                    sum = sum.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    $('#sum').text(sum + '원');
+                })
             });
 
             // 메뉴 취소 버튼
