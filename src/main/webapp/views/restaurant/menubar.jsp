@@ -93,7 +93,7 @@
     <h2 id="page-name">업체 페이지</h2>
     <div id="menu">
         <ul>
-            <li id="menu1">예약관리<span>></span></li>
+            <li id="menu1" onclick= "location.href='/Fooding/book.re'">예약관리<span>></span></li>
             <li id="menu2">매장관리<span>></span></li>
             <li id="menu3">고객센터<span>></span></li>
         </ul>
@@ -101,20 +101,20 @@
     
     <div id="menu2-detail" class="detail">
         <ul>
-            <li>달력설정<span>></span></li>
-            <li>매장정보<span>></span></li>
-            <li>메뉴정보<span>></span></li>
-            <li>문의답변<span>></span></li>
-            <li>리뷰관리<span>></span></li>
-            <li>정산<span>></span></li>
+            <li onclick="location.href='/Fooding/calendar.re'">달력설정<span>></span></li>
+            <li onclick="location.href='/Fooding/info.re'">매장정보<span>></span></li>
+            <li onclick= "location.href='/Fooding/menu.re'">메뉴정보<span>></span></li>
+            <li onclick= "location.href='/Fooding/qna.re'">문의답변<span>></span></li>
+            <li onclick= "location.href='/Fooding/review.re'">리뷰관리<span>></span></li>
+            <li onclick= "location.href='/Fooding/monthly.re'">정산<span>></span></li>
         </ul>
     </div>
     
     <div id="menu3-detail" class="detail">
         <ul>
-            <li>공지사항<span>></span></li>
-            <li>FAQ<span>></span></li>
-            <li>1:1문의<span>></span></li>
+            <li onclick= "location.href='/Fooding/notice.re'">공지사항<span>></span></li>
+            <li onclick= "location.href='/Fooding/faq.re'">FAQ<span>></span></li>
+            <li onclick= "location.href='/Fooding/oneone.re'">1:1문의<span>></span></li>
         </ul>
     </div>
 
@@ -136,13 +136,11 @@
                     $('.detail').css("display","none");
                 }
         
-                    if($(detailId).css("display") == "none") {
-                        $('.detail').css("display","none");
-                        $(detailId).css("display", "block");
-                    }
-                
-                
-                
+                if($(detailId).css("display") == "none") {
+                    $('.detail').css("display","none");
+                    $(detailId).css("display", "block");
+                }
+                             
 
                 
             })
