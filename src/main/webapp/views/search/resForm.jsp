@@ -60,6 +60,10 @@
    
     }
     
+    .ss{
+        color:red; 
+    }
+    
 </style>
 </head>
 <body>
@@ -96,56 +100,56 @@
                     <div class="inputForm">
                         대표자명 <span style="color:red;">*</span> <br>
                         <input type="text" name="ceo" id="ceo" required> <br>
-                        <span class="requiredInfo" id="ceoSpan"></span>
+                        <span id="ceoHelper" class="ss"></span>
                     </div>
                     <br><br>
 
                     <div class="inputForm">
                         상호명 <span style="color:red;">*</span>  <br>
                         <input type="text" name="resName" id="resName" required> <br> 
-                        <span class="requiredInfo"></span>
+                        <span id="resNameHelper" class="ss"></span>
                     </div>
                     <br><br>
 
                     <div class="inputForm">
                         사업자등록번호 <span style="color:red;">*</span>  <br>
                         <input type="text" name="permitNo" id="permitNo" required> <br> 
-                        <span class="requiredInfo" id="pNoSpan"></span>
+                        <span id="permitNoHelper" class="ss"></span>
                     </div>
                     <br><br>
 
                     <div class="inputForm">
                         주소 <span style="color:red;">*</span>  <br>
                         <input type="text" name="address" id="address" required> <br> 
-                        <span class="requiredInfo"></span>
+                        <span id="addressHelper" class="ss"></span>
                     </div>
                     <br><br>
 
                     <div class="inputForm">
                         상세주소 <span style="color:red;">*</span>  <br>
                         <input type="text" name="dAddress" id="dAddress" required> <br> 
-                        <span class="requiredInfo"></span>
+                        <span id="dAddressHelper" class="ss"></span>
                     </div>
                     <br><br>
 
                     <div class="inputForm">
                         전화번호 <span style="color:red;">*</span>  <br>
                         <input type="text" name="phone" id="phone" required> <br> 
-                        <span class="requiredInfo" id="phoneSpan"></span>
+                        <span id="phoneHelper" class="ss"></span>
                     </div>
                     <br><br>
 
                     <div class="inputForm">
                         휴대폰번호 <span style="color:red;">*</span>  <br>
                         <input type="text" name="cellPhone" id="cellPhone" required> <br> 
-                        <span class="requiredInfo" id="cellSpan"></span>
+                        <span id="cellHelper" class="ss"></span>
                     </div>
                     <br><br>
 
                     <div class="inputForm">
                         이메일 <span style="color:red;">*</span>  <br>
                         <input type="email" name="email" id="email" required> <br> 
-                        <span class="requiredInfo"></span>
+                        <span id="emailHelper" class="ss"></span>
                     </div>
                     <br><br>
 
@@ -163,7 +167,6 @@
                             <option value="bar">술집</option>
                             <option value="cafe">카페</option>
                         </select>
-                        <span class="requiredInfo"></span>
                     </div> 
                     <br><br>
 
@@ -171,7 +174,6 @@
                         주차여부 <span style="color:red;">*</span>  <br>
                         <input type="checkbox" name="parking" id="parkingY" checked> <label for="parkingY">가능</label>
                         <input type="checkbox" name="parking" id="parkingN"> <label for="parkingN">불가능</label>
-                        <span class="requiredInfo"></span>
                     </div>
                     <br><br>
 
@@ -179,13 +181,12 @@
                     <div class="inputForm">
                         업체사진등록 <span style="color:red;">*</span>  <br> 
                         <input type="file" name="rImg" id="rImg" required> <br> 
-                        <span class="requiredInfo"></span>
                     </div>
                     <br><br>
 
                     
                     <br><br><br><br>
-                    <p><button type="submit" class="btn btn-danger btn-block" style="margin:auto; width:400px;" onclick="return validate();">업체등록요청</button></p>
+                    <p><button type="submit" class="btn btn-danger btn-block" style="margin:auto; width:400px;" >업체등록요청</button></p>
 
                 </form>
             </div>
@@ -195,57 +196,143 @@
 
         <script>
 
+        
+            // (1) 대표자명, 상호명, 사업자등록번호, 주소, 상세주소, 전화번호, 휴대폰번호, 이메일 입력 칸에 
 
-            // 아무것도 입력하지 않았을 때 "필수정보입니다."가 뜨도록 
+            // 아무것도 입력하지 않았을 때 "필수정보입니다."가 뜨도록 !!
             
-            /*
+
+            // (2) 유효성체크를 위한 regExp 전역변수 선언 
+
+            let regExp; 
+
+            //업체등록요청 버튼을 누르지 않아도 입력칸에서 focusout 이벤트가 발생하는 순간, 바로바로 유효성체크가 이뤄지도록) 
+
+            // 유효성체크할 목록: 대표자명, 사업자등록번호, 전화번호, 휴대폰번호
+            
             $(function(){
+
+                // 1) 대표자명 아무것도 입력 안 했을 때 
+                // 대표자명에서 커서가 이동할 때 
                 $("#ceo").focusout(function(){
-
-                    // 아무것도 입력되지 않았을 때 
-                    $(".requiredInfo").html("필수정보입니다.");    
+                    // 대표자명 값이 null 값이라면 
+                    if($("#ceo").val() == "" || $("#ceo").val() == null){
+                        $("#ceoHelper").html("필수정보입니다."); 
+                    }else{
+                        // 대표자명 값이 null 값이 아니라면 --> 유효성체크(한글로 2글자 이상)
+                        regExp = /^[가-힣]{2,}$/;
+                        if(!regExp.test($("#ceo").val())){
+                            $("#ceoHelper").html("한글로 2글자 이상의 이름을 입력해주세요");
+                        }else{
+                            $("#ceoHelper").html(""); 
+                        }
+                    }
                 })
+
+
+                // 2) 상호명 아무것도 입력 안 했을 때 
+                // 상호명에서 커서가 이동할 때 
+                $("#resName").focusout(function(){
+                    // 상호명 값이 null 값이라면 
+                    if($("#resName").val() == "" || $("#resName").val() == null){
+                        $("#resNameHelper").html("필수정보입니다."); 
+                    }else{
+                        $("#resNameHelper").html(""); 
+                    }
+                })
+
+                // 3) 사업자등록번호 아무것도 입력 안 했을 때 
+                // 사업자등록번호에서 커서가 이동할 때 
+                $("#permitNo").focusout(function(){
+                    // 사업자등록번호 값이 null 값이라면 
+                    if($("#permitNo").val() == "" || $("#permitNo").val() == null){
+                        $("#permitNoHelper").html("필수정보입니다."); 
+                    }else{
+                        // 사업자등록번호 null 값이 아니라면 -->유효성체크(xxx-xx-xxxxx 형식) 
+                        regExp = /^\d{3}-\d{2}-\d{5}/;
+                        if(!regExp.test($("#permitNo").val())){
+                            $("#permitNoHelper").html("xxx-xx-xxxxx 형식으로 입력해주세요!");
+                        }else{
+                            $("#permitNoHelper").html(""); 
+                        }
+
+                    }
+                })
+
+
+                // 4) 주소 아무것도 입력 안 했을 때 
+                // 주소에서 커서가 이동할 때 
+                $("#address").focusout(function(){
+                    // 주소 값이 null이라면
+                    if($("#address").val() == "" || $("#address").val() == null){
+                        $("#addressHelper").html("필수정보입니다.");
+                    }else{
+                        $("#addressHelper").html(""); 
+                    }
+                })
+
+                // 5) 상세주소 아무것도 입력 안 했을 때 
+                // 상세주소에서 커서가 이동할 때 
+                $("#dAddress").focusout(function(){
+                    // 상세주소 값이 null 이라면 
+                    if($("#dAddress").val() == "" || $("#dAddress").val() == null){
+                        $("#dAddressHelper").html("필수정보입니다."); 
+                    }else{
+                       $("#dAddressHelper").html(""); 
+                    }
+                })
+
+                // 6) 전화번호 아무것도 입력 안 했을 때 
+                // 전화번호에서 커서가 이동할 때 
+                $("#phone").focusout(function(){ 
+                    // 전화번호 값이 null 이라면 
+                    if($("#phone").val() == "" || $("#phone").val() == null){
+                        $("#phoneHelper").html("필수정보입니다."); 
+                    }else{ 
+                        // 전화번호 값이 null 값이 아니라면 --> 유효성체크(0xx-xxx-xxxx 형식 또는 0x-xxx-xxxx 형식)) 
+                        regExp = /^0\d{1,2}-\d{3}-\d{4}$/;
+                        if(!regExp.test($("#phone").val())){
+                            $("#phoneHelper").html("0xx-xxx-xxxx 형식으로 입력해주세요!"); 
+                        }else{
+                            $("#phoneHelper").html(""); 
+                        }
+
+                    }
+                })
+
+
+                // 7) 휴대폰번호 아무것도 입력 안 했을 때
+                // 휴대폰번호에서 커서가 이동할 때 
+                $("#cellPhone").focusout(function(){
+                    // 휴대폰번호 값이 null이라면 
+                    if($("#cellPhone").val() == "" || $("#cellPhone").val() == null){
+                        $("#cellHelper").html("필수정보입니다."); 
+                    }else{
+                        // 휴대폰번호 값이 null 값이 아니라면 --> 유효성체크(0xx-xxxx-xxxx 형식)
+                        regExp = /^0\d{2}-\d{4}-\d{4}$/;
+                        if(!regExp.test($("#cellPhone").val())){
+                            $("#cellHelper").html("0xx-xxxx-xxxx 형식으로 입력해주세요!"); 
+                        }else{
+                            $("#cellHelper").html(""); 
+                        }
+                    }
+                })
+
+
+                // 8) 이메일 아무것도 입력 안 했을 때 
+                // 이메일에서 커서가 이동할 때 
+                $("#email").focusout(function(){
+                    // 이메일 값이 null이라면
+                    if($("#email").val() == "" || $("#email").val() == null){
+                        $("#emailHelper").html("필수정보입니다."); 
+                    }else{
+                        $("#emailHelper").html(""); 
+                    }
+                })
+ 
             })
-            */
 
-            // 자바스크립xm --> 유효성체크 
-            function validate(){
-                // (1)대표자명, (2)사업자등록번호, (3)전화번호 (4) 휴대폰번호 유효성체크 
-
-                const ceoInput = document.getElementById("ceo"); 
-                const pNoInput = document.getElementById("permitNo");
-                const phoneInput = document.getElementById("phone"); 
-                const cellInput = document.getElementById("cellPhone"); 
-
-                // (1) 대표자명 유효성체크 (한글로 2글자 이상)
-                let regExp = /^[가-힣]{2,}$/;
-                if(!regExp.test(ceoInput.value)){
-                    document.getElementById("ceoSpan").innerHTML = "유효한 이름을 입력해주세요!";
-                    return false; 
-                }
-
-                // (2) 사업자번호 유효성체크 (xxx-xx-xxxxx 형식) 
-                regExp = /^\d{3}-\d{2}-\d{5}/;
-                if(!regExp.test(pNoInput.value)){
-                    document.getElementById("pNoSpan").innerHTML = "xxx-xx-xxxxx 형식으로 입력해주세요!"
-                    return false; 
-                }
-
-                // (3) 전화번호 ( 숫자2개or3개-숫자3개-숫자4개 형식)
-                regExp = /^0\d{1,2}-\d{3}-\d{4}$/;
-                if(!regExp.test(phoneInput.value)){
-                    document.getElementById("phoneSpan").innerHTML = "0xx(또는 0x)-xxx-xxxxx 형식으로 입력해주세요!"
-                    return false; 
-                }
-
-                // (4) 핸드폰
-                regExp = /^0\d{2}-\d{4}-\d{4}$/;
-                if(!regExp.test(cellInput.value)){
-                    document.getElementById("cellSpan").innerHTML = "0xx-xxx-xxxxx 형식으로 입력해주세요!"
-                    return false; 
-                }
-            }
-            
+   
         </script>
 
         <div id="footer">
