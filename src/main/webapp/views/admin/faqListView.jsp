@@ -28,7 +28,6 @@
         box-sizing: border-box;
         position:absolute;
         right:10px;
-        /* margin-top: -60px; 내려가있어서 위로 올려줌 */
     }
     #menubar {
         width: 220px;
@@ -92,47 +91,32 @@
 
 
 
-    /*표...상단*/
-    .listTitle{
-        margin-left: 32px;
-        border-bottom: 1px solid rgb(223, 223, 223);
-        border-top: 2px solid rgb(223, 223, 223);
-        padding-bottom: 20px;
-        padding-top: 20px;
-    }
-    .listTitle>div {
-        display: inline-block;
-    }
-
     /*표 내용*/
     .list {
         cursor: pointer;
         height: 40px;
         border-bottom: 1px solid rgb(223, 223, 223);
-        margin-left: -30px;
+        margin-left: -32px;
     }
     .list>div>div{
         display: inline-block; 
     }
 
-    .content {
+    .faqContent {
         position: relative;
-        padding-left: 70px; padding-bottom: 30px;
+        padding: 20px;
+        padding-bottom: 20px;
         text-align: left;
         white-space: pre-line;
-        border-bottom: 1px solid rgb(244, 244, 244);
         display: none;
-        margin-left: -30px;
+        margin-right: 32px;
     } 
     
-    #checkbox{
+    #checkbox, #number{
         width: 70px;
         text-align: center;
-    }
-    #number{
-        width: 70px;
-        text-align: center;
-    }
+        
+    }    
     #category{
         width: 150px;
         text-align: center;
@@ -165,7 +149,6 @@
                     <option value="">적립금</option>
                 </select>
 
-
                 <div class="right">
                     <!--회원/업체-->
                     <input type="radio" id="member" name="selectNotice" value="M" checked>
@@ -180,16 +163,16 @@
                     <br> <br>
                 </div>
 
+
+                <!--표-->
                 <table class="table">
                     <tr style="border-bottom: 2px solid rgb(223, 223, 223); height: 50px;">
                         <th width="70px"><input type="checkbox"></th>
                         <th width="80px">번호</th>
                         <th width="150px">카테고리</th>
                         <th>제목</th>
-                    </tr>
-                    
+                    </tr>  
                 </table>
-
 
                 <ul>
                     <div class="list">
@@ -202,7 +185,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
+                    <div class="faqContent">
                         <div id="answer">
                             ■ 아이디, 비밀번호 찾기 안내
 
@@ -226,13 +209,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
-                        <div>
+                    <div class="faqContent">
+                        <div id="answer">
                             ■ 아이디, 비밀번호 찾기 안내
 
                             - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
 
                             [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
+                        </div>
+                        <div align="center">
+                            <a href="" class="btn btn-danger">수정하기</a>
                         </div>
                     </div>
                 </ul>
@@ -247,13 +233,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
-                        <div>
+                    <div class="faqContent">
+                        <div id="answer">
                             ■ 아이디, 비밀번호 찾기 안내
 
                             - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
 
                             [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
+                        </div>
+                        <div align="center">
+                            <a href="" class="btn btn-danger">수정하기</a>
                         </div>
                     </div>
                 </ul>
@@ -268,13 +257,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
-                        <div>
+                    <div class="faqContent">
+                        <div id="answer">
                             ■ 아이디, 비밀번호 찾기 안내
 
                             - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
 
                             [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
+                        </div>
+                        <div align="center">
+                            <a href="" class="btn btn-danger">수정하기</a>
                         </div>
                     </div>
                 </ul>
@@ -289,13 +281,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
-                        <div>
+                    <div class="faqContent">
+                        <div id="answer">
                             ■ 아이디, 비밀번호 찾기 안내
 
                             - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
 
                             [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
+                        </div>
+                        <div align="center">
+                            <a href="" class="btn btn-danger">수정하기</a>
                         </div>
                     </div>
                 </ul>
@@ -310,13 +305,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
-                        <div>
+                    <div class="faqContent">
+                        <div id="answer">
                             ■ 아이디, 비밀번호 찾기 안내
 
                             - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
 
                             [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
+                        </div>
+                        <div align="center">
+                            <a href="" class="btn btn-danger">수정하기</a>
                         </div>
                     </div>
                 </ul>
@@ -331,13 +329,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
-                        <div>
+                    <div class="faqContent">
+                        <div id="answer">
                             ■ 아이디, 비밀번호 찾기 안내
 
                             - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
 
                             [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
+                        </div>
+                        <div align="center">
+                            <a href="" class="btn btn-danger">수정하기</a>
                         </div>
                     </div>
                 </ul>
@@ -352,13 +353,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
-                        <div>
+                    <div class="faqContent">
+                        <div id="answer">
                             ■ 아이디, 비밀번호 찾기 안내
 
                             - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
 
                             [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
+                        </div>
+                        <div align="center">
+                            <a href="" class="btn btn-danger">수정하기</a>
                         </div>
                     </div>
                 </ul>
@@ -373,13 +377,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
-                        <div>
+                    <div class="faqContent">
+                        <div id="answer">
                             ■ 아이디, 비밀번호 찾기 안내
 
                             - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
 
                             [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
+                        </div>
+                        <div align="center">
+                            <a href="" class="btn btn-danger">수정하기</a>
                         </div>
                     </div>
                 </ul>
@@ -394,19 +401,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
-                        <div>
+                    <div class="faqContent">
+                        <div id="answer">
                             ■ 아이디, 비밀번호 찾기 안내
 
                             - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
 
                             [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
+                        </div>
+                        <div align="center">
+                            <a href="" class="btn btn-danger">수정하기</a>
                         </div>
                     </div>
                 </ul>
                 
-
-
 
             </form>
             
@@ -435,12 +443,27 @@
             $('#menu4').css("color","rgb(221,45,45)");
 		})
 
-
+        /*
         $(function(){
             $(".list").click(function(){
                 $(this).next().slideToggle();
             })
         })
+        */
+
+       
+        $(function(){
+            $('.list').click(function(){
+                const $slide = $(this).next();
+                if($slide.css('display') == 'none'){
+                    $(this).siblings('.faqContent').slideUp();
+                    $slide.slideDown(); 
+                }else{
+                    $slide.slideUp();
+                }
+                });    
+        });
+        
  
 	</script>
 </body>

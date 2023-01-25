@@ -190,6 +190,14 @@
                     $(detailId).css("display","block")
                 } 
             })
+            
+            // 외부영역 클릭시 디테일 메뉴 닫게
+            $(document).click(function() {
+                var area = $("#menu");
+                if (!area.is(event.target) && !area.has(event.target).length) {
+                    $(".detail").hide();
+                }
+            });
 
 
         })
