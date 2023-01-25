@@ -83,6 +83,15 @@
 			position: relative;
 			bottom:90px;
 		}
+		#book-list-title {
+			font-size: 20px;
+			font-weight: 600;
+			color:rgb(69, 69, 69);
+		}
+		.book-info {
+			font-size:16px;
+		}
+		
 	
 	</style>
 </head>
@@ -99,7 +108,7 @@
 			<h2>2월</h2><div id="space"></div>
 			<button type="button" class="btn btn-outline-danger">예약가능 변경</button>
 			<button type="button" class="btn btn-outline-danger">예약불가 변경</button>
-			<button type="button" class="btn btn-outline-danger">예약내역 보기</button><br>
+			<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-list">예약내역 보기</button><br>
 			<div id="prev-area">
 				<img src="../../resources/images/prevButton.png" width="60">
 			</div>
@@ -168,6 +177,37 @@
 	<div id="footer">
 		<%@ include file="../common/footer.jsp" %>
 	</div>	
+	<!-- The Modal -->
+	<div class="modal" id="book-list">
+		<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+	
+			<!-- Modal body -->
+			<div class="modal-body" align="center">
+				<br><br>
+				<h4 id="book-list-title">
+					2023-02-10 <br>
+					예약내역
+				</h4><br>
+				<h4 class="book-info">
+					15:30 채치수(2명)
+				</h4>
+				<h4 class="book-info">
+					18:30 정대만(2명)
+				</h4>
+				<h4 class="book-info">
+					15:30 강백호(5명)
+				</h4><br>
+			</div>
+	
+			<!-- Modal footer -->
+			<div class="modal-footer">
+			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+			</div>
+	
+		</div>
+		</div>
+	</div>
 	<script>
 		$(function(){
 			// Head.jsp 내의 요소, #title의 문구를 변경한다.

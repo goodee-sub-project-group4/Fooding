@@ -20,6 +20,7 @@
 			box-sizing: border-box;
 			position:absolute;
 			right:10px;
+            padding:10px;
 		}
 		#menubar {
 			width: 200px;
@@ -34,10 +35,13 @@
 
 		/* ↓↓↓ 컨텐츠용 스타일 */
 		table td, table th {
-        margin:auto;
-        text-align: center;
-        line-height: 33px;     
+            margin:auto;
+            text-align: center;
+            line-height: 33px;     
         }
+        table th {
+			color:rgb(85, 85, 85);
+		}
         .select {
             border: 1px solid gray;
             border-radius: 4px;
@@ -91,6 +95,10 @@
         	font-size:12px;
         }
 
+            
+        .pagination a{ /*페이징바*/
+            color:rgb(221,45,45);
+        }
 	
 	</style>
 </head>
@@ -125,7 +133,7 @@
             <br>
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr class="table-secondary">
 						<th>번호</th>
 						<th>예약번호</th>
 						<th>접수날짜</th>
@@ -238,7 +246,17 @@
                         <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
                     </tr>
                 </tbody>	
-			</table>
+			</table><br><br>
+            <!--페이징바-->
+            <ul class="pagination justify-content-center" style="margin:20px;">
+                <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+            </ul> 
 		</div>
 		
 	</div>
