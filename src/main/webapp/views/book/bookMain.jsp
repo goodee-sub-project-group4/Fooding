@@ -54,7 +54,7 @@
         /* 업체 사진 */
         #thumbnail{height: 350px;}
         /* 업체 정보 */
-        #content-main{width: 100%; padding: 5px; height: 700px; float: left;}
+        #content-main{width: 100%; padding: 5px; height: 700px; float: left; border: 2px solid gainsboro;}
         /* 업체명 (조회/리뷰/별점) */
         #main1{width: 100%; height: 100px;}
         /* 업체세부정보 + 메뉴 */
@@ -70,14 +70,14 @@
         .menu img{width: 180px; height: 100px;}
 
         /* 리뷰 */
-        #content2-2{margin-top: 50px; height: 1270px; overflow: auto}
+        #content2-2{margin-top: 50px; height: 1270px; overflow: auto; border-bottom: 2px solid gainsboro;}
         #content2-2 div{box-sizing: border-box;}
-        #review-head{height: 50px;}
-        .review-content{width: 100%;}
-        .review-content div{float: left;}
-        .review-content1-1{width: 20%; height: 50px;}
+        #review-head{height: 50px; border: 2px solid gainsboro; padding: 5px;}
+        .review-content{width: 100%; height: 500px; border: 2px solid gainsboro;}
+        .review-content div{float: left; padding: 5px;}
+        .review-content1-1{width: 20%; height: 50px; }
         /* 리뷰 제목 */
-        .review-content1-2{width: 80%; height: 50px;}
+        .review-content1-2{width: 80%; height: 60px;}
         /* 리뷰 작성자 */
         .review-content2-1{width: 20%; height: 355px;}
         .review-content2-2{width: 80%; height: 355px;}
@@ -85,7 +85,7 @@
         .review-text{width: 100%; height: 200px;}
         /* 리뷰 사진 */
         .review-picture{width: 100%; height: 150px; padding: 10px; text-align: center;}
-        .review-picture img{width: 30%; height: 120px;}
+        .review-picture img{width: 140px; height: 120px;}
         /* 리뷰 페이징 */
         .paging{height: 50px; text-align: center; padding-top: 20px;}
 
@@ -99,11 +99,11 @@
         #content3-3{display: none;}
 
         /* 예약 내용 */
-        #content3-3{width: 100%; height: 1500px;}
+        #content3-3{width: 100%; height: 1500px; }
         /* 예약 업체명 */
-        #book-title{height: 70px; line-height: 70px; text-align: center;}
+        #book-title{height: 70px; line-height: 70px; text-align: center; background-color: antiquewhite;}
         /* 예약 날짜 */
-        #book-menu1, #book-menu2, #book-menu3, #book-menu4{height: 70px; text-align: center; line-height: 70px;}
+        #book-menu1, #book-menu2, #book-menu3, #book-menu4{height: 70px; text-align: center; line-height: 70px; border: 2px solid gainsboro;}
         /* 슬라이드 */
         .slide-detail{width: 100%; height: 550px; margin-top:5px; padding: 5px; box-sizing: border-box; overflow: auto;
             display: none;
@@ -131,10 +131,10 @@
         .book-time-btn{width: 75px; height: 50px; margin-bottom: 5px;}
 
         /* 메뉴선택 창 */
-        .menu-select{width: 600px; height: 830px; background-color: rgba(128, 128, 128, 0.913); padding: 15px; position: absolute; left: 150px; right: 0; top: 550px; bottom: 0px; display: none;}
-        #menu-select-background{width: 570px; height: 800px; margin: auto; background-color: white; padding-top: 20px; }
-        #menu-select-border1{width: 550px; height: 450px; margin: auto; margin-bottom: 10px; border: 1px solid gray; padding: 15px;}
-        #menu-selectView1{width: 520px; height: 420px; margin: auto; overflow: auto;}
+        .menu-select{width: 600px; background-color: rgba(128, 128, 128, 0.913); padding: 15px; position: absolute; left: 150px; top: 550px; display: none;}
+        #menu-select-background{width: 570px; margin: auto; background-color: white; padding-top: 20px; padding-bottom: 20px;}
+        #menu-select-border1{width: 550px; margin: auto; margin-bottom: 10px; border: 1px solid gray; padding: 15px;}
+        #menu-selectView1{width: 520px; margin: auto; overflow: auto;}
         .menu-detail{width: 100%; height: 150px; margin-bottom: 5px; background-color: whitesmoke;}
         .menu-detail > img{width: 150px; height: 150px; display: block; float: left; padding: 5px;}
         .menu-datail1{width: 275px; height: 150px; float: left; padding: 5px; }
@@ -142,7 +142,10 @@
         .btn.btn-secondary.btn-sm{margin-left: 13px; margin-top: 50px; height: 40px;}
 
         /* 금액 창 */
-        #menu-select-border2{width: 550px; height: 250px; margin: auto; border: 1px solid gray; padding: 15px;}
+        #menu-select-border2{width: 550px; max-height: 400px; overflow: auto; margin: auto; border: 1px solid gray; padding: 15px;}
+        .minus{width: 30px;}
+        .plus{width: 30px;}
+        .quantity{width: 40px; text-align: center;}
     </style>
 </head>
 <body>
@@ -158,7 +161,7 @@
                         <div id="thumbnail">
                             <img src="" alt="">
                         </div>
-                        <div id="content-main">
+                        <div id="content-main" style="">
                             <div id="main1">
                                 <b>(업체명)</b>
                                 <br>
@@ -444,62 +447,47 @@
                                                 함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴</div>
                                             </div>
                                             <div class="menu-datail2">
-                                                <button type="button" class="btn btn-secondary btn-sm">추가</button>
+                                                <button type="button" class="btn btn-secondary btn-sm add">추가</button>
                                             </div>
                                         </div>
                                         <div class="menu-detail">
                                             <img src="" alt="">
                                             <div class="menu-datail1">
                                                 <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
-
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">13,000원</div>
                                                 <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
                                             </div>
                                             <div class="menu-datail2">
-                                                <button type="button" class="btn btn-secondary btn-sm">추가</button>
+                                                <button type="button" class="btn btn-secondary btn-sm add">추가</button>
                                             </div>
                                         </div>
                                         <div class="menu-detail">
                                             <img src="" alt="">
                                             <div class="menu-datail1">
-                                                <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">12,000원</div>
+                                                <div style="font-weight: 1000; font-size: 20px;">경양식 돈까스</div>
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;">10,000원</div>
                                                 <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
                                             </div>
                                             <div class="menu-datail2">
-                                                <button type="button" class="btn btn-secondary btn-sm">추가</button>
+                                                <button type="button" class="btn btn-secondary btn-sm add">추가</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="menu-select-border2">
                                     <table>
-                                        <tr>
-                                            <th style="width: 250px; text-align: center;">주문내역</th>
-                                            <th style="width: 125px; text-align: center;">수량</th>
-                                            <th style="width: 145px; text-align: center;">금액</th>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3"><hr></td>
-                                        </tr>
-                                        <tr class="menu-choice">
-                                            <td>1. 도쿄 수제 함바그 고젠</td>
-                                            <td>
-                                                <button class="minus" style="width: 30px;">-</button>
-                                                <input class="quantity" type="text" style="width: 40px; text-align: center;" value="1">
-                                                <button class="plus" style="width: 30px;">+</button>
-                                            </td>
-                                            <td style="text-align: right;" >12,000원</td>
-                                        </tr>
-                                        <tr class="menu-choice">
-                                            <td>2. 치킨 스테이크 고젠</td>
-                                            <td>
-                                                <button class="minus" style="width: 30px;">-</button>
-                                                <input class="quantity" type="text" style="width: 40px; text-align: center;" value="1">
-                                                <button class="plus" style="width: 30px;">+</button>
-                                            </td>
-                                            <td style="text-align: right;">12,000원</td>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 250px; text-align: center;">주문내역</th>
+                                                <th style="width: 125px; text-align: center;">수량</th>
+                                                <th style="width: 145px; text-align: center;">금액</th>
+                                            </tr>
+                                            <tr class="menu-column">
+                                                <td colspan="3"><hr></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
                                         <tr>
                                             <td colspan="2" style="font-weight: 700; font-size: 25px;">총액</td>
                                             <td style="text-align: right; font-weight: 600; font-size: 20px; color: brown;">25,000원</td>
@@ -535,7 +523,7 @@
                 </div>
             </div>
         </div>
- 
+
         <script>
             // 예약 버튼 활성화/비활성화
             $(function(){
@@ -567,19 +555,37 @@
                 }
                 $('.menu-select').css('display', 'block');
             });
-
-            // 메뉴 추가, 수량 추가
-
-            $('.minus').click(function(){
+            
+            // 메뉴 추가
+            $('.btn.btn-secondary.btn-sm.add').click(function(){
+                const addMenu = $(this).parent().prev().children();
+                const tableData = [];
+                for()
+                   if(addMenu.eq(0).text() != ) 
+                }
+                $('#menu-select-border2 tbody:first').append(
+                    '<tr class="menu-choice">'
+                    + '<td>' + addMenu.eq(0).text() + '</td>'
+                    + '<td>'
+                    +    '<button class="minus">-</button> '
+                    +   '<input class="quantity" type="number" value="1"> '
+                    +   '<button class="plus">+</button> '
+                    + '</td>'
+                    + '<td style="text-align: right;" >' + addMenu.eq(1).text() + '</td>'
+                    + '</tr>'
+                    );
+            });
+            
+            // 수량 추가, 삭제
+            $(document).on('click', '.minus', function(){
                 const minus = parseInt($(this).next().val()) -1;
                 if($(this).next().val() > 1){
                     $(this).next().val(minus);
                 }else{
                     $(this).parents('tr.menu-choice').attr('style', 'display: none');
-                    console.log($(this).parents('tr.menu-choice'));
                 }
             });
-            $('.plus').click(function(){
+            $(document).on('click', '.plus', function(){
                 const plus = parseInt($(this).prev().val()) +1;
                 $(this).prev().val(plus);
             });
