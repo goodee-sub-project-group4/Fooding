@@ -9,7 +9,7 @@
 		/* ↓↓↓ 기본골격용 스타일들 (수정할필요X) */
 		#outer2 {
 			width:1200px;
-			height: 800px;
+			height: 700px;
 			position: relative;
 			margin:auto;
 		}			
