@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>고객센터 사이드바</title>
 <!-- 제이쿼리구문 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
@@ -17,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <style>
-    #content1-padding {float: left; margin: auto; padding: 5px; box-sizing:border-box; width: 25%; height: 1200px;}
+    #content1-padding {float: left; margin: auto; padding: 5px; box-sizing:border-box; width: 25%;}
     #content1{box-sizing: border-box; height: 100%;}
     #content1-1 {height: 120px; box-sizing: border-box; padding:60px 60px 10px 60px;}
     #content1-2 {height: 450px; box-sizing: border-box; padding:40px;}
@@ -38,20 +38,17 @@
     </style>
 </head>
 <body>
-	<div class="wrap">
-	   <div class="content">
-            <div id="content1-padding">
-                <div id="content1">
-                    <div id="content1-1"><h2><b>고객센터</b></h2></div>
-                    <div id="content1-2">
-                        <div>공지사항<span class="arrow">></span></div>
-                        <div>FAQ<span class="arrow">></span></div>
-                        <div>1 : 1 문의<span class="arrow">></span></div> 
-                    </div>
-                    
+    <div class="wrap">
+        <div id="content1-padding">
+            <div id="content1">
+                <div id="content1-1"><h2><b>고객센터</b></h2></div>
+                <div id="content1-2">
+                    <div>공지사항<span class="arrow">></span></div>
+                    <div>FAQ<span class="arrow">></span></div>
+                    <div>1 : 1 문의<span class="arrow">></span></div> 
                 </div>
             </div>
         </div>
-	</div>
+    </div>
 </body>
 </html>
