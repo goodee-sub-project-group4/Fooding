@@ -22,7 +22,7 @@
 		}
 		#menubar {
 			border-width:0px;
-			width:200px;
+			width: 220px;
 			height: 100%;
 			z-index: 1000;
 			position: absolute;

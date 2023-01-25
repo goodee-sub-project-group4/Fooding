@@ -30,7 +30,7 @@
     }
 
     #menubar {
-        width: 200px;
+        width: 220px;
         height: 100%;
         z-index: 1000;
         position: absolute;
@@ -43,7 +43,7 @@
     }
 
     #useTerms textarea, #policy textarea{
-        width: 680px;
+        width: 700px;
         box-sizing: border-box;
         padding: 20px;
         margin-left: 30px;
@@ -102,7 +102,7 @@
                 </table>
 
             </form>
-
+            <br><br><br>
 
             
 			

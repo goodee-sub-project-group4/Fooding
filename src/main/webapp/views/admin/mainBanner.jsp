@@ -30,7 +30,7 @@
         /* margin-top: -60px; 내려가있어서 위로 올려줌 */
     }
     #menubar {
-        width: 200px;
+        width: 220px;
         height: 100%;
         z-index: 1000;
         position: absolute;
@@ -64,17 +64,17 @@
                 <table>
                     <tr>
                         <td>
-                            <img src="" width="800px" height="300">
+                            <img src="" width="791.47px" height="250">
                         </td>
                     </tr>  
                     <tr>
                         <td>
-                            <br><img src="" width="800" height="300">
+                            <br><img src="" width="791.47px" height="250">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <br><img src="" width="800" height="300">
+                            <br><img src="" width="791.47px" height="250">
                         </td>
                     </tr>  
                     <tr>

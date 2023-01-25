@@ -29,7 +29,7 @@
         right:10px;
     }
     #menubar {
-        width: 200px;
+        width: 220px;
         height: 100%;
         z-index: 1000;
         position: absolute;
@@ -56,7 +56,7 @@
     #qCategory, #qTitle, #qContent, #qImg, #aContent{
         /*그냥 border-radius 하면 적용안됨*/
         border-collapse: collapse;
-        border-radius: 5px;
+        border-radius: 2px;
         border-style: hidden;
         box-shadow: 0 0 0 1px gray;
         box-sizing: border-box;
@@ -135,7 +135,7 @@
                             <img src="../../resources/images/chicken.jpg" width="320" height="210">
                         </td>
                     </tr>
-                    <tr><td><br><br></td></tr>
+                    <tr><td><br></td></tr>
                     <tr>
                         <th>답변</th>
                         <td colspan="2">
@@ -149,10 +149,10 @@
                     <button type="submit" class="btn btn-danger">답변하기</button>&nbsp&nbsp
                     <button type="submit" class="btn btn-outline-danger" onclick="history.back();">취소하기</button>
                 </div>
-
+                <br><br><br><br>
             </form>
 		</div>
-        <br><br><br>
+
 		
 	
 	<script>

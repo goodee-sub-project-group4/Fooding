@@ -124,7 +124,8 @@
         font-weight: 600;
         color: rgb(71, 71, 71);
         font-size: 28px;
-        margin-left: 10px;
+        margin: 10px;
+        text-align: center;
     }
     
 

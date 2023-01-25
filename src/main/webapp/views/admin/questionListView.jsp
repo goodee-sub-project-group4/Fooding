@@ -31,7 +31,7 @@
         /* margin-top: -60px; 내려가있어서 위로 올려줌 */
     }
     #menubar {
-        width: 200px;
+        width: 220px;
         height: 100%;
         z-index: 1000;
         position: absolute;

@@ -30,7 +30,7 @@
         /* margin-top: -60px; 내려가있어서 위로 올려줌 */
     }
     #menubar {
-        width: 200px;
+        width: 220px;
         height: 100%;
         z-index: 1000;
         position: absolute;
@@ -131,7 +131,7 @@
                 <a href="" class="btn btn-danger" style="width:90px">업체등록</a>&nbsp&nbsp
                 <a href="" class="btn btn-danger" style="width:90px">반려</a>
             </div>
-            <br><br><br>
+            <br><br><br><br><br>
 		</div>
 
 
