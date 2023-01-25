@@ -38,19 +38,10 @@
         });
     </script>
     <style>
-        .wrap{width: 1200px; margin: auto;} 
         /* 컨텐트 전체 영역 */
-        .content div{border: 1px solid black;}
-        .content{width: 1200px; margin: auto; box-sizing: border-box; float: left; position: relative;}
+        /* .content div{border: 1px solid black;} */
         #content1, #content2, #content3{box-sizing: border-box; height: 100%;}
         #content1-padding, #content2-padding, #content3-padding{float: left; margin: auto; padding: 5px; box-sizing: border-box;}
-
-        /* 컨텐트 왼쪽 영역 */
-        #content1-padding{width: 20%; height: 500px;}
-        /* 지역 카테고리 */
-        #content1-1{height: 30%; box-sizing: border-box;}
-        /* 음식 카테고리 */
-        #content1-2{height: 70%; box-sizing: border-box;}
 
         /* 컨텐트 가운데 영역 */
         #content2-padding{width: 50%; height: 100%;}
@@ -156,19 +147,10 @@
 <body>
 
 	<%@ include file="/views/common/head.jsp" %>
-	
+	<%@ include file="/views/common/searchSidebar.jsp" %>
+
     <div class="wrap">
         <div class="content">
-            <div id="content1-padding">
-                <div id="content1">
-                    <div id="content1-1">  
-
-                    </div>
-                    <div id="content1-2">
-
-                    </div>
-                </div>
-            </div>
             <div id="content2-padding">
                 <div id="content2">
                     <div id="content2-1">
@@ -570,8 +552,7 @@
 
             }
         </script>
-        <div id="footer">
-        </div>
+        <%@ include file="/views/common/footer.jsp" %>
     </div>
 </body>
 </html>
