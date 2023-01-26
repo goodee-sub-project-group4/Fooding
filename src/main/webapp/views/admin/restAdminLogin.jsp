@@ -66,7 +66,7 @@
                         <img src="../../resources/images/logo.png" alt="" width="300px">
                     </div>
                     <!-- 관리자로그인인지 업체로그인인지 분간한다 -->
-                    <input name="which"  type="hidden" value="rest">
+                    <input id="which" name="which"  type="hidden" value="rest">
                     
                     <div id="rest" class="btn btn-danger">업체</div>
                     <div id="admin" class="btn btn-outline-danger">관리자</div>

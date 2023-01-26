@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.fd.restaurant.model.vo.*" %>
+<%
+	String contextPath = request.getContextPath();
+	Restaurant loginRest = (Restaurant)session.getAttribute("loginRest");
+%>
 <!DOCTYPE html>
 <html>
 <head>

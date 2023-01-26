@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fd.restaurant.model.service.RestaurantService;
 import com.fd.restaurant.model.vo.Restaurant;
@@ -36,8 +37,15 @@ public class RestAdminLoginController extends HttpServlet {
 		
 		if(which.equals("rest")) {
 			int restNo = Integer.parseInt(userId);
-			Restaurant r = new RestaurantService().loginRest(restNo, userPwd);
-			System.out.println(r);
+			Restaurant loginRest = new RestaurantService().loginRest(restNo, userPwd);
+			if(loginRest == null) {
+				request.setAttribute("errorMsg", "로그인에 실패했습니다.");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}else {
+				HttpSession session = request.getSession();
+				session.setAttribute("loginRest", loginRest);
+				request.getRequestDispatcher("views/restaurant/restHome.jsp").forward(request, response)
+;			}
 		}
 	
 	}
