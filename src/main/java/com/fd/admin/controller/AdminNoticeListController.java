@@ -1,4 +1,4 @@
-package com.fd.customerService.controller;
+package com.fd.admin.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Qwe
+ * Servlet implementation class AdminNoticeListController
  */
-@WebServlet("/Qwe")
-public class Qwe extends HttpServlet {
+@WebServlet("/noList.ad")
+public class AdminNoticeListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Qwe() {
+    public AdminNoticeListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class Qwe extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/search/resForm.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/noticeListView.jsp").forward(request, response);
 	}
 
 	/**

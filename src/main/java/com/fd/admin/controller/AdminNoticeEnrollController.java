@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BlackReviewListController
+ * Servlet implementation class AdminNoticeEnrollController
  */
-@WebServlet("/review.bl")
-public class BlackReviewListController extends HttpServlet {
+@WebServlet("/noEnroll.ad")
+public class AdminNoticeEnrollController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BlackReviewListController() {
+    public AdminNoticeEnrollController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class BlackReviewListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/admin/blackReviewListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/noticeEnroll.jsp").forward(request, response);
 	}
 
 	/**
