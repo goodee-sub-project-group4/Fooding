@@ -154,7 +154,7 @@
 			<div id="area1">
 				<div>					
 					<h3>신규예약건 </h3> <span class="badge">2</span>
-					<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
+					<span class="more">더보기 <img src="resources/images/more.png" width="25"></span>
 					
 					<div class="alert alert-secondary">
 						<img class="user" src="/Fooding/resources/images/userIcon3.png">
@@ -179,7 +179,7 @@
 					</div>
 				</div>
 				<div>
-					<h3>이달의 스케줄 </h3> <span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
+					<h3>이달의 스케줄 </h3> <span class="more">더보기 <img src="resources/images/more.png" width="25"></span>
 					<div id="calendar-area" align="center">
 						<%@ include file="calendarSmall.jsp" %>
 					</div>
@@ -188,7 +188,7 @@
 			</div>
 			<div id="area2">
 				<h3>미답변문의</h3> <span class="badge">4</span>
-				<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
+				<span class="more">더보기 <img src="resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<div class="alert alert-secondary">
 					<span class="title">애견 동반 가능한가요?</span><br>
@@ -204,7 +204,7 @@
 			</div>
 			<div id="area3">
 				<h3>리뷰</h3> <span class="badge">1</span>
-				<span class="more">더보기 <img src="../../resources/images/more.png" width="25"></span>
+				<span class="more">더보기 <img src="resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<div class="alert alert-secondary">
 					<span class="title">애견 동반 가능한가요?</span><br>

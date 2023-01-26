@@ -46,6 +46,8 @@ public class RestAdminLoginController extends HttpServlet {
 				session.setAttribute("loginRest", loginRest);
 				request.getRequestDispatcher("views/restaurant/restHome.jsp").forward(request, response)
 ;			}
+		}else {
+			//관리자 로그인 진행
 		}
 	
 	}
