@@ -61,7 +61,7 @@
             
             <div class="login-area">
                 
-                <form action="/Fooding/login.re.ad" method="post" class="login-form">
+                <form action="<%= request.getContextPath()%>/login.re.ad" method="post" class="login-form">
                     <div id="logo">
                         <img src="resources/images/logo.png" alt="" width="300px">
                     </div>

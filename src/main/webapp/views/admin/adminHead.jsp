@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.fd.member.model.vo.*" %>
+<%
+	String contextPath = request.getContextPath();
+	Member loginAdmin =(Member)session.getAttribute("loginAdmin");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +20,6 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> -->
 <!-- 부트스트랩 Badges 효과 위해 바꾼 구문-->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">  -->
-
 <!-- 부트스트랩 5버전 -->
 <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -77,16 +81,16 @@
 <body>
     <div id="outer" align="center">
         <div id="div1">
-            <img src="../../resources/images/logo.png" width="190">
+            <img src="resources/images/logo.png" width="190">
         </div>
         <div id="div2">
             <h3 id="title" width="500">페이지마다 수정되는 타이틀</h3>
         </div>
         <div id="div3">
-            <a href="">로그아웃</a>
+            <a href="<%=request.getContextPath()%>/logout.re.ad">로그아웃</a>
             <span> | </span>
-            <h4> 관리자01 님</h4>
-            <img src="../../resources/images/userIcon.png" width="50">
+            <h4><%=loginAdmin.getUserName()%> 님</h4>
+            <img src="resources/images/userIcon.png" width="50">
         </div>
         <hr>
     </div>

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fd.admin.model.service.AdminService;
+import com.fd.member.model.vo.Member;
 import com.fd.restaurant.model.service.RestaurantService;
 import com.fd.restaurant.model.vo.Restaurant;
 
@@ -27,7 +29,7 @@ public class RestAdminLoginController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	/**업체/관리자 로그인
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,6 +50,18 @@ public class RestAdminLoginController extends HttpServlet {
 ;			}
 		}else {
 			//관리자 로그인 진행
+			String adminId = userId;
+			String adminPwd = userPwd;
+			Member loginAdmin = new AdminService().loginAdmin(adminId, adminPwd);
+			if(loginAdmin == null) {
+				request.setAttribute("errorMsg", "로그인에 실패했습니다.");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);				
+			}else {
+				HttpSession session = request.getSession();
+				session.setAttribute("loginAdmin", loginAdmin);
+				request.getRequestDispatcher("views/admin/checkMember.jsp").forward(request, response);
+			}
+			
 		}
 	
 	}

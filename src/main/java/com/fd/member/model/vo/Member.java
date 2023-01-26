@@ -35,6 +35,16 @@ public class Member {
 		this.modifyDate = modifyDate;
 		this.status = status;
 	}
+	
+	// 관리자로그인 조회할 때 사용
+	public Member(int userNo, String userId, String userPwd, String userName, String status) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.status = status;
+	}
 
 	public int getUserNo() {
 		return userNo;
