@@ -96,7 +96,6 @@
 	</style>
 </head>
 <body>
-	
 	<%@ include file="head.jsp" %>
 	<div id="outer2">
 		<div id="menubar">

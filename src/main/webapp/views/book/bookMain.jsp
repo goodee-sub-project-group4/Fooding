@@ -381,7 +381,7 @@
                     </div>
                     <div id="book-menu2" class="menu-slide">시간 선택</div>
                     <div class="slide-detail">
-                        <div class="book-time">&nbsp;&nbsp;오전</div>
+                        <div class="am">&nbsp;&nbsp;오전</div>
                         <button class="book-time-btn">00:00</button>
                         <button class="book-time-btn">00:30</button>
                         <button class="book-time-btn">01:00</button>
@@ -399,7 +399,7 @@
                         <button class="book-time-btn">03:00</button>
                         <button class="book-time-btn">03:30</button>
                         <br><br><br>
-                        <div class="book-time">&nbsp;&nbsp;오후</div>
+                        <div class="pm">&nbsp;&nbsp;오후</div>
                         <button class="book-time-btn">12:00</button>
                         <button class="book-time-btn">12:30</button>
                         <button class="book-time-btn">13:00</button>
@@ -443,7 +443,7 @@
                                             <img src="" alt="">
                                             <div class="menu-datail1">
                                                 <div style="font-weight: 1000; font-size: 20px;">도쿄 수제 함바그 고젠</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>12,000</b>원</div>
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>12000</b></div>
                                                 <div style="font-size: 13px; height: 80px; overflow: hidden;">함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴
                                                 함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴</div>
                                             </div>
@@ -455,7 +455,7 @@
                                             <img src="" alt="">
                                             <div class="menu-datail1">
                                                 <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>13,000</b>원</div>
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>13000</b></div>
                                                 <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
                                             </div>
                                             <div class="menu-datail2">
@@ -466,7 +466,7 @@
                                             <img src="" alt="">
                                             <div class="menu-datail1">
                                                 <div style="font-weight: 1000; font-size: 20px;">경양식 돈까스</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>10,000</b>원</div>
+                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>10000</b></div>
                                                 <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
                                             </div>
                                             <div class="menu-datail2">
@@ -563,63 +563,79 @@
             let sum = 0;
             // const result = "";
             let regex = /[^0-9]/g;
+            let variable = 0;
+            let plus = 0;
             $('.btn.btn-secondary.btn-sm.add').click(function(){
                 const addMenu = $(this).parent().prev().children();
                 const table = $('#menu-select-border2>table>tbody>tr').length;
                 const tableData = $('#menu-select-border2>table>tbody>tr').text();
-                
                 if(table == 0) {
                         $('#menu-select-border2 tbody:first').append(
                         '<tr class="menu-choice">'
                         + '<td>' + addMenu.eq(0).text() + '</td>'
                         + '<td>'
                         +    '<button class="minus">-</button> '
-                        +   '<input class="quantity" type="number" value="1"> '
-                        +   '<button class="plus">+</button> '
+                        +    '<input id="quantity' + variable + '"  class="quantity" type="number" value="1"> '
+                        +    '<button class="plus">+</button> '
                         + '</td>'
                         + '<td style="text-align: right;" >' + addMenu.eq(1).text() + '</td>'
                         + '</tr>'
-                    );
+                    ); 
                 }else if(tableData.indexOf(addMenu.eq(0).text()) < 0){
+                    variable++;
                     $('#menu-select-border2 tbody:first').append(
                         '<tr class="menu-choice">'
                         + '<td>' + addMenu.eq(0).text() + '</td>'
                         + '<td>'
                         +    '<button class="minus">-</button> '
-                        +   '<input class="quantity" type="number" value="1"> '
-                        +   '<button class="plus">+</button> '
+                        +    '<input id="quantity' + variable + '" class="quantity" type="number" value="1"> '
+                        +    '<button class="plus">+</button> '
                         + '</td>'
                         + '<td style="text-align: right;" >' + addMenu.eq(1).text() + '</td>'
                         + '</tr>'
-                    );  
+                    );
+                }else{
+                    // k = ($(this).parents('#menu-selectView1').find(this));
+                    k = 0;
+                    plus = parseInt($('#quantity' + k).val()) + 1;
+                    $('#quantity' + k).val(plus);
+                    console.log($('#menu-selectView1').children(this).index());
+                    console.log(addMenu.eq(1).text());
+                    
                 }
-                sum += parseInt(addMenu.eq(1).text().replace(regex, ''));
-                return sum;
+                // plus * price;
+                for(let i=2; i<$('#menu-select-border2>table>tbody td').length; i+=3){
+                        price = parseInt($('#menu-select-border2>table>tbody td').eq(i).text().replace(regex, ''));
+                    }
+                
+                sum += price;
+                return sum;  
             });
+                
 
             // 수량 추가, 삭제
             $(document).on('click', '.minus', function(){
-                const minus = parseInt($(this).next().val()) -1;
                 if($(this).next().val() > 1){
-                    $(this).next().val(minus);
+                    $(this).next().val(parseInt($(this).next().val()) -1);
                 }else{
                     $(this).parents('tr.menu-choice').remove();
                 }
             });
             $(document).on('click', '.plus', function(){
-                const plus = parseInt($(this).prev().val()) +1;
-                $(this).prev().val(plus);
-            });
+                    $(this).prev().val(parseInt($(this).prev().val()) +1);
+                    });
             $(document).on('keyup', '.quantity', function(){
                 if($(this).val() == '0'){
                     $(this).parents('tr.menu-choice').remove();
                 }
             });
+            
+               
 
             // 총액 천 단위 콤마
             $(function(){
                 $('.btn.btn-secondary.btn-sm.add').click(function(sum){
-                    console.log(sum.result);
+                    // console.log(sum.result);
                     sum = sum.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                     $('#sum').text(sum + '원');
                 })
@@ -629,6 +645,24 @@
             $('#cancel').click(function(){
                 $('.menu-select').css('display', 'none');
             });
+
+
+            // $('#book-menu2').click(function(){
+                // 시작 시간 s: 11:00
+                // 브레이크 시작 bs: 14:00
+                // 오전 dt: 12:00
+                // 브레이크 종료 be: 15:00
+                // 영업 종료 e: 22:00
+                
+            //     if(s < dt){
+            //         for(let i=30; i<(dt-s); i+=30){
+            //             $('.am').append(
+            //                 '<div>' + s + i + '<div>''
+            //             );
+            //         }
+            //     }
+            // });
+
         </script>
         <%@ include file="/views/common/footer.jsp" %>
     </div>

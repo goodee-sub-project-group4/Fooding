@@ -88,13 +88,13 @@
 					<input type="text" name="dAddress" id="dAddress" required value="<%=loginRest.getdAddress() %>" > <br><br><br>
 
 					<h3>전화번호</h3>
-					<input type="text" name="phone" id="phone" required <%=loginRest.getPhone()%>> <br><br><br>
+					<input type="text" name="phone" id="phone" required value="<%=loginRest.getPhone()%>"> <br><br><br>
 
 					<h3>휴대폰번호</h3>
-					<input type="text" name="cellPhone" id="cellPhone" required <%=loginRest.getCellphone()%> > <br><br><br>
+					<input type="text" name="cellPhone" id="cellPhone" required value="<%=loginRest.getCellphone()%>" > <br><br><br>
 
 					<h3>이메일</h3>
-					<input type="email" name="email" id="email" required <%=loginRest.getEmail() %>> <br><br><br>
+					<input type="email" name="email" id="email" required value="<%=loginRest.getEmail() %>"> <br><br><br>
 
 
 					<h3>사업체유형(업종)</h3>
@@ -122,9 +122,11 @@
 				<button type="submit" class="btn btn-danger btn-block">정보변경</button>
 				<button type="reset" class="btn btn-secondary btn-block">초기화</button>
 			</form>
+			<div id="check">체크</div>
 			</div>
 		</div>
 	</div>
+	
 	<br clear="both"><br><br><br><br><br><br>
 	<div id="footer">
 		<%@ include file="../common/footer.jsp" %>
@@ -136,9 +138,20 @@
 			$('#menu2-detail').find('li').eq(1).click();
             $('#menu2').css("background-color","whitesmoke");
             $('#menu2').css("color","rgb(221,45,45)");
-
 			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
 			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"5px"});
+			
+			//사업체유형선택
+			const foodCt = <%=loginRest.getFoodCt()%>
+			const count = 0;
+			$('#foodCt option').each(function(){
+				if($(this).val() ==foodCt) {
+					count++;
+					<% System.out.println("확인"); %>
+					$(this).html("selected");
+					$('#check').text("되나");
+				}
+			})
 
 		})
 	</script>
