@@ -60,7 +60,7 @@
         position:absolute;
         left:208px;
         top:160px;
-        display:none;
+        display:block;
     }
 
     #menu3-detail {
@@ -77,19 +77,32 @@
         top:220px;
         display:none;
     }
+    li { 
+    	position:relative;/*a태그 포지션의 기준이 될*/
+    }
     
-	#menu3-detail a, #menu2-detail a, #menu1 a{
+	#menu3-detail a, #menu2-detail a, #menu a{
         text-decoration: none;
         color: black;
-        width:100%;
-        height:100%;
-        border:1px solid green;
+        /*a태그의 영역을 확장하기 위한 속성*/
+        width:200px;
+        height:60px;
+        position:absolute;
+        right:0px;
+        bottom:0px;
+    }
+    li label { /*a태그 위치조정으로 밀려난 글자위치조정*/
+    	position:relative;
+    	left:12px;
+    	top:12px;
     }
     
     #page-name { 
         margin: 0;
         font-weight: 600;
         color: rgb(71, 71, 71);
+        margin-left:10px;
+        font-size:30px;
     } 
 
 
@@ -101,8 +114,8 @@
     <br>
     <h2 id="page-name">업체 페이지</h2>
     <div id="menu">
-        <ul>
-            <li id="menu1"><a href='/Fooding/book.re'>예약관리</a></li>
+        <ul><!-- -->
+            <li id="menu1"><a href="/Fooding/book.re"><label>예약관리</label></a><span>></span></li>
             <li id="menu2">매장관리<span>></span></li>
             <li id="menu3">고객센터<span>></span></li>
         </ul>
@@ -110,20 +123,20 @@
     
     <div id="menu2-detail" class="detail">
         <ul>
-            <li><a href='/Fooding/calendar.re'>달력설정</a><span>></span></li>
-            <li><a href='/Fooding/info.re'>매장정보</a><span>></span></li>
-            <li><a href='/Fooding/menu.re'>메뉴정보</a><span>></span></li>
-            <li><a href='/Fooding/qna.re'>문의답변</a><span>></span></li>
-            <li><a href='/Fooding/review.re'>리뷰관리</a><span>></span></li>
-            <li><a href='/Fooding/monthly.re'>정산</a><span>></span></li>
+            <li><a href='/Fooding/calendar.re'><label>달력설정</label></a><span>></span></li>
+            <li><a href='/Fooding/info.re'><label>매장정보</label></a><span>></span></li>
+            <li><a href='/Fooding/menu.re'><label>메뉴정보</label></a><span>></span></li>
+            <li><a href='/Fooding/qna.re'><label>문의답변</label></a><span>></span></li>
+            <li><a href='/Fooding/review.re'><label>리뷰관리</label></a><span>></span></li>
+            <li><a href='/Fooding/monthly.re'><label>정산</label></a><span>></span></li>
         </ul>
     </div>
     
     <div id="menu3-detail" class="detail">
         <ul>
-            <li><a href='/Fooding/notice.re'>공지사항</a><span>></span></li>
-            <li><a href='/Fooding/faq.re'>FAQ</a><span>></span></li>
-            <li><a href="/Fooding/oneone.re">1:1문의</a><span>></span></li>
+            <li><a href='/Fooding/notice.re'><label>공지사항</label></a><span>></span></li>
+            <li><a href='/Fooding/faq.re'><label>FAQ</label></a><span>></span></li>
+            <li><a href="/Fooding/oneone.re"><label>1:1문의</label></a><span>></span></li>
         </ul>
     </div>
 
@@ -132,7 +145,7 @@
         $(function(){
             
             $('li').click(function(){
-                /*클릭시 배경색 효과주기
+                /*클릭시 배경색 효과주기*/
                 $(this).siblings().css("background-color","");
                 $(this).css("background-color","whitesmoke");
                 $(this).siblings().css("color","");
@@ -145,24 +158,24 @@
                 if(detailId.classList == null) {
                     $('.detail').css("display","none");
                 }
-        
+        		
                 if($(detailId).css("display") == "none") {
                     $('.detail').css("display","none");
                     $(detailId).css("display", "block");
-                }                               
+                }else {
+                	$(detailId).css("display", "none");
+                }  
+                
             })
-            // 외부영역 클릭시 디테일 메뉴 닫게
+            /* 외부영역 클릭시 디테일 메뉴 닫게
             $(document).click(function() {
                 var area = $("#menu");
                 if (!area.is(event.target) && !area.has(event.target).length) {
                     $(".detail").hide();
                 }
-            })
+            })*/
             
         })
-
-
-        
     </script> 
     
 </body>

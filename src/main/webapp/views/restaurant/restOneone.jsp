@@ -124,8 +124,6 @@
             $('#menu3').css("color","rgb(221,45,45)");
 
 
-			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
-			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"5px"});
 		})
 		
 	</script>

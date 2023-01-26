@@ -96,7 +96,7 @@
 					<h3>이메일</h3>
 					<input type="email" name="email" id="email" required value="<%=loginRest.getEmail() %>"> <br><br><br>
 
-
+					
 					<h3>사업체유형(업종)</h3>
 					<select name="foodCt" id="foodCt" style="width:190px;">
 						<option value="western">양식</option>
@@ -122,7 +122,6 @@
 				<button type="submit" class="btn btn-danger btn-block">정보변경</button>
 				<button type="reset" class="btn btn-secondary btn-block">초기화</button>
 			</form>
-			<div id="check">체크</div>
 			</div>
 		</div>
 	</div>
@@ -138,22 +137,23 @@
 			$('#menu2-detail').find('li').eq(1).click();
             $('#menu2').css("background-color","whitesmoke");
             $('#menu2').css("color","rgb(221,45,45)");
-			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
-			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"5px"});
 			
 			//사업체유형선택
-			const foodCt = <%=loginRest.getFoodCt()%>
-			const count = 0;
-			$('#foodCt option').each(function(){
-				if($(this).val() ==foodCt) {
-					count++;
-					<% System.out.println("확인"); %>
-					$(this).html("selected");
-					$('#check').text("되나");
+			let foodCt = "<%=loginRest.getFoodCt()%>"
+			$('.options').each(function(){
+				if($(this).val() == foodCt) {
+					<% System.out.println("성공"); %>
+					$(this).attr("selected", true);
 				}
 			})
+			
+			//주차여부선택
+			let parkingId = "#parking"+"<%=loginRest.getParking()%>";
+			$(parkingId).attr("checked", true);
 
 		})
+		
+		
 	</script>
 </body>
 </html>
