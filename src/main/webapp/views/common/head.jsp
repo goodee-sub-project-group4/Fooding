@@ -87,7 +87,7 @@
                     <div id="header3-1">
                         <span><a href="">회원가입</a></span>
                         <span>&nbsp;|&nbsp;</span>
-                        <span><a href="">로그인</a></span>
+                        <span><a href="<%=request.getContextPath()%>/views/member/memberLogin.jsp">로그인</a></span>
                         <span>&nbsp;|&nbsp;</span>
                         <span>
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
@@ -113,7 +113,7 @@
                             <a class="dropdown-item" href="#">찜하기</a>
                             <a class="dropdown-item" href="#">적립금</a>
                             <a class="dropdown-item" href="#">개인정보수정</a>
-                            <a class="dropdown-item" href="#">로그아웃</a>
+                            <a class="dropdown-item" href="<%= request.getContextPath()%>/logout.me">로그아웃</a>
                             </span>
                         </span>
                         <span>&nbsp;|&nbsp;</span>
