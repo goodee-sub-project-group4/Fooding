@@ -19,7 +19,6 @@ public class MemberService {
 		Connection conn = getConnection();
 		Member m = new MemberDao().loginMember(conn, userId, userPwd);
 		close(conn);
-		System.out.println(m + "dao");
 		return m;
 	}
 

@@ -8,7 +8,9 @@
 </head>
 <body>
 	<%@ include file="head.jsp" %>
-	<h1><%= request.getAttribute("errorMsg") %></h1>
+	
+	<br><br><br>
+	<h1 align="center" style="color:crimson;"><%= request.getAttribute("errorMsg") %></h1>
 
 </body>
 </html>

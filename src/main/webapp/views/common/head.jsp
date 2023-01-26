@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.fd.member.model.vo.Member" %>
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,9 +81,9 @@
 
             <!-- 헤더바3-1  -->
             <div id="header3-padding">
-
+				<% if(loginUser == null) { %>
                 <div id="header3">
-                    <!-- case1. 로그인전 -->
+                    <!-- case1. 로그인 전 -->
                     <div id="header3-1">
                         <span><a href="">회원가입</a></span>
                         <span>&nbsp;|&nbsp;</span>
@@ -96,10 +99,11 @@
                             </span>
                         </span>
                     </div>
-
-                    <!--  case2. 로그인후 -->
-                    <!-- <div id="header3-1">
-                        <span>000님</span>
+				<% } else { %>
+				
+                    <!--  case2. 로그인 후 -->
+                    <div id="header3-1">
+                        <span><%= loginUser.getUserName() %>님</span>
                         <span>&nbsp;|&nbsp;</span>
                         <span>
                             <button type="button" data-toggle="dropdown">마이페이지</button>
@@ -122,8 +126,8 @@
                                 <a class="dropdown-item" href="#">업체등록</a>
                             </span>
                         </span>
-                    </div> -->
-
+                    </div>
+				<% } %>
                     <!-- 헤더바3-2 -->
                     <div id="header3-2">
                         <!-- 각 이미지 클릭시 찜하기, (최근 본 게시물,) 리뷰페이지로 이동가능 -->
