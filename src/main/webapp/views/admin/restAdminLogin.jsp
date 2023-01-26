@@ -63,7 +63,7 @@
                 
                 <form action="/Fooding/login.re.ad" method="post" class="login-form">
                     <div id="logo">
-                        <img src="../../resources/images/logo.png" alt="" width="300px">
+                        <img src="resources/images/logo.png" alt="" width="300px">
                     </div>
                     <!-- 관리자로그인인지 업체로그인인지 분간한다 -->
                     <input id="which" name="which"  type="hidden" value="rest">

@@ -85,16 +85,16 @@
 					<input type="text" name="address" id="address" required value="<%=loginRest.getAddress()%>"> <br><br><br>
 
 					<h3>상세주소</h3>
-					<input type="text" name="dAddress" id="dAddress" required value="<%=loginRest.getdLocal %>" > <br><br><br>
+					<input type="text" name="dAddress" id="dAddress" required value="<%=loginRest.getdAddress() %>" > <br><br><br>
 
 					<h3>전화번호</h3>
-					<input type="text" name="phone" id="phone" required> <br><br><br>
+					<input type="text" name="phone" id="phone" required <%=loginRest.getPhone()%>> <br><br><br>
 
 					<h3>휴대폰번호</h3>
-					<input type="text" name="cellPhone" id="cellPhone" required> <br><br><br>
+					<input type="text" name="cellPhone" id="cellPhone" required <%=loginRest.getCellphone()%> > <br><br><br>
 
 					<h3>이메일</h3>
-					<input type="email" name="email" id="email" required> <br><br><br>
+					<input type="email" name="email" id="email" required <%=loginRest.getEmail() %>> <br><br><br>
 
 
 					<h3>사업체유형(업종)</h3>
