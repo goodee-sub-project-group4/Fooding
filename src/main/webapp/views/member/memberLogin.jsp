@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,11 +43,12 @@
     </style>
 </head>
 <body>
-
+	<%@ include file="../common/head.jsp" %>
+	
     <div class="outer">
         <div class="login-area">
             
-            <form action="<%=request.getContextPath() %>/login.me" method="post" class="login-form">
+            <form action="<%= contextPath%>/login.me" method="post" class="login-form">
                 
                 <div id="login"><h2>로그인</h2></div>
                 <div id="login-id"><input type="text" name="userId" placeholder="아이디를 입력해주세요" required></div>

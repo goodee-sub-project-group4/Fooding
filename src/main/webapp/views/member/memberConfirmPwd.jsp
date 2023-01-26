@@ -48,7 +48,7 @@
 </head>
 <body>
 
- <%@ include file="/views/common/head.jsp" %>
+ 	<%@ include file="/views/common/head.jsp" %>
 	<%@ include file="/views/common/myPageSidebar.jsp" %>
 
     <div id="content2-padding">

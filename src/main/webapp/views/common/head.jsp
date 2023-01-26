@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.fd.member.model.vo.Member" %>
 <%
+	String contextPath = request.getContextPath(); // /Fooding
+
 	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
@@ -85,9 +87,9 @@
                 <div id="header3">
                     <!-- case1. 로그인 전 -->
                     <div id="header3-1">
-                        <span><a href="">회원가입</a></span>
+                        <span><a href="<%= contextPath %>/enrollForm.me">회원가입</a></span>
                         <span>&nbsp;|&nbsp;</span>
-                        <span><a href="<%=request.getContextPath()%>/views/member/memberLogin.jsp">로그인</a></span>
+                        <span><a href="<%= contextPath %>/loginForm.me">로그인</a></span>
                         <span>&nbsp;|&nbsp;</span>
                         <span>
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
@@ -113,7 +115,7 @@
                             <a class="dropdown-item" href="#">찜하기</a>
                             <a class="dropdown-item" href="#">적립금</a>
                             <a class="dropdown-item" href="#">개인정보수정</a>
-                            <a class="dropdown-item" href="<%= request.getContextPath()%>/logout.me">로그아웃</a>
+                            <a class="dropdown-item" href="<%= contextPath %>/logout.me">로그아웃</a>
                             </span>
                         </span>
                         <span>&nbsp;|&nbsp;</span>

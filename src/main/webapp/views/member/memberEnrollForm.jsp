@@ -27,7 +27,7 @@
     .required {width:700px; height:30px; margin:auto; text-align:right;}
     #required {color: rgb(247, 51, 51);}
     /* 라인 */
-    .line { width:700px; height:0.5px; margin-top:1px; background-color:rgb(83, 83, 83);}
+    .line { width:400px; height:0.5px; margin-top:1px; background-color:rgb(83, 83, 83);}
     /* form */
     .enroll-form { width: 700px; height:1200px; margin: auto;}
 
@@ -54,6 +54,9 @@
                                                                                                                                                                                                                                                                                                                
 </head>
 <body>
+
+	<%@ include file="/views/common/head.jsp" %>
+	
     <div class="outer">
 
         <div class="enroll-head"><h2>회원가입</h2></div>
@@ -62,7 +65,7 @@
             <hr class="line">
             <div class="enroll">
 
-                <form action="" method="post" class="enroll-form">
+                <form action="<%= contextPath %>/insert.me" method="post" class="enroll-form">
                     
                     <table class="table1">
                         <tr>
