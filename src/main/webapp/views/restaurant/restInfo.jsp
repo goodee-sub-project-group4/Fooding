@@ -73,19 +73,19 @@
 			<form action="">
 
 					<h3>대표자명</h3>
-					<input type="text" name="ceo" id="ceo" value="기존입력값" readonly> <br><br><br>
+					<input type="text" name="ceo" id="ceo" value="<%=loginRest.getCeo()%>" readonly> <br><br><br>
 
 					<h3>상호명</h3>
-					<input type="text" name="resName" id="resName" value="기존입력값" readonly> <br><br><br>
+					<input type="text" name="resName" id="resName" value="<%=loginRest.getResName()%>" readonly> <br><br><br>
 
 					<h3>사업자등록번호</h3>
-					<input type="text" name="permitNo" id="permitNo" value="기존입력값" readonly > <br><br><br>
+					<input type="text" name="permitNo" id="permitNo" value="<%=loginRest.getPermitNo() %>" readonly > <br><br><br>
 
 					<h3>주소</h3>
-					<input type="text" name="address" id="address" required> <br><br><br>
+					<input type="text" name="address" id="address" required value="<%=loginRest.getAddress()%>"> <br><br><br>
 
 					<h3>상세주소</h3>
-					<input type="text" name="dAddress" id="dAddress" required> <br><br><br>
+					<input type="text" name="dAddress" id="dAddress" required value="<%=loginRest.getdLocal %>" > <br><br><br>
 
 					<h3>전화번호</h3>
 					<input type="text" name="phone" id="phone" required> <br><br><br>

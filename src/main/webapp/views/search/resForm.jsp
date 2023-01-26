@@ -93,7 +93,7 @@
         <div class="content">
             <div id="content-padding">
 
-                <img src="/Fooding/resources/images/푸딩로고.png" width="500px">
+                <img src="/Fooding/resources/images/logo.png" width="500px">
 
                 <form action="">
 
