@@ -114,7 +114,7 @@
     <br>
     <h2 id="page-name">업체 페이지</h2>
     <div id="menu">
-        <ul><!-- -->
+        <ul>
             <li id="menu1"><a href="/Fooding/book.re"><label>예약관리</label></a><span>></span></li>
             <li id="menu2">매장관리<span>></span></li>
             <li id="menu3">고객센터<span>></span></li>
@@ -173,7 +173,7 @@
                 if (!area.is(event.target) && !area.has(event.target).length) {
                     $(".detail").hide();
                 }
-            })*/
+            }) */
             
         })
     </script> 

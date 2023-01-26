@@ -138,16 +138,14 @@
             $('#menu2').css("background-color","whitesmoke");
             $('#menu2').css("color","rgb(221,45,45)");
 			
-			//사업체유형선택
+			//사업체유형표시
 			let foodCt = "<%=loginRest.getFoodCt()%>"
-			$('.options').each(function(){
+			$('#foodCt option').each(function(){
 				if($(this).val() == foodCt) {
-					<% System.out.println("성공"); %>
 					$(this).attr("selected", true);
 				}
-			})
-			
-			//주차여부선택
+			})			
+			//주차여부표시
 			let parkingId = "#parking"+"<%=loginRest.getParking()%>";
 			$(parkingId).attr("checked", true);
 
