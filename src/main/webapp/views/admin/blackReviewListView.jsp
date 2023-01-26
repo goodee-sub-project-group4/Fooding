@@ -87,53 +87,48 @@
     }
 
     .blackContent {
-        position: relative;
         padding: 20px;
-        padding-bottom: 20px;
-        white-space: pre-line;
+        padding-bottom: 40px;
+        padding-top: 40px;
         /* display: none; */
         margin-right: 32px;
     } 
     
-    #checkbox, #number, #blackStar{
+    .checkbox, .number, .blackStar{
         width: 80px;
         text-align: center;      
     }    
-    #blackRest, #blackId, #blackDate, #blackStatus{
+    .blackRest, .blackId, .blackDate, .blackStatus{
         text-align: center;
     }
-    #blackRest{
+    .blackRest{
         width: 210px;
     }
-    #blackId{
+    .blackId{
         width: 135px;
     }
-    #blackDate{
+    .blackDate{
         width: 120px;
     }
-    #blackStatus{
+    .blackStatus{
         width: 115px;
     }
 
     /*리뷰내용*/
-    .blackContent>table {
-        table-layout: fixed;
-        width: 100;
-        border: 5px solid red;
-        
+    .blackDetail{
+        text-align: left;
+        /* overflow-x: auto; */
     }
-    #blackDetail{
-        border: 1px solid red;
-        table-layout: fixed;
+    .blackImg{
         text-align: left;
     }
-    #blackImg{
-        display: flex;        
-    }
-    #blackImg>img{
-        border: 1px solid red;
+    .blackImg>img{
         margin: 5px;
     }
+
+    
+    
+    
     
     
     
@@ -181,41 +176,98 @@
                 <ul>
                     <div class="list">
                         <div>
-                            <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="blackRest">미오도쿄다이닝</div>
-                            <div id="blackId">user01</div>
-                            <div id="blackStar">1.0</div>
-                            <div id="blackDate">2023.01.25</div>
-                            <div id="blackStatus">처리완료</div>
+                            <div class="checkbox"><input type="checkbox"></div>
+                            <div class="number">1</div>
+                            <div class="blackRest">미오도쿄다이닝</div>
+                            <div class="blackId">user01</div>
+                            <div class="blackStar">1.0</div>
+                            <div class="blackDate">2023.01.25</div>
+                            <div class="blackStatus">처리완료</div>
                         </div>
                     </div>
                     <div class="blackContent">
-                            <table>
-                                <tr>
-                                    <td id="blackDetail">
-                                        
-                                    </td>
-                                </tr>
-                                <tr><td><br></td></tr>
-                                <tr>
-                                    <td id="blackImg">
-                                        <img src="../../resources/images/chicken.jpg" alt="" width="150" height="150">
-                                        <img src="../../resources/images/chicken.jpg" alt="" width="150" height="150">
-                                        <img src="../../resources/images/chicken.jpg" alt="" width="150" height="150">
-                                    </td>
-                                </tr>
-                            </table>
-                        <div align="center" style="border: 1px solid red;">
-                            <a href="" class="btn btn-danger">신고</a><!--신고하기 버튼 누르면 해당 글 삭제(숨김)처리되면서 회원 신고횟수 1누적-->
-                            <a href="" class="btn btn-outline-danger">확인</a>
-                        </div>
+                        <table>
+                            <tr>
+                                <td class="blackDetail" colspan="2">
+                                    ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                                </td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                            <tr>
+                                <td class="blackImg" colspan="2">
+                                    <img src="../../resources/images/chicken.jpg" alt="" width="150" height="150">
+                                    <img src="../../resources/images/chicken.jpg" alt="" width="150" height="150">
+                                    <img src="../../resources/images/chicken.jpg" alt="" width="150" height="150">
+                                </td>
+                            </tr>
+                            <tr><td><br><hr></td></tr>
+                            <tr>
+                                <td style="padding-top: 20px; text-align: left; color: rgb(221,45,45);">
+                                    신고사유 <br><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">
+                                    ㅇㅇㅇㅇㅇㅇㅇㅇㅇㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                                </td>
+                            </tr>
+                            <tr><td><br><br></td></tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a href="" class="btn btn-danger">신고하기</a>&nbsp&nbsp&nbsp<!--신고하기 버튼 누르면 해당 글 삭제(숨김)처리되면서 회원 신고횟수 1누적-->
+                                    <a href="" class="btn btn-outline-danger" style="width: 90px;">확인</a>
+                                </td>
+                            </tr>
+
+
+                        </table>  
                     </div>
                 </ul>
+                <ul>
+                    <div class="list">
+                        <div>
+                            <div class="checkbox"><input type="checkbox"></div>
+                            <div class="number">1</div>
+                            <div class="blackRest">미오도쿄다이닝</div>
+                            <div class="blackId">user01</div>
+                            <div class="blackStar">1.0</div>
+                            <div class="blackDate">2023.01.25</div>
+                            <div class="blackStatus">처리완료</div>
+                        </div>
+                    </div>
+                    <div class="blackContent">
+                        <table>
+                            <tr>
+                                <td class="blackDetail" colspan="2">
+                                    ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                                </td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                            <tr>
+                                <td class="blackImg" colspan="2">
+                                    <img src="../../resources/images/chicken.jpg" alt="" width="150" height="150">
+                                    <img src="../../resources/images/chicken.jpg" alt="" width="150" height="150">
+                                    <img src="../../resources/images/chicken.jpg" alt="" width="150" height="150">
+                                </td>
+                            </tr>
+                            <tr><td><br><hr></td></tr>
+                            <tr>
+                                <td style="padding-top: 20px; text-align: left;">
+                                    신고사유 <br><br>
+                                </td>
+                            </tr>
+                            <tr><td><br><br></td></tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a href="" class="btn btn-danger">신고하기</a>&nbsp&nbsp&nbsp<!--신고하기 버튼 누르면 해당 글 삭제(숨김)처리되면서 회원 신고횟수 1누적-->
+                                    <a href="" class="btn btn-outline-danger" style="width: 90px;">확인</a>
+                                </td>
+                            </tr>
 
 
-                
-
+                        </table>  
+                    </div>
+                </ul>
                 
 
             </form>
