@@ -3,6 +3,7 @@
 <%@ page import="com.fd.restaurant.model.vo.*" %>
 <%
 	String contextPath = request.getContextPath();
+	String alertMsg = (String)session.getAttribute("alertMsg");
 	Restaurant loginRest = (Restaurant)session.getAttribute("loginRest");
 %>
 <!DOCTYPE html>
@@ -13,11 +14,12 @@
 <title>Fooding</title>
 <!--제이쿼리-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 <!-- 부트스트랩 5버전 (4버전 오류로인한 불가피한 선택) -->
 <!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
 <!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> 
 
 <style>
     #outer {
@@ -68,6 +70,12 @@
 </style>
 </head>
 <body>
+	<% if(alertMsg != null) { %>
+		<script>
+			alert('<%=alertMsg%>');
+			<% session.removeAttribute("alertMsg");%>
+		</script>
+	<% } %>
     <div id="outer" align="center">
         <div id="div1">
             <img src="resources/images/logo.png" width="190">
