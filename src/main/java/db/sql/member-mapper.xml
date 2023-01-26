@@ -2,5 +2,25 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+	<!-- 로그인 (로그인 한 회원 전체정보 조회) -->
+ 	<entry key="loginMember">
+ 		SELECT 
+			   USER_NO
+			 , USER_ID
+			 , USER_PWD
+			 , USER_NAME
+			 , NICKNAME
+			 , USER_EMAIL
+			 , USER_PHONE
+			 , GENDER
+			 , BIRTH
+			 , ENROLL_DATE
+			 , MODIFY_DATE
+			 , STATUS
+		  FROM TB_USER
+		 WHERE USER_ID = ?
+		   AND USER_PWD = ?
+		   AND STATUS = 'Y'
+	</entry>
 
 </properties>
