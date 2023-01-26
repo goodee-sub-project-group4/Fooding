@@ -46,10 +46,10 @@ public class RestAdminLoginController extends HttpServlet {
 			}else {
 				HttpSession session = request.getSession();
 				session.setAttribute("loginRest", loginRest);
-				request.getRequestDispatcher("views/restaurant/restHome.jsp").forward(request, response)
-;			}
+				request.getRequestDispatcher("views/restaurant/restHome.jsp").forward(request, response);
+			}
 		}else {
-			//관리자 로그인 진행
+			// 관리자 로그인 진행
 			String adminId = userId;
 			String adminPwd = userPwd;
 			Member loginAdmin = new AdminService().loginAdmin(adminId, adminPwd);
@@ -60,10 +60,8 @@ public class RestAdminLoginController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("loginAdmin", loginAdmin);
 				request.getRequestDispatcher("views/admin/checkMember.jsp").forward(request, response);
-			}
-			
-		}
-	
+			}			
+		}	
 	}
 
 	/**

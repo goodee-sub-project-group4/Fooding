@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class RestAdminLogoutController
  */
-@WebServlet(description = "/logout.re.ad", urlPatterns = { "/RestAdminLogoutController" })
+@WebServlet("/logout.re.ad")
 public class RestAdminLogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,7 +24,7 @@ public class RestAdminLogoutController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/** 로그아웃
+	/** 업체/관리자 로그아웃
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +33,7 @@ public class RestAdminLogoutController extends HttpServlet {
 		session.invalidate();
 		
 		response.sendRedirect(request.getContextPath()+"/views/admin/restAdminLogin.jsp");
-//		request.getRequestDispatcher("/views/admin/restAdminLogin.jsp").forward(request, response);
+		
 	}
 
 	/**
