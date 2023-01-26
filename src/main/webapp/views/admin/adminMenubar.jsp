@@ -137,8 +137,8 @@
     <h2 id="page-name">관리자 페이지</h2>
     <div id="menu">
         <ul>
-            <li id="menu1"><a href="">회원 관리<span>></span></a></li>
-            <li id="menu2"><a href="">업체 관리<span>></span></a></li>
+            <li id="menu1"><a href="<%= request.getContextPath()%>/member.ad">회원 관리<span>></span></a></li>
+            <li id="menu2"><a href="<%= request.getContextPath()%>/rest.ad">업체 관리<span>></span></a></li>
             <li id="menu3">사이트 관리<span>></span></li>
             <li id="menu4">고객센터 관리<span>></span></li>
             <li id="menu5">신고 관리<span>></span></li>
@@ -147,24 +147,24 @@
     
     <div id="menu3-detail" class="detail">
         <ul>
-            <li id="menu3-detail-1"><a href="">메인 배너<span>></span></a></li>
-            <li id="menu3-detail-2"><a href="">이용약관<span>></span></a></li>
+            <li id="menu3-detail-1"><a href="<%= request.getContextPath()%>/banner.ad">메인 배너<span>></span></a></li>
+            <li id="menu3-detail-2"><a href="<%= request.getContextPath()%>/terms.ad">이용약관<span>></span></a></li>
         </ul>
     </div>
 
     <div id="menu4-detail" class="detail">
         <ul>
-            <li id="menu4-detail-1"><a href="">공지사항<span>></span></a></li>
-            <li id="menu4-detail-2"><a href="">FAQ<span>></span></a></li>
-            <li id="menu4-detail-3"><a href="">1:1 문의<span>></span></a></li>
-            <li id="menu4-detail-4"><a href="">업체 등록 요청<span>></span></a></li>
+            <li id="menu4-detail-1"><a href="<%= request.getContextPath()%>/noList.ad">공지사항<span>></span></a></li>
+            <li id="menu4-detail-2"><a href="<%= request.getContextPath()%>/faqList.ad">FAQ<span>></span></a></li>
+            <li id="menu4-detail-3"><a href="<%= request.getContextPath()%>/quList.ad">1:1 문의<span>></span></a></li>
+            <li id="menu4-detail-4"><a href="<%= request.getContextPath()%>/rrList.ad">업체 등록 요청<span>></span></a></li>
         </ul>
     </div>
 
     <div id="menu5-detail" class="detail">
         <ul>
-            <li id="menu5-detail-1"><a href="">리뷰 신고<span>></span></a></li>
-            <li id="menu5-detail-2"><a href="">업체 신고<span>></span></a></li>
+            <li id="menu5-detail-1"><a href="<%= request.getContextPath()%>/review.bl">리뷰 신고<span>></span></a></li>
+            <li id="menu5-detail-2"><a href="<%= request.getContextPath()%>/rest.bl">업체 신고<span>></span></a></li>
         </ul>
     </div>
 

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Notice" %>
+<% 
+   ArrayList<Notice> list = (ArrayList)request.getAttribute("selectNoticeListU");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,87 +128,16 @@
                         </tr>
                     </thead>
                     <tbody>
+	                    <% for(Notice n : list) {%>
                         <tr>
                             <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
+                            <td><%= n.getNoticeNo() %></td>
+                            <td><%= n.getNoticeTitle() %></td>
+                            <td><%= n.getUserNo() %></td>
+                            <td><%= n.getCount() %></td>
+                            <td><%= n.getCreateDate() %></td>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">푸딩 공지사항</td>
-                            <td>푸딩</td>
-                            <td>0</td>
-                            <td>2023.01.22</td>
-                        </tr>
-                        
+	             		<% } %>       
                     </tbody>	
                 </table>
             </form>
