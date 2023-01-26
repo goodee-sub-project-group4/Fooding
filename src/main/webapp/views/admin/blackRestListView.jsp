@@ -197,10 +197,7 @@
                             <table>
                                 <tr>
                                     <td id="blackDetail">
-                                        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-                                        dddddddd
-                                        ddddddddddd
-                                        fffff
+
                                     </td>
                                 </tr>
                                 <tr><td><br></td></tr>
