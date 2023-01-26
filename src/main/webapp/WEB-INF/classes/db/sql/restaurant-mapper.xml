@@ -1,1 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="loginRest">
+		SELECT
+			   RES_NO
+			 , RES_NAME
+			 , CEO
+			 , PERMIT_NO
+			 , ADDRESS
+			 , D_ADDRESS
+			 , LOCAL_CT
+			 , DLOCAL_CT
+			 , PHONE
+			 , CELLPHONE
+			 , EMAIL
+			 , PARKING
+			 , LONGTITUDE
+			 , LATITUDE
+			 , R_IMG
+			 , OPEN
+			 , CLOSE
+			 , BREAK_S
+			 , BREAK_E
+			 , FOOD_CT
+		 FROM RESTAURANT
+	    WHERE RES_NO=?
+	      AND USER_PWD=?
+	      AND STATUS='Y'		   
+	</entry>	
+
+</properties>

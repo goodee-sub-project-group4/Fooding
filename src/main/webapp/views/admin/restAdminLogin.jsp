@@ -61,10 +61,12 @@
             
             <div class="login-area">
                 
-                <form action="" method="post" class="login-form">
+                <form action="/Fooding/login.re.ad" method="post" class="login-form">
                     <div id="logo">
                         <img src="../../resources/images/logo.png" alt="" width="300px">
                     </div>
+                    <!-- 관리자로그인인지 업체로그인인지 분간한다 -->
+                    <input name="which"  type="hidden" value="rest">
                     
                     <div id="rest" class="btn btn-danger">업체</div>
                     <div id="admin" class="btn btn-outline-danger">관리자</div>
@@ -73,11 +75,13 @@
                         $("#admin").click(function(){
                             $("#rest").attr("class", "btn btn-outline-danger");
                             $("#admin").attr("class", "btn btn-danger");
+                            $('#which').val('admin');
                         });
                         // 업체 클릭시
                         $("#rest").click(function(){
                             $("#admin").attr("class", "btn btn-outline-danger");
                             $("#rest").attr("class", "btn btn-danger");
+                            $('#which').val('rest');
                         });
     
                     </script>
@@ -85,8 +89,6 @@
                     <div id="login-id"><input type="text" name="userId" placeholder="아이디를 입력해주세요" required></div>
                     <div id="login-pwd"><input type="password" name="userPwd" placeholder="비밀번호를 입력해주세요" required></div>
                     <div id="login-btn"><input type="submit" class="btn btn-danger" value="로그인"></div>
-    
-    
                 </form>
     
             </div>
