@@ -11,6 +11,7 @@ import java.util.Properties;
 import static com.fd.common.JDBCTemplate.*;
 
 import com.fd.admin.model.vo.Notice;
+import com.fd.common.model.vo.Attachment;
 import com.fd.member.model.vo.Member;
 
 
@@ -92,6 +93,55 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	/**공지사항 등록(제목, 내용, 작성자)
+	 * @param conn
+	 * @param n
+	 * @return
+	 */
+	public int insertNotice(Connection conn, Notice n) {
+		int result=0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNotice");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeContent());
+			pstmt.setString(3, n.getUserNo());
+//			pstmt.setString(4, n.getToWhom());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}	
+		return result;
+	}
+
+	/**회원 공지사항 등록(첨부파일)
+	 * @param conn
+	 * @param at
+	 * @return
+	 */
+	public int insertAttachment(Connection conn, Attachment at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getOriginName());
+			pstmt.setString(2, at.getChangeName());
+			pstmt.setString(3, at.getFilePath());
+			pstmt.setString(4, at.getBoardType());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	

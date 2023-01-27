@@ -42,5 +42,17 @@ public class MemberService {
 		
 	}
 	
+	/** 아이디 중복체크
+	 * @author 빛나
+	 * @param checkId
+	 * @return count count (중복된 아이디 값의 개수)(중복된 아이디 값의 개수)
+	 */
+	public int idCheck(String checkId) {
+		Connection conn = getConnection();
+		int count = new MemberDao().idCheck(conn, checkId);
+		close(conn);
+		return count;
+	}
+	
 
 }
