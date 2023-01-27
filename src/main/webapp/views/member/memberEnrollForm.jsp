@@ -21,13 +21,13 @@
 <style>
     .outer {width: 1200px; margin:auto;}
     /* 회원가입 문구 */
-    .enroll-head {text-align: center; padding-top: 100px;}
+    .enroll-head {text-align: center; padding-top:50px;}
     .enroll-head h2 {font-weight:600; color:rgb(83, 83, 83);}
     /* 필수사항입력 */
     .required1 {width:700px; height:30px; margin:auto; text-align:right;}
     .required {color: rgb(247, 51, 51);}
     /* 라인 */
-    .line { width:400px; height:0.5px; margin-top:1px; background-color:rgb(83, 83, 83);}
+    /* .line { width:400px; height:0.5px; margin-top:1px; background-color:rgb(83, 83, 83);} */
     /* form */
     .enroll-form { width: 700px; height:1200px; margin: auto;}
 
@@ -36,10 +36,10 @@
     /* 두번째 칸 input */
     .input-area2 {width:50%;}
     .input-area2 input {width:380px; height:40px; margin:20px; font-size:small; padding-left:10px;}
-    .gender-area input {margin:20px;}
+    .gender-area input {margin:20px; accent-color: crimson;}
     .gender-area {font-weight:600;}
     .birth-area input {margin:20px; width:80px; padding-left:20px; font-weight:600;}
-    .check-terms input {margin:20px 10px 0px 20px;}
+    .check-terms input {margin:20px 10px 0px 20px; accent-color: crimson;}
     /* 세번째 칸 */
     .input-area3 {width:20%;}
     .input-area3-phone button {margin-left:5px;}
@@ -62,7 +62,7 @@
         <div class="enroll-head"><h2>회원가입</h2></div>
             
             <div class="required1"><span class="required">*</span> 필수사항입력</div>
-            <hr class="line">
+            <!-- <hr class="line"> -->
             <div class="enroll">
 
                 <form action="<%= contextPath %>/insert.me" method="post" class="enroll-form">
@@ -131,11 +131,11 @@
                         <tr>
                             <th id="term2"><span id="terms">이용약관동의 </span><span class="required">*</span></th>
                             <td class="check-terms">
-                                <input type="checkbox" style="width:17px; height:17px;"><b>전체 동의합니다</b><br>
-                                <input type="checkbox" style="width:17px; height:17px;">이용약관 동의(필수)<br>
-                                <input type="checkbox" style="width:17px; height:17px;">개인정보 수집 이용동의 (필수)<br>
-                                <input type="checkbox" style="width:17px; height:17px;">본인은 만 14세이상입니다 (필수)<br>
-                                <input type="checkbox" style="width:17px; height:17px;">프로모션 할인 쿠폰 등 혜택/정보 수신 동의 (선택)<br>
+                                <input type="checkbox" id="allCheck" style="width:17px; height:17px;"><b>전체 동의합니다</b><br>
+                                <input type="checkbox" name="writeType" value="P" style="width:17px; height:17px;">이용약관 동의(필수)<br>
+                                <input type="checkbox" name="writeType" value="I"style="width:17px; height:17px;">개인정보 수집 이용동의 (필수)<br>
+                                <input type="checkbox" name="writeType" value="E"style="width:17px; height:17px;">본인은 만 14세이상입니다 (필수)<br>
+                                <input type="checkbox" name="writeType" style="width:17px; height:17px;">프로모션 할인 쿠폰 등 혜택/정보 수신 동의 (선택)<br>
                             </td>
                             <td>
                                 <div class="terms">
@@ -229,7 +229,21 @@
                 
                 }
                 
-                
+                /* 이용약관 체크 */
+                	$(function() {
+                		$("#allCheck").click(function() {
+                			if($("#allCheck").is(":checked")) $("input[name=writeType]").prop("checked", true);
+                			else $("input[name=writeType]").prop("checked", false);
+                		})
+                		
+                		$("input[name=writeType]").click(function() {
+                			var total = $("input[name=writeType]").length;
+                			var checked = $("input[name=writeType]:checked").length;
+                			
+                			if(total !=checked) $("#allCheck").prop("checked", false);
+                			else $("#allCheck").prop("checked", true);
+                		});
+                	});
                 
                 
                 
