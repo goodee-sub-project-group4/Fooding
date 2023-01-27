@@ -96,7 +96,7 @@
         padding: 20px;
         padding-bottom: 20px;
         white-space: pre-line;
-        /* display: none; */
+        display: none;
         margin-right: 32px;
     } 
     
@@ -255,7 +255,7 @@
             })
         })
         */
-
+		/*
         $(function(){
             $('.list').click(function(){
             const $slide = $(this).next();
@@ -267,7 +267,17 @@
             }
             });
         });
- 
+		*/
+ 		
+		//답변 펼침효과
+        $(function(){
+			$(".list").click(function(){
+				$(this).parent().siblings("ul").children(".blackContent").slideUp();
+				$(this).next().slideToggle();
+			})    
+        });
+		
+		
 	</script>
 </body>
 </html>
