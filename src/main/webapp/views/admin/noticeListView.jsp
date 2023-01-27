@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Notice" %>
 <% 
-   ArrayList<Notice> list = (ArrayList)request.getAttribute("selectNoticeListU");
+   ArrayList<Notice> list = (ArrayList)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
