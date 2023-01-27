@@ -125,9 +125,8 @@
 		$(function(){
 			// Head.jsp 내의 요소, #title의 문구를 변경한다.
 			$('#title').text("문의답변");
-			$('#menu2-detail').find('li').eq(3).click();
-            $('#menu2').css("background-color","whitesmoke");
-            $('#menu2').css("color","rgb(221,45,45)");
+			$("#menu2").addClass("active");
+			$("#menu2_4").addClass("active");
 
 
 		})

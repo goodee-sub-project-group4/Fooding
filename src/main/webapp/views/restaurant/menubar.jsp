@@ -43,6 +43,7 @@
     
     li:hover {
         background-color: whitesmoke;
+        color:rgb(221,45,45);
         cursor: pointer;
     }
 
@@ -84,7 +85,9 @@
         margin: 0;
         font-weight: 600;
         color: rgb(71, 71, 71);
-    } 
+        margin-left:10px;
+        font-size:30px;
+    }  
 
 	.active{
 		background:whitesmoke;
@@ -105,49 +108,48 @@
     
     <div id="menu2-detail" class="detail">
         <ul>
-            <li onclick="location.href='/Fooding/calendar.re'">달력설정<span>></span></li>
-            <li onclick="location.href='/Fooding/info.re'">매장정보<span>></span></li>
-            <li onclick= "location.href='/Fooding/menu.re'">메뉴정보<span>></span></li>
-            <li onclick= "location.href='/Fooding/qna.re'">문의답변<span>></span></li>
-            <li onclick= "location.href='/Fooding/review.re'">리뷰관리<span>></span></li>
-            <li onclick= "location.href='/Fooding/monthly.re'">정산<span>></span></li>
+            <li onclick="location.href='/Fooding/calendar.re'" id="menu2_1">달력설정<span>></span></li>
+            <li onclick="location.href='/Fooding/info.re'" id="menu2_2">매장정보<span>></span></li>
+            <li onclick= "location.href='/Fooding/menu.re'" id="menu2_3">메뉴정보<span>></span></li>
+            <li onclick= "location.href='/Fooding/qna.re'" id="menu2_4">문의답변<span>></span></li>
+            <li onclick= "location.href='/Fooding/review.re'" id="menu2_5">리뷰관리<span>></span></li>
+            <li onclick= "location.href='/Fooding/monthly.re'" id="menu2_6">정산<span>></span></li>
         </ul>
     </div>
     
     <div id="menu3-detail" class="detail">
         <ul>
             <li onclick= "location.href='/Fooding/notice.re'" id="menu3_1">공지사항<span>></span></li>
-            <li onclick= "location.href='/Fooding/faq.re'">FAQ<span>></span></li>
-            <li onclick= "location.href='/Fooding/oneone.re'">1:1문의<span>></span></li>
+            <li onclick= "location.href='/Fooding/faq.re'" id="menu3_2">FAQ<span>></span></li>
+            <li onclick= "location.href='/Fooding/oneone.re'" id="menu3_3">1:1문의<span>></span></li>
         </ul>
     </div>
 
 	<script>
         
         $(function(){
-            let flag = 0;
-            $('li').click(function(flag){
+            $('li').click(function(){
   
-
+            	
                 let detailId = '#'+$(this).attr("id")+"-detail";
                 /*
                 if(detailId.classList == null) {
                     $('.detail').css("display","none");
-                }
-                */
+                } */
+                
                 $(detailId).siblings("div").not("#menu").hide();
                 
                 console.log($(detailId));
         		console.log($(detailId).css("display"));
         		
-        		/*
+        		/* toggle과 동일한 효과이다.
                 if($(detailId).css("display") == "none") {
                     $('.detail').css("display","none");
                     $(detailId).css("display", "block");
                 }else {
                 	$(detailId).css("display", "none");
-                }   
-        		*/
+                } */  
+        		
         		$(detailId).toggle();
                 
                 

@@ -90,7 +90,7 @@
             <span onclick="location.href='/Fooding/logout.re.ad'">로그아웃</span>
             <span> | </span>
             <h4><%=loginRest.getResName()%></h4>
-            <img src="resources/images/userIcon.png" width="50">
+            <img src="/Fooding/resources/images/userIcon.png" width="50">
         </div>
         <hr>
     </div>
