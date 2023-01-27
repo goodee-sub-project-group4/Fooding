@@ -81,7 +81,7 @@
 <body>
     <div id="outer" align="center">
         <div id="div1">
-            <img src="resources/images/logo.png" width="190">
+            <img src="../../resources/images/logo.png" width="190">
         </div>
         <div id="div2">
             <h3 id="title" width="500">페이지마다 수정되는 타이틀</h3>

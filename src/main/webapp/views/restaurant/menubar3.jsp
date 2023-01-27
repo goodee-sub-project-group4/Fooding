@@ -4,8 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="resources/js/jquery-3.6.3.min.js"></script>
-
 <style>
     #menu {
         border-width: 0px 2px 2px 2px;
@@ -40,11 +38,11 @@
         line-height: 40px;
         
     }
-    /*
+    
     li:hover {
         background-color: whitesmoke;
         cursor: pointer;
-    }*/
+    }
 
     li span {
         float: right;
@@ -62,7 +60,7 @@
         position:absolute;
         left:208px;
         top:160px;
-        display:none;
+        display:block;
     }
 
     #menu3-detail {
@@ -79,22 +77,45 @@
         top:220px;
         display:none;
     }
-
+    li { 
+    	position:relative;/*a태그 포지션의 기준이 될*/
+    }
+    
+	#menu3-detail a, #menu2-detail a, #menu a{
+        text-decoration: none;
+        color: black;
+        /*a태그의 영역을 확장하기 위한 속성*/
+        width:200px;
+        height:60px;
+        position:absolute;
+        right:0px;
+        bottom:0px;
+    }
+    li label { /*a태그 위치조정으로 밀려난 글자위치조정*/
+    	position:relative;
+    	left:12px;
+    	top:12px;
+    }
+    
     #page-name { 
         margin: 0;
         font-weight: 600;
         color: rgb(71, 71, 71);
+        margin-left:10px;
+        font-size:30px;
     } 
 
 
-</style> 
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+ 
 </head>
 <body>
     <br>
     <h2 id="page-name">업체 페이지</h2>
     <div id="menu">
         <ul>
-            <li id="menu1" onclick= "location.href='/Fooding/book.re'">예약관리</li>
+            <li id="menu1"><a href="/Fooding/book.re"><label>예약관리</label></a><span>></span></li>
             <li id="menu2">매장관리<span>></span></li>
             <li id="menu3">고객센터<span>></span></li>
         </ul>
@@ -102,28 +123,28 @@
     
     <div id="menu2-detail" class="detail">
         <ul>
-            <li onclick="location.href='/Fooding/calendar.re'">달력설정<span>></span></li>
-            <li onclick="location.href='/Fooding/info.re'">매장정보<span>></span></li>
-            <li onclick= "location.href='/Fooding/menu.re'">메뉴정보<span>></span></li>
-            <li onclick= "location.href='/Fooding/qna.re'">문의답변<span>></span></li>
-            <li onclick= "location.href='/Fooding/review.re'">리뷰관리<span>></span></li>
-            <li onclick= "location.href='/Fooding/monthly.re'">정산<span>></span></li>
+            <li><a href='/Fooding/calendar.re'><label>달력설정</label></a><span>></span></li>
+            <li><a href='/Fooding/info.re'><label>매장정보</label></a><span>></span></li>
+            <li><a href='/Fooding/menu.re'><label>메뉴정보</label></a><span>></span></li>
+            <li><a href='/Fooding/qna.re'><label>문의답변</label></a><span>></span></li>
+            <li><a href='/Fooding/review.re'><label>리뷰관리</label></a><span>></span></li>
+            <li><a href='/Fooding/monthly.re'><label>정산</label></a><span>></span></li>
         </ul>
     </div>
     
     <div id="menu3-detail" class="detail">
         <ul>
-            <li onclick= "location.href='/Fooding/notice.re'">공지사항<span>></span></li>
-            <li onclick= "location.href='/Fooding/faq.re'">FAQ<span>></span></li>
-            <li onclick= "location.href='/Fooding/oneone.re'">1:1문의<span>></span></li>
+            <li><a href='/Fooding/notice.re'><label>공지사항</label></a><span>></span></li>
+            <li><a href='/Fooding/faq.re'><label>FAQ</label></a><span>></span></li>
+            <li><a href="/Fooding/oneone.re"><label>1:1문의</label></a><span>></span></li>
         </ul>
     </div>
 
 	<script>
         
         $(function(){
-            let flag = 0;
-            $('li').click(function(flag){
+            
+            $('li').click(function(){
                 /*클릭시 배경색 효과주기*/
                 $(this).siblings().css("background-color","");
                 $(this).css("background-color","whitesmoke");
@@ -137,24 +158,24 @@
                 if(detailId.classList == null) {
                     $('.detail').css("display","none");
                 }
-        
+        		
                 if($(detailId).css("display") == "none") {
                     $('.detail').css("display","none");
                     $(detailId).css("display", "block");
-                }                               
+                }else {
+                	$(detailId).css("display", "none");
+                }  
+                
             })
-            //영역밖 클릭시 디테일메뉴창 닫기
+            /* 외부영역 클릭시 디테일 메뉴 닫게
             $(document).click(function() {
                 var area = $("#menu");
                 if (!area.is(event.target) && !area.has(event.target).length) {
                     $(".detail").hide();
                 }
-            });
+            }) */
             
         })
-
-
-        
     </script> 
     
 </body>
