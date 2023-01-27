@@ -99,15 +99,16 @@
         #content3-3{display: none;}
 
         /* 예약 내용 */
-        #content3-3{width: 100%; height: 1500px; }
+        #content3-3{width: 100%;}
         /* 예약 업체명 */
         #book-title{height: 70px; line-height: 70px; text-align: center; background-color: antiquewhite;}
-        /* 예약 날짜 */
-        #book-menu1, #book-menu2, #book-menu3, #book-menu4{height: 70px; text-align: center; line-height: 70px; border: 2px solid gainsboro;}
+        /* 예약 카테고리 */
+        .book-category, .menu-slide{
+            height: 70px; text-align: center; line-height: 70px; margin-bottom: 2px; font-size: 20px; font-weight: 00; 
+            color: rgba(220, 20, 60, 0.909); border: 3px solid crimson; border-radius: 7px;}
         /* 슬라이드 */
-        .slide-detail{width: 100%; height: 550px; margin-top:5px; padding: 5px; box-sizing: border-box; overflow: auto;
-            display: none;
-        }
+        .slide-detail{width: 100%; margin-top: 15px; margin-bottom: 15px; padding: 5px; box-sizing: border-box; overflow: auto; display: none;}
+
         /* 달력 */
         .fc .fc-toolbar{display: block;}
         .fc .fc-toolbar-title{width: 335px;}
@@ -147,6 +148,17 @@
         .minus{width: 30px;}
         .plus{width: 30px;}
         .quantity{width: 40px; text-align: center;}
+
+        /* 예약인원 */
+        #book-menu4-btn{width: 100%; height: 60px; padding-top: 5px; border: 2px solid gainsboro; box-sizing: border-box;}
+        #book-menu4-btn>div{float: right;}
+        /* placeholder css효과 */
+        .align1::-webkit-input-placeholder{text-align: center;}
+        .align2::-webkit-input-placeholder{text-align: center; line-height: 160px;}
+
+        /* 서비스 이용약관 */
+        .general-condition{width: 95%; height: 45px; margin: auto; margin-bottom: 5px; border: 1px solid gainsboro; text-align: center; line-height: 40px;}
+        #general-condition-detail1, #general-condition-detail2{width: 95%; height: 300px; margin: auto; margin-bottom: 5px; border: 2px solid gainsboro; display: none;}
     </style>
 </head>
 <body>
@@ -375,65 +387,19 @@
                         <div id="book-title">업체명</div>
                     </div>
                     <br>
-                    <div id="book-menu1" class="menu-slide">(달)월 (일)일 (요일)요일</div>
+                    <div class="menu-slide" id="book-date">(달)월 (일)일 (요일)요일</div>
                     <div class="slide-detail">
                         <div id='calendar'></div>
                     </div>
-                    <div id="book-menu2" class="menu-slide">시간 선택</div>
+                    <div class="menu-slide" id="book-time">시간 선택</div>
                     <div class="slide-detail">
                         <div class="am">&nbsp;&nbsp;오전</div>
                         <button class="book-time-btn">00:00</button>
-                        <button class="book-time-btn">00:30</button>
-                        <button class="book-time-btn">01:00</button>
-                        <button class="book-time-btn">01:30</button>
-                        <button class="book-time-btn">02:00</button>
-                        <button class="book-time-btn">02:30</button>
-                        <button class="book-time-btn">03:00</button>
-                        <button class="book-time-btn">03:30</button>
-                        <button class="book-time-btn">00:00</button>
-                        <button class="book-time-btn">00:30</button>
-                        <button class="book-time-btn">01:00</button>
-                        <button class="book-time-btn">01:30</button>
-                        <button class="book-time-btn">02:00</button>
-                        <button class="book-time-btn">02:30</button>
-                        <button class="book-time-btn">03:00</button>
-                        <button class="book-time-btn">03:30</button>
                         <br><br><br>
                         <div class="pm">&nbsp;&nbsp;오후</div>
                         <button class="book-time-btn">12:00</button>
-                        <button class="book-time-btn">12:30</button>
-                        <button class="book-time-btn">13:00</button>
-                        <button class="book-time-btn">13:30</button>
-                        <button class="book-time-btn">14:00</button>
-                        <button class="book-time-btn">14:30</button>
-                        <button class="book-time-btn">15:00</button>
-                        <button class="book-time-btn">15:30</button>
-                        <button class="book-time-btn">12:00</button>
-                        <button class="book-time-btn">12:30</button>
-                        <button class="book-time-btn">13:00</button>
-                        <button class="book-time-btn">13:30</button>
-                        <button class="book-time-btn">14:00</button>
-                        <button class="book-time-btn">14:30</button>
-                        <button class="book-time-btn">15:00</button>
-                        <button class="book-time-btn">15:30</button>
-                        <button class="book-time-btn">12:00</button>
-                        <button class="book-time-btn">12:30</button>
-                        <button class="book-time-btn">13:00</button>
-                        <button class="book-time-btn">13:30</button>
-                        <button class="book-time-btn">14:00</button>
-                        <button class="book-time-btn">14:30</button>
-                        <button class="book-time-btn">15:00</button>
-                        <button class="book-time-btn">15:30</button>
-                        <button class="book-time-btn">12:00</button>
-                        <button class="book-time-btn">12:30</button>
-                        <button class="book-time-btn">13:00</button>
-                        <button class="book-time-btn">13:30</button>
-                        <button class="book-time-btn">14:00</button>
-                        <button class="book-time-btn">14:30</button>
-                        <button class="book-time-btn">15:00</button>
-                        <button class="book-time-btn">15:30</button>
                     </div>
-                    <div id="book-menu3">메뉴 선택</div>
+                    <div class="book-category" id="book-menu">메뉴 선택</div>
                     <div class="menu-fixed" >
                         <div class="menu-select">
                             <div id="menu-select-background">
@@ -510,19 +476,63 @@
                             </div>
                         </div>
                     </div>
-                    <div id="book-menu4">
+                    <div class="book-category">
                         예약인원
                     </div>
-                    <br>
-                    <div id="book-menu5">
-                        예약확인 및 예약자 정보
+                    <div id="book-menu4-btn">
+                        <div>
+                            <button class="minus" style="width: 50px; height: 50px;">-</button>
+                            <!-- input value가 0인 경우 오류 발생 필요 -->
+                            <input id="quantity" class="quantity" type="number" value="1" style="width: 75px; height:50px;"> 
+                            <button class="plus" style="width: 50px; height: 50px;">+</button>
+                        </div>
                     </div>
                     <br>
-                    <div id="book-menu6">
-                        서비스 약관
+                    <div id="book-menu4-userInfo">
+                        <div style="width: 100%; height: 70px; text-align: center; line-height: 70px; border: 2px solid gainsboro;">
+                            예약확인 및 예약자 정보
+                        </div>
+                        <div style="width: 95%; border: 1px solid gainsboro; margin: auto; margin-top: 10px; margin-bottom: 10px; text-align: center; font-size: 20px;">
+                            <b>날짜</b> &nbsp; <b>시간</b>
+                        </div>
+                        <table style="width: 95%; margin: auto;">
+                            <tr>
+                                <th style="width: 25%; height: 50px;">예약자<b style="color: crimson;">*</b></th>
+                                <td><input class="align2" type="text" name="bookUserName" placeholder="김푸딩" style="width: 100%; height: 45px;" required></td>
+                            </tr>
+                            <tr>
+                                <th style="height: 50px;">연락처<b style="color: crimson;">*</b></th>
+                                <td><input class="align2" type="text" name="bookUserPhone" placeholder="010-0000-0000" style="width: 100%; height: 45px;" required></td>
+                            </tr>
+                            <tr>
+                                <th style="height: 50px;">이메일</th>
+                                <td><input class="align2" type="text" name="bookEmail" placeholder="fooding@naver.com" style="width: 100%; height: 45px;" required></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: right;">* 작성 시 예약 확인 메일이 발송됩니다<br><br></td>
+                                
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <b>요청사항</b> <br>
+                                    <textarea class="align2" name="bookRequest" placeholder="요청사항을 입력해주세요" cols="40" rows="7" style="resize: none; overflow: hidden;"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                        <div></div>
+                    </div>
+                    <br>
+                    <div>
+                        <div class="book-category" style="margin-bottom: 10px;">서비스 약관</div>
+                        <div class="general-condition">개인정보 수집 동의</div>
+                        <div id="general-condition-detail1">에베베</div>
+                        <div class="general-condition">개인정보 제공 동의</div>
+                        <div id="general-condition-detail2">에베베</div>
                     </div>
                     <br><br>
-                    <button>예약하기</button>
+                    <div>
+                        <button type="button" class="btn btn-outline-danger btn-lg" style="display: block; margin: auto;">예약하기</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -539,25 +549,83 @@
                 });
             });
 
-            // 예약날짜, 시간, 메뉴 슬라이드 효과
+            // 예약날짜, 시간, 메뉴, 약관 슬라이드 효과
             $(function(){
                 $('.menu-slide').click(function(){
-                const $slide = $(this).next();
-                if($slide.css('display') == 'none'){
-                    $(this).siblings('.slide-detail').slideUp();
-                    $slide.slideDown(); 
-                }else{
-                    $slide.slideUp();
-                }
+                    const $slide = $(this).next();
+                    if($slide.css('display') == 'none'){
+                        $(this).siblings('.slide-detail').slideUp();
+                        $slide.slideDown(); 
+                    }else{
+                        $slide.slideUp();
+                    }
+                });
+
+                $('#book-menu').click(function(){
+                    if($('#book-date').css('display') == 'block' || $('#book-time').css('display') == 'block'){
+                        $('#book-date').next().slideUp();
+                        $('#book-time').next().slideUp();
+                    };
+                    $('.menu-select').css('display', 'block');
+                });
+
+                $('.general-condition').click(function(){
+                    const $slide = $(this).next();
+                    if($slide.css('display') == 'none'){
+                        $('#general-condition-detail1').slideUp();
+                        $('#general-condition-detail2').slideUp();
+                        $slide.slideDown();
+                    }else{
+                        $slide.slideUp();
+                    }
                 });
             });
-            $('#book-menu3').click(function(){
-                if($('#book-menu1').css('display') == 'block' || $('#book-menu2').css('display') == 'block'){
-                    $('#book-menu1').next().slideUp();
-                    $('#book-menu2').next().slideUp();
-                }
-                $('.menu-select').css('display', 'block');
-            });
+
+            // // 시간 선택 버튼 생성
+            // $(function(){
+            //     // 시간 = 그대로
+            //     // 분 = 분/60
+            //     // 시작 시간 s: 10:00
+            //     // 브레이크 시작 bs: 11:00
+            //     // 오전 dt: 12:00
+            //     // 브레이크 종료 be: 15:00
+            //     // 영업 종료 e: 22:00
+            //     const daytime = dt;
+            //     const open = s;
+            //     const close = e;
+            //     const breakS = bs;
+            //     const breadE = be;
+
+            //     // 영업시작 < 12시 < 영업종료
+            //     if(s < daytime && dt < e){
+            //         // 오전 00:00 ~ 11:30
+            //         for(let i=0; i<(dt-s); i++){
+            //             $('.am').append(
+            //                 '<div class="book-time-btn">' + s + ':' + (i%2)*30 + '</div>'
+            //             );
+            //         };
+            //         // 오후 12:00 ~ 23:30
+            //         for(let i=0; i<(e-dt); i++){
+            //             $('.pm').append(
+            //                 '<div class="book-time-btn">' + x + ':' + (i%2)*30 + '</div>'
+            //             );
+            //         };
+            //     // 12시 <= 영업시작
+            //     }else if(dt <= s){
+            //         for(let i=0; i<(e-s); i++){
+            //             $('.pm').append(
+            //                 '<div class="book-time-btn">' + x + ':' + (i%2)*30 + '</div>'
+            //             );
+            //         };
+            //     // 영업종료 <= 12시
+            //     }else{
+            //         for(let i=0; i<(e-s); i++){
+            //             $('.am').append(
+            //                 '<div class="book-time-btn">' + x + ':' + (i%2)*30 + '</div>'
+            //             );
+            //         };
+            //     };
+            // });
 
             // 메뉴 추가
             let sum = 0;
@@ -569,6 +637,8 @@
                 const addMenu = $(this).parent().prev().children();
                 const table = $('#menu-select-border2>table>tbody>tr').length;
                 const tableData = $('#menu-select-border2>table>tbody>tr').text();
+                //console.log(tableData);
+
                 if(table == 0) {
                         $('#menu-select-border2 tbody:first').append(
                         '<tr class="menu-choice">'
@@ -595,23 +665,16 @@
                         + '</tr>'
                     );
                 }else{
-                    // k = ($(this).parents('#menu-selectView1').find(this));
-                    k = 0;
-                    plus = parseInt($('#quantity' + k).val()) + 1;
-                    $('#quantity' + k).val(plus);
-                    console.log($('#menu-selectView1').children(this).index());
-                    console.log(addMenu.eq(1).text());
-                    
-                }
-                // plus * price;
-                for(let i=2; i<$('#menu-select-border2>table>tbody td').length; i+=3){
-                        price = parseInt($('#menu-select-border2>table>tbody td').eq(i).text().replace(regex, ''));
-                    }
-                
-                sum += price;
-                return sum;  
+                    $(".menu-choice").each(function(){
+                        if($(this).children().eq(0).text() == addMenu.eq(0).text()){
+                            $(this).find("input").val(Number($(this).find("input").val()) + 1);
+                            const price = addMenu.eq(1).text(); 
+                            sum = $(this).find("input").val() * price
+                            $(this).children().eq(2).text(sum); 
+                        };
+                    });
+                };
             });
-                
 
             // 수량 추가, 삭제
             $(document).on('click', '.minus', function(){
@@ -619,50 +682,44 @@
                     $(this).next().val(parseInt($(this).next().val()) -1);
                 }else{
                     $(this).parents('tr.menu-choice').remove();
-                }
+                };
             });
             $(document).on('click', '.plus', function(){
-                    $(this).prev().val(parseInt($(this).prev().val()) +1);
-                    });
+                const addedMenu = $(this).parents('.menu-choice').eq(0).text()
+                const value = $(this).prev();
+                const price = 0;
+                value.val(parseInt($(this).prev().val()) +1);
+                $('.btn.btn-secondary.btn-sm.add').each(function(){
+                    console.log(sum)
+                    console.log(addedMenu);
+                    if($(this).parent().prev().children().eq(0).text() == addedMenu){
+                        let menuInfo = $(this).parent().prev().children();
+                        sum = menuInfo.eq(2).text * value
+                        value.val(sum);
+                    }
+                })
+            });
             $(document).on('keyup', '.quantity', function(){
                 if($(this).val() == '0'){
                     $(this).parents('tr.menu-choice').remove();
-                }
+                };
             });
             
-               
-
             // 총액 천 단위 콤마
-            $(function(){
-                $('.btn.btn-secondary.btn-sm.add').click(function(sum){
-                    // console.log(sum.result);
-                    sum = sum.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                    $('#sum').text(sum + '원');
-                })
-            });
+            // $(function(){
+            //     $('.btn.btn-secondary.btn-sm.add').click(function(sum){
+            //         // console.log(sum.result);
+            //         sum = sum.result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            //         $('#sum').text(sum + '원');
+            //     });
+            // });
 
             // 메뉴 취소 버튼
             $('#cancel').click(function(){
                 $('.menu-select').css('display', 'none');
             });
 
-
-            // $('#book-menu2').click(function(){
-                // 시작 시간 s: 11:00
-                // 브레이크 시작 bs: 14:00
-                // 오전 dt: 12:00
-                // 브레이크 종료 be: 15:00
-                // 영업 종료 e: 22:00
-                
-            //     if(s < dt){
-            //         for(let i=30; i<(dt-s); i+=30){
-            //             $('.am').append(
-            //                 '<div>' + s + i + '<div>''
-            //             );
-            //         }
-            //     }
-            // });
-
+            
         </script>
         <%@ include file="/views/common/footer.jsp" %>
     </div>
