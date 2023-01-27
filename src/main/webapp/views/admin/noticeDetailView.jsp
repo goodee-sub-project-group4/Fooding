@@ -89,7 +89,10 @@
                             </p>
                         </td>
                     </tr>
-                    
+                    <tr>
+                        <td>첨부파일</td>
+                        <td><a href="<%= contextPath %>/<%=at.getFilePath() + at.getChangeName() %>"><%= at.getOriginName() %></a></td>
+                    </tr>
                 </table>
 
 
