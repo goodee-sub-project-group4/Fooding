@@ -77,6 +77,41 @@ public class MemberDao {
 		
 	}
 	
+	/** 회원가입
+	 * @param conn
+	 * @param m 
+	 * @return result 
+	 */
+	public int insertMember(Connection conn, Member m) {
+		// insert문
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserPwd());
+			pstmt.setString(3, m.getUserName());
+			pstmt.setString(4, m.getNickname());
+			pstmt.setString(5, m.getUserEmail());
+			pstmt.setString(6, m.getUserPhone());
+			pstmt.setString(7, m.getGender());
+			pstmt.setString(8, m.getBirth());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
 	
 	
 

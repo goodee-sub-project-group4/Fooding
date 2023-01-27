@@ -24,8 +24,8 @@
     .enroll-head {text-align: center; padding-top: 100px;}
     .enroll-head h2 {font-weight:600; color:rgb(83, 83, 83);}
     /* 필수사항입력 */
-    .required {width:700px; height:30px; margin:auto; text-align:right;}
-    #required {color: rgb(247, 51, 51);}
+    .required1 {width:700px; height:30px; margin:auto; text-align:right;}
+    .required {color: rgb(247, 51, 51);}
     /* 라인 */
     .line { width:400px; height:0.5px; margin-top:1px; background-color:rgb(83, 83, 83);}
     /* form */
@@ -61,7 +61,7 @@
 
         <div class="enroll-head"><h2>회원가입</h2></div>
             
-            <div class="required"><span id="required">*</span> 필수사항입력</div>
+            <div class="required1"><span class="required">*</span> 필수사항입력</div>
             <hr class="line">
             <div class="enroll">
 
@@ -69,38 +69,38 @@
                     
                     <table class="table1">
                         <tr>
-                            <th>아이디 <span id="required">*</span></th>
+                            <th>아이디 <span class="required">*</span></th>
                             <td class="input-area2"><input type="text" size="55" name="userId" placeholder="아이디를 입력해주세요" required></td>
                             <td class="input-area3-id"><button type="button" class="btn btn-danger">중복확인</button></td>
                         </tr>
                         <tr>
-                            <th>비밀번호 <span id="required">*</span></th>
+                            <th>비밀번호 <span class="required">*</span></th>
                             <td class="input-area2"><input type="password" size="55" name="userPwd" maxlength="15" placeholder="비밀번호를 입력해주세요" required></td>
                             <td class="input-area3"></td>
                         </tr>
                         <tr>
-                            <th>비밀번호확인 <span id="required">*</span></th>
+                            <th>비밀번호확인 <span class="required">*</span></th>
                             <td class="input-area2"><input type="password" size="55" maxlength="15" placeholder="비밀번호를 한 번 더 입력해주세요" required></td>
                             <td class="input-area3"></td>
                         </tr>
                         <tr>
-                            <th>이름 <span id="required">*</span></th>
+                            <th>이름 <span class="required">*</span></th>
                             <td class="input-area2"><input type="text" size="55" name="userName" maxlength="10" placeholder="이름을 입력해주세요" required></td>
                             <td class="input-area3"></td>
                         </tr>
                         <tr>
-                            <th>닉네임 <span id="required">*</span></th>
+                            <th>닉네임 <span class="required">*</span></th>
                             <td class="input-area2"><input type="text" size="55" name="nickname" placeholder="닉네임을 입력해주세요" required></td>
                             <td class="input-area3-nickname"><button type="button" class="btn btn-danger">중복확인</button></td>
                         </tr>
                         <tr>
-                            <th>이메일 <span id="required">*</span></th>
-                            <td class="input-area2"><input type="email" size="55" name="email" placeholder="예:fooding@fooding.com"></td>
+                            <th>이메일 <span class="required">*</span></th>
+                            <td class="input-area2"><input type="email" size="55" name="userEmail" placeholder="예:fooding@fooding.com" required></td>
                             <td class="input-area3"></td>
                         </tr>
                         <tr>
-                            <th>휴대폰 <span id="required">*</span></th>
-                            <td class="input-area2"><input type="text" size="55" name="phone" placeholder="숫자만 입력해주세요"></td>
+                            <th>휴대폰 <span class="required">*</span></th>
+                            <td class="input-area2"><input type="text" size="55" name="userPhone" placeholder="숫자만 입력해주세요" required></td>
                             <td class="input-area3-phone"><button type="button" class="btn btn-danger">인증번호 받기</button></td>
                         </tr>
                         <tr>
@@ -112,7 +112,7 @@
                             <th>성별&nbsp;&nbsp;&nbsp; </th>
                             <td class="gender-area">
                                 <input type="radio" style="width:17px; height:17px;" name="gender" value="M">남자
-                                <input type="radio" style="width:17px; height:17px;" name="gender" value="W">여자
+                                <input type="radio" style="width:17px; height:17px;" name="gender" value="F">여자
                                 <input type="radio" style="width:17px; height:17px;" name="gender" value="N">선택안함
                             </td>
                             <td class="input-area3"></td>
@@ -120,7 +120,7 @@
                         <tr>
                             <th>생년월일&nbsp;&nbsp;&nbsp; </th>
                             <td class="birth-area" width="500px">
-                                <input type="text" size="10" value="YYYY" width="">
+                                <input type="text" size="10" value="YYYY">
                                 <span>/</span>
                                 <input type="text" size="10" value=" MM">
                                 <span>/</span>
@@ -129,7 +129,7 @@
                             <td class="input-area3"></td>
                         </tr>
                         <tr>
-                            <th id="term2"><span id="terms">이용약관동의 </span><span id="required">*</span></th>
+                            <th id="term2"><span id="terms">이용약관동의 </span><span class="required">*</span></th>
                             <td class="check-terms">
                                 <input type="checkbox" style="width:17px; height:17px;"><b>전체 동의합니다</b><br>
                                 <input type="checkbox" style="width:17px; height:17px;">이용약관 동의(필수)<br>

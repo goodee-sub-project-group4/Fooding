@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="com.fd.member.model.vo.Member" %>
 <%
 	String contextPath = request.getContextPath(); // /Fooding
+	String alertMsg = (String)session.getAttribute("alertMsg"); // Alert
 
 	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
@@ -63,6 +64,14 @@
 
 </head>
 <body>
+	<!-- Alert -->
+	<% if(alertMsg != null) { %>
+	<script>
+		alert("<%=alertMsg%>");
+	</script>
+	<% session.removeAttribute("alertMsg"); %>
+	<% } %>
+	
 	<div class="wrap">
         
         <div class="header">
