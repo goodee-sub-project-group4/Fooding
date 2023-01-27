@@ -71,7 +71,7 @@
                         <tr>
                             <th>아이디 <span class="required">*</span></th>
                             <td class="input-area2"><input type="text" size="55" name="userId" placeholder="아이디를 입력해주세요" required></td>
-                            <td class="input-area3-id"><button type="button" class="btn btn-danger" onclick="idCheck();">중복확인</button></td>
+                            <td class="input-area3-id"><button type="button" class="btn btn-danger" onclick="idCheck();" required>중복확인</button></td>
                         </tr>
                         <tr>
                             <th>비밀번호 <span class="required">*</span></th>
@@ -91,7 +91,7 @@
                         <tr>
                             <th>닉네임 <span class="required">*</span></th>
                             <td class="input-area2"><input type="text" size="55" name="nickname" placeholder="닉네임을 입력해주세요" required></td>
-                            <td class="input-area3-nickname"><button type="button" class="btn btn-danger">중복확인</button></td>
+                            <td class="input-area3-nickname"><button type="button" class="btn btn-danger" onclick="nicknameCheck();" required>중복확인</button></td>
                         </tr>
                         <tr>
                             <th>이메일 <span class="required">*</span></th>
@@ -167,7 +167,7 @@
                 			
                 		} else {
                         	alert("비밀번호가 일치하지않습니다.");
-                			userPwd2.value= ""; //기존값을 지울때는 빈문자열
+                			userPwd2.value= "";
                 			userPwd2.focus();
                 		}
                 		
@@ -184,10 +184,10 @@
                 		data:{checkId:$idInput.val()},
                 		success:function(result) {
                 			if(result == "NNN") { // 사용불가능
-                				alert("이미 존재하거나 탈퇴한 아이디입니다.");
+                				alert("사용할 수 없는 아이디입니다.");
                 				$idInput.focus();
                 			} else { // 사용가능
-                				if(confirm("사용가능한 아이디입니다. 정말로 사용하시겠습니까?")) { // 사용
+                				if(confirm("사용 가능한 아이디입니다. 사용하시겠습니까?")) { // 사용
                 					$idInput.attr("readonly", true);
                 					$(".enroll-form :submit").removeAttr("disabled");
                 				} else { // 비사용
@@ -201,8 +201,39 @@
                 		}
                 	});
                 	
-                	
+                	}
+                
+                /* 닉네임 중복체크 */
+            	function nicknameCheck() {
+            		const $nicknameInput = $(".enroll-form input[name=nickname]");
+            		
+            		$.ajax({
+            			url:"<%=contextPath%>/nicknameCheck.me",
+            			date:{checkNickname:$nicknameInput.val()},
+            			success:function(result2) {
+            				if(result2 == "NNN") { // 사용불가능
+            					alert("사용할 수 없는 닉네임입니다.");
+            					$nicknameInput.focus();
+            				} else { // 사용가능
+            					if(confirm("사용 가능한 닉네임입니다. 사용하시겠습니까?")) {
+            						$nicknameInput.attr("readonly", true);
+                					$(".enroll-form :submit").removeAttr("disabled");
+            					} else {
+            						$nicknameInput.focus();
+            					}
+            				}
+            			}, error:function() {
+            				cosole.log("닉네임 중복체크 ajax 실패");
+            			}
+            		});
+                
                 }
+                
+                
+                
+                
+                
+                
                 </script>
              
             </div>      

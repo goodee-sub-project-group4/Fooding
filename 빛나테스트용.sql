@@ -51,7 +51,17 @@ commit;
 			 , ?
 		     );
              
---
+-- 아이디 중복체크
+        SELECT
+			   COUNT(*) "COUNT"
+		  FROM TB_USER
+		 WHERE USER_ID = ? 
+
+-- 닉네임 중복체크
+        SELECT
+		       COUNT(*) "COUNT2"
+		  FROM TB_USER
+		 WHERE NICKNAME = ?
 
 
 

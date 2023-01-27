@@ -45,7 +45,7 @@ public class MemberService {
 	/** 아이디 중복체크
 	 * @author 빛나
 	 * @param checkId
-	 * @return count count (중복된 아이디 값의 개수)(중복된 아이디 값의 개수)
+	 * @return count (중복된 아이디 값의 개수)
 	 */
 	public int idCheck(String checkId) {
 		Connection conn = getConnection();
@@ -53,6 +53,31 @@ public class MemberService {
 		close(conn);
 		return count;
 	}
+	
+	/** 닉네임 중복체크
+	 * @author 빛나
+	 * @param checkNickname
+	 * @return count2 (중복된 닉네임 값의 개수)
+	 */
+	public int nicknameCheck(String checkNickname) {
+		Connection conn = getConnection();
+		int count2 = new MemberDao().nicknameCheck(conn, checkNickname);
+		close(conn);
+		return count2;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }
