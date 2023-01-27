@@ -1,11 +1,16 @@
 package com.fd.admin.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fd.admin.model.service.AdminService;
+import com.fd.admin.model.vo.Notice;
+import com.fd.common.model.vo.Attachment;
 
 /**
  * Servlet implementation class AdminNoticeDetailController
@@ -26,7 +31,25 @@ public class AdminNoticeDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/admin/noticeDetailView.jsp").forward(request, response);
+		
+		int noticeNo = Integer.parseInt(request.getParameter("no"));
+		AdminService nService = new AdminService();
+		
+		int result = nService.increaseCount(noticeNo);
+		if(result>0) {
+			Notice n = nService.selectNotice(noticeNo);
+			Attachment at = nService.selectAttachment(noticeNo);
+				// 마저 해야됨
+			request.setAttribute("n", n);
+			request.setAttribute("at", at);
+			request.getRequestDispatcher("views/admin/noticeDetailView.jsp").forward(request, response);
+			
+		} else {
+			request.setAttribute("errorPage", "상세조회 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+		
+		
 	}
 
 	/**

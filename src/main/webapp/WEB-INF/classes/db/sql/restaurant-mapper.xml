@@ -15,6 +15,7 @@
 			 , CELLPHONE
 			 , EMAIL
 			 , PARKING
+			 , STATUS
 			 , LONGTITUDE
 			 , LATITUDE
 			 , R_IMG
@@ -26,7 +27,13 @@
 		 FROM RESTAURANT
 	    WHERE RES_NO=?
 	      AND USER_PWD=?
-	      AND STATUS='Y'		   
+	      AND STATUS IN ('Y', 'C')		   
+	</entry>
+	<entry key="updatePwd">
+		UPDATE RESTAURANT
+           SET USER_PWD = ?,
+               STATUS = 'Y'
+         WHERE RES_NO = ?	
 	</entry>	
 
 </properties>

@@ -77,7 +77,93 @@ public class MemberDao {
 		
 	}
 	
+	/** 회원가입
+	 * @param conn
+	 * @param m 
+	 * @return result 
+	 */
+	public int insertMember(Connection conn, Member m) {
+		// insert문
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserPwd());
+			pstmt.setString(3, m.getUserName());
+			pstmt.setString(4, m.getNickname());
+			pstmt.setString(5, m.getUserEmail());
+			pstmt.setString(6, m.getUserPhone());
+			pstmt.setString(7, m.getGender());
+			pstmt.setString(8, m.getBirth());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
+	/** 아이디 중복체크
+	 * @author 빛나
+	 * @param conn
+	 * @param checkId
+	 * @return count (중복된 아이디 값의 개수)
+	 */
+	public int idCheck(Connection conn, String checkId) {
+		
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, checkId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+		
+	}
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

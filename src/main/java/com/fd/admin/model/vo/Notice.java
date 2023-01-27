@@ -14,6 +14,9 @@ public class Notice {
 	private String toWhom;
 	private String status;
 	
+	private String boardType;	// 공지사항 공지사항 N / 리뷰 R / 1:1문의 Q
+
+
 	public Notice() {}
 
 	public Notice(int noticeNo, String userNo, String noticeTitle, String noticeContent, Date createDate, Date modifyDate,
@@ -29,9 +32,25 @@ public class Notice {
 		this.toWhom = toWhom;
 		this.status = status;
 	}
-
 	
-	// 회원 공지사항 목록 조회
+	
+	
+	public Notice(int noticeNo, String userNo, String noticeTitle, String noticeContent, Date createDate,
+			Date modifyDate, int count, String toWhom, String status, String boardType) {
+		super();
+		this.noticeNo = noticeNo;
+		this.userNo = userNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+		this.count = count;
+		this.toWhom = toWhom;
+		this.status = status;
+		this.boardType = boardType;
+	}
+
+	// 공지사항 목록 조회
 	public Notice(int noticeNo, String noticeTitle, String userNo, int count, Date createDate) {
 		super();
 		this.noticeNo = noticeNo;
@@ -113,6 +132,14 @@ public class Notice {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public String getBoardType() {
+		return boardType;
+	}
+
+	public void setBoardType(String boardType) {
+		this.boardType = boardType;
+	}
 
 	@Override
 	public String toString() {
@@ -120,4 +147,6 @@ public class Notice {
 				+ ", noticeContent=" + noticeContent + ", createDate=" + createDate + ", modifyDate=" + modifyDate
 				+ ", count=" + count + ", toWhom=" + toWhom + ", status=" + status + "]";
 	}
+
+
 }

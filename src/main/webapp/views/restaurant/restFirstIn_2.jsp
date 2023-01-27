@@ -70,23 +70,24 @@
 			(2단계/2단계) 메뉴를 하나씩 등록해주세요.
 		</div><br>
 
-		<form action="">
+		<form action="/menuInsert.re" method="post" enctype="multipart/form-data">
 			<div class="menu-box">
 				<div class="text-box">
-					<span>메뉴명 </span><span style="color:crimson">* </span>
+					<span name="name1" >메뉴명 </span><span style="color:crimson">* </span>
 					<input type="text" required><br>
 				</div><br>
 				<div class="text-box">
-					<span>가격 </span><span style="color:crimson">* </span>
+					<span name="price1">가격 </span><span style="color:crimson">* </span>
 					<input type="text" required><br>
 				</div><br>
 				<div class="text-box">
-					<span>설명</span>
+					<span name="describe1">설명</span>
 					<input type="text"><br>
 				</div>
 				<div class="photo" align="center">
-					<img src="../../resources/images/forTest.png" class="rounded" width="200" height="150"><br>
-					<button type="button" class="btn btn-outline-danger">사진등록</button>
+					<img src="/Fooding/resources/images/forTest.png" class="rounded" width="200" height="150"><br>
+					<button type="button" class="btn btn-outline-danger" onclick="clickFile(1)">사진등록</button>
+					<div style="display:none"><input type="file" name="file1"></div>
 				</div>
 			</div>
 			
@@ -108,12 +109,11 @@
 		$(function(){
 			// Head.jsp 내의 요소, #title의 문구를 변경한다.
 			$('#title').text("");
-			
-
-			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
-			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"5px"});
-
 		})
+
+		function clickFile(num) {
+			$('input[name=file'+num+']').click();
+		}
 	</script>
 </body>
 </html>

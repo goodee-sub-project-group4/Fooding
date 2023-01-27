@@ -55,11 +55,11 @@
 			(1단계/2단계) 비밀번호를 설정해주세요.
 		</div><br>
 		<div id="password-box">
-			<form action="">
+			<form action="<%=contextPath%>/pwd.re" method="post">
 				<span>비밀번호</span>
-				<input type="password"><br>
+				<input type="password" name="userPwd" id="userPwd"><br>
 				<span>비밀번호 확인</span>
-				<input type="password">
+				<input type="password" name="checkPwd" id="checkPwd" onfocusout="validate();">
 				<br clear="both"><br>
 				<button class="btn btn-danger">확인</button>
 			</form>			
@@ -73,14 +73,17 @@
 	</div>	
 	<script>
 		$(function(){
-			// Head.jsp 내의 요소, #title의 문구를 변경한다.
 			$('#title').text("");
-			
-
-			// Menubar.jsp 내의 요소, 스타일이 include시 바뀌는 버그를 수정하기 위한 코드(건들필요X)
-			$('#page-name').css({"font-size":"28px", "font-weight":600, "margin-left":"10px", "margin-top":"5px"});
-
 		})
+		
+		//비밀번호 일치여부확인
+		function validate(){
+			if($('#userPwd').val() != $('#checkPwd').val()) {
+				alert('비밀번호가 일치하지 않습니다');
+				$('#userPwd').val("");
+				$('#checkPwd').val("");				
+			}
+		}
 	</script>
 </body>
 </html>

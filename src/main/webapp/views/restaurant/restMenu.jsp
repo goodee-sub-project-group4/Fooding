@@ -99,42 +99,6 @@
 						<button type="button" class="btn btn-outline-danger">사진등록</button>
 					</div>
 				</div>
-				<div class="menu-box">
-					<div class="text-box">
-						<span>메뉴명 </span><span style="color:crimson">* </span>
-						<input type="text" value="기존입력값"><br>
-					</div><br>
-					<div class="text-box">
-						<span>가격 </span><span style="color:crimson">* </span>
-						<input type="text" value="기존입력값"><br>
-					</div><br>
-					<div class="text-box">
-						<span>설명</span>
-						<input type="text" value="기존입력값"><br>
-					</div>
-					<div class="photo" align="center">
-						<img src="resources/images/forTest.png" class="rounded" width="200" height="150"><br>
-						<button type="button" class="btn btn-outline-danger">사진등록</button>
-					</div>
-				</div>
-				<div class="menu-box">
-					<div class="text-box">
-						<span>메뉴명 </span><span style="color:crimson">* </span>
-						<input type="text" value="기존입력값"><br>
-					</div><br>
-					<div class="text-box">
-						<span>가격 </span><span style="color:crimson">* </span>
-						<input type="text" value="기존입력값"><br>
-					</div><br>
-					<div class="text-box">
-						<span>설명</span>
-						<input type="text" value="기존입력값"><br>
-					</div>
-					<div class="photo" align="center">
-						<img src="resources/images/forTest.png" class="rounded" width="200" height="150"><br>
-						<button type="button" class="btn btn-outline-danger">사진등록</button>
-					</div>
-				</div>
 				<div align="center"><br><br><br>
 					<button type="button" class="btn btn-outline-danger">메뉴추가</button>
 					<button type="button" class="btn btn-danger">저장</button>
@@ -154,9 +118,8 @@
 		$(function(){
 			// Head.jsp 내의 요소, #title의 문구를 변경한다.
 			$('#title').text("메뉴정보");
-			$('#menu2-detail').find('li').eq(2).click();
-            $('#menu2').css("background-color","whitesmoke");
-            $('#menu2').css("color","rgb(221,45,45)");
+			$("#menu2").addClass("active");
+			$("#menu2_3").addClass("active");
 
 
 		})

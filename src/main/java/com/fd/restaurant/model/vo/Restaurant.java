@@ -20,8 +20,18 @@ public class Restaurant {
 	private String longtitude;
 	private String latitude;
 	private String rImg;
+	
+
+	private String open;
+	private String close;
+	private String breakS;
+	private String privateE;
+	private String foodCt;
+	
+	public Restaurant() {}
+	
 	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
-			String localCt, String dLocalCt, String phone, String cellphone, String email, String parking,
+			String localCt, String dLocalCt, String phone, String cellphone, String email, String parking, String status,
 			String longtitude, String latitude, String rImg, String open, String close, String breakS, String privateE,
 			String foodCt) {
 		super();
@@ -37,6 +47,7 @@ public class Restaurant {
 		this.cellphone = cellphone;
 		this.email = email;
 		this.parking = parking;
+		this.status=status;
 		this.longtitude = longtitude;
 		this.latitude = latitude;
 		this.rImg = rImg;
@@ -46,15 +57,6 @@ public class Restaurant {
 		this.privateE = privateE;
 		this.foodCt = foodCt;
 	}
-
-	private String open;
-	private String close;
-	private String breakS;
-	private String privateE;
-	private String foodCt;
-	
-	public Restaurant() {}
-
 	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
 			String localCt, String dLocalCt, String phone, String cellphone, String email, String parking,
 			String applyDate, String enrollDate, String modifyDate, String status, String longtitude, String latitude,

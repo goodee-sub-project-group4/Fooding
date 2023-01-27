@@ -385,7 +385,7 @@
 	<script>
 		$(function(){
 			$('#title').text("예약관리");
-			$('#menu1').click();
+			$("#menu1").addClass("active");
 
 		})
 		

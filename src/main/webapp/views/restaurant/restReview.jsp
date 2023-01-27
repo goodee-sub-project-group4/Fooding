@@ -325,9 +325,8 @@
 	<script>
 		$(function(){
 			$('#title').text("리뷰관리");
-            $('#menu2-detail').find('li').eq(4).click();
-            $('#menu2').css("background-color","whitesmoke");
-            $('#menu2').css("color","rgb(221,45,45)");
+			$("#menu2").addClass("active");
+			$("#menu2_5").addClass("active");
 
 
 		})

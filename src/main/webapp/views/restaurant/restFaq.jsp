@@ -347,12 +347,12 @@
 		$(function(){
 			// Head.jsp 내의 요소, #title의 문구를 변경한다.
 			$('#title').text("FAQ");
-			$('#menu3-detail').find('li').eq(1).click();
-            $('#menu3').css("background-color","whitesmoke");
-            $('#menu3').css("color","rgb(221,45,45)");
+			$("#menu3").addClass("active");
+			$("#menu3_2").addClass("active");
 
 			//답변 펼침효과
 			$(".list").click(function(){
+				$(this).parent().siblings("ul").children(".content").slideUp();
 				$(this).next().slideToggle();
 			})
 			

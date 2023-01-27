@@ -441,27 +441,17 @@
 			$('#menu4-detail-2').click();
             $('#menu4').css("background-color","whitesmoke");
             $('#menu4').css("color","rgb(221,45,45)");
+            
+    
 		})
 
-        /*
+  
+       	//답변 펼침효과
         $(function(){
-            $(".list").click(function(){
-                $(this).next().slideToggle();
-            })
-        })
-        */
-
-       
-        $(function(){
-            $('.list').click(function(){
-                const $slide = $(this).next();
-                if($slide.css('display') == 'none'){
-                    $(this).siblings('.faqContent').slideUp();
-                    $slide.slideDown(); 
-                }else{
-                    $slide.slideUp();
-                }
-                });    
+			$(".list").click(function(){
+				$(this).parent().siblings("ul").children(".faqContent").slideUp();
+				$(this).next().slideToggle();
+			})    
         });
         
  

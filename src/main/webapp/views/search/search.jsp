@@ -155,7 +155,12 @@
 </style>
 </head>
 <body>
+	
+	<%@ include file="../common/head.jsp" %>
+	 
     <div class="wrap">
+    
+    <!-- 
         <div class="header">
             <div id="header1-padding">
                 <div id="header1">
@@ -176,7 +181,9 @@
         </div>
         <div id="header-line">
             <div></div>
-        </div>    
+        </div>  
+        
+        -->  
 
         <div class="content">
             <div id="content1-padding">

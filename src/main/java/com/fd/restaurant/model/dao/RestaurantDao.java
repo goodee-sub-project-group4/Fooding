@@ -49,6 +49,7 @@ public class RestaurantDao {
 								, rset.getString("cellphone")
 								, rset.getString("email")
 								, rset.getString("parking")
+								, rset.getString("status")
 								, rset.getString("longtitude")
 								, rset.getString("latitude")
 								, rset.getString("r_img")
@@ -64,9 +65,25 @@ public class RestaurantDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
 		return r;
+	}
+	
+	public int updatePwd(Connection conn, int resNo, String userPwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userPwd);
+			pstmt.setInt(2, resNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

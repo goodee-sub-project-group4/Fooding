@@ -20,7 +20,66 @@
 		  FROM TB_USER
 		 WHERE USER_ID = ?
 		   AND USER_PWD = ?
-		   AND STATUS = 'Y'
+		   AND STATUS = 'Y' || 'A'
 	</entry>
+	
+	<!-- 회원가입 -->
+	<entry key="insertMember">
+		INSERT 
+		  INTO TB_USER
+		     (
+		       USER_NO
+		     , USER_ID
+		     , USER_PWD
+			 , USER_NAME
+			 , NICKNAME
+			 , USER_EMAIL
+			 , USER_PHONE
+			 , GENDER
+			 , BIRTH
+		     )
+		VALUES
+		     (
+		       SEQ_UNO.NEXTVAL
+		     , ?
+		     , ?
+			 , ?
+			 , ?
+			 , ?
+			 , ?
+			 , ?
+			 , ?
+		     )
+	</entry>
+	
+	<!-- 아이디 중복체크 -->
+	<entry key="idCheck">
+		SELECT
+			   COUNT(*) "COUNT"
+		  FROM TB_USER
+		 WHERE USER_ID = ? 
+	</entry>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </properties>

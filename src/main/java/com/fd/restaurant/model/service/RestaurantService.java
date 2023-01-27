@@ -14,5 +14,16 @@ public class RestaurantService {
 		close(conn);
 		return r;
 	}
+	public int updatePwd(int resNo, String userPwd) {
+		Connection conn = getConnection();
+		int result = new RestaurantDao().updatePwd(conn, resNo, userPwd);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }

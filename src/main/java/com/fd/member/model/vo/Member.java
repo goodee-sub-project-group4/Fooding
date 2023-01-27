@@ -36,6 +36,20 @@ public class Member {
 		this.status = status;
 	}
 	
+	// 회원가입
+	public Member(String userId, String userPwd, String userName, String nickname, String userEmail, String userPhone,
+			String gender, String birth) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.nickname = nickname;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.gender = gender;
+		this.birth = birth;
+	}
+
 	// 관리자로그인 조회할 때 사용
 	public Member(int userNo, String userId, String userPwd, String userName, String status) {
 		super();
