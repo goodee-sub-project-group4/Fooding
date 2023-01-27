@@ -72,6 +72,9 @@
 		<%@ include file="../common/footer.jsp" %>
 	</div>	
 	<script>
+		$(function(){
+			$('#title').text("");
+		})
 		
 		//비밀번호 일치여부확인
 		function validate(){

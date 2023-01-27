@@ -5,6 +5,8 @@
 	String contextPath = request.getContextPath();
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	Restaurant loginRest = (Restaurant)session.getAttribute("loginRest");
+	
+
 %>
 <!DOCTYPE html>
 <html>
