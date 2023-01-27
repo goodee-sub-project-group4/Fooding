@@ -99,42 +99,6 @@
 						<button type="button" class="btn btn-outline-danger">사진등록</button>
 					</div>
 				</div>
-				<div class="menu-box">
-					<div class="text-box">
-						<span>메뉴명 </span><span style="color:crimson">* </span>
-						<input type="text" value="기존입력값"><br>
-					</div><br>
-					<div class="text-box">
-						<span>가격 </span><span style="color:crimson">* </span>
-						<input type="text" value="기존입력값"><br>
-					</div><br>
-					<div class="text-box">
-						<span>설명</span>
-						<input type="text" value="기존입력값"><br>
-					</div>
-					<div class="photo" align="center">
-						<img src="resources/images/forTest.png" class="rounded" width="200" height="150"><br>
-						<button type="button" class="btn btn-outline-danger">사진등록</button>
-					</div>
-				</div>
-				<div class="menu-box">
-					<div class="text-box">
-						<span>메뉴명 </span><span style="color:crimson">* </span>
-						<input type="text" value="기존입력값"><br>
-					</div><br>
-					<div class="text-box">
-						<span>가격 </span><span style="color:crimson">* </span>
-						<input type="text" value="기존입력값"><br>
-					</div><br>
-					<div class="text-box">
-						<span>설명</span>
-						<input type="text" value="기존입력값"><br>
-					</div>
-					<div class="photo" align="center">
-						<img src="resources/images/forTest.png" class="rounded" width="200" height="150"><br>
-						<button type="button" class="btn btn-outline-danger">사진등록</button>
-					</div>
-				</div>
 				<div align="center"><br><br><br>
 					<button type="button" class="btn btn-outline-danger">메뉴추가</button>
 					<button type="button" class="btn btn-danger">저장</button>

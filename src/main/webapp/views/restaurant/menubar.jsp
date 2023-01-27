@@ -128,39 +128,19 @@
 	<script>
         
         $(function(){
+        	//디테일메뉴 열고닫는기능
             $('li').click(function(){
-  
-            	
                 let detailId = '#'+$(this).attr("id")+"-detail";
-                /*
-                if(detailId.classList == null) {
-                    $('.detail').css("display","none");
-                } */
-                
                 $(detailId).siblings("div").not("#menu").hide();
-                
-                console.log($(detailId));
-        		console.log($(detailId).css("display"));
-        		
-        		/* toggle과 동일한 효과이다.
-                if($(detailId).css("display") == "none") {
-                    $('.detail').css("display","none");
-                    $(detailId).css("display", "block");
-                }else {
-                	$(detailId).css("display", "none");
-                } */  
-        		
         		$(detailId).toggle();
-                
-                
             })
-            //영역밖 클릭시 디테일메뉴창 닫기
+            /*영역밖 클릭시 디테일메뉴창 닫기
             $(document).click(function() {
                 var area = $("#menu");
                 if (!area.is(event.target) && !area.has(event.target).length) {
                     $(".detail").hide();
                 }
-            });
+            });*/
             
         })
 
