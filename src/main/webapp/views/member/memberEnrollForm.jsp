@@ -71,17 +71,17 @@
                         <tr>
                             <th>아이디 <span class="required">*</span></th>
                             <td class="input-area2"><input type="text" size="55" name="userId" placeholder="아이디를 입력해주세요" required></td>
-                            <td class="input-area3-id"><button type="button" class="btn btn-danger">중복확인</button></td>
+                            <td class="input-area3-id"><button type="button" class="btn btn-danger" onclick="idCheck();">중복확인</button></td>
                         </tr>
                         <tr>
                             <th>비밀번호 <span class="required">*</span></th>
-                            <td class="input-area2"><input type="password" size="55" name="userPwd" maxlength="15" placeholder="비밀번호를 입력해주세요" required></td>
+                            <td class="input-area2"><input type="password" size="55" name="userPwd" class="userPwd" id="userPwd" maxlength="15" placeholder="비밀번호를 입력해주세요" required></td>
                             <td class="input-area3"></td>
                         </tr>
                         <tr>
                             <th>비밀번호확인 <span class="required">*</span></th>
-                            <td class="input-area2"><input type="password" size="55" maxlength="15" placeholder="비밀번호를 한 번 더 입력해주세요" required></td>
-                            <td class="input-area3"></td>
+                            <td class="input-area2"><input type="password" size="55" name="userPwd2" class="userPwd" id="userPwd2" maxlength="15" placeholder="비밀번호를 한 번 더 입력해주세요" required></td>
+							<td class="input-area3"></td>
                         </tr>
                         <tr>
                             <th>이름 <span class="required">*</span></th>
@@ -120,11 +120,11 @@
                         <tr>
                             <th>생년월일&nbsp;&nbsp;&nbsp; </th>
                             <td class="birth-area" width="500px">
-                                <input type="text" size="10" value="YYYY">
+                                <input type="text" size="10" placeholder="YYYY" class="birth" name="birth">
                                 <span>/</span>
-                                <input type="text" size="10" value=" MM">
+                                <input type="text" size="10" placeholder="MM" name="birth">
                                 <span>/</span>
-                                <input type="text" size="10" value=" DD">
+                                <input type="text" size="10" placeholder=" DD" name="birth">
                             </td>
                             <td class="input-area3"></td>
                         </tr>
@@ -150,12 +150,60 @@
                     </table>
                     <br><br>
                     <div align="center" id="enroll-btn">
-                        <input type="submit" class="btn btn-danger" value="가입하기">
+                        <input type="submit" class="btn btn-danger" value="가입하기" disabled>
                     </div>
                     <br><br>
 
-                
                 </form>
+                
+                <!-- 비밀번호확인 -->
+                <script>
+                $('#userPwd2').focusout(function() {
+                	let pass1 = $("#userPwd").val();
+                	let pass2 = $("#userPwd2").val();
+                	
+                	if(pass1 != "" && pass2 != "") { 
+                		if (pass1 == pass2) {
+                			
+                		} else {
+                        	alert("비밀번호가 일치하지않습니다.");
+                			userPwd2.value= ""; //기존값을 지울때는 빈문자열
+                			userPwd2.focus();
+                		}
+                		
+                	 } 
+                	
+                })
+              		/* 아이디 중복체크 */
+                	function idCheck() {
+                	
+                	const $idInput = $(".enroll-form input[name=userId]");
+                	
+                	$.ajax({
+                		url:"<%=contextPath%>/idCheck.me",
+                		data:{checkId:$idInput.val()},
+                		success:function(result) {
+                			if(result == "NNN") { // 사용불가능
+                				alert("이미 존재하거나 탈퇴한 아이디입니다.");
+                				$idInput.focus();
+                			} else { // 사용가능
+                				if(confirm("사용가능한 아이디입니다. 정말로 사용하시겠습니까?")) { // 사용
+                					$idInput.attr("readonly", true);
+                					$(".enroll-form :submit").removeAttr("disabled");
+                				} else { // 비사용
+                					$idInput.focus();
+                				}
+                			
+                			}
+                		},
+                		error:function() {
+                			console.log("아이디 중복체크용 ajax 실패");
+                		}
+                	});
+                	
+                	
+                }
+                </script>
              
             </div>      
         
