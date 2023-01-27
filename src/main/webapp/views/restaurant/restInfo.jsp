@@ -132,11 +132,8 @@
 	</div>	
 	<script>
 		$(function(){
-			// Head.jsp 내의 요소, #title의 문구를 변경한다.
-			$('#title').text("매장정보");
-			$('#menu2-detail').find('li').eq(1).click();
-            $('#menu2').css("background-color","whitesmoke");
-            $('#menu2').css("color","rgb(221,45,45)");
+			$("#menu2").addClass("active");
+			$("#menu2_2").addClass("active");
 			
 			//사업체유형표시
 			let foodCt = "<%=loginRest.getFoodCt()%>"

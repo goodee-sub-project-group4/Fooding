@@ -203,12 +203,9 @@
 	<script>
 		$(function(){
 			$('#title').text("공지사항");
-			//$('#menu3-detail').find('li').eq(0).click();
-            //$('#menu3').css("background-color","whitesmoke");
-            //$('#menu3').css("color","rgb(221,45,45)");
-
 			$("#menu3").addClass("active");
 			$("#menu3_1").addClass("active");
+			
 		})
 		
 	</script>

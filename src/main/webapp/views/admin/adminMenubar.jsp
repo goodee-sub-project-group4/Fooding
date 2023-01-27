@@ -49,15 +49,7 @@
     li span {
         float: right;
     }
-    li:hover {
-        background-color: whitesmoke;
-        cursor: pointer;
-    }
-
-    li span {
-        float: right;
-    }
-
+    
 
     #menu3-detail {
         background-color: white;
@@ -126,6 +118,12 @@
         font-size: 28px;
         margin: 10px;
         text-align: center;
+    }
+    
+    li:hover {
+        background-color: whitesmoke;
+        cursor: pointer;
+        color:rgb(221,45,45);
     }
     
 

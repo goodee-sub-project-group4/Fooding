@@ -119,9 +119,8 @@
 	<script>
 		$(function(){
 			$('#title').text("1:1문의");
-			$('#menu3-detail').find('li').eq(2).click();
-            $('#menu3').css("background-color","whitesmoke");
-            $('#menu3').css("color","rgb(221,45,45)");
+			$("#menu3").addClass("active");
+			$("#menu3_3").addClass("active");
 
 
 		})

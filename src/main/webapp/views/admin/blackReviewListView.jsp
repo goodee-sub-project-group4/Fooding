@@ -90,7 +90,7 @@
         padding: 20px;
         padding-bottom: 40px;
         padding-top: 40px;
-        /* display: none; */
+        display: none;
         margin-right: 32px;
     } 
     
@@ -297,24 +297,12 @@
             $('#menu5').css("color","rgb(221,45,45)");
 		})
 
-        /*
+		//답변 펼침효과
         $(function(){
-            $(".list").click(function(){
-                $(this).next().slideToggle();
-            })
-        })
-        */
-
-        $(function(){
-            $('.list').click(function(){
-            const $slide = $(this).next();
-            if($slide.css('display') == 'none'){
-                $(this).siblings('.faqContent').slideUp();
-                $slide.slideDown(); 
-            }else{
-                $slide.slideUp();
-            }
-            });
+			$(".list").click(function(){
+				$(this).parent().siblings("ul").children(".blackContent").slideUp();
+				$(this).next().slideToggle();
+			})    
         });
  
 	</script>
