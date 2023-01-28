@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class AjaxSearchController2
  */
-@WebServlet("/ajaxsearch2.do")
+@WebServlet("/ajaxsearch2.aj")
 public class AjaxSearchController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
