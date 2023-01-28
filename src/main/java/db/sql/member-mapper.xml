@@ -20,7 +20,7 @@
 		  FROM TB_USER
 		 WHERE USER_ID = ?
 		   AND USER_PWD = ?
-		   AND STATUS = 'Y'
+		   AND STATUS = 'Y' || 'A'
 	</entry>
 	
 	<!-- 회원가입 -->
@@ -50,10 +50,42 @@
 			 , ?
 			 , ?
 		     )
-		WHERE USER_PWD
 	</entry>
 	
+	<!-- 아이디 중복체크 -->
+	<entry key="idCheck">
+		SELECT
+			   COUNT(*) "COUNT"
+		  FROM TB_USER
+		 WHERE USER_ID = ? 
+	</entry>
 	
-	
+	<!-- 닉네임 중복체크 -->
+	<entry key="nicknameCheck">
+		SELECT
+		       COUNT(*) "COUNT2"
+		  FROM TB_USER
+		 WHERE NICKNAME = ?
+	</entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </properties>

@@ -42,7 +42,12 @@ public class MemberInsertController extends HttpServlet {
 		String userEmail = request.getParameter("userEmail");
 		String userPhone = request.getParameter("userPhone");
 		String gender = request.getParameter("gender");
-		String birth = request.getParameter("birth");
+		String[] birthArr = request.getParameterValues("birth");
+		
+		String birth = "";
+		if(birthArr != null) {
+			birth = String.join("", birthArr);
+		}
 		
 		Member m = new Member(userId, userPwd, userName, nickname, userEmail, userPhone, gender, birth);
 		

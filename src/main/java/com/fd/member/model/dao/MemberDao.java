@@ -112,7 +112,90 @@ public class MemberDao {
 		
 	}
 	
+	/** 아이디 중복체크
+	 * @author 빛나
+	 * @param conn
+	 * @param checkId
+	 * @return count (중복된 아이디 값의 개수)
+	 */
+	public int idCheck(Connection conn, String checkId) {
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, checkId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
 	
+	}
 	
+	/** 닉네임 중복체크
+	 * @author 빛나
+	 * @param conn
+	 * @param checkNickname
+	 * @return count2 (중복된 닉네임 값의 개수)
+	 */
+	public int nicknameCheck(Connection conn, String checkNickname) {
 
+		int count2 = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("nicknameCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, checkNickname);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count2 = rset.getInt("count2");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count2;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

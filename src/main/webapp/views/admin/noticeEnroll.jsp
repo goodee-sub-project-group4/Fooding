@@ -83,8 +83,8 @@
 			<!-- 컨텐츠 작성부 -->
 			<br><br>
 
-            <form action="" id="enroll-notice" method="post">
-                
+            <form action="<%= contextPath %>/noInsert.ad" id="enroll-notice" method="post" enctype="multipart/form-data">
+                <input type="hidden" value="N" name="boardType">
                 <table>
                     <tr>
                         <th width="70">제목 <span id="required">*</span></th>

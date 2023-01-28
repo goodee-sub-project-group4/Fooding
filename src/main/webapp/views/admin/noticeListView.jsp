@@ -103,15 +103,15 @@
             <form action="">
                 <div class="right">
                     <!--회원/업체-->
-                    <input type="radio" id="member" name="selectNotice" value="M" checked>
+                    <input type="radio" id="member" name="toWhom" value="M" checked>
                     <label for="member">회원</label>&nbsp&nbsp
-                    <input type="radio" id="restaurant" name="selectNotice" value="R">
+                    <input type="radio" id="restaurant" name="toWhom" value="R">
                     <label for="restaurant">업체</label>
-                    &nbsp&nbsp&nbsp&nbsp
+                    &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <!--등록 삭제-->
                     <button type="button" class="btn btn-outline-danger btn-sm" id="deleteNotice">삭제</button>
-                    <a class="btn btn-danger btn-sm" id="insertNotice">등록</a>
+                    <a class="btn btn-danger btn-sm" id="insertNotice" href="<%=contextPath%>/noEnroll.ad">등록</a>
                     <br> <br>
                 </div>
 

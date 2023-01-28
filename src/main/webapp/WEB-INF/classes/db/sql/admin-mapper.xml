@@ -40,8 +40,25 @@
 	    BY NOTICE_NO DESC	 
 </entry>
 
-
-
-
+<!-- 공지사항 등록 -->
+<entry key="insertNotice">
+	INSERT
+	  INTO NOTICE
+	  (
+	  	NOTICE_NO		
+	  , NOTICE_TITLE
+	  , NOTICE_CONTENT	
+	  , USER_NO			<!-- 로그인한회원번호 -->
+	  , TO_WHOM			<!-- 회원U / 업체R -->
+	  )
+	  VALUES
+	  (
+	  	SEQ_NONO.NEXTVAL
+	  , ?
+	  , ?
+	  , ?
+	  , 'U'	<!-- ? 로 설정해서 값 가져오기 -->
+	  )
+</entry>
 
 </properties>
