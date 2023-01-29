@@ -31,9 +31,46 @@
 	</entry>
 	<entry key="updatePwd">
 		UPDATE RESTAURANT
-           SET USER_PWD = ?,
-               STATUS = 'Y'
+           SET USER_PWD = ?
+             , STATUS = 'Y'
          WHERE RES_NO = ?	
-	</entry>	
+	</entry>
+		
+	<entry key="updateHours">
+		UPDATE RESTAURANT
+           SET OPEN = ?
+             , CLOSE = ?
+             , BREAK_S = ?
+             , BREAK_E = ?
+         WHERE RES_NO = ?		
+	</entry>
+	
+	<entry key="selectRest">
+		SELECT
+			   RES_NO
+			 , RES_NAME
+			 , CEO
+			 , PERMIT_NO
+			 , ADDRESS
+			 , D_ADDRESS
+			 , LOCAL_CT
+			 , DLOCAL_CT
+			 , PHONE
+			 , CELLPHONE
+			 , EMAIL
+			 , PARKING
+			 , STATUS
+			 , LONGTITUDE
+			 , LATITUDE
+			 , R_IMG
+			 , OPEN
+			 , CLOSE
+			 , BREAK_S
+			 , BREAK_E
+			 , FOOD_CT
+		 FROM RESTAURANT
+	    WHERE RES_NO=?
+	      AND STATUS = 'Y'		
+	</entry>
 
 </properties>

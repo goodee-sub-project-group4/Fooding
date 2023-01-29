@@ -25,14 +25,14 @@ public class Restaurant {
 	private String open;
 	private String close;
 	private String breakS;
-	private String privateE;
+	private String breakE;
 	private String foodCt;
 	
 	public Restaurant() {}
 	
 	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
 			String localCt, String dLocalCt, String phone, String cellphone, String email, String parking, String status,
-			String longtitude, String latitude, String rImg, String open, String close, String breakS, String privateE,
+			String longtitude, String latitude, String rImg, String open, String close, String breakS, String breakE,
 			String foodCt) {
 		super();
 		this.resNo = resNo;
@@ -54,13 +54,13 @@ public class Restaurant {
 		this.open = open;
 		this.close = close;
 		this.breakS = breakS;
-		this.privateE = privateE;
+		this.breakE = breakE;
 		this.foodCt = foodCt;
 	}
 	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
 			String localCt, String dLocalCt, String phone, String cellphone, String email, String parking,
 			String applyDate, String enrollDate, String modifyDate, String status, String longtitude, String latitude,
-			String rImg, String open, String close, String breakS, String privateE, String foodCt) {
+			String rImg, String open, String close, String breakS, String breakE, String foodCt) {
 		super();
 		this.resNo = resNo;
 		this.resName = resName;
@@ -84,7 +84,7 @@ public class Restaurant {
 		this.open = open;
 		this.close = close;
 		this.breakS = breakS;
-		this.privateE = privateE;
+		this.breakE = breakE;
 		this.foodCt = foodCt;
 	}
 
@@ -264,12 +264,12 @@ public class Restaurant {
 		this.breakS = breakS;
 	}
 
-	public String getPrivateE() {
-		return privateE;
+	public String getBreakE() {
+		return breakE;
 	}
 
-	public void setPrivateE(String privateE) {
-		this.privateE = privateE;
+	public void setBreakE(String breakE) {
+		this.breakE = breakE;
 	}
 
 	public String getFoodCt() {
@@ -287,9 +287,9 @@ public class Restaurant {
 				+ ", phone=" + phone + ", cellphone=" + cellphone + ", email=" + email + ", parking=" + parking
 				+ ", applyDate=" + applyDate + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status="
 				+ status + ", longtitude=" + longtitude + ", latitude=" + latitude + ", rImg=" + rImg + ", open=" + open
-				+ ", close=" + close + ", breakS=" + breakS + ", privateE=" + privateE + ", foodCt=" + foodCt + "]";
+				+ ", close=" + close + ", breakS=" + breakS + ", breakE=" + breakE + ", foodCt=" + foodCt + "]";
 	}
-	
-	
+
+
 
 }

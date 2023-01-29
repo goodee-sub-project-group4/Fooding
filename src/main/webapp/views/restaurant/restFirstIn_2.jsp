@@ -8,7 +8,6 @@
 	<style>
 		#outer2 {
 			width:1200px;
-			position: relative;
 			margin:auto;
 		}		
 		#footer {
@@ -20,45 +19,35 @@
 			color:gray;
 			font-size: 20px;
 		}
-		.menu-box {
-			/* border: 1px solid green; */
-			width:600px;
-			height:220px;
-			position:relative;
+		.content-box {
+			width:350px;
 			margin:auto;
-			margin-top: 40px;
-		}
-		.text-box {
-			display: inline-block;
-			width:320px;
-			height:34px;
 			margin-top:18px;
 		}
-		.text-box>span {
+		.content-box>span { /*글자*/
 			font-size: 20px;
 			font-weight: 600;
 			line-height: 34px;
 			color:rgb(75, 75, 75);
 		}
-		.text-box>input {
-			width: 220px;
+		.content-box>input {
+			width: 120px;
 			height:28px;
 			float: right;
 			font-size: 16px;
 			margin-top: 3px;
 			color: gray;
 		}
-		.photo {
+		
+		.content-box>button { /*다음버튼*/
 			float:right;
-			position:absolute;
-			right:10px;
-			top:10px;
-		}
-		.photo button {
-			margin-top: 10px;
+			margin-left: 10px;
 		}
 		
 	</style>
+	<!-- timepicker CDN (1/2) 24시간 입력용 -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
 </head>
 <body>
 	
@@ -67,36 +56,23 @@
 		<br><br><br><br>
 		<div class="guide">
 			입점을 환영합니다!<br>
-			(2단계/2단계) 메뉴를 하나씩 등록해주세요.
+			(2단계/3단계) 영업시간을 입력해주세요.
 		</div><br>
 
-		<form action="/menuInsert.re" method="post" enctype="multipart/form-data">
-			<div class="menu-box">
-				<div class="text-box">
-					<span name="name1" >메뉴명 </span><span style="color:crimson">* </span>
-					<input type="text" required><br>
-				</div><br>
-				<div class="text-box">
-					<span name="price1">가격 </span><span style="color:crimson">* </span>
-					<input type="text" required><br>
-				</div><br>
-				<div class="text-box">
-					<span name="describe1">설명</span>
-					<input type="text"><br>
-				</div>
-				<div class="photo" align="center">
-					<img src="/Fooding/resources/images/forTest.png" class="rounded" width="200" height="150"><br>
-					<button type="button" class="btn btn-outline-danger" onclick="clickFile(1)">사진등록</button>
-					<div style="display:none"><input type="file" name="file1"></div>
-				</div>
-			</div>
-			
-			<div align="center"><br><br><br><br><br>
-				<button type="button" class="btn btn-outline-danger">메뉴추가</button>
+		<form action="<%=contextPath %>/hours.re" method="get">
+			<div class="content-box">
+				<span>오픈시간</span>
+				<input type="text" placeholder="시간선택" name="open" required><br>
+				<span>마감시간</span>
+				<input type="text" class="timepicker" name="close" placeholder="시간선택" required><br>
+				<span>브레이크타임 시작</span>
+				<input type="text" class="timepicker" name="break-s" placeholder="시간선택"><br>
+				<span>브레이크타임 끝</span>
+				<input type="text" class="timepicker" name="break-e" placeholder="시간선택"><br><br>
+				
 				<button type="submit" class="btn btn-danger">저장</button>
-				<button type="button" class="btn btn-secondary">다음에하기</button>
+				<button type="reset" class="btn btn-outline-secondary">초기화</button>
 			</div>
-			
 		</form>
 		
 		
@@ -109,11 +85,22 @@
 		$(function(){
 			// Head.jsp 내의 요소, #title의 문구를 변경한다.
 			$('#title').text("");
+
+			//입력시간을 24시로 바꾼다
+			$('input[type="text"]').timepicker({
+				timeFormat: 'HH:mm'
+			});
 		})
 
 		function clickFile(num) {
 			$('input[name=file'+num+']').click();
 		}
+		
+		
+
 	</script>
+
+	<!-- timepicker CDN (2/2) 24시간 입력용 -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </body>
 </html>

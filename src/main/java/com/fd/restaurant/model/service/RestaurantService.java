@@ -14,6 +14,7 @@ public class RestaurantService {
 		close(conn);
 		return r;
 	}
+	
 	public int updatePwd(int resNo, String userPwd) {
 		Connection conn = getConnection();
 		int result = new RestaurantDao().updatePwd(conn, resNo, userPwd);
@@ -25,5 +26,21 @@ public class RestaurantService {
 		close(conn);
 		return result;
 	}
+	
+	public Restaurant updateHours(Restaurant r) {
+		Connection conn = getConnection();
+		int result = new RestaurantDao().updateHours(conn, r);
+		Restaurant updateRest = null;
+		if(result>0) {
+			//업데이트 성공시 회원 정보를 다시 조회해온다.
+			commit(conn);
+			updateRest = new RestaurantDao().selectRest(conn, r.getResNo());
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return updateRest;
+	}
+	
 
 }

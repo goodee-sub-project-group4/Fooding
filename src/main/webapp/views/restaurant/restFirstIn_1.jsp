@@ -23,24 +23,25 @@
 			font-size: 20px;
 		}
 		#password-box {
-			width:420px;
+			width:350px;
 			margin:auto;
-			margin-top: 30px;;
+			margin-top: 30px;
 		}
 		#password-box input{
 			float:right;
-			width:250px;
-
+			width:180px;
 		}
 		#password-box button{
 			float:right;
-
+			margin-left: 10px;
 		}
 		#password-box span {
-			font-size: 22px;
+			font-size: 20px;
 			font-weight: 600;
 			color:rgb(81, 81, 81);
-
+		}
+		#spacing { /*간격띄우기용*/
+			height:6px;
 		}
 		
 	</style>
@@ -52,16 +53,19 @@
 		<br><br><br><br>
 		<div class="guide">
 			입점을 환영합니다!<br>
-			(1단계/2단계) 비밀번호를 설정해주세요.
+			(1단계/3단계) 비밀번호를 설정해주세요.
 		</div><br>
 		<div id="password-box">
 			<form action="<%=contextPath%>/pwd.re" method="post">
 				<span>비밀번호</span>
 				<input type="password" name="userPwd" id="userPwd"><br>
+				<div id="spacing"></div>
 				<span>비밀번호 확인</span>
 				<input type="password" name="checkPwd" id="checkPwd" onfocusout="validate();">
 				<br clear="both"><br>
-				<button class="btn btn-danger">확인</button>
+
+				<button class="btn btn-danger">저장</button>
+				<button type="reset" class="btn btn-outline-secondary">초기화</button>
 			</form>			
 		</div>
 		
