@@ -8,7 +8,6 @@
 	<style>
 		#outer2 {
 			width:1200px;
-			position: relative;
 			margin:auto;
 		}		
 		#footer {
@@ -21,12 +20,13 @@
 			font-size: 20px;
 		}
 		.menu-box {
-			/* border: 1px solid green; */
-			width:600px;
-			height:220px;
+			width:580px;
+			height:250px;
 			position:relative;
 			margin:auto;
-			margin-top: 40px;
+			margin-bottom: 20px;
+			padding:15px;
+
 		}
 		.text-box {
 			display: inline-block;
@@ -41,7 +41,7 @@
 			color:rgb(75, 75, 75);
 		}
 		.text-box>input {
-			width: 220px;
+			width: 200px;
 			height:28px;
 			float: right;
 			font-size: 16px;
@@ -52,11 +52,15 @@
 			float:right;
 			position:absolute;
 			right:10px;
-			top:10px;
+			top:10px; 
 		}
 		.photo button {
 			margin-top: 10px;
 		}
+		#menu-outer {
+			height:260px;
+		}
+		
 		
 	</style>
 </head>
@@ -68,37 +72,43 @@
 		<div class="guide">
 			입점을 환영합니다!<br>
 			(3단계/3단계) 메뉴를 하나씩 등록해주세요.
-		</div><br>
+		</div><br><br>
 
-		<form action="/menuInsert.re" method="post" enctype="multipart/form-data">
-			<div class="menu-box">
-				<div class="text-box">
-					<span name="name1" >메뉴명 </span><span style="color:crimson">* </span>
-					<input type="text" required><br>
-				</div><br>
-				<div class="text-box">
-					<span name="price1">가격 </span><span style="color:crimson">* </span>
-					<input type="text" required><br>
-				</div><br>
-				<div class="text-box">
-					<span name="describe1">설명</span>
-					<input type="text"><br>
-				</div>
-				<div class="photo" align="center">
-					<img src="/Fooding/resources/images/forTest.png" class="rounded" width="200" height="150"><br>
-					<button type="button" class="btn btn-outline-danger" onclick="clickFile(1)">사진등록</button>
-					<div style="display:none"><input type="file" name="file1"></div>
-				</div>
-			</div>
+		<form action="/menuInsert.re" method="get" enctype="multipart/form-data">
 			
-			<div align="center"><br><br><br><br><br>
-				<button type="button" class="btn btn-outline-danger">메뉴추가</button>
+
+			<div id="menu-outer">
+				
+				<div id="firstone" class="menu-box">
+					<div class="text-box">
+						<span>메뉴명 </span><span style="color:crimson">* </span>
+						<input name="name0" type="text" required><br>
+					</div><br>
+					<div class="text-box">
+						<span>가격 </span><span style="color:crimson">* </span>
+						<input name="price0" type="text" required><br>
+					</div><br>
+					<div class="text-box">
+						<span>설명</span>
+						<input type="text" name="describe0"><br>
+					</div>
+					<div class="photo" align="center">
+						<img id="image0" src="/Fooding/resources/images/forTest.png" class="rounded" width="180" height="180"><br>
+						<button type="button" class="btn btn-outline-danger">사진등록</button>
+						<div style="display:none"><input type="file" name="file0"></div>
+					</div>
+					<br clear="both"><br><br><br><br>
+				</div><br><br>
+
+			</div>
+
+			<div align="center"><br><br>
+				<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
 				<button type="submit" class="btn btn-danger">저장</button>
 				<button type="button" class="btn btn-secondary">다음에하기</button>
 			</div>
 			
 		</form>
-		
 		
 	</div>
 	<br><br><br><br><br><br><br><br><br><br><br>
@@ -111,9 +121,56 @@
 			$('#title').text("");
 		})
 
-		function clickFile(num) {
-			$('input[name=file'+num+']').click();
+		//파일첨부 버튼 숨기고 button에 클릭효과 주기
+		$('#menu-outer').on('click', 'button', function(){
+			$(this).next().children().click();
+		})
+
+		//파일첨부 시 미리보기 띄우기
+		$('#menu-outer').on('change','input[type=file]', function(){
+			//순번을 저장
+			let num = $(this).attr('name').charAt(4);
+			//이벤트 객체를 저장
+			const inputFile = event.target;
+			//파일이 선택된경우에만 미리보기 실행
+			if(inputFile.files.length == 1 ) {				
+				const reader = new FileReader();
+				reader.readAsDataURL(inputFile.files[0]);
+				reader.onload = function(e){
+					console.log(e.target.result);
+					$('#image'+num).attr('src', e.target.result);
+				}
+			}
+		})
+
+		//메뉴추가버튼 클릭시 메뉴div를 추가해주는 메소드
+		let count=1;
+		function addMenu() {
+			$('#firstone').append(
+			$('<div class="menu-box new-box" style="right:16px">'+
+				'<div class="text-box">'+
+					'<span>메뉴명</span><span style="color:crimson">* </span>'+
+					'<input type="text" name="name'+count+'" required><br>'+
+				'</div><br>'+
+				'<div class="text-box">'+
+					'<span>가격 </span><span style="color:crimson">* </span>'+
+					'<input type="text" name="price'+count+'" required><br>'+
+				'</div><br>'+
+				'<div class="text-box">'+
+					'<span>설명</span>'+
+					'<input type="text" name="describe'+count+'"><br>'+
+				'</div>'+
+				'<div class="photo" align="center">'+
+					'<img id="image'+count+'" src="/Fooding/resources/images/forTest.png" class="rounded" width="180" height="180"><br>'+
+					'<button type="button" class="btn btn-outline-danger">사진등록</button>'+
+					'<div style="display:none"><input type="file" name="file'+count+'"></div>'+
+				'</div>'+
+			'</div>')
+			);
+			//메뉴 추가될때마다 높이 늘리기 + count늘리기
+			$('#menu-outer').css("height", 260*(1+count++));
 		}
+		
 	</script>
 </body>
 </html>
