@@ -3,6 +3,7 @@
 <%@ page import="com.fd.member.model.vo.*" %>
 <%
 	String contextPath = request.getContextPath();
+    String alertMsg = (String)session.getAttribute("alertMsg");
 	Member loginAdmin =(Member)session.getAttribute("loginAdmin");
 %>
 <!DOCTYPE html>
@@ -12,20 +13,15 @@
 
 <title>Insert title here</title>
 
-<!-- 부트스트랩 사용하기 -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
+<title>Fooding</title>
 <!--제이쿼리-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> -->
-<!-- 부트스트랩 Badges 효과 위해 바꾼 구문-->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">  -->
-<!-- 부트스트랩 5버전 -->
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<!-- 부트스트랩 5버전 (4버전 오류로인한 불가피한 선택) -->
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
 <!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> 
 
 <style>
     #outer {
@@ -57,14 +53,14 @@
         width:500px
     }
     /* div3 = 로그아웃, 프로필 영역 */
-    #div3 a{
-        text-decoration:none; color:black; font-size:12px;
-    }
     #div3 span {
         margin:5px;
-    }        
+    }   
+    #div3 span:hover {
+    	cursor:pointer;
+    }   
     #div3 h4 { 
-        width : 120px;
+        width : 100px;
         height : 50px;
         display: inline-block;
         margin-top: 20px;
@@ -79,18 +75,24 @@
 </style>
 </head>
 <body>
+	<% if(alertMsg != null) { %>
+		<script>
+			alert('<%=alertMsg%>');
+			<% session.removeAttribute("alertMsg");%>
+		</script>
+	<% } %>
     <div id="outer" align="center">
         <div id="div1">
-            <img src="resources/images/logo.png" width="190">
+            <img src="/Fooding/resources/images/logo.png" width="190">
         </div>
         <div id="div2">
-            <h3 id="title" width="500">페이지마다 수정되는 타이틀</h3>
+            <h3 id="title" width="500"><!--페이지마다 수정되는 타이틀--></h3>
         </div>
         <div id="div3">
-            <a href="<%=request.getContextPath()%>/logout.re.ad">로그아웃</a>
+            <span onclick="location.href='/Fooding/logout.re.ad'">로그아웃</span>
             <span> | </span>
             <h4><%=loginAdmin.getUserName()%> 님</h4>
-            <img src="resources/images/userIcon.png" width="50">
+            <img src="/Fooding/resources/images/userIcon.png" width="50">
         </div>
         <hr>
     </div>

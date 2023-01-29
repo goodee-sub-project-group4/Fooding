@@ -5,14 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<!-- Popper JS -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <style>
        
     #outer2 {
@@ -291,19 +283,17 @@
 	
 	<script>
 		$(function(){
+            // Head.jsp 내의 요소, #title의 문구를 변경
 			$('#title').text("리뷰신고");
-			$('#menu5-detail-1').click();
-            $('#menu5').css("background-color","whitesmoke");
-            $('#menu5').css("color","rgb(221,45,45)");
-		})
+			$("#menu5").addClass("active");
+			$("#menu5-detail-1").addClass("active");
 
-		//답변 펼침효과
-        $(function(){
-			$(".list").click(function(){
+            // 답변 펼침효과
+            $(".list").click(function(){
 				$(this).parent().siblings("ul").children(".blackContent").slideUp();
 				$(this).next().slideToggle();
-			})    
-        });
+			}) 
+		})
  
 	</script>
 </body>

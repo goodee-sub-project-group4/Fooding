@@ -5,14 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<!-- Popper JS -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <style>
        
     #outer2 {
@@ -276,11 +268,13 @@
 	
 	<script>
 		$(function(){
-			$('#title').text("1 : 1 문의");
-			$('#menu4-detail-3').click();
-            $('#menu4').css("background-color","whitesmoke");
-            $('#menu4').css("color","rgb(221,45,45)");
-		})
+               
+               // Head.jsp 내의 요소, #title의 문구를 변경
+               $('#title').text("1 : 1 문의");
+               $("#menu4").addClass("active");
+               $("#menu4-detail-3").addClass("active");
+               
+        })
         
 	</script>
 </body>

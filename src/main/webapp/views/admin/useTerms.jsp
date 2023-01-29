@@ -111,10 +111,12 @@
 	
 	<script>
 		$(function(){
+            
+            // Head.jsp 내의 요소, #title의 문구를 변경
 			$('#title').text("이용약관");
-			$('#menu3-detail-2').click();
-            $('#menu3').css("background-color","whitesmoke");
-            $('#menu3').css("color","rgb(221,45,45)");
+			$("#menu3").addClass("active");
+			$("#menu3-detail-2").addClass("active");
+            
 		})
 
         

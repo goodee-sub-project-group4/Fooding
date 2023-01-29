@@ -5,13 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<!-- Popper JS -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
        
     #outer2 {
@@ -698,24 +691,14 @@
 		
 	
 	<script>
-		$(function(){
-			$('#title').text("업체조회");
-			$('#menu2').click();
+
+        $(function(){
+			$('#title').text("업체 조회");
+			$("#menu2").addClass("active");
+            
+            $("td").addClass("align-middle");
 		})
 
-        $(function(){
-            $("#restId").mouseover(function(){
-                $(this).css("color", "rgb(221,45,45)");
-                $(this).css("cursor", "pointer");
-            })
-            $("#restId").mouseout(function(){
-                $(this).css("color", "");
-            })
-        })
-
-        $(function(){
-            $("td").addClass("align-middle");
-        })
 
 
 	</script>
