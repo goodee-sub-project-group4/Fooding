@@ -128,9 +128,10 @@
         .fc-day,.fc-resource-cell,.fc-content-col{min-width:20px; width:48px;}
 
         /* 예약시간 */
-        .am .pm{margin-bottom: 10px;}
+        .am, .pm{margin-bottom: 10px;}
+        #am-box, #pm-box{padding-left: 15px;}
         .book-time{width: 100%; height: 50px; font-size: 30px;}
-        .book-time-btn{width: 75px; height: 50px; margin-bottom: 5px; margin-right: 5px;}
+        .book-time-btn{width: 75px; height: 40px; margin-bottom: 7px; margin-right: 5px;}
 
         /* 메뉴선택 창 */
         .menu-select{width: 600px; background-color: rgba(128, 128, 128, 0.913); padding: 15px; position: absolute; left: 150px; top: 550px; display: none;}
@@ -396,12 +397,12 @@
                     <div class="menu-slide" id="book-time">시간 선택</div>
                     <div class="slide-detail">
                         <div class="am">&nbsp;&nbsp;오전</div>
-                        <div style="margin: auto;">
-                        </div>
-                        <br><br><br>
+                        <div id="am-box"></div>
+                        <br>
                         <div class="pm">&nbsp;&nbsp;오후</div>
-                        <div style="margin: auto;">
-                        </div>
+                        <div id="pm-box"></div>
+                        <div style="float: right; margin-left: 20px; font-weight: 600; color: gray;"><div style="width: 15px; height: 15px; margin-top: 4.5px; margin-right: 5px; border: 2px solid gray; border-radius: 3px; float: left;"></div>예약불가</div>
+                        <div style="float: right; font-weight: 600; color: crimson;"><div style="width: 15px; height: 15px; margin-top: 4.5px; margin-right: 5px; border: 2px solid crimson; border-radius: 3px; float: left;"></div>예약가능</div>
                     </div>
                     <div class="book-category" id="book-menu">메뉴 선택</div>
                     <form class="menu-fixed" >
@@ -591,56 +592,62 @@
             // // 시간 선택 버튼 생성
             $(function(){
                 $('#book-time').click(function(){
-                    const open = (8*100) + ((30/30)*50);
-                    const close = (22*100) + ((0/30)*50);
+                    const open = (5*100) + ((30/30)*50);
+                    const close = (22*100) + ((30/30)*50);
                     const breakS = (13*100) + ((0/30)*50);
                     const breadE = (14*100) + ((30/30)*50);
-                    console.log($('.am').next().text());
-                    if($('.am').next().text() == ""){
+                    if($('.am').next().children().length == 0){
                         if(open < 1200){
-                            for(let i=0; i<12-8; i++){
-                                console.log(open)
-                                $('.am').next().append(
-                                    '<button class="book-time-btn">' + parseInt(8 + i) + ':' + ((open%100)/50)*30 + '</button>'
+                            if(open%100 == 0){
+                                for(let i=0; i<1200-open; i+=50){
+                                    $('.am').next().append(
+                                        '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(open + i)/100) + ':' + ('00' + ((open + i)%100/50*30)).slice(-2) + '</button>' 
+                                    );
+                                }
+                            }else{
+                                for(let i=0; i<1200-open; i+=50){
+                                    $('.am').next().append(
+                                        '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(open + i)/100) + ':' + ('00' + ((open + i)%100/50*30)).slice(-2) + '</button>' 
+                                    );
+                                }
+                            }
+                        }
+                    }
+                    if($('.pm').next().children().length == 0){
+                        if(close%100 == 0){
+                            for(let i=1200; i<close; i+=50){
+                                $('.pm').next().append(
+                                    '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(i)/100) + ':' + ('00' + ((i)%100/50*30)).slice(-2) + '</button>' 
+                                );
+                            }
+                        }else{
+                            for(let i=1200; i<close; i+=50){
+                                $('.pm').next().append(
+                                    '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(i)/100) + ':' + ('00' + ((i)%100/50*30)).slice(-2) + '</button>' 
                                 );
                             }
                         }
                     }
                 })
             });
-               
-            //     if(close > dt){
 
-            //     }
-            //     // 영업시작 < 12시 < 영업종료
-            //     if(s < daytime && dt < e){
-            //         // 오전 00:00 ~ 11:30
-            //         for(let i=0; i<(dt-s); i++){
-            //             $('.am').append(
-            //                 '<div class="book-time-btn">' + s + ':' + (i%2)*30 + '</div>'
-            //             );
-            //         };
-            //         // 오후 12:00 ~ 23:30
-            //         for(let i=0; i<(e-dt); i++){
-            //             $('.pm').append(
-            //                 '<div class="book-time-btn">' + x + ':' + (i%2)*30 + '</div>'
-            //             );
-            //         };
-            //     // 12시 <= 영업시작
-            //     }else if(dt <= s){
-            //         for(let i=0; i<(e-s); i++){
-            //             $('.pm').append(
-            //                 '<div class="book-time-btn">' + x + ':' + (i%2)*30 + '</div>'
-            //             );
-            //         };
-            //     // 영업종료 <= 12시
-            //     }else{
-            //         for(let i=0; i<(e-s); i++){
-            //             $('.am').append(
-            //                 '<div class="book-time-btn">' + x + ':' + (i%2)*30 + '</div>'
-            //             );
-            //         };
-            //     };
+            // 시간 선택 버튼 효과
+            $(document).on('click', '.book-time-btn.btn.btn-outline-danger', function(e){
+                $('#am-box, #pm-box').children().each(function(){
+                    if($(this).prop('name')){
+                        $(this).css({'background-color':'', 'color':''});
+                        $(this).removeAttr('name');
+                        $(this).removeAttr('value');
+                    }
+                })
+                
+                const bookTimeValue = $(this).text();
+                $(this).css({'background-color':'crimson', 'color':'white'});
+                $(this).attr('name', 'bookTime');
+                $(this).attr('value', bookTimeValue);
+                
+            });
+            
 
             // 메뉴 추가
             let sum = 0;
