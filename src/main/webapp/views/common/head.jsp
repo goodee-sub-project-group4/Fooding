@@ -98,7 +98,7 @@
                     <div id="header3-1">
                         <span><a href="<%= contextPath %>/enrollForm.me">회원가입</a></span>
                         <span>&nbsp;|&nbsp;</span>
-                        <span><a href="<%= contextPath %>/loginForm.me">로그인</a></span>
+                        <span><a href="<%= request.getContextPath() %>/loginForm.me">로그인</a></span>
                         <span>&nbsp;|&nbsp;</span>
                         <span>
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
