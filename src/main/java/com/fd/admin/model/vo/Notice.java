@@ -33,8 +33,7 @@ public class Notice {
 		this.status = status;
 	}
 	
-	
-	
+	// 공지사항 등록..
 	public Notice(int noticeNo, String userNo, String noticeTitle, String noticeContent, Date createDate,
 			Date modifyDate, int count, String toWhom, String status, String boardType) {
 		super();
@@ -60,6 +59,16 @@ public class Notice {
 		this.createDate = createDate;
 	}
 	
+	
+	// 공지사항 게시글 정보 조회
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String userNo, Date createDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.userNo = userNo;
+		this.createDate = createDate;
+	}
 
 	public int getNoticeNo() {
 		return noticeNo;

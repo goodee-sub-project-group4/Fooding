@@ -28,6 +28,16 @@ public class Attachment {
 		this.status = status;
 		BoardType = boardType;
 	}
+	
+	
+	// 공지사항 첨부파일 정보 조회할 때 사용했음
+	public Attachment(int fileNo, String originName, String changeName, String filePath) {
+		super();
+		this.fileNo = fileNo;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.filePath = filePath;
+	}
 
 	public int getFileNo() {
 		return fileNo;

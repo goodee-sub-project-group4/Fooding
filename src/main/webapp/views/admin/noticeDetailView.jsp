@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "com.fd.admin.model.vo.Notice, com.fd.common.model.vo.Attachment" %>
+<%
+	Notice n = (Notice)request.getAttribute("n");	// 글번호, 제목, 내용, 작성자아이디, 작성이 담겨있음
+	Attachment at = (Attachment)request.getAttribute("at");	// 첨부파일 없을 경우 null, 있을 경우 파일번호, 원본명, 실제저장된파일명, 저장경로 담겨있음
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,27 +69,33 @@
                 <table class="table">
                     <tr>
                         <th>제목</th>
-                        <td>푸딩 공지사항</td>
+                        <td><%= n.getNoticeTitle() %></td>
                     </tr>
                     <tr>
                         <th width="70">작성자</th>
-                        <td>푸딩 공지사항</td>
+                        <td><%= n.getUserNo() %></td>
                     </tr>
                     <tr>
                         <th width="70">작성일</th>
-                        <td>2023.01.22</td>
+                        <td><%= n.getCreateDate() %></td>
                     </tr>     
                     <tr>
                         <td colspan="2">
                             <br>
                             <p>
-                                푸딩공지사항 
+                                <%= n.getNoticeContent() %> 
                             </p>
                         </td>
                     </tr>
                     <tr>
                         <td>첨부파일</td>
-                        <td><a href="<%= contextPath %>/<%=at.getFilePath() + at.getChangeName() %>"><%= at.getOriginName() %></a></td>
+                        <td>
+               				<% if(at == null) { %>
+                     			첨부파일이 없습니다.
+                     		<% }else { %>
+                     			<a href="<%= contextPath %>/<%=at.getFilePath() + at.getChangeName() %>"><%= at.getOriginName() %></a>
+                     		<% } %>
+                        </td>
                     </tr>
                 </table>
 
@@ -94,7 +105,7 @@
             
             <div align="center">
                 <a href="" class="btn btn-outline-danger">목록가기</a>&nbsp&nbsp
-                <a href="" class="btn btn-danger">수정하기</a>&nbsp&nbsp
+                <a href="<%= contextPath%>/noUpdate.ad?no=<%=n.getNoticeNo()%>" class="btn btn-danger">수정하기</a>&nbsp&nbsp
                 <a href="" class="btn btn-danger">삭제하기</a>
             </div>
             <br><br><br>

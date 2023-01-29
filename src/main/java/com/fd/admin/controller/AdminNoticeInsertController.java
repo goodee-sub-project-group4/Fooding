@@ -51,8 +51,10 @@ public class AdminNoticeInsertController extends HttpServlet {
 			
 			String noticeTitle = multiRequest.getParameter("title");
 			String noticeContent = multiRequest.getParameter("content");
+			
 			HttpSession session = request.getSession();
 			int userNo = ((Member)session.getAttribute("loginAdmin")).getUserNo();
+			
 //			String toWhom = multiRequest.getParameter("toWhom");
 			String boardType = multiRequest.getParameter("boardType");	// boardType 숨겨서 담을 예정
 			
@@ -68,7 +70,8 @@ public class AdminNoticeInsertController extends HttpServlet {
 			Attachment at = null;
 			if(multiRequest.getOriginalFileName("upfile") != null) {
 				at = new Attachment();
-				at.setOriginName(multiRequest.getFilesystemName("upfile"));
+				at.setOriginName(multiRequest.getOriginalFileName("upfile"));
+				at.setChangeName(multiRequest.getFilesystemName("upfile"));
 				at.setFilePath("resources/notice_upfiles/");
 			}
 			

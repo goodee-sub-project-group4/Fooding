@@ -33,13 +33,14 @@ public class AdminNoticeDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("no"));
+		
 		AdminService nService = new AdminService();
 		
-		int result = nService.increaseCount(noticeNo);
+		int result = nService.increseCountNotice(noticeNo);
 		if(result>0) {
 			Notice n = nService.selectNotice(noticeNo);
-			Attachment at = nService.selectAttachment(noticeNo);
-				// 마저 해야됨
+			Attachment at = nService.selectNoticeAttachment(noticeNo);
+
 			request.setAttribute("n", n);
 			request.setAttribute("at", at);
 			request.getRequestDispatcher("views/admin/noticeDetailView.jsp").forward(request, response);

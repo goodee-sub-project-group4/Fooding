@@ -2,24 +2,25 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <entry key="insertAttachment">
-	INTO ATTACHMENT
-	(
-	  FILE_NO
-	, REF_BNO
-	, ORIGIN_NAME
-	, CHANGE_NAME
-	, FILE_PATH
-	, BOARD_TYPE
-	)
-	VALUES
-	(
-	  SEQ_FNO.NEXTVAL
-	, REF_BNO.CURRVAL
-	, ?		<!-- 첨부파일의 원본명 -->
-	, ?		<!-- 첨부파일의 실제 업로드된 파일명 -->
-	, ?		<!-- 저장경로 -->
-	, ?		<!-- 공지사항 N / 리뷰 R / 1:1문의 Q -->
-	)
+	INSERT
+	  INTO ATTACHMENT
+	  (
+	    FILE_NO
+	  , REF_BNO
+	  , ORIGIN_NAME
+	  , CHANGE_NAME
+	  , FILE_PATH
+	  , BOARD_TYPE
+	  )
+	  VALUES
+	  (
+	    SEQ_ATNO.NEXTVAL	<!-- 시퀀스 확실 X -->
+	  , REF_BNO.CURRVAL
+	  , ?		<!-- 첨부파일의 원본명 -->
+	  , ?		<!-- 첨부파일의 실제 업로드된 파일명 -->
+	  , ?		<!-- 저장경로 -->
+	  , ?		<!-- 공지사항 N / 리뷰 R / 1:1문의 Q -->
+	  )
 </entry>
 
 </properties>

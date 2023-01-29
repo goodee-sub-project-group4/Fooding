@@ -32,9 +32,11 @@ public class AdminNoticeListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		ArrayList<Notice> list = new AdminService().selectNoticeListU();
+		ArrayList<Notice> list1 = new AdminService().selectNoticeListU();
+		ArrayList<Notice> list2 = new AdminService().selectNoticeListR();
 		
-		request.setAttribute("list", list);
+		request.setAttribute("list1", list1);
+		request.setAttribute("list2", list2);
 		request.getRequestDispatcher("views/admin/noticeListView.jsp").forward(request, response);
 	}
 

@@ -2,13 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Notice" %>
 <% 
-   ArrayList<Notice> list = (ArrayList)request.getAttribute("list");
+   ArrayList<Notice> list1 = (ArrayList)request.getAttribute("list1");
+   ArrayList<Notice> list2 = (ArrayList)request.getAttribute("list2");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
        
     #outer2 {
@@ -77,7 +86,15 @@
     .pagination a{
         color:rgb(221,45,45);
     }
+
+    .restList{
+        display: none;
+    }
     
+    /*리스트 호버*/
+    .list-area>tbody>tr:hover{
+    	cursor:pointer;
+    }
     
     
 </style>
@@ -93,11 +110,12 @@
 			<!-- 컨텐츠 작성부 -->
             <br><br>
             <form action="">
+
                 <div class="right">
                     <!--회원/업체-->
-                    <input type="radio" id="member" name="toWhom" value="M" checked>
+                    <input type="radio" id="member" name="toWhom" value="U" checked onchange="listDisplay()">
                     <label for="member">회원</label>&nbsp&nbsp
-                    <input type="radio" id="restaurant" name="toWhom" value="R">
+                    <input type="radio" id="restaurant" name="toWhom" value="R" onchange="listDisplay()">
                     <label for="restaurant">업체</label>
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -108,7 +126,7 @@
                 </div>
 
                 <!--공지사항 표-->
-                <table class="table">
+                <table class="table list-area">
                     <thead>
                         <tr>
                             <th><input type="checkbox"></th>
@@ -120,18 +138,32 @@
                         </tr>
                     </thead>
                     <tbody>
-	                    <% for(Notice n : list) {%>
-                        <tr>
+    
+	                    <% for(Notice n1 : list1) {%>
+                        <tr class="memberList">
                             <td><input type="checkbox"></td>
-                            <td><%= n.getNoticeNo() %></td>
-                            <td><%= n.getNoticeTitle() %></td>
-                            <td><%= n.getUserNo() %></td>
-                            <td><%= n.getCount() %></td>
-                            <td><%= n.getCreateDate() %></td>
+                            <td><%= n1.getNoticeNo() %></td>
+                            <td><%= n1.getNoticeTitle() %></td>
+                            <td><%= n1.getUserNo() %></td>
+                            <td><%= n1.getCount() %></td>
+                            <td><%= n1.getCreateDate() %></td>
                         </tr>
-	             		<% } %>       
+	             		<% } %>   
+
+	                    <% for(Notice n2 : list2) {%>
+                        <tr class="restList">
+                            <td><input type="checkbox"></td>
+                            <td><%= n2.getNoticeNo() %></td>
+                            <td><%= n2.getNoticeTitle() %></td>
+                            <td><%= n2.getUserNo() %></td>
+                            <td><%= n2.getCount() %></td>
+                            <td><%= n2.getCreateDate() %></td>
+                        </tr>
+	             		<% } %>   
+	     
                     </tbody>	
                 </table>
+            
             </form>
             
             
@@ -147,25 +179,37 @@
             </ul> 
             <br><br><br>
 
-
-
-            
-
-
-            
-			
 		</div>
 		
 	
 	<script>
 		$(function(){
-
-            // Head.jsp 내의 요소, #title의 문구를 변경
+			// Head.jsp 내의 요소, #title의 문구를 변경
 			$('#title').text("공지사항");
 			$("#menu4").addClass("active");
-			$("#menu4-detail-1").addClass("active");
-            
+			$("#menu4-detail-1").addClass("active");       
 		})
+		
+		// 라디오버튼 클릭시 회원/업체 데이터 받아오기
+		function listDisplay(){
+			if($('input:radio[id=member]').is(':checked')){
+                $(".memberList").show();
+                $(".restList").hide();
+            }
+            if($('input:radio[id=restaurant]').is(':checked')){
+                $(".restList").show();
+                $(".memberList").hide();
+            }
+		}
+
+        // 쿼리스트링으로 글번호 데이터 넘기기
+        
+        $(function(){
+            $(".list-area>tbody>tr").click(function(){
+                location.href = '<%=contextPath%>/noDetail.ad?no=' + $(this).children().eq(1).text();
+            })
+        })
+
 
 	</script>
 </body>

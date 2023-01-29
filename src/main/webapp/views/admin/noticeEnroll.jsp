@@ -94,9 +94,9 @@
                     </tr>
                     <tr><td><br></td></tr>
                     <tr>
-                        <th>이미지</th>
+                        <th>첨부파일</th>
                         <td id="noticeImg">
-                            <input type="file">
+                            <input type="file" name="upfile">
                         </td>
                     </tr>
                 </table>
@@ -104,7 +104,7 @@
                 <br><br>
                 <div align="center">
                     <button type="submit" class="btn btn-danger">등록하기</button>&nbsp&nbsp
-                    <button type="rset" class="btn btn-outline-danger">취소하기</button>
+                    <button type="reset" class="btn btn-outline-danger">취소하기</button>
                 </div>
 
             </form>

@@ -65,6 +65,7 @@ public class AdminDao {
 		return a;
 	}
 
+	
 	/**회원 공지사항 목록 조회
 	 * @param conn
 	 * @return
@@ -95,7 +96,39 @@ public class AdminDao {
 		return list;
 	}
 
-	/**공지사항 등록(제목, 내용, 작성자)
+	/**업체 공지사항 목록 조회
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Notice> selectNoticeListR(Connection conn) {
+		// select문 => ResultSet(여러행)
+		ArrayList<Notice> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNoticeListR");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Notice(rset.getInt("notice_no"),
+									rset.getString("notice_title"),
+									rset.getString("user_name"),
+									rset.getInt("count"),
+									rset.getDate("create_date")));
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
+	//공지사항 등록
+	/**1.회원 공지사항 등록(제목, 내용, 작성자)
 	 * @param conn
 	 * @param n
 	 * @return
@@ -119,21 +152,20 @@ public class AdminDao {
 		return result;
 	}
 
-	/**회원 공지사항 등록(첨부파일)
+	/**2.회원 공지사항 등록(첨부파일)
 	 * @param conn
 	 * @param at
 	 * @return
 	 */
-	public int insertAttachment(Connection conn, Attachment at) {
+	public int insertNoticeAttachment(Connection conn, Attachment at) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertAttachment");
+		String sql = prop.getProperty("insertNoticeAttachment");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, at.getOriginName());
 			pstmt.setString(2, at.getChangeName());
 			pstmt.setString(3, at.getFilePath());
-			pstmt.setString(4, at.getBoardType());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -142,6 +174,89 @@ public class AdminDao {
 		}
 		
 		return result;
+	}
+	
+	
+	// 공지사항 상세 조회
+	/**1.공지사항 조회수 증가
+	 * @param conn
+	 * @param noticeNo
+	 * @return
+	 */
+	public int increseCountNotice(Connection conn, int noticeNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increseCountNotice");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/**2.공지사항 게시글 정보 조회
+	 * @param conn
+	 * @param noticeNo
+	 * @return
+	 */
+	public Notice selectNotice(Connection conn, int noticeNo) {
+		Notice n = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNotice");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				n = new Notice(rset.getInt("notice_no")
+							 , rset.getString("notice_title")
+							 , rset.getString("notice_content")
+							 , rset.getString("user_name")
+							 , rset.getDate("create_date"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return n;
+	}
+
+	/**3. 공지사항 첨부파일 정보 조회
+	 * @param conn
+	 * @param noticeNo
+	 * @return
+	 */
+	public Attachment selectNoticeAttachment(Connection conn, int noticeNo) {
+		Attachment at = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNoticeAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				at = new Attachment(rset.getInt("file_no")
+								  , rset.getString("origin_name")
+								  , rset.getString("change_name")
+								  , rset.getString("file_path"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return at;
 	}
 
 	
