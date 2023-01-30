@@ -74,7 +74,7 @@
         height: 33px;
     }
     /*등록 버튼*/
-    #insertNotice{
+    #insertNoticeU, #insertNoticeR{
         float: right;
         font-size: 15px;
         margin-right: 5px;
@@ -82,13 +82,19 @@
         height: 33px;
     }
 
+    /*업체 공지사항 처음엔 안보이게*/
+    .restList{
+        display: none;
+    }
+
+    /*업체 등록버튼 처음엔 안보이게*/
+    #insertNoticeR{
+        display:none;
+    }
+
     /*페이징바*/
     .pagination a{
         color:rgb(221,45,45);
-    }
-
-    .restList{
-        display: none;
     }
     
     /*리스트 호버*/
@@ -121,7 +127,9 @@
 
                     <!--등록 삭제-->
                     <button type="button" class="btn btn-outline-danger btn-sm" id="deleteNotice">삭제</button>
-                    <a class="btn btn-danger btn-sm" id="insertNotice" href="<%=contextPath%>/noEnroll.ad">등록</a>
+                    <a class="btn btn-danger btn-sm" id="insertNoticeU" href="<%=contextPath%>/noEnroll.ad">등록</a>
+                    <a class="btn btn-danger btn-sm" id="insertNoticeR" href="<%=contextPath%>/noEnroll.ad">등록</a>
+                    
                     <br> <br>
                 </div>
 
@@ -195,10 +203,14 @@
 			if($('input:radio[id=member]').is(':checked')){
                 $(".memberList").show();
                 $(".restList").hide();
+                $("#insertNoticeU").show();
+                $("#insertNoticeR").hide();
             }
             if($('input:radio[id=restaurant]').is(':checked')){
                 $(".restList").show();
                 $(".memberList").hide();
+                $("#insertNoticeR").show();
+                $("#insertNoticeU").hide();
             }
 		}
 
