@@ -1,16 +1,19 @@
 package com.fd.search.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fd.search.model.service.SearchService;
+
 /**
  * Servlet implementation class SearchController
  */
-@WebServlet("/search.do")
+@WebServlet("/search.res")
 public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +29,10 @@ public class SearchController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/search/search.jsp").forward(request, response);
+		
+		// 응답페이지 (views/search/search.jsp); 
+		request.getRequestDispatcher("views/search/search.jsp").forward(request, response); 
+	
 	}
 
 	/**
