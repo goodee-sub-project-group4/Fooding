@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- 지도 API -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	694ae779a7a7935c84a1e22edd5c5d87"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=694ae779a7a7935c84a1e22edd5c5d87"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=694ae779a7a7935c84a1e22edd5c5d87&libraries=services"></script>
+
     <!-- 달력 API -->
     <link href='resources/fullcalendar/main.css' rel='stylesheet'/>
     <script src='resources/fullcalendar/main.js'></script>
@@ -342,48 +343,13 @@
                 	</div>
                 </div>
                 
-                <script>
-                	// 지도 api 띄우기
-					var container = document.getElementById('map');
-					var options = {
-						center: new kakao.maps.LatLng(33.450701, 126.570667),
-						level: 3,
-						
-					};
-					var map = new kakao.maps.Map(container, options);
-				
-					// 카카오 지도 라이브러리
-					// 지도 확대 축소
-					var zoomControl = new kakao.maps.ZoomControl();
-					map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-				</script>
-				<script type="text/javascript">
-					// 지도 마커
-					var clusterer = new kakao.maps.MarkerClusterer({
-				     	map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-				        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-				        minLevel: 10 // 클러스터 할 최소 지도 레벨 
-				    });
-				 
-				    // 데이터를 가져오기 위해 jQuery를 사용합니다
-				    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-				    $.get("/download/web/data/chicken.json", function(data) {
-				        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-				        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-				        var markers = $(data.positions).map(function(i, position) {
-				            return new kakao.maps.Marker({
-				                position : new kakao.maps.LatLng(33.450701, 126.570667)
-				            });
-				        });
-				
-				        // 클러스터러에 마커들을 추가합니다
-				        clusterer.addMarkers(markers);
-				    });
-				</script>
+               
                 
                 <div id="content3-2">
                     <button type="button" id="book-btn">예약</button>
                 </div>
+                <br>
+                <input type="text" id="testmap">
                 <br>
                 <div id="content3-3">
                     <div>
@@ -546,6 +512,37 @@
         </div>
 
         <script>
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                mapOption = {
+                    center: new kakao.maps.LatLng(37.57150, 126.99034), // 지도의 중심좌표
+                    level: 2, // 지도의 확대 레벨
+                    mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
+                }; 
+
+            // 지도를 생성한다 
+            var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+            // 지도에 확대 축소 컨트롤을 생성한다
+            var zoomControl = new kakao.maps.ZoomControl();
+
+            // 지도의 우측에 확대 축소 컨트롤을 추가한다
+            map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+            // 지도에 마커를 생성하고 표시한다
+            var marker = new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(37.57150, 126.99034), // 마커의 좌표
+                map: map // 마커를 표시할 지도 객체
+            });
+
+            // 마커 위에 표시할 인포윈도우를 생성한다
+            var infowindow = new kakao.maps.InfoWindow({
+                content : '<div style="padding:5px;">인포윈도우 :D</div>' // 인포윈도우에 표시할 내용
+            });
+
+            // 인포윈도우를 지도에 표시한다
+            infowindow.open(map, marker);
+            
+
             // 메뉴용 전역변수
             let sum = 0;
             let pirce = 0;
