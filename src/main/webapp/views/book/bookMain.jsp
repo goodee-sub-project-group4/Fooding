@@ -546,6 +546,19 @@
         </div>
 
         <script>
+            // 메뉴용 전역변수
+            let sum = 0;
+            let pirce = 0;
+            let menuPrice = [];
+            let variable = 0;
+            let plus = 0;
+
+            // 문자가 섞인 숫자 => 숫자로 변환해주는 변수
+            const transNumber = /[^0-9]/g;
+
+
+
+
             // 예약 버튼 활성화/비활성화
             $(function(){
                 $('#book-btn').click(function(){
@@ -585,52 +598,56 @@
                         $slide.slideDown();
                     }else{
                         $slide.slideUp();
-                    }
+                    };
                 });
             });
 
             // // 시간 선택 버튼 생성
             $(function(){
                 $('#book-time').click(function(){
-                    const open = (5*100) + ((30/30)*50);
-                    const close = (22*100) + ((30/30)*50);
-                    const breakS = (13*100) + ((0/30)*50);
-                    const breadE = (14*100) + ((30/30)*50);
-                    if($('.am').next().children().length == 0){
+                    const open = (8*100) + ((00/30)*50);
+                    const close = (19*100) + ((00/30)*50);
+                    const breakS = (7*100) + ((0/30)*50);
+                    const breakE = (15*100) + ((30/30)*50);
+
+                    if($('.am').next().children().length == 0 && $('.pm').next().children().length == 0){
+                        // 오전 오픈
                         if(open < 1200){
-                            if(open%100 == 0){
-                                for(let i=0; i<1200-open; i+=50){
-                                    $('.am').next().append(
-                                        '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(open + i)/100) + ':' + ('00' + ((open + i)%100/50*30)).slice(-2) + '</button>' 
-                                    );
-                                }
-                            }else{
-                                for(let i=0; i<1200-open; i+=50){
-                                    $('.am').next().append(
-                                        '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(open + i)/100) + ':' + ('00' + ((open + i)%100/50*30)).slice(-2) + '</button>' 
-                                    );
-                                }
-                            }
-                        }
-                    }
-                    if($('.pm').next().children().length == 0){
-                        if(close%100 == 0){
-                            for(let i=1200; i<close; i+=50){
-                                $('.pm').next().append(
-                                    '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(i)/100) + ':' + ('00' + ((i)%100/50*30)).slice(-2) + '</button>' 
+                            for(let i=0; i<1200-open; i+=50){
+                                $('.am').next().append(
+                                    '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(open + i)/100) + ':' + ('00' + ((open + i)%100/50*30)).slice(-2) + '</button>' 
                                 );
-                            }
+                            };
+                            for(let i=0; i<close-1200; i+=50){
+                                $('.pm').next().append(
+                                    '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(1200 + i)/100) + ':' + ('00' + ((1200 + i)%100/50*30)).slice(-2) + '</button>' 
+                                );
+                            };
+                        // 오후 오픈
                         }else{
-                            for(let i=1200; i<close; i+=50){
+                            for(let i=0; i<close-open; i+=50){
                                 $('.pm').next().append(
-                                    '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(i)/100) + ':' + ('00' + ((i)%100/50*30)).slice(-2) + '</button>' 
+                                    '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(open + i)/100) + ':' + ('00' + ((open + i)%100/50*30)).slice(-2) + '</button>' 
                                 );
-                            }
-                        }
+                            };
+                        };
+                    };
+
+                    // 브레이크 타임 속성 적용
+                    const time = '';
+                    let arraytime = new Array();
+                    if(breakS != null){
+                        console.log($('#am-box, #pm-box').children('button').text())
+                        $('#am-box, #pm-box').children().each(function(){
+                            arrayTime.
+                        })
                     }
-                })
+                });
             });
 
+            
+            
+                        
             // 시간 선택 버튼 효과
             $(document).on('click', '.book-time-btn.btn.btn-outline-danger', function(e){
                 $('#am-box, #pm-box').children().each(function(){
@@ -645,17 +662,10 @@
                 $(this).css({'background-color':'crimson', 'color':'white'});
                 $(this).attr('name', 'bookTime');
                 $(this).attr('value', bookTimeValue);
-                
             });
             
-
             // 메뉴 추가
-            let sum = 0;
-            let pirce = 0;
-            let menuPrice = [];
-            let variable = 0;
-            let plus = 0;
-            const transNumber = /[^0-9]/g;
+            
             $('.menuAdd.btn.btn-secondary.btn-sm').click(function(){
                 const addMenu = $(this).parent().prev().children();
                 const table = $('#menu-select-border2>table>tbody>tr').length;
