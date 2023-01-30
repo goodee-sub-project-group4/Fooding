@@ -30,6 +30,14 @@ public class SearchController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// 1) 요청시 전달값 뽑기 & 데이터 가공처리 => 변수 또는 객체에 기록하기 
+		String localCt = request.getParameter("city");	
+		String dLocalCt = request.getParameter("county"); 
+		String foodCt = request.getParameter("foodCt"); 
+		
+		// 2) 요청처리 (db에 sql문)
+		new SearchService().selectListCount(); 
+		
 		// 응답페이지 (views/search/search.jsp); 
 		request.getRequestDispatcher("views/search/search.jsp").forward(request, response); 
 	
