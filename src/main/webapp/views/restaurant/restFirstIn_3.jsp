@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +75,7 @@
 			(3단계/3단계) 메뉴를 하나씩 등록해주세요.
 		</div><br><br>
 
-		<form action="/menuInsert.re" method="get" enctype="multipart/form-data">
+		<form action="<%=contextPath %>/menuInsert.re" method="post" enctype="multipart/form-data">
 			
 
 			<div id="menu-outer">
@@ -96,6 +97,8 @@
 						<img id="image0" src="/Fooding/resources/images/forTest.png" class="rounded" width="180" height="180"><br>
 						<button type="button" class="btn btn-outline-danger">사진등록</button>
 						<div style="display:none"><input type="file" name="file0"></div>
+						<!-- 메뉴갯수를 넘기는 태그 -->
+						<input type="hidden" name="count" value="0"> 
 					</div>
 					<br clear="both"><br><br><br><br>
 				</div><br><br>
@@ -128,8 +131,10 @@
 
 		//파일첨부 시 미리보기 띄우기
 		$('#menu-outer').on('change','input[type=file]', function(){
-			//순번을 저장
-			let num = $(this).attr('name').charAt(4);
+			//순번 저장, 순번이 1자리수를 초과하는 경우도 커버할 수 있도록 코드설정
+			// let num = $(this).attr('name').charAt(4);
+			let name = $(this).attr('name');
+			let num = name.substr(4, name.length);
 			//이벤트 객체를 저장
 			const inputFile = event.target;
 			//파일이 선택된경우에만 미리보기 실행
@@ -142,10 +147,14 @@
 				}
 			}
 		})
+		
 
 		//메뉴추가버튼 클릭시 메뉴div를 추가해주는 메소드
-		let count=1;
+		let count=0;
 		function addMenu() {
+			//메뉴 추가될때마다 높이 늘리기 + count늘리기
+			$('#menu-outer').css("height", 260*(++count +1));
+			//메뉴요소 추가하기
 			$('#firstone').append(
 			$('<div class="menu-box new-box" style="right:16px">'+
 				'<div class="text-box">'+
@@ -164,11 +173,13 @@
 					'<img id="image'+count+'" src="/Fooding/resources/images/forTest.png" class="rounded" width="180" height="180"><br>'+
 					'<button type="button" class="btn btn-outline-danger">사진등록</button>'+
 					'<div style="display:none"><input type="file" name="file'+count+'"></div>'+
+					'<input type="hidden" name="count" value="'+ count +'"> '+
 				'</div>'+
 			'</div>')
 			);
-			//메뉴 추가될때마다 높이 늘리기 + count늘리기
-			$('#menu-outer').css("height", 260*(1+count++));
+			
+			
+
 		}
 		
 	</script>

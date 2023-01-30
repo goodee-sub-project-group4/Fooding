@@ -32,6 +32,7 @@ public class RestMenuController extends HttpServlet {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
 			response.sendRedirect(request.getContextPath()+"/rest.admin");
 		}else {
+			
 			request.getRequestDispatcher("views/restaurant/restMenu.jsp").forward(request, response);
 		}
 		

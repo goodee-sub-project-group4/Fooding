@@ -27,16 +27,13 @@ public class RestCalendarController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
 		if (session.getAttribute("loginRest")==null) {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
 			response.sendRedirect(request.getContextPath()+"/rest.admin");
 		}else {
 			request.getRequestDispatcher("views/restaurant/restCalendar.jsp").forward(request, response);
-		}
-	
-		
+		}		
 	}
 
 	/**

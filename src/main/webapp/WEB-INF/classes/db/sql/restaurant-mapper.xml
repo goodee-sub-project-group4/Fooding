@@ -72,5 +72,26 @@
 	    WHERE RES_NO=?
 	      AND STATUS = 'Y'		
 	</entry>
+	<entry key="insertMenu">
+		INSERT
+		  INTO MENU
+		  (
+		    MENU_NO
+		  , RES_NO
+		  , MENU_NAME
+		  , PRICE
+		  , MENU_DES
+		  , M_IMG  
+		  )
+		  VALUES
+		  (
+		    SEQ_MNO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?  
+		  )
+	</entry>
 
 </properties>
