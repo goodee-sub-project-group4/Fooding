@@ -604,50 +604,47 @@
 
             // // 시간 선택 버튼 생성
             $(function(){
-                $('#book-time').click(function(){
-                    const open = (8*100) + ((00/30)*50);
-                    const close = (19*100) + ((00/30)*50);
-                    const breakS = (7*100) + ((0/30)*50);
-                    const breakE = (15*100) + ((30/30)*50);
-
-                    if($('.am').next().children().length == 0 && $('.pm').next().children().length == 0){
-                        // 오전 오픈
-                        if(open < 1200){
-                            for(let i=0; i<1200-open; i+=50){
-                                $('.am').next().append(
-                                    '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(open + i)/100) + ':' + ('00' + ((open + i)%100/50*30)).slice(-2) + '</button>' 
-                                );
-                            };
-                            for(let i=0; i<close-1200; i+=50){
-                                $('.pm').next().append(
-                                    '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(1200 + i)/100) + ':' + ('00' + ((1200 + i)%100/50*30)).slice(-2) + '</button>' 
-                                );
-                            };
-                        // 오후 오픈
-                        }else{
-                            for(let i=0; i<close-open; i+=50){
-                                $('.pm').next().append(
-                                    '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(open + i)/100) + ':' + ('00' + ((open + i)%100/50*30)).slice(-2) + '</button>' 
-                                );
-                            };
+                const open = (08*100) + ((00/30)*50);
+                const close = (23*100) + ((30/30)*50);
+                if($('.am').next().children().length == 0 && $('.pm').next().children().length == 0){
+                    // 오전 오픈
+                    if(open < 1200){
+                        for(let i=0; i<1200-open; i+=50){
+                            $('.am').next().append(
+                                '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(open + i)/100) + ':' + ('00' + ((open + i)%100/50*30)).slice(-2) + '</button>' 
+                            );
+                        };
+                        for(let i=0; i<close-1200; i+=50){
+                            $('.pm').next().append(
+                                '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(1200 + i)/100) + ':' + ('00' + ((1200 + i)%100/50*30)).slice(-2) + '</button>' 
+                            );
+                        };
+                    // 오후 오픈
+                    }else{
+                        for(let i=0; i<close-open; i+=50){
+                            $('.pm').next().append(
+                                '<button type="button" class="book-time-btn btn btn-outline-danger">' + parseInt(Math.floor(open + i)/100) + ':' + ('00' + ((open + i)%100/50*30)).slice(-2) + '</button>' 
+                            );
                         };
                     };
-
-                    // 브레이크 타임 속성 적용
-                    const time = '';
-                    let arraytime = new Array();
-                    if(breakS != null){
-                        console.log($('#am-box, #pm-box').children('button').text())
-                        $('#am-box, #pm-box').children().each(function(){
-                            arrayTime.
-                        })
-                    }
-                });
+                };
             });
 
-            
-            
-                        
+            // 브레이크 타임 속성 적용
+            $(function(){
+                const breakS = (14*100) + ((30/30)*50);
+                const breakE = (16*100) + ((00/30)*50);
+                if(breakS != null){
+                    $('#am-box, #pm-box').children().each(function(){
+                        if($(this).text().replace(/[:]/g, "") >= breakS && $(this).text().replace(/[:]/g, "") <= breakE){
+                            $(this).attr('class', 'book-time-btn btn btn-outline-secondary');
+                            $(this).attr('disabled', true);
+                        }
+                    })
+                }
+            })
+                    
+
             // 시간 선택 버튼 효과
             $(document).on('click', '.book-time-btn.btn.btn-outline-danger', function(e){
                 $('#am-box, #pm-box').children().each(function(){

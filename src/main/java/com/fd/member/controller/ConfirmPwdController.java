@@ -15,7 +15,7 @@ import com.fd.member.model.vo.Member;
 /**
  * Servlet implementation class ConfirmPwdController
  */
-@WebServlet("/confirmPwd.me")
+@WebServlet("/changeInfo.me")
 public class ConfirmPwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

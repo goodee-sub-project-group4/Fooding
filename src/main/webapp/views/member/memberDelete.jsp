@@ -53,7 +53,7 @@
 
         </div>
 
-        <button type="button" class="btn btn-outline-danger">취소하기</button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-outline-danger" onclick="location.href='<%=request.getContextPath()%>/changeInfo.me'">취소하기</button>&nbsp;&nbsp;
         <button type="button" class="btn btn-danger">탈퇴하기</button>
         <br><br><br>
     </div>
