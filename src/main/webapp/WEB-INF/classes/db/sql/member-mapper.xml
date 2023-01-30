@@ -20,7 +20,7 @@
 		  FROM TB_USER
 		 WHERE USER_ID = ?
 		   AND USER_PWD = ?
-		   AND STATUS = 'Y' || 'A'
+		   AND STATUS in ('Y', 'A')
 	</entry>
 	
 	<!-- 회원가입 -->
