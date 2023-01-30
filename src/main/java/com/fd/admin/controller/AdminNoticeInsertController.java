@@ -55,7 +55,7 @@ public class AdminNoticeInsertController extends HttpServlet {
 			HttpSession session = request.getSession();
 			int userNo = ((Member)session.getAttribute("loginAdmin")).getUserNo();
 			
-//			String toWhom = multiRequest.getParameter("toWhom");
+			String toWhom = multiRequest.getParameter("toWhom");
 			String boardType = multiRequest.getParameter("boardType");	// boardType 숨겨서 담을 예정
 			
 			
@@ -63,7 +63,7 @@ public class AdminNoticeInsertController extends HttpServlet {
 			n.setNoticeTitle(noticeTitle);
 			n.setNoticeContent(noticeContent); 	
 			n.setUserNo(String.valueOf(userNo));
-//			n.setToWhom(toWhom);
+			n.setToWhom(toWhom);
 			n.setBoardType(boardType);
 			
 			

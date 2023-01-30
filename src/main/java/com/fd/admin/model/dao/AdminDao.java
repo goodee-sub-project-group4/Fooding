@@ -142,7 +142,7 @@ public class AdminDao {
 			pstmt.setString(1, n.getNoticeTitle());
 			pstmt.setString(2, n.getNoticeContent());
 			pstmt.setString(3, n.getUserNo());
-//			pstmt.setString(4, n.getToWhom());
+			pstmt.setString(4, n.getToWhom());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

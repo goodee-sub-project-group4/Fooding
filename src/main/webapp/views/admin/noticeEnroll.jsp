@@ -45,6 +45,10 @@
         color: red;
     }
 
+    input{
+        accent-color: rgb(221,45,45);
+    }
+
     #noticeTitle>input {
         width: 700px;
         height: 40px;
@@ -62,6 +66,10 @@
         padding: 5px;
     }
 
+    .right {
+        position: relative;
+        left: 640px;
+    }
 
 </style>
 </head>
@@ -77,6 +85,18 @@
 			<br><br>
 
             <form action="<%= contextPath %>/noInsert.ad" id="enroll-notice" method="post" enctype="multipart/form-data">
+                <div class="right">
+                    <!--회원/업체-->
+                    <input type="radio" id="member" name="toWhom" value="U" checked>
+                    <label for="member">회원</label>&nbsp&nbsp
+                    <input type="radio" id="restaurant" name="toWhom" value="R">
+                    <label for="restaurant">업체</label>
+                    <br> <br>
+                </div>
+
+                <!-- <input type="hidden" value="U" name="toWhom"> -->
+                <!-- <input type="hidden" value="R" name="toWhom"> -->
+
                 <input type="hidden" value="N" name="boardType">
                 <table>
                     <tr>
