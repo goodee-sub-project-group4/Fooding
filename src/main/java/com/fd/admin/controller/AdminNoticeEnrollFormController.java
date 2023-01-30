@@ -6,18 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionAttributeListener;
 
 /**
  * Servlet implementation class AdminNoticeEnrollController
  */
 @WebServlet("/noEnroll.ad")
-public class AdminNoticeEnrollController extends HttpServlet {
+public class AdminNoticeEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeEnrollController() {
+    public AdminNoticeEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +28,9 @@ public class AdminNoticeEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		String toWhom =  request.getParameter("toWhom");
+		HttpSession session = request.getSession();
+		request.setAttribute("toWhom", toWhom);
 		
 		request.getRequestDispatcher("views/admin/noticeEnroll.jsp").forward(request, response);
 		

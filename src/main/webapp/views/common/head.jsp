@@ -77,7 +77,7 @@
         <div class="header">
             <!-- 헤더바1 로고 -->
             <div id="header1-padding">
-                <div id="header1"><img id="img-logo" src="/Fooding/resources/images/logo.png" width="240" height="80"></div>
+                <div id="header1"><img id="img-logo" src="/Fooding/resources/images/logo.png" width="240" height="80" onclick="location.href='<%=contextPath%>'"></div>
             </div>
 
             <!-- 헤더바2 검색창 -->
@@ -96,9 +96,9 @@
                 <div id="header3">
                     <!-- case1. 로그인 전 -->
                     <div id="header3-1">
-                        <span><a href="<%= contextPath %>/enrollForm.me">회원가입</a></span>
+                        <span><a href="<%= contextPath%>/enrollForm.me">회원가입</a></span>
                         <span>&nbsp;|&nbsp;</span>
-                        <span><a href="<%= request.getContextPath() %>/loginForm.me">로그인</a></span>
+                        <span><a href="<%= contextPath%>/loginForm.me">로그인</a></span>
                         <span>&nbsp;|&nbsp;</span>
                         <span>
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
@@ -123,8 +123,8 @@
                             <a class="dropdown-item" href="#">리뷰</a>
                             <a class="dropdown-item" href="#">찜하기</a>
                             <a class="dropdown-item" href="#">적립금</a>
-                            <a class="dropdown-item" href="#">개인정보수정</a>
-                            <a class="dropdown-item" href="<%= contextPath %>/logout.me">로그아웃</a>
+                            <a class="dropdown-item" href="<%= contextPath%>/myPageConfirmPwd.me">개인정보수정</a>
+                            <a class="dropdown-item" href="<%= contextPath%>/logout.me">로그아웃</a>
                             </span>
                         </span>
                         <span>&nbsp;|&nbsp;</span>

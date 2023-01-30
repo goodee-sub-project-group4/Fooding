@@ -74,7 +74,7 @@
         height: 33px;
     }
     /*등록 버튼*/
-    #insertNoticeU, #insertNoticeR{
+    #insertNotice {
         float: right;
         font-size: 15px;
         margin-right: 5px;
@@ -85,11 +85,6 @@
     /*업체 공지사항 처음엔 안보이게*/
     .restList{
         display: none;
-    }
-
-    /*업체 등록버튼 처음엔 안보이게*/
-    #insertNoticeR{
-        display:none;
     }
 
     /*페이징바*/
@@ -115,7 +110,7 @@
 
 			<!-- 컨텐츠 작성부 -->
             <br><br>
-            <form action="">
+            <form action="<%=contextPath%>/noEnroll.ad">
 
                 <div class="right">
                     <!--회원/업체-->
@@ -127,8 +122,7 @@
 
                     <!--등록 삭제-->
                     <button type="button" class="btn btn-outline-danger btn-sm" id="deleteNotice">삭제</button>
-                    <a class="btn btn-danger btn-sm" id="insertNoticeU" href="<%=contextPath%>/noEnroll.ad">등록</a>
-                    <a class="btn btn-danger btn-sm" id="insertNoticeR" href="<%=contextPath%>/noEnroll.ad">등록</a>
+                    <button class="btn btn-danger btn-sm" id="insertNotice">등록</button> 
                     
                     <br> <br>
                 </div>
@@ -203,26 +197,26 @@
 			if($('input:radio[id=member]').is(':checked')){
                 $(".memberList").show();
                 $(".restList").hide();
-                $("#insertNoticeU").show();
-                $("#insertNoticeR").hide();
             }
             if($('input:radio[id=restaurant]').is(':checked')){
                 $(".restList").show();
                 $(".memberList").hide();
-                $("#insertNoticeR").show();
-                $("#insertNoticeU").hide();
             }
 		}
 
         // 쿼리스트링으로 글번호 데이터 넘기기
         
         $(function(){
-            $(".list-area>tbody>tr").click(function(){
-                location.href = '<%=contextPath%>/noDetail.ad?no=' + $(this).children().eq(1).text();
+            $(".list-area tbody").on('click', 'tr td:not(:first-child)', function(){
+                const tr = $(this).parent('tr');
+                const td = tr.children();
+                let tdArray = new Array();
+                td.each(function(i){
+                    tdArray.push(td.eq(i).text());
+                });
+                location.href = '<%=contextPath%>/noDetail.ad?no=' + tdArray[1];
             })
         })
-
-
 	</script>
 </body>
 </html>

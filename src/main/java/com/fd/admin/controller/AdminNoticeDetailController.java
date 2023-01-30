@@ -34,12 +34,12 @@ public class AdminNoticeDetailController extends HttpServlet {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("no"));
 		
-		AdminService nService = new AdminService();
+		AdminService aService = new AdminService();
 		
-		int result = nService.increseCountNotice(noticeNo);
+		int result = aService.increseCountNotice(noticeNo);
 		if(result>0) {
-			Notice n = nService.selectNotice(noticeNo);
-			Attachment at = nService.selectNoticeAttachment(noticeNo);
+			Notice n = aService.selectNotice(noticeNo);
+			Attachment at = aService.selectNoticeAttachment(noticeNo);
 
 			request.setAttribute("n", n);
 			request.setAttribute("at", at);

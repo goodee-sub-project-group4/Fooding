@@ -1,4 +1,4 @@
-package com.fd.restaurant.controller;
+package com.fd.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,19 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class RestCalendarController
+ * Servlet implementation class MypageConfirmPwdController
  */
-@WebServlet("/calendar.re")
-public class RestCalendarController extends HttpServlet {
+@WebServlet("/myPageConfirmPwd.me")
+public class MypageConfirmPwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RestCalendarController() {
+    public MypageConfirmPwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,13 +26,9 @@ public class RestCalendarController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		if (session.getAttribute("loginRest")==null) {
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			response.sendRedirect(request.getContextPath()+"/rest.admin");
-		}else {
-			request.getRequestDispatcher("views/restaurant/restCalendar.jsp").forward(request, response);
-		}		
+		
+		request.getRequestDispatcher("/views/member/memberConfirmPwd.jsp").forward(request, response);
+		
 	}
 
 	/**

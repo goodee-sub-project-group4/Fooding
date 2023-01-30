@@ -48,6 +48,7 @@ public class MemberService {
 	 * @return count (중복된 아이디 값의 개수)
 	 */
 	public int idCheck(String checkId) {
+		
 		Connection conn = getConnection();
 		int count = new MemberDao().idCheck(conn, checkId);
 		close(conn);
@@ -60,14 +61,22 @@ public class MemberService {
 	 * @return count2 (중복된 닉네임 값의 개수)
 	 */
 	public int nicknameCheck(String checkNickname) {
+		
 		Connection conn = getConnection();
 		int count2 = new MemberDao().nicknameCheck(conn, checkNickname);
 		close(conn);
 		return count2;
 	}
 	
-	
-	
+	/*
+	 * public void confirmPwdMember(String userId, String userPwd) {
+	 * 
+	 * Connection conn = getConnection(); i = new MemberDao().confirmPwdMember(conn,
+	 * userId, userPwd);
+	 * 
+	 * 
+	 * }
+	 */
 	
 	
 	

@@ -8,8 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
 
 public class RestaurantDao {
@@ -148,6 +150,27 @@ public class RestaurantDao {
 			close(pstmt);
 		}
 		return r;
+	}
+	
+	public int insertMenu(Connection conn, Menu m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMenu");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, m.getResNo());
+			pstmt.setString(2, m.getMenuName());
+			pstmt.setInt(3, m.getPrice());
+			pstmt.setString(4, m.getMenuDes());
+			pstmt.setString(5, m.getmImg());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.fd.admin.model.vo.Notice, com.fd.common.model.vo.Attachment" %>
+<%
+	Notice n = (Notice)request.getAttribute("n");
+	Attachment at = (Attachment)request.getAttribute("at");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,28 +81,33 @@
 			<!-- 컨텐츠 작성부 -->
 			<br><br>
 
-            <form action="" id="enroll-notice" method="post">
+            <form action="<%= contextPath %>/noUpdate.ad" id="enroll-notice" method="post" enctype="multipart/form-data">
+            	
+            	<input type="hidden" name="no" value="<%=n.getNoticeNo()%>">
                 
                 <table>
                     <tr>
                         <th width="70">제목 <span id="required">*</span></th>
                         <td id="noticeTitle">
-                            <input type="text" name="title" value="기존 공지사항 제목" required >
+                            <input type="text" name="title" value="<%= n.getNoticeTitle() %>" required >
                         </td>
                     </tr>
                     <tr><td><br></td></tr>
                     <tr>
                         <th>내용 <span id="required">*</span></th>
                         <td>
-                            <textarea name="content" id="" rows="10" style="resize:none" required>기존 공지사항 내용</textarea>
+                            <textarea name="content" id="" rows="10" style="resize:none" required><%= n.getNoticeContent() %></textarea>
                         </td>
                     </tr>
                     <tr><td><br></td></tr>
                     <tr>
-                        <th id="imgTitle">이미지</th>
+                        <th id="imgTitle">첨부파일</th>
                         <td id="noticeImg">
-                            <input type="hidden" name="기존원본명" value=""> 
-                            <input type="file">
+                        	<% if(at != null){ %>
+                        		<%= at.getOriginName() %>
+                            	<input type="hidden" name="originFileNo" value="<%=at.getFileNo()%>"> 
+                            <% } %>
+                            <input type="file" name="upfile">
                         </td>
                     </tr>
                 </table>

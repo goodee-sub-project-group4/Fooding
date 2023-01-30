@@ -50,6 +50,9 @@
 
  	<%@ include file="/views/common/head.jsp" %>
 	<%@ include file="/views/common/myPageSidebar.jsp" %>
+	<%
+		String userId = loginUser.getUserId();
+	%>
 
     <div id="content2-padding">
         <div id="reconfirm-pwd-area">
@@ -59,20 +62,21 @@
             <p style="font-weight:600; font-size:20px;">비밀번호 재확인</p>
             <p>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인해주세요.</p>
         </div>
-        <form action="" method="post">
+        <form action="<%=contextPath%>/confirmPwd.me" method="post">
+        <input type="hidden" name="userId" value="<%=userId%>">
             <div id="input-id-pwd-area">
 
                 <div id="input-id-area">
                     <div id="input-id-area1">아이디</div>
-                    <div id="input-id-area2"><input type="text" name="userId" size="40" value="hahaha0123"></div> <!--아이디가 이미 적혀있어야함-->
+                    <div id="input-id-area2"><input type="text" name="userId" size="40" value="<%=userId%>"></div> <!--아이디가 이미 적혀있어야함-->
                 </div>
                 <div id="input-pwd-area">
                     <div id="input-pwd-area1">비밀번호<span> *</span></div>
-                    <div id="input-pwd-area2"><input type="password" size="40" placeholder="현재 비밀번호를 입력해주세요" required></div>
+                    <div id="input-pwd-area2"><input type="password" size="40" name="userPwd" placeholder="현재 비밀번호를 입력해주세요" required></div>
                 </div>
 
                 <div id="btn-area">
-                    <button type="button" id="confirm-btn" class="btn btn-danger">확인</button>
+                    <button type="submit" id="confirm-btn" class="btn btn-danger">확인</button>
                 </div>
 
             </div>
