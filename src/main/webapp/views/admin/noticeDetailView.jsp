@@ -105,8 +105,8 @@
             
             <div align="center">
                 <a href="<%= contextPath%>/noList.ad" class="btn btn-outline-danger">목록가기</a>&nbsp&nbsp
-                <a href="<%= contextPath%>/noUpdate.ad?no=<%=n.getNoticeNo()%>" class="btn btn-danger">수정하기</a>&nbsp&nbsp
-                <a href="" class="btn btn-danger">삭제하기</a>
+                <a href="<%= contextPath%>/noUpdateForm.ad?no=<%=n.getNoticeNo()%>" class="btn btn-danger">수정하기</a>&nbsp&nbsp
+                <a href="<%= contextPath%>/noDelete.ad?no=<%=n.getNoticeNo()%>" class="btn btn-danger">삭제하기</a>
             </div>
             <br><br><br>
 		</div>

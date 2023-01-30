@@ -54,9 +54,11 @@ public class AdminService {
 	 */
 	public int insertNotice(Notice n, Attachment at) {
 		Connection conn = getConnection();
+		// 게시글 등록
 		int result1 = new AdminDao().insertNotice(conn, n);
 		int result2 = 1;
 		if(at != null) {
+			// 첨부파일 등록
 			result2 = new AdminDao().insertNoticeAttachment(conn, at);
 		}
 		
@@ -106,6 +108,51 @@ public class AdminService {
 		Attachment at = new AdminDao().selectNoticeAttachment(conn, noticeNo);
 		close(conn);
 		return at;
+	}
+
+
+	/**공지사항 수정
+	 * @param n
+	 * @param at
+	 * @return
+	 */
+	public int updateNotice(Notice n, Attachment at) {
+		Connection conn = getConnection();
+		// 게시글 정보만 수정
+		int result1 = new AdminDao().updateNotice(conn, n);
+		int result2 = 1;
+		if(at != null) {
+			if(at.getFileNo()!=0) {
+				// 기존 첨부파일 있었을 경우 첨부파일 업데이트
+				result2 = new AdminDao().updateNoticeAttachment(conn, at);
+			}else {
+				// 기존 첨부파일 없었을 경우 첨부파일 업데이트 
+				result2 = new AdminDao().insertNewNoticeAttachment(conn, at);
+			}
+		}
+		if(result1 > 0 && result2 >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result1 * result2;
+	}
+
+
+	/**공지사항 삭제
+	 * @param noticeNo
+	 * @return
+	 */
+	public int deleteNotice(int noticeNo) {
+		Connection conn = getConnection();
+		int result = new AdminDao().deleteNotice(conn, noticeNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 	

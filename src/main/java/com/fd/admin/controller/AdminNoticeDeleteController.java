@@ -9,20 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fd.admin.model.service.AdminService;
-import com.fd.admin.model.vo.Notice;
-import com.fd.common.model.vo.Attachment;
 
 /**
- * Servlet implementation class AdminNoticeDetailController
+ * Servlet implementation class AdminNoticeDeleteController
  */
-@WebServlet("/noDetail.ad")
-public class AdminNoticeDetailController extends HttpServlet {
+@WebServlet("/noDelete.ad")
+public class AdminNoticeDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeDetailController() {
+    public AdminNoticeDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +29,15 @@ public class AdminNoticeDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int noticeNo = Integer.parseInt(request.getParameter("no"));
-		
-		AdminService aService = new AdminService();
-		
-		int result = aService.increseCountNotice(noticeNo);
+		int result = new AdminService().deleteNotice(noticeNo);
 		if(result>0) {
-			Notice n = aService.selectNotice(noticeNo);
-			Attachment at = aService.selectNoticeAttachment(noticeNo);
-
-			request.setAttribute("n", n);
-			request.setAttribute("at", at);
-			request.getRequestDispatcher("views/admin/noticeDetailView.jsp").forward(request, response);
-			
-		} else {
-			request.setAttribute("errorPage", "상세조회 실패");
+			request.getSession().setAttribute("alertMsg", "삭제 완료");
+			response.sendRedirect(request.getContextPath() + "/noList.ad");
+		}else {
+			request.setAttribute("errorMsg", "삭제 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		
-		
 	}
 
 	/**

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String toWhom = (String)request.getAttribute("toWhom");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,6 +78,7 @@
 </style>
 </head>
 <body>
+	
 	<%@ include file="adminHead.jsp" %>
 	<div id="outer2">
 		<div id="menubar">
@@ -85,18 +90,8 @@
 			<br><br>
 
             <form action="<%= contextPath %>/noInsert.ad" id="enroll-notice" method="post" enctype="multipart/form-data">
-                <div class="right">
-                    <!--회원/업체-->
-                    <input type="radio" id="member" name="toWhom" value="U" checked>
-                    <label for="member">회원</label>&nbsp&nbsp
-                    <input type="radio" id="restaurant" name="toWhom" value="R">
-                    <label for="restaurant">업체</label>
-                    <br> <br>
-                </div>
-
-                <!-- <input type="hidden" value="U" name="toWhom"> -->
-                <!-- <input type="hidden" value="R" name="toWhom"> -->
-
+                
+                <input type="hidden" value="<%= toWhom %>" name="toWhom"> 
                 <input type="hidden" value="N" name="boardType">
                 <table>
                     <tr>
@@ -124,7 +119,7 @@
                 <br><br>
                 <div align="center">
                     <button type="submit" class="btn btn-danger">등록하기</button>&nbsp&nbsp
-                    <button type="reset" class="btn btn-outline-danger">취소하기</button>
+                    <button type="reset" class="btn btn-outline-danger" onclick="history.back();">취소하기</button>
                 </div>
 
             </form>

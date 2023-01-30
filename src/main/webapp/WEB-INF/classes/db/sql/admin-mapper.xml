@@ -129,4 +129,56 @@
 </entry>
 
 
+<!-- 공지사항 수정하기 -->
+<!-- 1. 게시글 정보 update -->
+<entry key="updateNotice">
+	UPDATE
+		   NOTICE
+	   SET NOTICE_TITLE = ?
+	     , NOTICE_CONTENT = ?
+	 WHERE NOTICE_NO = ?
+</entry>
+<!-- 2_0. 새로 넘어온 첨부파일이 없을 경우 => 1. updateNotice실행 -->
+<!-- 2_1. 새로 넘어온 첨부파일이 있고, 기존의 첨부파일이 있었을 경우 -->
+<entry key="updateNoticeAttachment">
+	UPDATE
+		   ATTACHMENT
+	   SET ORIGIN_NAME = ?
+	     , CHANGE_NAME = ?
+	     , FILE_PATH = ?
+	 WHERE FILE_NO = ?
+</entry>
+
+<!-- 2_2. 새로 넘어온 첨부파일이 있고, 기존의 첨부파일이 없었을 경우 -->
+<entry key="insertNewNoticeAttachment">
+	INSERT
+	  INTO ATTACHMENT
+	  (
+	  	FILE_NO
+	  , REF_BNO
+	  , ORIGIN_NAME
+	  , CHANGE_NAME
+	  , FILE_PATH
+	  , BOARD_TYPE
+	  )
+	  VALUES
+	  (
+	    SEQ_ATNO.NEXTVAL
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , 'N'
+	  )
+</entry>
+
+<!-- 공지사항 삭제 -->
+<entry key="deleteNotice">
+	UPDATE NOTICE
+	   SET STATUS = 'N'
+	 WHERE NOTICE_NO = ?
+</entry>
+
+
+
 </properties>

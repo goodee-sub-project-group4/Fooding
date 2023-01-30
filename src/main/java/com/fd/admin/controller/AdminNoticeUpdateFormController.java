@@ -13,16 +13,16 @@ import com.fd.admin.model.vo.Notice;
 import com.fd.common.model.vo.Attachment;
 
 /**
- * Servlet implementation class AdminNoticeDetailController
+ * Servlet implementation class AdminNoticeUpdateController
  */
-@WebServlet("/noDetail.ad")
-public class AdminNoticeDetailController extends HttpServlet {
+@WebServlet("/noUpdateForm.ad")
+public class AdminNoticeUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeDetailController() {
+    public AdminNoticeUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,21 +36,13 @@ public class AdminNoticeDetailController extends HttpServlet {
 		
 		AdminService aService = new AdminService();
 		
-		int result = aService.increseCountNotice(noticeNo);
-		if(result>0) {
-			Notice n = aService.selectNotice(noticeNo);
-			Attachment at = aService.selectNoticeAttachment(noticeNo);
-
-			request.setAttribute("n", n);
-			request.setAttribute("at", at);
-			request.getRequestDispatcher("views/admin/noticeDetailView.jsp").forward(request, response);
-			
-		} else {
-			request.setAttribute("errorPage", "상세조회 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		Notice n =aService.selectNotice(noticeNo);
+		Attachment at = aService.selectNoticeAttachment(noticeNo);
 		
+		request.setAttribute("n", n);
+		request.setAttribute("at", at);
 		
+		request.getRequestDispatcher("views/admin/noticeUpdate.jsp").forward(request, response);
 	}
 
 	/**
