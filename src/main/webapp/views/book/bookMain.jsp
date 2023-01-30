@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- 지도 API -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=694ae779a7a7935c84a1e22edd5c5d87"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=694ae779a7a7935c84a1e22edd5c5d87&libraries=services"></script>
 
     <!-- 달력 API -->
@@ -178,7 +177,7 @@
                         <div id="thumbnail">
                             <img src="" alt="">
                         </div>
-                        <div id="content-main" style="">
+                        <div id="content-main">
                             <div id="main1">
                                 <b>(업체명)</b>
                                 <br>
@@ -336,20 +335,15 @@
                 </div>
             </div>
             <div id="content3-padding">
-            	<!-- 지도 api -->
                 <div id="content3-1">
-                	<div id="map">
-                		
-                	</div>
+                    <div id="map"></div>
                 </div>
-                
-               
-                
                 <div id="content3-2">
                     <button type="button" id="book-btn">예약</button>
                 </div>
                 <br>
-                <input type="text" id="testmap">
+                <input type="text" id="testMap" name="testMap"><button type="button" id="test-btn">확인</button>
+                <div id="result"></div>
                 <br>
                 <div id="content3-3">
                     <div>
@@ -456,7 +450,6 @@
                     <div id="book-menu4-btn">
                         <div>
                             <button class="minus" style="width: 50px; height: 50px;">-</button>
-                            <!-- input value가 0인 경우 오류 발생 필요 -->
                             <input id="quantity" class="quantity" type="number" value="1" style="width: 75px; height:50px;"> 
                             <button class="plus" style="width: 50px; height: 50px;">+</button>
                         </div>
@@ -536,12 +529,62 @@
 
             // 마커 위에 표시할 인포윈도우를 생성한다
             var infowindow = new kakao.maps.InfoWindow({
-                content : '<div style="padding:5px;">인포윈도우 :D</div>' // 인포윈도우에 표시할 내용
+                content : '<div style="padding:5px;">업체 이름</div>' // 인포윈도우에 표시할 내용
             });
 
             // 인포윈도우를 지도에 표시한다
             infowindow.open(map, marker);
+
+            $(function(){
+                $('#test-btn').click(function(){
+                    // 주소-좌표 변환 객체를 생성합니다
+                    var geocoder = new kakao.maps.services.Geocoder();
+
+                    // 주소로 좌표를 검색합니다
+                    geocoder.addressSearch($('#testMap').val(), function(result, status) {
+                    
+                        // 정상적으로 검색이 완료됐으면 
+                        if (status === kakao.maps.services.Status.OK) {
+
+                            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new kakao.maps.Marker({
+                                map: map,
+                                position: coords
+                            });
+
+                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                            var infowindow = new kakao.maps.InfoWindow({
+                                content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+                            });
+                            infowindow.open(map, marker);
+
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+                        } 
+                    });
+                    kakao.maps.event.addListener(map, 'center_changed', function() {
+
+                    // 지도의  레벨을 얻어옵니다
+                    var level = map.getLevel();
+
+                    // 지도의 중심좌표를 얻어옵니다 
+                    var latlng = map.getCenter(); 
+
+                    var message = '<p>지도 레벨은 ' + level + ' 이고</p>';
+                    message += '<p>중심 좌표는 위도 ' + latlng.getLat() + ', 경도 ' + latlng.getLng() + '입니다</p>';
+
+                    var resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = message;
+                    });
+                });
+            });
             
+            
+            
+            
+
 
             // 메뉴용 전역변수
             let sum = 0;
@@ -552,9 +595,6 @@
 
             // 문자가 섞인 숫자 => 숫자로 변환해주는 변수
             const transNumber = /[^0-9]/g;
-
-
-
 
             // 예약 버튼 활성화/비활성화
             $(function(){
