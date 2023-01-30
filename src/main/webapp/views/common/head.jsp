@@ -123,8 +123,8 @@
                             <a class="dropdown-item" href="#">리뷰</a>
                             <a class="dropdown-item" href="#">찜하기</a>
                             <a class="dropdown-item" href="#">적립금</a>
-                            <a class="dropdown-item" href="#">개인정보수정</a>
-                            <a class="dropdown-item" href="<%= contextPath %>/logout.me">로그아웃</a>
+                            <a class="dropdown-item" href="<%= contextPath%>/confirmPwd.me">개인정보수정</a>
+                            <a class="dropdown-item" href="<%= contextPath%>/logout.me">로그아웃</a>
                             </span>
                         </span>
                         <span>&nbsp;|&nbsp;</span>
