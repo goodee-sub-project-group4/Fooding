@@ -50,6 +50,9 @@
 
  	<%@ include file="/views/common/head.jsp" %>
 	<%@ include file="/views/common/myPageSidebar.jsp" %>
+	<%
+		String userId = loginUser.getUserId();
+	%>
 
     <div id="content2-padding">
         <div id="reconfirm-pwd-area">
@@ -64,7 +67,7 @@
 
                 <div id="input-id-area">
                     <div id="input-id-area1">아이디</div>
-                    <div id="input-id-area2"><input type="text" name="userId" size="40" value="hahaha0123"></div> <!--아이디가 이미 적혀있어야함-->
+                    <div id="input-id-area2"><input type="text" name="userId" size="40" value="<%=userId%>"></div> <!--아이디가 이미 적혀있어야함-->
                 </div>
                 <div id="input-pwd-area">
                     <div id="input-pwd-area1">비밀번호<span> *</span></div>

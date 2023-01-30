@@ -77,7 +77,7 @@
         <div class="header">
             <!-- 헤더바1 로고 -->
             <div id="header1-padding">
-                <div id="header1"><img id="img-logo" src="/Fooding/resources/images/logo.png" width="240" height="80"></div>
+                <div id="header1"><img id="img-logo" src="/Fooding/resources/images/logo.png" width="240" height="80" onclick="location.href='<%=contextPath%>'"></div>
             </div>
 
             <!-- 헤더바2 검색창 -->
