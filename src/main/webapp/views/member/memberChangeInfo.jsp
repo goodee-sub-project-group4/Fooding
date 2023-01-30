@@ -18,7 +18,7 @@
 
     <style>
         #content2-padding {width:900px; height: 800px; margin: auto; margin-top: 45px; padding: 20px; box-sizing:border-box; float:left;}
-        #content2-padding div {border:1px solid green;}
+        /* #content2-padding div {border:1px solid green;} */
         #change-area {width: 100%; height: 135px; font-size: 30px; text-align: center; padding-top:20px;
             display: inline-block; border-bottom:1px solid black;}
         #change-infomation {width:800px; margin: auto;}
@@ -48,6 +48,16 @@
 	
 	<%@ include file="/views/common/head.jsp" %>
 	<%@ include file="/views/common/myPageSidebar.jsp" %>
+	<%
+		String userId = loginUser.getUserId();
+		String userPwd = loginUser.getUserPwd();
+		String userName = loginUser.getUserName();
+		String nickname = loginUser.getNickname();
+		String userEmail = loginUser.getUserEmail();
+		String userPhone = loginUser.getUserPhone();
+		String gender = loginUser.getGender() == null ? "" : loginUser.getGender();
+		String birth = loginUser.getBirth();
+	%>
 
 	<div id="content2-padding">
         <div id="change-area">
@@ -59,12 +69,12 @@
                 <table class="table1">
                     <tr>
                         <th>아이디</th>
-                        <td class="input-area2"><input type="text" size="55" name="userId" value="hahaha0123" required></td> <!--아이디는 미리 입력되어있어야함-->
+                        <td class="input-area2"><input type="text" size="55" name="userId" value="<%=userId%>" required></td> <!--아이디는 미리 입력되어있어야함-->
                         <td class="input-area3-id"></td>
                     </tr>
                     <tr>
                         <th>현재 비밀번호</th>
-                        <td class="input-area2"><input type="password" size="55" name="userPwd" maxlength="15" placeholder="비밀번호를 입력해주세요" required></td>
+                        <td class="input-area2"><input type="password" size="55" name="userPwd" value="<%=userPwd%>" maxlength="15" placeholder="비밀번호를 입력해주세요" required></td>
                         <td class="input-area3"></td>
                     </tr>
                     <tr>
@@ -79,22 +89,22 @@
                     </tr>
                     <tr>
                         <th>이름</th>
-                        <td class="input-area2"><input type="text" size="55" name="userName" maxlength="10" placeholder="이름을 입력해주세요" required></td>
+                        <td class="input-area2"><input type="text" size="55" name="userName" value="<%=userName%>" maxlength="10" placeholder="이름을 입력해주세요" required></td>
                         <td class="input-area3"></td>
                     </tr>
                     <tr>
                         <th>닉네임</th>
-                        <td class="input-area2"><input type="text" size="55" name="nickname" placeholder="닉네임을 입력해주세요" required></td>
+                        <td class="input-area2"><input type="text" size="55" name="nickname" value="nickname" placeholder="닉네임을 입력해주세요" required></td>
                         <td class="input-area3-nickname"><button type="button" class="btn btn-danger">중복확인</button></td>
                     </tr>
                     <tr>
                         <th>이메일</th>
-                        <td class="input-area2"><input type="email" size="55" name="email" placeholder="예:fooding@fooding.com"></td>
+                        <td class="input-area2"><input type="email" size="55" name="email" value="<%=userEmail%>" placeholder="예:fooding@fooding.com"></td>
                         <td class="input-area3"></td>
                     </tr>
                     <tr>
                         <th>휴대폰</th>
-                        <td class="input-area2"><input type="text" size="55" name="phone" placeholder="-빼고 숫자만 입력해주세요"></td>
+                        <td class="input-area2"><input type="text" size="55" name="phone" value="<%=userPhone%>" placeholder="-빼고 숫자만 입력해주세요"></td>
                         <td class="input-area3-phone"><button type="button" class="btn btn-danger">다른번호 인증</button></td>
                     </tr>
                     <tr>
@@ -114,15 +124,40 @@
                     <tr>
                         <th>생년월일&nbsp;&nbsp;&nbsp; </th>
                         <td class="birth-area" width="500px">
-                            <input type="text" size="10" value="YYYY" width="">
+                            <input type="text" size="10" placeholder="YYYY" value="" width="">
                             <span>/</span>
-                            <input type="text" size="10" value=" MM">
+                            <input type="text" size="10" placeholder="MM" value="">
                             <span>/</span>
-                            <input type="text" size="10" value=" DD">
+                            <input type="text" size="10" placeholder="DD" value="">
                         </td>
                         <td class="input-area3"></td>
                     </tr>
                 </table>
+                
+                <script>
+                	<%-- $(function() {
+                		const gender = "<%=gender%>";
+                		$("input[type=radio]")/* .each(function() */ {
+                			if(gender.search($(this).val()) != -1) {
+                				$(this).attr("checked", true);
+                			}
+                		})
+                	})
+                 --%>
+                	$(function() {
+                		const gender = "<%=gender%>";
+                		$("input[name='gender']:checked").each(function(){	
+                			//checked 된 라디오버튼 값
+                			console.log($(this).val())
+                		});
+
+                		
+                		
+                	})
+              
+                
+                </script>
+                
                 <br><br>
                     <div align="center" id="change-btn">
                         <button type="button" class="btn btn-outline-danger">회원탈퇴</button>&nbsp;&nbsp;

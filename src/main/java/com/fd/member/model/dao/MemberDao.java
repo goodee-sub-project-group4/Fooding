@@ -181,21 +181,25 @@ public class MemberDao {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/*
+	 * public int confirmPwdMember(Connection conn, String userId, String userPwd) {
+	 * // select문 PreparedStatement pstmt = null; ResultSet rset = null;
+	 * 
+	 * String sql = prop.getProperty("loginMember");
+	 * 
+	 * try { pstmt = conn.prepareStatement(sql); pstmt.setString(1, userId);
+	 * pstmt.setString(2, userPwd);
+	 * 
+	 * rset = pstmt.executeQuery();
+	 * 
+	 * if(rset.next()) {}
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
+
+
 	
 	
 }
