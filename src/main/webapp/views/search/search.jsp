@@ -4,32 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <!-- Popper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<title>검색페이지</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
     .wrap{width: 1200px; margin: auto;}
-    .header div{border: 1px solid black;}
-    #header1-padding, #header2-padding, #header3-padding{
-        float:left;
-        box-sizing: border-box;
-        padding: 5px;
-        height: 150px;
-    }
-    #header1-padding, #header3-padding{width: 25%;}
-    #header2-padding{width: 50%;}
-    #header1, #header2, #header3{height: 100%;}
-    #header3-1, #header3-2{box-sizing: border-box; width: 100%; height: 50%;}
-    #header-line{width:100%; float: left; box-sizing: border-box; padding: 20px;}
-    #header-line>div{height:3px; background-color: black;}
     
     /* 컨텐트 전체 영역 */
     .content div{border: 1px solid black;} 
@@ -42,69 +25,22 @@
 
     /* 내가 한 수정!! */
     /* 카테고리 로고*/
-    .icon{
-        border: 1px solid red; 
-        float:left; 
-    }
+    .icon{border: 1px solid red; float:left;}
 
     /* 카테고리 이름 (로고 옆에 붙도록 수정)*/
-    .ctName{
-        height: 30px; 
-        line-height: 30px; 
-        font-size: 20px;
-    }
+    .ctName{height: 30px; line-height: 30px; font-size: 20px;}
 
     /* 지역 카테고리 상위 칸*/
-    #content1-1{
-        height: 30%; /*150px*/
-        box-sizing: border-box;
-
-    }
+    #content1-1{height: 30%; /*150px*/	box-sizing: border-box;}
+    
     /* 음식 카테고리 상위 칸*/
-    #content1-2{
-        height: 70%; /*350px;*/
-        box-sizing: border-box;
-    }
+    #content1-2{height: 70%; /*350px;*/ box-sizing: border-box;}
 
     /* 지역 카테고리 */
-    #ctLocal{
-        border:1px solid red; 
-        width:150px; 
-        margin-top:25px; 
-        margin-left:30px; 
-    }
+    #ctLocal{border:1px solid red; width:150px; margin-top:25px; margin-left:30px;}
 
     /* 음식 카테고리 */
-    /* 스타일 퍼옴 */
-    .circle{
-        display: inline-block; /* 영역적용가능해짐 */
-        width: 20px; height: 20px;
-        border: 2px solid #666;
-        box-sizing: border-box;
-        border-radius: 10px; /* 모서리둥글게 처리 */
-        position: relative; top: 4px;
-        cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
-
-        background-image: url(https://blog.kakaocdn.net/dn/XTnSL/btrhtUIVtpB/5FungHN6IXVXG8bLbhE9Dk/img.png);
-        background-size: 70%;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-
-    .chk:checked + .circle{
-    background-color: navy;
-    border-color: navy;
-    background-image: url(https://blog.kakaocdn.net/dn/t7a2D/btrhtVgLYmG/dUxzAkBy9hIZ4gHmyllQrk/img.png);
-    }
-
-    /* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
-    .chk{ position: absolute; left: -999em; }
-
-    #ctFood{
-        width:150px;
-        margin-left:30px;
-        margin-top:15px;
-    }
+    .food{width:150px; margin-left:30px; margin-top:15px;}
 
 
 
@@ -124,80 +60,41 @@
 
     }
 
-    #searchCount{
-        display:inline; 
-    }
-    #searchFilter{
-        display:inline; 
-        float:right; 
-    }
+    #searchCount{display:inline; }
+    #searchFilter{display:inline; float:right; }
 
     /* 업체 정보 */
     #content-main{width: 100%; padding: 5px; float: left;}
     
     /*음식점정보(음식점 썸네일 사진+음식점 간단설명) 옆으로 붙도록 인라인 블럭처리*/
-    .searchRes{
-        display:inline-block; 
-        margin: 30px;
-    }
+    .searchRes{display:inline-block; margin: 30px;}
 
     /*찜하기*/
-    .zzim{
-
-        float:right;
-        box-sizing: border-box; 
-    }
+    .zzim{float:right;box-sizing: border-box; }
 
     /* 리뷰 페이징 */
     .paging{height: 50px; text-align: center; padding-top: 20px;}
-    
-
 </style>
 </head>
+
 <body>
-	
-	<%@ include file="../common/head.jsp" %>
-	 
     <div class="wrap">
     
-    <!-- 
-        <div class="header">
-            <div id="header1-padding">
-                <div id="header1">
-
-                </div>
-            </div>
-            <div id="header2-padding">
-                <div id="header2">
-            </div>
-
-            </div>
-            <div id="header3-padding">
-                <div id="header3">
-                    <div id="header3-1"></div>
-                    <div id="header3-2"></div>
-                </div>
-            </div>
-        </div>
-        <div id="header-line">
-            <div></div>
-        </div>  
-        
-        -->  
+        <%@ include file="../common/head.jsp" %>   
 
         <div class="content">
             <div id="content1-padding">
+                <form name=form method=get action="">
                 <div id="content1">
                     <div id="content1-1"> 
-
                         <!--로고랑 카테고리 이름-->
-                        <img src="/Fooding/resources/images/003-location.png" width="30px" height="30px;" class="icon">
+                        <img src="images/003-location.png" width="30px" height="30px;" class="icon">
                         <div class="ctName">지역</div>
 
                         <div id="ctLocal">
                             <!-- 지역 카테고리 시작(퍼옴)-->
                             <script language='javascript'>
-                                
+                                <!--
                                     var cnt = new Array();
                                     cnt[0] = new Array('전체');
                                     cnt[1] = new Array('전체','강남구','강동구','강북구','강서구','관악구','광진구','구로구','금천구','노원구','도봉구','동대문구','동작구','마포구','서대문구','서초구','성동구','성북구','송파구','양천구','영등포구','용산구','은평구','종로구','중구','중랑구');
@@ -229,9 +126,9 @@
                                             sel.options[i] = new Option(cnt[add][i], cnt[add][i]);
                                         }         
                                     }
-                                
+                                //-->
                             </script>
-                            <form name=form method=post action=$PHP_SELF>
+                            <!-- <form name=form method=post action=$PHP_SELF> -->
                                 시/도: 
                                 <select name='city' onchange="change(this.selectedIndex);" class=input style="width:100px;">
                                     <option value='전체'>전체</option>
@@ -249,7 +146,7 @@
                                     <option value='전북'>전라북도</option>
                                     <option value='전남'>전라남도</option>
                                     <option value='경북'>경상북도</option>
-                                    <option value='경남'>경상남도</option>
+                                    <option value='경남'>경상남도</option>S
                                     <option value='제주'>제주도</option>
                                 </select>   
                                 <br>
@@ -260,83 +157,56 @@
                             </form> 
                             <!-- 지역 카테고리 끝(퍼음)-->
                         </div>
+                        <br>
                     </div>
+
                     <div id="content1-2">
                         <!--로고랑 카테고리 이름-->
-                        <img src="/Fooding/resources/images/002-chicken-1.png" width="30px" height="30px" class="icon">
+                        <img src="images/002-chicken-1.png" width="30px" height="30px" class="icon">
                         <div class="ctName">음식</div>
 
                         <!--음식카테고리-->
-                        <div id="ctFood">
-                            <form action="#">
-                                <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
-                                <label for="western">
-                                  <input type="checkbox" class="chk" id="western">
-                                  <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
-                                  <i class="circle"></i>
-                                  <span class="text">양식</span>
-                                </label>
-                                <br> 
-                            
-                                <label for="japanese">
-                                  <input type="checkbox" class="chk" id="japanese">
-                                  <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
-                                  <i class="circle"></i>
-                                  <span class="text">일식</span>
-                                </label>
-                                <br>
-                            
-                                <label for="chinese">
-                                  <input type="checkbox" class="chk" id="chinese">
-                                  <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
-                                  <i class="circle"></i>
-                                  <span class="text">중식</span>
-                                </label>
-                                <br>
-                            
-                                <label for="chicken">
-                                  <input type="checkbox" class="chk" id="chicken">
-                                  <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
-                                  <i class="circle"></i>
-                                  <span class="text">분식류/치킨</span>
-                                </label>
-                                <br>
-                            
-                                <label for="asia">
-                                  <input type="checkbox" class="chk" id="asia">
-                                  <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
-                                  <i class="circle"></i>
-                                  <span class="text">아시아/퓨전</span>
-                                </label>
-                                <br>
-                            
-                                <label for="buffet">
-                                  <input type="checkbox" class="chk" id="buffet">
-                                  <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
-                                  <i class="circle"></i>
-                                  <span class="text">뷔페/레스토랑</span>
-                                </label>
-                                <br>
-                            
-                                <label for="bar">
-                                  <input type="checkbox" class="chk" id="bar">
-                                  <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
-                                  <i class="circle"></i>
-                                  <span class="text">술집</span>
-                                </label>
-                                <br>
-                            
-                                <label for="cafe">
-                                  <input type="checkbox" class="chk" id="cafe">
-                                  <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
-                                  <i class="circle"></i>
-                                  <span class="text">카페</span>
-                                </label>
-                                
-                              </form>
+                        <div class="food">
+                            <input type="radio" id="all" name="foodCt"  value="all" checked>
+                            <label for="all">전체</label>
+                            <br>
+
+                            <input type="radio" id="western" name="foodCt" value="western">
+                            <label for="western">양식</label>
+                            <br> 
+
+                            <input type="radio" id="japanese" name="foodCt">
+                            <label for="japanese">일식</label>
+                            <br>
+
+                            <input type="radio" id="chinese" name="foodCt" value="chinese">
+                            <label for="chinese">중식</label>
+                            <br>
+
+                            <input type="radio" id="chicken" name="foodCt" value="chicken">
+                            <label for="chicken">분식류/치킨</label>
+                            <br>
+
+                            <input type="radio" id="asia" name="foodCt" value="aisa">
+                            <label for="asia">아시아/퓨전</label>
+                            <br>
+
+                            <input type="radio" id="buffet" name="foodCt" value="buffet">
+                            <label for="buffet">뷔페/레스토랑</label>
+                            <br>
+
+                            <input type="radio" id="bar" name="foodCt" value="bar">
+                            <label for="bar">술집</label>
+                            <br>
+
+                            <input type="radio" id="cafe" name="foodCt" value="cafe">
+                            <label for="cafe">카페</label>
+                            <br>
                         </div>
                     </div>
+                    <button type="submit">검색하기</button>
                 </div>
+            </form>
             </div>
             <div id="content2-padding">
                 <div id="content2">
@@ -361,18 +231,18 @@
                         <div class="searchRes">
                             <!-- 음식점 사진-->
                             <div class="resThumbnail">
-                                <img src="/Fooding/resources/images/chicken.jpg" style="width:400px;" height="300px;">
+                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
                             </div>
                             <!-- 음식점 사진 아래 간단 설명 -->
                             <div class="resDescription" style="width:400px;">
                                 차만다 (서울숲점) 4.5  <br>
                                 왕십리/성동 - 아시아/퓨전 <br>
                                 <span class="zzim">
-                                    <img src="/Fooding/resources/images/찜하기.png" width="50px;">
+                                    <img src="images/찜하기.png" width="50px;">
                                 </span>
-                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
+                                <img src="images/조회수.png" width="20px;">
                                 조회수: 89,459,500 <br>
-                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
+                                <img src="images/리뷰수2.png" width="20px;">
                                 리뷰수: 54 
                             </div>
                         </div>
@@ -380,18 +250,18 @@
                         <div class="searchRes">
                             <!-- 음식점 사진-->
                             <div class="resThumbnail">
-                                <img src="/Fooding/resources/images/chicken.jpg" style="width:400px;" height="300px;">
+                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
                             </div>
                             <!-- 음식점 사진 아래 간단 설명 -->
                             <div class="resDescription" style="width:400px;">
                                 차만다 (서울숲점) 4.5  <br>
                                 왕십리/성동 - 아시아/퓨전 <br>
                                 <span class="zzim">
-                                    <img src="/Fooding/resources/images/찜하기.png" width="50px;">
+                                    <img src="images/찜하기.png" width="50px;">
                                 </span>
-                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
+                                <img src="images/조회수.png" width="20px;">
                                 조회수: 89,459,500 <br>
-                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
+                                <img src="images/리뷰수2.png" width="20px;">
                                 리뷰수: 54 
                             </div>
                         </div>
@@ -399,18 +269,18 @@
                         <div class="searchRes">
                             <!-- 음식점 사진-->
                             <div class="resThumbnail">
-                                <img src="/Fooding/resources/images/chicken.jpg" style="width:400px;" height="300px;">
+                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
                             </div>
                             <!-- 음식점 사진 아래 간단 설명 -->
                             <div class="resDescription" style="width:400px;">
                                 차만다 (서울숲점) 4.5  <br>
                                 왕십리/성동 - 아시아/퓨전 <br>
                                 <span class="zzim">
-                                    <img src="/Fooding/resources/images/찜하기.png" width="50px;">
+                                    <img src="images/찜하기.png" width="50px;">
                                 </span>
-                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
+                                <img src="images/조회수.png" width="20px;">
                                 조회수: 89,459,500 <br>
-                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
+                                <img src="images/리뷰수2.png" width="20px;">
                                 리뷰수: 54 
                             </div>
                         </div>
@@ -418,18 +288,18 @@
                         <div class="searchRes">
                             <!-- 음식점 사진-->
                             <div class="resThumbnail">
-                                <img src="/Fooding/resources/images/chicken.jpg" style="width:400px;" height="300px;">
+                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
                             </div>
                             <!-- 음식점 사진 아래 간단 설명 -->
                             <div class="resDescription" style="width:400px;">
                                 차만다 (서울숲점) 4.5  <br>
                                 왕십리/성동 - 아시아/퓨전 <br>
                                 <span class="zzim">
-                                    <img src="/Fooding/resources/images/찜하기.png" width="50px;">
+                                    <img src="images/찜하기.png" width="50px;">
                                 </span>
-                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
+                                <img src="images/조회수.png" width="20px;">
                                 조회수: 89,459,500 <br>
-                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
+                                <img src="images/리뷰수2.png" width="20px;">
                                 리뷰수: 54 
                             </div>
                         </div>
@@ -437,18 +307,18 @@
                         <div class="searchRes">
                             <!-- 음식점 사진-->
                             <div class="resThumbnail">
-                                <img src="/Fooding/resources/images/chicken.jpg" style="width:400px;" height="300px;">
+                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
                             </div>
                             <!-- 음식점 사진 아래 간단 설명 -->
                             <div class="resDescription" style="width:400px;">
                                 차만다 (서울숲점) 4.5  <br>
                                 왕십리/성동 - 아시아/퓨전 <br>
                                 <span class="zzim">
-                                    <img src="/Fooding/resources/images/찜하기.png" width="50px;">
+                                    <img src="images/찜하기.png" width="50px;">
                                 </span>
-                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
+                                <img src="images/조회수.png" width="20px;">
                                 조회수: 89,459,500 <br>
-                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
+                                <img src="images/리뷰수2.png" width="20px;">
                                 리뷰수: 54 
                             </div>
                         </div>
@@ -456,18 +326,18 @@
                         <div class="searchRes">
                             <!-- 음식점 사진-->
                             <div class="resThumbnail">
-                                <img src="/Fooding/resources/images/chicken.jpg" style="width:400px;" height="300px;">
+                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
                             </div>
                             <!-- 음식점 사진 아래 간단 설명 -->
                             <div class="resDescription" style="width:400px;">
                                 차만다 (서울숲점) 4.5  <br>
                                 왕십리/성동 - 아시아/퓨전 <br>
                                 <span class="zzim">
-                                    <img src="/Fooding/resources/images/찜하기.png" width="50px;">
+                                    <img src="images/찜하기.png" width="50px;">
                                 </span>
-                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
+                                <img src="images/조회수.png" width="20px;">
                                 조회수: 89,459,500 <br>
-                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
+                                <img src="images/리뷰수2.png" width="20px;">
                                 리뷰수: 54 
                             </div>
                         </div>
@@ -475,18 +345,18 @@
                         <div class="searchRes">
                             <!-- 음식점 사진-->
                             <div class="resThumbnail">
-                                <img src="/Fooding/resources/images/chicken.jpg" style="width:400px;" height="300px;">
+                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
                             </div>
                             <!-- 음식점 사진 아래 간단 설명 -->
                             <div class="resDescription" style="width:400px;">
                                 차만다 (서울숲점) 4.5  <br>
                                 왕십리/성동 - 아시아/퓨전 <br>
                                 <span class="zzim">
-                                    <img src="/Fooding/resources/images/찜하기.png" width="50px;">
+                                    <img src="images/찜하기.png" width="50px;">
                                 </span>
-                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
+                                <img src="images/조회수.png" width="20px;">
                                 조회수: 89,459,500 <br>
-                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
+                                <img src="images/리뷰수2.png" width="20px;">
                                 리뷰수: 54 
                             </div>
                         </div>
@@ -494,18 +364,18 @@
                         <div class="searchRes">
                             <!-- 음식점 사진-->
                             <div class="resThumbnail">
-                                <img src="/Fooding/resources/images/chicken.jpg" style="width:400px;" height="300px;">
+                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
                             </div>
                             <!-- 음식점 사진 아래 간단 설명 -->
                             <div class="resDescription" style="width:400px;">
                                 차만다 (서울숲점) 4.5  <br>
                                 왕십리/성동 - 아시아/퓨전 <br>
                                 <span class="zzim">
-                                    <img src="/Fooding/resources/images/찜하기.png" width="50px;">
+                                    <img src="images/찜하기.png" width="50px;">
                                 </span>
-                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
+                                <img src="images/조회수.png" width="20px;">
                                 조회수: 89,459,500 <br>
-                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
+                                <img src="images/리뷰수2.png" width="20px;">
                                 리뷰수: 54 
                             </div>
                         </div>
@@ -513,50 +383,31 @@
                         <div class="searchRes">
                             <!-- 음식점 사진-->
                             <div class="resThumbnail">
-                                <img src="/Fooding/resources/images/chicken.jpg" style="width:400px;" height="300px;">
+                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
                             </div>
                             <!-- 음식점 사진 아래 간단 설명 -->
                             <div class="resDescription" style="width:400px;">
                                 차만다 (서울숲점) 4.5  <br>
                                 왕십리/성동 - 아시아/퓨전 <br>
                                 <span class="zzim">
-                                    <img src="/Fooding/resources/images/찜하기.png" width="50px;">
+                                    <img src="images/찜하기.png" width="50px;">
                                 </span>
-                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
+                                <img src="images/조회수.png" width="20px;">
                                 조회수: 89,459,500 <br>
-                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
+                                <img src="images/리뷰수2.png" width="20px;">
                                 리뷰수: 54 
                             </div>
                         </div>
 
-                        <div class="searchRes">
-                            <!-- 음식점 사진-->
-                            <div class="resThumbnail">
-                                <img src="/Fooding/resources/images/chicken.jpg" style="width:400px;" height="300px;">
-                            </div>
-                            <!-- 음식점 사진 아래 간단 설명 -->
-                            <div class="resDescription" style="width:400px;">
-                                차만다 (서울숲점) 4.5  <br>
-                                왕십리/성동 - 아시아/퓨전 <br>
-                                <span class="zzim">
-                                    <img src="/Fooding/resources/images/찜하기.png" width="50px;">
-                                </span>
-                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
-                                조회수: 89,459,500 <br>
-                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
-                                리뷰수: 54 
-                            </div>
-                        </div>
 
                         <!-- 페이징바 -->
                         <div class="paging">
                             < 1 2 3 4 5 6 7 8 9 >
+                            
+                           	<button onclick="">&lt;</button>
+                           	<button onclick="">1</button>
+                           	<button onclick="">&gt;</button>
                         </div>
-
-
-
-
-
 
                     </div>
                       
