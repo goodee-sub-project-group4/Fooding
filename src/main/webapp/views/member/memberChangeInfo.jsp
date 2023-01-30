@@ -59,6 +59,8 @@
 		String birth = loginUser.getBirth();
 	%>
 
+    
+
 	<div id="content2-padding">
         <div id="change-area">
             <b>개인 정보 수정</b>
@@ -94,7 +96,7 @@
                     </tr>
                     <tr>
                         <th>닉네임</th>
-                        <td class="input-area2"><input type="text" size="55" name="nickname" value="nickname" placeholder="닉네임을 입력해주세요" required></td>
+                        <td class="input-area2"><input type="text" size="55" name="nickname" value="<%=nickname%>" placeholder="닉네임을 입력해주세요" required></td>
                         <td class="input-area3-nickname"><button type="button" class="btn btn-danger">중복확인</button></td>
                     </tr>
                     <tr>
@@ -116,7 +118,7 @@
                         <th>성별&nbsp;&nbsp;&nbsp; </th>
                         <td class="gender-area">
                             <input type="radio" style="width:17px; height:17px;" name="gender" value="M">남자
-                            <input type="radio" style="width:17px; height:17px;" name="gender" value="W">여자
+                            <input type="radio" style="width:17px; height:17px;" name="gender" value="F">여자
                             <input type="radio" style="width:17px; height:17px;" name="gender" value="N">선택안함
                         </td>
                         <td class="input-area3"></td>
@@ -124,43 +126,21 @@
                     <tr>
                         <th>생년월일&nbsp;&nbsp;&nbsp; </th>
                         <td class="birth-area" width="500px">
-                            <input type="text" size="10" placeholder="YYYY" value="" width="">
+                            <input type="text" size="10" placeholder="YYYY" value="" width="" name="birth">
                             <span>/</span>
-                            <input type="text" size="10" placeholder="MM" value="">
+                            <input type="text" size="10" placeholder="MM" value="" name="birth">
                             <span>/</span>
-                            <input type="text" size="10" placeholder="DD" value="">
+                            <input type="text" size="10" placeholder="DD" value="" name="birth">
                         </td>
                         <td class="input-area3"></td>
                     </tr>
                 </table>
                 
-                <script>
-                	<%-- $(function() {
-                		const gender = "<%=gender%>";
-                		$("input[type=radio]")/* .each(function() */ {
-                			if(gender.search($(this).val()) != -1) {
-                				$(this).attr("checked", true);
-                			}
-                		})
-                	})
-                 --%>
-                	$(function() {
-                		const gender = "<%=gender%>";
-                		$("input[name='gender']:checked").each(function(){	
-                			//checked 된 라디오버튼 값
-                			console.log($(this).val())
-                		});
-
-                		
-                		
-                	})
-              
                 
-                </script>
                 
                 <br><br>
                     <div align="center" id="change-btn">
-                        <button type="button" class="btn btn-outline-danger">회원탈퇴</button>&nbsp;&nbsp;
+                        <button type="button" class="btn btn-outline-danger" onclick="location.href='<%=contextPath%>/delete.me'">회원탈퇴</button>&nbsp;&nbsp;
                         <input type="submit" class="btn btn-danger" value="회원정보수정">
                     </div>
                     <br><br>
@@ -169,6 +149,28 @@
         </div>
 
     </div>
+
+    <script>
+        $(function() {
+            const gender = "<%=gender%>";
+            $("input[type=radio]").each(function() {
+                console.log($(this).val())
+                if(gender.search($(this).val()) != -1) {
+                    $(this).attr("checked", true);
+                }
+            })
+            const birth = "<%=birth%>";
+            console.log(birth);
+            const year = birth.substr(0, 4);
+            const month = birth.substr(4, 2);
+            const day = birth.substr(6, 2);
+            const birthArray = [year, month, day]
+            $('.birth-area').children('input').each(function(i) {
+                console.log($(this));
+                $(this).val(birthArray[i]);
+            });
+        })
+    </script>
 
 </body>
 </html>

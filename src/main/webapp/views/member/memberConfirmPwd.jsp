@@ -53,7 +53,7 @@
 	<%
 		String userId = loginUser.getUserId();
 	%>
-
+	
     <div id="content2-padding">
         <div id="reconfirm-pwd-area">
             <b>개인 정보 수정</b>
@@ -62,7 +62,7 @@
             <p style="font-weight:600; font-size:20px;">비밀번호 재확인</p>
             <p>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인해주세요.</p>
         </div>
-        <form action="<%=contextPath%>/confirmPwd.me" method="post">
+        <form action="<%=contextPath%>/changeInfo.me" method="post">
         <input type="hidden" name="userId" value="<%=userId%>">
             <div id="input-id-pwd-area">
 
