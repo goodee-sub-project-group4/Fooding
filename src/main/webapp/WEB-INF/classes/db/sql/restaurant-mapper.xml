@@ -104,5 +104,13 @@
 		  FROM MENU
 		 WHERE RES_NO=?        
 	</entry>
+	<entry key="updateMenu">
+		UPDATE MENU
+           SET MENU_NAME = ?
+             , PRICE = ?
+             , MENU_DES = ?
+             , M_IMG = ?
+         WHERE MENU_NO = ?		
+	</entry>
 
 </properties>
