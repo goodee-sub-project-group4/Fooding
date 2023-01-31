@@ -1,25 +1,28 @@
-package com.fd.member.controller;
+package com.fd.review.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.fd.review.model.service.ReviewService;
+import com.fd.review.model.vo.Review;
 
 /**
- * Servlet implementation class MypageConfirmPwdController
+ * Servlet implementation class MyPageReviewListController
  */
-@WebServlet("/myPageConfirmPwd.me")
-public class MypageConfirmPwdController extends HttpServlet {
+@WebServlet("/reviewList.re")
+public class ReviewListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageConfirmPwdController() {
+    public ReviewListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,15 +31,14 @@ public class MypageConfirmPwdController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		// 1)
 		
-		HttpSession session = request.getSession();
+		// 2) 응답페이지에 필요한 데이터 조회 (select)
+		ArrayList<Review> list = new ReviewService().selectReviewList();
 		
-		if(session.getAttribute("loginUser") == null) {// 로그인 전 => 메인페이지, alert띄우기
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			response.sendRedirect(request.getContextPath());
-		} else { // 로그인 후 =>
-			request.getRequestDispatcher("/views/member/memberConfirmPwd.jsp").forward(request, response);
-		}
+		// 3) 응답뷰 (views/review/reviewList.jsp)
+		
 		
 	}
 

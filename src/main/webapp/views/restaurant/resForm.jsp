@@ -60,7 +60,7 @@
 				<br><br><br><br><br>
 				
 				
-                <form action="">
+                <form action="<%= contextPath %>/resForm.res" method="get">
 
                     <div class="inputForm">
                         대표자명 <span style="color:red;">*</span> <br>
@@ -93,12 +93,14 @@
                     </div>
                     <br><br>
 
+					<!--
                     <div class="inputForm">
                         상세주소 <span style="color:red;">*</span>  <br>
                         <input type="text" name="dAddress" id="dAddress" required> <br> 
                         <span id="dAddressHelper" class="ss"></span>
                     </div>
                     <br><br>
+                     -->
 
                     <div class="inputForm">
                         전화번호 <span style="color:red;">*</span>  <br>
@@ -109,7 +111,7 @@
 
                     <div class="inputForm">
                         휴대폰번호 <span style="color:red;">*</span>  <br>
-                        <input type="text" name="cellPhone" id="cellPhone" required> <br> 
+                        <input type="text" name="cellphone" id="cellphone" required> <br> 
                         <span id="cellHelper" class="ss"></span>
                     </div>
                     <br><br>
@@ -145,14 +147,13 @@
                     </div>
                     <br><br>
 
-
-
+					<!--
                     <div class="inputForm">
                         업체사진등록 <span style="color:red;">*</span>  <br> 
                         <input type="file" name="rImg" id="rImg" required> <br> 
                     </div>
                     <br><br>
-
+					 -->	
                     
                     <br><br>
                     <p><button type="submit" class="btn btn-danger btn-block" style="margin:auto; width:400px;" >업체등록요청</button></p>
@@ -240,6 +241,7 @@
                     }
                 })
 
+                <!--
                 // 5) 상세주소 아무것도 입력 안 했을 때 
                 // 상세주소에서 커서가 이동할 때 
                 $("#dAddress").focusout(function(){
@@ -250,6 +252,7 @@
                        $("#dAddressHelper").html(""); 
                     }
                 })
+                -->
 
                 // 6) 전화번호 아무것도 입력 안 했을 때 
                 // 전화번호에서 커서가 이동할 때 

@@ -67,8 +67,51 @@
 		  FROM TB_USER
 		 WHERE NICKNAME = ?
 	</entry>
+	
+	<!-- 회원정보수정 -->
+	<entry key="updateMember">
+		UPDATE TB_USER
+		   SET USER_PWD = ?
+		     , USER_NAME = ?
+		     , NICKNAME = ?
+		     , USER_EMAIL = ?
+		     , USER_PHONE = ?
+		     , GENDER = ?
+		     , BIRTH=?
+		     , MODIFY_DATE = SYSDATE
+		 WHERE USER_ID = ?
+		   AND USER_PWD =?
+	</entry>
 
-
+	<!-- 회원정보수정(갱신된 회원 객체 다시 조회) -->
+ 	<entry key="selectMember">
+ 		SELECT 
+			   USER_NO
+			 , USER_ID
+			 , USER_PWD
+			 , USER_NAME
+			 , NICKNAME
+			 , USER_EMAIL
+			 , USER_PHONE
+			 , GENDER
+			 , BIRTH
+			 , ENROLL_DATE
+			 , MODIFY_DATE
+			 , STATUS
+		  FROM TB_USER
+		 WHERE USER_ID = ?
+		   AND USER_PWD = ?
+		   AND STATUS IN ('Y', 'A')
+ 	</entry>
+ 	
+ 	<!-- 회원탈퇴 -->
+ 	<entry key="confirmDeleteMember">
+ 		UPDATE TB_USER
+ 		   SET STATUS = 'N'
+ 		     , MODIFY_DATE = SYSDATE
+ 		 WHERE USER_ID = ?
+ 		   AND USER_PWD = ?
+ 	</entry>
 
 
 

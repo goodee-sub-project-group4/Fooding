@@ -8,7 +8,7 @@ import com.fd.member.model.vo.Member;
 
 public class MemberService {
 	
-	/** 로그인
+	/** 로그인 / (마이페이지) 비밀번호 확인
 	 * @author 빛나
 	 * @param userId
 	 * @param userPwd
@@ -67,16 +67,54 @@ public class MemberService {
 		close(conn);
 		return count2;
 	}
-	
-	/*
-	 * public void confirmPwdMember(String userId, String userPwd) {
-	 * 
-	 * Connection conn = getConnection(); i = new MemberDao().confirmPwdMember(conn,
-	 * userId, userPwd);
-	 * 
-	 * 
-	 * }
+	 
+	 
+	/** 회원정보수정
+	 * @author 빛나
+	 * @param m
+	 * @return updateMem
 	 */
+	public Member updateMember(Member m) {
+		
+		Connection conn = getConnection();
+		int result = new MemberDao().updateMember(conn, m);
+		Member updateMem = null;
+		if(result > 0) {
+			commit(conn);
+			// 갱신된 회원 객체 다시 조회 m대신 updateMem
+			updateMem = new MemberDao().selectMember(conn, m.getUserId(), m.getUpdatePwd());
+			
+		} else {
+			rollback(conn); // 변경에 실패 시 null
+		}
+		
+		close(conn);
+		
+		return updateMem;
+		
+	}
+	
+	/** 회원탈퇴 
+	 * @ 빛나
+	 * @param userId
+	 * @param userPwd
+	 * @return result
+	 */
+	public int confirmDeleteMember(String userId, String userPwd) {
+		
+		Connection conn = getConnection();
+		int result = new MemberDao().confirmDeleteMember(conn, userId, userPwd);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+		
+	}
 	
 	
 	

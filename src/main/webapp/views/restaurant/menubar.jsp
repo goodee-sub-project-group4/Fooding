@@ -134,13 +134,13 @@
                 $(detailId).siblings("div").not("#menu").hide();
         		$(detailId).toggle();
             })
-            /*영역밖 클릭시 디테일메뉴창 닫기
+            //영역밖 클릭시 디테일메뉴창 닫기
             $(document).click(function() {
                 var area = $("#menu");
                 if (!area.is(event.target) && !area.has(event.target).length) {
                     $(".detail").hide();
                 }
-            });*/
+            });
             
         })
 

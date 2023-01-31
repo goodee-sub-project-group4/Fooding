@@ -23,7 +23,8 @@
     #content1-2 {height: 450px; box-sizing: border-box; padding:40px;}
     #content1-3 {height: 100px;}
     #content1-2 div { border:1px solid lightgrey; margin:0px; height:70px; padding:20px; font-size:17px; font-weight:600;}
-    #content1-2 div:hover {background-color: rgb(244, 244, 244); cursor: pointer;}
+    #content1-2 div:hover {background-color: rgb(244, 244, 244); cursor: pointer; color:red;}
+    #content1-2 a {color:black; text-decoration:none; display:block;}
     .arrow {float: right;}
     #content1-3 div {
         background-color:rgb(240, 239, 239);
@@ -45,11 +46,11 @@
                <div id="content1">
                    <div id="content1-1"><h2><b>마이페이지</b></h2></div>
                    <div id="content1-2">
-                       <div>예약/결제내역<span class="arrow">></span></div>
-                       <div>리뷰조회<span class="arrow">></span></div>
-                       <div>적립금조회<span class="arrow">></span></div>
-                       <div>찜하기조회<span class="arrow">></span></div>
-                       <div>개인정보수정<span class="arrow">></span></div>
+                       <div><a href="">예약/결제내역<span class="arrow">></span></a></div>
+                       <div><a href="<%=request.getContextPath()%>/reviewList.re">리뷰조회<span class="arrow">></span></a></div>
+                       <div><a href="">적립금조회<span class="arrow">></span></a></div>
+                       <div><a href="">찜하기조회<span class="arrow">></span></a></div>
+                       <div><a href="<%=request.getContextPath()%>/myPageConfirmPwd.me">개인정보수정<span class="arrow">></span></a></div>
                    </div>
                    <div id="content1-3">
                        <div>도움이 필요하신가요?<br>1 : 1 문의하기 ></div>

@@ -1,6 +1,8 @@
 package com.fd.restaurant.model.vo;
 
-public class Menu {
+import java.io.Serializable;
+
+public class Menu implements Serializable{
 	private int menuNo;
 	private int resNo;
 	private String menuName;

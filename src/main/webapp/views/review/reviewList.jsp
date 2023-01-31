@@ -76,6 +76,11 @@
             <div id="review-title5">작성일</div>
             <div id="review-title6"></div>
         </div>
+
+        <!-- case1. 리뷰가 없을 경우 -->
+        <!-- <div align="center" style="margin-top:20px;"><b>존재하는 리뷰가 없습니다.</b></div> -->
+
+        <!-- case2. 리뷰가 있을 경우 -->
         <div id="review-content">
             <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
             <div id="review-content2">3</div>

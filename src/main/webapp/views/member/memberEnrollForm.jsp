@@ -122,7 +122,7 @@
                             <td class="birth-area" width="500px">
                                 <input type="text" size="10" placeholder="YYYY" class="birth" name="birth">
                                 <span>/</span>
-                                <input type="text" size="10" placeholder="MM" name="birth">
+                                <input type="text" size="10" placeholder=" MM" name="birth">
                                 <span>/</span>
                                 <input type="text" size="10" placeholder=" DD" name="birth">
                             </td>
@@ -245,7 +245,37 @@
                 		});
                 	});
                 
-                
+    				$('#sendNum').click(function() {
+    	
+    	                const phone = $('#phone').val();
+    	
+                        $.ajax ({
+                            url: '???',
+                            type: 'GET',
+                            data: {
+                                '???'
+                            },
+                            success: function(data) {
+                                const checkNum = data;
+                                alert('checkNum:'+ checkNum);
+                        
+                                $('#sendNum2').click(function() {	
+                                    const phone2 = $('#phone2').val();
+                                
+                                    if(checkNum === phone2) {
+                                        alert('인증 성공하였습니다.');
+                                    } else {
+                                        alert('인증 실패하였습니다. 다시 입력해주세요.');
+                                    }
+                                    
+                                });
+                        
+                            }
+
+    	                 });
+    	
+                    });
+    	
                 
                 
                 </script>
