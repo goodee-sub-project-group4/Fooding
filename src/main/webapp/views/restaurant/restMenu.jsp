@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%
+	ArrayList<Menu> list = (ArrayList<Menu>)session.getAttribute("list");
+	int oldCount = list.size(); //추가된 메뉴의 갯수
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,17 +14,12 @@
 		/* ↓↓↓ 기본골격용 스타일들 (수정할필요X) */
 		#outer2 {
 			width:1200px;
-			/* position: relative; */
 			margin:auto;
 		}			
 		#content {
 			width:950px;
-			/* display: inline-block; */
 			box-sizing: border-box;
-			/* position:absolute; */
-			/* right:10px; */
 			float: right;
-			border:2px solid pink;
 		}
 		#menubar {
 			border-width:0px;
@@ -71,9 +71,8 @@
 		.photo button {
 			margin-top: 10px;
 		}
-		#menu-list {
-			height:260px;
-			border:2px solid green;
+		#menu-list { /*기존등록메뉴*/
+			height:260*<%=oldCount%>px;
 		}
 		
 	</style>
@@ -89,52 +88,41 @@
 			<!-- 컨텐츠 작성부 -->
 			<div id="menu-outer">
 				<div id="menu-list">
-						
+				<form action="<%=contextPath %>/menuUpdate.re" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="oldCount" value="<%=oldCount%>">
+					<% for(int i=0; i<list.size(); i++) { %>	
 					<div class="menu-box">
 						<div class="text-box">
 							<span>메뉴명 </span><span style="color:crimson">* </span>
-							<input name="name0" type="text" required><br>
+							<input name="name<%=i%>" type="text" value="<%=list.get(i).getMenuName()%>" required><br>
 						</div><br>
 						<div class="text-box">
 							<span>가격 </span><span style="color:crimson">* </span>
-							<input name="price0" type="text" required><br>
+							<input name="price<%=i%>" type="text" value="<%=list.get(i).getPrice()%>" required><br>
 						</div><br>
 						<div class="text-box">
 							<span>설명</span>
-							<input type="text" name="describe0"><br>
+							<input type="text" name="describe<%=i%>" value="<%=(list.get(i).getMenuDes()==null)? "" : list.get(i).getMenuDes()%>"><br>
 						</div>
 						<div class="photo" align="center">
-							<img id="image0" src="/Fooding/resources/images/forTest.png" class="rounded" width="180" height="180"><br>
+							<img id="image0" src="<%= list.get(i).getmImg()%>" class="rounded" width="180" height="180"><br>
 							<button type="button" class="btn btn-outline-danger">사진등록</button>
-							<div style="display:none"><input type="file" name="file0"></div>
-							<!-- 메뉴갯수를 넘기는 태그 -->
-							<input type="hidden" name="count" value="0"> 
+							<div style="display:none"><input type="file" name="file<%=i%>"></div>
 						</div>
-						<br clear="both"><br><br><br><br>
-					</div><br><br>
-
+					</div>
+					<% } %>
 				</div>
-
-				<form action="<%=contextPath %>/menuInsert.re" method="post" enctype="multipart/form-data">
-				
-
-					<div id="menu-new">
-						<div id="firstone"></div>
-		
-					</div>
-		
-					<div align="center"><br><br>
-						<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
-						<button type="submit" class="btn btn-danger">저장</button>
-						<button type="button" class="btn btn-secondary">다음에하기</button>
-					</div>
-					
-				</form>
-			</div>
-			
-			
-		</div>
+				<div id="firstone"></div><!-- 이 뒤로 동적으로 생성된 메뉴가 추가된다. -->
+						
+	
+				<div align="center"><br><br>
+					<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
+					<button type="submit" class="btn btn-danger">수정하기</button>
+				</div>			
+			</form>
+		</div>					
 	</div>
+</div>
 	<br clear="both"><br><br><br><br><br><br>
 	<div id="footer">
 		<%@ include file="../common/footer.jsp" %>
@@ -170,7 +158,7 @@
 				}
 			}
 		})
-		let count=0;
+		let count=<%=oldCount%>; //기존메뉴갯수
 		function addMenu() {
 			
 			//메뉴요소 추가하기
@@ -178,7 +166,7 @@
 			$('<div class="menu-box new-box" >'+
 				'<div class="text-box">'+
 					'<span>메뉴명</span><span style="color:crimson">* </span>'+
-					'<input type="text" name="name'+count+'" required><br>'+
+					'<input type="text" name="name'+ count++ +'" required><br>'+
 				'</div><br>'+
 				'<div class="text-box">'+
 					'<span>가격 </span><span style="color:crimson">* </span>'+
@@ -192,7 +180,7 @@
 					'<img id="image'+count+'" src="/Fooding/resources/images/forTest.png" class="rounded" width="180" height="180"><br>'+
 					'<button type="button" class="btn btn-outline-danger">사진등록</button>'+
 					'<div style="display:none"><input type="file" name="file'+count+'"></div>'+
-					'<input type="hidden" name="count" value="'+ count++ +'"> '+
+					'<input type="hidden" name="count" value="'+ count +'"> '+
 				'</div>'+
 			'</div>')
 			);

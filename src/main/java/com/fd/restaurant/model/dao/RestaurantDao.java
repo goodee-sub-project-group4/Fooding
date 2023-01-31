@@ -172,5 +172,31 @@ public class RestaurantDao {
 		
 		return result;
 	}
+	
+	public ArrayList<Menu> selectMenu(Connection conn, int resNo) {
+		ArrayList<Menu> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMenu");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Menu(rset.getInt("menu_no")
+							    , rset.getInt("res_no")
+						        , rset.getString("menu_name")
+						        , rset.getInt("price")
+						        , rset.getString("menu_des")
+						        , rset.getString("m_img")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
 
 }

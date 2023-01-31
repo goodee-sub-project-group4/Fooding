@@ -93,5 +93,16 @@
 		  , ?  
 		  )
 	</entry>
+	<entry key="selectMenu">
+		SELECT
+		       RES_NO
+		     , MENU_NO
+		     , MENU_NAME
+		     , PRICE
+		     , MENU_DES
+		     , M_IMG
+		  FROM MENU
+		 WHERE RES_NO=?        
+	</entry>
 
 </properties>

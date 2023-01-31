@@ -1,5 +1,6 @@
 package com.fd.restaurant.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -66,6 +67,10 @@ public class RestMenuInsertController extends HttpServlet {
 				session.setAttribute("alertMsg", "초기설정이 완료되었습니다.");
 				response.sendRedirect(request.getContextPath()+"/home.re");
 			} else {
+				//업로드된 첨부파일 삭제하기
+				for(int i=0; i<list.size(); i++) {
+					new File(list.get(i).getmImg()).delete();
+				}
 				//메뉴 업데이트 실패 >> 정상이용 불가판단, 푸딩홈페이지로 보내버리기
 				session.setAttribute("alertMsg", "메뉴 추가에 실패하였습니다. 고객센터로 문의해주세요.");
 				response.sendRedirect(request.getContextPath());

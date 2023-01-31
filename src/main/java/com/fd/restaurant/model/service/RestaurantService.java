@@ -67,5 +67,12 @@ public class RestaurantService {
 		return resultTotal;
 	}
 	
+	public ArrayList<Menu> selectMenu(int resNo) {
+		Connection conn = getConnection();
+		ArrayList<Menu> list = new RestaurantDao().selectMenu(conn, resNo);
+		close(conn);
+		return list;
+	}
+	
 
 }

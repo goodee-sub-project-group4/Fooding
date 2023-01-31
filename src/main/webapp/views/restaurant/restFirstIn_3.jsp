@@ -61,6 +61,7 @@
 		#menu-outer {
 			height:260px;
 		}
+
 		
 		
 	</style>
@@ -108,7 +109,7 @@
 			<div align="center"><br><br>
 				<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
 				<button type="submit" class="btn btn-danger">저장</button>
-				<button type="button" class="btn btn-secondary">다음에하기</button>
+				<button type="button" class="btn btn-secondary" onclick="location.href='<%=contextPath%>/home.re'">다음에하기</button>
 			</div>
 			
 		</form>
@@ -132,7 +133,7 @@
 		//파일첨부 시 미리보기 띄우기
 		$('#menu-outer').on('change','input[type=file]', function(){
 			//순번 저장, 순번이 1자리수를 초과하는 경우도 커버할 수 있도록 코드설정
-			// let num = $(this).attr('name').charAt(4);
+			//let num = $(this).attr('name').charAt(4);
 			let name = $(this).attr('name');
 			let num = name.substr(4, name.length);
 			//이벤트 객체를 저장
