@@ -63,7 +63,6 @@
 		      , CEO
 		      , PERMIT_NO
 		      , ADDRESS
-		      , D_ADDRESS
 		      , LOCAL_CT
 		      , DLOCAL_CT
 		      , PHONE
@@ -73,6 +72,7 @@
 		      , LONGTITUDE
 		      , LATITUDE
 		      , FOOD_CT
+		      , PARKING
 		      )
 		 VALUES
 		      (
@@ -81,15 +81,15 @@
 		      , ?
 		      , ?
 		      , ?
-		      , ?
 		      , '서울특별시'
-		      , '구로구'
+		      , '은평구'
 		      , ?
 		      , ?
 		      , ?
 		      , SYSDATE
 		      , '10'
 		      , '20'
+		      , ?
 		      , ?
 		      )
 	</entry>
