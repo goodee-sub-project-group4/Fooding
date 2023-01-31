@@ -87,7 +87,6 @@
 	<div class="wrap">
     	<div class="content">
 	   		<div id="content1-padding">
-	   			<form name="form" method="get" action="/Fooding/search.res">
 	   			<div id="content1-1"> 
 		            <!--로고랑 카테고리 이름-->
 		            <img src="/Fooding/resources/images/003-location.png" width="30px" height="30px;" class="icon">
@@ -96,7 +95,7 @@
 		            <div id="ctLocal">
 		                <!-- 지역 카테고리 시작(퍼옴)-->
 		                <script language='javascript'>
-		                
+		                    
 		                        var cnt = new Array();
 		                        cnt[0] = new Array('전체');
 		                        cnt[1] = new Array('전체','강남구','강동구','강북구','강서구','관악구','광진구','구로구','금천구','노원구','도봉구','동대문구','동작구','마포구','서대문구','서초구','성동구','성북구','송파구','양천구','영등포구','용산구','은평구','종로구','중구','중랑구');
@@ -130,9 +129,8 @@
 		                        }
 		                    
 		                </script>
-		                
+		                <form name=form method=post action=$PHP_SELF>
 		                    시/도: 
-		                 
 		                    <select name='city' onchange="change(this.selectedIndex);" class=input style="width:100px;">
 		                        <option value='전체'>전체</option>
 		                        <option value='서울'>서울특별시</option>
@@ -157,7 +155,7 @@
 		                    <select name='county'  class=select style="width:100px;">
 		                        <option value=''>전체</option>
 		                    </select>
-		                
+		                </form> 
 		                <!-- 지역 카테고리 끝(퍼음)-->
 		            </div>
 		        </div>
@@ -168,46 +166,75 @@
 		
 		            <!--음식카테고리-->
 		            <div id="ctFood">
-		               <input type="radio" id="all" name="foodCt"  value="all" checked>
-                       <label for="all">전체</label>
-                       <br>
-
-                       <input type="radio" id="western" name="foodCt" value="western">
-                       <label for="western">양식</label>
-                       <br> 
-
-                       <input type="radio" id="japanese" name="foodCt" value="japanese">
-                       <label for="japanese">일식</label>
-                       <br>
-
-                       <input type="radio" id="chinese" name="foodCt" value="chinese">
-                       <label for="chinese">중식</label>
-                       <br>
-
-                       <input type="radio" id="chicken" name="foodCt" value="chicken">
-                       <label for="chicken">분식류/치킨</label>
-                       <br>
-
-                       <input type="radio" id="asia" name="foodCt" value="aisa">
-                       <label for="asia">아시아/퓨전</label>
-                       <br>
-
-                       <input type="radio" id="buffet" name="foodCt" value="buffet">
-                       <label for="buffet">뷔페/레스토랑</label>
-                       <br>
-
-                       <input type="radio" id="bar" name="foodCt" value="bar">
-                       <label for="bar">술집</label>
-                       <br>
-
-                       <input type="radio" id="cafe" name="foodCt" value="cafe">
-                       <label for="cafe">카페</label>
-                       <br> 
+		                <form action="#">
+		                    <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
+		                    <label for="western">
+		                      <input type="checkbox" class="chk" id="western">
+		                      <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
+		                      <i class="circle"></i>
+		                      <span class="text">양식</span>
+		                    </label>
+		                    <br> 
+		                
+		                    <label for="japanese">
+		                      <input type="checkbox" class="chk" id="japanese">
+		                      <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
+		                      <i class="circle"></i>
+		                      <span class="text">일식</span>
+		                    </label>
+		                    <br>
+		                
+		                    <label for="chinese">
+		                      <input type="checkbox" class="chk" id="chinese">
+		                      <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
+		                      <i class="circle"></i>
+		                      <span class="text">중식</span>
+		                    </label>
+		                    <br>
+		                
+		                    <label for="chicken">
+		                      <input type="checkbox" class="chk" id="chicken">
+		                      <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
+		                      <i class="circle"></i>
+		                      <span class="text">분식류/치킨</span>
+		                    </label>
+		                    <br>
+		                
+		                    <label for="asia">
+		                      <input type="checkbox" class="chk" id="asia">
+		                      <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
+		                      <i class="circle"></i>
+		                      <span class="text">아시아/퓨전</span>
+		                    </label>
+		                    <br>
+		                
+		                    <label for="buffet">
+		                      <input type="checkbox" class="chk" id="buffet">
+		                      <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
+		                      <i class="circle"></i>
+		                      <span class="text">뷔페/레스토랑</span>
+		                    </label>
+		                    <br>
+		                
+		                    <label for="bar">
+		                      <input type="checkbox" class="chk" id="bar">
+		                      <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
+		                      <i class="circle"></i>
+		                      <span class="text">술집</span>
+		                    </label>
+		                    <br>
+		                
+		                    <label for="cafe">
+		                      <input type="checkbox" class="chk" id="cafe">
+		                      <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
+		                      <i class="circle"></i>
+		                      <span class="text">카페</span>
+		                    </label>
+		                    
+		                  </form>
 		            </div>
 		        </div>
-		        <button type="submit" align="center">검색하기</button>
 		    </div>
-			</form>
 		</div>
 	</div>
 </body>

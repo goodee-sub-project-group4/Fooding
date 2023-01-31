@@ -89,15 +89,16 @@ public class Restaurant {
 	}
 	
 	
-	// 한수가 만든 매개변수생성자 (SearchDao클래스의 selectList()에서 사용!!)
+	// 한수가 만든 매개변수생성자1 (SearchDao클래스의 selectList()에서 사용!!)
+	/*
 	public Restaurant(String resName, String address, String foodCt) {
 		super();
 		this.resName = resName;
 		this.address = address;
 		this.foodCt = foodCt;
 	}
-	
-	// 한수가 만든 매개변수생성자 (ResFormController의 doGet()에서 사용!!)
+	*/
+	// 한수가 만든 매개변수생성자2 (ResFormController의 doGet()에서 사용!!)
 	public Restaurant(String resName, String ceo, String permitNo, String address, String phone, String cellphone,
 			String email, String parking, String foodCt) {
 		super();
@@ -112,11 +113,18 @@ public class Restaurant {
 		this.foodCt = foodCt;
 	}
 	
+	// 한수가 만든 매개변수 생성자3
+	public Restaurant(String localCt, String dLocalCt, String foodCt) {
+		super();
+		this.localCt = localCt;
+		this.dLocalCt = dLocalCt;
+		this.foodCt = foodCt;
+	}
+	
 
 	public int getResNo() {
 		return resNo;
 	}
-
 
 	public void setResNo(int resNo) {
 		this.resNo = resNo;

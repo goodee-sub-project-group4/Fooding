@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.fd.common.model.vo.PageInfo;
 import com.fd.restaurant.model.vo.Restaurant;
+import com.fd.review.model.vo.Review;
 
 public class SearchDao {
 	
@@ -97,7 +98,18 @@ public class SearchDao {
 										rset.getString("food_ct")
 										//rset.getDouble("star"),
 										//rset.getInt("count")
-										)); 
+										)
+						
+						, new Review(
+									rset.getDouble("star"),
+									rset.getInt("count")
+									)
+						// res_name, address, food_ct, star, count, 사진을 한꺼번에 뽑도록 
+						// 위의 애들을 모두 받아주는 Restaurant 매개변수 생성자를 생성해서, 
+						// Restaurant객체로 뽑은 다음에 arrayList에 담자!! 
+
+						); 
+				
 			}
 			
 			// 문제점 : 화면에 뿌려져야 할 값들이 들어있는 컬럼들은 
@@ -107,10 +119,7 @@ public class SearchDao {
 			// res_name컬럼값, address컬럼값, food_ct컬럼값 => Restaurant 객체 
 			// star컬럼값, count컬럼값 => Review 객체 
 			
-			// 우선은 임시방편으로 res_name컬럼값, address컬럼값, food_ct컬럼값만 뽑아서 
-			// Restaurant 객체로 만들겠음 (매개변수생성자 이용) 
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

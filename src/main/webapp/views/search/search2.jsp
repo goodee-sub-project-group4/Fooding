@@ -88,7 +88,9 @@
 
         <div class="content">
             <div id="content1-padding">
-                <form name=form method=get action="">
+            
+            
+                <form name=form method=get action="<%=contextPath%>/search.res">
                 <div id="content1">
                     <div id="content1-1"> 
                         <!--로고랑 카테고리 이름-->
@@ -96,9 +98,8 @@
                         <div class="ctName">지역</div>
 
                         <div id="ctLocal">
-                            <!-- 지역 카테고리 시작(퍼옴)-->
+                            
                             <script language='javascript'>
-                            <!--   
                                     var cnt = new Array();
                                     cnt[0] = new Array('전체');
                                     cnt[1] = new Array('전체','강남구','강동구','강북구','강서구','관악구','광진구','구로구','금천구','노원구','도봉구','동대문구','동작구','마포구','서대문구','서초구','성동구','성북구','송파구','양천구','영등포구','용산구','은평구','종로구','중구','중랑구');
@@ -122,7 +123,7 @@
                                         sel=document.form.county
                                         /* 옵션메뉴삭제 */
                                         for (i=sel.length-1; i>=0; i--){
-                                            sel.options[i] = null
+                                            sel.options[i] = null;
                                         }
 
                                         /* 옵션박스추가 */
@@ -130,9 +131,7 @@
                                             sel.options[i] = new Option(cnt[add][i], cnt[add][i]);
                                         }         
                                     }
-                            //-->
                             </script>
-                            <form name=form method=post action=""> 
                                 시/도: 
                                 <select name='city' onchange="change(this.selectedIndex);" class=input style="width:100px;">
                                     <option value='전체'>전체</option>
@@ -158,8 +157,6 @@
                                 <select name='county'  class=select style="width:100px;">
                                     <option value=''>전체</option>
                                 </select>
-                            </form> 
-                            <!-- 지역 카테고리 끝(퍼음)-->
                         </div>
                         <br>
                     </div>
@@ -244,9 +241,9 @@
 	                            </div>
 	                            <!-- 음식점 사진 아래 간단 설명 -->
 	                            <div class="resDescription" style="width:400px;">
-	                                <!-- 차만다 (서울숲점) 4.5  --> <%= r.getResName()%><br>
-	                                <!-- 왕십리/성동 --> <%= r.getAddress() %><br>
-	                                <!-- 아시아/퓨전 --> <%= r.getFoodCt() %><br>
+	                                <%= r.getResName()%><br>
+	                                <%= r.getAddress() %><br>
+	                                <%= r.getFoodCt() %><br>
 	                                <span class="zzim">
 	                                    <img src="images/찜하기.png" width="50px;">
 	                                </span>
@@ -259,26 +256,6 @@
 	                        <% } %>
                         <% } %>
 
-                        <div class="searchRes">
-                            <!-- 음식점 사진-->
-                            <div class="resThumbnail">
-                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
-                            </div>
-                            <!-- 음식점 사진 아래 간단 설명 -->
-                            <div class="resDescription" style="width:400px;">
-                                차만다 (서울숲점) 4.5  <br>
-                                왕십리/성동 - 아시아/퓨전 <br>
-                                <span class="zzim">
-                                    <img src="images/찜하기.png" width="50px;">
-                                </span>
-                                <img src="images/조회수.png" width="20px;">
-                                조회수: 89,459,500 <br>
-                                <img src="images/리뷰수2.png" width="20px;">
-                                리뷰수: 54 
-                            </div>
-                        </div>
-
- 
                         <!-- 페이징바 -->
                         <div class="paging">
                             <% if(pi.getCurrentPage() != 1) { %>
@@ -296,7 +273,6 @@
                         </div>
 
                     </div>
-                      
                 </div>
             </div>
         </div>

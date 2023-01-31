@@ -110,6 +110,7 @@
                     <div class="inputForm">
                         전화번호 <span style="color:red;">*</span>  <br>
                         <input type="text" name="phone" id="phone" required> <br> 
+               
                         <span id="phoneHelper" class="ss"></span>
                     </div>
                     <br><br>

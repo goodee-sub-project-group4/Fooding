@@ -32,7 +32,7 @@ public class SearchController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		/*
 		// 1) 요청시 전달값 뽑기 & 데이터 가공처리 => 변수 또는 객체에 기록하기 
 		String localCt = request.getParameter("city");	
 		String dLocalCt = request.getParameter("county"); 
@@ -84,9 +84,22 @@ public class SearchController extends HttpServlet {
 		
 		request.setAttribute("pi", pi); 
 		request.setAttribute("list", list); 
-		
+		*/
 		// 응답페이지 (views/search/search.jsp); 
-		request.getRequestDispatcher("views/search/search.jsp").forward(request, response); 
+		
+		
+		/* 연습 (입력받은 값 뽑아서 출력해보기)*/
+		String localCt = request.getParameter("city");	
+		String dLocalCt = request.getParameter("county"); 
+		String foodCt = request.getParameter("foodCt"); 
+		
+		/*위의 값들 Restaurant 객체에 담기*/
+		Restaurant r = new Restaurant(localCt, dLocalCt, foodCt); 
+		
+		/*jsp파일에 전달하기 위함*/
+		request.setAttribute("r", r);
+
+		request.getRequestDispatcher("views/search/practice.jsp").forward(request, response); 
 	
 	}
 
