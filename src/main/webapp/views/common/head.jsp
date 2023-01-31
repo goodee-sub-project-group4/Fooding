@@ -120,7 +120,7 @@
                             <button type="button" data-toggle="dropdown">마이페이지</button>
                             <span class="dropdown-menu">
                             <a class="dropdown-item" href="#">예약/결제 내역</a>
-                            <a class="dropdown-item" href="#">리뷰</a>
+                            <a class="dropdown-item" href="<%= contextPath%>/reviewList.re">리뷰</a>
                             <a class="dropdown-item" href="#">찜하기</a>
                             <a class="dropdown-item" href="#">적립금</a>
                             <a class="dropdown-item" href="<%= contextPath%>/myPageConfirmPwd.me">개인정보수정</a>

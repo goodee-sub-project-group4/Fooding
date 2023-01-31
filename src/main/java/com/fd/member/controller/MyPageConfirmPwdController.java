@@ -13,13 +13,13 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class MypageConfirmPwdController
  */
 @WebServlet("/myPageConfirmPwd.me")
-public class MypageConfirmPwdController extends HttpServlet {
+public class MyPageConfirmPwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageConfirmPwdController() {
+    public MyPageConfirmPwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
