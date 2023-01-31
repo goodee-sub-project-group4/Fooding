@@ -20,21 +20,6 @@
     /* 가로 규격 */
     .wrap{width: 1200px; margin: auto;}
 
-    /* 헤드바 */
-    .header div{border: 1px solid black;}
-    #header1-padding, #header2-padding, #header3-padding{float:left; box-sizing: border-box; padding: 5px; height: 150px;}
-    /* 헤드바 왼쪽, 오른쪽 영역 */
-    #header1-padding, #header3-padding{width: 25%;}
-    /* 헤드바 가운데 */
-    #header2-padding{width: 50%;}
-    /* 헤드바 높이 */
-    #header1, #header2, #header3{height: 100%;}
-    #header3-1, #header3-2{width: 100%; height: 50%; box-sizing: border-box; }
-    /* 헤드바 하단 구분 선 */
-    #header-line{width:100%; float: left; box-sizing: border-box; padding: 20px;}
-    #header-line>div{height:3px; background-color: black;}
-
-
     /*content*/
     .content{
         border: 1px solid red;
@@ -68,33 +53,18 @@
 </head>
 <body>
     <div class="wrap">
-        <div class="header">
-            <div id="header1-padding">
-                <div id="header1">
 
-                </div>
-            </div>
-            <div id="header2-padding">
-                <div id="header2">
-            </div>
-
-            </div>
-            <div id="header3-padding">
-                <div id="header3">
-                    <div id="header3-1"></div>
-                    <div id="header3-2"></div>
-                </div>
-            </div>
-        </div>
-        <div id="header-line">
-            <div></div>
-        </div>    
+        
+        <%@ include file="../common/head.jsp" %>    
 
         <div class="content">
             <div id="content-padding">
 
-                <img src="/Fooding/resources/images/logo.png" width="500px">
-
+				<br><br><br>
+                <img src="/Fooding/resources/images/logo.png" width="300px">
+				<br><br><br><br><br>
+				
+				
                 <form action="">
 
                     <div class="inputForm">
@@ -118,6 +88,9 @@
                     </div>
                     <br><br>
 
+                    <div>
+                        
+                    </div>
                     <div class="inputForm">
                         주소 <span style="color:red;">*</span>  <br>
                         <input type="text" name="address" id="address" required> <br> 
@@ -172,10 +145,11 @@
 
                     <div class="inputForm">
                         주차여부 <span style="color:red;">*</span>  <br>
-                        <input type="checkbox" name="parking" id="parkingY" checked> <label for="parkingY">가능</label>
-                        <input type="checkbox" name="parking" id="parkingN"> <label for="parkingN">불가능</label>
+                        <input type="radio" name="parking" id="Y" value="Y" checked> <label for="Y">가능</label>
+                        <input type="radio" name="parking" id="N" value="N"> <label for="N">불가능</label>
                     </div>
                     <br><br>
+
 
 
                     <div class="inputForm">

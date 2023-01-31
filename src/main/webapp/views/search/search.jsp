@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.common.model.vo.PageInfo, com.fd.restaurant.model.vo.Restaurant" %>
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Restaurant> list = (ArrayList<Restaurant>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -227,6 +232,33 @@
 
                     <!-- 검색결과 조회된 음식점 목록들 -->
                     <div id="content-main">
+						<% if(list.isEmpty()){ %>
+							<!-- case1. 조회된 음식점이 없을 경우  -->
+							<div align="center">조회된 음식점이 없습니다.</div>
+						<% } else { %>
+							<!-- case2. 조회된 음식점이 있을 경우  -->
+							<% for(Restaurant r : list){ %>
+	                        <div class="searchRes">
+	                            <!-- 음식점 사진-->
+	                            <div class="resThumbnail">
+	                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
+	                            </div>
+	                            <!-- 음식점 사진 아래 간단 설명 -->
+	                            <div class="resDescription" style="width:400px;">
+	                                <!-- 차만다 (서울숲점) 4.5  --> <%= r.getResName()%><br>
+	                                <!-- 왕십리/성동 --> <%= r.getAddress() %><br>
+	                                <!-- 아시아/퓨전 --> <%= r.getFoodCt() %><br>
+	                                <span class="zzim">
+	                                    <img src="images/찜하기.png" width="50px;">
+	                                </span>
+	                                <img src="images/조회수.png" width="20px;">
+	                                조회수: 89,459,500 <br>
+	                                <img src="images/리뷰수2.png" width="20px;">
+	                                리뷰수: 54 
+	                            </div>
+	                        </div>
+	                        <% } %>
+                        <% } %>
 
                         <div class="searchRes">
                             <!-- 음식점 사진-->
@@ -247,166 +279,21 @@
                             </div>
                         </div>
 
-                        <div class="searchRes">
-                            <!-- 음식점 사진-->
-                            <div class="resThumbnail">
-                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
-                            </div>
-                            <!-- 음식점 사진 아래 간단 설명 -->
-                            <div class="resDescription" style="width:400px;">
-                                차만다 (서울숲점) 4.5  <br>
-                                왕십리/성동 - 아시아/퓨전 <br>
-                                <span class="zzim">
-                                    <img src="images/찜하기.png" width="50px;">
-                                </span>
-                                <img src="images/조회수.png" width="20px;">
-                                조회수: 89,459,500 <br>
-                                <img src="images/리뷰수2.png" width="20px;">
-                                리뷰수: 54 
-                            </div>
-                        </div>
-
-                        <div class="searchRes">
-                            <!-- 음식점 사진-->
-                            <div class="resThumbnail">
-                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
-                            </div>
-                            <!-- 음식점 사진 아래 간단 설명 -->
-                            <div class="resDescription" style="width:400px;">
-                                차만다 (서울숲점) 4.5  <br>
-                                왕십리/성동 - 아시아/퓨전 <br>
-                                <span class="zzim">
-                                    <img src="images/찜하기.png" width="50px;">
-                                </span>
-                                <img src="images/조회수.png" width="20px;">
-                                조회수: 89,459,500 <br>
-                                <img src="images/리뷰수2.png" width="20px;">
-                                리뷰수: 54 
-                            </div>
-                        </div>
-
-                        <div class="searchRes">
-                            <!-- 음식점 사진-->
-                            <div class="resThumbnail">
-                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
-                            </div>
-                            <!-- 음식점 사진 아래 간단 설명 -->
-                            <div class="resDescription" style="width:400px;">
-                                차만다 (서울숲점) 4.5  <br>
-                                왕십리/성동 - 아시아/퓨전 <br>
-                                <span class="zzim">
-                                    <img src="images/찜하기.png" width="50px;">
-                                </span>
-                                <img src="images/조회수.png" width="20px;">
-                                조회수: 89,459,500 <br>
-                                <img src="images/리뷰수2.png" width="20px;">
-                                리뷰수: 54 
-                            </div>
-                        </div>
-
-                        <div class="searchRes">
-                            <!-- 음식점 사진-->
-                            <div class="resThumbnail">
-                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
-                            </div>
-                            <!-- 음식점 사진 아래 간단 설명 -->
-                            <div class="resDescription" style="width:400px;">
-                                차만다 (서울숲점) 4.5  <br>
-                                왕십리/성동 - 아시아/퓨전 <br>
-                                <span class="zzim">
-                                    <img src="images/찜하기.png" width="50px;">
-                                </span>
-                                <img src="images/조회수.png" width="20px;">
-                                조회수: 89,459,500 <br>
-                                <img src="images/리뷰수2.png" width="20px;">
-                                리뷰수: 54 
-                            </div>
-                        </div>
-
-                        <div class="searchRes">
-                            <!-- 음식점 사진-->
-                            <div class="resThumbnail">
-                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
-                            </div>
-                            <!-- 음식점 사진 아래 간단 설명 -->
-                            <div class="resDescription" style="width:400px;">
-                                차만다 (서울숲점) 4.5  <br>
-                                왕십리/성동 - 아시아/퓨전 <br>
-                                <span class="zzim">
-                                    <img src="images/찜하기.png" width="50px;">
-                                </span>
-                                <img src="images/조회수.png" width="20px;">
-                                조회수: 89,459,500 <br>
-                                <img src="images/리뷰수2.png" width="20px;">
-                                리뷰수: 54 
-                            </div>
-                        </div>
-
-                        <div class="searchRes">
-                            <!-- 음식점 사진-->
-                            <div class="resThumbnail">
-                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
-                            </div>
-                            <!-- 음식점 사진 아래 간단 설명 -->
-                            <div class="resDescription" style="width:400px;">
-                                차만다 (서울숲점) 4.5  <br>
-                                왕십리/성동 - 아시아/퓨전 <br>
-                                <span class="zzim">
-                                    <img src="images/찜하기.png" width="50px;">
-                                </span>
-                                <img src="images/조회수.png" width="20px;">
-                                조회수: 89,459,500 <br>
-                                <img src="images/리뷰수2.png" width="20px;">
-                                리뷰수: 54 
-                            </div>
-                        </div>
-
-                        <div class="searchRes">
-                            <!-- 음식점 사진-->
-                            <div class="resThumbnail">
-                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
-                            </div>
-                            <!-- 음식점 사진 아래 간단 설명 -->
-                            <div class="resDescription" style="width:400px;">
-                                차만다 (서울숲점) 4.5  <br>
-                                왕십리/성동 - 아시아/퓨전 <br>
-                                <span class="zzim">
-                                    <img src="images/찜하기.png" width="50px;">
-                                </span>
-                                <img src="images/조회수.png" width="20px;">
-                                조회수: 89,459,500 <br>
-                                <img src="images/리뷰수2.png" width="20px;">
-                                리뷰수: 54 
-                            </div>
-                        </div>
-
-                        <div class="searchRes">
-                            <!-- 음식점 사진-->
-                            <div class="resThumbnail">
-                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
-                            </div>
-                            <!-- 음식점 사진 아래 간단 설명 -->
-                            <div class="resDescription" style="width:400px;">
-                                차만다 (서울숲점) 4.5  <br>
-                                왕십리/성동 - 아시아/퓨전 <br>
-                                <span class="zzim">
-                                    <img src="images/찜하기.png" width="50px;">
-                                </span>
-                                <img src="images/조회수.png" width="20px;">
-                                조회수: 89,459,500 <br>
-                                <img src="images/리뷰수2.png" width="20px;">
-                                리뷰수: 54 
-                            </div>
-                        </div>
-
-
+ 
                         <!-- 페이징바 -->
                         <div class="paging">
-                            < 1 2 3 4 5 6 7 8 9 >
-                            
-                           	<button onclick="">&lt;</button>
-                           	<button onclick="">1</button>
-                           	<button onclick="">&gt;</button>
+                            <% if(pi.getCurrentPage() != 1) { %>
+        					<button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=pi.getCurrentPage() - 1%>';">&lt;</button>
+        					<% } %>
+        	
+        					<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+        					<button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=p%>';"><%= p %></button>
+        					<% } %>
+        	
+        					<% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
+        					<button onclick="location.href='<%=contextPath%>.list.bo?cpage=<%=pi.getCurrentPage()+1%>';">&gt;</button>
+        					<% } %>
+        					
                         </div>
 
                     </div>

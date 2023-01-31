@@ -1,4 +1,4 @@
-package com.fd.search.controller;
+package com.fd.restaurant.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PracticeController
+ * Servlet implementation class RestEnrollFormController
  */
-@WebServlet("/practice.sh")
-public class PracticeController extends HttpServlet {
+@WebServlet("/enrollForm.re")
+public class RestEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PracticeController() {
+    public RestEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class PracticeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/search/headPractice.jsp").forward(request, response);
+		request.getRequestDispatcher("views/restaurant/resForm.jsp").forward(request, response);
 	}
 
 	/**

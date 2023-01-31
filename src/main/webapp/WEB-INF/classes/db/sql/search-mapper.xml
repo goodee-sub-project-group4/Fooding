@@ -20,4 +20,77 @@
 	   FROM RESTAURANT
 	  WHERE RES_NAME LIKE '%' || ? || '%'
 	</entry>
+	
+	<entry key="selectListCount">
+		SELECT 
+		       COUNT(*) count
+		  FROM RESTAURANT
+		 WHERE (LOCAL_CT = ? AND DLOCAL_CT = ?) 
+		   AND FOOD_CT = ?
+	</entry>
+	
+	<entry key="selectList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                  SELECT 
+		                           RES_NAME
+		                         , ADDRESS || ' ' || D_ADDRESS "ADDRESS"
+		                         , FOOD_CT
+		                         , STAR 
+		                         , COUNT
+		                      FROM RESTAURANT  
+		                      JOIN REVIEW USING (RES_NO)
+		                     WHERE LOCAL_CT = ?
+		                       AND DLOCAL_CT = ?
+		                       AND FOOD_CT = ?    
+		               ) A
+		        )
+		    WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="extractLocal">
+	
+	</entry>
+	
+	<entry key="insertRes">
+		INSERT
+		  INTO RESTAURANT
+		     (
+		        RES_NO
+		      , RES_NAME
+		      , CEO
+		      , PERMIT_NO
+		      , ADDRESS
+		      , D_ADDRESS
+		      , LOCAL_CT
+		      , DLOCAL_CT
+		      , PHONE
+		      , CELPHONE
+		      , EMAIL
+		      , APPLY_DATE
+		      , LONGTITUDE
+		      , LATITUDE
+		      , FOOD_CT
+		      )
+		 VALUES
+		      (
+		        SEQ_RESNO.NEXTVAL
+		      , ?
+		      , ?
+		      , ?
+		      , ?
+		      , ?
+		      , '서울특별시'
+		      , '구로구'
+		      , ?
+		      , ?
+		      , ?
+		      , SYSDATE
+		      , '10'
+		      , '20'
+		      , ?
+		      )
+	</entry>
 </properties>
