@@ -23,7 +23,8 @@
     #content1-2 {height: 450px; box-sizing: border-box; padding:40px;}
     #content1-3 {height: 100px;}
     #content1-2 div { border:1px solid lightgrey; margin:0px; height:70px; padding:20px; font-size:17px; font-weight:600;}
-    #content1-2 div:hover {background-color: rgb(244, 244, 244); cursor: pointer;}
+    #content1-2 div:hover {background-color: rgb(244, 244, 244); cursor: pointer; color:red;}
+    #content1-2 a {color:black; text-decoration:none; display:block;}
     .arrow {float: right;}
     #content1-3 div {
         background-color:rgb(240, 239, 239);

@@ -60,16 +60,6 @@ public class MemberService {
 	 * @param checkNickname
 	 * @return count2 (중복된 닉네임 값의 개수)
 	 */
-	
-	/*
-	 * public Member confirmPwd(String userId, String userPwd) {
-	 * 
-	 * Connection conn = getConnection(); Member m = new
-	 * MemberDao().loginMember(conn, userId, userPwd); close(conn); return m;
-	 * 
-	 * }
-	 */
-	
 	public int nicknameCheck(String checkNickname) {
 		
 		Connection conn = getConnection();
@@ -88,13 +78,12 @@ public class MemberService {
 		
 		Connection conn = getConnection();
 		int result = new MemberDao().updateMember(conn, m);
-		//System.out.println("result : " + result);
-		//System.out.println(m);
 		Member updateMem = null;
 		if(result > 0) {
 			commit(conn);
 			// 갱신된 회원 객체 다시 조회 m대신 updateMem
-			updateMem = new MemberDao().selectMember(conn, m.getUserId(), m.getUserPwd());
+			updateMem = new MemberDao().selectMember(conn, m.getUserId(), m.getUpdatePwd());
+			
 		} else {
 			rollback(conn); // 변경에 실패 시 null
 		}
