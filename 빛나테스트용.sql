@@ -63,9 +63,37 @@ commit;
 		  FROM TB_USER
 		 WHERE NICKNAME = ?
 
+-- 회원 정보 수정
+        UPDATE TB_USER
+		   SET USER_PWD = '0101'
+		     , USER_NAME = '팜하니'
+		     , NICKNAME = '춤짱'
+		     , USER_EMAIL = 'hanni01@naver.com'
+		     , USER_PHONE = '01077770000'
+		     , GENDER = 'N'
+		     , BIRTH = '20041231'
+		     , MODIFY_DATE = SYSDATE
+		 WHERE USER_ID = 'user01'
+		   AND USER_PWD = '1111';
 
-
-
+-- 갱신된 회원 조회
+        SELECT 
+			   USER_NO
+			 , USER_ID
+			 , USER_PWD
+			 , USER_NAME
+			 , NICKNAME
+			 , USER_EMAIL
+			 , USER_PHONE
+			 , GENDER
+			 , BIRTH
+			 , ENROLL_DATE
+			 , MODIFY_DATE
+			 , STATUS
+		  FROM TB_USER
+		 WHERE USER_ID = 'user01'
+		   AND USER_PWD = '0101'
+		   AND STATUS IN ('Y', 'A');
 
 
 

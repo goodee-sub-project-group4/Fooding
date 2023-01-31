@@ -9,16 +9,12 @@
 		/* ↓↓↓ 기본골격용 스타일들 (수정할필요X) */
 		#outer2 {
 			width:1200px;
-			height: 800px;
-			position: relative;
 			margin:auto;
 		}			
 		#content {
 			width:950px;
-			display: inline-block;
 			box-sizing: border-box;
-			position:absolute;
-			right:10px;
+			float: right;
 		}
 		#menubar {
 			border-width:0px;

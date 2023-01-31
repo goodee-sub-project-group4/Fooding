@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,32 +11,7 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=694ae779a7a7935c84a1e22edd5c5d87&libraries=services"></script>
 
     <!-- 달력 API -->
-    <link href='resources/fullcalendar/main.css' rel='stylesheet'/>
-    <script src='resources/fullcalendar/main.js'></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                height: '500px',
-                headerToobar: {
-                    left: 'prev,next today',
-                    center: 'title'
-                },
-                locale: 'ko',
-                eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
-                    console.log(obj);
-                },
-                eventChange: function(obj) { // 이벤트가 수정되면 발생하는 이벤트
-                    console.log(obj);
-                },
-                eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
-                    console.log(obj);
-                },
-            });
-            calendar.render();
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.1/index.global.min.js"></script>
     <style>
         /* 컨텐트 전체 영역 */
         /* .content div{border: 1px solid black;} */
@@ -96,36 +71,28 @@
         /* 예약 펼치기 버튼 */
         #content3-2{height: 100px; box-sizing: border-box;}
         #book-btn{width: 100%; height: 100%; border: none; font-size: 3em; box-sizing: border-box;}
-        #content3-3{display: none;}
 
         /* 예약 내용 */
-        #content3-3{width: 100%;}
+        #content3-3{visibility: hidden;}
         /* 예약 업체명 */
         #book-title{height: 70px; line-height: 70px; text-align: center; background-color: antiquewhite;}
         /* 예약 카테고리 */
         .book-category, .menu-slide{
-            height: 70px; text-align: center; line-height: 70px; margin-bottom: 2px; font-size: 20px; font-weight: 00; 
+            height: 70px; text-align: center; line-height: 70px; margin-bottom: 2px; font-size: 20px; font-weight: 600; font-size: 1.5em; 
             color: rgba(220, 20, 60, 0.909); border: 3px solid crimson; border-radius: 7px;}
         /* 슬라이드 */
-        .slide-detail{width: 100%; margin-top: 15px; margin-bottom: 15px; padding: 5px; box-sizing: border-box; overflow: auto; display: none;}
+        .slide-detail1{width: 100%; margin-top: 15px; margin-bottom: 15px; padding: 5px; box-sizing: border-box; overflow: auto; display: block;}
+        .slide-detail2{width: 100%; margin-top: 15px; margin-bottom: 15px; padding: 5px; box-sizing: border-box; overflow: auto; display: none;}
 
-        /* 달력 */
-        .fc .fc-toolbar{display: block;}
-        .fc .fc-toolbar-title{width: 335px;}
-        #fc-dom-1{width: 100%; height: 45px; display: block; float: left; margin: auto;}
-        .fc-toolbar-chunk{width: 140px; float: left; margin-left: 25px;}
-        .fc-today-button{width: 50px;}
-        .fc .fc-button {height: 35px; padding: 0; font-size: small;}
-        .fc .fc-button-group>.fc-button{width: 30px;}
-        .fc-scroller{overflow: auto;}
-        .fc table{font-size: 15px;}
-        .fc .fc-daygrid-day-top{flex-direction: row; padding-left: 5px;}
-        .fc .fc-daygrid-day-number{padding: 0; text-align: left;}
-        /* 달력 테이블 가로 사이즈 */
-        .fc table{table-layout: auto;}
-        .fc-view > table{min-width: 0; width: auto;}
-        .fc-axis{min-width:20px; width:20px;}
-        .fc-day,.fc-resource-cell,.fc-content-col{min-width:20px; width:48px;}
+        /* 예약날짜 */
+        a {color: crimson}
+        .fc .fc-toolbar-title{font-size: 2.5em; margin-bottom: 25px;}
+        .fc .fc-button{padding: 0; font-size: 1.2em;}
+        .fc-today-button.fc-button.fc-button-primary{width: 70px; height: 45px;}
+        .fc-prev-button.fc-button.fc-button-primary, .fc-next-button.fc-button.fc-button-primary{width: 45px; height: 45px;}
+        .fc .fc-button{line-height: 10px;}
+        .fc .fc-toolbar {align-items: center; display: flex; justify-content: space-between; flex-direction: column;}
+        .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{min-height: 0;}
 
         /* 예약시간 */
         .am, .pm{margin-bottom: 10px;}
@@ -144,6 +111,9 @@
         .menu-datail2{width: 70px; height: 150px; float: left; padding: 5px;}
         .menuAdd.btn.btn-secondary.btn-sm{margin-left: 13px; margin-top: 20px; height: 40px;}
         .menuRemove.btn.btn-danger.btn-sm{margin-left: 13px; margin-top: 15px; height: 40px;}
+        
+
+
         /* 인풋 number 증감 화살표 제거 */
         input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin: 0;}
         /* 금액 창 */
@@ -151,6 +121,9 @@
         .minus{width: 30px;}
         .plus{width: 30px;}
         .quantity{width: 40px; text-align: center;}
+        /* 최종 결제용 추가 창 */
+        #menu-select-border3{width: 550px; margin: auto; margin-top: 10px; border: 1px solid gray; padding: 15px; display: none;}
+        #menu-payment{display: none;}
 
         /* 예약인원 */
         #book-menu4-btn{width: 100%; height: 60px; padding-top: 5px; border: 2px solid gainsboro; box-sizing: border-box;}
@@ -347,12 +320,34 @@
                         <div id="book-title">업체명</div>
                     </div>
                     <br>
-                    <div class="menu-slide" id="book-date">(달)월 (일)일 (요일)요일</div>
-                    <div class="slide-detail">
-                        <div id='calendar'></div>
+                    <div class="menu-slide" id="book-date">날짜 선택</div>
+                    <div class="slide-detail1">
+                        <div id='calendar' style='width: 340px;'></div>
+                        <input id="date" type="hidden" name="date" value="">
                     </div>
+                    <script>
+                    // 달력 api -----------------------------------------------------------------------------------------------
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var calendarEl = document.getElementById('calendar');
+                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                            locale: "ko",
+                            initialView: 'dayGridMonth',
+                            dayGridMonth: {type: 'dayGrid', duration: { months: 1 }, monthMode: true, fixedWeekCount: false},
+                            contentHeight: 'auto',
+                            editable: false,
+                            selectable:true,
+                            select:function(info){
+                                const date = info.startStr
+                                $('#date').val(info.startStr);
+                                $('#book-date').text('예약날짜 ' + date);
+                                console.log( $('#book-date').text())
+                            }
+                        });
+                        calendar.render();
+                    });
+                    </script>
                     <div class="menu-slide" id="book-time">시간 선택</div>
-                    <div class="slide-detail">
+                    <div class="slide-detail2">
                         <div class="am">&nbsp;&nbsp;오전</div>
                         <div id="am-box"></div>
                         <br>
@@ -423,7 +418,7 @@
                                         <tfoot>
                                         <tr>
                                             <td colspan="2" style="font-weight: 700; font-size: 25px;">총액</td>
-                                            <td id="sum" style="text-align: right; font-weight: 600; font-size: 20px; color: brown;"></td>
+                                            <td class="sum" style="text-align: right; font-weight: 600; font-size: 20px; color: brown;"></td>
                                         </tr>
                                         <tr>
                                             <td colspan="3"><hr></td>
@@ -434,9 +429,44 @@
                                         </tfoot>
                                     </table>
                                 </div>
-                                <div style="width: 300px; height: 50px; margin: auto; padding-top: 10px;">
-                                    <button type="submit" class="btn btn-primary btn-lg" id="check" style="float: left; width: 100px;" >확인</button>
-                                    <button type="button" class="btn btn-secondary btn-lg" id="cancel" style="float: right; width: 100px;" >취소</button>
+                                <div id="menu-select-border3">
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <td style="width: 50%;">현재 적립금</td>
+                                            <td style="width: 50%; text-align: right;">25,000원</td>
+                                        </tr>
+                                        <tr>
+                                            <td>적립금 사용</td>
+                                            <td style="text-align: right;"><input style="width: 80px; text-align: right;" type="number" class="quantity" value="5000">원</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><hr></td>
+                                        </tr>
+                                        <tr>
+                                            <td>주문 금액</td>
+                                            <td class="sum" style="text-align: right;">이용 금액</td>
+                                        </tr>
+                                        <tr>
+                                            <td>적립금 사용</td>
+                                            <td style="text-align: right;">- 사용금액</td>
+                                        </tr>
+                                        <tr>
+                                            <td>예상 적립금</td>
+                                            <td style="text-align: right;">+ </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 700; font-size: 25px;">최종 결제 금액</td>
+                                            <td class="sum-payment" style="text-align: right; font-weight: 600; font-size: 20px; color: brown;"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="menu-selected" style="width: 300px; height: 50px; margin: auto; padding-top: 10px;">
+                                    <button type="button" class="btn btn-primary btn-lg check" style="float: left; width: 100px;" >확인</button>
+                                    <button type="button" class="btn btn-secondary btn-lg cancel" style="float: right; width: 100px;" >취소</button>
+                                </div>
+                                <div id="menu-payment" style="width: 300px; height: 50px; margin: auto; padding-top: 10px;">
+                                    <button type="submit" class="btn btn-danger btn-lg payment" style="float: left; width: 100px;" >결제</button>
+                                    <button type="button" class="btn btn-secondary btn-lg cancel" style="float: right; width: 100px;" >취소</button>
                                 </div>
                             </div>
                         </div>
@@ -489,19 +519,55 @@
                     <div>
                         <div class="book-category" style="margin-bottom: 10px;">서비스 약관</div>
                         <div class="general-condition">개인정보 수집 동의</div>
-                        <div id="general-condition-detail1">에베베</div>
+                        <div id="general-condition-detail1" style="overflow: auto;">
+                            <p style="padding: 5px;"> -개인정보 수집 동의-
+                            <br><br>1. 기본수집항목: [필수] 푸딩 아이디, 이름, (휴대)전화번호, [선택] 이메일 주소
+                            <br><br>2. 수집 및 이용목적 : 사업자회원과 예약이용자의 원활한 거래 진행, 고객상담, 불만처리 등 민원 처리, 분쟁조정 해결을 위한 기록보존
+                            <br><br>3. 보관기간
+                            <br>&nbsp;&nbsp;- 회원탈퇴 시 지체없이 파기
+                            <br>&nbsp;&nbsp;- 단, 관련 법령에 의하여 일정 기간 보관이 필요한 경우에는 해당 기간 동안 보관함
+                            <br><br>4. 동의 거부권 등에 대한 고지: 정보주체는 개인정보의 수집 및 이용 동의를 거부할 권리가 있으나, 이 경우 상품 및 서비스 예약이 제한될 수 있습니다. 그 밖의 내용은 푸딩 개인정보 처리방침을 따릅니다.</p>
+                        </div>
                         <div class="general-condition">개인정보 제공 동의</div>
-                        <div id="general-condition-detail2">에베베</div>
+                        <div id="general-condition-detail2" style="overflow: auto;">
+                            <p style="padding: 5px;"> -개인정보 제공 동의-
+                            <br><br>1. 개인정보를 제공받는 자 : 이용업체
+                            <br><br>2. 제공하는 기본 개인정보 항목:  [필수] 푸딩 아이디, 이름, (휴대)전화번호, 성별, 연령대, [선택] 이메일 주소
+                            <br><br>3. 개인정보를 제공받는 자의 이용목적 : 사업자회원과 예약이용자의 원활한 거래 진행, 서비스 분석과 통계에 따른 혜택 및 맞춤 서비스 제공, 민원처리 등 고객상담, 고객관리, 서비스 이용에 따른 설문조사 및 혜택 제공, 분쟁조정을 위한 기록보존
+                            <br><br>4. 개인정보를 제공받는 자의 개인정보 보유 및 이용기간 : 푸딩 회원탈퇴 시 또는 위 개인정보 이용목적 달성 시 까지 이용합니다.
+                            <br><br>5. 동의 거부권 등에 대한 고지 : 정보주체는 개인정보 제공 동의를 거부할 권리가 있으나, 이 경우 상품 및 서비스 예약이 제한될 수 있습니다.</p>
+                        </div>
                     </div>
                     <br><br>
                     <div>
-                        <button type="button" class="btn btn-outline-danger btn-lg" style="display: block; margin: auto;">예약하기</button>
+                        <button id="book-final" type="button" class="btn btn-outline-danger btn-lg" style="display: block; margin: auto;">예약하기</button>
                     </div>
+
+                    <script>
+                        $('#book-final').click(function(){
+                            $('.menu-select').css('display', 'block');
+                            $('#menu-select-border3').css('display', 'block');
+                            $('#menu-payment').css('display', 'block');
+                            $('#menu-selected').css('display', 'none');
+                        })
+                   
+                    </script>
+
                 </div>
             </div>
         </div>
-
         <script>
+            // 스크립트 전역변수 ---------------------------------------------------------------------
+            // 메뉴용 전역변수
+            let sum = 0;
+            let pirce = 0;
+            let menuPrice = [];
+            let variable = 0;
+            let plus = 0;
+            // 문자가 섞인 숫자 => 숫자로 변환해주는 변수
+            const transNumber = /[^0-9]/g;
+
+            // 카카오 지도 api ---------------------------------------------------------------------- 
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                 mapOption = {
                     center: new kakao.maps.LatLng(37.57150, 126.99034), // 지도의 중심좌표
@@ -577,40 +643,28 @@
                     });
                 });
             });
-            
-            
-            
-            
 
-
-            // 메뉴용 전역변수
-            let sum = 0;
-            let pirce = 0;
-            let menuPrice = [];
-            let variable = 0;
-            let plus = 0;
-
-            // 문자가 섞인 숫자 => 숫자로 변환해주는 변수
-            const transNumber = /[^0-9]/g;
-
-            // 예약 버튼 활성화/비활성화
+            // 예약 버튼 활성화/비활성화 ----------------------------------------------------------
             $(function(){
                 $('#book-btn').click(function(){
-                    if($('#content3-3').css('display') == 'none'){
-                        $('#content3-3').css('display', 'block')
+                    if($('#content3-3').css('visibility') == 'hidden'){
+                        $('#content3-3').css('visibility', 'visible')
                     }else{
-                        $('#content3-3').css('display', 'none')
+                        $('#content3-3').css('visibility', 'hidden')
                     }
                 });
             });
 
-            // 예약날짜, 시간, 메뉴, 약관 슬라이드 효과
+            // 예약날짜, 시간, 메뉴, 약관 슬라이드 효과 -----------------------------------------------
             $(function(){
                 $('.menu-slide').click(function(){
                     const $slide = $(this).next();
                     if($slide.css('display') == 'none'){
-                        $(this).siblings('.slide-detail').slideUp();
-                        $slide.slideDown(); 
+                        $(this).siblings('.slide-detail1').slideUp();
+                        $(this).siblings('.slide-detail2').slideUp();
+                        $('#general-condition-detail1').slideUp();
+                        $('#general-condition-detail2').slideUp();
+                        $slide.slideDown();
                     }else{
                         $slide.slideUp();
                     }
@@ -620,23 +674,36 @@
                     if($('#book-date').css('display') == 'block' || $('#book-time').css('display') == 'block'){
                         $('#book-date').next().slideUp();
                         $('#book-time').next().slideUp();
+                        $('#general-condition-detail1').slideUp();
+                        $('#general-condition-detail2').slideUp();
                     };
                     $('.menu-select').css('display', 'block');
+                    $('#menu-select-border3').css('display', 'none');
+                    $('#menu-payment').css('display', 'none');
+                    $('#menu-selected').css('display', 'block');
                 });
+
+                $('.check').click(function(){
+                    $('.menu-select').css('display', 'none');
+                })
 
                 $('.general-condition').click(function(){
                     const $slide = $(this).next();
                     if($slide.css('display') == 'none'){
                         $('#general-condition-detail1').slideUp();
                         $('#general-condition-detail2').slideUp();
+                        $('.slide-detail1').slideUp();
+                        $('.slide-detail2').slideUp();
                         $slide.slideDown();
                     }else{
                         $slide.slideUp();
                     };
                 });
+                
+             
             });
 
-            // // 시간 선택 버튼 생성
+            // 시간 선택 버튼 생성 -------------------------------------------------------------------------------------
             $(function(){
                 const open = (08*100) + ((00/30)*50);
                 const close = (23*100) + ((30/30)*50);
@@ -693,10 +760,10 @@
                 $(this).css({'background-color':'crimson', 'color':'white'});
                 $(this).attr('name', 'bookTime');
                 $(this).attr('value', bookTimeValue);
+                $('#book-time').text('예약시간 ' + bookTimeValue)
             });
             
             // 메뉴 추가
-            
             $('.menuAdd.btn.btn-secondary.btn-sm').click(function(){
                 const addMenu = $(this).parent().prev().children();
                 const table = $('#menu-select-border2>table>tbody>tr').length;
@@ -744,7 +811,7 @@
                     sum += menuPrice[i];
                     i++
                 })
-                $('#sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
             });
             
             $('.menuRemove.btn.btn-danger.btn-sm').click(function(){
@@ -762,7 +829,7 @@
                     sum += menuPrice[i];
                     i++
                 })
-                $('#sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
             })
                 
             // 수량 추가, 삭제
@@ -790,7 +857,7 @@
                     sum += menuPrice[i];
                     i++
                 })
-                $('#sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
             });
             $(document).on('click', '.plus', function(){
                 const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
@@ -815,7 +882,7 @@
                     sum += menuPrice[i];
                     i++
                 })
-                $('#sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
             });
             $(document).on('keyup', '.quantity', function(){
                 const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
@@ -844,7 +911,7 @@
                         sum += menuPrice[i];
                         i++
                     })
-                    $('#sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                    $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                 });
             });
             // - / + 입력 방지
@@ -856,7 +923,7 @@
                 }
             });
             // 메뉴 취소 버튼
-            $('#cancel').click(function(){
+            $('.cancel').click(function(){
                 $('.menu-select').css('display', 'none');
             });
 

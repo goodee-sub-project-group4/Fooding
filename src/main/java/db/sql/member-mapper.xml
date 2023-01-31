@@ -104,13 +104,13 @@
 		   AND STATUS IN ('Y', 'A')
  	</entry>
  	
- 	<!-- 탈퇴 -->
+ 	<!-- 회원탈퇴 -->
  	<entry key="confirmDeleteMember">
  		UPDATE TB_USER
  		   SET STATUS = 'N'
  		     , MODIFY_DATE = SYSDATE
  		 WHERE USER_ID = ?
- 		   AND USER_PWD = ? 
+ 		   AND USER_PWD = ?
  	</entry>
 
 

@@ -37,7 +37,7 @@ public class MemberUpdateController extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
-		String updatePwd = (request.getParameter("updatePwd") == "") ? userPwd : request.getParameter("updatePwd"); 
+		String updatePwd = (request.getParameter("updatePwd") == "") ? request.getParameter("userPwd") : request.getParameter("updatePwd"); 
 		String userName = request.getParameter("userName");
 		String nickname = request.getParameter("nickname");
 		String userEmail = request.getParameter("userEmail");

@@ -36,6 +36,7 @@
 	
 	<%
 		String userId = loginUser.getUserId();
+		String userPwd = loginUser.getUserPwd();
 	%>
 	
 	<div class="delete-area">
@@ -60,10 +61,16 @@
 
         </div>
 
-		<input type="hidden" name="userId" value="<%=userId %>">
-        <button type="button" class="btn btn-outline-danger" onclick="location.href='<%=request.getContextPath()%>'">취소하기</button>&nbsp;&nbsp;
-        <button type="button" class="btn btn-danger" onclick="location.href='<%=contextPath%>/confirmDelete.me'">탈퇴하기</button>
-        <br><br><br>
+		<form action="<%=contextPath%>/confirmDelete.me" method="post">
+			<input type="hidden" name="userId" value="<%=userId %>">
+			<input type="hidden" name="userPwd" value="<%=userPwd %>">
+		
+	        <button type="button" class="btn btn-outline-danger" onclick="location.href='<%=request.getContextPath()%>'">취소하기</button>&nbsp;&nbsp;
+	        <button type="submit" class="btn btn-danger">탈퇴하기</button>
+	        <br><br><br>
+	        
+        </form>
+        
     </div>
 
 </body>

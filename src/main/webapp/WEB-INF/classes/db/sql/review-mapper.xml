@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+	
+	<!-- 리뷰리스트 -->
+	<entry key="selectReviewList">
+		SELECT
+		       REVIEW_NO
+		     , RES_NAME <!-- RES_NO으로 JOIN -->
+		     , REVIEW_CONTENT
+		     , STAR
+		     , CREATE_DATE
+		  FROM REVIEW R
+		  JOIN RESTAURANT USING (RES_NO)
+		 WHERE R.STATUS = 'Y'
+		 ORDER
+            BY REVIEW_NO DESC		  
+	</entry>
+	
+
+
+
 
 
 </properties>
