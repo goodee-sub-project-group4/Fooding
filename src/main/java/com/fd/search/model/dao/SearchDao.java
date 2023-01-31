@@ -21,9 +21,10 @@ public class SearchDao {
 	private Properties prop = new Properties(); 
 	
 	public SearchDao() {
+		String filePath = SearchDao.class.getResource("/db/sql/search-mapper.xml").getPath();
 		
 		try {
-			prop.loadFromXML(new FileInputStream( SearchDao.class.getResource("db/sql/search-mapper.xml").getPath() ));
+			prop.loadFromXML(new FileInputStream(filePath));
 		} catch (InvalidPropertiesFormatException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -129,14 +130,27 @@ public class SearchDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setString(1, r.getResName()); 
 			pstmt.setString(2, r.getCeo());
 			pstmt.setString(3, r.getPermitNo());
 			pstmt.setString(4, r.getAddress());
-			pstmt.setString(5, r.getd)
+			pstmt.setString(5, r.getPhone()); 
+			pstmt.setString(6, r.getCellphone());
+			pstmt.setString(7, r.getEmail()); 
+			pstmt.setString(8, r.getFoodCt());
+			pstmt.setString(9, r.getParking());
+			
+			result = pstmt.executeUpdate(); 
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		} finally {
+			close(pstmt); 
+		}
+		
+		return result; 
+
 		
 	}
 	
