@@ -168,6 +168,8 @@ public class RestaurantDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;
@@ -191,12 +193,33 @@ public class RestaurantDao {
 						        , rset.getString("m_img")));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public int updateMenu(Connection conn, Menu m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMenu");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, m.getMenuName());
+			pstmt.setInt(2, m.getPrice());
+			pstmt.setString(3, m.getMenuDes());
+			pstmt.setString(4, m.getmImg());
+			pstmt.setInt(5, m.getMenuNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
-		
-		return list;
+		return result;
 	}
 
 }

@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%
-	ArrayList<Menu> list = (ArrayList<Menu>)session.getAttribute("list");
-	int oldCount = list.size(); //추가된 메뉴의 갯수
+	ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("list");
+	int oldCount = list.size(); //기존 메뉴의 갯수
 %>
 <!DOCTYPE html>
 <html>
@@ -92,6 +92,7 @@
 					<input type="hidden" name="oldCount" value="<%=oldCount%>">
 					<% for(int i=0; i<list.size(); i++) { %>	
 					<div class="menu-box">
+						<input type="hidden" name="number<%=i%>" value="<%=list.get(i).getMenuNo()%>">
 						<div class="text-box">
 							<span>메뉴명 </span><span style="color:crimson">* </span>
 							<input name="name<%=i%>" type="text" value="<%=list.get(i).getMenuName()%>" required><br>
@@ -105,9 +106,15 @@
 							<input type="text" name="describe<%=i%>" value="<%=(list.get(i).getMenuDes()==null)? "" : list.get(i).getMenuDes()%>"><br>
 						</div>
 						<div class="photo" align="center">
-							<img id="image0" src="<%= list.get(i).getmImg()%>" class="rounded" width="180" height="180"><br>
+							<img id="image<%=i%>" src="<%= list.get(i).getmImg()%>" class="rounded" width="180" height="180"><br>
 							<button type="button" class="btn btn-outline-danger">사진등록</button>
-							<div style="display:none"><input type="file" name="file<%=i%>"></div>
+							<div style="display:none">
+								<input type="hidden" name="oldfile<%=i%>" value="<%= list.get(i).getmImg()%>">
+								<input type="file" name="file<%=i%>">
+								<input type="hiddden" name="file-changed<%=i%>" value="no">
+								<!-- 메뉴갯수를 넘기는 태그 -->
+								<input type="hidden" name="count" value="<%=i%>"> 
+							</div>
 						</div>
 					</div>
 					<% } %>
@@ -156,17 +163,19 @@
 					console.log(e.target.result);
 					$('#image'+num).attr('src', e.target.result);
 				}
+				//기존메뉴에서는 사진이 바뀌었음을 의미한다. 해당 변화를 전달한다.
+				$(this).next().val("yes");
 			}
 		})
-		let count=<%=oldCount%>; //기존메뉴갯수
+		let count = <%=oldCount%>; //기존메뉴갯수로부터 시작되는 카운트
 		function addMenu() {
 			
 			//메뉴요소 추가하기
 			$('#firstone').append(
-			$('<div class="menu-box new-box" >'+
+			$('<div class="menu-box new-box">'+
 				'<div class="text-box">'+
-					'<span>메뉴명</span><span style="color:crimson">* </span>'+
-					'<input type="text" name="name'+ count++ +'" required><br>'+
+					'<span>메뉴명'+ count+'</span><span style="color:crimson">* </span>'+
+					'<input type="text" name="name'+ count +'" required><br>'+
 				'</div><br>'+
 				'<div class="text-box">'+
 					'<span>가격 </span><span style="color:crimson">* </span>'+
@@ -185,7 +194,7 @@
 			'</div>')
 			);
 			//메뉴 추가될때마다 높이 늘리기 + count늘리기
-			$('#menu-outer').css("height", 270*(count));
+			$('#menu-outer').css("height", 270*(++count));
 			}
 	</script>
 </body>
