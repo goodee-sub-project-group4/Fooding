@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,13 @@
 </head>
 <body>
 
-<div class="delete-area">
+	<%@ include file="/views/common/head.jsp" %>
+	
+	<%
+		String userId = loginUser.getUserId();
+	%>
+	
+	<div class="delete-area">
         <br><br><br>
         <h2>회원 탈퇴 안내</h2>
         <hr width="600">
@@ -53,8 +60,9 @@
 
         </div>
 
-        <button type="button" class="btn btn-outline-danger" onclick="location.href='<%=request.getContextPath()%>/changeInfo.me'">취소하기</button>&nbsp;&nbsp;
-        <button type="button" class="btn btn-danger">탈퇴하기</button>
+		<input type="hidden" name="userId" value="<%=userId %>">
+        <button type="button" class="btn btn-outline-danger" onclick="location.href='<%=request.getContextPath()%>'">취소하기</button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-danger" onclick="location.href='<%=contextPath%>/confirmDelete.me'">탈퇴하기</button>
         <br><br><br>
     </div>
 

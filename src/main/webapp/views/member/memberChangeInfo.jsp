@@ -51,6 +51,7 @@
 	<%
 		String userId = loginUser.getUserId();
 		String userPwd = loginUser.getUserPwd();
+		String updatePWd = loginUser.getUpdatePwd();
 		String userName = loginUser.getUserName();
 		String nickname = loginUser.getNickname();
 		String userEmail = loginUser.getUserEmail();
@@ -66,27 +67,27 @@
             <b>개인 정보 수정</b>
         </div>
         <div id="change-infomation">
-            <form action="" method="post" class="enroll-form">
+            <form action="<%=contextPath%>/update.me" method="post" class="enroll-form">
                     
                 <table class="table1">
                     <tr>
                         <th>아이디</th>
-                        <td class="input-area2"><input type="text" size="55" name="userId" value="<%=userId%>" required></td> <!--아이디는 미리 입력되어있어야함-->
+                        <td class="input-area2"><input type="text" size="55" name="userId" value="<%=userId%>" readonly required></td> <!--아이디는 미리 입력되어있어야함-->
                         <td class="input-area3-id"></td>
                     </tr>
                     <tr>
                         <th>현재 비밀번호</th>
-                        <td class="input-area2"><input type="password" size="55" name="userPwd" value="<%=userPwd%>" maxlength="15" placeholder="비밀번호를 입력해주세요" required></td>
+                        <td class="input-area2"><input type="password" size="55" name="userPwd" value="<%=userPwd%>" readonly maxlength="15" placeholder="비밀번호를 입력해주세요" required></td>
                         <td class="input-area3"></td>
                     </tr>
                     <tr>
                         <th>새 비밀번호</th>
-                        <td class="input-area2"><input type="password" size="55" name="userPwd" maxlength="15" placeholder="비밀번호를 한 번 더 입력해주세요" required></td>
+                        <td class="input-area2"><input type="password" size="55" name="updatePwd" maxlength="15" placeholder="새로운 비밀번호를 입력해주세요"></td>
                         <td class="input-area3"></td>
                     </tr>
                     <tr>
                         <th>비밀번호 확인</th>
-                        <td class="input-area2"><input type="password" size="55" maxlength="15" placeholder="비밀번호를 한 번 더 입력해주세요" required></td>
+                        <td class="input-area2"><input type="password" size="55" maxlength="15" placeholder="비밀번호를 한 번 더 입력해주세요"></td>
                         <td class="input-area3"></td>
                     </tr>
                     <tr>
@@ -101,12 +102,12 @@
                     </tr>
                     <tr>
                         <th>이메일</th>
-                        <td class="input-area2"><input type="email" size="55" name="email" value="<%=userEmail%>" placeholder="예:fooding@fooding.com"></td>
+                        <td class="input-area2"><input type="email" size="55" name="userEmail" value="<%=userEmail%>" placeholder="예:fooding@fooding.com"></td>
                         <td class="input-area3"></td>
                     </tr>
                     <tr>
                         <th>휴대폰</th>
-                        <td class="input-area2"><input type="text" size="55" name="phone" value="<%=userPhone%>" placeholder="-빼고 숫자만 입력해주세요"></td>
+                        <td class="input-area2"><input type="text" size="55" name="userPhone" value="<%=userPhone%>" placeholder="-빼고 숫자만 입력해주세요"></td>
                         <td class="input-area3-phone"><button type="button" class="btn btn-danger">다른번호 인증</button></td>
                     </tr>
                     <tr>
@@ -126,7 +127,7 @@
                     <tr>
                         <th>생년월일&nbsp;&nbsp;&nbsp; </th>
                         <td class="birth-area" width="500px">
-                            <input type="text" size="10" placeholder="YYYY" value="" width="" name="birth">
+                            <input type="text" size="10" placeholder="YYYY" value="" name="birth">
                             <span>/</span>
                             <input type="text" size="10" placeholder="MM" value="" name="birth">
                             <span>/</span>
@@ -164,10 +165,10 @@
             const year = birth.substr(0, 4);
             const month = birth.substr(4, 2);
             const day = birth.substr(6, 2);
-            const birthArray = [year, month, day]
+            const birthArr = [year, month, day]     
             $('.birth-area').children('input').each(function(i) {
                 console.log($(this));
-                $(this).val(birthArray[i]);
+                $(this).val(birthArr[i]);
             });
         })
     </script>

@@ -45,11 +45,11 @@
                <div id="content1">
                    <div id="content1-1"><h2><b>마이페이지</b></h2></div>
                    <div id="content1-2">
-                       <div>예약/결제내역<span class="arrow">></span></div>
-                       <div>리뷰조회<span class="arrow">></span></div>
-                       <div>적립금조회<span class="arrow">></span></div>
-                       <div>찜하기조회<span class="arrow">></span></div>
-                       <div>개인정보수정<span class="arrow">></span></div>
+                       <div><a href="">예약/결제내역<span class="arrow">></span></a></div>
+                       <div><a href="">리뷰조회<span class="arrow">></span></a></div>
+                       <div><a href="">적립금조회<span class="arrow">></span></a></div>
+                       <div><a href="">찜하기조회<span class="arrow">></span></a></div>
+                       <div><a href="<%=request.getContextPath()%>/confirmPwd.me">개인정보수정<span class="arrow">></span></a></div>
                    </div>
                    <div id="content1-3">
                        <div>도움이 필요하신가요?<br>1 : 1 문의하기 ></div>
