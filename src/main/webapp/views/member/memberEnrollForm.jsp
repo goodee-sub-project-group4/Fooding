@@ -100,13 +100,13 @@
                         </tr>
                         <tr>
                             <th>휴대폰 <span class="required">*</span></th>
-                            <td class="input-area2"><input type="text" size="55" name="userPhone" placeholder="숫자만 입력해주세요" required></td>
-                            <td class="input-area3-phone"><button type="button" class="btn btn-danger">인증번호 받기</button></td>
+                            <td class="input-area2"><input type="number" size="11" id="phone" name="userPhone" placeholder="숫자만 입력해주세요" required></td>
+                            <td class="input-area3-phone"><button type="button" id="sendNum" class="btn btn-danger">인증번호 받기</button></td>
                         </tr>
                         <tr>
                             <th></th>
-                            <td class="input-area2"><input type="text" size="55"></td>
-                            <td class="input-area3-phone"><button type="button" class="btn btn-danger">인증번호 확인</button></td>
+                            <td class="input-area2"><input type="number" id="phone2" size="10"></td>
+                            <td class="input-area3-phone"><button type="button" id="sendNum2" class="btn btn-danger">인증번호 확인</button></td>
                         </tr>
                         <tr>
                             <th>성별&nbsp;&nbsp;&nbsp; </th>
@@ -245,36 +245,48 @@
                 		});
                 	});
                 
+                	const randomNumber = Math.floor(Math.random() * 10000) + 1;
+                
+                	// 인증번호 발송
     				$('#sendNum').click(function() {
     	
-    	                const phone = $('#phone').val();
-    	
+    					const phone = document.getElementById("phone").value;
+    					if (phone.length == 0) {
+    						alert("번호를 입력해 주세요.");
+    						return false;
+    					}
+    					
+    					console.log(phone)
+    					console.log("숫자 4자리 : ", randomNumber)
+    					
                         $.ajax ({
-                            url: '???',
-                            type: 'GET',
+                            url: "<%=contextPath%>/RestApiPhonAuthCheck.me",
+                            type: 'POST',
                             data: {
-                                '???'
-                            },
-                            success: function(data) {
-                                const checkNum = data;
-                                alert('checkNum:'+ checkNum);
-                        
-                                $('#sendNum2').click(function() {	
-                                    const phone2 = $('#phone2').val();
-                                
-                                    if(checkNum === phone2) {
-                                        alert('인증 성공하였습니다.');
-                                    } else {
-                                        alert('인증 실패하였습니다. 다시 입력해주세요.');
-                                    }
-                                    
-                                });
-                        
+    	                		to : phone,
+    	                		text : randomNumber
+    	                	},
+                            success: function(resData) {
+                            	alert("암호를 발송했습니다.");
                             }
-
     	                 });
-    	
                     });
+    				
+    				// 인증번호 확인
+    				$('#sendNum2').click(function() {
+    					
+    					console.log(randomNumber)
+    					console.log(document.querySelector("#phone2").value)
+    					
+    					if (randomNumber == document.querySelector("#phone2").value) {
+    						alert("같다")
+    					} else {
+    						alert("다르다")
+    					}
+    					
+                    });
+    				
+    				
     	
                 
                 
