@@ -1,10 +1,18 @@
 package com.fd.member.model.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
+
+import org.json.simple.JSONObject;
 
 import static com.fd.common.JDBCTemplate.*;
+
+import com.fd.common.sms.SmsConst;
 import com.fd.member.model.dao.MemberDao;
 import com.fd.member.model.vo.Member;
+
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public class MemberService {
 	
@@ -113,6 +121,18 @@ public class MemberService {
 		
 		close(conn);
 		return result;
+		
+	}
+	
+	public void sendMessage(HashMap<String, String> map) throws Exception {
+		
+		Message message = new Message(SmsConst.KEY, SmsConst.PWD);
+		
+		JSONObject jsonObject = (JSONObject)message.send(map);
+		System.out.println(jsonObject);
+		
+		// Object a = jsonObject.get("success_count");
+		
 		
 	}
 	
