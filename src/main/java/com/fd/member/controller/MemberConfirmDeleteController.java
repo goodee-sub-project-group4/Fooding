@@ -43,7 +43,7 @@ public class MemberConfirmDeleteController extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 		} else { // 실패
 			session.setAttribute("alertMsg", "탈퇴실패");
-			response.sendRedirect(request.getContextPath() + "/changeInfo.me");
+			response.sendRedirect(request.getContextPath() + "/delete.me");
 		}
 		
 	}

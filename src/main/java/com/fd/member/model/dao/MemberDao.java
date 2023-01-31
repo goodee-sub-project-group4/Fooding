@@ -267,6 +267,12 @@ public class MemberDao {
 		
 	}
 	
+	/** 회원탈퇴
+	 * @param conn
+	 * @param userId
+	 * @param userPwd
+	 * @return result
+	 */
 	public int confirmDeleteMember(Connection conn, String userId, String userPwd) {
 		//update
 		int result = 0;

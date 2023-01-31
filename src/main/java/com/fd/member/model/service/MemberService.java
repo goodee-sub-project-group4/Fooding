@@ -94,6 +94,12 @@ public class MemberService {
 		
 	}
 	
+	/** 회원탈퇴 
+	 * @ 빛나
+	 * @param userId
+	 * @param userPwd
+	 * @return result
+	 */
 	public int confirmDeleteMember(String userId, String userPwd) {
 		
 		Connection conn = getConnection();
