@@ -126,6 +126,18 @@ public class SearchDao {
 		int result = 0; 
 		PreparedStatement pstmt = null; 
 		String sql = prop.getProperty("insertRes"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, r.getResName()); 
+			pstmt.setString(2, r.getCeo());
+			pstmt.setString(3, r.getPermitNo());
+			pstmt.setString(4, r.getAddress());
+			pstmt.setString(5, r.getd)
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
 	}
 	
 
