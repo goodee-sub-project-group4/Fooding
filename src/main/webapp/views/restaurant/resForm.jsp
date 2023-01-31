@@ -18,18 +18,17 @@
 
 <style>
     /* 가로 규격 */
-    .wrap{width: 1200px; margin: auto;}
+    .wrap{width: 1200px; margin: auto; margin-top: 50px; margin-bottom: 100px;}
 
     /*content*/
     .content{
-        border: 1px solid red;
+        border: 4px solid crimson;
         width: 1200px;
         box-sizing: border-box;
         margin: auto;
     }
 
     #content-padding{
-        border:1px solid blue; 
         margin: auto;
         padding: 5px;
         box-sizing: border-box;
@@ -53,10 +52,6 @@
 </head>
 <body>
     <div class="wrap">
-
-        
-        <%@ include file="../common/head.jsp" %>    
-
         <div class="content">
             <div id="content-padding">
 
@@ -159,9 +154,9 @@
                     <br><br>
 
                     
-                    <br><br><br><br>
+                    <br><br>
                     <p><button type="submit" class="btn btn-danger btn-block" style="margin:auto; width:400px;" >업체등록요청</button></p>
-
+                    <br><br>
                 </form>
             </div>
         </div>
