@@ -106,7 +106,7 @@
                                 <a class="dropdown-item" href="#">공지사항</a>
                                 <a class="dropdown-item" href="#">FAQ</a>
                                 <a class="dropdown-item" href="#">1:1문의</a>
-                                <a class="dropdown-item" href="#">업체등록</a>
+                                <a class="dropdown-item" href="<%= contextPath %>/enrollForm.re">업체등록</a>
                             </span>
                         </span>
                     </div>

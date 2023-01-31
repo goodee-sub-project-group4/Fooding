@@ -342,9 +342,6 @@
                     <button type="button" id="book-btn">예약</button>
                 </div>
                 <br>
-                <input type="text" id="testMap" name="testMap"><button type="button" id="test-btn">확인</button>
-                <div id="result"></div>
-                <br>
                 <div id="content3-3">
                     <div>
                         <div id="book-title">업체명</div>
@@ -508,7 +505,7 @@
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                 mapOption = {
                     center: new kakao.maps.LatLng(37.57150, 126.99034), // 지도의 중심좌표
-                    level: 2, // 지도의 확대 레벨
+                    level: 1, // 지도의 확대 레벨
                     mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
                 }; 
 

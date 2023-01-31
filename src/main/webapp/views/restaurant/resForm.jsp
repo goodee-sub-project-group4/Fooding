@@ -118,6 +118,9 @@
                     </div>
                     <br><br>
 
+                    <div>
+                        
+                    </div>
                     <div class="inputForm">
                         주소 <span style="color:red;">*</span>  <br>
                         <input type="text" name="address" id="address" required> <br> 
