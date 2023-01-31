@@ -64,7 +64,7 @@
 
 </head>
 <body>
-	<!-- Alert -->
+	<!-- alert -->
 	<% if(alertMsg != null) { %>
 	<script>
 		alert("<%=alertMsg%>");
