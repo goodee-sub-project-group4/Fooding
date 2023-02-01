@@ -150,6 +150,10 @@ public class Restaurant {
 		this.breakE = breakE;
 		this.foodCt = foodCt;
 	}
+	
+	public int getResNo () {
+		return resNo;
+	}
 
 	public void setResNo(int resNo) {
 		this.resNo = resNo;
