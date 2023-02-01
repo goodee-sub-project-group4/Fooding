@@ -46,24 +46,23 @@
         .menu img{width: 180px; height: 100px;}
 
         /* 리뷰 */
-        #content2-2{margin-top: 20px; float: left;}
+        #content2-2{margin-top: 20px; float: left; height: 1700px; overflow: auto;}
         #content2-2 div{box-sizing: border-box;}
-        #review-head{height: 50px; border: 2px solid gainsboro; padding: 5px;}
-        .review-content{width: 100%; height: 500px; border: 2px solid gainsboro;}
+        #review-head{height: 50px; border: 2px solid gainsboro; padding: 5px; margin-bottom: 4px;}
         .review-content div{float: left; padding: 5px;}
-        .review-content1-1{width: 20%; height: 50px; }
+        .review-content1-1{width: 20%; height: 60px; border-left: 2px solid gainsboro; border-top: 2px solid gainsboro;}
         /* 리뷰 제목 */
-        .review-content1-2{width: 80%; height: 60px;}
+        .review-content1-2{width: 80%; height: 60px; border-top: 2px solid gainsboro; border-right: 2px solid gainsboro;}
         /* 리뷰 작성자 */
-        .review-content2-1{width: 20%; height: 355px;}
-        .review-content2-2{width: 80%; height: 355px;}
+        .review-content2-1{width: 20%; height: 355px; border-left: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
+        .review-content2-2{width: 80%; height: 355px; border-right: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
         /* 리뷰 내용 */
         .review-text{width: 100%; height: 200px;}
         /* 리뷰 사진 */
         .review-picture{width: 100%; height: 150px; padding: 10px; text-align: center;}
         .review-picture img{width: 140px; height: 120px;}
         /* 리뷰 페이징 */
-        .paging{height: 50px; text-align: center; padding-top: 20px;}
+        .paging{text-align: center; margin-top: 30px; width: 100%; float: left;}
 
         /* 컨텐트 오른쪽 영역 */
         #content3-padding{width: 30%; height: 465px;}
@@ -147,7 +146,7 @@
                 <div id="content2">
                     <div id="content2-1">
                         <div id="thumbnail">
-                            <img style="width: 100%; height: 100%;" src="<%= contextPath %>/resources/restaurantSample/loosedoor_0.jpg" alt="">
+                            <img style="width: 100%; height: 100%;" src="<%= contextPath %>/resources/restaurantSample/4_loosedoor.jpg" alt="">
                         </div>
                         <div id="content-main">
                             <div id="main1">
@@ -364,8 +363,6 @@
                          // 예약날짜, 시간, 메뉴, 약관 슬라이드 효과 -----------------------------------------------
                         $(function(){
                             $('.menu-slide').click(function(){
-                                console.log($(this).text().length)
-                                if($('#book-date').text().length > 5 && $(this).text() == '시간 선택'){
                                     const $slide = $(this).next();
                                     if($slide.css('display') == 'none'){
                                         $(this).siblings('.slide-detail1').slideUp();
@@ -376,9 +373,6 @@
                                     }else{
                                         $slide.slideUp();
                                     }
-                                }else if($(this).text().length == 5 && $(this).text() == '시간 선택'){
-                                    alert('날짜를 먼저 선택해주세요');
-                                }
                             });
 
                             $('#book-menu').click(function(){
@@ -393,8 +387,12 @@
                                     $('#menu-select-border3').css('display', 'none');
                                     $('#menu-payment').css('display', 'none');
                                     $('#menu-selected').css('display', 'block');
+                                }else if($('#book-date').text() == '날짜 선택'){
+                                    alert('날짜를 먼저 선택해주세요!');
+                                    $('#book-date').next().slideDown();
                                 }else{
-                                    alert('날짜 또는 시간을 선택해주세요!');
+                                    alert('시간을 먼저 선택해주세요!');
+                                    $('#book-time').next().slideDown();
                                 }
                             });
 
