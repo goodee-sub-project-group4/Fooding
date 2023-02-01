@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.fd.restaurant.model.vo.Restaurant"%>
-
+<%
+	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>

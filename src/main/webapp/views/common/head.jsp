@@ -5,7 +5,6 @@
 	String alertMsg = (String)session.getAttribute("alertMsg"); // Alert
 
 	Member loginUser = (Member)session.getAttribute("loginUser");
-	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant"); // 식당정보 조회
 %>
 <!DOCTYPE html>
 <html>
