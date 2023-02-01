@@ -556,6 +556,7 @@
                         </div>
                     </div>
                     <br>
+                    
                     <div id="book-menu4-userInfo">
                         <div style="width: 100%; height: 70px; text-align: center; line-height: 70px; border: 2px solid gainsboro;">
                             예약확인 및 예약자 정보
@@ -564,6 +565,20 @@
                             <b>날짜</b> &nbsp; <b>시간</b>
                         </div>
                         <table style="width: 95%; margin: auto;">
+                        	<% if(loginUser != null) { %>
+                            <tr>
+                                <th style="width: 25%; height: 50px;">예약자<b style="color: crimson;">*</b></th>
+                                <td><input class="align2" type="text" name="bookUserName" value="<%= loginUser.getUserName() %>" placeholder="김푸딩" style="width: 100%; height: 45px;" required></td>
+                            </tr>
+                            <tr>
+                                <th style="height: 50px;">연락처<b style="color: crimson;">*</b></th>
+                                <td><input class="align2" type="text" name="bookUserPhone" value="<%= loginUser.getUserPhone() %>" placeholder="010-0000-0000" style="width: 100%; height: 45px;" required></td>
+                            </tr>
+                            <tr>
+                                <th style="height: 50px;">이메일</th>
+                                <td><input class="align2" type="text" name="bookEmail" value="<%= loginUser.getUserEmail() %>" placeholder="fooding@naver.com" style="width: 100%; height: 45px;" required></td>
+                            </tr>
+                            <% }else{ %>
                             <tr>
                                 <th style="width: 25%; height: 50px;">예약자<b style="color: crimson;">*</b></th>
                                 <td><input class="align2" type="text" name="bookUserName" placeholder="김푸딩" style="width: 100%; height: 45px;" required></td>
