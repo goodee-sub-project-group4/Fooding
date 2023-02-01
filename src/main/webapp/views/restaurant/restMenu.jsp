@@ -33,14 +33,16 @@
 			margin:auto;
 		}
 		/* ↓↓↓ 컨텐츠용 스타일 */
+		#menu-outer {
+			
+		}
 		.menu-box {
-			width:580px;
+			width:650px;
 			height:250px;
 			position:relative;
 			margin:auto;
 			margin-bottom: 20px;
 			padding:15px;
-
 		}
 		.text-box {
 			display: inline-block;
@@ -62,15 +64,27 @@
 			margin-top: 3px;
 			color: gray;
 		}
-		.photo {
+		.photo { /*사진등록영역*/
 			float:right;
 			position:absolute;
-			right:10px;
+			right:80px;
 			top:10px; 
 		}
 		.photo button {
 			margin-top: 10px;
 		}
+		.delete { /*삭제버튼영역*/
+			float:right;
+		}
+		.delete img {
+			width:30px;
+			position:relative;
+			bottom:110px;
+		}
+		.delete img:hover {
+			cursor: pointer;
+		}
+
 		#menu-list { /*기존등록메뉴*/
 			height:260*<%=oldCount%>px;
 		}
@@ -115,6 +129,9 @@
 									<!-- 메뉴갯수를 넘기는 태그 -->
 									<input type="hidden" name="count" value="<%=i%>"> 
 								</div>
+							</div>
+							<div class="delete">
+								<img src="<%=contextPath%>/resources/images/xIcon.png">
 							</div>
 						</div>
 						<% } %>
@@ -188,6 +205,9 @@
 					'<button type="button" class="btn btn-outline-danger">사진등록</button>'+
 					'<div style="display:none"><input type="file" name="file'+count+'"></div>'+
 					'<input type="hidden" name="count" value="'+count+'">'+
+				'</div>'+
+				'<div class="delete">'+
+					'<img src="<%=contextPath%>/resources/images/xIcon.png">'+
 				'</div>'+
 			'</div>')
 			);

@@ -32,73 +32,62 @@ public class SearchController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		// 1) 요청시 전달값 뽑기 & 데이터 가공처리 => 변수 또는 객체에 기록하기 
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		// 1) 사용자로부터 전달받은 값 뽑아서 변수에 저장 
 		String localCt = request.getParameter("city");	
 		String dLocalCt = request.getParameter("county"); 
 		String foodCt = request.getParameter("foodCt"); 
-	
-		// 페이징 처리
-		int listCount; // 현재 게시글 총 갯수 
-		int currentPage; // 사용자가 요청한 페이지 ( == 현재 페이지)
-		int pageLimit; // 페이지 하단에 보여질 페이징바의 페이지 최대갯수 (몇개 단위씩)
-		int boardLimit; // 한 페이지 내에 보여질 게시글 최대 갯수 (몇개 단위씩)
-		// 위의 4개를 가지고 아래의 3개의 값을 구할꺼임
-		int maxPage; // 가장 마지막페이지 (총 페이지수)
-		int startPage; // 서용자가 요청한 페이지 하단의 페이징바의 시작수
-		int endPage; // 사용자가 요청한 페이지 하단의 페이징바의 끝수 
+		 
 		
-		// listCount : 총 게시글 갯수 
+		// 2) 페이징처리를 위한 변수 설정 
+		int listCount; 		// 현재 게시글 총 갯수 ( => 검색결과 총 갯수로 쓰자!! )
+		int currentPage; 	// 사용자가 요청한 페이지 ( == 현재 페이지)
+		int pageLimit; 		// 페이지 하단에 보여질 페이징바의 페이지 최대갯수 (몇개 단위씩)
+		int boardLimit; 	// 한 페이지 내에 보여질 게시글 최대 갯수 (몇개 단위씩)
+		
+		int maxPage; 		// 가장 마지막페이지 (총 페이지수)
+		int startPage; 		// 서용자가 요청한 페이지 하단의 페이징바의 시작수
+		int endPage; 		// 사용자가 요청한 페이지 하단의 페이징바의 끝수 
+		
+		// 3) listCount (총 게시글 갯수 => 검색결과 총 갯수)
 		listCount = new SearchService().selectListCount(localCt, dLocalCt, foodCt);
 		
-		// * currentPage : 사용자가 요청한 페이지 (현재 페이지)
+		// 4) currentPage : 사용자가 요청한 페이지 (현재 페이지)
 		currentPage = Integer.parseInt(request.getParameter("cpage")); 
-				
-		// * pageLimit : 페이징바의 페이지 최대 갯수 (단위)
+		
+		// 5) pageLimit : 페이징바의 페이지 최대 갯수 
 		pageLimit = 10; 
 		
-		// * boardLimit : 한 페이지당 보여질 게시글 최대 갯수 (단위)
+		// 6) boardLimit : 한 페이지당 보여질 검색게시글 최대 갯수 
 		boardLimit = 10; 
 		
-		// * maxPage : 제일 마지막 페이지수(총 페이지수)
-		// listCount(실수형) / boardLimit => 올림처리 (나머지가 있기라도 하면 무조건 올림처리 해야되므로)
+		// 7) maxPage : 제일 마지막 페이지수(총 페이지수)
 		maxPage = (int)Math.ceil( (double)listCount / boardLimit ); 
 		
-		// * startPage : 페이징바의 시작수 
-		startPage = (currentPage-1) / pageLimit * pageLimit + 1; //이해안됨 걍 암기
+		// 8) startPage : 페이징바의 시작수 
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1; 
 		
-		// * endPage : 페이징바의 끝 수 
+		// 9 ) endPage : 페이징바의 끝수 
 		endPage = startPage + pageLimit - 1; 
 		
-		// startPage가 11일 경우 endPage는 20으로 됨 (근데 maxPage가 고작 13까지밖에 안되면?)
+		// 10) 
 		if(endPage > maxPage) {
 			endPage = maxPage; 
 		}
 		
-		// com.br.common.model.vo.PageInfo 
-		// * 페이징바를 만들때 필요한 객체 
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage); 
+		// 11) 페이징바를 만들때 필요한 객체 생성
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		// * 현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 boardLimit 수만큼 조회 
-		ArrayList<Restaurant> list = new SearchService().selectList(pi, localCt, dLocalCt, foodCt);
+		// 12) 현재 요청한 페이지(currentPage)에 보여질 검색게시글 리스트 boardLimit 수만큼 조회 
+		
+		ArrayList<Restaurant> list = new SearchService().selectList(pi, localCt, dLocalCt, foodCt); 
 		
 		request.setAttribute("pi", pi); 
 		request.setAttribute("list", list); 
-		*/
-		// 응답페이지 (views/search/search.jsp); 
 		
 		
-		/* 연습 (입력받은 값 뽑아서 출력해보기)*/
-		String localCt = request.getParameter("city");	
-		String dLocalCt = request.getParameter("county"); 
-		String foodCt = request.getParameter("foodCt"); 
-		
-		/*위의 값들 Restaurant 객체에 담기*/
-		Restaurant r = new Restaurant(localCt, dLocalCt, foodCt); 
-		
-		/*jsp파일에 전달하기 위함*/
-		request.setAttribute("r", r);
-
 		request.getRequestDispatcher("views/search/practice.jsp").forward(request, response); 
 	
 	}
