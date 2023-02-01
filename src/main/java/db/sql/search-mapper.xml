@@ -107,8 +107,8 @@
 		  )
 		  VALUES
 		  (
-		    SEQ_FNO.NEXTVAL
-		  , SEQ_BNO.CURRVAL
+		    SEQ_RESNO.NEXTVAL
+		  , SEQ_RESNO.CURRVAL
 		  , ?
 		  , ?
 		  , ?

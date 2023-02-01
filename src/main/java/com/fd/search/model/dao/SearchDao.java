@@ -159,7 +159,7 @@ public class SearchDao {
 	}
 	
 	public int insertAttachment(Connection conn, Attachment at) {
-		// insert
+		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertAttachment");
@@ -171,6 +171,7 @@ public class SearchDao {
 			pstmt.setString(3, at.getFilePath());
 			
 			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
