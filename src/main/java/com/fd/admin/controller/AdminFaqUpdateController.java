@@ -1,6 +1,7 @@
 package com.fd.admin.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,22 +39,28 @@ public class AdminFaqUpdateController extends HttpServlet {
 		}else {	
 			
 			request.setCharacterEncoding("UTF-8");
-//			int faqNo = Integer.parseInt(request.getParameter("no"));
+			int faqNo = Integer.parseInt(request.getParameter("no"));
 			String faqCategory = request.getParameter("category");
 			String faqTitle = request.getParameter("title");
 			String faqContent = request.getParameter("content");
 			String modifyDate = request.getParameter("modifyDate");
 			
 			Faq f = new Faq();
+			f.setFaqNo(faqNo);
+			f.setCategory(faqCategory);
+			f.setFaqTitle(faqTitle);
+			f.setFaqContent(faqContent);
+			f.setModifyDate(modifyDate);
 			
-			
-			int result = new AdminService().updateFaq();
+			int result = new AdminService().updateFaq(f);
 			if(result>0) {
 				request.getSession().setAttribute("alertMsg", "수정 완료");
-				response.sendRedirect(request.getContextPath() + "/faqList.ad=");
+				response.sendRedirect(request.getContextPath() + "/faqList.ad");
+			}else {
+				request.getSession().setAttribute("errorMsg", "수정 실패");
+				request.getRequestDispatcher("views/common/errorPage.jsp");
 			}
 
-			request.getRequestDispatcher("views/admin/faqUpdate.jsp").forward(request, response);
 		}
 	}
 
