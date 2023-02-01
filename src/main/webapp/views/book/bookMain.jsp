@@ -354,6 +354,82 @@
                         <div style="float: right; margin-left: 20px; font-weight: 600; color: gray;"><div style="width: 15px; height: 15px; margin-top: 4.5px; margin-right: 5px; border: 2px solid gray; border-radius: 3px; float: left;"></div>예약불가</div>
                         <div style="float: right; font-weight: 600; color: crimson;"><div style="width: 15px; height: 15px; margin-top: 4.5px; margin-right: 5px; border: 2px solid crimson; border-radius: 3px; float: left;"></div>예약가능</div>
                     </div>
+
+                    <script>
+                         // 예약날짜, 시간, 메뉴, 약관 슬라이드 효과 -----------------------------------------------
+                        $(function(){
+                            $('.menu-slide').click(function(){
+                                console.log($(this).text().length)
+                                if($('#book-date').text().length > 5 && $(this).text() == '시간 선택'){
+                                    const $slide = $(this).next();
+                                    if($slide.css('display') == 'none'){
+                                        $(this).siblings('.slide-detail1').slideUp();
+                                        $(this).siblings('.slide-detail2').slideUp();
+                                        $('#general-condition-detail1').slideUp();
+                                        $('#general-condition-detail2').slideUp();
+                                        $slide.slideDown();
+                                    }else{
+                                        $slide.slideUp();
+                                    }
+                                }else if($(this).text().length == 5 && $(this).text() == '시간 선택'){
+                                    alert('날짜를 먼저 선택해주세요');
+                                }
+                            });
+
+                            $('#book-menu').click(function(){
+                                if($('#book-date').text() != '날짜 선택' && $('#book-time').text() != '시간 선택'){
+                                    if($('#book-date').css('display') == 'block' || $('#book-time').css('display') == 'block'){
+                                        $('#book-date').next().slideUp();
+                                        $('#book-time').next().slideUp();
+                                        $('#general-condition-detail1').slideUp();
+                                        $('#general-condition-detail2').slideUp();
+                                    };
+                                    $('.menu-select').css('display', 'block');
+                                    $('#menu-select-border3').css('display', 'none');
+                                    $('#menu-payment').css('display', 'none');
+                                    $('#menu-selected').css('display', 'block');
+                                }else{
+                                    alert('날짜 또는 시간을 선택해주세요!');
+                                }
+                            });
+
+                            $('.check').click(function(){
+                                $('.menu-select').css('display', 'none');
+                            })
+
+                            $('.general-condition').click(function(){
+                                const $slide = $(this).next();
+                                if($slide.css('display') == 'none'){
+                                    $('#general-condition-detail1').slideUp();
+                                    $('#general-condition-detail2').slideUp();
+                                    $('.slide-detail1').slideUp();
+                                    $('.slide-detail2').slideUp();
+                                    $slide.slideDown();
+                                }else{
+                                    $slide.slideUp();
+                                };
+                            });
+                        });
+                        
+                        // 시간 선택 버튼 효과
+                        $(document).on('click', '.book-time-btn.btn.btn-outline-danger', function(e){
+                            {
+                                $('#am-box, #pm-box').children().each(function(){
+                                if($(this).prop('name')){
+                                    $(this).css({'background-color':'', 'color':''});
+                                    $(this).removeAttr('name');
+                                    $(this).removeAttr('value');
+                                }
+                            })
+                                const bookTimeValue = $(this).text();
+                                $(this).css({'background-color':'crimson', 'color':'white'});
+                                $(this).attr('name', 'bookTime');
+                                $(this).attr('value', bookTimeValue);
+                                $('#book-time').text('예약시간 ' + bookTimeValue);
+                            }
+                        });
+                    </script>
+
                     <div class="book-category" id="book-menu">메뉴 선택</div>
                     <form class="menu-fixed" >
                         <div class="menu-select">
@@ -653,53 +729,7 @@
                 });
             });
 
-            // 예약날짜, 시간, 메뉴, 약관 슬라이드 효과 -----------------------------------------------
-            $(function(){
-                $('.menu-slide').click(function(){
-                    const $slide = $(this).next();
-                    if($slide.css('display') == 'none'){
-                        $(this).siblings('.slide-detail1').slideUp();
-                        $(this).siblings('.slide-detail2').slideUp();
-                        $('#general-condition-detail1').slideUp();
-                        $('#general-condition-detail2').slideUp();
-                        $slide.slideDown();
-                    }else{
-                        $slide.slideUp();
-                    }
-                });
-
-                $('#book-menu').click(function(){
-                    if($('#book-date').css('display') == 'block' || $('#book-time').css('display') == 'block'){
-                        $('#book-date').next().slideUp();
-                        $('#book-time').next().slideUp();
-                        $('#general-condition-detail1').slideUp();
-                        $('#general-condition-detail2').slideUp();
-                    };
-                    $('.menu-select').css('display', 'block');
-                    $('#menu-select-border3').css('display', 'none');
-                    $('#menu-payment').css('display', 'none');
-                    $('#menu-selected').css('display', 'block');
-                });
-
-                $('.check').click(function(){
-                    $('.menu-select').css('display', 'none');
-                })
-
-                $('.general-condition').click(function(){
-                    const $slide = $(this).next();
-                    if($slide.css('display') == 'none'){
-                        $('#general-condition-detail1').slideUp();
-                        $('#general-condition-detail2').slideUp();
-                        $('.slide-detail1').slideUp();
-                        $('.slide-detail2').slideUp();
-                        $slide.slideDown();
-                    }else{
-                        $slide.slideUp();
-                    };
-                });
-                
-             
-            });
+           
 
             // 시간 선택 버튼 생성 -------------------------------------------------------------------------------------
             $(function(){
