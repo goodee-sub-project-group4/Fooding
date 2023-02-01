@@ -576,6 +576,7 @@
                                 <th style="height: 50px;">이메일</th>
                                 <td><input class="align2" type="text" name="bookEmail" placeholder="fooding@naver.com" style="width: 100%; height: 45px;" required></td>
                             </tr>
+                            <% } %>
                             <tr>
                                 <td colspan="2" style="text-align: right;">* 작성 시 예약 확인 메일이 발송됩니다<br><br></td>
                                 
