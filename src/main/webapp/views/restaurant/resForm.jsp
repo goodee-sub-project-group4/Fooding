@@ -63,7 +63,7 @@
 				<br><br><br><br><br>
 				
 				
-                <form action="<%= contextPath %>/resForm.res" method="get">
+                <form action="<%= contextPath %>/resForm.res" method="post" enctype="multipart/form-data">
 
                     <div class="inputForm">
                         대표자명 <span style="color:red;">*</span> <br>

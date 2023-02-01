@@ -94,7 +94,7 @@ public class ResFormController extends HttpServlet {
 		
 		
 		request.setCharacterEncoding("UTF-8");
-		
+		System.out.println(ServletFileUpload.isMultipartContent(request));
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			int maxSize = 10*1024*1024;
@@ -102,8 +102,6 @@ public class ResFormController extends HttpServlet {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/search_upfiles/");
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			
-			
 			
 			String resName = multiRequest.getParameter("resName");
 			String ceo = multiRequest.getParameter("ceo");
@@ -133,7 +131,7 @@ public class ResFormController extends HttpServlet {
 				HttpSession session = request.getSession(); 
 				session.setAttribute("alertMsg", "성공적으로 업체등록신청이 되었습니다.");
 				
-				response.sendRedirect(request.getContextPath()); 
+				response.sendRedirect(request.getContextPath()); // 인덱스 페이지로 보내기!! 
 				
 			}else {
 				
