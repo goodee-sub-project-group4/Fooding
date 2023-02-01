@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.fd.restaurant.model.vo.Restaurant"%>
+<%
+	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -27,25 +30,23 @@
         #content2-1 div{box-sizing: border-box;}
         
         /* 업체 사진 */
-        #thumbnail{height: 350px;}
+        #thumbnail{height: 450px;}
         /* 업체 정보 */
-        #content-main{width: 100%; padding: 5px; height: 700px; float: left; border: 2px solid gainsboro;}
+        #content-main{width: 100%; padding: 5px; float: left; border: 2px solid gainsboro;}
         /* 업체명 (조회/리뷰/별점) */
-        #main1{width: 100%; height: 100px;}
+        #main1{width: 100%;}
         /* 업체세부정보 + 메뉴 */
         #main2{width: 100%; height: 600px;}
         #main2 div{float: left;}
         #main2-1, #main2-3{width: 25%;}
         #main2-2, #main2-4{width: 75%;}
-        #main2-1, #main2-2{height: 200px;}
-        #main2-3, #main2-4{height: 400px;}
-        #main2-4{overflow: auto;}
+        #main2-4{height: 400px; overflow: auto;}
         /* 메뉴 */
         .menu{width: 50%; padding: 3px; text-align: center;}
         .menu img{width: 180px; height: 100px;}
 
         /* 리뷰 */
-        #content2-2{margin-top: 50px; height: 1270px; overflow: auto; border-bottom: 2px solid gainsboro;}
+        #content2-2{margin-top: 20px; float: left;}
         #content2-2 div{box-sizing: border-box;}
         #review-head{height: 50px; border: 2px solid gainsboro; padding: 5px;}
         .review-content{width: 100%; height: 500px; border: 2px solid gainsboro;}
@@ -146,11 +147,11 @@
                 <div id="content2">
                     <div id="content2-1">
                         <div id="thumbnail">
-                            <img src="" alt="">
+                            <img style="width: 100%; height: 100%;" src="<%= contextPath %>/resources/restaurantSample/loosedoor_0.jpg" alt="">
                         </div>
                         <div id="content-main">
                             <div id="main1">
-                                <b>(업체명)</b>
+                                <b><%= restaurant.getResName() %></b>
                                 <br>
                                 조회수 / 리뷰수 / 별점
                             </div>
@@ -158,31 +159,35 @@
                                 <table style="width: 100%;">
                                     <tr>
                                         <th style="width: 25%;;">사업자명</th>
-                                        <td style="width: 75%;">사업자명</td>
+                                        <td style="width: 75%;"><%= restaurant.getCeo() %></td>
                                     </tr>
                                     <tr>
                                         <th>영업시간</th>
-                                        <td>영업시간</td>
+                                        <td><%= restaurant.getOpen() %> ~ <%= restaurant.getClose() %></td>
                                     </tr>
                                     <tr>
                                         <th>브레이크 타임</th>
-                                        <td>브레이크 타임</td>
+                                        <td><%= restaurant.getBreakS() %> ~ <%= restaurant.getBreakE() %></td>
                                     </tr>
                                     <tr>
                                         <th>주차</th>
-                                        <td>주차</td>
+                  	                    <% if(restaurant.getParking().equals("Y")){ %> 
+                                        <td>주차가능</td>
+                                        <% }else{ %>
+                                        <td>주차 불가능</td>
+                                        <% } %>
                                     </tr>
                                     <tr>
                                         <th>주소</th>
-                                        <td>주소</td>
+                                        <td><%= restaurant.getAddress() %><%= restaurant.getdAddress() %></td>
                                     </tr>
                                     <tr>
                                         <th>업종</th>
-                                        <td>업종</td>
+                                        <td><%= restaurant.getFoodCt() %></td>
                                     </tr>
                                     <tr>
                                         <th>사업자등록번호</th>
-                                        <td>사업자등록번호</td>
+                                        <td><%= restaurant.getPermitNo() %></td>
                                     </tr>
                                 </table>
 
@@ -232,7 +237,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                     <div id="content2-2">
@@ -299,10 +303,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="paging">
+                            < 1 2 3 4 5 6 7 8 9 >
+                        </div>
                     </div>
-                    <div class="paging">
-                        < 1 2 3 4 5 6 7 8 9 >
-                    </div>
+                    
                 </div>
             </div>
             <div id="content3-padding">

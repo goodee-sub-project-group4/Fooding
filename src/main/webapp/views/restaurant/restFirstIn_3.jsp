@@ -95,7 +95,7 @@
 						<input type="text" name="describe0"><br>
 					</div>
 					<div class="photo" align="center">
-						<img id="image0" src="/Fooding/resources/images/forTest.png" class="rounded" width="180" height="180"><br>
+						<img id="image0" src="<%=contextPath%>/resources/images/forTest.png" class="rounded" width="180" height="180"><br>
 						<button type="button" class="btn btn-outline-danger">사진등록</button>
 						<div style="display:none"><input type="file" name="file0"></div>
 						<!-- 메뉴갯수를 넘기는 태그 -->
@@ -107,9 +107,14 @@
 			</div>
 
 			<div align="center"><br><br>
+				<button type="button" class="btn btn-secondary" onclick="location.href='<%=contextPath%>/home.re'">다음에하기</button>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<button type="button" class="btn btn-outline-secondary" onclick="removeAll();">초기화</button>
+				
 				<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
 				<button type="submit" class="btn btn-danger">저장</button>
-				<button type="button" class="btn btn-secondary" onclick="location.href='<%=contextPath%>/home.re'">다음에하기</button>
+				
+				
 			</div>
 			
 		</form>
@@ -178,8 +183,15 @@
 				'</div>'+
 			'</div>')
 			);
-			
-			
+		}
+
+		function removeAll(){
+			$('.new-box').remove();
+			count=0; //메뉴추가 카운트 초기화
+			$('#menu-outer').css("height", "260"); //높이 초기화
+			//첫번째 메뉴 작성내용 초기화
+			$('#firstone input').val("");
+			$('#firstone img').attr("src", "<%=contextPath%>/resources/images/forTest.png");
 
 		}
 		

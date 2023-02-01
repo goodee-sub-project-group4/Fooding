@@ -151,7 +151,7 @@
 		</div>
 		<div id="content">
 			<!-- 컨텐츠 작성부 -->			
-			<div id="area1">
+			<div id="area1"><br>
 				<div>					
 					<h3>신규예약건 </h3> <span class="badge">2</span>
 					<span class="more">더보기 <img src="resources/images/more.png" width="25"></span>

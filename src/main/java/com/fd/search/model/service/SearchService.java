@@ -1,10 +1,13 @@
 package com.fd.search.model.service;
 
-import static com.fd.common.JDBCTemplate.*;
+import static com.fd.common.JDBCTemplate.close;
+import static com.fd.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import static com.fd.common.JDBCTemplate.*;
+import com.fd.common.model.vo.Attachment;
 import com.fd.common.model.vo.PageInfo;
 import com.fd.restaurant.model.vo.Restaurant;
 import com.fd.search.model.dao.SearchDao;
@@ -27,19 +30,26 @@ public class SearchService {
 		return list;
 	}
 	
-	public int insertRes(Restaurant r) {
+	public int insertRes(Restaurant r, Attachment at) {
 		
-		Connection conn = getConnection(); 
-		int result = new SearchDao().insertRes(conn, r);
+		Connection conn = getConnection();
 		
-		if(result > 0) {
+		int result1 = new SearchDao().insertRes(conn, r);
+		
+		int result2 = 1;
+		if(at != null) {
+			result2 = new SearchDao().insertAttachment(conn, at);
+		}
+		
+		if(result1 > 0 && result2 > 0) {
 			commit(conn); 
 		}else {
-			rollback(conn); 
+			rollback(conn);
 		}
 		
 		close(conn);
 		
-		return result; 
+		return result1 * result2;
+		
 	}
 }

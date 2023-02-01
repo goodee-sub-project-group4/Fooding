@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.fd.member.model.vo.Member" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>  
+<%@ page import="com.fd.member.model.vo.Member" %>    
 <%
 	String contextPath = request.getContextPath(); // /Fooding
 	String alertMsg = (String)session.getAttribute("alertMsg"); // Alert
@@ -100,7 +100,6 @@
                         <span>&nbsp;|&nbsp;</span>
                         <span><a href="<%= contextPath%>/loginForm.me">로그인</a></span>
                         <span>&nbsp;|&nbsp;</span>
-                        <span>
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
                             <span class="dropdown-menu">
                                 <a class="dropdown-item" href="#">공지사항</a>
@@ -108,7 +107,6 @@
                                 <a class="dropdown-item" href="#">1:1문의</a>
                                 <a class="dropdown-item" href="<%= contextPath %>/enrollForm.re">업체등록</a>
                             </span>
-                        </span>
                     </div>
 				<% } else { %>
 				
@@ -119,16 +117,16 @@
                         <span>
                             <button type="button" data-toggle="dropdown">마이페이지</button>
                             <span class="dropdown-menu">
-                            <a class="dropdown-item" href="#">예약/결제 내역</a>
-                            <a class="dropdown-item" href="<%= contextPath%>/reviewList.re">리뷰</a>
-                            <a class="dropdown-item" href="#">찜하기</a>
-                            <a class="dropdown-item" href="#">적립금</a>
-                            <a class="dropdown-item" href="<%= contextPath%>/myPageConfirmPwd.me">개인정보수정</a>
-                            <a class="dropdown-item" href="<%= contextPath%>/logout.me">로그아웃</a>
+	                            <a class="dropdown-item" href="#">예약/결제 내역</a>
+	                            <a class="dropdown-item" href="<%= contextPath%>/reviewList.re">리뷰</a>
+	                            <a class="dropdown-item" href="#">찜하기</a>
+	                            <a class="dropdown-item" href="#">적립금</a>
+	                            <a class="dropdown-item" href="<%= contextPath%>/myPageConfirmPwd.me">개인정보수정</a>
+	                            <a class="dropdown-item" href="<%= contextPath%>/logout.me">로그아웃</a>
                             </span>
                         </span>
                         <span>&nbsp;|&nbsp;</span>
-                        <span>
+                        <span class="dropdown">
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
                             <span class="dropdown-menu">
                                 <a class="dropdown-item" href="#">공지사항</a>
@@ -139,6 +137,22 @@
                         </span>
                     </div>
 				<% } %>
+				<script>
+                    $(function(){
+                    	$("button[data-toggle=dropdown]").click(function(){
+                    		let $span = $(this).next();
+                    		let $parentSpan = $(this).parent();
+                    		
+                    		if($span.is(".show")){
+                    			$span.removeClass("show");
+                    			$parentSpan.removeClass("show")
+                    		}else{
+                    			$span.addClass("show");
+                    			$parentSpan.addClass("show")
+                    		}
+                    	})
+                    })   	
+                </script>
                     <!-- 헤더바3-2 -->
                     <div id="header3-2">
                         <!-- 각 이미지 클릭시 찜하기, (최근 본 게시물,) 리뷰페이지로 이동가능 -->

@@ -33,14 +33,14 @@
 			margin:auto;
 		}
 		/* ↓↓↓ 컨텐츠용 스타일 */
+
 		.menu-box {
-			width:580px;
+			width:650px;
 			height:250px;
 			position:relative;
 			margin:auto;
 			margin-bottom: 20px;
 			padding:15px;
-
 		}
 		.text-box {
 			display: inline-block;
@@ -62,18 +62,59 @@
 			margin-top: 3px;
 			color: gray;
 		}
-		.photo {
+		.photo { /*사진등록영역*/
 			float:right;
 			position:absolute;
-			right:10px;
+			right:80px;
 			top:10px; 
 		}
 		.photo button {
 			margin-top: 10px;
 		}
-		#menu-list { /*기존등록메뉴*/
-			height:260*<%=oldCount%>px;
+		.delete { /*삭제버튼영역*/
+			float:right;
 		}
+		.delete img { /*삭제버튼*/
+			width:30px;
+			position:relative;
+			bottom:110px;
+		}
+		.delete img:hover, .delete-for-new img:hover {
+			cursor: pointer;
+		}
+
+		#menu-list { /*전체메뉴감싸는 div*/
+			height:(260*<%=oldCount%> + 50)px;
+		}
+		.new-box-set {
+			border: 2px solid crimson;
+			width:660px;
+			margin:auto;
+			position: relative;
+			right:20px;
+			margin-top: 30px;
+			display:none;
+		}
+		.new-box-set p { /*문구 : 추가된메뉴*/
+			margin-top: 30px;
+			font-size: 24px;
+			font-weight: 600;
+			line-height: 34px;
+			color: lightgray;
+			text-align: center;
+		}
+		.delete-for-new img { /*추가된 메뉴 삭제*/
+			width:30px;
+			float:right;
+			position:relative;
+			bottom:75px;
+			right:25px;
+		}
+		.new-box {
+			position: relative;
+			left:20px;
+		}
+
 		
 	</style>
 </head>
@@ -86,12 +127,11 @@
 		</div>
 		<div id="content"><br><br><br>
 			<!-- 컨텐츠 작성부 -->
-			<div id="menu-outer">
+			<form action="<%=contextPath %>/menuUpdate.re" method="post" enctype="multipart/form-data">
 				<div id="menu-list">
-				<form action="<%=contextPath %>/menuUpdate.re" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="oldCount" value="<%=oldCount%>">
 					<% for(int i=0; i<list.size(); i++) { %>	
-					<div class="menu-box">
+					<div class="menu-box" id="<%=list.get(i).getMenuNo()%>" >
 						<input type="hidden" name="number<%=i%>" value="<%=list.get(i).getMenuNo()%>">
 						<div class="text-box">
 							<span>메뉴명 </span><span style="color:crimson">* </span>
@@ -116,21 +156,28 @@
 								<input type="hidden" name="count" value="<%=i%>"> 
 							</div>
 						</div>
+						<div class="delete"> <!-- 삭제버튼 -->
+							<img src="<%=contextPath%>/resources/images/xIcon.png" onclick="deleteMenu('<%= list.get(i).getMenuNo() %>');">
+						</div>
 					</div>
 					<% } %>
+					<div class="new-box-set">
+						<p>추가된 메뉴</p><br>
+						<div class="delete-for-new">
+							<img src="<%=contextPath%>/resources/images/xIcon.png" onclick="removeNew();">
+						</div>
+						<div id="firstone"></div><!-- 이 뒤로 동적으로 생성된 메뉴가 추가된다. -->
+					</div>	
+					<div align="center"><br><br>
+						<button type="button" class="btn btn-outline-secondary" onclick="resetMenu();">초기화</button>						
+						<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
+						<button type="submit" class="btn btn-danger">수정하기</button>
+					</div>			
 				</div>
-				<div id="firstone"></div><!-- 이 뒤로 동적으로 생성된 메뉴가 추가된다. -->
-						
-	
-				<div align="center"><br><br>
-					<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
-					<button type="submit" class="btn btn-danger">수정하기</button>
-				</div>			
-			</form>
-		</div>					
+			</form>					
+		</div>
 	</div>
-</div>
-	<br clear="both"><br><br><br><br><br><br>
+	<br clear="both"><br><br><br><br><br><br><br><br><br><br><br><br>
 	<div id="footer">
 		<%@ include file="../common/footer.jsp" %>
 	</div>	
@@ -143,12 +190,12 @@
 		})
 
 		//파일첨부 버튼 숨기고 button에 클릭효과 주기
-		$('#menu-outer').on('click', 'button', function(){
+		$('#menu-list').on('click', 'button', function(){
 			$(this).next().children().click();
 		})
 
 		//파일첨부 시 미리보기 띄우기
-		$('#menu-outer').on('change','input[type=file]', function(){
+		$('#menu-list').on('change','input[type=file]', function(){
 			//순번 저장, 순번이 1자리수를 초과하는 경우도 커버할 수 있도록 코드설정
 			// let num = $(this).attr('name').charAt(4);
 			let name = $(this).attr('name');
@@ -167,14 +214,18 @@
 				$(this).next().val("yes");
 			}
 		})
-		let count = <%=oldCount%>; //기존메뉴갯수로부터 시작되는 카운트
+
+		//새로운 메뉴 추가하기
+		let count = <%=oldCount%>; //1)기존메뉴갯수로부터 시작되는 카운트
 		function addMenu() {
-			
-			//메뉴요소 추가하기
+			//2)안보였던 새메뉴 영역 보이게 하기
+			$('.new-box-set').css("display", "block");
+
+			//3)메뉴요소 추가하기
 			$('#firstone').append(
 			$('<div class="menu-box new-box">'+
 				'<div class="text-box">'+
-					'<span>메뉴명'+ count+'</span><span style="color:crimson">* </span>'+
+					'<span>메뉴명</span><span style="color:crimson">* </span>'+
 					'<input type="text" name="name'+ count +'" required><br>'+
 				'</div><br>'+
 				'<div class="text-box">'+
@@ -189,13 +240,55 @@
 					'<img id="image'+count+'" src="/Fooding/resources/images/forTest.png" class="rounded" width="180" height="180"><br>'+
 					'<button type="button" class="btn btn-outline-danger">사진등록</button>'+
 					'<div style="display:none"><input type="file" name="file'+count+'"></div>'+
-					'<input type="hidden" name="count" value="'+ count +'"> '+
+					'<input type="hidden" name="count" value="'+count+'">'+
 				'</div>'+
 			'</div>')
 			);
-			//메뉴 추가될때마다 높이 늘리기 + count늘리기
-			$('#menu-outer').css("height", 270*(++count));
+			//4)메뉴 추가될때마다 높이 늘리기 + count늘리기
+			$('#menu-list').css("height", 270*(++count));
+		}
+
+		//리셋버튼에 부여한 기능
+		function resetMenu(){
+			location.href="<%=contextPath%>/menu.re";
+		}
+
+		//새로운메뉴 전체삭제기능
+		function removeNew(){
+			$('.new-box').remove();
+			count = <%=oldCount%>; //메뉴 카운트 초기화
+			$('.new-box-set').css("display", "none");
+			$('#menu-list').css("height", "260*<%=oldCount%>+50");
+		}
+		
+		//기존메뉴 삭제기능
+		function deleteMenu(menuNo){
+			if($('.new-box-set').css("display")=="block") {
+				//추가된 메뉴가 있는데 삭제를 진행될 경우 순번이 꼬여 오류발생함 => 메뉴추가 완료후 진행하라고 안내
+				alert('추가된 메뉴를 저장하거나 삭제한 후에 진행해주세요');
+			}else {
+				if(confirm('해당 메뉴를 삭제하시겠습니까? 삭제 후 복원이 불가합니다.')){
+					$.ajax({
+						url:"<%=contextPath%>/deleteMenu.re",
+						data:{'menuNo':menuNo},
+						success:function(result){
+							if(result == "okey") {
+								//해당메뉴삭제
+								$('#'+menuNo).remove();
+								//순번도 바꾸어야한다.
+								<% oldCount--; %>
+								alert('삭제가 완료되었습니다.');
+							}else {
+								alert('메뉴삭제에 실패하였습니다. 고객센터로 문의하여주세요.');
+							}
+						}, error:function(){
+							console.log('메뉴삭제용 ajax통신실패')
+						}
+					})
+				}
 			}
+		}
+		
 	</script>
 </body>
 </html>

@@ -80,7 +80,7 @@ public class RestaurantService {
 		
 		//최종 결과를 판별할 변수 선언
 		int oldTotal = 0;
-		int newTotal = 0;
+		int newTotal = 1; //추가된것이 없을수 있으므로 기본 1 설정
 		
 		//Update 하러가기
 		for(Menu m : oldList) { //메뉴 한개씩 실행
@@ -91,10 +91,9 @@ public class RestaurantService {
 			//Insert 하러가기
 			for(Menu m : newList) { //메뉴 한개씩 실행
 				int result = new RestaurantDao().insertMenu(conn, m);
-				System.out.println("m객체:"+m+"////성공여부:"+result);
 				newTotal += result;
 			}
-			if(newTotal == newList.size()) { 
+			if(newTotal == newList.size()+1) { 
 				//모든 결과가 성공일 경우
 				commit(conn);
 			}else {
@@ -109,6 +108,33 @@ public class RestaurantService {
 		close(conn);
 		
 		return oldTotal*newTotal;
+	}
+	
+	public Restaurant updateInfo(Restaurant r) {
+		Restaurant updateRest = null;
+		Connection conn = getConnection();
+		int result = new RestaurantDao().updateInfo(conn, r);
+		if(result>0) {
+			commit(conn);
+			int resNo = r.getResNo();
+			updateRest = new RestaurantDao().selectRest(conn, resNo);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return updateRest;
+	}
+	
+	public int deleteMenu(int menuNo) {
+		Connection conn = getConnection();
+		int result = new RestaurantDao().deleteMenu(conn, menuNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			close(conn);
+		}
+		close(conn);
+		return result;
 	}
 	
 

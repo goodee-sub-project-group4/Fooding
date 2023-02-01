@@ -66,10 +66,18 @@
         margin-top: 20px;
         font-size: 20px;
     }
-    #div3 img { 
-        margin-bottom: 20px;
+
+    #rest-img {
+    	width:50px;
+    	height:50px;
+    	border-radius:25px;
+    	margin-bottom: 10px;
         margin-left:10px
-    }   
+    } 
+    
+    #logo:hover, h4:hover, #rest-img {
+    	cursor:pointer;
+    }
     
 
 </style>
@@ -83,20 +91,31 @@
 	<% } %>
     <div id="outer" align="center">
         <div id="div1">
-            <img src="/Fooding/resources/images/logo.png" width="190">
+            <img id="logo" src="<%=contextPath%>/resources/images/logo.png" width="190">
         </div>
         <div id="div2">
             <h3 id="title" width="500">페이지마다 수정되는 타이틀</h3>
         </div>
         <div id="div3">
-            <span onclick="location.href='/Fooding/logout.re.ad'">로그아웃</span>
+            <span onclick="location.href='<%= contextPath%>/logout.re.ad'">로그아웃</span>
             <span> | </span>
-            <h4><%=loginRest.getResName()%></h4>
-            <img src="/Fooding/resources/images/userIcon.png" width="50">
+            <h4 onclick="location.href='<%=contextPath%>/info.re'"><%=loginRest.getResName()%></h4>
+            <% if(loginRest.getrImg() == null) {%>
+            <img id="rest-img" src="<%= contextPath %>/resources/images/userIcon.png">
+            <% }else { %>
+            <img id="rest-img" src="<%= loginRest.getrImg() %>">
+            <% } %>
         </div>
         <hr>
     </div>
-    
+    <script>
+    	$('#logo').click(function(){
+    		location.href="<%=contextPath%>/home.re";
+    	})
+    	$('#rest-img').click(function(){
+    		location.href="<%=contextPath%>/info.re"
+    	})
+    </script>
 
 </body>
 </html>

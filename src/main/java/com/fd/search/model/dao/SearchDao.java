@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import com.fd.common.model.vo.Attachment;
 import com.fd.common.model.vo.PageInfo;
 import com.fd.restaurant.model.vo.Restaurant;
-import com.fd.review.model.vo.Review;
 
 public class SearchDao {
 	
@@ -36,9 +36,9 @@ public class SearchDao {
 	}
 	
 	public int selectListCount(Connection conn, String localCt, String dLocalCt, String foodCt) {
-		
 		// select => ResultSet(숫자 한 개 ) => int 
-		int listCount = 0; 
+		
+		int listCount = 0; // 총 검색결과 갯수
 		PreparedStatement pstmt = null; 
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectListCount"); 
@@ -77,17 +77,16 @@ public class SearchDao {
 		try {
 			pstmt = conn.prepareStatement(sql); // 미완성된 sql문 
 			
-			// 사용자로부터 입력받은 값으로 sql문 채우기 (5개 빈칸 중 3개)
-			pstmt.setString(1, localCt);
-			pstmt.setString(2, dLocalCt);
-			pstmt.setString(3, foodCt);
+			// 사용자로부터 입력받은 값으로 sql문 채우기 
 			
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; 
 			int endRow = startRow + pi.getBoardLimit() - 1;  
 			
-			// 나머지 빈칸 채우기 (5개 빈칸 중 2개)
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setString(1, localCt);
+			pstmt.setString(2, dLocalCt);
+			pstmt.setString(3, foodCt);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 			
 			rset = pstmt.executeQuery(); 
 			
@@ -95,31 +94,14 @@ public class SearchDao {
 				list.add(new Restaurant(
 										rset.getString("res_name"),
 										rset.getString("address"),
-										rset.getString("food_ct")
-										//rset.getDouble("star"),
-										//rset.getInt("count")
-										)
-						
-						, new Review(
-									rset.getDouble("star"),
-									rset.getInt("count")
-									)
-						// res_name, address, food_ct, star, count, 사진을 한꺼번에 뽑도록 
-						// 위의 애들을 모두 받아주는 Restaurant 매개변수 생성자를 생성해서, 
-						// Restaurant객체로 뽑은 다음에 arrayList에 담자!! 
-
-						); 
+										rset.getString("r_img"),
+										rset.getString("food_ct"),
+										rset.getDouble("star"),
+										rset.getInt("count")
+										)); 		
 				
 			}
 			
-			// 문제점 : 화면에 뿌려져야 할 값들이 들어있는 컬럼들은 
-			// res_name 컬럼, address 컬럼, food_ct 컬럼, star 컬럼, count 컬럼인데, 
-			// 이 컬럼값 5개를 뽑아줄 수는 있지만, 
-			// 얘네를 하나의 객체로 만들어서 ArrayList에 담아줄 수가 없음 
-			// res_name컬럼값, address컬럼값, food_ct컬럼값 => Restaurant 객체 
-			// star컬럼값, count컬럼값 => Review 객체 
-			
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -144,11 +126,16 @@ public class SearchDao {
 			pstmt.setString(2, r.getCeo());
 			pstmt.setString(3, r.getPermitNo());
 			pstmt.setString(4, r.getAddress());
-			pstmt.setString(5, r.getPhone()); 
-			pstmt.setString(6, r.getCellphone());
-			pstmt.setString(7, r.getEmail()); 
-			pstmt.setString(8, r.getFoodCt());
-			pstmt.setString(9, r.getParking());
+			pstmt.setString(5, r.getdAddress());
+			// localCt
+			pstmt.setString(6, r.getLocalCt());
+			// dLocalCt 
+			pstmt.setString(7, r.getdLocalCt());
+			pstmt.setString(8, r.getPhone()); 
+			pstmt.setString(9, r.getCellphone());
+			pstmt.setString(10, r.getEmail()); 
+			pstmt.setString(11, r.getFoodCt());
+			pstmt.setString(12, r.getParking());
 			
 			result = pstmt.executeUpdate(); 
 			
@@ -159,7 +146,29 @@ public class SearchDao {
 		}
 		
 		return result; 
-
+	}
+	
+	public int insertAttachment(Connection conn, Attachment at) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getOriginName());
+			pstmt.setString(2, at.getChangeName());
+			pstmt.setString(3, at.getFilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 		
 	}
 	

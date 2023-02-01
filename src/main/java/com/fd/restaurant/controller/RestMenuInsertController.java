@@ -43,7 +43,7 @@ public class RestMenuInsertController extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			//파일업로드처리
 			int maxSize = 10*1024*1024;
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/restUpfiles/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/rest_upfiles/");
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
 			//데이터담기
@@ -56,7 +56,7 @@ public class RestMenuInsertController extends HttpServlet {
 						        , multiRequest.getParameter("name"+i)
 						        , Integer.parseInt(multiRequest.getParameter("price"+i))
 						        , multiRequest.getParameter("describe"+i)
-						        , "resources/restUpfiles/"+multiRequest.getFilesystemName("file"+i)));
+						        , "resources/rest_upfiles/"+multiRequest.getFilesystemName("file"+i)));
 			}
 			
 			//DB 처리하기

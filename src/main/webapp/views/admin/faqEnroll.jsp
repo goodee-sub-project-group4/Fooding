@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String who = (String)request.getAttribute("who");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,19 +81,24 @@
 			<!-- 컨텐츠 작성부 -->
 			<br><br>
 
-            <form action="" id="enroll-faq" method="post">
-                
+            <form action="<%= contextPath %>/faqInsert.ad" id="enroll-faq" method="post">
+                <input type="hidden" value="<%= who %>" name="who">
                 <table>
                     <tr>
                         <th width="70">구분 <span id="required">*</span></th>
-                        <td id="category">
-                            <select id="select">
-                                <option value="">회원</option>
-                                <option value="">예약/결제</option>
-                                <option value="">적립금</option>
+                        <td>
+                            <select id="select" name="category">
+                                <option>구분</option>
+                                <option>회원</option>
+                                <option>업체</option>
+                                <option>예약</option>
+                                <option>결제/취소</option>
+                                <option>적립금</option>
+                                <option>서비스이용</option>
                             </select>
                         </td>
                     </tr>
+
                     <tr><td><br></td></tr>
                     <tr>
                         <th>제목 <span id="required">*</span></th>
@@ -110,7 +118,7 @@
                 <br><br>
                 <div align="center">
                     <button type="submit" class="btn btn-danger">등록하기</button>&nbsp&nbsp
-                    <button type="submit" class="btn btn-outline-danger">취소하기</button>
+                    <button type="reset" class="btn btn-outline-danger">취소하기</button>
                 </div>
 
             </form>

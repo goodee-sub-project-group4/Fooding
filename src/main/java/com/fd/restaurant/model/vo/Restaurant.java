@@ -28,6 +28,14 @@ public class Restaurant {
 	private String breakE;
 	private String foodCt;
 	
+	private int reviewCount;
+	private double reviewAvg;
+	
+	// 한수가 추가한 필드 (SearchController 및 search와 관련된 파일에서만 사용)
+	private int listCount; // 검색결과 총 갯수
+	private double star; // 별점 
+	private int count; // 조회수 
+	
 	public Restaurant() {}
 	
 	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
@@ -98,14 +106,28 @@ public class Restaurant {
 		this.foodCt = foodCt;
 	}
 	*/
-	// 한수가 만든 매개변수생성자2 (ResFormController의 doGet()에서 사용!!)
-	public Restaurant(String resName, String ceo, String permitNo, String address, String phone, String cellphone,
-			String email, String parking, String foodCt) {
+	
+	// 한수가 만든 매개변수 생성자3 (SearchDao의 selectList에서 사용)
+	public Restaurant(String resName, String address, String rImg, String foodCt, Double star, int count) {
+		super();
+		this.resName = resName;
+		this.address = address;
+		this.rImg = rImg;
+		this.foodCt = foodCt;
+		this.star = star;
+		this.count = count;
+	}
+	
+	// 한수가 만든 매개변수 생성자4(ResformController 에서 사용!! )
+	
+	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String phone,
+			String cellphone, String email, String parking, String foodCt) {
 		super();
 		this.resName = resName;
 		this.ceo = ceo;
 		this.permitNo = permitNo;
 		this.address = address;
+		this.dAddress = dAddress;
 		this.phone = phone;
 		this.cellphone = cellphone;
 		this.email = email;
@@ -113,16 +135,52 @@ public class Restaurant {
 		this.foodCt = foodCt;
 	}
 	
-	// 한수가 만든 매개변수 생성자3
-	public Restaurant(String localCt, String dLocalCt, String foodCt) {
+	
+	
+	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String localCt,
+			String dLocalCt, String phone, String cellphone, String email, String parking, String foodCt) {
 		super();
+		this.resName = resName;
+		this.ceo = ceo;
+		this.permitNo = permitNo;
+		this.address = address;
+		this.dAddress = dAddress;
 		this.localCt = localCt;
 		this.dLocalCt = dLocalCt;
+		this.phone = phone;
+		this.cellphone = cellphone;
+		this.email = email;
+		this.parking = parking;
 		this.foodCt = foodCt;
+	}
+
+	// 식당 조회용 매개변수 생성자 - 태진
+	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
+			String phone, String parking, String longtitude, String latitude, String rImg, String open,
+			String close, String breakS, String breakE, String foodCt, int reviewCount, double reviewAvg) {
+		super();
+		this.resNo = resNo;
+		this.resName = resName;
+		this.ceo = ceo;
+		this.permitNo = permitNo;
+		this.address = address;
+		this.dAddress = dAddress;
+		this.phone = phone;
+		this.parking = parking;
+		this.longtitude = longtitude;
+		this.latitude = latitude;
+		this.rImg = rImg;
+		this.open = open;
+		this.close = close;
+		this.breakS = breakS;
+		this.breakE = breakE;
+		this.foodCt = foodCt;
+		this.reviewCount = reviewCount;
+		this.reviewAvg = reviewAvg;
 	}
 	
 
-	public int getResNo() {
+	public int getResNo () {
 		return resNo;
 	}
 
@@ -198,7 +256,7 @@ public class Restaurant {
 		return cellphone;
 	}
 
-	public void setCelphone(String cellphone) {
+	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
 
@@ -312,6 +370,35 @@ public class Restaurant {
 
 	public void setFoodCt(String foodCt) {
 		this.foodCt = foodCt;
+	}
+	
+	
+	// 한수가 추가한 getter/setter 
+
+	public int getListCount() {
+		return listCount;
+	}
+	
+
+	public void setListCount(int listCount) {
+		this.listCount = listCount;
+	}
+	
+
+	public Double getStar() {
+		return star;
+	}
+
+	public void setStar(Double star) {
+		this.star = star;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	@Override
