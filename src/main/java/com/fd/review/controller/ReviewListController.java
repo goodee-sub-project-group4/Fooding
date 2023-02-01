@@ -32,12 +32,14 @@ public class ReviewListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		// 1)
+		// 1) 
 		
 		// 2) 응답페이지에 필요한 데이터 조회 (select)
 		ArrayList<Review> list = new ReviewService().selectReviewList();
 		
 		// 3) 응답뷰 (views/review/reviewList.jsp)
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/review/reviewList.jsp").forward(request, response);
 		
 		
 	}
