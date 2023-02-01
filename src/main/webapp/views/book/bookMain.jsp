@@ -774,22 +774,7 @@
             })
                     
 
-            // 시간 선택 버튼 효과
-            $(document).on('click', '.book-time-btn.btn.btn-outline-danger', function(e){
-                $('#am-box, #pm-box').children().each(function(){
-                    if($(this).prop('name')){
-                        $(this).css({'background-color':'', 'color':''});
-                        $(this).removeAttr('name');
-                        $(this).removeAttr('value');
-                    }
-                })
-                
-                const bookTimeValue = $(this).text();
-                $(this).css({'background-color':'crimson', 'color':'white'});
-                $(this).attr('name', 'bookTime');
-                $(this).attr('value', bookTimeValue);
-                $('#book-time').text('예약시간 ' + bookTimeValue)
-            });
+            
             
             // 메뉴 추가
             $('.menuAdd.btn.btn-secondary.btn-sm').click(function(){
