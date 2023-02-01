@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.fd.member.model.vo.Member" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>  
+<%@ page import="com.fd.member.model.vo.Member, com.fd.restaurant.model.vo.Restaurant"  %>    
 <%
 	String contextPath = request.getContextPath(); // /Fooding
 	String alertMsg = (String)session.getAttribute("alertMsg"); // Alert
 
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant"); // 식당정보 조회
 %>
 <!DOCTYPE html>
 <html>

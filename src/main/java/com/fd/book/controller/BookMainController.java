@@ -31,7 +31,10 @@ public class BookMainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int resNo = Integer.parseInt(request.getParameter("resNo"));  
+		int resNo = Integer.parseInt(request.getParameter("resNo"));
+		// 식당 조회수 1 증가
+		
+		// 식당 정보 조회
 		Restaurant restaurant = new BookService().selectRes(resNo);
 		if(restaurant == null) {
 			request.setAttribute("errorMsg", "식당 조회 오류발생");

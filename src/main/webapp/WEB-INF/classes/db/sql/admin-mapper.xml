@@ -180,5 +180,97 @@
 </entry>
 
 
+<!-- ============================================================================= -->
+
+<!-- 회원 FAQ 목록 / 상세 조회 -->
+<entry key="selectFaqListU">
+	SELECT
+		   FAQ_NO
+		 , CATEGORY
+		 , FAQ_TITLE
+		 , FAQ_CONTENT
+	  FROM FAQ
+	 WHERE STATUS = 'Y'
+	   AND WHO = 'U'
+	 ORDER
+	    BY FAQ_NO DESC	 
+</entry>
+
+<!-- 업체 FAQ 목록 / 상세 조회 -->
+<entry key="selectFaqListR">
+	SELECT
+		   FAQ_NO
+		 , CATEGORY
+		 , FAQ_TITLE
+		 , FAQ_CONTENT
+	  FROM FAQ
+	 WHERE STATUS = 'Y'
+	   AND WHO = 'R'
+	 ORDER
+	    BY FAQ_NO DESC	 
+</entry>
+
+
+<!-- ============================================================================= -->
+
+<!-- 회원 FAQ 목록 / 상세 조회 -->
+<entry key="selectFaqListU">
+	SELECT
+		   FAQ_NO
+		 , CATEGORY
+		 , FAQ_TITLE
+		 , FAQ_CONTENT
+	  FROM FAQ
+	 WHERE STATUS = 'Y'
+	   AND WHO = 'U'
+	 ORDER
+	    BY FAQ_NO DESC	 
+</entry>
+
+<!-- 업체 FAQ 목록 / 상세 조회 -->
+<entry key="selectFaqListR">
+	SELECT
+		   FAQ_NO
+		 , CATEGORY
+		 , FAQ_TITLE
+		 , FAQ_CONTENT
+	  FROM FAQ
+	 WHERE STATUS = 'Y'
+	   AND WHO = 'R'
+	 ORDER
+	    BY FAQ_NO DESC	 
+</entry>
+
+<!-- 카테고리 조회 -->
+<entry key = "selectCategoryList">
+	SELECT DISTINCT
+		   CATEGORY
+	  FROM FAQ
+</entry>
+
+<!-- FAQ 등록(카테고리, 제목, 내용) -->
+<entry key="insertFaq">
+	INSERT
+	  INTO FAQ
+	  (
+	  	FAQ_NO
+	  , USER_NO			<!-- 로그인한회원번호 -->
+	  , CATEGORY		
+	  , FAQ_TITLE
+	  , FAQ_CONTENT	
+	  , WHO				<!-- 회원U / 업체R -->
+	  )
+	  VALUES
+	  (
+	  	SEQ_FAQNO.NEXTVAL
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?				
+	  )
+</entry>
+
+
 
 </properties>

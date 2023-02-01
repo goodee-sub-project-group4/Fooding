@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.fd.admin.model.vo.Faq" %>
+    
+<%
+	Faq f = (Faq)request.getAttribute("f");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
        
     #outer2 {
         width:1200px;
@@ -85,10 +91,14 @@
                     <tr>
                         <th width="70">구분 <span id="required">*</span></th>
                         <td id="category">
-                            <select id="select">
-                                <option value="">기존 카테고리 옵션</option>
-                                <option value="">예약/결제</option>
-                                <option value="">적립금</option>
+                            <select id="select" name="category" value="">
+                                <option>구분</option>
+                                <option>회원</option>
+                                <option>업체</option>
+                                <option>예약</option>
+                                <option>결제/취소</option>
+                                <option>적립금</option>
+                                <option>서비스이용</option>
                             </select>
                         </td>
                     </tr>
@@ -96,14 +106,14 @@
                     <tr>
                         <th width="70">제목 <span id="required">*</span></th>
                         <td id="faqTitle">
-                            <input type="text" name="title" value="기존 공지사항 제목" required >
+                            <input type="text" name="title" value="" required >
                         </td>
                     </tr>
                     <tr><td><br></td></tr>
                     <tr>
                         <th>내용 <span id="required">*</span></th>
                         <td>
-                            <textarea name="content" id="" rows="10" style="resize:none" required>기존 공지사항 내용</textarea>
+                            <textarea name="content" id="" rows="10" style="resize:none" required></textarea>
                         </td>
                     </tr>
                 </table>

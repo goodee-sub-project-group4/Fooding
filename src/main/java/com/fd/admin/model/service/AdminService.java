@@ -5,8 +5,10 @@ import static com.fd.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Locale.Category;
 
 import com.fd.admin.model.dao.AdminDao;
+import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
 import com.fd.common.model.vo.Attachment;
 import com.fd.member.model.vo.Member;
@@ -155,5 +157,67 @@ public class AdminService {
 		return result;
 	}
 
+// ==========================================================================
+
+	/**회원 FAQ 목록 / 상세 조회
+	 * @return
+	 */
+	public ArrayList<Faq> selectFaqListU() {
+		Connection conn = getConnection();
+		ArrayList<Faq> list = new AdminDao().selectFaqListU(conn);
+		close(conn);
+		return list;
+	}
+
+
+	/**업체 FAQ 목록 / 상세 조회
+	 * @return
+	 */
+	public ArrayList<Faq> selectFaqListR() {
+		Connection conn = getConnection();
+		ArrayList<Faq> list = new AdminDao().selectFaqListR(conn);
+		close(conn);
+		return list;
+	}
+
+
+	/**FAQ 카테고리 (아직..안씀,,,)
+	 * @return
+	 */
+	public Faq selectCategoryList() {
+		Connection conn = getConnection();
+		Faq f = new AdminDao().selectCategoryList(conn);
+		close(conn);
+		return f;
+	}
+
+
+	/**FAQ 등록
+	 * @param f
+	 * @return
+	 */
+	public int insertFaq(Faq f) {
+		Connection conn = getConnection();
+		int result = new AdminDao().insertFaq(conn, f);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+
+	public int updateFaq() {
+		return 0;
+	}
+
+
+
+
+	
+	
+	
 	
 }

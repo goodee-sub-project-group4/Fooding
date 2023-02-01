@@ -7,9 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale.Category;
 import java.util.Properties;
 import static com.fd.common.JDBCTemplate.*;
 
+import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
 import com.fd.common.model.vo.Attachment;
 import com.fd.member.model.vo.Member;
@@ -352,10 +354,112 @@ public class AdminDao {
 		return result;
 	}
 
+// ==========================================================================
+
+	/**회원 FAQ 목록 / 상세 조회
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Faq> selectFaqListU(Connection conn) {
+		ArrayList<Faq> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectFaqListU");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Faq(rset.getInt("faq_no"),
+								 rset.getString("category"),
+								 rset.getString("faq_title"),
+								 rset.getString("faq_content")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 	
-	
-	
-	
+	/**업체 FAQ 목록 / 상세 조회
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Faq> selectFaqListR(Connection conn) {
+		ArrayList<Faq> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectFaqListR");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Faq(rset.getInt("faq_no"),
+								 rset.getString("category"),
+								 rset.getString("faq_title"),
+								 rset.getString("faq_content")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/**FAQ 카테고리 (아직..안씀,,,)
+	 * @param conn
+	 * @return
+	 */
+	public Faq selectCategoryList(Connection conn) {
+		Faq f = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCategoryList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				f = new Faq(rset.getString("category"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return f;
+	}
+
+	/**FAQ 등록
+	 * @param conn
+	 * @param f
+	 * @return
+	 */
+	public int insertFaq(Connection conn, Faq f) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertFaq");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, f.getUserNo());
+			pstmt.setString(2, f.getCategory());
+			pstmt.setString(3, f.getFaqTitle());
+			pstmt.setString(4, f.getFaqContent());
+			pstmt.setString(5, f.getWho());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 	
 	
 	
