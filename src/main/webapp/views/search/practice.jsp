@@ -104,7 +104,7 @@
 
                     <!-- 검색결과 조회된 음식점 총 갯수 -->
                     <div id="searchCount">
-                        총 208건
+                        총 <%= pi.getListCount() %>건
                     </div>
 
                     <!-- 검색결과 필터링: 별점순|방문자순|리뷰순-->
@@ -114,6 +114,8 @@
 
                     <!-- 검색결과 조회된 음식점 목록들 -->
                     <div id="content-main">
+                    
+                    
                     	<% if(list.isEmpty()){ %>
 							<!-- case1. 조회된 음식점이 없을 경우  -->
 							<div align="center">조회된 음식점이 없습니다.</div>
@@ -123,7 +125,7 @@
 	                        <div class="searchRes">
 	                            <!-- 음식점 사진-->
 	                            <div class="resThumbnail">
-	                                <img src="<%=contextPath%>/<%= r.getrImg() %>" style="width:400px;" height="300px;">
+	                                <img src="<%= contextPath %>/<%= r.getrImg() %>" style="width:400px;" height="300px;">
 	                            </div>
 	                            <!-- 음식점 사진 아래 간단 설명 -->
 	                            <div class="resDescription" style="width:400px;">
@@ -132,17 +134,17 @@
 	                                주소 : <%= r.getAddress() %> <br>
 	                                음식카테고리 : <%= r.getFoodCt() %> <br>
 	                                <span class="zzim">
-	                                    <img src="" width="50px;">
+	                                    <img src="/Fooding/resources/images/heart.png" width="50px;">  
 	                                </span>
-	                                <img src="" width="20px;">
+	                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
 	                                조회수: <%= r.getCount() %> <br>
-	                                <img src="" width="20px;">
+	                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
 	                                리뷰수: 54 
 	                            </div>
 	                        </div>
 	                        <% } %>
                         <% } %>
-						
+                        
 						
 						<div class="paging-area">
 			        	
