@@ -1,31 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="selectSearch">
-		SELECT
-	        RES_NO
-	      , RES_NAME
-	      , CEO
-	      , PERMIT_NO
-	      , ADDRESS
-	      , LOCAL_CT
-	      , DLOCAL_CT
-	      , PHONE
-	      , CELPHONE
-	      , EMAIL
-	      , APPLY_DATE
-	      , LONGTITUDE
-	      , LATITUDE
-	      , FOOD_CT
-	   FROM RESTAURANT
-	  WHERE RES_NAME LIKE '%' || ? || '%'
-	</entry>
-	
+
 	<entry key="selectListCount">
 		SELECT 
 		       COUNT(*) count
 		  FROM RESTAURANT
-		 WHERE (LOCAL_CT = ? AND DLOCAL_CT = ?) 
+		 WHERE LOCAL_CT = ?
+           AND DLOCAL_CT = ?
 		   AND FOOD_CT = ?
 	</entry>
 	
@@ -37,6 +19,7 @@
 		                  SELECT 
 		                           RES_NAME
 		                         , ADDRESS || ' ' || D_ADDRESS "ADDRESS"
+		                         , R_IMG
 		                         , FOOD_CT
 		                         , STAR 
 		                         , COUNT
@@ -48,10 +31,6 @@
 		               ) A
 		        )
 		    WHERE RNUM BETWEEN ? AND ?
-	</entry>
-	
-	<entry key="extractLocal">
-	
 	</entry>
 	
 	<entry key="insertRes">
@@ -114,5 +93,25 @@
 		  , ?
 		  , 'N'
 		  )
+	</entry>
+	
+	<entry key="selectSearch">
+		SELECT
+	        RES_NO
+	      , RES_NAME
+	      , CEO
+	      , PERMIT_NO
+	      , ADDRESS
+	      , LOCAL_CT
+	      , DLOCAL_CT
+	      , PHONE
+	      , CELPHONE
+	      , EMAIL
+	      , APPLY_DATE
+	      , LONGTITUDE
+	      , LATITUDE
+	      , FOOD_CT
+	   FROM RESTAURANT
+	  WHERE RES_NAME LIKE '%' || ? || '%'
 	</entry>
 </properties>

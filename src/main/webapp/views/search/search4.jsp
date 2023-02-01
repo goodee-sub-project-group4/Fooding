@@ -119,18 +119,19 @@
 	                        <div class="searchRes">
 	                            <!-- 음식점 사진-->
 	                            <div class="resThumbnail">
-	                                <img src="images/chicken.jpg" style="width:400px;" height="300px;">
+	                                <img src="<%=contextPath%>/<%= r.getrImg() %>" style="width:400px;" height="300px;">
 	                            </div>
 	                            <!-- 음식점 사진 아래 간단 설명 -->
 	                            <div class="resDescription" style="width:400px;">
-	                                <!-- 차만다 (서울숲점) 4.5  --> <%= r.getResName()%><br>
-	                                <!-- 왕십리/성동 --> <%= r.getAddress() %><br>
-	                                <!-- 아시아/퓨전 --> <%= r.getFoodCt() %><br>
+	                                음식점 이름 : <%= r.getResName()%> <br>
+	                                별점 : <%= r.getStar() %> <br>
+	                                주소 : <%= r.getAddress() %> <br>
+	                                음식카테고리 : <%= r.getFoodCt() %> <br>
 	                                <span class="zzim">
-	                                    <img src="images/찜하기.png" width="50px;">
+	                                    <img src="" width="50px;">
 	                                </span>
 	                                <img src="images/조회수.png" width="20px;">
-	                                조회수: 89,459,500 <br>
+	                                조회수: <%= r.getCount() %> <br>
 	                                <img src="images/리뷰수2.png" width="20px;">
 	                                리뷰수: 54 
 	                            </div>
@@ -139,29 +140,27 @@
                         <% } %>
 						
 						
-						<!--  
-                        <div class="paging">
-                            <% if(pi.getCurrentPage() != 1) { %>
-        					<button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=pi.getCurrentPage() - 1%>';">&lt;</button>
-        					<% } %>
-        	
-        					<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-        					<button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=p%>';"><%= p %></button>
-        					<% } %>
-        	
-        					<% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
-        					<button onclick="location.href='<%=contextPath%>.list.bo?cpage=<%=pi.getCurrentPage()+1%>';">&gt;</button>
-        					<% } %>
-                        </div> 
-                        -->
+						<div class="paging-area">
+			        	
+				        	<% if(pi.getCurrentPage() != 1) { %>
+				        		<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage() - 1%>';">&lt;</button>
+				        	<% } %>
+				        	
+				        	<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+				        		<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=p%>';"><%= p %></button>
+				        	<% } %>
+				        	
+				        	<% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
+				        		<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()+1%>';">&gt;</button>
+				        	<% } %>
+				        </div>
 
                     </div>
                       
                 </div>
             </div>
         </div>
-        <div id="footer">
-        </div>
+  
     </div>
 </body>
 </html>
