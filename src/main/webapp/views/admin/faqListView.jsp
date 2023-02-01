@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Faq" %>
+<% 
+   ArrayList<Faq> listU = (ArrayList)request.getAttribute("listU");
+   ArrayList<Faq> listR = (ArrayList)request.getAttribute("listR");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +58,7 @@
     }
 
     /*카테고리*/
-    #select{
+    .select{
         border: 1px solid gray;
         border-radius: 4px;
         width: 100px;
@@ -61,14 +66,14 @@
     }
 
     /*삭제 버튼*/
-    #deleteNotice{
+    #deleteFaq{
         float: right;    
         font-size: 15px;
         width: 70px;
         height: 33px;
     }
     /*등록 버튼*/
-    #insertNotice{
+    #insertFaq{
         float: right;
         font-size: 15px;
         margin-right: 5px;
@@ -116,6 +121,22 @@
     #faqTitle{
         width: 300px;
     }
+
+    #mdButton{
+        display: inline-flex;
+        padding-left: 300px;
+        padding-bottom: 20px;
+    }
+
+    /*업체 FAQ리스트 처음엔 안보이게*/
+    .restList{
+        display: none;
+    }
+
+    /*업체 카테고리 처음엔 안보이게*/
+    .categoryR{
+        display:none;
+    }
     
     
     
@@ -130,28 +151,44 @@
 		<div id="content" class="container">
 
 			<!-- 컨텐츠 작성부 -->
-
             <br><br>
-            <form action="">
+            <form action="<%=contextPath%>/faqEnroll.ad">
                 
                 <!--카테고리-->
-                <select id="select">
-                    <option value="">회원</option>
-                    <option value="">예약/결제</option>
-                    <option value="">적립금</option>
-                </select>
+                <div class="categoryU">
+                    <select class="select" name="category">
+                        <option>구분</option>
+                        <option>회원</option>
+                        <option>예약</option>
+                        <option>결제/취소</option>
+                        <option>적립금</option>
+                        <option>서비스이용</option>
+                    </select>
+                </div>
+
+                <!--카테고리-->
+                <div class="categoryR">
+                    <select class="select" name="category">
+                        <option>구분</option>
+                        <option>업체</option>
+                        <option>예약</option>
+                        <option>결제/취소</option>
+                        <option>적립금</option>
+                        <option>서비스이용</option>
+                    </select>
+                </div>
 
                 <div class="right">
                     <!--회원/업체-->
-                    <input type="radio" id="member" name="selectNotice" value="M" checked>
-                    <label for="member">회원</label>&nbsp&nbsp
-                    <input type="radio" id="restaurant" name="selectNotice" value="R">
+                    <input type="radio" id="member" name="who" value="U" checked onchange="listDisplay()">
+                    <label for="member">회원</label>&nbsp;&nbsp;
+                    <input type="radio" id="restaurant" name="who" value="R" onchange="listDisplay()">
                     <label for="restaurant">업체</label>
-                    &nbsp&nbsp&nbsp&nbsp
+                    &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <!--등록 삭제-->
-                    <button type="button" class="btn btn-outline-danger btn-sm" id="deleteNotice">삭제</button>
-                    <a class="btn btn-danger btn-sm" id="insertNotice">등록</a>
+                    <button type="button" class="btn btn-outline-danger btn-sm" id="deleteFaq">삭제</button>
+                    <button class="btn btn-danger btn-sm" id="insertFaq">등록</button> 
                     <br> <br>
                 </div>
 
@@ -165,249 +202,57 @@
                         <th>제목</th>
                     </tr>  
                 </table>
-
-                <ul>
+				
+				<% for(Faq f1 : listU) {%>
+                <ul class="memberList">
                     <div class="list">
                         <div>
                             <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
+                            <div id="number"><%= f1.getFaqNo() %></div>
+                            <div id="category"><%= f1.getCategory() %></div>
                             <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
+                                <div><%= f1.getFaqTitle() %></div>
                             </div>
                         </div>
                     </div>
                     <div class="faqContent">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                        </div>
-                        <div align="center">
-                            <a href="" class="btn btn-danger">수정하기</a>
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
                         <div>
-                            <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
+                            <%= f1.getFaqContent() %>
                         </div>
-                    </div>
-                    <div class="faqContent">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                        </div>
-                        <div align="center">
-                            <a href="" class="btn btn-danger">수정하기</a>
+                        <div id="mdButton" align="center">
+                            <div><a href="<%=contextPath%>/faqUpdateForm.ad?no=<%=f1.getFaqNo()%>" class="btn btn-outline-danger">수정하기</a>&nbsp&nbsp</div>
+                            <div><a href="" class="btn btn-danger">삭제하기</a></div>
                         </div>
                     </div>
                 </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faqContent">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                        </div>
-                        <div align="center">
-                            <a href="" class="btn btn-danger">수정하기</a>
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faqContent">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                        </div>
-                        <div align="center">
-                            <a href="" class="btn btn-danger">수정하기</a>
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faqContent">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                        </div>
-                        <div align="center">
-                            <a href="" class="btn btn-danger">수정하기</a>
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faqContent">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                        </div>
-                        <div align="center">
-                            <a href="" class="btn btn-danger">수정하기</a>
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faqContent">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                        </div>
-                        <div align="center">
-                            <a href="" class="btn btn-danger">수정하기</a>
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faqContent">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                        </div>
-                        <div align="center">
-                            <a href="" class="btn btn-danger">수정하기</a>
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faqContent">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                        </div>
-                        <div align="center">
-                            <a href="" class="btn btn-danger">수정하기</a>
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="checkbox"><input type="checkbox"></div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faqContent">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                        </div>
-                        <div align="center">
-                            <a href="" class="btn btn-danger">수정하기</a>
-                        </div>
-                    </div>
-                </ul>
+                <% } %>
                 
-
+                <% for(Faq f2 : listR) {%>
+                <ul class="restList">
+                    <div class="list">
+                        <div>
+                            <div id="checkbox"><input type="checkbox"></div>
+                            <div id="number"><%= f2.getFaqNo() %></div>
+                            <div id="category"><%= f2.getCategory() %></div>
+                            <div id="faqTitle">
+                                <div><%= f2.getFaqTitle() %></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faqContent">
+                        <div>
+                            <%= f2.getFaqContent() %>
+                        </div>
+                        <div id="mdButton" align="center">
+                            <div><a href="<%=contextPath%>/faqUpdateForm.ad?no=<%=f2.getFaqNo()%>" class="btn btn-outline-danger">수정하기</a>&nbsp&nbsp</div>
+                            <div><a href="" class="btn btn-danger">삭제하기</a></div>
+                        </div>
+                    </div>
+                </ul>
+                <% } %>
+                
+                
+            
             </form>
             
             
@@ -440,6 +285,24 @@
 				$(this).next().slideToggle();
 			}) 
 		})
+		
+		// 라디오버튼 클릭시 회원/업체 데이터 받아오기
+		function listDisplay(){
+			if($('input:radio[id=member]').is(':checked')){
+                $(".categoryU").show();
+                $(".categoryR").hide();
+                $(".memberList").show();
+                $(".restList").hide();
+                
+            }
+            if($('input:radio[id=restaurant]').is(':checked')){
+                $(".categoryR").show();
+                $(".categoryU").hide();
+                $(".restList").show();
+                $(".memberList").hide();
+                
+            }
+		}
 
  
 	</script>

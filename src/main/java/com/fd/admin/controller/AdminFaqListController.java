@@ -1,11 +1,20 @@
 package com.fd.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.fd.admin.model.service.AdminService;
+import com.fd.admin.model.vo.Faq;
+import com.fd.restaurant.model.service.RestaurantService;
+import com.fd.restaurant.model.vo.Menu;
+import com.fd.restaurant.model.vo.Restaurant;
 
 /**
  * Servlet implementation class AdminFaqListController
@@ -26,7 +35,20 @@ public class AdminFaqListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/admin/faqListView.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginAdmin")==null) {
+			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
+			response.sendRedirect(request.getContextPath()+"/rest.admin");
+		}else {		
+			ArrayList<Faq> listU = new AdminService().selectFaqListU();
+			ArrayList<Faq> listR = new AdminService().selectFaqListR();
+			
+			request.setAttribute("listU", listU);
+			request.setAttribute("listR", listR);
+			
+			request.getRequestDispatcher("views/admin/faqListView.jsp").forward(request, response);
+		}
+
 	}
 
 	/**
