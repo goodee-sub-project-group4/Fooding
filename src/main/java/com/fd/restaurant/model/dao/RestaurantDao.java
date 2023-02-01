@@ -248,8 +248,22 @@ public class RestaurantDao {
 		} finally {
 			close(pstmt);
 		}
-		
-		
+		return result;
+	}
+	
+	public int deleteMenu(Connection conn, int menuNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMenu");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, menuNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 

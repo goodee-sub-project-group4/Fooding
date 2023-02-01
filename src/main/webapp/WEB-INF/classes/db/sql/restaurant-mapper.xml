@@ -130,5 +130,10 @@
 			 , FOOD_CT = ?
          WHERE RES_NO = ?	
 	</entry>
+	<entry key="deleteMenu">
+		DELETE
+		  FROM MENU
+		 WHERE MENU_NO = ? 
+	</entry>
 
 </properties>
