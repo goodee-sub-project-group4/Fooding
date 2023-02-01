@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import com.fd.common.model.vo.Attachment;
 import com.fd.common.model.vo.PageInfo;
 import com.fd.restaurant.model.vo.Restaurant;
-import com.fd.review.model.vo.Review;
 
 public class SearchDao {
 	
@@ -100,10 +100,7 @@ public class SearchDao {
 										//rset.getInt("count")
 										)
 						
-						, new Review(
-									rset.getDouble("star"),
-									rset.getInt("count")
-									)
+						
 						// res_name, address, food_ct, star, count, 사진을 한꺼번에 뽑도록 
 						// 위의 애들을 모두 받아주는 Restaurant 매개변수 생성자를 생성해서, 
 						// Restaurant객체로 뽑은 다음에 arrayList에 담자!! 
@@ -159,7 +156,28 @@ public class SearchDao {
 		}
 		
 		return result; 
-
+	}
+	
+	public int insertAttachment(Connection conn, Attachment at) {
+		// insert
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getOriginName());
+			pstmt.setString(2, at.getChangeName());
+			pstmt.setString(3, at.getFilePath());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 		
 	}
 	

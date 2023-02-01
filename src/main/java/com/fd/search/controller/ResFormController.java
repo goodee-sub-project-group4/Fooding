@@ -1,5 +1,6 @@
 package com.fd.search.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,8 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.fd.common.MyFileRenamePolicy;
+import com.fd.common.model.vo.Attachment;
 import com.fd.restaurant.model.vo.Restaurant;
 import com.fd.search.model.service.SearchService;
+import com.oreilly.servlet.MultipartRequest;
 
 /**
  * Servlet implementation class ResFormController
@@ -32,6 +38,7 @@ public class ResFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		/* 일단 주석처리!! 
 		// 1) 요청시 전달값 뽑아서 변수에 담기 
 		request.setCharacterEncoding("UTF-8"); // POST 방식일 때 사용 (연습할 때는 GET방식으로)
 		
@@ -80,6 +87,64 @@ public class ResFormController extends HttpServlet {
 		}else {
 			request.setAttribute("errorMsg", "업체등록요청을 실패했습니다."); 
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+		*/
+		
+		// multipart/form-data로 전송하는 경우!! 
+		
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		if(ServletFileUpload.isMultipartContent(request)) {
+			
+			int maxSize = 10*1024*1024;
+			
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/search_upfiles/");
+			
+			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+			
+			
+			
+			String resName = multiRequest.getParameter("resName");
+			String ceo = multiRequest.getParameter("ceo");
+			String permitNo = multiRequest.getParameter("permitNo"); 
+			String address = multiRequest.getParameter("address");
+			String phone = multiRequest.getParameter("phone"); 
+			String cellphone = multiRequest.getParameter("cellphone"); 
+			String email = multiRequest.getParameter("email"); 
+			String parking = multiRequest.getParameter("parking"); 
+			String foodCt = multiRequest.getParameter("foodCt");
+			
+			Restaurant r = new Restaurant(resName, ceo, permitNo, address, phone, cellphone, email, parking, foodCt);
+			
+			Attachment at = null;
+			
+			if(multiRequest.getOriginalFileName("rImg") != null) { // 첨부파일이 있을 경우
+				at = new Attachment();
+				at.setOriginName(multiRequest.getOriginalFileName("rImg"));
+				at.setChangeName(multiRequest.getFilesystemName("rImg"));
+				at.setFilePath("resources/search_upfiles/");
+			}
+			
+			int result = new SearchService().insertRes(r, at);
+			
+			if(result > 0) {
+				
+				HttpSession session = request.getSession(); 
+				session.setAttribute("alertMsg", "성공적으로 업체등록신청이 되었습니다.");
+				
+				response.sendRedirect(request.getContextPath()); 
+				
+			}else {
+				
+				if(at != null) {
+					new File(savePath + at.getChangeName()).delete();
+				}
+				
+				request.setAttribute("errorMsg", "업체등록요청을 실패했습니다."); 
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
+			
 		}
 	
 	}

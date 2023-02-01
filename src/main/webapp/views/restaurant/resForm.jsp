@@ -151,13 +151,13 @@
                     </div>
                     <br><br>
 
-					<!--
+					
                     <div class="inputForm">
                         업체사진등록 <span style="color:red;">*</span>  <br> 
                         <input type="file" name="rImg" id="rImg" required> <br> 
                     </div>
                     <br><br>
-					 -->	
+					 	
                     
                     <br><br>
                     <p><button type="submit" class="btn btn-danger btn-block" style="margin:auto; width:400px;" >업체등록요청</button></p>
