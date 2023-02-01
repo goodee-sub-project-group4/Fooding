@@ -128,7 +128,7 @@
                             </span>
                         </span>
                         <span>&nbsp;|&nbsp;</span>
-                        <span>
+                        <span class="dropdown">
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
                             <span class="dropdown-menu">
                                 <a class="dropdown-item" href="#">공지사항</a>
@@ -139,6 +139,22 @@
                         </span>
                     </div>
 				<% } %>
+				<script>
+                    $(function(){
+                    	$("button[data-toggle=dropdown]").click(function(){
+                    		let $span = $(this).next();
+                    		let $parentSpan = $(this).parent();
+                    		
+                    		if($span.is(".show")){
+                    			$span.removeClass("show");
+                    			$parentSpan.removeClass("show")
+                    		}else{
+                    			$span.addClass("show");
+                    			$parentSpan.addClass("show")
+                    		}
+                    	})
+                    })   	
+                </script>
                     <!-- 헤더바3-2 -->
                     <div id="header3-2">
                         <!-- 각 이미지 클릭시 찜하기, (최근 본 게시물,) 리뷰페이지로 이동가능 -->
