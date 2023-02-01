@@ -106,20 +106,6 @@ public class Restaurant {
 		this.foodCt = foodCt;
 	}
 	*/
-	// 한수가 만든 매개변수생성자2 (ResFormController의 doGet()에서 사용!!)
-	public Restaurant(String resName, String ceo, String permitNo, String address, String phone, String cellphone,
-			String email, String parking, String foodCt) {
-		super();
-		this.resName = resName;
-		this.ceo = ceo;
-		this.permitNo = permitNo;
-		this.address = address;
-		this.phone = phone;
-		this.cellphone = cellphone;
-		this.email = email;
-		this.parking = parking;
-		this.foodCt = foodCt;
-	}
 	
 	// 한수가 만든 매개변수 생성자3 (SearchDao의 selectList에서 사용)
 	public Restaurant(String resName, String address, String rImg, String foodCt, Double star, int count) {
@@ -130,6 +116,42 @@ public class Restaurant {
 		this.foodCt = foodCt;
 		this.star = star;
 		this.count = count;
+	}
+	
+	// 한수가 만든 매개변수 생성자4(ResformController 에서 사용!! )
+	
+	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String phone,
+			String cellphone, String email, String parking, String foodCt) {
+		super();
+		this.resName = resName;
+		this.ceo = ceo;
+		this.permitNo = permitNo;
+		this.address = address;
+		this.dAddress = dAddress;
+		this.phone = phone;
+		this.cellphone = cellphone;
+		this.email = email;
+		this.parking = parking;
+		this.foodCt = foodCt;
+	}
+	
+	
+	
+	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String localCt,
+			String dLocalCt, String phone, String cellphone, String email, String parking, String foodCt) {
+		super();
+		this.resName = resName;
+		this.ceo = ceo;
+		this.permitNo = permitNo;
+		this.address = address;
+		this.dAddress = dAddress;
+		this.localCt = localCt;
+		this.dLocalCt = dLocalCt;
+		this.phone = phone;
+		this.cellphone = cellphone;
+		this.email = email;
+		this.parking = parking;
+		this.foodCt = foodCt;
 	}
 
 	// 식당 조회용 매개변수 생성자 - 태진
@@ -157,6 +179,7 @@ public class Restaurant {
 		this.reviewAvg = reviewAvg;
 	}
 	
+
 	public int getResNo () {
 		return resNo;
 	}
