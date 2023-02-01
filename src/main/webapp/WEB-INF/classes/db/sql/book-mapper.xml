@@ -12,10 +12,10 @@
 			 , PERMIT_NO
 			 , ADDRESS
 			 , D_ADDRESS
-			 , LONGTITUDE
-			 , LATITUDE
 			 , PHONE
 			 , PARKING
+			 , LONGTITUDE
+			 , LATITUDE
 			 , R_IMG
 			 , OPEN
 			 , CLOSE
@@ -32,8 +32,8 @@
 			 	  FROM REVIEW
 			 	 WHERE RES_NO = ?
 			 	) "REVIEW_AVG"
-		  FROM RESTAURANT RE
-		 WHERE RE.RES_NO = ?
+		  FROM RESTAURANT
+		 WHERE RES_NO = ?
 	       AND STATUS = 'Y'
 	</entry>
 </properties>

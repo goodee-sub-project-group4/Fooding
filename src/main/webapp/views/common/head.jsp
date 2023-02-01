@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>  
-<%@ page import="com.fd.member.model.vo.Member, com.fd.restaurant.model.vo.Restaurant"  %>    
+<%@ page import="com.fd.member.model.vo.Member" %>    
 <%
 	String contextPath = request.getContextPath(); // /Fooding
 	String alertMsg = (String)session.getAttribute("alertMsg"); // Alert

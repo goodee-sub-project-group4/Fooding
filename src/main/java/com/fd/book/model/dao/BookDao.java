@@ -40,7 +40,7 @@ public class BookDao {
 				re = new Restaurant(rset.getInt("res_no")
 								  , rset.getString("res_name")
 								  , rset.getString("ceo")
-								  , rset.getString("permitNo")
+								  , rset.getString("permit_No")
 								  , rset.getString("address")
 								  , rset.getString("d_address")
 								  , rset.getString("phone")
@@ -53,8 +53,8 @@ public class BookDao {
 								  , rset.getString("break_s")
 								  , rset.getString("break_e")
 								  , rset.getString("food_ct")
-								  , rset.getInt("review_count")
-								  , rset.getDouble("review_avg"));
+								  , rset.getInt("REVIEW_COUNT")
+								  , rset.getDouble("REVIEW_AVG"));
 			}
 			System.out.println(re);
 		} catch (SQLException e) {

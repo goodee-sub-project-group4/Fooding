@@ -32,23 +32,21 @@
         /* 업체 사진 */
         #thumbnail{height: 450px;}
         /* 업체 정보 */
-        #content-main{width: 100%; padding: 5px; height: 700px; float: left; border: 2px solid gainsboro;}
+        #content-main{width: 100%; padding: 5px; float: left; border: 2px solid gainsboro;}
         /* 업체명 (조회/리뷰/별점) */
-        #main1{width: 100%; height: 100px;}
+        #main1{width: 100%;}
         /* 업체세부정보 + 메뉴 */
         #main2{width: 100%; height: 600px;}
         #main2 div{float: left;}
         #main2-1, #main2-3{width: 25%;}
         #main2-2, #main2-4{width: 75%;}
-        #main2-1, #main2-2{height: 200px;}
-        #main2-3, #main2-4{height: 400px;}
-        #main2-4{overflow: auto;}
+        #main2-4{height: 400px; overflow: auto;}
         /* 메뉴 */
         .menu{width: 50%; padding: 3px; text-align: center;}
         .menu img{width: 180px; height: 100px;}
 
         /* 리뷰 */
-        #content2-2{margin-top: 50px; height: 1270px; overflow: auto; border-bottom: 2px solid gainsboro;}
+        #content2-2{margin-top: 20px; float: left;}
         #content2-2 div{box-sizing: border-box;}
         #review-head{height: 50px; border: 2px solid gainsboro; padding: 5px;}
         .review-content{width: 100%; height: 500px; border: 2px solid gainsboro;}
@@ -241,7 +239,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                     <div id="content2-2">
@@ -308,10 +305,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="paging">
+                            < 1 2 3 4 5 6 7 8 9 >
+                        </div>
                     </div>
-                    <div class="paging">
-                        < 1 2 3 4 5 6 7 8 9 >
-                    </div>
+                    
                 </div>
             </div>
             <div id="content3-padding">
