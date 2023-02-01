@@ -32,21 +32,6 @@ public class SearchService {
 	
 	public int insertRes(Restaurant r, Attachment at) {
 		
-		/* 일단 주석처리
-		Connection conn = getConnection(); 
-		int result = new SearchDao().insertRes(conn, r);
-		
-		if(result > 0) {
-			commit(conn); 
-		}else {
-			rollback(conn); 
-		}
-		
-		close(conn);
-		
-		return result; 
-		*/
-		
 		Connection conn = getConnection();
 		
 		int result1 = new SearchDao().insertRes(conn, r);

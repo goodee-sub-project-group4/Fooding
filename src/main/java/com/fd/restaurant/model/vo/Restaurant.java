@@ -28,6 +28,11 @@ public class Restaurant {
 	private String breakE;
 	private String foodCt;
 	
+	// 한수가 추가한 필드 (SearchController 및 search와 관련된 파일에서만 사용)
+	private int listCount; // 검색결과 총 갯수
+	private double star; // 별점 
+	private int count; // 조회수 
+	
 	public Restaurant() {}
 	
 	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
@@ -113,14 +118,16 @@ public class Restaurant {
 		this.foodCt = foodCt;
 	}
 	
-	// 한수가 만든 매개변수 생성자3
-	public Restaurant(String localCt, String dLocalCt, String foodCt) {
+	// 한수가 만든 매개변수 생성자3 (SearchDao의 selectList에서 사용)
+	public Restaurant(String resName, String address, String rImg, String foodCt, Double star, int count) {
 		super();
-		this.localCt = localCt;
-		this.dLocalCt = dLocalCt;
+		this.resName = resName;
+		this.address = address;
+		this.rImg = rImg;
 		this.foodCt = foodCt;
+		this.star = star;
+		this.count = count;
 	}
-	
 
 	public int getResNo() {
 		return resNo;
@@ -312,6 +319,35 @@ public class Restaurant {
 
 	public void setFoodCt(String foodCt) {
 		this.foodCt = foodCt;
+	}
+	
+	
+	// 한수가 추가한 getter/setter 
+
+	public int getListCount() {
+		return listCount;
+	}
+	
+
+	public void setListCount(int listCount) {
+		this.listCount = listCount;
+	}
+	
+
+	public Double getStar() {
+		return star;
+	}
+
+	public void setStar(Double star) {
+		this.star = star;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	@Override
