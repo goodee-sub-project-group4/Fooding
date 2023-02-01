@@ -21,7 +21,7 @@
 			font-size: 20px;
 		}
 		.menu-box {
-			width:580px;
+			width:650px;
 			height:250px;
 			position:relative;
 			margin:auto;
@@ -52,11 +52,22 @@
 		.photo {
 			float:right;
 			position:absolute;
-			right:10px;
+			right:80px;
 			top:10px; 
 		}
 		.photo button {
 			margin-top: 10px;
+		}
+		.delete { /*삭제버튼영역*/
+			float:right;
+		}
+		.delete img {
+			width:30px;
+			position:relative;
+			bottom:110px;
+		}
+		.delete img:hover {
+			cursor: pointer;
 		}
 		#menu-outer {
 			height:260px;
@@ -175,6 +186,9 @@
 					'<button type="button" class="btn btn-outline-danger">사진등록</button>'+
 					'<div style="display:none"><input type="file" name="file'+count+'"></div>'+
 					'<input type="hidden" name="count" value="'+ count +'"> '+
+				'</div>'+
+				'<div class="delete">'+
+					'<img src="<%=contextPath%>/resources/images/xIcon.png">'+
 				'</div>'+
 			'</div>')
 			);
