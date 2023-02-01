@@ -9,16 +9,12 @@
 		/* ↓↓↓ 기본골격용 스타일들 (수정할필요X) */
 		#outer2 {
 			width:1200px;
-			height: 600px;
-			position: relative;
 			margin:auto;
 		}			
 		#content {
 			width:950px;
-			display: inline-block;
 			box-sizing: border-box;
-			position:absolute;
-			right:10px;
+			float:right;
 			/* border:1px solid green; */
 		}
 		#menubar {
@@ -31,6 +27,7 @@
 		#footer {
 			width:1200px;
 			margin:auto;
+			margin-top:50px;
 		}
 		/* ↓↓↓ 컨텐츠용 스타일 */
 		#calendar-outer {
@@ -103,7 +100,7 @@
 		</div>
 		<div id="content" align="center">
 		<!-- 컨텐츠 작성부 -->
-			<br>
+			<br><br><br>
 			<h2>2월</h2><div id="space"></div>
 			<button type="button" class="btn btn-outline-danger">예약가능 변경</button>
 			<button type="button" class="btn btn-outline-danger">예약불가 변경</button>
@@ -172,7 +169,7 @@
 			</div>
 		</div>
 	</div>
-	<br><br><br><br><br><br><br>
+
 	<div id="footer">
 		<%@ include file="../common/footer.jsp" %>
 	</div>	

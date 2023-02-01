@@ -51,19 +51,37 @@
 			height: 40px;
 			position: relative;
 			bottom: 8px;
+			text-align: center;
 		}
-		#form-area input[type=checkbox] {
-			width:24px;
+		#form-area input[type=radio] {
+			width:20px;
+			height:20px;
+			margin-left:30px;
 		}
 		#form-area label {
-			position: relative;
-			bottom:14px;
-			margin-right: 30px;
+			font-size:17px;
 		}
 
 		.hour-box input {
 			width: 120px;
 		}
+
+		#form-area img {
+			width:60px;
+			height:60px;
+			float:right;
+		}
+
+		#form-area input[type=file] {
+			width:220px;
+		}
+
+		#form-area span {
+			color: crimson;
+			font-size: 12px;
+			float: right;
+		}
+		
 		
 		
 	</style>
@@ -79,30 +97,35 @@
 		</div>
 		<div id="content">
 			<!-- 컨텐츠 작성부 -->
-			<br><br>
+			<br><br><br><br>
 			<div id="form-area">
-			<form action="">
-
+			<form action="<%=contextPath%>/updateInfo.re" method="post" enctype="multipart/form-data">
+				
 					<h3>대표자명</h3>
-					<input class="narrow" type="text" name="ceo" id="ceo" value="<%=loginRest.getCeo()%>" readonly> <br><br><br>
+					<input class="narrow" type="text" name="ceo" id="ceo" value="<%=loginRest.getCeo()%>" readonly><br>
+					<span>* 수정은 고객센터로 문의하세요</span><br><br><br>
 
 					<h3>상호명</h3>
-					<input class="narrow" type="text" name="resName" id="resName" value="<%=loginRest.getResName()%>글자가무한히늘어난다면?" readonly> <br><br><br>
+					<input class="narrow" type="text" name="resName" id="resName" value="<%=loginRest.getResName()%>" readonly><br>
+					<span>* 수정은 고객센터로 문의하세요</span><br><br><br>
 
 					<h3>사업자등록번호</h3>
-					<input class="narrow" type="text" name="permitNo" id="permitNo" value="<%=loginRest.getPermitNo() %>" readonly > <br><br><br>
+					<input class="narrow" type="text" name="permitNo" id="permitNo" value="<%=loginRest.getPermitNo() %>" readonly ><br>
+					<span>* 수정은 고객센터로 문의하세요</span><br><br><br>
 
+					<h3>전화번호</h3>
+					<input class="narrow" type="text" name="phone" id="phone" required value="<%=loginRest.getPhone()%>"> <br><br><br>
+
+					<h3>휴대폰번호</h3>
+					<input class="narrow" type="text" name="cellPhone" id="cellPhone" required value="<%=loginRest.getCellphone()%>" > <br><br><br>
+					
 					<h3>주소</h3>
 					<input class="wide" type="text" name="address" id="address" required value="<%=loginRest.getAddress()%>"> <br><br><br>
 
 					<h3>상세주소</h3>
 					<input class="wide" type="text" name="dAddress" id="dAddress" required value="<%=loginRest.getdAddress() %>" > <br><br><br>
 
-					<h3>전화번호</h3>
-					<input class="wide" type="text" name="phone" id="phone" required value="<%=loginRest.getPhone()%>"> <br><br><br>
-
-					<h3>휴대폰번호</h3>
-					<input class="wide" type="text" name="cellPhone" id="cellPhone" required value="<%=loginRest.getCellphone()%>" > <br><br><br>
+					
 
 					<h3>이메일</h3>
 					<input class="wide" type="email" name="email" id="email" required value="<%=loginRest.getEmail() %>"> <br><br><br>
@@ -122,26 +145,32 @@
 					<br><br><br>
 
 					<h3>주차여부</h3>
-					<input type="checkbox" name="parking" id="parkingY"> <label for="parkingY">가능</label>
-					<input type="checkbox" name="parking" id="parkingN"> <label for="parkingN">불가능</label>
+					<input type="radio" name="parking" id="parkingY" value="Y"> <label for="parkingY">가능</label>
+					<input type="radio" name="parking" id="parkingN" value="N"> <label for="parkingN">불가능</label>
 					<br><br><br>
 
 					<div class="hour-box">
 						<h3>오픈시간</h3>
-						<input class="narrow" type="text" placeholder="시간선택" name="open" required><br><br><br>
+						<input class="narrow" type="text" placeholder="시간선택" name="open" value="<%=loginRest.getOpen()%>" required><br><br><br>
 						<h3>마감시간</h3>
-						<input class="narrow" type="text" class="timepicker" name="close" placeholder="시간선택" required><br><br><br>
+						<input class="narrow" type="text" class="timepicker" name="close" placeholder="시간선택" value="<%=loginRest.getClose()%>" required><br><br><br>
 						<h3>브레이크타임 시작</h3>
-						<input class="narrow" type="text" class="timepicker" name="break-s" placeholder="시간선택"><br><br><br>
+						<input class="narrow" type="text" class="timepicker" name="break-s" value="<%=(loginRest.getBreakS()==null)? "" : loginRest.getBreakS()%>" placeholder="시간선택"><br><br><br>
 						<h3>브레이크타임 끝</h3>
-						<input class="narrow" type="text" class="timepicker" name="break-e" placeholder="시간선택"><br><br><br>
+						<input class="narrow" type="text" class="timepicker" name="break-e" value="<%=(loginRest.getBreakE()==null)? "" : loginRest.getBreakE()%>" placeholder="시간선택"><br><br><br>
 					</div>
 
 					<h3>대표사진</h3> 
-					<input type="file" name="rImg" id="rImg" required> <br><br><br><br><br>
+					<img src="<%=loginRest.getrImg()%>" id="img-area" class="rounded">
+					<input type="hidden" name="oldfile" value="<%=loginRest.getrImg()%>">
+					<input type="file" name="rImg" id="rImg" onchange="loadImg(this)"> 
+					<br><br><br><br><br>
+				
+					<div align="center">
+						<button type="submit" class="btn btn-danger btn-block">정보변경</button>
+						<button type="reset" class="btn btn-secondary btn-block">초기화</button>
+					</div>
 
-				<button type="submit" class="btn btn-danger btn-block">정보변경</button>
-				<button type="reset" class="btn btn-secondary btn-block">초기화</button>
 			</form>
 			</div>
 		</div>
@@ -154,7 +183,6 @@
 	<script>
 		$(function(){
 			$('#title').text("매장정보");
-
 			$("#menu2").addClass("active");
 			$("#menu2_2").addClass("active");
 			
@@ -164,7 +192,8 @@
 				if($(this).val() == foodCt) {
 					$(this).attr("selected", true);
 				}
-			})			
+			})	
+			
 			//주차여부표시
 			let parkingId = "#parking"+"<%=loginRest.getParking()%>";
 			$(parkingId).attr("checked", true);
@@ -173,8 +202,19 @@
 			$('.hour-box input[type="text"]').timepicker({
 				timeFormat: 'HH:mm'
 			});
-
 		})
+		
+		//대표사진 미리보기
+		function loadImg(inputFile){
+			if(inputFile.files.length == 1) {
+				const reader = new FileReader();
+				reader.readAsDataURL(inputFile.files[0]);
+				reader.onload = function(e) {
+					$('#img-area').attr("src", e.target.result);
+				}
+			}
+
+		}
 		
 		
 	</script>

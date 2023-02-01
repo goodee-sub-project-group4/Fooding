@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.fd.restaurant.model.vo.Restaurant"%>
+<%
+    Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
+
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -27,7 +31,7 @@
         #content2-1 div{box-sizing: border-box;}
         
         /* 업체 사진 */
-        #thumbnail{height: 350px;}
+        #thumbnail{height: 450px;}
         /* 업체 정보 */
         #content-main{width: 100%; padding: 5px; height: 700px; float: left; border: 2px solid gainsboro;}
         /* 업체명 (조회/리뷰/별점) */
@@ -148,11 +152,11 @@
                 <div id="content2">
                     <div id="content2-1">
                         <div id="thumbnail">
-                            <img src="" alt="">
+                            <img style="width: 100%; height: 100%;" src="<%= contextPath %>/resources/restaurantSample/loosedoor_0.jpg" alt="">
                         </div>
                         <div id="content-main">
                             <div id="main1">
-                                <b>(업체명)</b>
+                                <b><%= restaurant.getResName() %></b>
                                 <br>
                                 조회수 / 리뷰수 / 별점
                             </div>

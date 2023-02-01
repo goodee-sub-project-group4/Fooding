@@ -13,13 +13,13 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class RestInfoController
  */
 @WebServlet("/info.re")
-public class RestInfoController extends HttpServlet {
+public class RestInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RestInfoController() {
+    public RestInfo() {
         super();
         // TODO Auto-generated constructor stub
     }

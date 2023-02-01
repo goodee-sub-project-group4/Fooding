@@ -221,5 +221,36 @@ public class RestaurantDao {
 		
 		return result;
 	}
+	
+	public int updateInfo(Connection conn, Restaurant r) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateInfo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, r.getAddress());
+			pstmt.setString(2, r.getdAddress());
+			pstmt.setString(3, r.getPhone());
+			pstmt.setString(4, r.getCellphone());
+			pstmt.setString(5, r.getEmail());
+			pstmt.setString(6, r.getParking());
+			pstmt.setString(7, r.getrImg());
+			pstmt.setString(8, r.getOpen());
+			pstmt.setString(9, r.getClose());
+			pstmt.setString(10, r.getBreakS());
+			pstmt.setString(11, r.getBreakE());
+			pstmt.setString(12, r.getFoodCt());
+			pstmt.setInt(13, r.getResNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 
 }

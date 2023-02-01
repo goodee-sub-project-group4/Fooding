@@ -33,14 +33,16 @@
 			margin:auto;
 		}
 		/* ↓↓↓ 컨텐츠용 스타일 */
+		#menu-outer {
+			
+		}
 		.menu-box {
-			width:580px;
+			width:650px;
 			height:250px;
 			position:relative;
 			margin:auto;
 			margin-bottom: 20px;
 			padding:15px;
-
 		}
 		.text-box {
 			display: inline-block;
@@ -62,15 +64,27 @@
 			margin-top: 3px;
 			color: gray;
 		}
-		.photo {
+		.photo { /*사진등록영역*/
 			float:right;
 			position:absolute;
-			right:10px;
+			right:80px;
 			top:10px; 
 		}
 		.photo button {
 			margin-top: 10px;
 		}
+		.delete { /*삭제버튼영역*/
+			float:right;
+		}
+		.delete img {
+			width:30px;
+			position:relative;
+			bottom:110px;
+		}
+		.delete img:hover {
+			cursor: pointer;
+		}
+
 		#menu-list { /*기존등록메뉴*/
 			height:260*<%=oldCount%>px;
 		}
@@ -87,49 +101,50 @@
 		<div id="content"><br><br><br>
 			<!-- 컨텐츠 작성부 -->
 			<div id="menu-outer">
-				<div id="menu-list">
 				<form action="<%=contextPath %>/menuUpdate.re" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="oldCount" value="<%=oldCount%>">
-					<% for(int i=0; i<list.size(); i++) { %>	
-					<div class="menu-box">
-						<input type="hidden" name="number<%=i%>" value="<%=list.get(i).getMenuNo()%>">
-						<div class="text-box">
-							<span>메뉴명 </span><span style="color:crimson">* </span>
-							<input name="name<%=i%>" type="text" value="<%=list.get(i).getMenuName()%>" required><br>
-						</div><br>
-						<div class="text-box">
-							<span>가격 </span><span style="color:crimson">* </span>
-							<input name="price<%=i%>" type="text" value="<%=list.get(i).getPrice()%>" required><br>
-						</div><br>
-						<div class="text-box">
-							<span>설명</span>
-							<input type="text" name="describe<%=i%>" value="<%=(list.get(i).getMenuDes()==null)? "" : list.get(i).getMenuDes()%>"><br>
-						</div>
-						<div class="photo" align="center">
-							<img id="image<%=i%>" src="<%= list.get(i).getmImg()%>" class="rounded" width="180" height="180"><br>
-							<button type="button" class="btn btn-outline-danger">사진등록</button>
-							<div style="display:none">
-								<input type="hidden" name="oldfile<%=i%>" value="<%= list.get(i).getmImg()%>">
-								<input type="file" name="file<%=i%>">
-								<input type="hiddden" name="file-changed<%=i%>" value="no">
-								<!-- 메뉴갯수를 넘기는 태그 -->
-								<input type="hidden" name="count" value="<%=i%>"> 
+					<div id="menu-list">
+						<input type="hidden" name="oldCount" value="<%=oldCount%>">
+						<% for(int i=0; i<list.size(); i++) { %>	
+						<div class="menu-box">
+							<input type="hidden" name="number<%=i%>" value="<%=list.get(i).getMenuNo()%>">
+							<div class="text-box">
+								<span>메뉴명 </span><span style="color:crimson">* </span>
+								<input name="name<%=i%>" type="text" value="<%=list.get(i).getMenuName()%>" required><br>
+							</div><br>
+							<div class="text-box">
+								<span>가격 </span><span style="color:crimson">* </span>
+								<input name="price<%=i%>" type="text" value="<%=list.get(i).getPrice()%>" required><br>
+							</div><br>
+							<div class="text-box">
+								<span>설명</span>
+								<input type="text" name="describe<%=i%>" value="<%=(list.get(i).getMenuDes()==null)? "" : list.get(i).getMenuDes()%>"><br>
+							</div>
+							<div class="photo" align="center">
+								<img id="image<%=i%>" src="<%= list.get(i).getmImg()%>" class="rounded" width="180" height="180"><br>
+								<button type="button" class="btn btn-outline-danger">사진등록</button>
+								<div style="display:none">
+									<input type="hidden" name="oldfile<%=i%>" value="<%= list.get(i).getmImg()%>">
+									<input type="file" name="file<%=i%>">
+									<input type="hiddden" name="file-changed<%=i%>" value="no">
+									<!-- 메뉴갯수를 넘기는 태그 -->
+									<input type="hidden" name="count" value="<%=i%>"> 
+								</div>
+							</div>
+							<div class="delete">
+								<img src="<%=contextPath%>/resources/images/xIcon.png">
 							</div>
 						</div>
+						<% } %>
+						<div id="firstone"></div><!-- 이 뒤로 동적으로 생성된 메뉴가 추가된다. -->
+						<div align="center"><br><br>
+							<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
+							<button type="submit" class="btn btn-danger">수정하기</button>
+						</div>			
 					</div>
-					<% } %>
-				</div>
-				<div id="firstone"></div><!-- 이 뒤로 동적으로 생성된 메뉴가 추가된다. -->
-						
-	
-				<div align="center"><br><br>
-					<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
-					<button type="submit" class="btn btn-danger">수정하기</button>
-				</div>			
-			</form>
-		</div>					
+				</form>
+			</div>					
+		</div>
 	</div>
-</div>
 	<br clear="both"><br><br><br><br><br><br>
 	<div id="footer">
 		<%@ include file="../common/footer.jsp" %>
@@ -189,7 +204,10 @@
 					'<img id="image'+count+'" src="/Fooding/resources/images/forTest.png" class="rounded" width="180" height="180"><br>'+
 					'<button type="button" class="btn btn-outline-danger">사진등록</button>'+
 					'<div style="display:none"><input type="file" name="file'+count+'"></div>'+
-					'<input type="hidden" name="count" value="'+ count +'"> '+
+					'<input type="hidden" name="count" value="'+count+'">'+
+				'</div>'+
+				'<div class="delete">'+
+					'<img src="<%=contextPath%>/resources/images/xIcon.png">'+
 				'</div>'+
 			'</div>')
 			);
