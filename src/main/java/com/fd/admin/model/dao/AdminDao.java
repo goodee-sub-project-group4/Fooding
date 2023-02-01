@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Locale.Category;
 import java.util.Properties;
 import static com.fd.common.JDBCTemplate.*;
 
@@ -458,6 +457,58 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	
+	/**FAQ 수정
+	 * @return
+	 */
+	public int updateFaq(Connection conn, Faq f) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateFaq");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, f.getCategory());
+			pstmt.setString(2, f.getFaqTitle());
+			pstmt.setString(3, f.getFaqContent());
+			pstmt.setInt(4, f.getFaqNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/**FAQ 조회
+	 * @param conn
+	 * @param faqNo
+	 * @return
+	 */
+	public Faq selectFaq(Connection conn, int faqNo) {
+		Faq f = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectFaq");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, faqNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				f = new Faq(rset.getInt("faq_no"),
+							rset.getString("category"),
+							rset.getString("faq_title"),
+							rset.getString("faq_content"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return f;
 	}
 
 	

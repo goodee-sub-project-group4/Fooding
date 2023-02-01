@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fd.admin.model.service.AdminService;
 import com.fd.admin.model.vo.Faq;
 
 /**
@@ -36,9 +37,14 @@ public class AdminFaqUpdateFormController extends HttpServlet {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
 			response.sendRedirect(request.getContextPath()+"/rest.admin");
 		}else {	
-
+			
+			int faqNo = Integer.parseInt(request.getParameter("no"));
+			Faq f = new AdminService().selectFaq(faqNo);
+			request.setAttribute("f", f);
 			request.getRequestDispatcher("views/admin/faqUpdate.jsp").forward(request, response);
 		}
+
+		
 	}
 
 	/**
