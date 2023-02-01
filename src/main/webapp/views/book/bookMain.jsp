@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.fd.restaurant.model.vo.Restaurant"%>
-<%
-    Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
 
-%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -164,31 +161,35 @@
                                 <table style="width: 100%;">
                                     <tr>
                                         <th style="width: 25%;;">사업자명</th>
-                                        <td style="width: 75%;">사업자명</td>
+                                        <td style="width: 75%;"><%= restaurant.getCeo() %></td>
                                     </tr>
                                     <tr>
                                         <th>영업시간</th>
-                                        <td>영업시간</td>
+                                        <td><%= restaurant.getOpen() %> ~ <%= restaurant.getClose() %></td>
                                     </tr>
                                     <tr>
                                         <th>브레이크 타임</th>
-                                        <td>브레이크 타임</td>
+                                        <td><%= restaurant.getBreakS() %> ~ <%= restaurant.getBreakE() %></td>
                                     </tr>
                                     <tr>
                                         <th>주차</th>
-                                        <td>주차</td>
+                  	                    <% if(restaurant.getParking().equals("Y")){ %> 
+                                        <td>주차가능</td>
+                                        <% }else{ %>
+                                        <td>주차 불가능</td>
+                                        <% } %>
                                     </tr>
                                     <tr>
                                         <th>주소</th>
-                                        <td>주소</td>
+                                        <td><%= restaurant.getAddress() %><%= restaurant.getdAddress() %></td>
                                     </tr>
                                     <tr>
                                         <th>업종</th>
-                                        <td>업종</td>
+                                        <td><%= restaurant.getFoodCt() %></td>
                                     </tr>
                                     <tr>
                                         <th>사업자등록번호</th>
-                                        <td>사업자등록번호</td>
+                                        <td><%= restaurant.getPermitNo() %></td>
                                     </tr>
                                 </table>
 

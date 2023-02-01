@@ -28,6 +28,9 @@ public class Restaurant {
 	private String breakE;
 	private String foodCt;
 	
+	private int reviewCount;
+	private double reviewAvg;
+	
 	public Restaurant() {}
 	
 	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
@@ -122,13 +125,14 @@ public class Restaurant {
 	}
 
 	// 식당 조회용 매개변수 생성자 - 태진
-	public Restaurant(int resNo, String resName, String ceo, String address, String dAddress,
+	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
 			String phone, String parking, String longtitude, String latitude, String rImg, String open,
-			String close, String breakS, String breakE, String foodCt) {
+			String close, String breakS, String breakE, String foodCt, int reviewCount, double reviewAvg) {
 		super();
 		this.resNo = resNo;
 		this.resName = resName;
 		this.ceo = ceo;
+		this.permitNo = permitNo;
 		this.address = address;
 		this.dAddress = dAddress;
 		this.phone = phone;
@@ -141,6 +145,8 @@ public class Restaurant {
 		this.breakS = breakS;
 		this.breakE = breakE;
 		this.foodCt = foodCt;
+		this.reviewCount = reviewCount;
+		this.reviewAvg = reviewAvg;
 	}
 
 	public void setResNo(int resNo) {

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+	<entry key="">
+		
+	</entry>
 	<entry key="selectRes">
 		SELECT 
 			   RES_NO
 			 , RES_NAME
 			 , CEO
+			 , PERMIT_NO
 			 , ADDRESS
 			 , D_ADDRESS
 			 , LONGTITUDE
@@ -18,9 +22,18 @@
 			 , BREAK_S
 			 , BREAK_E
 			 , FOOD_CT
-		  FROM RESTAURANT R
-		  JOIN REVIEW
-		 WHERE R.RES_NO = ?
+			 , (
+			 	SELECT COUNT(REVIEW_NO)
+			 	  FROM REVIEW
+			 	 WHERE RES_NO = ?
+			 	) "REVIEW_COUNT"
+			 , (
+			 	SELECT AVG(STAR)
+			 	  FROM REVIEW
+			 	 WHERE RES_NO = ?
+			 	) "REVIEW_AVG"
+		  FROM RESTAURANT RE
+		 WHERE RE.RES_NO = ?
 	       AND STATUS = 'Y'
 	</entry>
 </properties>
