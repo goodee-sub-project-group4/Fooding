@@ -111,8 +111,6 @@
         .menu-datail2{width: 70px; height: 150px; float: left; padding: 5px;}
         .menuAdd.btn.btn-secondary.btn-sm{margin-left: 13px; margin-top: 20px; height: 40px;}
         .menuRemove.btn.btn-danger.btn-sm{margin-left: 13px; margin-top: 15px; height: 40px;}
-        
-
 
         /* 인풋 number 증감 화살표 제거 */
         input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin: 0;}
