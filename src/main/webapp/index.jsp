@@ -135,9 +135,11 @@
 		    <div id="area2" align="center">
 		        <h2>리뷰 best ></h2>
 		        <div class="restaurant">
+		        	<a href="<%= contextPath %>/main.bo?resNo=1">
 		            <img src="/Fooding/resources/images/forTest.png"><br>
-		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
+		            <span class="rest-name">미미식당</span> <span style="float:right">★4.8(618)</span><br>
 		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>
+		            </a>
 		        </div>
 		        <div class="restaurant">
 		            <img src="/Fooding/resources/images/forTest.png"><br>
@@ -187,6 +189,7 @@
 		        </div>
 		    </div>
 		</div>
+		
 		<%@ include file="views/common/footer.jsp" %>
 	</div>
 </body>

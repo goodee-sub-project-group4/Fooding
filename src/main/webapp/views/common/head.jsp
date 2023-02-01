@@ -100,7 +100,6 @@
                         <span>&nbsp;|&nbsp;</span>
                         <span><a href="<%= contextPath%>/loginForm.me">로그인</a></span>
                         <span>&nbsp;|&nbsp;</span>
-                        <span>
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
                             <span class="dropdown-menu">
                                 <a class="dropdown-item" href="#">공지사항</a>
@@ -108,7 +107,6 @@
                                 <a class="dropdown-item" href="#">1:1문의</a>
                                 <a class="dropdown-item" href="<%= contextPath %>/enrollForm.re">업체등록</a>
                             </span>
-                        </span>
                     </div>
 				<% } else { %>
 				

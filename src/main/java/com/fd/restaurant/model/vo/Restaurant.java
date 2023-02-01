@@ -120,10 +120,27 @@ public class Restaurant {
 		this.dLocalCt = dLocalCt;
 		this.foodCt = foodCt;
 	}
-	
 
-	public int getResNo() {
-		return resNo;
+	// 식당 조회용 매개변수 생성자 - 태진
+	public Restaurant(int resNo, String resName, String ceo, String address, String dAddress,
+			String phone, String parking, String longtitude, String latitude, String rImg, String open,
+			String close, String breakS, String breakE, String foodCt) {
+		super();
+		this.resNo = resNo;
+		this.resName = resName;
+		this.ceo = ceo;
+		this.address = address;
+		this.dAddress = dAddress;
+		this.phone = phone;
+		this.parking = parking;
+		this.longtitude = longtitude;
+		this.latitude = latitude;
+		this.rImg = rImg;
+		this.open = open;
+		this.close = close;
+		this.breakS = breakS;
+		this.breakE = breakE;
+		this.foodCt = foodCt;
 	}
 
 	public void setResNo(int resNo) {
