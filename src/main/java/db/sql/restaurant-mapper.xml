@@ -102,7 +102,9 @@
 		     , MENU_DES
 		     , M_IMG
 		  FROM MENU
-		 WHERE RES_NO=?        
+		 WHERE RES_NO=?
+		 ORDER
+		    BY MENU_NO       
 	</entry>
 	<entry key="updateMenu">
 		UPDATE MENU
@@ -111,6 +113,22 @@
              , MENU_DES = ?
              , M_IMG = ?
          WHERE MENU_NO = ?		
+	</entry>
+	<entry key="updateInfo">
+		UPDATE RESTAURANT
+           SET ADDRESS = ?
+			 , D_ADDRESS = ?
+			 , PHONE = ?
+			 , CELLPHONE = ?
+			 , EMAIL = ?
+			 , PARKING = ?
+			 , R_IMG = ?
+			 , OPEN = ?
+			 , CLOSE = ?
+			 , BREAK_S = ?
+			 , BREAK_E = ?
+			 , FOOD_CT = ?
+         WHERE RES_NO = ?	
 	</entry>
 
 </properties>

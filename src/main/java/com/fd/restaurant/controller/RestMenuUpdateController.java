@@ -42,7 +42,7 @@ public class RestMenuUpdateController extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			//1)파일업로드하기
 			int maxSize = 10*1024*1024;
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/restUpfiles/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/rest_upfiles/");
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
 			//2)데이터담기
@@ -53,8 +53,6 @@ public class RestMenuUpdateController extends HttpServlet {
 			// ↓ 기존메뉴갯수(인덱스)
 			int oldCount = Integer.parseInt(multiRequest.getParameter("oldCount"))-1; 
 			
-			System.out.println("count : "+count);
-			System.out.println("oldCount : "+oldCount);
 			//2-1)기존메뉴 담기
 			ArrayList<Menu> oldList = new ArrayList<>();
 			for(int i=0; i<=oldCount; i++) {
@@ -67,7 +65,7 @@ public class RestMenuUpdateController extends HttpServlet {
 					           , multiRequest.getParameter("name"+i)
 					           , Integer.parseInt(multiRequest.getParameter("price"+i))
 					           , multiRequest.getParameter("describe"+i)
-					           , "resources/restUpfiles/"+multiRequest.getFilesystemName("file"+i));
+					           , "resources/rest_upfiles/"+multiRequest.getFilesystemName("file"+i));
 					oldList.add(m);
 				} else { 
 					//첨부파일이 바뀌지 않았을 경우
@@ -86,20 +84,26 @@ public class RestMenuUpdateController extends HttpServlet {
 			ArrayList<Menu> newList = new ArrayList<>();
 			if(oldCount<count) { //새로운 메뉴가 있다면
 				for(int i=oldCount+1; i<=count; i++) {
-					newList.add(new Menu(Integer.parseInt(multiRequest.getParameter("number"+i))
-							   , resNo
-					           , multiRequest.getParameter("name"+i)
-					           , Integer.parseInt(multiRequest.getParameter("price"+i))
-					           , multiRequest.getParameter("describe"+i)
-					           , "resources/restUpfiles/"+multiRequest.getFilesystemName("file"+i)));
+					newList.add(new Menu( resNo
+					                    , multiRequest.getParameter("name"+i)
+					                    , Integer.parseInt(multiRequest.getParameter("price"+i))
+					                    , multiRequest.getParameter("describe"+i)
+					                    , "resources/rest_upfiles/"+multiRequest.getFilesystemName("file"+i)));
 				}
 			}
 			
-			System.out.println("newList : "+newList);
-			
 			//3) 요청처리하러가기
-			//int result = new RestaurantService().updateMenu(oldList, newList);
+			int result = new RestaurantService().updateMenu(oldList, newList);
 
+			//4) 결과에 따라 화면 넘기기
+			if(result>0) {
+				session.setAttribute("alertMsg", "정보수정이 완료되었습니다");
+				response.sendRedirect(request.getContextPath()+"/menu.re");
+			}else {
+				//메뉴 업데이트 실패
+				session.setAttribute("alertMsg", "메뉴 추가에 실패하였습니다. 고객센터로 문의해주세요.");
+				response.sendRedirect(request.getContextPath()+"/menu.re");
+			}
 
 		}
 	}

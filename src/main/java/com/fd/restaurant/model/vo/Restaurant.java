@@ -198,7 +198,7 @@ public class Restaurant {
 		return cellphone;
 	}
 
-	public void setCelphone(String cellphone) {
+	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
 
