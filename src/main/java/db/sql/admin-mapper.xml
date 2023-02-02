@@ -300,4 +300,47 @@ SELECT
 	 WHERE FAQ_NO = ?
 </entry>
 
+
+
+
+<!-- 메인 배너 -->
+<entry key="insertBanner">
+	INSERT
+	  INTO ATTACHMENT
+	  (
+	  	FILE_NO
+	  , ORIGIN_NAME
+	  , CHANGE_NAME
+	  , FILE_PATH
+	  , BOARD_TYPE
+	  )
+	  VALUES
+	  (
+	    SEQ_ATNO.NEXTVAL
+	  , ?
+	  , ?
+	  , ?
+	  , 'B'
+	  )
+</entry>
+
+<!-- 메인 배너 조회 -->
+<entry key="selectBanner">
+	SELECT
+		   FILE_NO
+		 , ORIGIN_NAME
+		 , CHANGE_NAME
+		 , FILE_PATH
+	  FROM ATTACHMENT
+	 WHERE STATUS = 'Y'
+	   AND BOARD_TYPE = 'B'
+</entry>
+
+<!-- 메인 배너 삭제 -->
+<entry key="deleteBanner">
+	UPDATE ATTACHMENT
+	   SET STATUS = 'N'
+	 WHERE BOARD_TYPE = 'B'
+</entry>
+
 </properties>

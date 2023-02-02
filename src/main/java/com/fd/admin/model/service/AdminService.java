@@ -252,6 +252,51 @@ public class AdminService {
 		return result;
 	}
 
+
+// ==========================================================================
+
+	/**메인배너 사진 등록
+	 * @param list
+	 * @return
+	 */
+	public int insertBanner(ArrayList<Attachment> list) {
+		Connection conn = getConnection();
+		int result = new AdminDao().insertBanner(conn, list);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	/**메인배너 사진 조회
+	 * @return
+	 */
+	public ArrayList<Attachment> selectBanner() {
+		Connection conn = getConnection();
+		ArrayList list = new AdminDao().selectBanner(conn);
+		close(conn);
+		return list;
+	}
+
+
+	/**메인배너 삭제
+	 * @return
+	 */
+	public int deleteBanner() {
+		Connection conn = getConnection();
+		int result = new AdminDao().deleteBanner(conn);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 	
 
 
