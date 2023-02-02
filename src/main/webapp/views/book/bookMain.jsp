@@ -3,6 +3,7 @@
 <%
 	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
