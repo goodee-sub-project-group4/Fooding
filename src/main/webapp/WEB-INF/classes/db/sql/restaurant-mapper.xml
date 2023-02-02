@@ -183,5 +183,28 @@
 		 ORDER
 		    BY REVIEW_NO DESC		
 	</entry>
+	<entry key="selectNewQuestion">
+		SELECT
+		       Q_NO
+		     , Q_TITLE
+		     , Q_CONTENT
+		     , TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') "CREATE_DATE"
+		  FROM QUESTION 
+		 WHERE A_PERSON = ?
+		   AND STATUS= 'N'
+		 ORDER
+		    BY CREATE_DATE DESC		
+	</entry>
+		<entry key="selectNewReview">
+		SELECT
+		       REVIEW_NO
+		     , CREATE_DATE
+		     , REVIEW_CONTENT
+		  FROM REVIEW 
+		 WHERE RES_NO = ?
+		   AND GOOD = 'N'
+		 ORDER
+		    BY CREATE_DATE DESC		
+	</entry>
 
 </properties>

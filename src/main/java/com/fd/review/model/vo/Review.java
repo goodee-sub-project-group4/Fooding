@@ -10,8 +10,8 @@ public class Review {
 	private String reviewTitle;
 	private String reviewContent;
 	private double star;
-	private Date createDate;
-	private Date modifyDate;
+	private String createDate;
+	private String modifyDate;
 	private String status;
 	private String good;
 	private int count;
@@ -22,7 +22,7 @@ public class Review {
 	
 	
 	public Review(int reviewNo, String resNo, int userNo, String reviewTitle, String reviewContent, double star,
-			Date createDate, Date modifyDate, String status, String good, int count) {
+			String createDate, String modifyDate, String status, String good, int count) {
 		super();
 		this.reviewNo = reviewNo;
 		this.resNo = resNo;
@@ -38,7 +38,7 @@ public class Review {
 		
 	}
 	
-	public Review(int reviewNo, String resNo, String reviewContent, double star, Date createDate) {
+	public Review(int reviewNo, String resNo, String reviewContent, double star, String createDate) {
 		super();
 		this.reviewNo = reviewNo;
 		this.resNo = resNo;
@@ -95,19 +95,19 @@ public class Review {
 		this.star = star;
 	}
 	
-	public Date getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
 	
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
 	
-	public Date getModifyDate() {
+	public String getModifyDate() {
 		return modifyDate;
 	}
 	
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 	
