@@ -235,11 +235,11 @@
 					<span class="create-date"><%=qList.get(1).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div class="data-box2 dafault">
+				<div name="dafult" class="data-box2 dafault">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
 				<% } %>
-				<p>. . . . .</p>
+				<p class="dash">. . . . .</p>
 			</div>
 			<div id="area3">
 				<h3 onclick="toReview();">리뷰</h3> <span class="badge"><%=rList.size() %></span>
@@ -260,7 +260,7 @@
 					<span class="create-date"><%=rList.get(0).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div class="data-box2 dafault">
+				<div name="dafult" class="data-box2 dafault">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
 				<% } %>
@@ -279,13 +279,11 @@
 					<span class="create-date"><%=rList.get(1).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div class="data-box2 dafault">
+				<div name="dafult" class="data-box2 dafault">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
-				<% } %>
-				
-				
-				<p>. . . . .</p>
+				<% } %>				
+				<p class="dash">. . . . .</p>
 			</div>
 			
 		</div>
@@ -298,6 +296,12 @@
 	<script>
 		$(function(){
 			$('#title').text("");
+			$('.dash').each(function(){
+				console.log($(this).prev());
+				if($(this).prev().attr("name")=="dafault") {
+					$(this).css("color:red");
+				}
+			})
 		})
 		
 		function toQna(){
