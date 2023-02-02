@@ -19,40 +19,30 @@
 <style>
     .wrap{width: 1200px; margin: auto;}
     
-#content1, #content2, #content3{box-sizing: border-box; height: 100%;}
-    #content1-padding, #content2-padding, #content3-padding{float: left; margin: auto; padding: 5px; box-sizing: border-box;}
+    /* 컨텐트 전체 영역 */
+    .content div{border: 1px solid black;} 
+    .content{width: 1200px; margin: auto; box-sizing: border-box; float: left;}
+    #content1, #content2 {box-sizing: border-box; height: 100%;}
+    #content1-padding, #content2-padding {float: left; margin: auto; padding: 5px; box-sizing: border-box;}
 
-	#content1-padding{width: 20%; height: 500px;}
+    /* 컨텐트 왼쪽 영역 */
+    /*#content1-padding{width: 20%; height: 500px;}*/
 
-	.icon{ 
-        float:left; 
-    }
+    /* 내가 한 수정!! */
+    /* 카테고리 로고*/
+    .icon{border: 1px solid red; float:left;}
 
     /* 카테고리 이름 (로고 옆에 붙도록 수정)*/
-    .ctName{
-        height: 30px; 
-        line-height: 30px; 
-        font-size: 20px;
-    }
+    .ctName{height: 30px; line-height: 30px; font-size: 20px;}
 
     /* 지역 카테고리 상위 칸*/
-    #content1-1{
-        height: 30%; /*150px*/
-        box-sizing: border-box;
-
-    }
+    #content1-1{height: 30%; /*150px*/	box-sizing: border-box;}
+    
     /* 음식 카테고리 상위 칸*/
-    #content1-2{
-        height: 70%; /*350px;*/
-        box-sizing: border-box;
-    }
+    #content1-2{height: 70%; /*350px;*/ box-sizing: border-box;}
 
     /* 지역 카테고리 */
-    #ctLocal{
-        width:150px; 
-        margin-top:25px; 
-        margin-left:30px; 
-    }
+    #ctLocal{border:1px solid red; width:150px; margin-top:25px; margin-left:30px;}
 
     /* 음식 카테고리 */
     .food{width:150px; margin-left:30px; margin-top:15px;}
@@ -87,7 +77,7 @@
     .zzim{float:right;box-sizing: border-box; }
 
     /* 리뷰 페이징 */
-    .paging-area{height: 50px; text-align: center; padding-top: 20px;}
+    .paging{height: 50px; text-align: center; padding-top: 20px;}
 </style>
 </head>
 
@@ -98,8 +88,13 @@
         <%@ include file="../common/searchSidebar.jsp" %>
 
         <div class="content">
+        
             
-
+            <div id="content1-padding">
+                
+            </div>
+            
+            
             <div id="content2-padding">
                 <div id="content2">
                     <!-- 검색결과 -->
@@ -144,7 +139,7 @@
 	                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
 	                                조회수: <%= r.getCount() %> <br>
 	                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
-	                                리뷰수: 54
+	                                리뷰수: 54 
 	                            </div>
 	                        </div>
 	                        <% } %>
@@ -152,21 +147,18 @@
                         
 						
 						<div class="paging-area">
-						
-
-				        	<% if(pi.getCurrentPage() != 1){ %>
-			            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()-1%>';">&lt;</button>
-				            <% } %>
-				
-							<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=p%>';"><%= p %></button>
-				            <% } %>
-				
-							<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()+1%>';">&gt;</button>
-							<% } %>
-								        
-
+			        	
+				        	<% if(pi.getCurrentPage() != 1) { %>
+				        		<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage() - 1%>';">&lt;</button>
+				        	<% } %>
+				        	
+				        	<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+				        		<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=p%>';"><%= p %></button>
+				        	<% } %>
+				        	
+				        	<% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
+				        		<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()+1%>';">&gt;</button>
+				        	<% } %>
 				        </div>
 
                     </div>

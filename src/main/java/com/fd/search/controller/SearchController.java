@@ -84,6 +84,7 @@ public class SearchController extends HttpServlet {
 		
 		ArrayList<Restaurant> list = new SearchService().selectList(pi, localCt, dLocalCt, foodCt); 
 		
+		
 		request.setAttribute("pi", pi); 
 		request.setAttribute("list", list); 
 		
