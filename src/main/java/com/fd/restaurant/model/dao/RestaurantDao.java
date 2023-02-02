@@ -402,7 +402,9 @@ public class RestaurantDao {
 		ArrayList<Review> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
 		String sql = prop.getProperty("selectNewReview");
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, resNo);
@@ -411,6 +413,7 @@ public class RestaurantDao {
 				Review r = new Review();
 				r.setReviewNo(rset.getInt("review_no"));
 				r.setCreateDate(rset.getString("create_date"));
+				r.setReviewContent(rset.getString("review_content"));
 				list.add(r);
 			}
 		} catch (SQLException e) {

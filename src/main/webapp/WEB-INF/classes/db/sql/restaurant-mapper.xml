@@ -198,7 +198,7 @@
 		<entry key="selectNewReview">
 		SELECT
 		       REVIEW_NO
-		     , CREATE_DATE
+		     , TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') "CREATE_DATE"
 		     , REVIEW_CONTENT
 		  FROM REVIEW 
 		 WHERE RES_NO = ?
