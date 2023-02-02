@@ -156,7 +156,7 @@
                 
                 <!--카테고리-->
                 <div class="categoryU">
-                    <select class="select" name="category">
+                    <select class="select" name="category" onchange="changeCategory()">
                         <option>구분</option>
                         <option>회원</option>
                         <option>예약</option>
@@ -168,7 +168,7 @@
 
                 <!--카테고리-->
                 <div class="categoryR">
-                    <select class="select" name="category">
+                    <select class="select" name="category" onchange="changeCategory()">
                         <option>구분</option>
                         <option>업체</option>
                         <option>예약</option>
@@ -221,7 +221,7 @@
                         </div>
                         <div id="mdButton" align="center">
                             <div><a href="<%=contextPath%>/faqUpdateForm.ad?no=<%=f1.getFaqNo()%>" class="btn btn-outline-danger">수정하기</a>&nbsp&nbsp</div>
-                            <div><a href="" class="btn btn-danger">삭제하기</a></div>
+                            <div><a href="<%=contextPath%>/faqDelete.ad?no=<%=f1.getFaqNo()%>" class="btn btn-danger">삭제하기</a></div>
                         </div>
                     </div>
                 </ul>
@@ -245,7 +245,7 @@
                         </div>
                         <div id="mdButton" align="center">
                             <div><a href="<%=contextPath%>/faqUpdateForm.ad?no=<%=f2.getFaqNo()%>" class="btn btn-outline-danger">수정하기</a>&nbsp&nbsp</div>
-                            <div><a href="" class="btn btn-danger">삭제하기</a></div>
+                            <div><a href="<%=contextPath%>/faqDelete.ad?no=<%=f2.getFaqNo()%>" class="btn btn-danger">삭제하기</a></div>
                         </div>
                     </div>
                 </ul>
@@ -303,6 +303,14 @@
                 
             }
 		}
+
+        // 카테고리 조회,,
+        // function changeCategory(){
+        //     var kind = $(this).val();
+        //     $.ajax({
+        //         url : 
+        //     })
+        // }
 
  
 	</script>

@@ -381,7 +381,6 @@ public class AdminDao {
 		}
 		return list;
 	}
-
 	
 	/**업체 FAQ 목록 / 상세 조회
 	 * @param conn
@@ -410,6 +409,7 @@ public class AdminDao {
 		return list;
 	}
 
+	
 	/**FAQ 카테고리 (아직..안씀,,,)
 	 * @param conn
 	 * @return
@@ -434,6 +434,7 @@ public class AdminDao {
 		return f;
 	}
 
+	
 	/**FAQ 등록
 	 * @param conn
 	 * @param f
@@ -458,7 +459,36 @@ public class AdminDao {
 		}
 		return result;
 	}
-
+	
+	
+	/**FAQ 조회
+	 * @param conn
+	 * @param faqNo
+	 * @return
+	 */
+	public Faq selectFaq(Connection conn, int faqNo) {
+		Faq f = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectFaq");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, faqNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				f = new Faq(rset.getInt("faq_no"),
+						rset.getString("category"),
+						rset.getString("faq_title"),
+						rset.getString("faq_content"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return f;
+	}
 	
 	/**FAQ 수정
 	 * @return
@@ -482,34 +512,28 @@ public class AdminDao {
 		return result;
 	}
 
-	/**FAQ 조회
+	
+	/**FAQ 삭제
 	 * @param conn
 	 * @param faqNo
 	 * @return
 	 */
-	public Faq selectFaq(Connection conn, int faqNo) {
-		Faq f = null;
+	public int deleteFaq(Connection conn, int faqNo) {
+		int result = 0;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectFaq");
+		String sql = prop.getProperty("deleteFaq");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, faqNo);
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				f = new Faq(rset.getInt("faq_no"),
-							rset.getString("category"),
-							rset.getString("faq_title"),
-							rset.getString("faq_content"));
-			}
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
 		}
-		return f;
+		return result;
 	}
+
 
 	
 	
