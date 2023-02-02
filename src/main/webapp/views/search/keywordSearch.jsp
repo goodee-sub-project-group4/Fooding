@@ -4,9 +4,7 @@
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Restaurant> list = (ArrayList<Restaurant>)request.getAttribute("list");
-	String city = (String)request.getAttribute("localCt");
-	String county = (String)request.getAttribute("dLocalCt");
-	String foodCt = (String)request.getAttribute("foodCt");
+	String keyword = (String)request.getAttribute("keyword");
 %>
 <!DOCTYPE html>
 <html>
@@ -158,15 +156,15 @@
 						
 
 				        	<% if(pi.getCurrentPage() != 1){ %>
-			            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()-1%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';">&lt;</button>
+			            	<button onclick="location.href='<%=contextPath%>/keyword.sh?cpage=<%=pi.getCurrentPage()-1%>&keyword=<%=keyword%>';">&lt;</button>
 				            <% } %>
 				
 							<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=p%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';"><%= p %></button>
+				            	<button onclick="location.href='<%=contextPath%>/keyword.sh?cpage=<%=p%>&keyword=<%=keyword%>';"><%= p %></button>
 				            <% } %>
 				
 							<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()+1%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';">&gt;</button>
+				            	<button onclick="location.href='<%=contextPath%>/keyword.sh?cpage=<%=pi.getCurrentPage()+1%>&keyword=<%=keyword%>';">&gt;</button>
 							<% } %>
 								        
 

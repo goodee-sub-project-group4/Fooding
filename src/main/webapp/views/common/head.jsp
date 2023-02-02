@@ -87,6 +87,7 @@
                     <div id="search">
                         <input type="text" name="keyword" size="45">&nbsp;&nbsp;<img src="/Fooding/resources/images/search.png" width="25" height="25" >
                     </div>
+                    <input type="hidden" name="cpage" value="1">
                 </form>
             </div>
 
