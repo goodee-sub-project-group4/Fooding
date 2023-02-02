@@ -8,7 +8,7 @@
 <%
 	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
 	ArrayList<Menu> menuList = (ArrayList<Menu>)request.getAttribute("menuList");
-	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
+	//ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -233,8 +233,8 @@
                         <div id="review-head">
                             사용자 리뷰
                         </div>
-                        <% if(!reviewList.isEmpty()) { %>
-                        	<% for(Review r : reviewList) { %>
+                        <!-- <% //if(!reviewList.isEmpty()) { %> -->
+                        	<!-- <% //for(Review r : reviewList) { %> -->
 	                        <div class="review-content">
 	                            <div class="review-content1-1">
 	                            </div>
@@ -255,8 +255,8 @@
 	                                </div>
 	                            </div>
 	                        </div>
-                        	<% } %>
-                        <% } %>
+                        	<!-- <% //} %>
+                        <% //} %> -->
                         <div class="review-content">
                             <div class="review-content1-1">
                             </div>
