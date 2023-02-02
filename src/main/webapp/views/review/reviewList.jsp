@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.review.model.vo.Review" %>
+<%
+	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,47 +81,28 @@
             <div id="review-title5">작성일</div>
             <div id="review-title6"></div>
         </div>
-
+	<% if(list.isEmpty()) { %>
         <!-- case1. 리뷰가 없을 경우 -->
         <!-- <div align="center" style="margin-top:20px;"><b>존재하는 리뷰가 없습니다.</b></div> -->
-
+        
+	<% } else { %>
         <!-- case2. 리뷰가 있을 경우 -->
+        <% for(Review r : list) { %>
         <div id="review-content">
             <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
-            <div id="review-content2">3</div>
-            <div id="review-content3"><img src="C:\Users\lbn06\Desktop\오븐\KakaoTalk_20230123_223422687.jpg" width="120" height="140"></div>
+            <div id="review-content2"><%= r.getReviewNo() %></div>
+            <div id="review-content3"><img src="" width="125" height="140"></div>
             <div id="review-content4">
-                <div id="review-content4-1">식당이름</div>
-                <div id="review-content4-2">리뷰내용</div>
+                <div id="review-content4-1"><%= r.getResNo() %></div>
+                <div id="review-content4-2"><%= r.getReviewContent() %></div>
             </div>
-            <div id="review-content5">★ 4.5</div>
-            <div id="review-content6">2023.01.23</div>
+            <div id="review-content5">★ <%= r.getStar() %></div>
+            <div id="review-content6"><%= r.getCreateDate() %></div>
             <div id="review-content7"><button type="button" class="btn btn-danger">수정</button></div>
         </div>
-        <div id="review-content">
-            <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
-            <div id="review-content2">2</div>
-            <div id="review-content3"><img src="C:\Users\lbn06\Desktop\오븐\KakaoTalk_20230123_223422687.jpg" width="120" height="140"></div>
-            <div id="review-content4">
-                <div id="review-content4-1">식당이름</div>
-                <div id="review-content4-2">리뷰내용</div>
-            </div>
-            <div id="review-content5">★ 4.5</div>
-            <div id="review-content6">2023.01.23</div>
-            <div id="review-content7"><button type="button" class="btn btn-danger">수정</button></div>
-        </div>
-        <div id="review-content">
-            <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
-            <div id="review-content2">1</div>
-            <div id="review-content3"><img src="C:\Users\lbn06\Desktop\오븐\KakaoTalk_20230123_223422687.jpg" width="120" height="140"></div>
-            <div id="review-content4">
-                <div id="review-content4-1">식당이름</div>
-                <div id="review-content4-2">리뷰내용</div>
-            </div>
-            <div id="review-content5">★ 4.5</div>
-            <div id="review-content6">2023.01.23</div>
-            <div id="review-content7"><button type="button" class="btn btn-danger">수정</button></div>
-        </div>
+       <% } %>
+	<% } %>
+        
         <div id="paging">
             <div class="container">                  
                 <ul class="pagination">
@@ -130,6 +116,8 @@
                 </ul>
             </div>
         </div>
+      
     </div>
+   
 </body>
 </html>

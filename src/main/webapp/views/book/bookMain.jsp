@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.fd.restaurant.model.vo.Restaurant"%>
-<%
-	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
-%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,6 +13,14 @@
 
     <!-- 달력 API -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.1/index.global.min.js"></script>
+    
+    <!-- 결제 API -->
+ 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-{SDK-1.1.8}.js"></script>
+    <script>
+        let IMP = window.IMP;
+        IMP.init("{imp44408883}");    
+    </script>
+
     <style>
         /* 컨텐트 전체 영역 */
         /* .content div{border: 1px solid black;} */
@@ -46,24 +52,23 @@
         .menu img{width: 180px; height: 100px;}
 
         /* 리뷰 */
-        #content2-2{margin-top: 20px; float: left;}
+        #content2-2{margin-top: 20px; float: left; height: 1700px; overflow: auto;}
         #content2-2 div{box-sizing: border-box;}
-        #review-head{height: 50px; border: 2px solid gainsboro; padding: 5px;}
-        .review-content{width: 100%; height: 500px; border: 2px solid gainsboro;}
+        #review-head{height: 50px; border: 2px solid gainsboro; padding: 5px; margin-bottom: 4px;}
         .review-content div{float: left; padding: 5px;}
-        .review-content1-1{width: 20%; height: 50px; }
+        .review-content1-1{width: 20%; height: 60px; border-left: 2px solid gainsboro; border-top: 2px solid gainsboro;}
         /* 리뷰 제목 */
-        .review-content1-2{width: 80%; height: 60px;}
+        .review-content1-2{width: 80%; height: 60px; border-top: 2px solid gainsboro; border-right: 2px solid gainsboro;}
         /* 리뷰 작성자 */
-        .review-content2-1{width: 20%; height: 355px;}
-        .review-content2-2{width: 80%; height: 355px;}
+        .review-content2-1{width: 20%; height: 355px; border-left: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
+        .review-content2-2{width: 80%; height: 355px; border-right: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
         /* 리뷰 내용 */
         .review-text{width: 100%; height: 200px;}
         /* 리뷰 사진 */
         .review-picture{width: 100%; height: 150px; padding: 10px; text-align: center;}
         .review-picture img{width: 140px; height: 120px;}
         /* 리뷰 페이징 */
-        .paging{height: 50px; text-align: center; padding-top: 20px;}
+        .paging{text-align: center; margin-top: 30px; width: 100%; float: left;}
 
         /* 컨텐트 오른쪽 영역 */
         #content3-padding{width: 30%; height: 465px;}
@@ -112,8 +117,6 @@
         .menu-datail2{width: 70px; height: 150px; float: left; padding: 5px;}
         .menuAdd.btn.btn-secondary.btn-sm{margin-left: 13px; margin-top: 20px; height: 40px;}
         .menuRemove.btn.btn-danger.btn-sm{margin-left: 13px; margin-top: 15px; height: 40px;}
-        
-
 
         /* 인풋 number 증감 화살표 제거 */
         input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin: 0;}
@@ -149,7 +152,7 @@
                 <div id="content2">
                     <div id="content2-1">
                         <div id="thumbnail">
-                            <img style="width: 100%; height: 100%;" src="<%= contextPath %>/resources/restaurantSample/loosedoor_0.jpg" alt="">
+                            <img style="width: 100%; height: 100%;" src="<%= contextPath %>/resources/restaurantSample/4_loosedoor.jpg" alt="">
                         </div>
                         <div id="content-main">
                             <div id="main1">
@@ -361,6 +364,81 @@
                         <div style="float: right; margin-left: 20px; font-weight: 600; color: gray;"><div style="width: 15px; height: 15px; margin-top: 4.5px; margin-right: 5px; border: 2px solid gray; border-radius: 3px; float: left;"></div>예약불가</div>
                         <div style="float: right; font-weight: 600; color: crimson;"><div style="width: 15px; height: 15px; margin-top: 4.5px; margin-right: 5px; border: 2px solid crimson; border-radius: 3px; float: left;"></div>예약가능</div>
                     </div>
+
+                    <script>
+                         // 예약날짜, 시간, 메뉴, 약관 슬라이드 효과 -----------------------------------------------
+                        $(function(){
+                            $('.menu-slide').click(function(){
+                                    const $slide = $(this).next();
+                                    if($slide.css('display') == 'none'){
+                                        $(this).siblings('.slide-detail1').slideUp();
+                                        $(this).siblings('.slide-detail2').slideUp();
+                                        $('#general-condition-detail1').slideUp();
+                                        $('#general-condition-detail2').slideUp();
+                                        $slide.slideDown();
+                                    }else{
+                                        $slide.slideUp();
+                                    }
+                            });
+
+                            $('#book-menu').click(function(){
+                                if($('#book-date').text() != '날짜 선택' && $('#book-time').text() != '시간 선택'){
+                                    if($('#book-date').css('display') == 'block' || $('#book-time').css('display') == 'block'){
+                                        $('#book-date').next().slideUp();
+                                        $('#book-time').next().slideUp();
+                                        $('#general-condition-detail1').slideUp();
+                                        $('#general-condition-detail2').slideUp();
+                                    };
+                                    $('.menu-select').css('display', 'block');
+                                    $('#menu-select-border3').css('display', 'none');
+                                    $('#menu-payment').css('display', 'none');
+                                    $('#menu-selected').css('display', 'block');
+                                }else if($('#book-date').text() == '날짜 선택'){
+                                    alert('날짜를 먼저 선택해주세요!');
+                                    $('#book-date').next().slideDown();
+                                }else{
+                                    alert('시간을 먼저 선택해주세요!');
+                                    $('#book-time').next().slideDown();
+                                }
+                            });
+
+                            $('.check').click(function(){
+                                $('.menu-select').css('display', 'none');
+                            })
+
+                            $('.general-condition').click(function(){
+                                const $slide = $(this).next();
+                                if($slide.css('display') == 'none'){
+                                    $('#general-condition-detail1').slideUp();
+                                    $('#general-condition-detail2').slideUp();
+                                    $('.slide-detail1').slideUp();
+                                    $('.slide-detail2').slideUp();
+                                    $slide.slideDown();
+                                }else{
+                                    $slide.slideUp();
+                                };
+                            });
+                        });
+                        
+                        // 시간 선택 버튼 효과
+                        $(document).on('click', '.book-time-btn.btn.btn-outline-danger', function(e){
+                            {
+                                $('#am-box, #pm-box').children().each(function(){
+                                if($(this).prop('name')){
+                                    $(this).css({'background-color':'', 'color':''});
+                                    $(this).removeAttr('name');
+                                    $(this).removeAttr('value');
+                                }
+                            })
+                                const bookTimeValue = $(this).text();
+                                $(this).css({'background-color':'crimson', 'color':'white'});
+                                $(this).attr('name', 'bookTime');
+                                $(this).attr('value', bookTimeValue);
+                                $('#book-time').text('예약시간 ' + bookTimeValue);
+                            }
+                        });
+                    </script>
+
                     <div class="book-category" id="book-menu">메뉴 선택</div>
                     <form class="menu-fixed" >
                         <div class="menu-select">
@@ -487,6 +565,7 @@
                         </div>
                     </div>
                     <br>
+                    
                     <div id="book-menu4-userInfo">
                         <div style="width: 100%; height: 70px; text-align: center; line-height: 70px; border: 2px solid gainsboro;">
                             예약확인 및 예약자 정보
@@ -495,6 +574,20 @@
                             <b>날짜</b> &nbsp; <b>시간</b>
                         </div>
                         <table style="width: 95%; margin: auto;">
+                        	<% if(loginUser != null) { %>
+                            <tr>
+                                <th style="width: 25%; height: 50px;">예약자<b style="color: crimson;">*</b></th>
+                                <td><input class="align2" type="text" name="bookUserName" value="<%= loginUser.getUserName() %>" placeholder="김푸딩" style="width: 100%; height: 45px;" required></td>
+                            </tr>
+                            <tr>
+                                <th style="height: 50px;">연락처<b style="color: crimson;">*</b></th>
+                                <td><input class="align2" type="text" name="bookUserPhone" value="<%= loginUser.getUserPhone() %>" placeholder="010-0000-0000" style="width: 100%; height: 45px;" required></td>
+                            </tr>
+                            <tr>
+                                <th style="height: 50px;">이메일</th>
+                                <td><input class="align2" type="text" name="bookEmail" value="<%= loginUser.getUserEmail() %>" placeholder="fooding@naver.com" style="width: 100%; height: 45px;" required></td>
+                            </tr>
+                            <% }else{ %>
                             <tr>
                                 <th style="width: 25%; height: 50px;">예약자<b style="color: crimson;">*</b></th>
                                 <td><input class="align2" type="text" name="bookUserName" placeholder="김푸딩" style="width: 100%; height: 45px;" required></td>
@@ -507,6 +600,7 @@
                                 <th style="height: 50px;">이메일</th>
                                 <td><input class="align2" type="text" name="bookEmail" placeholder="fooding@naver.com" style="width: 100%; height: 45px;" required></td>
                             </tr>
+                            <% } %>
                             <tr>
                                 <td colspan="2" style="text-align: right;">* 작성 시 예약 확인 메일이 발송됩니다<br><br></td>
                                 
@@ -518,6 +612,7 @@
                                 </td>
                             </tr>
                         </table>
+                        
                         <div></div>
                     </div>
                     <br>
@@ -660,53 +755,7 @@
                 });
             });
 
-            // 예약날짜, 시간, 메뉴, 약관 슬라이드 효과 -----------------------------------------------
-            $(function(){
-                $('.menu-slide').click(function(){
-                    const $slide = $(this).next();
-                    if($slide.css('display') == 'none'){
-                        $(this).siblings('.slide-detail1').slideUp();
-                        $(this).siblings('.slide-detail2').slideUp();
-                        $('#general-condition-detail1').slideUp();
-                        $('#general-condition-detail2').slideUp();
-                        $slide.slideDown();
-                    }else{
-                        $slide.slideUp();
-                    }
-                });
-
-                $('#book-menu').click(function(){
-                    if($('#book-date').css('display') == 'block' || $('#book-time').css('display') == 'block'){
-                        $('#book-date').next().slideUp();
-                        $('#book-time').next().slideUp();
-                        $('#general-condition-detail1').slideUp();
-                        $('#general-condition-detail2').slideUp();
-                    };
-                    $('.menu-select').css('display', 'block');
-                    $('#menu-select-border3').css('display', 'none');
-                    $('#menu-payment').css('display', 'none');
-                    $('#menu-selected').css('display', 'block');
-                });
-
-                $('.check').click(function(){
-                    $('.menu-select').css('display', 'none');
-                })
-
-                $('.general-condition').click(function(){
-                    const $slide = $(this).next();
-                    if($slide.css('display') == 'none'){
-                        $('#general-condition-detail1').slideUp();
-                        $('#general-condition-detail2').slideUp();
-                        $('.slide-detail1').slideUp();
-                        $('.slide-detail2').slideUp();
-                        $slide.slideDown();
-                    }else{
-                        $slide.slideUp();
-                    };
-                });
-                
-             
-            });
+           
 
             // 시간 선택 버튼 생성 -------------------------------------------------------------------------------------
             $(function(){
@@ -751,22 +800,7 @@
             })
                     
 
-            // 시간 선택 버튼 효과
-            $(document).on('click', '.book-time-btn.btn.btn-outline-danger', function(e){
-                $('#am-box, #pm-box').children().each(function(){
-                    if($(this).prop('name')){
-                        $(this).css({'background-color':'', 'color':''});
-                        $(this).removeAttr('name');
-                        $(this).removeAttr('value');
-                    }
-                })
-                
-                const bookTimeValue = $(this).text();
-                $(this).css({'background-color':'crimson', 'color':'white'});
-                $(this).attr('name', 'bookTime');
-                $(this).attr('value', bookTimeValue);
-                $('#book-time').text('예약시간 ' + bookTimeValue)
-            });
+            
             
             // 메뉴 추가
             $('.menuAdd.btn.btn-secondary.btn-sm').click(function(){
