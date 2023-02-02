@@ -171,7 +171,7 @@
                                     <tr>
                                         <td><img style="width: 15px; height: 15px;" src="<%= contextPath %>/resources/images/조회수.png" alt=""> <%= restaurant.getCount() %></td>
                                         <td><img style="width: 15px; height: 15px;" src="<%= contextPath %>/resources/images/리뷰수2.png" alt=""> <%= restaurant.getReviewCount() %></td>
-                                        <td><img style="width: 15px; height: 15px;" src="<%= contextPath %>/resources/images/찜하기.png" alt=""> <%= restaurant.getReviewAvg() %></td>
+                                        <td><img style="width: 15px; height: 15px;" src="<%= contextPath %>/resources/images/찜하기.png" alt=""> <%= Math.round(restaurant.getReviewAvg() * 100.0) / 100.0 %></td>
                                     </tr>
                                 </table>
                                 <br>
@@ -184,11 +184,11 @@
                                     </tr>
                                     <tr>
                                         <th>영업시간</th>
-                                        <td><%= restaurant.getOpen() %> ~ <%= restaurant.getClose() %></td>
+                                        <td><b id="open"><%= restaurant.getOpen() %></b> ~ <b id="close"><%= restaurant.getClose() %></b></td>
                                     </tr>
                                     <tr>
                                         <th>브레이크 타임</th>
-                                        <td><%= restaurant.getBreakS() %> ~ <%= restaurant.getBreakE() %></td>
+                                        <td><b id="breakS"><%= restaurant.getBreakS() %></b> ~ <b id="breakE"><%= restaurant.getBreakE() %></b></td>
                                     </tr>
                                     <tr>
                                         <th>주차</th>
@@ -434,43 +434,22 @@
                             <div id="menu-select-background">
                                 <div id="menu-select-border1">
                                     <div id="menu-selectView1">
-                                        <div class="menu-detail">
-                                            <img src="" alt="">
-                                            <div class="menu-datail1">
-                                                <div style="font-weight: 1000; font-size: 20px;">도쿄 수제 함바그 고젠</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>12000</b></div>
-                                                <div style="font-size: 13px; height: 80px; overflow: hidden;">함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴
-                                                함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴함바그는 하나하나 수제로 만든 패티를 사용. 정성들여 만든 데미그라스 소스를 곁들인 한상 메뉴</div>
-                                            </div>
-                                            <div class="menu-datail2">
-                                                <button type="button" class="menuAdd btn btn-secondary btn-sm">추가</button>
-                                                <button type="button" class="menuRemove btn btn-danger btn-sm">삭제</button>
-                                            </div>
-                                        </div>
-                                        <div class="menu-detail">
-                                            <img src="" alt="">
-                                            <div class="menu-datail1">
-                                                <div style="font-weight: 1000; font-size: 20px;">치킨 스테이크 고젠</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>13000</b></div>
-                                                <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
-                                            </div>
-                                            <div class="menu-datail2">
-                                                <button type="button" class="menuAdd btn btn-secondary btn-sm">추가</button>
-                                                <button type="button" class="menuRemove btn btn-danger btn-sm">삭제</button>
-                                            </div>
-                                        </div>
-                                        <div class="menu-detail">
-                                            <img src="" alt="">
-                                            <div class="menu-datail1">
-                                                <div style="font-weight: 1000; font-size: 20px;">경양식 돈까스</div>
-                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b>10000</b></div>
-                                                <div style="font-size: 13px; height: 80px; overflow: hidden;">한국인이 좋아하는 치킨과 일본 갈릭 소스와의 만남.소스와 밥이 환상 궁합</div>
-                                            </div>
-                                            <div class="menu-datail2">
-                                                <button type="button" class="menuAdd btn btn-secondary btn-sm">추가</button>
-                                                <button type="button" class="menuRemove btn btn-danger btn-sm">삭제</button>
-                                            </div>
-                                        </div>
+                                     	<% if(!menuList.isEmpty()) { %>
+                                     		<% for(Menu m : menuList) {%>
+	                                        <div class="menu-detail">
+	                                            <img src="" alt="">
+	                                            <div class="menu-datail1">
+	                                                <div style="font-weight: 1000; font-size: 20px;"><%= m.getMenuName() %></div>
+	                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b><%= m.getPrice() %></b></div>
+	                                                <div style="font-size: 13px; height: 80px; overflow: hidden;"><%= m.getMenuDes() %></div>
+	                                            </div>
+	                                            <div class="menu-datail2">
+	                                                <button type="button" class="menuAdd btn btn-secondary btn-sm">추가</button>
+	                                                <button type="button" class="menuRemove btn btn-danger btn-sm">삭제</button>
+	                                            </div>
+	                                        </div>
+	                                        <% } %>
+	                                    <% } %>
                                     </div>
                                 </div>
                                 <div id="menu-select-border2">
@@ -516,7 +495,7 @@
                                         </tr>
                                         <tr>
                                             <td>주문 금액</td>
-                                            <td class="sum" style="text-align: right;">이용 금액</td>
+                                            <td class="sum" style="text-align: right;"></td>
                                         </tr>
                                         <tr>
                                             <td>적립금 사용</td>
@@ -713,7 +692,7 @@
 
             // 마커 위에 표시할 인포윈도우를 생성한다
             var infowindow = new kakao.maps.InfoWindow({
-                content : '<div style="padding:5px;">업체 이름</div>' // 인포윈도우에 표시할 내용
+                content : '<div style="padding:5px;"><%= restaurant.getResName() %></div>' // 인포윈도우에 표시할 내용
             });
 
             // 인포윈도우를 지도에 표시한다
@@ -776,12 +755,11 @@
                 });
             });
 
-           
 
             // 시간 선택 버튼 생성 -------------------------------------------------------------------------------------
             $(function(){
-                const open = (08*100) + ((00/30)*50);
-                const close = (23*100) + ((30/30)*50);
+                const open = parseInt($('#open').text().replace(/[:]/g, ""));
+                const close = $('#close').text().replace(/[:]/g, "");
                 if($('.am').next().children().length == 0 && $('.pm').next().children().length == 0){
                     // 오전 오픈
                     if(open < 1200){
@@ -808,8 +786,8 @@
 
             // 브레이크 타임 속성 적용
             $(function(){
-                const breakS = (14*100) + ((30/30)*50);
-                const breakE = (16*100) + ((00/30)*50);
+                const breakS = $('#breakS').text().replace(/[:]/g, "")
+                const breakE = $('#breakE').text().replace(/[:]/g, "")
                 if(breakS != null){
                     $('#am-box, #pm-box').children().each(function(){
                         if($(this).text().replace(/[:]/g, "") >= breakS && $(this).text().replace(/[:]/g, "") <= breakE){
