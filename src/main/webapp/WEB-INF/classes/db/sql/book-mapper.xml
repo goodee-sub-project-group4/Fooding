@@ -52,4 +52,22 @@
 		 WHERE RS.RES_NO = ?
 	       AND STATUS = 'Y'
 	</entry>
+	<entry key="selectReview">
+		SELECT
+			   REVIEW_NO
+			 , RES_NO
+			 , USER_NO
+			 , REVIEW_TITLE
+			 , REVIEW_CONTENT
+			 , STAR
+			 , CREATE_DATE
+			 , MODIFY_DATE
+			 , STATUS
+			 , GOOD
+			 , COUNT	
+		  FROM REVIEW RE
+		  JOIN RESTAURANT RS (RE.RES_NO = RS.RES_NO)
+		 WHERE RE.RES_NO
+		   AND RE.STATUS = 'Y'
+	</entry>
 </properties>

@@ -3,7 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%
 	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
-	ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("menuList");
+	ArrayList<Menu> menuList = (ArrayList<Menu>)request.getAttribute("menuList");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -211,8 +211,8 @@
                                     메뉴
                                 </div>
                                 <div id="main2-4">
-                                <% if(!list.isEmpty()) {%>
-                                	<% for(Menu m : list) { %>
+                                <% if(!menuList.isEmpty()) {%>
+                                	<% for(Menu m :menuList) { %>
                                     <div class="menu">
                                         <img src="<%= m.getmImg() %>" alt=""><br>
                                         <%= m.getMenuName() %> <br>

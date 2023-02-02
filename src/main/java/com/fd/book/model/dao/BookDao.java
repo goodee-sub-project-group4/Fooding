@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
+import com.fd.review.model.vo.Review;
 
 public class BookDao {
 
@@ -95,6 +96,34 @@ public class BookDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectMenu");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Menu(rset.getInt("menu_no")
+								, rset.getString("menu_name")
+								, rset.getInt("price")
+								, rset.getString("menu_des")
+								, rset.getString("m_img")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Review> selectReview(int resNo, Connection conn) {
+		ArrayList<Review> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReview");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.fd.book.model.dao.BookDao;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
+import com.fd.review.model.vo.Review;
 
 public class BookService {
 
@@ -41,6 +42,15 @@ public class BookService {
 	public ArrayList<Menu> selectMenu(int resNo) {
 		Connection conn = getConnection();
 		ArrayList<Menu> list = new BookDao().selectMenu(resNo, conn);
+		close(conn);
+		return list;
+	}
+
+
+
+	public ArrayList<Review> selectReview(int resNo) {
+		Connection conn = getConnection();
+		ArrayList<Menu> list = new BookDao().selectReview(resNo, conn);
 		close(conn);
 		return list;
 	}
