@@ -5,6 +5,7 @@
 	//Restaurant restaurant = (Restaurant)
 	String resName = "미미식당";
 	int resNo = 1200;
+	int userNo = 1;
 %>    
     
     <html>
@@ -516,6 +517,8 @@
                                         <div id="review-content2-2">
                                             <div id="review-content2-2-1"><%=resName%></div> <!-- 업체명 가져와야함  -->
                                             <input type="hidden" name="resNo" value="<%=resNo%>">
+                                            <input type="hidden" name="userNo" value="<%=userNo%>">
+                                            
                                         </div>
                                         <div id="review-content2-3">
                                             <p>★ 별점</p>

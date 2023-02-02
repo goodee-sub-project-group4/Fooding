@@ -52,4 +52,21 @@ public class SearchService {
 		return result1 * result2;
 		
 	}
+	
+		public int keywordListCount(String keyword) {
+		
+		Connection conn = getConnection();
+		int listCount = new SearchDao().keywordListCount(conn, keyword); 
+		close(conn); 
+		return listCount; 
+	}
+		
+		public ArrayList<Restaurant> keywordList(PageInfo pi, String keyword){ //currentPage에 보여질 게시물 리스
+			
+			Connection conn = getConnection();
+			ArrayList<Restaurant> list= new SearchDao().keywordList(conn, pi, keyword); 
+			close(conn); 
+			return list;
+		}
+		
 }

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.fd.admin.model.vo.Question" %>
+<%
+	Question q = (Question)request.getAttribute("q");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +71,7 @@
         }
         #post-qna button {
             float: right;
-            margin-left:20px;
+            margin-left:10px;
         }
 
 		
@@ -84,23 +88,24 @@
 			<!-- 컨텐츠 작성부 -->
 			<br>
             <div id="post-info">
-                <span>작성일</span><label>2022/12/30</label><br>
-                <span>작성자Id</span><label>user01</label><br>
-                <span>문의유형</span><label>이용문의</label><br>
-                <span>처리결과</span><label>미답변</label><br>
+                <span>작성일</span><label><%=q.getCreateDate() %></label><br>
+                <span>작성자Id</span><label><%=q.getqPerson() %></label><br>
+                <span>문의유형</span><label><%=q.getCategory() %></label><br>
+                <span>처리결과</span><label><%=(q.getStatus().equals("Y"))? "답변완료" : "미답변"%></label><br>
             </div>
 
             <div id="post-qna">
                 <h4>제목</h4>
-                <input type="text" value="주차관련해서 문의가 있습니다." readonly><br><br>
+                <input type="text" value="<%=q.getqTitle() %>" readonly><br><br>
                 <h4>내용</h4>
-                <textarea cols="30" rows="10" readonly>예약했는데 차량주차가 2대필요합니다</textarea><br><br>
-                <form action="">
+                <textarea cols="30" rows="10" readonly><%=q.getqContent() %></textarea><br><br>
+                <form action="<%=contextPath%>/updateAnswer.re">
+                	<input type="hidden" name="qNo" value="<%=q.getqNo()%>">
                     <h4>답변</h4>
-                    <textarea cols="30" rows="10"></textarea>
+                    <textarea rows="10" name="aContent" <%=(q.getStatus().equals("Y"))? "readonly" : ""%> ><%=(q.getaContent()==null)? "" : q.getaContent() %></textarea>
                     <br><br>
-                    <button class="btn btn-danger">답변하기</button>
-                    <button class="btn btn-secondary">초기화</button>
+                    <button type="submit" class="btn btn-danger" <%=(q.getStatus().equals("Y"))? "disabled" : ""%>>답변하기</button>
+                    <button type="reset" class="btn btn-outline-secondary" onclick="location.href='<%=contextPath%>/qna.re'">목록</button>
                 </form>
             </div>
 

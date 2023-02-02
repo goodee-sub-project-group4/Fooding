@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	검색을 위한 화면
+	
+	
+	<span class="zzim">
+		<img src="/Fooding/resources/images/heart.png" width="50px;">  
+	</span>
+
 </body>
 </html>

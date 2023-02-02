@@ -38,7 +38,7 @@
 		INSERT
 		  INTO REVIEW
 		     (
-		     , REVIEW_NO
+		       REVIEW_NO
 		     , RES_NO
 		     , USER_NO
 		     , REVIEW_CONTENT
@@ -64,6 +64,7 @@
 		     , ORIGIN_NAME
 		     , CHANGE_NAME
 		     , FILE_PATH
+		     , BOARD_TYPE
 		     )
 	    VALUES
 	         (
@@ -72,6 +73,7 @@
 	         , ? <!-- 첨부파일의원본명 -->
 	         , ? <!-- 첨부파일의실제업로드명 -->
 	         , ? <!-- 저장경로 -->
+	         , ? <!-- 타입 -->
 	         )
 	</entry>
 	

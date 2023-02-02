@@ -82,7 +82,7 @@ public class ReviewDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			// 업체명 담아야함
-			/* pstmt.setInt(1, r.getIntResNo()); */
+			pstmt.setString(1, r.getResNo());
 			pstmt.setInt(2, r.getUserNo());
 			pstmt.setString(3, r.getReviewContent());
 			pstmt.setDouble(4, r.getStar());
@@ -120,6 +120,7 @@ public class ReviewDao {
 				pstmt.setString(1, at.getOriginName());
 				pstmt.setString(2, at.getChangeName());
 				pstmt.setString(3, at.getFilePath());
+				pstmt.setString(4, at.getBoardType());
 				
 				result = pstmt.executeUpdate();
 				

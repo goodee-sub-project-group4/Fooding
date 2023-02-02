@@ -4,6 +4,9 @@
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Restaurant> list = (ArrayList<Restaurant>)request.getAttribute("list");
+	String city = (String)request.getAttribute("localCt");
+	String county = (String)request.getAttribute("dLocalCt");
+	String foodCt = (String)request.getAttribute("foodCt");
 %>
 <!DOCTYPE html>
 <html>
@@ -104,12 +107,12 @@
                 <div id="content2">
                     <!-- 검색결과 -->
                     <div id="searchResult">
-                        치킨에 대한 검색 결과 
+                        <b><%= city %> / <%= county %> / <%= foodCt %></b>에 대한 검색 결과 
                     </div>
 
                     <!-- 검색결과 조회된 음식점 총 갯수 -->
                     <div id="searchCount">
-                        총 <%= pi.getListCount() %>건
+                        <b>총 <%= pi.getListCount() %>건</b>
                     </div>
 
                     <!-- 검색결과 필터링: 별점순|방문자순|리뷰순-->
@@ -155,15 +158,15 @@
 						
 
 				        	<% if(pi.getCurrentPage() != 1){ %>
-			            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()-1%>';">&lt;</button>
+			            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()-1%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';">&lt;</button>
 				            <% } %>
 				
 							<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=p%>';"><%= p %></button>
+				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=p%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';"><%= p %></button>
 				            <% } %>
 				
 							<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()+1%>';">&gt;</button>
+				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()+1%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';">&gt;</button>
 							<% } %>
 								        
 

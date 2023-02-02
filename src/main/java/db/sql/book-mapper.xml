@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="">
-		
+	<entry key="selectCountUp">
+		UPDATE RESTAURANT
+		   SET COUNT = COUNT + 1
+	 	 WHERE RES_NO = ?
+	 	   AND STATUS = 'Y'
 	</entry>
 	<entry key="selectRes">
 		SELECT 
 			   RES_NO
-			 , RES_NAME
+			 , RS.RES_NAME
 			 , CEO
 			 , PERMIT_NO
 			 , ADDRESS
@@ -32,8 +35,39 @@
 			 	  FROM REVIEW
 			 	 WHERE RES_NO = ?
 			 	) "REVIEW_AVG"
-		  FROM RESTAURANT
-		 WHERE RES_NO = ?
+			 , COUNT
+		  FROM RESTAURANT RS
+		 WHERE RS.RES_NO = ?
 	       AND STATUS = 'Y'
 	</entry>
+	<entry key="selectMenu">
+		SELECT 
+			   MENU_NO
+			 , MENU_NAME
+			 , PRICE
+			 , MENU_DES
+			 , M_IMG
+		  FROM RESTAURANT RS
+		  JOIN MENU M ON (RS.RES_NO = M.RES_NO)
+		 WHERE RS.RES_NO = ?
+	       AND STATUS = 'Y'
+	</entry>
+	<!-- <entry key="selectReview">
+		SELECT
+			   REVIEW_NO
+			 , RE.RES_NO
+			 , USER_NO
+			 , BOOK_NO
+			 , REVIEW_CONTENT
+			 , RE.STAR
+			 , CREATE_DATE
+			 , RE.MODIFY_DATE
+			 , GOOD
+			 , RE.COUNT
+		  FROM REVIEW RE
+		  JOIN RESTAURANT RS ON (RE.RES_NO = RS.RES_NO)
+		  JOIN ATTACHMENT AT ON (REF_BNO = REVIEW_NO)
+		 WHERE RE.RES_NO = ?
+		   AND RE.STATUS = 'Y'  
+	</entry> -->
 </properties>

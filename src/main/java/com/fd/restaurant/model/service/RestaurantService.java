@@ -12,6 +12,7 @@ import com.fd.admin.model.vo.Question;
 import com.fd.restaurant.model.dao.RestaurantDao;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
+import com.fd.review.model.vo.Review;
 
 public class RestaurantService {
 	
@@ -79,16 +80,16 @@ public class RestaurantService {
 		Connection conn = getConnection();
 		//목표 : Update 먼저 수행하고, 결과가 성공적이면 Insert를 수행한다.
 		
-		//최종 결과를 판별할 변수 선언
-		int oldTotal = 0;
-		int newTotal = 1; //추가된것이 없을수 있으므로 기본 1 설정
+		//최종 결과를 판별할 변수 선언, 추가된것이 없을수 있으므로 기본 1 설정
+		int oldTotal = 1;
+		int newTotal = 1; 
 		
 		//Update 하러가기
 		for(Menu m : oldList) { //메뉴 한개씩 실행
 			int result = new RestaurantDao().updateMenu(conn, m);
 			oldTotal += result;
 		}
-		if(oldTotal == oldList.size()) { //모든 결과가 성공일때
+		if(oldTotal == oldList.size()+1) { //모든 결과가 성공일때
 			//Insert 하러가기
 			for(Menu m : newList) { //메뉴 한개씩 실행
 				int result = new RestaurantDao().insertMenu(conn, m);
@@ -107,7 +108,6 @@ public class RestaurantService {
 			oldTotal = 0; //Controller에서 실패를 인식할 수 있도록 0을 대입
 		}
 		close(conn);
-		
 		return oldTotal*newTotal;
 	}
 	
@@ -141,6 +141,45 @@ public class RestaurantService {
 	public ArrayList<Question> selectQuestion(int resNo){
 		Connection conn = getConnection();
 		ArrayList<Question> list = new RestaurantDao().selectQuestion(conn, resNo);
+		close(conn);
+		return list;
+	}
+	
+	public Question selectDetailQuestion(int qNo) {
+		Connection conn = getConnection();
+		Question q = new RestaurantDao().selectDetailQuestion(conn,qNo);
+		close(conn);
+		return q;
+	}
+	
+	public int updateQuestion(int qNo, String aContent) {
+		Connection conn = getConnection();
+		int result = new RestaurantDao().updateQuestion(conn, qNo, aContent);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<Review> selectReview(int resNo){
+		Connection conn = getConnection();
+		ArrayList<Review> list = new RestaurantDao().selectReview(conn, resNo);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Question> selectNewQuestion(int resNo){
+		Connection conn = getConnection();
+		ArrayList<Question> list = new RestaurantDao().selectNewQuestion(conn, resNo);
+		close(conn);
+		return list;
+	}
+	public ArrayList<Review> selectNewReviw(int resNo){
+		Connection conn = getConnection();
+		ArrayList<Review> list = new RestaurantDao().selectNewReview(conn, resNo);
 		close(conn);
 		return list;
 	}

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Question" %>
 <%
-	ArrayList<Question> list = (ArrayList<Question>)session.getAttribute("list");
+	ArrayList<Question> list = (ArrayList<Question>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -69,6 +69,9 @@
 		.answer-yet {
 			color: dodgerblue;
 		}
+		tr:hover {
+			cursor:pointer;
+		}
 	</style>
 </head>
 <body>
@@ -83,7 +86,7 @@
 			<br>
 
             <select id="question-type" class="select">
-                <option value="">문의유형</option>
+                <option value="">전체문의</option>
                 <option value="">이용문의</option>
 				<option value="">예약문의</option>
             </select><br>
@@ -103,7 +106,7 @@
                 </thead>
                 <tbody>
                 	<% for(int i=0; i<list.size(); i++) { %>
-                    <tr>
+                    <tr onclick="location.href='<%=contextPath%>/qnaDetail.re?no='+<%=list.get(i).getqNo() %>">
                         <td><%=list.get(i).getqNo()%></td>
                         <td><%=list.get(i).getCreateDate() %></td>
                         <td><%=list.get(i).getqPerson() %></td>
@@ -141,9 +144,9 @@
 			$('#title').text("문의답변");
 			$("#menu2").addClass("active");
 			$("#menu2_4").addClass("active");
-
-
 		})
+		
+
 	</script>
 </body>
 </html>

@@ -50,9 +50,8 @@ public class RestMenuUpdateController extends HttpServlet {
 			int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
 			// ↓ 총 메뉴 갯수(인덱스)
 			int count = Integer.parseInt(multiRequest.getParameter("count")); 
-			// ↓ 기존메뉴갯수(인덱스)
+			// ↓ 기존메뉴갯수(인덱스), 기존메뉴갯수가 없다면 -1반환
 			int oldCount = Integer.parseInt(multiRequest.getParameter("oldCount"))-1; 
-			
 			//2-1)기존메뉴 담기
 			ArrayList<Menu> oldList = new ArrayList<>();
 			for(int i=0; i<=oldCount; i++) {
@@ -94,7 +93,6 @@ public class RestMenuUpdateController extends HttpServlet {
 			
 			//3) 요청처리하러가기
 			int result = new RestaurantService().updateMenu(oldList, newList);
-
 			//4) 결과에 따라 화면 넘기기
 			if(result>0) {
 				session.setAttribute("alertMsg", "정보수정이 완료되었습니다");

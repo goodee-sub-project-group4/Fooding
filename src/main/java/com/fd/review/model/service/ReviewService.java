@@ -35,18 +35,11 @@ public class ReviewService {
 		Connection conn = getConnection();
 		
 		int result1 = new ReviewDao().insertContentReview(conn, r);
-		/* int result2 = new ReviewDao().insertAttachmentList(conn, list); */
-		int result2 = 0;
+		int result2 = new ReviewDao().insertAttachmentList(conn, list);
+		
 		System.out.println(result1);
-		if (result1 > 0 /* && result2 > 0 */) {
-
-			if(result2 > 0) {
-				result2 = new ReviewDao().insertAttachmentList(conn, list);
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
-			
+		if (result1 > 0 && result2 > 0) {
+			commit(conn);
 		} else {
 			rollback(conn);
 		}

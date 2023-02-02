@@ -1,15 +1,19 @@
 package com.fd.book.model.dao;
 
+import static com.fd.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
-import static com.fd.common.JDBCTemplate.*;
 
+import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
+import com.fd.review.model.vo.Review;
 
 public class BookDao {
 
@@ -21,6 +25,25 @@ public class BookDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int selectCountUp(Connection conn, int resNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectCountUp");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 	public Restaurant selectRes(Connection conn, int resNo) {
@@ -54,8 +77,10 @@ public class BookDao {
 								  , rset.getString("break_e")
 								  , rset.getString("food_ct")
 								  , rset.getInt("REVIEW_COUNT")
-								  , rset.getDouble("REVIEW_AVG"));
+								  , rset.getDouble("REVIEW_AVG")
+								  , rset.getInt("count"));
 			}
+			System.out.println(re);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -64,6 +89,67 @@ public class BookDao {
 		}
 				
 		return re;
+	}
+
+	public ArrayList<Menu> selectMenu(int resNo, Connection conn) {
+		ArrayList<Menu> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMenu");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Menu(rset.getInt("menu_no")
+								, rset.getString("menu_name")
+								, rset.getInt("price")
+								, rset.getString("menu_des")
+								, rset.getString("m_img")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Review> selectReview(int resNo, Connection conn) {
+		ArrayList<Review> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Review(rset.getInt("review_no")
+								  , rset.getString("RES_NO")
+								  , rset.getInt("USER_NO")
+								  , rset.getInt("book_no")
+								  , rset.getString("REVIEW_CONTENT")
+								  , rset.getDouble("star")
+								  , rset.getString("CREATE_DATE")
+								  , rset.getString("MODIFY_DATE")
+								  , rset.getString("good")
+								  , rset.getInt("count")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

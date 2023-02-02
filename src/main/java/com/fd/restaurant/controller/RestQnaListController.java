@@ -42,7 +42,6 @@ public class RestQnaListController extends HttpServlet {
 			int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
 			ArrayList<Question> list = new RestaurantService().selectQuestion(resNo);
 			request.setAttribute("list", list);
-			System.out.println(list);
 			request.getRequestDispatcher("views/restaurant/restQnaList.jsp").forward(request, response);
 		}
 		

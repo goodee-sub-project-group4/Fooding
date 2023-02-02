@@ -172,5 +172,90 @@ public class SearchDao {
 		
 	}
 	
+	public int keywordListCount(Connection conn, String keyword) {
+		// select => ResultSet(숫자 한 개 ) => int 
+		
+		int listCount = 0; // 총 검색결과 갯수
+		PreparedStatement pstmt = null; 
+		ResultSet rset = null;
+		String sql = prop.getProperty("keywordListCount"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql); // 미완성된 sql문 
+			
+			pstmt.setString(1, keyword);
+			pstmt.setString(2, keyword);
+			pstmt.setString(3, keyword);
+			pstmt.setString(4, keyword);
+			pstmt.setString(5, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count"); 
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount; 
+		
+	}
+	
+	
+		public ArrayList<Restaurant> keywordList(Connection conn, PageInfo pi, String keyword){
+		
+		ArrayList<Restaurant> list = new ArrayList<>();
+		PreparedStatement pstmt = null; 
+		ResultSet rset = null; 
+		String sql = prop.getProperty("keywordList"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql); // 미완성된 sql문 
+			
+			// 사용자로부터 입력받은 값으로 sql문 채우기 
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; 
+			int endRow = startRow + pi.getBoardLimit() - 1;  
+			
+			pstmt.setString(1, keyword);
+			pstmt.setString(2, keyword);
+			pstmt.setString(3, keyword);
+			pstmt.setString(4, keyword);
+			pstmt.setString(5, keyword);
+			pstmt.setInt(6, startRow);
+			pstmt.setInt(7, endRow);
+			
+			rset = pstmt.executeQuery(); 
+			
+			while(rset.next()) {
+				list.add(new Restaurant(
+										rset.getString("res_name"),
+										rset.getString("address"),
+										rset.getString("r_img"),
+										rset.getString("food_ct"),
+										rset.getDouble("star"),
+										rset.getInt("count")
+										)); 		
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt); 
+		}
+		
+		return list; 
+		
+	}
+	
+	
+	
 
 }
