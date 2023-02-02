@@ -135,5 +135,19 @@
 		  FROM MENU
 		 WHERE MENU_NO = ? 
 	</entry>
+	<entry key="selectQuestion">
+		SELECT
+		       Q_NO
+		     , CATEGORY
+		     , Q_TITLE
+		     , USER_ID
+		     , Q.STATUS
+		     , CREATE_DATE
+		  FROM QUESTION Q
+		  JOIN TB_USER ON (Q_PERSON=USER_NO)
+		 WHERE A_PERSON = ?
+		 ORDER
+		    BY CREATE_DATE DESC	
+	</entry>
 
 </properties>

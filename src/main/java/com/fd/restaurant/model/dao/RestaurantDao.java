@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.fd.admin.model.vo.Question;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
 
@@ -265,6 +266,35 @@ public class RestaurantDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public ArrayList<Question> selectQuestion(Connection conn, int resNo) {
+		ArrayList<Question> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Question q = new Question();
+				q.setqNo(rset.getInt("q_no"));
+				q.setCategory(rset.getString("category"));
+				q.setqTitle(rset.getString("q_title"));
+				q.setaPerson(rset.getString("user_id"));
+				q.setStatus(rset.getString("status"));
+				q.setCreatDate(rset.getString("create_date"));
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }
