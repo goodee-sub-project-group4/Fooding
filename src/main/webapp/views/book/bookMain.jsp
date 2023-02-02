@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.fd.restaurant.model.vo.Restaurant"%>
-
+<%
+	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,12 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.1/index.global.min.js"></script>
     
     <!-- 결제 API -->
- 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-{SDK-1.1.8}.js"></script>
-    <script>
-        let IMP = window.IMP;
-        IMP.init("{imp44408883}");    
-    </script>
-
+ 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
     <style>
         /* 컨텐트 전체 영역 */
         /* .content div{border: 1px solid black;} */
@@ -548,12 +545,44 @@
                                     <button type="button" class="btn btn-secondary btn-lg cancel" style="float: right; width: 100px;" >취소</button>
                                 </div>
                                 <div id="menu-payment" style="width: 300px; height: 50px; margin: auto; padding-top: 10px;">
-                                    <button type="submit" class="btn btn-danger btn-lg payment" style="float: left; width: 100px;" >결제</button>
+                                    <button type="button" onclick="payment();" class="btn btn-danger btn-lg payment" style="float: left; width: 100px;" >결제</button>
                                     <button type="button" class="btn btn-secondary btn-lg cancel" style="float: right; width: 100px;" >취소</button>
                                 </div>
                             </div>
                         </div>
                     </form>
+
+                    <!-- 결제 -->
+                    <script>
+                        var IMP = window.IMP; 
+                        IMP.init("imp44408883"); 
+                        function payment() {
+                          // IMP.request_pay(param, callback) 결제창 호출
+                          IMP.request_pay({ // param
+                              pg: "html5_inicis",
+                              pay_method: "card",
+                              merchant_uid: "ORD20180131-0000011",
+                              name: "노르웨이 회전 의자",
+                              amount: 500,
+                              buyer_email: "gildong@gmail.com",
+                              buyer_name: "홍길동",
+                              buyer_tel: "010-4242-4242",
+                              buyer_addr: "서울특별시 강남구 신사동",
+                              buyer_postcode: "01181"
+                          }, function (rsp) { // callback
+                              if (rsp.success) {
+                                //   ...,
+                                  // 결제 성공 시 로직,
+                                //   ...
+                              } else {
+                                //   ...,
+                                  // 결제 실패 시 로직,
+                                //   ...
+                              }
+                          });
+                        }
+                      </script>
+
                     <div class="book-category">
                         예약인원
                     </div>
