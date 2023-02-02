@@ -144,5 +144,24 @@ public class RestaurantService {
 		return list;
 	}
 	
+	public Question selectDetailQuestion(int qNo) {
+		Connection conn = getConnection();
+		Question q = new RestaurantDao().selectDetailQuestion(conn,qNo);
+		close(conn);
+		return q;
+	}
+	
+	public int updateQuestion(int qNo, String aContent) {
+		Connection conn = getConnection();
+		int result = new RestaurantDao().updateQuestion(conn, qNo, aContent);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 
 }

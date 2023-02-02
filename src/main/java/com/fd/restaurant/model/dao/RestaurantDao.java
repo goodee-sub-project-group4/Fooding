@@ -296,5 +296,54 @@ public class RestaurantDao {
 		
 		return list;
 	}
+	
+	public Question selectDetailQuestion(Connection conn, int qNo) {
+		Question q = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectDetailQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				q = new Question();
+				q.setqNo(rset.getInt("q_no"));
+				q.setCategory(rset.getString("category"));
+				q.setqTitle(rset.getString("q_title"));
+				q.setqPerson(rset.getString("user_id"));
+				q.setStatus(rset.getString("status"));
+				q.setCreateDate(rset.getString("create_date"));
+				q.setqContent(rset.getString("q_content"));
+				q.setaContent(rset.getString("a_content"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return q;
+	}
+	
+	public int updateQuestion(Connection conn, int qNo, String aContent) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, aContent);
+			pstmt.setInt(2, qNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

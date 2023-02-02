@@ -86,7 +86,7 @@
 			<br>
 
             <select id="question-type" class="select">
-                <option value="">문의유형</option>
+                <option value="">전체문의</option>
                 <option value="">이용문의</option>
 				<option value="">예약문의</option>
             </select><br>

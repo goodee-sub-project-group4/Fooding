@@ -147,7 +147,29 @@
 		  JOIN TB_USER ON (Q_PERSON=USER_NO)
 		 WHERE A_PERSON = ?
 		 ORDER
-		    BY CREATE_DATE DESC	
+		    BY Q.STATUS, CREATE_DATE DESC	
+	</entry>
+	<entry key="selectDetailQuestion">
+		SELECT
+		       Q_NO
+		     , CATEGORY
+		     , Q_TITLE
+		     , USER_ID
+		     , Q.STATUS
+		     , TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') "CREATE_DATE"
+		     , Q_CONTENT
+		     , A_CONTENT
+		  FROM QUESTION Q
+		  JOIN TB_USER ON (Q_PERSON=USER_NO)
+		 WHERE Q_NO = ?
+	</entry>
+	<entry key="updateQuestion">
+		UPDATE QUESTION
+           SET MODIFY_DATE = SYSDATE
+			 , A_DATE = SYSDATE
+			 , STATUS = 'Y'
+			 , A_CONTENT = ?
+         WHERE Q_NO = ?	
 	</entry>
 
 </properties>
