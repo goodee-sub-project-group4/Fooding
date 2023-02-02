@@ -107,12 +107,12 @@
                 <div id="content2">
                     <!-- 검색결과 -->
                     <div id="searchResult">
-                        치킨에 대한 검색 결과 
+                        <b><%= city %> / <%= county %> / <%= foodCt %></b>에 대한 검색 결과 
                     </div>
 
                     <!-- 검색결과 조회된 음식점 총 갯수 -->
                     <div id="searchCount">
-                        총 <%= pi.getListCount() %>건
+                        <b>총 <%= pi.getListCount() %>건</b>
                     </div>
 
                     <!-- 검색결과 필터링: 별점순|방문자순|리뷰순-->
