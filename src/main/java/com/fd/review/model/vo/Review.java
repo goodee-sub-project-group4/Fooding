@@ -7,6 +7,7 @@ public class Review {
 	private int reviewNo;
 	private String resNo;
 	private int userNo;
+	private int bookNo;
 	private String reviewTitle;
 	private String reviewContent;
 	private double star;

@@ -131,11 +131,16 @@ public class BookDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Menu(rset.getInt("menu_no")
-								, rset.getString("menu_name")
-								, rset.getInt("price")
-								, rset.getString("menu_des")
-								, rset.getString("m_img")));
+				list.add(new Review(rset.getInt("review_no")
+								  , rset.getInt("RES_NO")
+								  , rset.getInt("USER_NO")
+								  , rset.getString("REVIEW_TITLE")
+								  , rset.getString("REVIEW_CONTENT")
+								  , rset.getDouble("star")
+								  , rset.getString("CREATE_DATE")
+								  , rset.getString("MODIFY_DATE")
+								  , rset.getString("good")
+								  , rset.getInt("count")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
