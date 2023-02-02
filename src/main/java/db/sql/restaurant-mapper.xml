@@ -171,5 +171,19 @@
 			 , A_CONTENT = ?
          WHERE Q_NO = ?	
 	</entry>
+	<entry key="selectReview">
+		SELECT
+		       REVIEW_NO
+		     , CATEGORY
+		     , Q_TITLE
+		     , USER_ID
+		     , Q.STATUS
+		     , TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') "CREATE_DATE"
+		  FROM QUESTION Q
+		  JOIN TB_USER USING (USER_NO)
+		 WHERE A_PERSON = ?
+		 ORDER
+		    BY REVIEW_NO DESC		
+	</entry>
 
 </properties>

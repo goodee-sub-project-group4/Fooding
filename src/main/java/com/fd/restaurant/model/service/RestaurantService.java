@@ -12,6 +12,7 @@ import com.fd.admin.model.vo.Question;
 import com.fd.restaurant.model.dao.RestaurantDao;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
+import com.fd.review.model.vo.Review;
 
 public class RestaurantService {
 	
@@ -161,6 +162,13 @@ public class RestaurantService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public ArrayList<Review> selectReview(int resNo){
+		Connection conn = getConnection();
+		ArrayList<Review> list = new RestaurantDao().selectReview(conn, resNo);
+		close(conn);
+		return list;
 	}
 	
 

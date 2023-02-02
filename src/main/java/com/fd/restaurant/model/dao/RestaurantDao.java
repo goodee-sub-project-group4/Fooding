@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.fd.admin.model.vo.Question;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
+import com.fd.review.model.vo.Review;
 
 public class RestaurantDao {
 	
@@ -346,4 +347,28 @@ public class RestaurantDao {
 		return result;
 	}
 
+	public ArrayList<Review> selectReview(Connection conn, int resNo) {
+		ArrayList<Review> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReview");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Review r = new Review();
+				
+				
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 }
