@@ -53,21 +53,21 @@
 			<!-- 컨텐츠 작성부 -->
 			<br><br>
 
-            <form align="center">
+            <form align="center" action="<%=contextPath%>/insertBanner.ad">
                 <table>
                     <tr>
                         <td>
-                            <img src="" width="791.47px" height="250">
+                            <img src="" id="bannerImg1" width="791.47px" height="250" onclick="clickFile(1);">
                         </td>
                     </tr>  
                     <tr>
                         <td>
-                            <br><img src="" width="791.47px" height="250">
+                            <br><img src="" id="bannerImg2" width="791.47px" height="250" onclick="clickFile(2);">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <br><img src="" width="791.47px" height="250">
+                            <br><img src="" id="bannerImg3" width="791.47px" height="250" onclick="clickFile(3);">
                         </td>
                     </tr>  
                     <tr>
@@ -84,6 +84,12 @@
                         </td>
                     </tr>               
                 </table>
+
+                <div id="file-area" style="display: none;">
+                    <input type="file" name="file1" onchange="loadImg(this, 1);" required>
+                    <input type="file" name="file2" onchange="loadImg(this, 2);">
+                    <input type="file" name="file3" onchange="loadImg(this, 3);">
+                </div>
 
 
                 
@@ -110,6 +116,29 @@
 
 		})
 
+        function clickFile(num){
+            $('input[name=file'+num+']').click();
+        }
+        
+        function loadImg(inputFile, num){
+            if(inputFile.files.length == 1){
+                const reader = new FileReader();
+                reader.readAsDataURL(inputFile.files[0]);
+                reader.onload = function(e){
+                    switch(num){
+                        case 1 : $("#bannerImg1").attr("src", e.target.result); break;
+                        case 2 : $("#bannerImg2").attr("src", e.target.result); break;
+                        case 3 : $("#bannerImg3").attr("src", e.target.result); break;
+                    }
+                }
+            }else{
+                switch(num){
+                    case 1 : $("#bannerImg1").attr("src", null); break;
+                    case 2 : $("#bannerImg2").attr("src", null); break;
+                    case 3 : $("#bannerImg3").attr("src", null); break;
+                }
+            }
+        }
 
 
 	</script>
