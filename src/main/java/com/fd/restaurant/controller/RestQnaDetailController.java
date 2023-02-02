@@ -1,30 +1,27 @@
 package com.fd.restaurant.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fd.admin.model.vo.Question;
 import com.fd.restaurant.model.service.RestaurantService;
-import com.fd.restaurant.model.vo.Restaurant;
 
 /**
- * Servlet implementation class RestQnaListController
+ * Servlet implementation class RestQnaDetailController
  */
-@WebServlet("/qna.re")
-public class RestQnaListController extends HttpServlet {
+@WebServlet("/qnaDetail.re")
+public class RestQnaDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RestQnaListController() {
+    public RestQnaDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +30,13 @@ public class RestQnaListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		if (session.getAttribute("loginRest")==null) {
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			response.sendRedirect(request.getContextPath()+"/rest.admin");
+		int qNo = Integer.parseInt(request.getParameter("qNo"));
+		Question q = new RestaurantService().selectDetailQuestion(qNo);
+		if(q==null) {
+			
 		}else {
-			//해당 업체의 질문들을 담아 포워딩하기
-			int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
-			ArrayList<Question> list = new RestaurantService().selectQuestion(resNo);
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/restaurant/restQnaList.jsp").forward(request, response);
+			request.setAttribute("q", q);
+			
 		}
 		
 	}

@@ -169,9 +169,9 @@
 						<div id="firstone"></div><!-- 이 뒤로 동적으로 생성된 메뉴가 추가된다. -->
 					</div>	
 					<div align="center"><br><br>
-						<button type="button" class="btn btn-outline-secondary" onclick="resetMenu();">초기화</button>						
-						<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
-						<button type="submit" class="btn btn-danger">수정하기</button>
+						<button type="button" class="btn btn-outline-secondary" onclick="resetMenu();">기존정보</button>						
+						<button type="button" class="btn btn-outline-danger" onclick="addMenu();">새로운메뉴</button>
+						<button type="submit" class="btn btn-danger">저장하기</button>
 					</div>			
 				</div>
 			</form>					
@@ -268,23 +268,7 @@
 				alert('추가된 메뉴를 저장하거나 삭제한 후에 진행해주세요');
 			}else {
 				if(confirm('해당 메뉴를 삭제하시겠습니까? 삭제 후 복원이 불가합니다.')){
-					$.ajax({
-						url:"<%=contextPath%>/deleteMenu.re",
-						data:{'menuNo':menuNo},
-						success:function(result){
-							if(result == "okey") {
-								//해당메뉴삭제
-								$('#'+menuNo).remove();
-								//순번도 바꾸어야한다.
-								<% oldCount--; %>
-								alert('삭제가 완료되었습니다.');
-							}else {
-								alert('메뉴삭제에 실패하였습니다. 고객센터로 문의하여주세요.');
-							}
-						}, error:function(){
-							console.log('메뉴삭제용 ajax통신실패')
-						}
-					})
+					location.href="<%=contextPath%>/deleteMenu.re?menuNo="+menuNo;
 				}
 			}
 		}

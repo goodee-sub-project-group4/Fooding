@@ -62,6 +62,7 @@ public class RestMenuInsertController extends HttpServlet {
 			//DB 처리하기
 			int result = new RestaurantService().insertMenu(list);
 			
+			System.out.println("result : "+result);
 			//응답뷰지정
 			if(result>0) {
 				session.setAttribute("alertMsg", "초기설정이 완료되었습니다.");

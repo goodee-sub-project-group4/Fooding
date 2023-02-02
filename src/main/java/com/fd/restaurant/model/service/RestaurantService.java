@@ -79,16 +79,16 @@ public class RestaurantService {
 		Connection conn = getConnection();
 		//목표 : Update 먼저 수행하고, 결과가 성공적이면 Insert를 수행한다.
 		
-		//최종 결과를 판별할 변수 선언
-		int oldTotal = 0;
-		int newTotal = 1; //추가된것이 없을수 있으므로 기본 1 설정
+		//최종 결과를 판별할 변수 선언, 추가된것이 없을수 있으므로 기본 1 설정
+		int oldTotal = 1;
+		int newTotal = 1; 
 		
 		//Update 하러가기
 		for(Menu m : oldList) { //메뉴 한개씩 실행
 			int result = new RestaurantDao().updateMenu(conn, m);
 			oldTotal += result;
 		}
-		if(oldTotal == oldList.size()) { //모든 결과가 성공일때
+		if(oldTotal == oldList.size()+1) { //모든 결과가 성공일때
 			//Insert 하러가기
 			for(Menu m : newList) { //메뉴 한개씩 실행
 				int result = new RestaurantDao().insertMenu(conn, m);
@@ -107,7 +107,6 @@ public class RestaurantService {
 			oldTotal = 0; //Controller에서 실패를 인식할 수 있도록 0을 대입
 		}
 		close(conn);
-		
 		return oldTotal*newTotal;
 	}
 	
