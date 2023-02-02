@@ -7,7 +7,6 @@ public class Review {
 	private String resNo;
 	private int userNo;
 	private int bookNo;
-	private String reviewTitle;
 	private String reviewContent;
 	private double star;
 	private String createDate;
@@ -19,9 +18,10 @@ public class Review {
 	public Review () {}
 	
 	// 리뷰리스트
-	
+
 	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewTitle, String reviewContent, double star,
 			String createDate, String modifyDate, String status, String good, int count) {
+
 		super();
 		this.reviewNo = reviewNo;
 		this.resNo = resNo;
@@ -35,7 +35,6 @@ public class Review {
 		this.status = status;
 		this.good = good;
 		this.count = count;
-		
 	}
 	
 	public Review(int reviewNo, String resNo, String reviewContent, double star, String createDate) {
@@ -45,6 +44,21 @@ public class Review {
 		this.reviewContent = reviewContent;
 		this.star = star;
 		this.createDate = createDate;
+	}
+
+	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewContent, double star,
+			Date createDate, Date modifyDate, String good, int count) {
+		super();
+		this.reviewNo = reviewNo;
+		this.resNo = resNo;
+		this.userNo = userNo;
+		this.bookNo = bookNo;
+		this.reviewContent = reviewContent;
+		this.star = star;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+		this.good = good;
+		this.count = count;
 	}
 
 	public int getReviewNo() {
@@ -142,7 +156,7 @@ public class Review {
 	public void setCount(int count) {
 		this.count = count;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", resNo=" + resNo + ", userNo=" + userNo + ", bookNo=" + bookNo
@@ -150,5 +164,3 @@ public class Review {
 				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", status=" + status + ", good=" + good
 				+ ", count=" + count + "]";
 	}
-	
-}

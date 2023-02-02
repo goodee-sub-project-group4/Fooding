@@ -48,12 +48,12 @@ public class BookService {
 
 
 
-	public ArrayList<Review> selectReview(int resNo) {
-		Connection conn = getConnection();
-		ArrayList<Menu> list = new BookDao().selectReview(resNo, conn);
-		close(conn);
-		return list;
-	}
+//	public ArrayList<Review> selectReview(int resNo) {
+//		Connection conn = getConnection();
+//		ArrayList<Review> list = new BookDao().selectReview(resNo, conn);
+//		close(conn);
+//		return list;
+//	}
 
 	
 }

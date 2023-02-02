@@ -534,10 +534,84 @@ public class AdminDao {
 		return result;
 	}
 
+	
+	
+// ==========================================================================
+
+	/**메인배너 사진 등록
+	 * @param conn
+	 * @param list
+	 * @return
+	 */
+	public int insertBanner(Connection conn, ArrayList<Attachment> list) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertBanner");
+		try {
+			for(Attachment at : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, at.getOriginName());
+				pstmt.setString(2, at.getChangeName());
+				pstmt.setString(3, at.getFilePath());
+				result = pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	
+	/**메인배너 사진 조회
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList selectBanner(Connection conn) {
+		ArrayList<Attachment> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBanner");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Attachment at = new Attachment();
+				at.setChangeName(rset.getString("change_name"));
+				at.setFilePath(rset.getString("file_path"));
+				list.add(at);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 	
-	
+	/**메인배너 삭제
+	 * @param conn
+	 * @return
+	 */
+	public int deleteBanner(Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteBanner");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
 	
 	
 	

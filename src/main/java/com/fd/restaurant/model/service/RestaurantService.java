@@ -177,7 +177,7 @@ public class RestaurantService {
 		close(conn);
 		return list;
 	}
-	public ArrayList<Review> selectNewReviw(int resNo){
+	public ArrayList<Review> selectNewReview(int resNo){
 		Connection conn = getConnection();
 		ArrayList<Review> list = new RestaurantDao().selectNewReview(conn, resNo);
 		close(conn);

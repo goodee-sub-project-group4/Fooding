@@ -235,27 +235,55 @@
 					<span class="create-date"><%=qList.get(1).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div class="data-box2 dafault">
+				<div name="dafult" class="data-box2 dafault">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
 				<% } %>
-				<p>. . . . .</p>
+				<p class="dash">. . . . .</p>
 			</div>
 			<div id="area3">
-				<h3 onclick="toReview();">리뷰</h3> <span class="badge">1</span>
+				<h3 onclick="toReview();">리뷰</h3> <span class="badge"><%=rList.size() %></span>
 				<span class="more" onclick="toReview();">더보기 <img src="resources/images/more.png" width="25"></span>
 				<br clear="both">
-				<div class="data-box2" >
-					<span class="title">애견 동반 가능한가요?</span><br>
-					<span class="data-content">문의/리뷰 내용...어쩌고저쩌고<br>두줄까지표현가능</span><br>
-					<span class="create-date">2023-01-01</span>
+				<% if(rList.size()>0) { %>
+				<div class="data-box2">
+					<%
+						String origin = rList.get(0).getReviewContent();
+						String preview = "";
+						if(origin.length()>40) {
+							preview = origin.substring(0,39)+"...";
+						}else {
+							preview = origin;
+						}
+					%>
+					<span class="data-content"><%=preview%></span><br>
+					<span class="create-date"><%=rList.get(0).getCreateDate()%></span>
 				</div>
-				<div class="data-box2 dafault">
+				<% } else { %>
+				<div name="dafult" class="data-box2 dafault">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
-				
-				
-				<p>. . . . .</p>
+				<% } %>
+				<% if(rList.size()>1) { %>
+				<div class="data-box2">
+					<%
+						String origin = rList.get(1).getReviewContent();
+						String preview = "";
+						if(origin.length()>40) {
+							preview = origin.substring(0,39)+"...";
+						}else {
+							preview = origin;
+						}
+					%>
+					<span class="data-content"><%=preview%></span><br>
+					<span class="create-date"><%=rList.get(1).getCreateDate()%></span>
+				</div>
+				<% } else { %>
+				<div name="dafult" class="data-box2 dafault">
+					<img src="<%=contextPath%>/resources/images/logo.png">
+				</div>
+				<% } %>				
+				<p class="dash">. . . . .</p>
 			</div>
 			
 		</div>
@@ -268,6 +296,12 @@
 	<script>
 		$(function(){
 			$('#title').text("");
+			$('.dash').each(function(){
+				console.log($(this).prev());
+				if($(this).prev().attr("name")=="dafault") {
+					$(this).css("color:red");
+				}
+			})
 		})
 		
 		function toQna(){
