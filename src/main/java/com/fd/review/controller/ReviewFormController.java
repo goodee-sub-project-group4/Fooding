@@ -52,13 +52,12 @@ public class ReviewFormController extends HttpServlet {
 			// db
 			HttpSession session = request.getSession();
 			/* int userNo = ((Member)session.getAttribute("loginUser")).getUserNo(); */
-			int userNo = 1234;
+			
 			
 			Review r = new Review();
 			
 			r.setResNo(multiRequest.getParameter("resNo"));
-			/* r.setUserNo(Integer.parseInt(multiRequest.getParameter("userNo"))); */
-			r.setUserNo(Integer.parseInt(multiRequest.getParameter("resNo")));
+			r.setUserNo(Integer.parseInt(multiRequest.getParameter("userNo")));
 			r.setReviewContent(multiRequest.getParameter("reviewContent"));
 			r.setStar(Double.parseDouble(multiRequest.getParameter("star")));
 			
@@ -74,6 +73,7 @@ public class ReviewFormController extends HttpServlet {
 					at.setOriginName(multiRequest.getOriginalFileName(key));
 					at.setChangeName(multiRequest.getOriginalFileName(key));
 					at.setFilePath("resources/review_upfiles/");
+					at.setBoardType("R");
 					
 					list.add(at);
 					
