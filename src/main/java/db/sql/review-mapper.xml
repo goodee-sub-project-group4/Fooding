@@ -17,8 +17,24 @@
             BY REVIEW_NO DESC		  
 	</entry>
 	
+	<!-- 이건..사진첨부목록페이지 -->
+	<entry key="">
+		SELECT
+		       REVIEW_NO
+		     , RES_NAME
+		     , REVIEW_CONTENT
+		     , STAR
+		     , CREATE_DATE
+		  FROM REVIEW R
+		  JOIN RESTAURANT USING (RES_NO)
+		  JOIN ATTACHMENT ON (BOARD = REF_BNO)
+		 WHERE R.STATUS = 'Y'
+		 ORDER
+            BY REVIEW_NO DESC
+	</entry>
+	
 	<!-- 리뷰쓰기 -->
-	<entry>
+	<entry key="insertContentReview">
 		INSERT
 		  INTO REVIEW
 		     (
@@ -31,15 +47,15 @@
 		VALUES 
 		     (
 		       SEQ_RVNO.NEXTVAL
-		     , <!-- 선택한업체번호 --> 
-		     , <!-- 로그인한회원번호 -->
-		     , <!-- 사용자가입력한내용 -->
-		     , <!-- 사용자가선택한별점 -->
+		     , ? <!-- 선택한업체번호 --> 
+		     , ? <!-- 로그인한회원번호 -->
+		     , ? <!-- 사용자가입력한내용 -->
+		     , ? <!-- 사용자가선택한별점 -->
 		     )
 	</entry>
 	
-	<!-- 사진첨부 -->
-	<entry>
+	<!-- 리뷰사진첨부 -->
+	<entry key="insertAttachmentList">
 		INSERT
 		  INTO ATTACHMENT
 		     (
@@ -48,19 +64,18 @@
 		     , ORIGIN_NAME
 		     , CHANGE_NAME
 		     , FILE_PATH
-		     , FILE_LEVEL
 		     )
 	    VALUES
 	         (
 	           SEQ_ATNO.NEXTVAL
 	         , SEQ_RVNO.CURRVAL
-	         , <!-- 첨부파일의원본명 -->
-	         , <!-- 첨부파일의실제업로드명 -->
-	         , <!-- 저장경로 -->
-	         , <!-- 사진순번 -->
+	         , ? <!-- 첨부파일의원본명 -->
+	         , ? <!-- 첨부파일의실제업로드명 -->
+	         , ? <!-- 저장경로 -->
 	         )
 	</entry>
-
+	
+	
 
 
 

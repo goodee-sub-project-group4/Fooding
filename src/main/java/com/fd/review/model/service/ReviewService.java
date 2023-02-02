@@ -5,6 +5,7 @@ import static com.fd.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.fd.common.model.vo.Attachment;
 import com.fd.review.model.dao.ReviewDao;
 import com.fd.review.model.vo.Review;
 
@@ -20,6 +21,39 @@ public class ReviewService {
 		ArrayList<Review> list = new ReviewDao().selectReviewList(conn);
 		close(conn);
 		return list;
+		
+	}
+	
+	/** 리뷰쓰기 & 리뷰사진첨부
+	 * @author 빛나
+	 * @param r
+	 * @param list
+	 * @return result1 * result2
+	 */
+	public int insertReview(Review r, ArrayList<Attachment> list) {
+		
+		Connection conn = getConnection();
+		
+		int result1 = new ReviewDao().insertContentReview(conn, r);
+		/* int result2 = new ReviewDao().insertAttachmentList(conn, list); */
+		int result2 = 0;
+		System.out.println(result1);
+		if (result1 > 0 /* && result2 > 0 */) {
+
+			if(result2 > 0) {
+				result2 = new ReviewDao().insertAttachmentList(conn, list);
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1 * result2;
 		
 	}
 	

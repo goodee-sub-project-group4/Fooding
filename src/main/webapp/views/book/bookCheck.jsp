@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
+<%@ page import="com.fd.restaurant.model.vo.Restaurant"  %>
+<%
+	//Restaurant restaurant = (Restaurant)
+	String resName = "미미식당";
+	int resNo = 1200;
+%>    
+    
     <html>
 
     <head>
@@ -436,9 +443,10 @@
 
                         <div>
                             <div class="selectList-no" style="font-size: 20px;">01</div>
-                            <img src="" alt="" class="selectList-img">
+                            	<img src="" alt="" class="selectList-img">
                             <div>
                                 <div class="selectList-text">
+                                
                                     <table>
                                         <tr>
                                             <th style="width: 80px; height: 70px;">업체명</th>
@@ -502,13 +510,12 @@
 
                             <!-- Modal body -->
                             <form action="<%= contextPath%>/reviewForm.re" id="review-form" method="post" enctype="multipart/form-data">
-                                <div class="modal-body">
+                                <div class="modal-body"></div>
                                     <div class="review-content2">
-                                        <div id="review-content2-1"><img
-                                                src=""
-                                                width="130" height="160"></div>
+                                        <div id="review-content2-1"><img src="" width="130" height="160"></div> <!-- 업체이미지 가져와야함 -->
                                         <div id="review-content2-2">
-                                            <div id="review-content2-2-1">업체명</div>
+                                            <div id="review-content2-2-1"><%=resName%></div> <!-- 업체명 가져와야함  -->
+                                            <input type="hidden" name="resNo" value="<%=resNo%>">
                                         </div>
                                         <div id="review-content2-3">
                                             <p>★ 별점</p>
@@ -521,7 +528,7 @@
                                                 <option value="3.5">3.5</option>
                                                 <option value="4.0">4.0</option>
                                                 <option value="4.5">4.5</option>
-                                                <option value="5">5</option>
+                                                <option value="5.0" selected>5.0</option>
                                             </select>
                                         </div>
                                     </div>
@@ -562,7 +569,7 @@
 
                                     <!-- Modal footer -->
                                     <div class="modal-footer" style="border:none;">
-                                        <close type="submit" class="btn btn-danger" data-toggle="modal" data-target="#reviewModal" style="width:90px;">등록</button>
+                                        <input type="submit" class="btn btn-danger" style="width:90px;" value="등록">
                                     </div>
                                     <br>
                             </form>

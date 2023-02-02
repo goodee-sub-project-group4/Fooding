@@ -56,7 +56,6 @@ public class BookDao {
 								  , rset.getInt("REVIEW_COUNT")
 								  , rset.getDouble("REVIEW_AVG"));
 			}
-			System.out.println(re);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -8,6 +8,7 @@ import static com.fd.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.fd.admin.model.vo.Question;
 import com.fd.restaurant.model.dao.RestaurantDao;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
@@ -135,6 +136,13 @@ public class RestaurantService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public ArrayList<Question> selectQuestion(int resNo){
+		Connection conn = getConnection();
+		ArrayList<Question> list = new RestaurantDao().selectQuestion(conn, resNo);
+		close(conn);
+		return list;
 	}
 	
 

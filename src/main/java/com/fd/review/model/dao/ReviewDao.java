@@ -1,7 +1,8 @@
 package com.fd.review.model.dao;
 
-import java.io.FileInputStream;
+import static com.fd.common.JDBCTemplate.close;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.fd.common.model.vo.Attachment;
 import com.fd.review.model.vo.Review;
-
-import static com.fd.common.JDBCTemplate.*;
 
 public class ReviewDao {
 	
@@ -63,6 +63,75 @@ public class ReviewDao {
 		}
 		
 		return list;
+		
+	}
+	
+	/** 리뷰쓰기
+	 * @author 빛나
+	 * @param conn
+	 * @param r (리뷰쓰기 데이터)
+	 * @return result
+	 */
+	public int insertContentReview(Connection conn, Review r) {
+		// insert
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertContentReview");
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			// 업체명 담아야함
+			/* pstmt.setInt(1, r.getIntResNo()); */
+			pstmt.setInt(2, r.getUserNo());
+			pstmt.setString(3, r.getReviewContent());
+			pstmt.setDouble(4, r.getStar());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	/** 리뷰사진첨부
+	 * @param conn
+	 * @param list (사진첨부 데이터 넣은 리스트)
+	 * @return result
+	 */
+	public int insertAttachmentList(Connection conn, ArrayList<Attachment> list) {
+		// insert
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertAttachmentList");
+		
+		try {
+			
+			for(Attachment at : list) {
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, at.getOriginName());
+				pstmt.setString(2, at.getChangeName());
+				pstmt.setString(3, at.getFilePath());
+				
+				result = pstmt.executeUpdate();
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 		
 	}
 	

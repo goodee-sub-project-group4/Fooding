@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Question" %>
+<%
+	ArrayList<Question> list = (ArrayList<Question>)session.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,96 +102,23 @@
 					</tr>
                 </thead>
                 <tbody>
+                	<% for(int i=0; i<list.size(); i++) { %>
                     <tr>
-                        <td>10</td>
-                        <td>2022/12/30</td>
-                        <td>user01</td>
-						<td>이용문의</td>
-                        <td>알러지가 있는데 재료확인부탁드립니다</td>
-                        <td class="answer-yet">미답변</td>
+                        <td><%=list.get(i).getqNo()%></td>
+                        <td><%=list.get(i).getCreateDate() %></td>
+                        <td><%=list.get(i).getqPerson() %></td>
+						<td><%=list.get(i).getCategory() %></td>
+                        <td><%=list.get(i).getqTitle() %></td>
+                        <% if(list.get(i).getStatus().equals("N")) { %>
+                        	<td class="answer-yet">미답변</td>
+                        <% }else { %>
+                        	<td>답변완료</td>
+                        <% } %>
                     </tr>
-					<tr>
-                        <td>10</td>
-                        <td>2022/12/30</td>
-                        <td>user01</td>
-						<td>이용문의</td>
-                        <td>알러지가 있는데 재료확인부탁드립니다</td>
-                        <td class="answer-yet">미답변</td>
-                    </tr>
-					<tr>
-                        <td>10</td>
-                        <td>2022/12/30</td>
-                        <td>user01</td>
-						<td>이용문의</td>
-                        <td>알러지가 있는데 재료확인부탁드립니다</td>
-                        <td class="answer-yet">미답변</td>
-                    </tr>
-					<tr>
-                        <td>10</td>
-                        <td>2022/12/30</td>
-                        <td>user01</td>
-						<td>이용문의</td>
-                        <td>알러지가 있는데 재료확인부탁드립니다</td>
-                        <td class="answer-yet">미답변</td>
-                    </tr>
-					<tr>
-                        <td>10</td>
-                        <td>2022/12/30</td>
-                        <td>user01</td>
-						<td>이용문의</td>
-                        <td>알러지가 있는데 재료확인부탁드립니다</td>
-                        <td>답변완료</td>
-                    </tr>
-					<tr>
-                        <td>10</td>
-                        <td>2022/12/30</td>
-                        <td>user01</td>
-						<td>이용문의</td>
-                        <td>알러지가 있는데 재료확인부탁드립니다</td>
-                        <td>답변완료</td>
-                    </tr>
-					<tr>
-                        <td>10</td>
-                        <td>2022/12/30</td>
-                        <td>user01</td>
-						<td>이용문의</td>
-                        <td>알러지가 있는데 재료확인부탁드립니다</td>
-                        <td>답변완료</td>
-                    </tr>
-					<tr>
-                        <td>10</td>
-                        <td>2022/12/30</td>
-                        <td>user01</td>
-						<td>이용문의</td>
-                        <td>알러지가 있는데 재료확인부탁드립니다</td>
-                        <td>답변완료</td>
-                    </tr>
-					<tr>
-                        <td>10</td>
-                        <td>2022/12/30</td>
-                        <td>user01</td>
-						<td>이용문의</td>
-                        <td>알러지가 있는데 재료확인부탁드립니다</td>
-                        <td>답변완료</td>
-                    </tr>
-					<tr>
-                        <td>10</td>
-                        <td>2022/12/30</td>
-                        <td>user01</td>
-						<td>이용문의</td>
-                        <td>알러지가 있는데 재료확인부탁드립니다</td>
-                        <td>답변완료</td>
-                    </tr>
+					<% } %>
                 </tbody>	
 			</table><br><br>
 			
-
-
-
-
-
-
-
 			<!--페이징바-->
             <ul class="pagination justify-content-center" style="margin:20px 0">
                 <li class="page-item"><a class="page-link" href="#">&lt;</a></li>

@@ -7,11 +7,11 @@ INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user03', '3333', '김민지', '핫
 COMMIT;
 
 -- REVIEW
-INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, 1, 1, '안녕하세요', '너무 맛있어요 분위기도 넘 좋아요~!', 4.5, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
-INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, 2, 2, '맛없어요', '기분이 나쁘네요...', 2.5, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
-INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, 2, 3, 'GOOD', '넘 맛잇어요ㅋㅋ 담에 또 올게요', 5.0, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
-INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, 1, 2, '메롱', '메롱~!', 4.5, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
-INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, 1, 3, '히히', '여기 다시 올거같아요', 4.0, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
+INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, 1, 1, '너무 맛있어요 분위기도 넘 좋아요~!', 4.5, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
+INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, 2, 2, '기분이 나쁘네요...', 2.5, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
+INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, 2, 3, '넘 맛잇어요ㅋㅋ 담에 또 올게요', 5.0, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
+INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, 1, 2, '메롱~!', 4.5, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
+INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, 1, 3, '여기 다시 올거같아요', 4.0, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
 
 -- RESTAURANT
 --일반업체
@@ -128,7 +128,7 @@ COMMIT;
             
             
 <!-- 리뷰리스트 -->
-	<entry key="selectReviewList">
+	
 		SELECT
 		       REVIEW_NO
 		     , RES_NAME
@@ -140,14 +140,14 @@ COMMIT;
 		 WHERE R.STATUS = 'Y'
 		 ORDER
             BY REVIEW_NO DESC		  
-	</entry>
+	
 	
 	<!-- 리뷰쓰기 -->
-	<entry>
+	
 		INSERT
 		  INTO REVIEW
 		     (
-		     , REVIEW_NO
+		       REVIEW_NO
 		     , RES_NO
 		     , USER_NO
 		     , REVIEW_CONTENT
@@ -156,12 +156,12 @@ COMMIT;
 		VALUES 
 		     (
 		       SEQ_RVNO.NEXTVAL
-		     , <!-- 선택한업체번호 --> 
-		     , <!-- 로그인한회원번호 -->
-		     , <!-- 사용자가입력한내용 -->
-		     , <!-- 사용자가선택한별점 -->
-		     )
-	</entry>
+		     , 1111
+		     , 1200
+		     , '맛있다!'
+		     , 4.5
+		     );
+	
 	
 	<!-- 사진첨부 -->
 	<entry>

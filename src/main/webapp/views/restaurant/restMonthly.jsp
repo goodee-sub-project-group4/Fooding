@@ -50,6 +50,7 @@
 		#table-area {
 			width:700px;
 			margin:auto;
+			text-align: center;
 		}
 		#table-area span {
 			color: rgb(63, 63, 63);
