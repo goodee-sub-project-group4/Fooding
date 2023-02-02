@@ -15,6 +15,14 @@
 
     <!-- 달력 API -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.1/index.global.min.js"></script>
+    
+    <!-- 결제 API -->
+ 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-{SDK-1.1.8}.js"></script>
+    <script>
+        let IMP = window.IMP;
+        IMP.init("{imp44408883}");    
+    </script>
+
     <style>
         /* 컨텐트 전체 영역 */
         /* .content div{border: 1px solid black;} */
