@@ -132,9 +132,9 @@ public class BookDao {
 			
 			while(rset.next()) {
 				list.add(new Review(rset.getInt("review_no")
-								  , rset.getInt("RES_NO")
+								  , rset.getString("RES_NO")
 								  , rset.getInt("USER_NO")
-								  , rset.getString("REVIEW_TITLE")
+								  , rset.getInt("book_no")
 								  , rset.getString("REVIEW_CONTENT")
 								  , rset.getDouble("star")
 								  , rset.getString("CREATE_DATE")
