@@ -108,9 +108,13 @@
 
 			<div align="center"><br><br>
 				<button type="button" class="btn btn-secondary" onclick="location.href='<%=contextPath%>/home.re'">다음에하기</button>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				<button type="button" class="btn btn-outline-secondary" onclick="removeAll();">초기화</button>
+				
 				<button type="button" class="btn btn-outline-danger" onclick="addMenu();">메뉴추가</button>
 				<button type="submit" class="btn btn-danger">저장</button>
+				
+				
 			</div>
 			
 		</form>

@@ -9,16 +9,16 @@ public class Faq {
 	private String category;
 	private String faqTitle;
 	private String faqContent;
-	private Date createDate;
-	private Date modifyDate;
+	private String createDate;
+	private String modifyDate;
 	private int count;
 	private String who;
 	private String status;
 	
 	public Faq() {}
 
-	public Faq(int faqNo, String userNo, String category, String faqTitle, String faqContent, Date createDate,
-			Date modifyDate, int count, String who, String status) {
+	public Faq(int faqNo, String userNo, String category, String faqTitle, String faqContent, String createDate,
+			String modifyDate, int count, String who, String status) {
 		super();
 		this.faqNo = faqNo;
 		this.userNo = userNo;
@@ -87,19 +87,19 @@ public class Faq {
 		this.faqContent = faqContent;
 	}
 
-	public Date getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
 
-	public Date getModifyDate() {
+	public String getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 

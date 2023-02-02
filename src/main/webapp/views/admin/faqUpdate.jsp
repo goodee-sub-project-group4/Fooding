@@ -4,6 +4,7 @@
     
 <%
 	Faq f = (Faq)request.getAttribute("f");
+	/*int faqNo = (int)request.getAttribute("no");*/
 %>
 <!DOCTYPE html>
 <html>
@@ -85,14 +86,15 @@
 			<!-- 컨텐츠 작성부 -->
 			<br><br>
 
-            <form action="" id="enroll-faq" method="post">
-                
+            <form action="<%= contextPath %>/faqUpdate.ad" id="enroll-faq" method="post">
+                <input type="hidden" name="no" value="<%= f.getFaqNo()%>">
+
                 <table>
                     <tr>
                         <th width="70">구분 <span id="required">*</span></th>
                         <td id="category">
-                            <select id="select" name="category" value="">
-                                <option>구분</option>
+                            <select id="select" name="category">
+                                <option value="<%=f.getCategory()%>"><%=f.getCategory()%></option>
                                 <option>회원</option>
                                 <option>업체</option>
                                 <option>예약</option>
@@ -106,14 +108,14 @@
                     <tr>
                         <th width="70">제목 <span id="required">*</span></th>
                         <td id="faqTitle">
-                            <input type="text" name="title" value="" required >
+                            <input type="text" name="title" value="<%= f.getFaqTitle() %>" required >
                         </td>
                     </tr>
                     <tr><td><br></td></tr>
                     <tr>
                         <th>내용 <span id="required">*</span></th>
                         <td>
-                            <textarea name="content" id="" rows="10" style="resize:none" required></textarea>
+                            <textarea name="content" id="" rows="10" style="resize:none" required><%= f.getFaqContent() %></textarea>
                         </td>
                     </tr>
                 </table>

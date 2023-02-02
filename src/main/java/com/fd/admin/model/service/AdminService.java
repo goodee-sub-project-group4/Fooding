@@ -1,11 +1,12 @@
 package com.fd.admin.model.service;
 
-import static com.fd.common.JDBCTemplate.*;
+import static com.fd.common.JDBCTemplate.close;
+import static com.fd.common.JDBCTemplate.commit;
 import static com.fd.common.JDBCTemplate.getConnection;
+import static com.fd.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Locale.Category;
 
 import com.fd.admin.model.dao.AdminDao;
 import com.fd.admin.model.vo.Faq;
@@ -169,7 +170,6 @@ public class AdminService {
 		return list;
 	}
 
-
 	/**업체 FAQ 목록 / 상세 조회
 	 * @return
 	 */
@@ -180,7 +180,7 @@ public class AdminService {
 		return list;
 	}
 
-
+	
 	/**FAQ 카테고리 (아직..안씀,,,)
 	 * @return
 	 */
@@ -191,7 +191,7 @@ public class AdminService {
 		return f;
 	}
 
-
+	
 	/**FAQ 등록
 	 * @param f
 	 * @return
@@ -207,11 +207,56 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
-
-
-	public int updateFaq() {
-		return 0;
+	
+	
+	/**FAQ 조회
+	 * @param faqNo
+	 * @return
+	 */
+	public Faq selectFaq(int faqNo) {
+		Connection conn = getConnection();
+		Faq f = new AdminDao().selectFaq(conn, faqNo);
+		close(conn);
+		return f;
 	}
+	
+	/**FAQ 수정
+	 * @return
+	 */
+	public int updateFaq(Faq f) {
+		Connection conn = getConnection();
+		int result = new AdminDao().updateFaq(conn, f);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+
+	/**FAQ 삭제
+	 * @param faqNo
+	 * @return
+	 */
+	public int deleteFaq(int faqNo) {
+		Connection conn = getConnection();
+		int result = new AdminDao().deleteFaq(conn, faqNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	
+
+
+
+
 
 
 

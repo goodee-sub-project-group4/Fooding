@@ -136,6 +136,7 @@
 		   NOTICE
 	   SET NOTICE_TITLE = ?
 	     , NOTICE_CONTENT = ?
+	     , MODIFY_DATE = SYSDATE
 	 WHERE NOTICE_NO = ?
 </entry>
 <!-- 2_0. 새로 넘어온 첨부파일이 없을 경우 => 1. updateNotice실행 -->
@@ -271,6 +272,32 @@
 	  )
 </entry>
 
+<!-- FAQ 조회 -->
+<entry key="selectFaq">
+SELECT 
+	   FAQ_NO
+	 , CATEGORY
+	 , FAQ_TITLE
+	 , FAQ_CONTENT
+  FROM FAQ
+ WHERE FAQ_NO = ? 
+</entry>
 
+<!-- FAQ 수정(카테고리, 제목, 내용, 수정일) -->
+<entry key="updateFaq">
+	UPDATE FAQ
+	   SET CATEGORY = ?
+	     , FAQ_TITLE = ?
+	     , FAQ_CONTENT = ?
+	     , MODIFY_DATE = SYSDATE
+	 WHERE FAQ_NO = ?
+</entry>
+
+<!-- FAQ 삭제 -->
+<entry key="deleteFaq">
+	UPDATE FAQ
+	   SET STATUS = 'N'
+	 WHERE FAQ_NO = ?
+</entry>
 
 </properties>

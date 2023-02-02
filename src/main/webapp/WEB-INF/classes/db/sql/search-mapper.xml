@@ -42,6 +42,7 @@
 		      , CEO
 		      , PERMIT_NO
 		      , ADDRESS
+              , D_ADDRESS
 		      , LOCAL_CT
 		      , DLOCAL_CT
 		      , PHONE
@@ -60,8 +61,9 @@
 		      , ?
 		      , ?
 		      , ?
-		      , '서울특별시'
-		      , '은평구'
+              , ?
+		      , ?
+		      , ?
 		      , ?
 		      , ?
 		      , ?

@@ -125,5 +125,17 @@ public class RestaurantService {
 		return updateRest;
 	}
 	
+	public int deleteMenu(int menuNo) {
+		Connection conn = getConnection();
+		int result = new RestaurantDao().deleteMenu(conn, menuNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			close(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 
 }

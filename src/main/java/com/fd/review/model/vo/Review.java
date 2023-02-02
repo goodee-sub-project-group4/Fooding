@@ -9,7 +9,7 @@ public class Review {
 	private int userNo;
 	private String reviewTitle;
 	private String reviewContent;
-	private int star;
+	private double star;
 	private Date createDate;
 	private Date modifyDate;
 	private String status;
@@ -17,8 +17,11 @@ public class Review {
 	private int count;
 	
 	public Review () {}
-
-	public Review(int reviewNo, String resNo, int userNo, String reviewTitle, String reviewContent, int star,
+	
+	// 리뷰리스트
+	
+	
+	public Review(int reviewNo, String resNo, int userNo, String reviewTitle, String reviewContent, double star,
 			Date createDate, Date modifyDate, String status, String good, int count) {
 		super();
 		this.reviewNo = reviewNo;
@@ -32,10 +35,10 @@ public class Review {
 		this.status = status;
 		this.good = good;
 		this.count = count;
+		
 	}
 	
-	// 리뷰리스트
-	public Review(int reviewNo, String resNo, String reviewContent, int star, Date createDate) {
+	public Review(int reviewNo, String resNo, String reviewContent, double star, Date createDate) {
 		super();
 		this.reviewNo = reviewNo;
 		this.resNo = resNo;
@@ -47,96 +50,101 @@ public class Review {
 	public int getReviewNo() {
 		return reviewNo;
 	}
-
+	
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
-
+	
 	public String getResNo() {
 		return resNo;
 	}
-
+	
 	public void setResNo(String resNo) {
 		this.resNo = resNo;
 	}
-
+	
 	public int getUserNo() {
 		return userNo;
 	}
-
+	
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
-
+	
 	public String getReviewTitle() {
 		return reviewTitle;
 	}
-
+	
 	public void setReviewTitle(String reviewTitle) {
 		this.reviewTitle = reviewTitle;
 	}
-
+	
 	public String getReviewContent() {
 		return reviewContent;
 	}
-
+	
 	public void setReviewContent(String reviewContent) {
 		this.reviewContent = reviewContent;
 	}
-
-	public int getStar() {
+	
+	public double getStar() {
 		return star;
 	}
-
-	public void setStar(int star) {
+	
+	public void setStar(double star) {
 		this.star = star;
 	}
-
+	
 	public Date getCreateDate() {
 		return createDate;
 	}
-
+	
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-
+	
 	public Date getModifyDate() {
 		return modifyDate;
 	}
-
+	
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-
+	
 	public String getStatus() {
 		return status;
 	}
-
+	
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	
 	public String getGood() {
 		return good;
 	}
-
+	
 	public void setGood(String good) {
 		this.good = good;
 	}
-
+	
 	public int getCount() {
 		return count;
 	}
-
+	
 	public void setCount(int count) {
 		this.count = count;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", resNo=" + resNo + ", userNo=" + userNo + ", reviewTitle="
 				+ reviewTitle + ", reviewContent=" + reviewContent + ", star=" + star + ", createDate=" + createDate
 				+ ", modifyDate=" + modifyDate + ", status=" + status + ", good=" + good + ", count=" + count + "]";
 	}
+
+	
+	
+	
+	
 	
 }

@@ -1,7 +1,6 @@
 package com.fd.admin.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,19 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fd.admin.model.service.AdminService;
-import com.fd.admin.model.vo.Faq;
 
 /**
- * Servlet implementation class AdminFaqUpdateController
+ * Servlet implementation class AdminFaqDeleteController
  */
-@WebServlet("/faqUpdate.ad")
-public class AdminFaqUpdateController extends HttpServlet {
+@WebServlet("/faqDelete.ad")
+public class AdminFaqDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminFaqUpdateController() {
+    public AdminFaqDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,30 +35,15 @@ public class AdminFaqUpdateController extends HttpServlet {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
 			response.sendRedirect(request.getContextPath()+"/rest.admin");
 		}else {	
-			
-			request.setCharacterEncoding("UTF-8");
 			int faqNo = Integer.parseInt(request.getParameter("no"));
-			String faqCategory = request.getParameter("category");
-			String faqTitle = request.getParameter("title");
-			String faqContent = request.getParameter("content");
-			String modifyDate = request.getParameter("modifyDate");
-			
-			Faq f = new Faq();
-			f.setFaqNo(faqNo);
-			f.setCategory(faqCategory);
-			f.setFaqTitle(faqTitle);
-			f.setFaqContent(faqContent);
-			f.setModifyDate(modifyDate);
-			
-			int result = new AdminService().updateFaq(f);
+			int result = new AdminService().deleteFaq(faqNo);
 			if(result>0) {
-				request.getSession().setAttribute("alertMsg", "수정 완료");
-				response.sendRedirect(request.getContextPath() + "/faqList.ad");
+				request.getSession().setAttribute("alertMsg", "삭제 완료");
+				response.sendRedirect(request.getContextPath()+"/faqList.ad");
 			}else {
-				request.getSession().setAttribute("errorMsg", "수정 실패");
-				request.getRequestDispatcher("views/common/errorPage.jsp");
+				request.setAttribute("errorMsg", "FAQ 삭제 실패");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
-
 		}
 	}
 

@@ -106,14 +106,24 @@ public class ResFormController extends HttpServlet {
 			String resName = multiRequest.getParameter("resName");
 			String ceo = multiRequest.getParameter("ceo");
 			String permitNo = multiRequest.getParameter("permitNo"); 
+			
+			// 나중에 지도 API로 받아올 변수 (address와 dAddress)
 			String address = multiRequest.getParameter("address");
+			String dAddress = multiRequest.getParameter("dAddress"); 
+			
+			// 시/도 (지역 카테고리가 될 변수)
+			String localCt = multiRequest.getParameter("city"); 
+			
+			// 구/군 (세부지역 카테고리가 될 변수)
+			String dLocalCt = multiRequest.getParameter("county"); 
+			
 			String phone = multiRequest.getParameter("phone"); 
 			String cellphone = multiRequest.getParameter("cellphone"); 
 			String email = multiRequest.getParameter("email"); 
 			String parking = multiRequest.getParameter("parking"); 
 			String foodCt = multiRequest.getParameter("foodCt");
 			
-			Restaurant r = new Restaurant(resName, ceo, permitNo, address, phone, cellphone, email, parking, foodCt);
+			Restaurant r = new Restaurant(resName, ceo, permitNo, address, dAddress, localCt, dLocalCt, phone, cellphone, email, parking, foodCt);
 			
 			Attachment at = null;
 			
@@ -133,11 +143,13 @@ public class ResFormController extends HttpServlet {
 				
 				response.sendRedirect(request.getContextPath()); // 인덱스 페이지로 보내기!! 
 				
+				
 			}else {
 				
 				if(at != null) {
 					new File(savePath + at.getChangeName()).delete();
 				}
+				
 				
 				request.setAttribute("errorMsg", "업체등록요청을 실패했습니다."); 
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
