@@ -20,23 +20,54 @@ public class Restaurant {
 	private String longtitude;
 	private String latitude;
 	private String rImg;
-	
-
 	private String open;
 	private String close;
 	private String breakS;
 	private String breakE;
 	private String foodCt;
-	
 	private int reviewCount;
 	private double reviewAvg;
+	private int menuNo;
+	private String menuName;
+	private String price;
+	private String menuDes;
+	private String img;
 	
+	
+
 	// 한수가 추가한 필드 (SearchController 및 search와 관련된 파일에서만 사용)
 	private int listCount; // 검색결과 총 갯수
 	private double star; // 별점 
 	private int count; // 조회수 
 	
 	public Restaurant() {}
+	
+	// 식당 조회용 매개변수 생성자 - 태진
+	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
+			String phone, String parking, String longtitude, String latitude, String rImg, String open, String close, String breakS, String breakE, String foodCt, int reviewCount,
+			double reviewAvg, int count) {
+		super();
+		this.resNo = resNo;
+		this.resName = resName;
+		this.ceo = ceo;
+		this.permitNo = permitNo;
+		this.address = address;
+		this.dAddress = dAddress;
+		this.phone = phone;
+		this.parking = parking;
+		this.longtitude = longtitude;
+		this.latitude = latitude;
+		this.rImg = rImg;
+		this.open = open;
+		this.close = close;
+		this.breakS = breakS;
+		this.breakE = breakE;
+		this.foodCt = foodCt;
+		this.setReviewCount(reviewCount);
+		this.setReviewAvg(reviewAvg);
+		this.count = count;
+	}
+	
 	
 	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
 			String localCt, String dLocalCt, String phone, String cellphone, String email, String parking, String status,
@@ -154,35 +185,14 @@ public class Restaurant {
 		this.foodCt = foodCt;
 	}
 
-	// 식당 조회용 매개변수 생성자 - 태진
-	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
-			String phone, String parking, String longtitude, String latitude, String rImg, String open,
-			String close, String breakS, String breakE, String foodCt, int reviewCount, double reviewAvg) {
-		super();
-		this.resNo = resNo;
-		this.resName = resName;
-		this.ceo = ceo;
-		this.permitNo = permitNo;
-		this.address = address;
-		this.dAddress = dAddress;
-		this.phone = phone;
-		this.parking = parking;
-		this.longtitude = longtitude;
-		this.latitude = latitude;
-		this.rImg = rImg;
-		this.open = open;
-		this.close = close;
-		this.breakS = breakS;
-		this.breakE = breakE;
-		this.foodCt = foodCt;
-		this.reviewCount = reviewCount;
-		this.reviewAvg = reviewAvg;
-	}
+	
 	
 
 	public int getResNo () {
 		return resNo;
 	}
+
+	
 
 	public void setResNo(int resNo) {
 		this.resNo = resNo;
@@ -378,7 +388,6 @@ public class Restaurant {
 	public int getListCount() {
 		return listCount;
 	}
-	
 
 	public void setListCount(int listCount) {
 		this.listCount = listCount;
@@ -401,6 +410,66 @@ public class Restaurant {
 		this.count = count;
 	}
 
+	public int getMenuNo() {
+		return menuNo;
+	}
+
+	public void setMenuNo(int menuNo) {
+		this.menuNo = menuNo;
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getMenuDes() {
+		return menuDes;
+	}
+
+	public void setMenuDes(String menuDes) {
+		this.menuDes = menuDes;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public void setStar(double star) {
+		this.star = star;
+	}
+
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public double getReviewAvg() {
+		return reviewAvg;
+	}
+
+	public void setReviewAvg(double reviewAvg) {
+		this.reviewAvg = reviewAvg;
+	}
+
 	@Override
 	public String toString() {
 		return "Restaurant [resNo=" + resNo + ", resName=" + resName + ", ceo=" + ceo + ", permitNo=" + permitNo
@@ -408,9 +477,10 @@ public class Restaurant {
 				+ ", phone=" + phone + ", cellphone=" + cellphone + ", email=" + email + ", parking=" + parking
 				+ ", applyDate=" + applyDate + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status="
 				+ status + ", longtitude=" + longtitude + ", latitude=" + latitude + ", rImg=" + rImg + ", open=" + open
-				+ ", close=" + close + ", breakS=" + breakS + ", breakE=" + breakE + ", foodCt=" + foodCt + "]";
+				+ ", close=" + close + ", breakS=" + breakS + ", breakE=" + breakE + ", foodCt=" + foodCt
+				+ ", reviewCount=" + reviewCount + ", reviewAvg=" + reviewAvg + ", listCount=" + listCount + ", star="
+				+ star + ", count=" + count + "]";
 	}
-
 
 
 }
