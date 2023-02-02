@@ -3,12 +3,32 @@ package com.fd.book.model.service;
 import static com.fd.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.fd.book.model.dao.BookDao;
+import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
 
 public class BookService {
 
+	/**
+	 * @param 김태진
+	 * 업체 상세 조회 조회수 증가
+	 */
+	public int selectCountUp(int resNo) {
+		Connection conn = getConnection();
+		int result = new BookDao().selectCountUp(conn, resNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	
+	
 	public Restaurant selectRes(int resNo) {
 		Connection conn = getConnection();
 		Restaurant re = new BookDao().selectRes(conn, resNo);
@@ -16,4 +36,14 @@ public class BookService {
 		return re;
 	}
 
+
+
+	public ArrayList<Menu> selectMenu(int resNo) {
+		Connection conn = getConnection();
+		ArrayList<Menu> list = new BookDao().selectMenu(resNo, conn);
+		close(conn);
+		return list;
+	}
+
+	
 }

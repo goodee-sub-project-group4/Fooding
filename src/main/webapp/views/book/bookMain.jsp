@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.fd.restaurant.model.vo.Restaurant"%>
+<%@ page import="com.fd.restaurant.model.vo.Restaurant, com.fd.restaurant.model.vo.Menu"%>
+<%@ page import="java.util.ArrayList" %>
 <%
 	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
+	ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("menuList");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,8 +30,8 @@
         /* 컨텐트 가운데 영역 */
         #content2-padding{width: 50%; height: 100%;}
         /* 컨텐트 가운데 전체 높이 */
-        #content2{height: 2450px;}
-        #content2-1{height: 1050px;}
+        #content2{max-height: 2450px;}
+        #content2-1{max-height: 1050px;}
         #content2-1 div{box-sizing: border-box;}
         
         /* 업체 사진 */
@@ -39,17 +41,18 @@
         /* 업체명 (조회/리뷰/별점) */
         #main1{width: 100%;}
         /* 업체세부정보 + 메뉴 */
-        #main2{width: 100%; height: 600px;}
+        #main2{width: 100%;}
         #main2 div{float: left;}
         #main2-1, #main2-3{width: 25%;}
         #main2-2, #main2-4{width: 75%;}
-        #main2-4{height: 400px; overflow: auto;}
+        #main2-3, #main2-4{margin-top: 25px;} 
+        #main2-4{max-height: 400px; overflow: auto;}
         /* 메뉴 */
         .menu{width: 50%; padding: 3px; text-align: center;}
         .menu img{width: 180px; height: 100px;}
 
         /* 리뷰 */
-        #content2-2{margin-top: 20px; float: left; height: 1700px; overflow: auto;}
+        #content2-2{margin-top: 20px; float: left; max-height: 1700px; overflow: auto;}
         #content2-2 div{box-sizing: border-box;}
         #review-head{height: 50px; border: 2px solid gainsboro; padding: 5px; margin-bottom: 4px;}
         .review-content div{float: left; padding: 5px;}
@@ -153,9 +156,20 @@
                         </div>
                         <div id="content-main">
                             <div id="main1">
-                                <b><%= restaurant.getResName() %></b>
+                                <b style="font-size: 2em;"><%= restaurant.getResName() %></b>
+                                <table style="text-align: center;">
+                                    <tr>
+                                        <th style="width: 60px;">조회수</th>
+                                        <th style="width: 60px;">리뷰수</th>
+                                        <th style="width: 60px;">좋아요</th>
+                                    </tr>
+                                    <tr>
+                                        <td><img style="width: 15px; height: 15px;" src="<%= contextPath %>/resources/images/조회수.png" alt=""> <%= restaurant.getCount() %></td>
+                                        <td><img style="width: 15px; height: 15px;" src="<%= contextPath %>/resources/images/리뷰수2.png" alt=""> <%= restaurant.getReviewCount() %></td>
+                                        <td><img style="width: 15px; height: 15px;" src="<%= contextPath %>/resources/images/찜하기.png" alt=""> <%= restaurant.getReviewAvg() %></td>
+                                    </tr>
+                                </table>
                                 <br>
-                                조회수 / 리뷰수 / 별점
                             </div>
                             <div id="main2">
                                 <table style="width: 100%;">
@@ -197,46 +211,15 @@
                                     메뉴
                                 </div>
                                 <div id="main2-4">
+                                <% if(!list.isEmpty()) {%>
+                                	<% for(Menu m : list) { %>
                                     <div class="menu">
-                                        <img src="sample.jpeg" alt=""><br>
-                                        치킨 스테이크 <br>
-                                        가격 25,000원
+                                        <img src="<%= m.getmImg() %>" alt=""><br>
+                                        <%= m.getMenuName() %> <br>
+                                        <%= m.getPrice() %>
                                     </div>
-                                    <div class="menu">
-                                        <img src="sample.jpeg" alt=""><br>
-                                        치킨 스테이크 <br>
-                                        가격 25,000원
-                                    </div>
-                                    <div class="menu">
-                                        <img src="sample.jpeg" alt=""><br>
-                                        치킨 스테이크 <br>
-                                        가격 25,000원
-                                    </div>
-                                    <div class="menu">
-                                        <img src="sample.jpeg" alt=""><br>
-                                        치킨 스테이크 <br>
-                                        가격 25,000원
-                                    </div>
-                                    <div class="menu">
-                                        <img src="sample.jpeg" alt=""><br>
-                                        치킨 스테이크 <br>
-                                        가격 25,000원
-                                    </div>
-                                    <div class="menu">
-                                        <img src="sample.jpeg" alt=""><br>
-                                        치킨 스테이크 <br>
-                                        가격 25,000원
-                                    </div>
-                                    <div class="menu">
-                                        <img src="sample.jpeg" alt=""><br>
-                                        치킨 스테이크 <br>
-                                        가격 25,000원
-                                    </div>
-                                    <div class="menu">
-                                        <img src="sample.jpeg" alt=""><br>
-                                        치킨 스테이크 <br>
-                                        가격 25,000원
-                                    </div>
+                                    <% } %>
+                                <% } %>
                                 </div>
                             </div>
                         </div>
