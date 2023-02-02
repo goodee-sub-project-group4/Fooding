@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.fd.restaurant.model.vo.Restaurant, com.fd.restaurant.model.vo.Menu"%>
+<%@ 
+	page import="com.fd.restaurant.model.vo.Restaurant, com.fd.restaurant.model.vo.Menu,
+				 com.fd.review.model.vo.Review"
+%>
+
 <%@ page import="java.util.ArrayList" %>
 <%
 	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
 	ArrayList<Menu> menuList = (ArrayList<Menu>)request.getAttribute("menuList");
+	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -228,26 +233,30 @@
                         <div id="review-head">
                             사용자 리뷰
                         </div>
-                        <div class="review-content">
-                            <div class="review-content1-1">
-                            </div>
-                            <div class="review-content1-2">
-                                리뷰 작성일<br>
-                                리뷰 제목
-                            </div>
-                            <div class="review-content2-1">
-                                홍길동<br>
-                                별점
-                            </div>
-                            <div class="review-content2-2">
-                                <div class="review-text"></div>
-                                <div class="review-picture">
-                                    <img src="sample2.jpeg" alt="">
-                                    <img src="sample2.jpeg" alt="">
-                                    <img src="sample2.jpeg" alt="">
-                                </div>
-                            </div>
-                        </div>
+                        <% if(!reviewList.isEmpty()) { %>
+                        	<% for(Review r : reviewList) { %>
+	                        <div class="review-content">
+	                            <div class="review-content1-1">
+	                            </div>
+	                            <div class="review-content1-2">
+	                                리뷰 작성일<br>
+	                                리뷰 제목
+	                            </div>
+	                            <div class="review-content2-1">
+	                                홍길동<br>
+	                                별점
+	                            </div>
+	                            <div class="review-content2-2">
+	                                <div class="review-text"></div>
+	                                <div class="review-picture">
+	                                    <img src="sample2.jpeg" alt="">
+	                                    <img src="sample2.jpeg" alt="">
+	                                    <img src="sample2.jpeg" alt="">
+	                                </div>
+	                            </div>
+	                        </div>
+                        	<% } %>
+                        <% } %>
                         <div class="review-content">
                             <div class="review-content1-1">
                             </div>

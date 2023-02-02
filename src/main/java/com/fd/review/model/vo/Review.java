@@ -8,7 +8,6 @@ public class Review {
 	private String resNo;
 	private int userNo;
 	private int bookNo;
-	private String reviewTitle;
 	private String reviewContent;
 	private double star;
 	private Date createDate;
@@ -20,15 +19,13 @@ public class Review {
 	public Review () {}
 	
 	// 리뷰리스트
-	
-	
-	public Review(int reviewNo, String resNo, int userNo, String reviewTitle, String reviewContent, double star,
+	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewContent, double star,
 			Date createDate, Date modifyDate, String status, String good, int count) {
 		super();
 		this.reviewNo = reviewNo;
 		this.resNo = resNo;
 		this.userNo = userNo;
-		this.reviewTitle = reviewTitle;
+		this.bookNo = bookNo;
 		this.reviewContent = reviewContent;
 		this.star = star;
 		this.createDate = createDate;
@@ -36,7 +33,6 @@ public class Review {
 		this.status = status;
 		this.good = good;
 		this.count = count;
-		
 	}
 	
 	public Review(int reviewNo, String resNo, String reviewContent, double star, Date createDate) {
@@ -46,6 +42,21 @@ public class Review {
 		this.reviewContent = reviewContent;
 		this.star = star;
 		this.createDate = createDate;
+	}
+
+	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewContent, double star,
+			Date createDate, Date modifyDate, String good, int count) {
+		super();
+		this.reviewNo = reviewNo;
+		this.resNo = resNo;
+		this.userNo = userNo;
+		this.bookNo = bookNo;
+		this.reviewContent = reviewContent;
+		this.star = star;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+		this.good = good;
+		this.count = count;
 	}
 
 	public int getReviewNo() {
@@ -70,14 +81,6 @@ public class Review {
 	
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
-	}
-	
-	public String getReviewTitle() {
-		return reviewTitle;
-	}
-	
-	public void setReviewTitle(String reviewTitle) {
-		this.reviewTitle = reviewTitle;
 	}
 	
 	public String getReviewContent() {
@@ -136,10 +139,18 @@ public class Review {
 		this.count = count;
 	}
 	
+	public int getBookNo() {
+		return bookNo;
+	}
+
+	public void setBookNo(int bookNo) {
+		this.bookNo = bookNo;
+	}
+
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", resNo=" + resNo + ", userNo=" + userNo + ", reviewTitle="
-				+ reviewTitle + ", reviewContent=" + reviewContent + ", star=" + star + ", createDate=" + createDate
+		return "Review [reviewNo=" + reviewNo + ", resNo=" + resNo + ", userNo=" + userNo
+				+ ", reviewContent=" + reviewContent + ", star=" + star + ", createDate=" + createDate
 				+ ", modifyDate=" + modifyDate + ", status=" + status + ", good=" + good + ", count=" + count + "]";
 	}
 
