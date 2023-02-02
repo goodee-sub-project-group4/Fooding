@@ -282,9 +282,9 @@ public class RestaurantDao {
 				q.setqNo(rset.getInt("q_no"));
 				q.setCategory(rset.getString("category"));
 				q.setqTitle(rset.getString("q_title"));
-				q.setaPerson(rset.getString("user_id"));
+				q.setqPerson(rset.getString("user_id"));
 				q.setStatus(rset.getString("status"));
-				q.setCreatDate(rset.getString("create_date"));
+				q.setCreateDate(rset.getString("create_date"));
 				list.add(q);
 			}
 		} catch (SQLException e) {

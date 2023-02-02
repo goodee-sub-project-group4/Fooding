@@ -102,14 +102,14 @@
 					</tr>
                 </thead>
                 <tbody>
-                	<% for(Question q : list) { %>
+                	<% for(int i=0; i<list.size(); i++) { %>
                     <tr>
-                        <td><%=q.getqNo()%></td>
-                        <td><%=q.getCreateDate() %></td>
-                        <td><%=q.getaPerson() %></td>
-						<td><%=q.getCategory() %></td>
-                        <td><%=q.getqTitle() %></td>
-                        <% if(q.getStatus().equals("N")) { %>
+                        <td><%=list.get(i).getqNo()%></td>
+                        <td><%=list.get(i).getCreateDate() %></td>
+                        <td><%=list.get(i).getqPerson() %></td>
+						<td><%=list.get(i).getCategory() %></td>
+                        <td><%=list.get(i).getqTitle() %></td>
+                        <% if(list.get(i).getStatus().equals("N")) { %>
                         	<td class="answer-yet">미답변</td>
                         <% }else { %>
                         	<td>답변완료</td>
