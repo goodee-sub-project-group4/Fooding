@@ -56,6 +56,7 @@ public class ReviewFormController extends HttpServlet {
 			
 			Review r = new Review();
 			
+			r.setBookNo(Integer.parseInt(multiRequest.getParameter("bookNo")));
 			r.setResNo(multiRequest.getParameter("resNo"));
 			r.setUserNo(Integer.parseInt(multiRequest.getParameter("userNo")));
 			r.setReviewContent(multiRequest.getParameter("reviewContent"));

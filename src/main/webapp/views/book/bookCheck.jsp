@@ -3,9 +3,10 @@
 <%@ page import="com.fd.restaurant.model.vo.Restaurant"  %>
 <%
 	//Restaurant restaurant = (Restaurant)
-	String resName = "미미식당";
+	String resName = "브룩클린 더 버거 조인트";
 	int resNo = 1200;
 	int userNo = 1;
+	int bookNo = 2;
 %>    
     
     <html>
@@ -482,8 +483,7 @@
                                                 data-target="#reviewModal">리뷰쓰기</button>
                                         </div>
                                         <div>
-                                            <button type="button" class="btn btn-outline-danger" data-toggle="modal"
-                                                data-target="#reviewModal">신고하기</button>
+                                            <button type="button" class="btn btn-outline-danger">신고하기</button>
                                         </div>
                                     </div>
                                 </div>
@@ -518,6 +518,7 @@
                                             <div id="review-content2-2-1"><%=resName%></div> <!-- 업체명 가져와야함  -->
                                             <input type="hidden" name="resNo" value="<%=resNo%>">
                                             <input type="hidden" name="userNo" value="<%=userNo%>">
+                                            <input type="hidden" name="bookNo" value="<%=bookNo%>">
                                             
                                         </div>
                                         <div id="review-content2-3">
@@ -614,8 +615,6 @@
                          				
                          			}
                                     
-                                
-                                
                                 }
 
                             </script>
@@ -625,7 +624,6 @@
                 </div>
                 </div>
 
-                <!-- 문의하기모달 -->
 
     </body>
 

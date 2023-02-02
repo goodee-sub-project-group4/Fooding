@@ -1,6 +1,5 @@
 package com.fd.review.model.vo;
 
-import java.sql.Date;
 
 public class Review {
 	
@@ -21,13 +20,13 @@ public class Review {
 	
 	// 리뷰리스트
 	
-	
-	public Review(int reviewNo, String resNo, int userNo, String reviewTitle, String reviewContent, double star,
+	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewTitle, String reviewContent, double star,
 			String createDate, String modifyDate, String status, String good, int count) {
 		super();
 		this.reviewNo = reviewNo;
 		this.resNo = resNo;
 		this.userNo = userNo;
+		this.bookNo = bookNo;
 		this.reviewTitle = reviewTitle;
 		this.reviewContent = reviewContent;
 		this.star = star;
@@ -70,6 +69,14 @@ public class Review {
 	
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
+	}
+	
+	public int getBookNo() {
+		return bookNo;
+	}
+
+	public void setBookNo(int bookNo) {
+		this.bookNo = bookNo;
 	}
 	
 	public String getReviewTitle() {
@@ -135,17 +142,13 @@ public class Review {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", resNo=" + resNo + ", userNo=" + userNo + ", reviewTitle="
-				+ reviewTitle + ", reviewContent=" + reviewContent + ", star=" + star + ", createDate=" + createDate
-				+ ", modifyDate=" + modifyDate + ", status=" + status + ", good=" + good + ", count=" + count + "]";
+		return "Review [reviewNo=" + reviewNo + ", resNo=" + resNo + ", userNo=" + userNo + ", bookNo=" + bookNo
+				+ ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent + ", star=" + star
+				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", status=" + status + ", good=" + good
+				+ ", count=" + count + "]";
 	}
-
-	
-	
-	
-	
 	
 }
