@@ -128,7 +128,7 @@ COMMIT;
             
             
 <!-- 리뷰리스트 -->
-	<entry key="selectReviewList">
+	
 		SELECT
 		       REVIEW_NO
 		     , RES_NAME
@@ -140,14 +140,14 @@ COMMIT;
 		 WHERE R.STATUS = 'Y'
 		 ORDER
             BY REVIEW_NO DESC		  
-	</entry>
+	
 	
 	<!-- 리뷰쓰기 -->
-	<entry>
+	
 		INSERT
 		  INTO REVIEW
 		     (
-		     , REVIEW_NO
+		       REVIEW_NO
 		     , RES_NO
 		     , USER_NO
 		     , REVIEW_CONTENT
@@ -156,12 +156,12 @@ COMMIT;
 		VALUES 
 		     (
 		       SEQ_RVNO.NEXTVAL
-		     , <!-- 선택한업체번호 --> 
-		     , <!-- 로그인한회원번호 -->
-		     , <!-- 사용자가입력한내용 -->
-		     , <!-- 사용자가선택한별점 -->
-		     )
-	</entry>
+		     , 1111
+		     , 1200
+		     , '맛있다!'
+		     , 4.5
+		     );
+	
 	
 	<!-- 사진첨부 -->
 	<entry>
