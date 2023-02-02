@@ -39,7 +39,7 @@ public class BookMainController extends HttpServlet {
 		// 메뉴 정보 조회
 		ArrayList<Menu> menuList = new BookService().selectMenu(resNo);
 		// 리뷰 정보 조회
-		ArrayList<Review> reviewList = new BookService().selectReview(resNo);
+//		ArrayList<Review> reviewList = new BookService().selectReview(resNo);
 		// 식당 정보 조회
 		Restaurant restaurant = new BookService().selectRes(resNo);	
 		
@@ -49,7 +49,7 @@ public class BookMainController extends HttpServlet {
 		}else {
 			request.setAttribute("restaurant", restaurant);
 			request.setAttribute("menuList", menuList);
-			request.setAttribute("menuList", reviewList);
+//			request.setAttribute("menuList", reviewList);
 			request.getRequestDispatcher("views/book/bookMain.jsp").forward(request, response);
 		}
 	}

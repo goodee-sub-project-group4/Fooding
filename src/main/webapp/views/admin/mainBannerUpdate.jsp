@@ -57,13 +57,13 @@
 
 			<!-- 컨텐츠 작성부 -->
 			<br><br>
-            <form align="center" action="<%=contextPath%>/baEnroll.ad" method="post" enctype="multipart/form-data">
+            <form align="center" action="<%=contextPath%>/baUpdate.ad" method="post" enctype="multipart/form-data">
                 <table>
-                	<% if(list.size()!=0){ %>
+                    <% if(list.size()!=0){ %>
 	                	<% for(int i=0; i<list.size(); i++){ %>
 		                    <tr>
 		                        <td>	
-		                            <img src="<%=contextPath %>/<%=list.get(i).getFilePath() + list.get(i).getChangeName() %>" width="791.47px" height="250">
+		                            <img src="<%=contextPath %>/<%=list.get(i).getFilePath() + list.get(i).getChangeName() %>" id="bannerImg<%= i %>+1" class="bannerImg" width="791.47px" height="250" onclick="clickFile(<%= i %>+1);">
 		                        	<br><br>
 		                        </td>
 		                    </tr>  
@@ -88,13 +88,20 @@
                     <tr><td><br></td></tr> 
                     <tr>
                         <td>
-                            <button type="submit" class="btn btn-danger">등록하기</button>&nbsp&nbsp
-                            <a href="<%=contextPath%>/baUpdateForm.ad" class="btn btn-danger">수정하기</a>&nbsp&nbsp
-                            <a href="<%=contextPath%>/baDelete.ad" class="btn btn-outline-danger">삭제하기</a>
+                            <button type="submit" class="btn btn-danger">수정하기</button>
+                            <button class="btn btn-danger">취소하기</button>
                         </td>
                     </tr>               
                 </table>
 
+                <div id="file-area" style="display: none;">
+                    <input type="file" name="file1" onchange="loadImg(this, 1);" required>
+                    <input type="file" name="file2" onchange="loadImg(this, 2);">
+                    <input type="file" name="file3" onchange="loadImg(this, 3);">
+                </div>
+
+
+                
     
                 <br>
                 
@@ -117,6 +124,31 @@
 			$("#menu3-detail-1").addClass("active");
 
 		})
+
+        function clickFile(num){
+            $('input[name=file'+num+']').click();
+        }
+        
+        function loadImg(inputFile, num){
+            if(inputFile.files.length == 1){
+                const reader = new FileReader();
+                reader.readAsDataURL(inputFile.files[0]);
+                reader.onload = function(e){
+                    switch(num){
+                        case 1 : $("#bannerImg1").attr("src", e.target.result); break;
+                        case 2 : $("#bannerImg2").attr("src", e.target.result); break;
+                        case 3 : $("#bannerImg3").attr("src", e.target.result); break;
+                    }
+                }
+            }else{
+                switch(num){
+                    case 1 : $("#bannerImg1").attr("src", null); break;
+                    case 2 : $("#bannerImg2").attr("src", null); break;
+                    case 3 : $("#bannerImg3").attr("src", null); break;
+                }
+            }
+        }
+
 
 	</script>
 </body>

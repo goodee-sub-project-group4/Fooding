@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.common.model.vo.Attachment" %>
+<%
+	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +85,9 @@
     }
 
 </style>
+	<script>
+
+	</script>
 </head>
 <body>
 
@@ -109,13 +116,13 @@
 					<!-- The slideshow -->
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img src="/Fooding/resources/images/forTest.png" alt="" width="791.47" height="250">
+							<img src="" alt="" width="791.47" height="250">
 						</div>
 						<div class="carousel-item">
-							<img src="/Fooding/resources/images/forTest.png" alt="" width="791.47" height="250">
+							<img src="" alt="" width="791.47" height="250">
 						</div>
 						<div class="carousel-item">
-							<img src="/Fooding/resources/images/forTest.png" alt="" width="791.47" height="250">
+							<img src="" alt="" width="791.47" height="250">
 						</div>
 						
 					</div>
@@ -192,5 +199,11 @@
 		
 		<%@ include file="views/common/footer.jsp" %>
 	</div>
+
+	<script>
+		$(function(){
+			$()
+		})
+	</script>
 </body>
 </html>

@@ -52,21 +52,22 @@
 		 WHERE RS.RES_NO = ?
 	       AND STATUS = 'Y'
 	</entry>
-	<entry key="selectReview">
+	<!-- <entry key="selectReview">
 		SELECT
 			   REVIEW_NO
-			 , RES_NO
+			 , RE.RES_NO
 			 , USER_NO
 			 , BOOK_NO
 			 , REVIEW_CONTENT
-			 , STAR
+			 , RE.STAR
 			 , CREATE_DATE
-			 , MODIFY_DATE
+			 , RE.MODIFY_DATE
 			 , GOOD
-			 , COUNT	
+			 , RE.COUNT
 		  FROM REVIEW RE
-		  JOIN RESTAURANT RS (RE.RES_NO = RS.RES_NO)
+		  JOIN RESTAURANT RS ON (RE.RES_NO = RS.RES_NO)
+		  JOIN ATTACHMENT AT ON (REF_BNO = REVIEW_NO)
 		 WHERE RE.RES_NO = ?
-		   AND RE.STATUS = 'Y'
-	</entry>
+		   AND RE.STATUS = 'Y'  
+	</entry> -->
 </properties>

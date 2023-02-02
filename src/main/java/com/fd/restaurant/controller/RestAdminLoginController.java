@@ -36,7 +36,6 @@ public class RestAdminLoginController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		String which = request.getParameter("which"); //관리자로그인인지 업체로그인인지 담음
-		
 		if(which.equals("rest")) {
 			int restNo = Integer.parseInt(userId);
 			Restaurant loginRest = new RestaurantService().loginRest(restNo, userPwd);
