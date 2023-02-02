@@ -82,7 +82,7 @@
 
             <!-- 헤더바2 검색창 -->
             <div id="header2-padding">
-                <form action="" id="header2-search">
+                <form action="/Fooding/keyword.sh" id="header2-search">
                     <!-- 돋보기 클릭시 검색가능 -->
                     <div id="search">
                         <input type="text" name="keyword" size="45">&nbsp;&nbsp;<img src="/Fooding/resources/images/search.png" width="25" height="25" >

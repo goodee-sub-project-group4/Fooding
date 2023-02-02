@@ -84,6 +84,7 @@
 </style>
 </head>
 <body>
+	<!-- searchSidebar.jsp 파일이 이상할 경우 이 파일을 사용할 것!!  -->
 	<div class="wrap">
     	<div class="content">
 	   		<div id="content1-padding">

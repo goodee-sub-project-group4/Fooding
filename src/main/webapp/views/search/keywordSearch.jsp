@@ -97,8 +97,6 @@
 <body>
     <div class="wrap">
     
-    	<!-- categorySearch.jsp 파일이 안 될 경우 이 파일을 사용할 것!!  -->
-    
         <%@ include file="../common/head.jsp" %>   
         <%@ include file="../common/searchSidebar.jsp" %>
 

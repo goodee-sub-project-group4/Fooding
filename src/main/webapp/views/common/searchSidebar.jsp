@@ -87,7 +87,7 @@
 	<div class="wrap">
     	<div class="content">
 	   		<div id="content1-padding">
-	   			<form name="form" method="post" action="/Fooding/search.res?cpage=1">
+	   			<form name="form" method="post" action="/Fooding/search.res">
 	   			<div id="content1-1"> 
 		            <!--로고랑 카테고리 이름-->
 		            <img src="/Fooding/resources/images/003-location.png" width="30px" height="30px;" class="icon">
@@ -205,6 +205,7 @@
                        <br> 
 		            </div>
 		        </div>
+		        <input type="hidden" name="cpage" value="1">
 		        <button type="submit" align="center">검색하기</button>
 		    </div>
 			</form>

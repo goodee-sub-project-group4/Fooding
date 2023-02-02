@@ -81,7 +81,7 @@ public class SearchDao {
 			
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; 
 			int endRow = startRow + pi.getBoardLimit() - 1;  
-			
+			System.out.println(startRow + " / " + endRow);
 			pstmt.setString(1, localCt);
 			pstmt.setString(2, dLocalCt);
 			pstmt.setString(3, foodCt);
