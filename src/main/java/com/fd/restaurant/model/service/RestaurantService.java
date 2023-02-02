@@ -171,5 +171,18 @@ public class RestaurantService {
 		return list;
 	}
 	
+	public ArrayList<Question> selectNewQuestion(int resNo){
+		Connection conn = getConnection();
+		ArrayList<Question> list = new RestaurantDao().selectNewQuestion(conn, resNo);
+		close(conn);
+		return list;
+	}
+	public ArrayList<Review> selectNewReviw(int resNo){
+		Connection conn = getConnection();
+		ArrayList<Review> list = new RestaurantDao().selectNewReview(conn, resNo);
+		close(conn);
+		return list;
+	}
+	
 
 }

@@ -371,4 +371,54 @@ public class RestaurantDao {
 		
 		return list;
 	}
+	
+	public ArrayList<Question> selectNewQuestion(Connection conn, int resNo) {
+		ArrayList<Question> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNewQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Question q = new Question();
+				q.setqNo(rset.getInt("q_no"));
+				q.setqTitle(rset.getString("q_title"));
+				q.setqContent(rset.getString("q_content"));
+				q.setCreateDate(rset.getString("create_date"));
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public ArrayList<Review> selectNewReview(Connection conn, int resNo) {
+		ArrayList<Review> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNewReview");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Review r = new Review();
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setCreateDate(rset.getString("create_date"));
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 }

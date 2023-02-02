@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.*, com.fd.review.model.vo.Review" %>
+<%
+	ArrayList<Question> qList = (ArrayList<Question>)session.getAttribute("qList");
+	ArrayList<Review> rList = (ArrayList<Review>)session.getAttribute("rList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,17 +14,13 @@
 		/* ↓↓↓ 기본골격용 스타일들 */
 		#outer2 {
 			width:1200px;
-			height: 800px;
-			position: relative;
 			margin:auto;
 		}			
 		
 		#content {
 			width:950px;
-			display: inline-block;
 			box-sizing: border-box;
-			position:absolute;
-			right:10px;
+			float: right;
 		}
 		#menubar {
 			width:200px;
@@ -33,14 +34,8 @@
 		}
 
 		/* ↓↓↓ 컨텐츠용 스타일 */
-		#content {
-			display: inline-block;
-		}
-		#content>div {
-			width:100%;
-			box-sizing:border-box;
-		}
-		#area1 {
+		
+		#area1 { /*신규예약건*/
 			height:400px
 		}
 		#area1 h3, #area2 h3, #area3 h3 {
@@ -71,7 +66,8 @@
 			background-color:whitesmoke;
 			border-color: whitesmoke;
 		}
-		#area2 .alert, #area3 .alert {
+		
+		.data-box2 {
 			width:350px;
 			height:150px;
 			display:inline-block;
@@ -79,6 +75,17 @@
 			background-color:whitesmoke;
 			border-color: whitesmoke;
 			padding:20px;
+			border-radius: 8px;
+		}
+		.dafault { /*데이터가 2개미만이면 뜨는 박스*/
+			position: relative;
+			top:6px;
+			padding:45px;
+		}
+		.dafault img {
+			margin-left: 40px;
+			width:180px;
+			opacity: 0.3;
 		}
 		#area2, #area3 {
 			height:280px;
@@ -120,23 +127,25 @@
 			font-size: 100;
 			font-weight: 900;
 			color:rgb(69, 69, 69);
-			position: relative;
-			bottom:20px;
 		}
 		
 		.title {
 			font-weight: 900;
 			color:rgb(69, 69, 69);
 		}
-		.content {
+		.data-content {
 			display: inline-block;
 			margin-top: 10px;
+			height:50px;
 		}
 		.create-date {
 			float:right;
 			margin-top: 10px;
 		}
-
+		h3:hover, .more:hover {
+			cursor:pointer;
+		}
+		
 
 	</style>
 	
@@ -153,8 +162,8 @@
 			<!-- 컨텐츠 작성부 -->			
 			<div id="area1"><br>
 				<div>					
-					<h3>신규예약건 </h3> <span class="badge">2</span>
-					<span class="more">더보기 <img src="resources/images/more.png" width="25"></span>
+					<h3 onclick="toBook();">신규예약건 </h3> <span class="badge">2</span>
+					<span class="more" onclick="toBook();">더보기 <img src="resources/images/more.png" width="25"></span>
 					
 					<div class="alert alert-secondary">
 						<img class="user" src="/Fooding/resources/images/userIcon3.png">
@@ -179,7 +188,7 @@
 					</div>
 				</div>
 				<div>
-					<h3>이달의 스케줄 </h3> <span class="more">더보기 <img src="resources/images/more.png" width="25"></span>
+					<h3 onclick="toCalendar();">이달의 스케줄 </h3> <span class="more" onclick="toCalendar();">더보기 <img src="resources/images/more.png" width="25"></span>
 					<div id="calendar-area" align="center">
 						<%@ include file="calendarSmall.jsp" %>
 					</div>
@@ -187,30 +196,64 @@
 				</div>
 			</div>
 			<div id="area2">
-				<h3>미답변문의</h3> <span class="badge">4</span>
-				<span class="more">더보기 <img src="resources/images/more.png" width="25"></span>
+				<h3 onclick="toQna();">미답변문의</h3> <span class="badge"><%= qList.size() %></span>
+				<span class="more" onclick="toQna();">더보기 <img src="resources/images/more.png" width="25"></span>
 				<br clear="both">
-				<div class="alert alert-secondary">
-					<span class="title">애견 동반 가능한가요?</span><br>
-					<span class="content">문의/리뷰 내용...어쩌고저쩌고<br>두줄까지표현가능</span><br>
-					<span class="create-date">2023-01-01</span>
+				<% if(qList.size()>0) { %>
+				<div class="data-box2">
+					<span class="title"><%=qList.get(0).getqTitle()%></span><br>
+					<%
+						String origin = qList.get(0).getqContent();
+						String preview = "";
+						if(origin.length()>40) {
+							preview = origin.substring(0,39)+"...";
+						}else {
+							preview = origin;
+						}
+					%>
+					<span class="data-content"><%=preview%></span><br>
+					<span class="create-date"><%=qList.get(0).getCreateDate()%></span>
 				</div>
-				<div class="alert alert-secondary">
-					<span class="title">애견 동반 가능한가요?</span><br>
-					<span class="content">문의/리뷰 내용...어쩌고저쩌고<br>두줄까지표현가능</span><br>
-					<span class="create-date">2023-01-01</span>
+				<% } else { %>
+				<div class="data-box2 dafault">
+					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
+				<% } %>
+				<% if(qList.size()>1) { %>
+				<div class="data-box2">
+					<span class="title"><%=qList.get(1).getqTitle()%></span><br>
+					<%
+						String origin = qList.get(1).getqContent();
+						String preview = "";
+						if(origin.length()>40) {
+							preview = origin.substring(0,39)+"...";
+						}else {
+							preview = origin;
+						}
+					%>
+					<span class="data-content"><%=preview%></span><br>
+					<span class="create-date"><%=qList.get(1).getCreateDate()%></span>
+				</div>
+				<% } else { %>
+				<div class="data-box2 dafault">
+					<img src="<%=contextPath%>/resources/images/logo.png">
+				</div>
+				<% } %>
 				<p>. . . . .</p>
 			</div>
 			<div id="area3">
-				<h3>리뷰</h3> <span class="badge">1</span>
-				<span class="more">더보기 <img src="resources/images/more.png" width="25"></span>
+				<h3 onclick="toReview();">리뷰</h3> <span class="badge">1</span>
+				<span class="more" onclick="toReview();">더보기 <img src="resources/images/more.png" width="25"></span>
 				<br clear="both">
-				<div class="alert alert-secondary">
+				<div class="data-box2" >
 					<span class="title">애견 동반 가능한가요?</span><br>
-					<span class="content">문의/리뷰 내용...어쩌고저쩌고<br>두줄까지표현가능</span><br>
+					<span class="data-content">문의/리뷰 내용...어쩌고저쩌고<br>두줄까지표현가능</span><br>
 					<span class="create-date">2023-01-01</span>
 				</div>
+				<div class="data-box2 dafault">
+					<img src="<%=contextPath%>/resources/images/logo.png">
+				</div>
+				
 				
 				<p>. . . . .</p>
 			</div>
@@ -225,8 +268,22 @@
 	<script>
 		$(function(){
 			$('#title').text("");
-
 		})
+		
+		function toQna(){
+			location.href="<%=contextPath%>/qna.re";
+		}
+		
+		function toBook(){
+			location.href="<%=contextPath%>/book.re";
+		}
+		function toReview(){
+			location.href="<%=contextPath%>/review.re";
+		}
+		function toCalendar(){
+			location.href="<%=contextPath%>/calendar.re";
+		}
+		
 	</script>
 </body>
 </html>
