@@ -41,4 +41,19 @@ DELETE FROM QUESTION WHERE Q_NO=10;
 --반드시 커밋후 테스트할것!!
 COMMIT;
 
-ROLLBACK;
+ SELECT
+             REVIEW_NO
+           , RES_NAME
+           , REVIEW_CONTENT
+           , STAR
+           , CREATE_DATE
+        FROM REVIEW V
+        JOIN BOOK B ON (V.BOOK_NO = B.BOOK_NO )
+        JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
+        LEFT JOIN ATTACHMENT A ON (REVIEW_NO = REF_BNO)
+       WHERE V.STATUS = 'Y'
+
+
+
+	
+
