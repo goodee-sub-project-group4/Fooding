@@ -134,7 +134,7 @@ public class MemberService {
 		Message message = new Message(SmsConst.KEY, SmsConst.PWD);
 		
 		JSONObject jsonObject = (JSONObject)message.send(map);
-		System.out.println(jsonObject);
+		//System.out.println(jsonObject);
 		
 		// Object a = jsonObject.get("success_count");
 		
