@@ -256,4 +256,13 @@
 		  , 'RV'
 		  )	
 	</entry>
+	<entry key="selectReviewAttachment">
+		SELECT
+		       FILE_NO
+		     , CHANGE_NAME
+		     , FILE_PATH
+		  FROM ATTACHMENT
+		 WHERE REF_BNO = ?
+		   AND STATUS = 'Y'
+	</entry>	
 </properties>

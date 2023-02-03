@@ -41,23 +41,7 @@ INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
 INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
 ,'구매10%', 'B', '3000','5000',SYSDATE);
 
---인서트 sql문
-INSERT 
-  INTO POINT 
-  VALUES 
-  (
-    SEQ_PNO.NEXTVAL
-  , NULL
-  , ? -- 회원번호
-  , NULL
-  , ? -- pointName
-  , 'B' -- 적립일때므로 'B'
-  , ? -- pointTrade값 (사용일시 -값을 넣어야한다)
-  ,(
-    SELECT SUM(POINT_TRADE)
-      FROM POINT 
-     WHERE USER_NO= ? /*회원번호*/) + ? /*pointTrade값 */
-  , SYSDATE);
+
 
 ----------------------------------------------------
 

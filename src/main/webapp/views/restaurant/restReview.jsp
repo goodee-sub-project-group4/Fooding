@@ -239,7 +239,7 @@
                     <span onclick="sendBlack()">해당리뷰 신고하기</span>
                     <br clear="both"><br><br>
                     <h3 id="star">★4.5</h3>
-                    <img src="/Fooding/resources/images/forTest.png" class="rounded"><br>
+                    <img id="photo1" src="/Fooding/resources/images/forTest.png" class="rounded"><br>
                     
                     <p id="reviewContent">
                         리뷰내용
@@ -282,16 +282,18 @@
 			$.ajax({
 				url:"<%=contextPath%>/reviewDetail.re",
 				data:{reviewNo:reviewNo},
-				success: function(r){
-					$('#bookNo').text("예약번호 : "+r.bookNo);
-					$('#bookNo').val(r.bookNo);
-					$('#star').text("★"+r.star);
-					$('#reviewContent').text(r.reviewContent);
-					if(r.good=="Y") {
+				success: function(set){
+					$('#bookNo').text("예약번호 : "+set[0].bookNo);
+					$('#bookNo').val(set[0].bookNo);
+					$('#star').text("★"+set[0].star);
+					$('#reviewContent').text(set[0].reviewContent);
+					if(set[0].good=="Y") {
 						
 					}else {
 						
 					}
+					$('#photo1').attr("src", "<%=contextPath%>/" +set[1].filePath+set[1].changeName);
+					console.log("<%=contextPath%>/" +set[1].filePath + set[1].changeName);
 				}, error: function(){
 					console.log("리뷰상세조회 ajax 통신실패")
 				}
