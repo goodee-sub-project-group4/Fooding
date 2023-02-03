@@ -36,6 +36,7 @@ public class Review {
 		this.count = count;
 	}
 	
+	// 리뷰리스트
 	public Review(int reviewNo, String resNo, String reviewContent, double star, String createDate) {
 		super();
 		this.reviewNo = reviewNo;
