@@ -17,14 +17,14 @@
 		        SELECT ROWNUM RNUM, A.*
 		          FROM (
 		                  SELECT 
-		                  		   RES_NO 
+		                  		   RES_NO R
 		                         , RES_NAME
 		                         , ADDRESS || ' ' || D_ADDRESS "ADDRESS"
 		                         , R_IMG
 		                         , FOOD_CT
 		                         , STAR 
 		                         , COUNT
-		                      FROM RESTAURANT  
+		                      FROM RESTAURANT R 
 		                      JOIN REVIEW USING (RES_NO)
 		                     WHERE LOCAL_CT = ?
 		                       AND DLOCAL_CT = ?

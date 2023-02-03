@@ -18,7 +18,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- 지도 API -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=694ae779a7a7935c84a1e22edd5c5d87&libraries=services"></script>
 <style>
     /* 가로 규격 */
     .wrap{width: 1200px; margin: auto; margin-top: 50px; margin-bottom: 100px;}
@@ -42,13 +43,32 @@
     }
 
     .inputForm{
-        width: 200px;
+        width: 300px;
         margin:auto;
    
+    }
+    .inputBar{
+        margin-top: 10px;
+        width: 300px;
+        height: 40px;
+        text-align: center;
+    }
+
+    .selectBar{height: 35px; float: right;}
+
+    .inputName{
+        font-size: 1.4em;
+        font-weight: 300px;
+        vertical-align: middle;
     }
     
     .ss{
         color:red; 
+    }
+
+    #map{
+        width: 300px;
+        height: 350px;
     }
     
 </style>
@@ -66,44 +86,120 @@
                 <form name="form" action="<%= contextPath %>/resForm.res" method="post" enctype="multipart/form-data">
 
                     <div class="inputForm">
-                        대표자명 <span style="color:red;">*</span> <br>
-                        <input type="text" name="ceo" id="ceo" required> <br>
+                        <b class="inputName">대표자명</b> <span style="color:red;">*</span> <br>
+                        <input class="inputBar" type="text" name="ceo" id="ceo" required> <br>
                         <span id="ceoHelper" class="ss"></span>
                     </div>
-                    <br><br>
+                    <br>
 
                     <div class="inputForm">
-                        상호명 <span style="color:red;">*</span>  <br>
-                        <input type="text" name="resName" id="resName" required> <br> 
+                        <b class="inputName">상호명</b> <span style="color:red;">*</span>  <br>
+                        <div style="margin: auto;">
+                            <input class="inputBar" type="text" name="resName" id="resName" required> <br> 
+                        </div>
                         <span id="resNameHelper" class="ss"></span>
                     </div>
-                    <br><br>
+                    <br>
 
                     <div class="inputForm">
-                        사업자등록번호 <span style="color:red;">*</span>  <br>
-                        <input type="text" name="permitNo" id="permitNo" required> <br> 
+                        <b class="inputName">사업자등록번호</b> <span style="color:red;">*</span>  <br>
+                        <input class="inputBar" type="text" name="permitNo" id="permitNo" required> <br> 
                         <span id="permitNoHelper" class="ss"></span>
                     </div>
-                    <br><br>
+                    <br><br><br>
 
                     <div>
                         
                     </div>
                     <div class="inputForm">
-                        주소 <span style="color:red;">*</span>  <br>
-                        <input type="text" name="address" id="address" required> <br> 
-                        <span id="addressHelper" class="ss"></span>
+                        <b class="inputName">주소</b> <span style="color:red;">*</span>  <br>
+                        <input class="inputBar" type="text" name="address" value="" id="address" required> <br> 
                     </div>
-                    <br><br>
+                    <br>
 
 					
                     <div class="inputForm">
-                        상세주소 <span style="color:red;">*</span>  <br>
-                        <input type="text" name="dAddress" id="dAddress" required> <br> 
-                        <span id="dAddressHelper" class="ss"></span>
+                        <b class="inputName">상세주소</b> <span style="color:red;">*</span>  <br>
+                        <input class="inputBar" type="text" name="dAddress" value="" id="dAddress" required> <br> 
                     </div>
+                    <br>
+
+                    <div class="inputForm">
+                        <button type="button" class="btn btn-danger btn-block" id="mapSearch" style="width: 300px; height: 35px">검색하기</button>
+                    </div>
+                    <br>
+
+                    <div class="inputForm">
+                        <div id="map">
+
+                        </div>
+                        <input type="hidden" id="latitude" name="latitude" value="">
+                        <input type="hidden" id="longtitude" name="longtitude" value="">
+                    </div>
+                    <script>
+                        // 카카오 지도 api ---------------------------------------------------------------------- 
+                        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                        mapOption = {
+                            center: new kakao.maps.LatLng(37.477931, 126.878981), // 지도의 중심좌표
+                            level: 1, // 지도의 확대 레벨
+                            mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
+                        }; 
+
+                        // 지도를 생성한다 
+                        var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+                        // 지도에 확대 축소 컨트롤을 생성한다
+                        var zoomControl = new kakao.maps.ZoomControl();
+
+                        // 지도의 우측에 확대 축소 컨트롤을 추가한다
+                        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: new kakao.maps.LatLng(37.477931, 126.878981), // 마커의 좌표
+                            map: map // 마커를 표시할 지도 객체
+                        });
+                        $('#mapSearch').click(function(){
+                            const address = $('#address').val() + $('#dAddress').val()
+                            console.log
+                            // 주소-좌표 변환 객체를 생성합니다
+                            var geocoder = new kakao.maps.services.Geocoder();
+
+                            // 주소로 좌표를 검색합니다
+                            geocoder.addressSearch($('#address').val(), function(result, status) {
+                                // 정상적으로 검색이 완료됐으면 
+                                if (status === kakao.maps.services.Status.OK) {
+
+                                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                                    // 결과값으로 받은 위치를 마커로 표시합니다
+                                    var marker = new kakao.maps.Marker({
+                                        map: map,
+                                        position: coords
+                                    });
+
+                                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                                    map.setCenter(coords);
+                                } 
+                            });
+                            kakao.maps.event.addListener(map, 'center_changed', function() {
+
+                            // 지도의  레벨을 얻어옵니다
+                            var level = map.getLevel();
+
+                            // 지도의 중심좌표를 얻어옵니다 
+                            var latlng = map.getCenter(); 
+                            let lng = latlng.getLng().toFixed(6);
+                            let lat = latlng.getLat().toFixed(6);
+
+                            console.log(lng + ', ' + lat);
+                                
+                            $('#longtitude').attr('value', lng);
+                            $('#latitude').attr('value', lat);
+                            });
+                        });
+                    </script>
                     <br><br>
-                    
                     
                     <div class="inputForm">
                      
@@ -144,10 +240,8 @@
 		                    
 		                </script>
 		                
-		                    시/도 <span style="color:red;">*</span>
-                            <br>
-		                 
-		                    <select name='city' onchange="change(this.selectedIndex);" class=input style="width:190px;">
+                            <b class="inputName">시/도</b> <span style="color:red;">*</span>
+		                    <select class="selectBar" name='city' onchange="change(this.selectedIndex);" class=input style="width:190px;">
 		                        <option value='전체'>전체</option>
 		                        <option value='서울특별시'>서울특별시</option>
 		                        <option value='부산광역시'>부산광역시</option>
@@ -167,9 +261,8 @@
 		                        <option value='제주도'>제주도</option>
 		                    </select>   
 		                    <div style="height: 40px"></div>
-		                    구/군 <span style="color:red;">*</span>
-                            <br>
-		                    <select name='county'  class=select style="width:190px;">
+		                    <b class="inputName">구/군</b> <span style="color:red;">*</span>
+		                    <select class="selectBar" name='county'  class=select style="width:190px;">
 		                        <option value=''>전체</option>
 		                    </select>
                     
@@ -177,32 +270,31 @@
                     <br><br>
                     
                     <div class="inputForm">
-                        전화번호 <span style="color:red;">*</span>  <br>
-                        <input type="text" name="phone" id="phone" required> <br> 
+                        <b class="inputName">전화번호</b> <span style="color:red;">*</span>  <br>
+                        <input class="inputBar" type="text" name="phone" id="phone" required> <br> 
                
                         <span id="phoneHelper" class="ss"></span>
                     </div>
                     <br><br>
 
                     <div class="inputForm">
-                        휴대폰번호 <span style="color:red;">*</span>  <br>
-                        <input type="text" name="cellphone" id="cellphone" required> <br> 
+                        <b class="inputName">휴대폰번호</b> <span style="color:red;">*</span>  <br>
+                        <input class="inputBar" type="text" name="cellphone" id="cellphone" required> <br> 
                         <span id="cellHelper" class="ss"></span>
                     </div>
                     <br><br>
 
                     <div class="inputForm">
-                        이메일 <span style="color:red;">*</span>  <br>
-                        <input type="email" name="email" id="email" required> <br> 
+                        <b class="inputName">이메일</b> <span style="color:red;">*</span>  <br>
+                        <input class="inputBar" type="email" name="email" id="email" required> <br> 
                         <span id="emailHelper" class="ss"></span>
                     </div>
                     <br><br>
 
 
                     <div class="inputForm">
-                        사업체유형 (업종) <span style="color:red;">*</span>  <br>
-
-                        <select name="foodCt" id="foodCt" style="width:190px;">
+                        <b style="font-size: 1.2em; vertical-align: middle;">사업체유형(업종)</b> <span style="color:red;">*</span>
+                        <select class="selectBar" name="foodCt" id="foodCt" style="width:130px;">
                             <option value="western">양식</option>
                             <option value="japanese">일식</option>
                             <option value="chinese">중식</option>
@@ -216,7 +308,7 @@
                     <br><br>
 
                     <div class="inputForm">
-                        주차여부 <span style="color:red;">*</span>  <br>
+                        <b class="inputName">주차여부</b> <span style="color:red;">*</span>  <br>
                         <input type="radio" name="parking" id="Y" value="Y" checked> <label for="Y">가능</label>
                         <input type="radio" name="parking" id="N" value="N"> <label for="N">불가능</label>
                     </div>
@@ -224,8 +316,8 @@
 
 					
                     <div class="inputForm">
-                        업체사진등록 <span style="color:red;">*</span>  <br> 
-                        <input type="file" name="rImg" id="rImg" required> <br> 
+                        <b class="inputName">업체사진등록</b> <span style="color:red;">*</span>  <br> 
+                        <input class="inputBar" type="file" name="rImg" id="rImg" required> <br> 
                     </div>
                     <br><br>
 					 	
