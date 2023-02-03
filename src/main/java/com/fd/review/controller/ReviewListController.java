@@ -15,7 +15,7 @@ import com.fd.review.model.vo.Review;
 /**
  * Servlet implementation class MyPageReviewListController
  */
-@WebServlet("/reviewList.re")
+@WebServlet("/reviewList.me")
 public class ReviewListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

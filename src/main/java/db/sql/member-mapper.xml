@@ -113,7 +113,23 @@
  		   AND USER_PWD = ?
  	</entry>
 
-
+	<!-- 적립금 -->
+	<entry key="insertPoint">
+		INSERT 
+	      INTO POINT 
+	    VALUES 
+	  		 (
+	           SEQ_PNO.NEXTVAL
+	         , NULL
+	         , ?   <!-- 회원번호 -->
+	         , NULL
+			 , '회원가입축하' <!-- 적립내용 -->
+			 , 'B' <!-- 적립일 때 -->
+			 , 1000   <!-- pointTrade값 (사용일시 -값을 넣어야한다) -->
+			 , 1000 <!-- 1,4 동일 3,5 동일 -->
+	     	, SYSDATE
+	     	)
+	</entry>
 
 
 
