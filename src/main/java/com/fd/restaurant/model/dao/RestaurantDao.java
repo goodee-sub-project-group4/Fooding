@@ -431,11 +431,11 @@ public class RestaurantDao {
 		return list;
 	}
 	
-	public Review selectReviewDatail(Connection conn, int reviewNo) {
+	public Review selectReviewDetail(Connection conn, int reviewNo) {
 		Review r= null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectReviewDatail");
+		String sql = prop.getProperty("selectReviewDetail");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewNo);

@@ -184,9 +184,9 @@ public class RestaurantService {
 		return list;
 	}
 	
-	public Review selectReviewDatail(int reviewNo) {
+	public Review selectReviewDetail(int reviewNo) {
 		Connection conn = getConnection();
-		Review r = new RestaurantDao().selectReviewDatail(conn, reviewNo);
+		Review r = new RestaurantDao().selectReviewDetail(conn, reviewNo);
 		close(conn);
 		return r;
 	}

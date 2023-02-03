@@ -88,6 +88,10 @@
             margin-right:7px;
             margin-top:7px;
         }
+        .modal-body span:hover {
+            cursor: pointer;
+            color: crimson;
+        }
         .modal-body label { /*예약번호*/
         	margin-left: 7px;
         	margin-top:7px;
@@ -205,7 +209,7 @@
                         <td><%= preview %></td>
                         <td><%=list.get(i).getCreateDate() %></td>
                         <td><%=(list.get(i).getGood().equals("Y"))? "♥" : "♡" %></td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail" >조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail" onclick="viewDetail(<%=list.get(i).getReviewNo()%>)" >조회</button></td>
                     </tr>
                     <% } %>
                 </tbody>	
@@ -231,14 +235,14 @@
             <div class="modal-content">        
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <label>예약번호 453</label>
-                    <span>해당리뷰 신고하기</span>
+                    <label id="bookNo">예약번호 453</label>
+                    <span onclick="sendblack()">해당리뷰 신고하기</span>
                     <br clear="both"><br><br>
-                    <h3>★4.5</h3>
+                    <h3 id="star">★4.5</h3>
                     <img src="/Fooding/resources/images/forTest.png" class="rounded"><br>
                     
-                    <p>
-                        하여도 원질이 뜨고, 돋고, 무엇을 일월과 열락의 아니다. 안고, 웅대한 이상의 끓는 하는 할지니, 황금시대의 인도하겠다는 인생의 아름다우냐? 아니한 꾸며 피고 있다. 보는 뼈 인생의 만천하의 동산에는 없으면, 관현악이며, 것이다. 원대하고, 장식하는 예수는 소금이라 위하여서. 가진 것은 대고, 주는 눈에 찾아 말이다.
+                    <p id="reviewContent">
+                        리뷰내용
                     </p><br><br>
                     <div id="heart" align="center" onclick="heartFull()">
                         <!-- 좋아요 전 -->
@@ -273,7 +277,30 @@
 			$('#heart').children('img').attr("src","<%=contextPath %>/resources/images/heart-filled.png");
 			$('#heart').children('h4').text("좋아요!");
 		}
-		
+
+        function viewDetail(reviewNo) {
+			$.ajax({
+				url:"<%=contextPath%>/reviewDetail.re",
+				data:{reviewNo:reviewNo},
+				success: function(r){
+					$('#bookNo').text("예약번호 : "+r.bookNo);
+					$('#star').text("★"+r.star);
+					$('#reviewContent').text(r.reviewContent);
+					if(r.good=="Y") {
+						
+					}else {
+						
+					}
+				}, error: function(){
+					console.log("리뷰상세조회 ajax 통신실패")
+				}, complete: function(){
+					console.log("리뷰상세조회 ajax 통신완료")
+				}
+			})
+		}
+        
+        //신고버튼
+        
 		
 		
 		

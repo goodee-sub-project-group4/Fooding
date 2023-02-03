@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fd.common.model.vo.Attachment;
 import com.fd.restaurant.model.service.RestaurantService;
 import com.fd.review.model.vo.Review;
 import com.google.gson.Gson;
@@ -32,7 +33,8 @@ public class AjaxRestReviewDatailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		Review r = new RestaurantService().selectReviewDatail(reviewNo);
+		Review r = new RestaurantService().selectReviewDetail(reviewNo);
+		//Attachment at = new RestaurantService().selectReviewAttachment(reviewNo);
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(r, response.getWriter());
 	}

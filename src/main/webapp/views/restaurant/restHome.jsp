@@ -105,7 +105,7 @@
 		#area2, #area3 {
 			height:280px;
 			padding:30px;
-			/* border:2px sandybrown solid;			 */
+			position: relative;			
 		}
 		.data-box2 {
 			width:350px;
@@ -116,11 +116,10 @@
 			border-color: whitesmoke;
 			padding:22px;
 			border-radius: 8px;
+			
 		}
 		/*데이터가 2개미만이면 뜨는 박스*/
 		.dafault { 
-			position: relative;
-			top:6px;
 			padding:45px;
 		}
 		.dafault img {
@@ -157,14 +156,10 @@
 			font-size: 100;
 			font-weight: 900;
 			color:rgb(69, 69, 69);
-			position: relative;
-			bottom:40px;
+			position: absolute;
+			bottom:100px;
 		}
-		
-		#review-dash {
-			position: relative;
-			bottom:45px;
-		}
+
 		
 
 	</style>
@@ -216,7 +211,7 @@
 				</div>
 			</div>
 			<div id="area2">
-				<h3 onclick="toQna();">미답변문의</h3> <span class="badge" id="quesion-number"><%= qList.size() %></span>
+				<h3 onclick="toQna();">미답변문의</h3> <span class="badge" id="question-number"><%= qList.size() %></span>
 				<span class="more" onclick="toQna();">더보기 <img src="resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<% if(qList.size()>0) { %>
@@ -255,7 +250,7 @@
 					<span class="create-date"><%=qList.get(1).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div name="dafult" class="dafault data-box2 ">
+				<div id="question-default2" class="dafault data-box2 ">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
 				<% } %>
@@ -299,7 +294,7 @@
 					<span class="create-date"><%=rList.get(1).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div name="dafult" class="dafault data-box2">
+				<div id="review-default2" class="dafault data-box2">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
 				<% } %>				
@@ -316,7 +311,14 @@
 	<script>
 		$(function(){
 			$('#title').text("");
-			
+
+			//컨텐츠가 1개일때 디폴트박스가 내려가는 문제 해결
+			if($('#review-number').text()==1) {
+				$("#review-default2").css({"position":"relative", "bottom":"35px"})
+			}
+			if($('#question-number').text()==1) {
+				$("#question-default2").css({"position":"relative", "bottom":"35px"})
+			}
 			
 		})
 		
