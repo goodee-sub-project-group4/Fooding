@@ -20,7 +20,6 @@ public class ReviewService {
 		Connection conn = getConnection();
 		ArrayList<Review> list = new ReviewDao().selectReviewList(conn);
 		close(conn);
-		System.out.println("왜안될까" + list);
 		return list;
 		
 	}
