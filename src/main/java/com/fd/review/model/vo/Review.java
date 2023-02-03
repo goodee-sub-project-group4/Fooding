@@ -6,6 +6,7 @@ public class Review {
 	private int reviewNo;
 	private String resNo;
 	private int userNo;
+	private String userId;
 	private int bookNo;
 	private String reviewContent;
 	private double star;
@@ -26,7 +27,6 @@ public class Review {
 		this.resNo = resNo;
 		this.userNo = userNo;
 		this.bookNo = bookNo;
-		this.reviewTitle = reviewTitle;
 		this.reviewContent = reviewContent;
 		this.star = star;
 		this.createDate = createDate;
@@ -68,6 +68,14 @@ public class Review {
 		this.reviewNo = reviewNo;
 	}
 	
+	public String getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 	public String getResNo() {
 		return resNo;
 	}
@@ -92,13 +100,8 @@ public class Review {
 		this.bookNo = bookNo;
 	}
 	
-	public String getReviewTitle() {
-		return reviewTitle;
-	}
+
 	
-	public void setReviewTitle(String reviewTitle) {
-		this.reviewTitle = reviewTitle;
-	}
 	
 	public String getReviewContent() {
 		return reviewContent;
@@ -159,7 +162,8 @@ public class Review {
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", resNo=" + resNo + ", userNo=" + userNo + ", bookNo=" + bookNo
-				+ ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent + ", star=" + star
+				+ ", reviewContent=" + reviewContent + ", star=" + star
 				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", status=" + status + ", good=" + good
 				+ ", count=" + count + "]";
 	}
+}
