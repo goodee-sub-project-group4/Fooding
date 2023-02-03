@@ -51,7 +51,7 @@
 			position:relative;
 			bottom:4px;
 		}
-		h3:hover, .more:hover { /*제목과 더보기에 클릭효과*/
+		h3:hover, .more:hover, .data-box2:hover { /* 클릭효과*/
 			cursor:pointer;
 		}
 
@@ -114,7 +114,7 @@
 			margin-right: 30px;
 			background-color:whitesmoke;
 			border-color: whitesmoke;
-			padding:20px;
+			padding:22px;
 			border-radius: 8px;
 		}
 		/*데이터가 2개미만이면 뜨는 박스*/
@@ -133,17 +133,22 @@
 			color:rgb(69, 69, 69);
 		}
 		.data-content {
-			display: inline-block;
-			margin-top: 10px;
+			display: block;
+			margin: auto;
 			height:50px;
+			width:300px;
+			/* text-align: center; */
+			padding:5px;
+			/* border:2px solid violet; */
 		}
 		.review { /*리뷰내용영역*/
-			margin-top: 15px;
-			height:68px;
+			margin-top: 11px;
+			height:62px;
 		}
 		.create-date { /*작성일자*/
 			float:right;
-			margin-top: 10px;
+			position: relative;
+			bottom: 11px;
 		}
 		
 
@@ -152,11 +157,13 @@
 			font-size: 100;
 			font-weight: 900;
 			color:rgb(69, 69, 69);
+			position: relative;
+			bottom:40px;
 		}
 		
 		#review-dash {
 			position: relative;
-			top:5px;
+			bottom:45px;
 		}
 		
 
@@ -213,7 +220,7 @@
 				<span class="more" onclick="toQna();">더보기 <img src="resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<% if(qList.size()>0) { %>
-				<div class="data-box2">
+				<div class="data-box2" onclick="toQna();">
 					<span class="title"><%=qList.get(0).getqTitle()%></span><br>
 					<%
 						String origin = qList.get(0).getqContent();
@@ -233,7 +240,7 @@
 				</div>
 				<% } %>
 				<% if(qList.size()>1) { %>
-				<div class="data-box2">
+				<div class="data-box2" onclick="toQna();">
 					<span class="title"><%=qList.get(1).getqTitle()%></span><br>
 					<%
 						String origin = qList.get(1).getqContent();
@@ -259,7 +266,7 @@
 				<span class="more" onclick="toReview();">더보기 <img src="resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<% if(rList.size()>0) { %>
-				<div class="data-box2">
+				<div class="data-box2" onclick="toReview();">
 					<%
 						String origin = rList.get(0).getReviewContent();
 						String preview = "";
@@ -278,12 +285,12 @@
 				</div>
 				<% } %>
 				<% if(rList.size()>1) { %>
-				<div class="data-box2">
+				<div class="data-box2" onclick="toReview();">
 					<%
 						String origin = rList.get(1).getReviewContent();
 						String preview = "";
-						if(origin.length()>20) {
-							preview = origin.substring(0,19)+"...";
+						if(origin.length()>40) {
+							preview = origin.substring(0,39)+"...";
 						}else {
 							preview = origin;
 						}
@@ -309,10 +316,7 @@
 	<script>
 		$(function(){
 			$('#title').text("");
-			// 리뷰박스 콘텐츠가 꽉차면 .dash의 위치가 위로 올라가는 오류 해결용도
-			if($('#review-number').val()==2) {
-				$('#review-dash').css({"color":"red", "position":"relative", "top":"20px"});
-			}
+			
 			
 		})
 		

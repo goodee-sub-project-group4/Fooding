@@ -80,27 +80,36 @@
             float: right;
         }
 
-        /* 리뷰상세조회(모달) */      
+        /*----------------- 리뷰상세조회(모달) ----------------- */      
         .modal-body span { /*신고문구*/
         	color:gray;
         	font-size:12px;
             float: right;
+            margin-right:7px;
+            margin-top:7px;
         }
+        .modal-body label { /*예약번호*/
+        	margin-left: 7px;
+        	margin-top:7px;
+        }
+        
         .modal-body img { /*리뷰사진*/
-            width:200px;
-            float:left;
-            margin-left: 10px;
+            width:400px;
+            margin:auto;
+            display: block;
+            margin: auto;
+           
         }
         .modal-body h3 { /*별점*/
             font-size:40px;
             float: right;
-            margin-right: 10px;
+            margin-right: 40px;
+            margin-bottom: 15px;
         }
         .modal-body p { /*리뷰내용*/
             /* border:1px solid red; */
-            display: inline-block;
-            width:235px;    
-            margin-left:15px;
+            width:400px;    
+            margin: auto;
             text-align: center;       
         }
         .modal-body label { /*리뷰번호*/
@@ -114,6 +123,9 @@
         #heart img {
             display: inline-block;
             width:100px;    
+        }
+        #heart img:hover {
+        	cursor:pointer;
         }
         #heart h4 {
             font-size: 18px;
@@ -181,10 +193,19 @@
                         <td><%=(list.size()-i)%></td>
                         <td><%=list.get(i).getBookNo() %></td>
                         <td><%=list.get(i).getStar() %></td>
-                        <td><%=list.get(i).getReviewContent() %></td>
+                        <%
+                        	String origin = list.get(i).getReviewContent();
+                        	String preview = "";
+                        	if(origin.length()>20) {
+                        		preview = origin.substring(0,19)+"...";
+                        	}else {
+                        		preview = origin;
+                        	}
+                        %>
+                        <td><%= preview %></td>
                         <td><%=list.get(i).getCreateDate() %></td>
                         <td><%=(list.get(i).getGood().equals("Y"))? "♥" : "♡" %></td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail" onclick="viewDetail(<%=list.get(i).getReviewNo() %>)">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail" >조회</button></td>
                     </tr>
                     <% } %>
                 </tbody>	
@@ -212,21 +233,24 @@
                 <div class="modal-body">
                     <label>예약번호 453</label>
                     <span>해당리뷰 신고하기</span>
-                    <br clear="both"><br><br><br>
-                    <img src="/Fooding/resources/images/forTest.png" class="rounded">
+                    <br clear="both"><br><br>
                     <h3>★4.5</h3>
+                    <img src="/Fooding/resources/images/forTest.png" class="rounded"><br>
+                    
                     <p>
-                        분위기도 너무 좋고 맛도 정말좋아요!다시 방문할게요~
-                    </p><br><br><br><br>
-                    <div id="heart" align="center">
+                        하여도 원질이 뜨고, 돋고, 무엇을 일월과 열락의 아니다. 안고, 웅대한 이상의 끓는 하는 할지니, 황금시대의 인도하겠다는 인생의 아름다우냐? 아니한 꾸며 피고 있다. 보는 뼈 인생의 만천하의 동산에는 없으면, 관현악이며, 것이다. 원대하고, 장식하는 예수는 소금이라 위하여서. 가진 것은 대고, 주는 눈에 찾아 말이다.
+                    </p><br><br>
+                    <div id="heart" align="center" onclick="heartFull()">
                         <!-- 좋아요 전 -->
-                        <img src="/Fooding/resources/images/heart-empty.png"><br>
+                        <img src="<%=contextPath %>/resources/images/heart-empty.png" onclick="heartFull()"><br>
+                        <h4 onclick="heartFull()">좋아요 누르기</h4>
                         <!-- 좋아요 후 -->
-                        <!-- <img class="heart" src="/Fooding/resources/images/heart-filled.png"><br> -->
-                        <h4>좋아요 누르기</h4>
+                        <!-- <img class="heart" src="<%=contextPath %>/resources/images/heart-filled.png"><br>
+                        <h4 onclick="heartFull()">좋아요!</h4> -->
+                        
                     </div>
                     
-                    <br clear="both"><br>
+                    <br clear="both">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
                 </div>      
             </div>
@@ -244,20 +268,14 @@
 			$("#menu2").addClass("active");
 			$("#menu2_5").addClass("active");
 		})
-		
-		function viewDetail(reviewNo) {
-			$.ajax({
-				url:"<%=contextPath%>/reviewDetail.re",
-				data:{reviewNo:reviewNo},
-				success: function(r){
-					데이터뿌리기
-				}, error: function(){
-					console.log("리뷰상세조회 ajax 통신실패")
-				}, complete: function(){
-					console.log("리뷰상세조회 ajax 통신완료")
-				}
-			})
+		//하트누르기
+		function heartFull(){
+			$('#heart').children('img').attr("src","<%=contextPath %>/resources/images/heart-filled.png");
+			$('#heart').children('h4').text("좋아요!");
 		}
+		
+		
+		
 		
 	</script>
 </body>
