@@ -22,7 +22,7 @@ import com.oreilly.servlet.MultipartRequest;
 /**
  * Servlet implementation class ReviewFormController
  */
-@WebServlet("/reviewForm.re")
+@WebServlet("/reviewForm.me")
 public class ReviewFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

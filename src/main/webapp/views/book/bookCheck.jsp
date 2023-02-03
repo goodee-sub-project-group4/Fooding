@@ -510,7 +510,7 @@
                             </div>
 
                             <!-- Modal body -->
-                            <form action="<%= contextPath%>/reviewForm.re" id="review-form" method="post" enctype="multipart/form-data">
+                            <form action="<%= contextPath%>/reviewForm.me" id="review-form" method="post" enctype="multipart/form-data">
                                 <div class="modal-body"></div>
                                     <div class="review-content2">
                                         <div id="review-content2-1"><img src="" width="130" height="160"></div> <!-- 업체이미지 가져와야함 -->

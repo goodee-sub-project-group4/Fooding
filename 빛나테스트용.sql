@@ -196,10 +196,6 @@ commit;
 	         )
 	</entry>
 
-
-
-
-
         SELECT
 		       REVIEW_NO
 		     , RES_NAME
@@ -215,7 +211,23 @@ commit;
 		 ORDER
             BY REVIEW_NO DESC;
 
-
+-- 리뷰상세리스트
+        SELECT
+		       REVIEW_NO
+		     , RES_NO
+			 , USER_NO
+             , BOOK_NO
+             , REVIEW_CONTENT
+             , STAR
+             , CREATE_DATE
+             , MODIFY_DATE
+             , STATUS
+             , GOOD
+             , COUNT
+          FROM REVIEW V
+          JOIN BOOK B ON (V.BOOK_NO = B.BOOK_NO )
+		  JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
+	     WHERE REVIEW_NO = 4;
 
 
 
