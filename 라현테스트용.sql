@@ -31,8 +31,28 @@ INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CR
             VALUES(SEQ_RVNO.NEXTVAL, 1201, 2, 3,  '하여도 원질이 뜨고, 돋고, 무엇을 일월과 열락의 아니다. 안고, 웅대한 이상의 끓는 하는 할지니, 황금시대의 인도하겠다는 인생의 아름다우냐? 아니한 꾸며 피고 있다. 보는 뼈 인생의 만천하의 동산에는 없으면, 관현악이며, 것이다. 원대하고, 장식하는 예수는 소금이라 위하여서. 가진 것은 대고, 주는 눈에 찾아 말이다.', 5, SYSDATE, 'Y', 'N', 0);
 INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CREATE_DATE, STATUS, GOOD, COUNT)
             VALUES(SEQ_RVNO.NEXTVAL, 1200, 2, 1,  '굿입니다. 아주 굿이다.', 5, SYSDATE, 'Y', 'N', 0);
-----------------------------------------------------
+------------- ATTACHMENT 첨부파일 -------------
+INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진1.jpg', '2023020309460940055', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
+INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진2.jpg', '2023020309460951785', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
+INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진3.jpg', '2023020309460910025', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
+------------- POINT 적립금 -------------
+--2번회원에게 적립금 추가하는 구문
+INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
+,'새해맞이이벤트', 'B', '2000','2000',SYSDATE);
+INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
+,'구매10%', 'B', '3000','5000',SYSDATE);
 
+INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
+,'구매', 'B', 500, (SELECT POINT_NOW+500 FROM POINT WHERE USER_NO=2 AND ROWNUM=1 ORDER BY POINT_NO DESC),SYSDATE);
+
+--2번 회원의 현재적립금
+SELECT POINT_NOW+500
+FROM POINT
+WHERE USER_NO=2
+AND ROWNUM=1
+ORDER BY POINT_NO DESC;
+
+----------------------------------------------------
 
 --첫로그인 상태로 바꾸기
 UPDATE RESTAURANT SET STATUS='C' WHERE RES_NO=1201;
@@ -45,4 +65,6 @@ DELETE FROM QUESTION WHERE Q_NO=10;
 COMMIT;
 
 ROLLBACK;
+
+
 
