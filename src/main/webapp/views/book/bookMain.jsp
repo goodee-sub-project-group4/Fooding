@@ -8,6 +8,7 @@
 <%
 	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
 	ArrayList<Menu> menuList = (ArrayList<Menu>)request.getAttribute("menuList");
+	int bookNo = (int)request.getAttribute("bookNo");
 	//ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
 %>
 <!DOCTYPE html>
@@ -337,7 +338,7 @@
                                 const date = info.startStr
                                 $('#date').val(info.startStr);
                                 $('#book-date').text('예약날짜 ' + date);
-                                console.log( $('#book-date').text())
+                                $('.bookDate').val(date);
                             }
                         });
                         calendar.render();
@@ -358,37 +359,23 @@
                          // 예약날짜, 시간, 메뉴, 약관 슬라이드 효과 -----------------------------------------------
                         $(function(){
                             $('.menu-slide').click(function(){
-                                    const $slide = $(this).next();
-                                    if($slide.css('display') == 'none'){
-                                        $(this).siblings('.slide-detail1').slideUp();
-                                        $(this).siblings('.slide-detail2').slideUp();
-                                        $('#general-condition-detail1').slideUp();
-                                        $('#general-condition-detail2').slideUp();
-                                        $slide.slideDown();
-                                    }else{
-                                        $slide.slideUp();
-                                    }
-                            });
+                                const $slide = $(this).next();
+                                if($slide.css('display') == 'none'){
+                                    $(this).siblings('.slide-detail1').slideUp();
+                                    $(this).siblings('.slide-detail2').slideUp();
+                                    $('#general-condition-detail1').slideUp();
+                                    $('#general-condition-detail2').slideUp();
+                                    $slide.slideDown();
+                                }else{
+                                    $slide.slideUp();
+                                }
+                            })
 
                             $('#book-menu').click(function(){
-                                if($('#book-date').text() != '날짜 선택' && $('#book-time').text() != '시간 선택'){
-                                    if($('#book-date').css('display') == 'block' || $('#book-time').css('display') == 'block'){
-                                        $('#book-date').next().slideUp();
-                                        $('#book-time').next().slideUp();
-                                        $('#general-condition-detail1').slideUp();
-                                        $('#general-condition-detail2').slideUp();
-                                    };
                                     $('.menu-select').css('display', 'block');
                                     $('#menu-select-border3').css('display', 'none');
                                     $('#menu-payment').css('display', 'none');
                                     $('#menu-selected').css('display', 'block');
-                                }else if($('#book-date').text() == '날짜 선택'){
-                                    alert('날짜를 먼저 선택해주세요!');
-                                    $('#book-date').next().slideDown();
-                                }else{
-                                    alert('시간을 먼저 선택해주세요!');
-                                    $('#book-time').next().slideDown();
-                                }
                             });
 
                             $('.check').click(function(){
@@ -424,6 +411,7 @@
                                 $(this).attr('name', 'bookTime');
                                 $(this).attr('value', bookTimeValue);
                                 $('#book-time').text('예약시간 ' + bookTimeValue);
+                                $('.bookTime').val(bookTimeValue);
                             }
                         });
                     </script>
@@ -518,48 +506,230 @@
                                 <div id="menu-payment" style="width: 300px; height: 50px; margin: auto; padding-top: 10px;">
                                     <button type="button" onclick="payment();" class="btn btn-danger btn-lg payment" style="float: left; width: 100px;" >결제</button>
                                     <button type="button" class="btn btn-secondary btn-lg cancel" style="float: right; width: 100px;" >취소</button>
-                                    <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
+                                    <% if(loginUser != null) { %>
+                                    	<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
+                                    <% } %>
                                     <input type="hidden" name="resNo" value="<%= restaurant.getResNo() %>">
-                                    <input type="hidden" name="bookName" value="">
-                                    <input type="hidden" name="bookPhone" value="">
-                                    <input type="hidden" name="bookDate" value="">
-                                    <input type="hidden" name="bookTime" value="">
-                                    <input type="hidden" name="people" value="">
-                                    <input type="hidden" name="email" value="">
-                                    <input type="hidden" name="request" value="">
+                                    <input type="hidden" class="bookName" name="bookName" value="">
+                                    <input type="hidden" class="bookPhone" name="bookPhone" value="">
+                                    <input type="hidden" class="bookDate" name="bookDate" value="">
+                                    <input type="hidden" class="bookTime" name="bookTime" value="">
+                                    <input type="hidden" class="people" name="people" value="">
+                                    <input type="hidden" class="email" name="email" value="">
+                                    <input type="hidden" class="request" name="request" value="">
                                 </div>
                             </div>
                         </div>
                     </form>
 
-                    <!-- 결제 -->
                     <script>
+                        $(function(){
+                            
+                        });
+                    </script>
+
+                    <!-- 메뉴 / 결제창 -->
+                    <script>
+                        // 메뉴 추가
+                        $('.menuAdd.btn.btn-secondary.btn-sm').click(function(){
+                            const addMenu = $(this).parent().prev().children();
+                            const table = $('#menu-select-border2>table>tbody>tr').length;
+                            const tableData = $('#menu-select-border2>table>tbody>tr').text();
+                            //console.log(tableData);
+                            if(table == 0) {
+                                    $('#menu-select-border2 tbody:first').append(
+                                    '<tr class="menu-choice">'
+                                    + '<td class="menuName">' + addMenu.eq(0).text() + '</td>'
+                                    + '<td>'
+                                    +    '<button class="minus" type="button">-</button> '
+                                    +    '<input id="quantity"  class="quantity" type="number" value="1" required> '
+                                    +    '<button class="plus" type="button">+</button> '
+                                    + '</td>'
+                                    + '<td id="price' + variable + '" style="text-align: right;" >' + addMenu.eq(1).text().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원' + '</td>'
+                                    + '</tr>'
+                                );
+                            }else if(tableData.indexOf(addMenu.eq(0).text()) < 0){
+                                variable++;
+                                $('#menu-select-border2 tbody:first').append(
+                                    '<tr class="menu-choice">'
+                                    + '<td class="menuName">' + addMenu.eq(0).text() + '</td>'
+                                    + '<td>'
+                                    +    '<button class="minus" type="button">-</button> '
+                                    +    '<input id="quantity" class="quantity" type="number" value="1" required> '
+                                    +    '<button class="plus" type="button">+</button> '
+                                    + '</td>'
+                                    + '<td id="price' + variable + '"style="text-align: right;" >' + addMenu.eq(1).text().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원' + '</td>'
+                                    + '</tr>'
+                                );
+                            }else{
+                                $(".menu-choice").each(function(){
+                                    if($(this).children().eq(0).text() == addMenu.eq(0).text()){
+                                        $(this).find("input").val(Number($(this).find("input").val()) + 1);
+                                        const price = addMenu.eq(1).text(); 
+                                        result = $(this).find("input").val() * price;
+                                        $(this).children().eq(2).text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                                    };
+                                });
+                            };
+                            sum = 0;
+                            $(".menu-choice").each(function(){
+                                i = 0;
+                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
+                                sum += menuPrice[i];
+                                i++
+                            })
+                            $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                        });
+                        
+                        $('.menuRemove.btn.btn-danger.btn-sm').click(function(){
+                            const addMenu = $(this).parent().prev().children();
+                            console.log(addMenu);
+                            $(".menu-choice").each(function(){
+                                if($(this).children().eq(0).text() == addMenu.eq(0).text()){
+                                    $(this).remove();
+                                };
+                            });
+                            sum = 0;
+                            $(".menu-choice").each(function(){
+                                i = 0;
+                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
+                                sum += menuPrice[i];
+                                i++
+                            })
+                            $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                        })
+                            
+                        // 수량 추가, 삭제
+                        $(document).on('click', '.minus', function(){
+                            const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
+                            const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
+                            let price = $(this).parents('.menu-choice').children().eq(2);
+                            let value = $(this).next();
+                            if($(this).next().val() > 1){
+                                value.val(parseInt(value.val()) - 1);
+                                $('.menuAdd.btn.btn-secondary.btn-sm').each(function(){
+                                    if($(this).parent().prev().children().eq(0).text() == addedMenuName){
+                                        let menuInfo = parseInt($(this).parent().prev().children().eq(1).text());
+                                        result = menuInfo * parseInt(value.val())
+                                        price.text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                                    }
+                                });
+                            }else{
+                                $(this).parents('tr.menu-choice').remove();
+                            }
+                            sum = 0;
+                            $(".menu-choice").each(function(){
+                                i = 0;
+                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
+                                sum += menuPrice[i];
+                                i++
+                            })
+                            $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                        });
+                        $(document).on('click', '.plus', function(){
+                            const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
+                            const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
+                            let price = $(this).parents('.menu-choice').children().eq(2);
+                            let value = $(this).prev();
+                            if(value.val() == ''){
+                                value.val(0);
+                            }
+                            value.val(parseInt(value.val()) + 1);
+                            $('.menuAdd.btn.btn-secondary.btn-sm').each(function(){
+                                if($(this).parent().prev().children().eq(0).text() == addedMenuName){
+                                    let menuInfo = parseInt($(this).parent().prev().children().eq(1).text());
+                                    result = menuInfo * parseInt(value.val())
+                                    price.text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                                }
+                            })
+                            sum = 0;
+                            $(".menu-choice").each(function(){
+                                i = 0;
+                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
+                                sum += menuPrice[i];
+                                i++
+                            })
+                            $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                        });
+                        $(document).on('keyup', '.quantity', function(){
+                            const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
+                            const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
+                            let price = $(this).parents('.menu-choice').children().eq(2);
+                            let value = $(this);
+                            $(this).val().replace(transNumber);
+                            if($(this).val() == 0 && $(this).val() != ''){
+                                alert('1 이상의 숫자만 입력해주세요')
+                                $(this).val(1)
+                            }
+                            $('.menuAdd.btn.btn-secondary.btn-sm').each(function(){
+                                if($(this).parent().prev().children().eq(0).text() == addedMenuName){
+                                    if(value.val() != ''){
+                                        let menuInfo = parseInt($(this).parent().prev().children().eq(1).text());
+                                        result = (menuInfo) * parseInt(value.val());
+                                        price.text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                                    }else{
+                                        price.text('0원');
+                                    }
+                                }
+                                sum = 0;
+                                $(".menu-choice").each(function(){
+                                    i = 0;
+                                    menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
+                                    sum += menuPrice[i];
+                                    i++
+                                })
+                                $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            });
+                        });
+                        // - / + 입력 방지
+                        $(document).on('keydown', '.quantity', function(e){
+                            if(!((e.keyCode > 95 && e.keyCode < 106)
+                            || (e.keyCode > 47 && e.keyCode < 58) 
+                            || e.keyCode == 8)) {
+                                return false;
+                            }
+                        });
+                        // 메뉴 취소 버튼
+                        $('.cancel').click(function(){
+                            $('.menu-select').css('display', 'none');
+                        });
+
+                            
                         var IMP = window.IMP; 
                         IMP.init("imp44408883"); 
                         function payment() {
-                          // IMP.request_pay(param, callback) 결제창 호출
-                          IMP.request_pay({ // param
-                              pg: "html5_inicis",
-                              pay_method: "card",
-                              merchant_uid: "ORD20180131-0000011",
-                              name: "노르웨이 회전 의자",
-                              amount: 500,
-                              buyer_email: "gildong@gmail.com",
-                              buyer_name: "홍길동",
-                              buyer_tel: "010-4242-4242",
-                              buyer_addr: "서울특별시 강남구 신사동",
-                              buyer_postcode: "01181"
-                          }, function (rsp) { // callback
-                              if (rsp.success) {
-                                //   ...,
-                                  // 결제 성공 시 로직,
-                                //   ...
-                              } else {
-                                //   ...,
-                                  // 결제 실패 시 로직,
-                                //   ...
-                              }
-                          });
+                            const menuChoice = document.querySelectorAll(".menuName"); // [td, td, ..]
+                            let menu = [];
+                            for(i=0; i<menuChoice.length; i++){
+                                menu.push(menuChoice[i].innerText);
+                            }
+                            // ["xx", "bb"]
+                            console.log($('.bookName').val())
+                            // IMP.request_pay(param, callback) 결제창 호출
+                            IMP.request_pay({ // param
+                                pg: "html5_inicis",
+                                pay_method: "card",
+                                merchant_uid: "<%= bookNo + 1 %>2",
+                                name: menu.join("<br>"),
+                                amount: 1,
+                                buyer_email: $('.email').val(),
+                                buyer_name: $('.bookName').val(),
+                                buyer_tel: $('.bookPhone').val(),
+                            }, function (rsp) { // callback
+                                if (rsp.success) {
+                                    ajax({
+                                        url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
+                                        method: "POST",
+                                        headers: { "Content-Type": "application/json" },
+                                        data: {
+                                            imp_uid: rsp.imp_uid,
+                                            merchant_uid: rsp.merchant_uid
+                                        }
+                                    })
+                                } else {
+                                    alert("결제에 실패했습니다.")
+                                }
+                            });
                         }
                       </script>
 
@@ -569,7 +739,7 @@
                     <div id="book-menu4-btn">
                         <div>
                             <button class="minus" style="width: 50px; height: 50px;">-</button>
-                            <input id="quantity" class="quantity" type="number" value="1" style="width: 75px; height:50px;"> 
+                            <input id="quantity" class="quantity bookPeople" type="number" value="1" style="width: 75px; height:50px;"> 
                             <button class="plus" style="width: 50px; height: 50px;">+</button>
                         </div>
                     </div>
@@ -584,50 +754,51 @@
                         </div>
                         <table style="width: 95%; margin: auto;">
                         	<% if(loginUser != null) { %>
-                            <tr>
-                                <th style="width: 25%; height: 50px;">예약자<b style="color: crimson;">*</b></th>
-                                <td><input class="align2" type="text" name="bookUserName" value="<%= loginUser.getUserName() %>" placeholder="김푸딩" style="width: 100%; height: 45px;" required></td>
-                            </tr>
-                            <tr>
-                                <th style="height: 50px;">연락처<b style="color: crimson;">*</b></th>
-                                <td><input class="align2" type="text" name="bookUserPhone" value="<%= loginUser.getUserPhone() %>" placeholder="010-0000-0000" style="width: 100%; height: 45px;" required></td>
-                            </tr>
-                            <tr>
-                                <th style="height: 50px;">이메일</th>
-                                <td><input class="align2" type="text" name="bookEmail" value="<%= loginUser.getUserEmail() %>" placeholder="fooding@naver.com" style="width: 100%; height: 45px;" required></td>
-                            </tr>
+                                <tr>
+                                    <th style="width: 25%; height: 50px;">예약자<b style="color: crimson;">*</b></th>
+                                    <td><input class="align2 bookUserName" type="text" name="bookUserName" value="<%= loginUser.getUserName() %>" placeholder="김푸딩" style="width: 100%; height: 45px;" required></td>
+                                </tr>
+                                <tr>
+                                    <th style="height: 50px;">연락처<b style="color: crimson;">*</b></th>
+                                    <td><input class="align2 bookUserPhone" type="text" name="bookUserPhone" value="<%= loginUser.getUserPhone() %>" placeholder="010-0000-0000" style="width: 100%; height: 45px;" required></td>
+                                </tr>
+                                <tr>
+                                    <th style="height: 50px;">이메일</th>
+                                    <td><input class="align2 bookEmail" type="text" name="bookEmail" value="<%= loginUser.getUserEmail() %>" placeholder="fooding@naver.com" style="width: 100%; height: 45px;" required></td>
+                                </tr>
                             <% }else{ %>
-                            <tr>
-                                <th style="width: 25%; height: 50px;">예약자<b style="color: crimson;">*</b></th>
-                                <td><input class="align2" type="text" name="bookUserName" placeholder="김푸딩" style="width: 100%; height: 45px;" required></td>
-                            </tr>
-                            <tr>
-                                <th style="height: 50px;">연락처<b style="color: crimson;">*</b></th>
-                                <td><input class="align2" type="text" name="bookUserPhone" placeholder="010-0000-0000" style="width: 100%; height: 45px;" required></td>
-                            </tr>
-                            <tr>
-                                <th style="height: 50px;">이메일</th>
-                                <td><input class="align2" type="text" name="bookEmail" placeholder="fooding@naver.com" style="width: 100%; height: 45px;" required></td>
-                            </tr>
+                                <tr>
+                                    <th style="width: 25%; height: 50px;">예약자<b style="color: crimson;">*</b></th>
+                                    <td><input class="align2 bookUserName" type="text" name="bookUserName" placeholder="김푸딩" style="width: 100%; height: 45px;" required></td>
+                                </tr>
+                                <tr>
+                                    <th style="height: 50px;">연락처<b style="color: crimson;">*</b></th>
+                                    <td><input class="align2 bookUserPhone" type="text" name="bookUserPhone" placeholder="010-0000-0000" style="width: 100%; height: 45px;" required></td>
+                                </tr>
+                                <tr>
+                                    <th style="height: 50px;">이메일</th>
+                                    <td><input class="align2 bookEmail" type="text" name="bookEmail" placeholder="fooding@naver.com" style="width: 100%; height: 45px;" required></td>
+                                </tr>
                             <% } %>
-                            <tr>
-                                <td colspan="2" style="text-align: right;">* 작성 시 예약 확인 메일이 발송됩니다<br><br></td>
-                                
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <b>요청사항</b> <br>
-                                    <textarea class="align2" name="bookRequest" placeholder="요청사항을 입력해주세요" cols="40" rows="7" style="resize: none; overflow: hidden;"></textarea>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: right;">* 작성 시 예약 확인 메일이 발송됩니다<br><br></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <b>요청사항</b> <br>
+                                        <textarea class="align2 bookRequest" name="bookRequest" placeholder="요청사항을 입력해주세요" cols="40" rows="7" style="resize: none; overflow: hidden;"></textarea>
+                                    </td>
+                                </tr>
                         </table>
+                        
                         
                         <div></div>
                     </div>
                     <br>
                     <div>
                         <div class="book-category" style="margin-bottom: 10px;">서비스 약관</div>
-                        <div class="general-condition">개인정보 수집 동의</div>
+                        <div class="general-condition"><input type="checkbox"> 개인정보 수집 동의</div>
                         <div id="general-condition-detail1" style="overflow: auto;">
                             <p style="padding: 5px;"> -개인정보 수집 동의-
                             <br><br>1. 기본수집항목: [필수] 푸딩 아이디, 이름, (휴대)전화번호, [선택] 이메일 주소
@@ -637,7 +808,7 @@
                             <br>&nbsp;&nbsp;- 단, 관련 법령에 의하여 일정 기간 보관이 필요한 경우에는 해당 기간 동안 보관함
                             <br><br>4. 동의 거부권 등에 대한 고지: 정보주체는 개인정보의 수집 및 이용 동의를 거부할 권리가 있으나, 이 경우 상품 및 서비스 예약이 제한될 수 있습니다. 그 밖의 내용은 푸딩 개인정보 처리방침을 따릅니다.</p>
                         </div>
-                        <div class="general-condition">개인정보 제공 동의</div>
+                        <div class="general-condition"><input type="checkbox"> 개인정보 제공 동의</div>
                         <div id="general-condition-detail2" style="overflow: auto;">
                             <p style="padding: 5px;"> -개인정보 제공 동의-
                             <br><br>1. 개인정보를 제공받는 자 : 이용업체
@@ -647,19 +818,47 @@
                             <br><br>5. 동의 거부권 등에 대한 고지 : 정보주체는 개인정보 제공 동의를 거부할 권리가 있으나, 이 경우 상품 및 서비스 예약이 제한될 수 있습니다.</p>
                         </div>
                     </div>
+                    <!-- 서비스 약관 동의 -->
+                    <script>
+                        $('.general-condition').click(function(){
+                            $(this).children().attr('checked', true);
+                        })
+                    </script>
                     <br><br>
                     <div>
                         <button id="book-final" type="button" class="btn btn-outline-danger btn-lg" style="display: block; margin: auto;">예약하기</button>
                     </div>
 
+                    <!-- 예약하기 버튼 -->
                     <script>
                         $('#book-final').click(function(){
-                            $('.menu-select').css('display', 'block');
-                            $('#menu-select-border3').css('display', 'block');
-                            $('#menu-payment').css('display', 'block');
-                            $('#menu-selected').css('display', 'none');
-                        })
-                   
+                            $('.bookName').val($('.bookUserName').val());
+                            $('.bookPhone').val($('.bookUserPhone').val());
+                            $('.email').val($('.bookEmail').val());
+                            $('.people').val($('.bookPeople').val());
+                            $('.request').val($('.bookRequest').val());
+
+                            if($('#book-date').text() == '날짜 선택'){
+                                alert('날짜를 먼저 선택해주세요!');
+                                $('#book-time').next().slideUp();
+                                $('#book-date').next().slideDown();
+                            }else if($('#book-time').text() == '시간 선택'){
+                                alert('시간을 먼저 선택해주세요!');
+                                $('#book-date').next().slideUp();
+                                $('#book-time').next().slideDown();
+                            }else if($('.bookName').val() == ""){
+                                alert("예약자명을 입력해주세요")
+                            }else if($('.bookPhone').val() == ""){
+                                alert("예약자 연락처를 입력해주세요")
+                            }else{
+                                $('.menu-select').css('display', 'block');
+                                $('#menu-select-border3').css('display', 'block');
+                                $('#menu-payment').css('display', 'block');
+                                $('#menu-selected').css('display', 'none');
+                                // 예약 정보 데이터
+                                
+                            }
+                        });
                     </script>
 
                 </div>
@@ -806,173 +1005,8 @@
                     })
                 }
             })
-                    
-
             
             
-            // 메뉴 추가
-            $('.menuAdd.btn.btn-secondary.btn-sm').click(function(){
-                const addMenu = $(this).parent().prev().children();
-                const table = $('#menu-select-border2>table>tbody>tr').length;
-                const tableData = $('#menu-select-border2>table>tbody>tr').text();
-                //console.log(tableData);
-                if(table == 0) {
-                        $('#menu-select-border2 tbody:first').append(
-                        '<tr class="menu-choice">'
-                        + '<td>' + addMenu.eq(0).text() + '</td>'
-                        + '<td>'
-                        +    '<button class="minus" type="button">-</button> '
-                        +    '<input id="quantity"  class="quantity" type="number" value="1" required> '
-                        +    '<button class="plus" type="button">+</button> '
-                        + '</td>'
-                        + '<td id="price' + variable + '" style="text-align: right;" >' + addMenu.eq(1).text().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원' + '</td>'
-                        + '</tr>'
-                    );
-                }else if(tableData.indexOf(addMenu.eq(0).text()) < 0){
-                    variable++;
-                    $('#menu-select-border2 tbody:first').append(
-                        '<tr class="menu-choice">'
-                        + '<td>' + addMenu.eq(0).text() + '</td>'
-                        + '<td>'
-                        +    '<button class="minus" type="button">-</button> '
-                        +    '<input id="quantity" class="quantity" type="number" value="1" required> '
-                        +    '<button class="plus" type="button">+</button> '
-                        + '</td>'
-                        + '<td id="price' + variable + '"style="text-align: right;" >' + addMenu.eq(1).text().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원' + '</td>'
-                        + '</tr>'
-                    );
-                }else{
-                    $(".menu-choice").each(function(){
-                        if($(this).children().eq(0).text() == addMenu.eq(0).text()){
-                            $(this).find("input").val(Number($(this).find("input").val()) + 1);
-                            const price = addMenu.eq(1).text(); 
-                            result = $(this).find("input").val() * price;
-                            $(this).children().eq(2).text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-                        };
-                    });
-                };
-                sum = 0;
-                $(".menu-choice").each(function(){
-                    i = 0;
-                    menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
-                    sum += menuPrice[i];
-                    i++
-                })
-                $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-            });
-            
-            $('.menuRemove.btn.btn-danger.btn-sm').click(function(){
-                const addMenu = $(this).parent().prev().children();
-                console.log(addMenu);
-                $(".menu-choice").each(function(){
-                    if($(this).children().eq(0).text() == addMenu.eq(0).text()){
-                        $(this).remove();
-                    };
-                });
-                sum = 0;
-                $(".menu-choice").each(function(){
-                    i = 0;
-                    menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
-                    sum += menuPrice[i];
-                    i++
-                })
-                $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-            })
-                
-            // 수량 추가, 삭제
-            $(document).on('click', '.minus', function(){
-                const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
-                const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
-                let price = $(this).parents('.menu-choice').children().eq(2);
-                let value = $(this).next();
-                if($(this).next().val() > 1){
-                    value.val(parseInt(value.val()) - 1);
-                    $('.menuAdd.btn.btn-secondary.btn-sm').each(function(){
-                        if($(this).parent().prev().children().eq(0).text() == addedMenuName){
-                            let menuInfo = parseInt($(this).parent().prev().children().eq(1).text());
-                            result = menuInfo * parseInt(value.val())
-                            price.text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-                        }
-                    });
-                }else{
-                    $(this).parents('tr.menu-choice').remove();
-                }
-                sum = 0;
-                $(".menu-choice").each(function(){
-                    i = 0;
-                    menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
-                    sum += menuPrice[i];
-                    i++
-                })
-                $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-            });
-            $(document).on('click', '.plus', function(){
-                const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
-                const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
-                let price = $(this).parents('.menu-choice').children().eq(2);
-                let value = $(this).prev();
-                if(value.val() == ''){
-                    value.val(0);
-                }
-                value.val(parseInt(value.val()) + 1);
-                $('.menuAdd.btn.btn-secondary.btn-sm').each(function(){
-                    if($(this).parent().prev().children().eq(0).text() == addedMenuName){
-                        let menuInfo = parseInt($(this).parent().prev().children().eq(1).text());
-                        result = menuInfo * parseInt(value.val())
-                        price.text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-                    }
-                })
-                sum = 0;
-                $(".menu-choice").each(function(){
-                    i = 0;
-                    menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
-                    sum += menuPrice[i];
-                    i++
-                })
-                $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-            });
-            $(document).on('keyup', '.quantity', function(){
-                const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
-                const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
-                let price = $(this).parents('.menu-choice').children().eq(2);
-                let value = $(this);
-                $(this).val().replace(transNumber);
-                if($(this).val() == 0 && $(this).val() != ''){
-                    alert('1 이상의 숫자만 입력해주세요')
-                    $(this).val(1)
-                }
-                $('.menuAdd.btn.btn-secondary.btn-sm').each(function(){
-                    if($(this).parent().prev().children().eq(0).text() == addedMenuName){
-                        if(value.val() != ''){
-                            let menuInfo = parseInt($(this).parent().prev().children().eq(1).text());
-                            result = (menuInfo) * parseInt(value.val());
-                            price.text(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-                        }else{
-                            price.text('0원');
-                        }
-                    }
-                    sum = 0;
-                    $(".menu-choice").each(function(){
-                        i = 0;
-                        menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
-                        sum += menuPrice[i];
-                        i++
-                    })
-                    $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-                });
-            });
-            // - / + 입력 방지
-            $(document).on('keydown', '.quantity', function(e){
-                if(!((e.keyCode > 95 && e.keyCode < 106)
-                || (e.keyCode > 47 && e.keyCode < 58) 
-                || e.keyCode == 8)) {
-                    return false;
-                }
-            });
-            // 메뉴 취소 버튼
-            $('.cancel').click(function(){
-                $('.menu-select').css('display', 'none');
-            });
 
             
         </script>

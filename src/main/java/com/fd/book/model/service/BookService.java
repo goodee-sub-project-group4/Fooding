@@ -48,6 +48,14 @@ public class BookService {
 
 
 
+	public int selectBookNo(int resNo) {
+		Connection conn = getConnection();
+		int result = new BookDao().selectBookNo(conn, resNo);
+		return result;
+	}
+
+
+
 //	public ArrayList<Review> selectReview(int resNo) {
 //		Connection conn = getConnection();
 //		ArrayList<Review> list = new BookDao().selectReview(resNo, conn);
