@@ -52,6 +52,14 @@
 		 WHERE RS.RES_NO = ?
 	       AND STATUS = 'Y'
 	</entry>
+	<entry key="selectBookNo">
+		SELECT BOOK_NO
+		  FROM BOOK B
+		  JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
+		 WHERE B.RES_NO = ?
+		   AND R.STATUS = 'Y'
+	</entry>
+	
 	<!-- <entry key="selectReview">
 		SELECT
 			   REVIEW_NO
