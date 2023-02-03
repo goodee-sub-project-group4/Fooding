@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.fd.admin.model.vo.Black;
 import com.fd.admin.model.vo.Question;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
@@ -458,5 +459,23 @@ public class RestaurantDao {
 		}
 		
 		return r;
+	}
+	
+	public int insertBlack(Connection conn, Black b) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertBlack");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }
