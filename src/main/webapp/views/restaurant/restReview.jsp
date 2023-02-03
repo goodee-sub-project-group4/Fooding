@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.review.model.vo.Review" %>
+<%
+	ArrayList<Review> list = (ArrayList<Review>)session.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -161,7 +165,7 @@
 				<thead>
 					<tr class="table-secondary">
 						<th><input type="checkbox"></th>
-						<th>번호</th>
+						<th>순번</th>
 						<th>예약번호</th>
 						<th>별점</th>
 						<th>리뷰내용</th>
@@ -171,106 +175,18 @@
 					</tr>
                 </thead>
                 <tbody>
+                	<% for(int i=0; i<list.size(); i++) { %>
                     <tr>
                         <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♡</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
+                        <td><%=(list.size()-i)%></td>
+                        <td><%=list.get(i).getBookNo() %></td>
+                        <td><%=list.get(i).getStar() %></td>
+                        <td><%=list.get(i).getReviewContent() %></td>
+                        <td><%=list.get(i).getCreateDate() %></td>
+                        <td><%=(list.get(i).getGood().equals("Y"))? "♥" : "♡" %></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail" onclick="viewDetail(<%=list.get(i).getReviewNo() %>)">조회</button></td>
                     </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♥</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♡</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♡</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♡</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♡</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♥</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♥</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♥</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♥</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
+                    <% } %>
                 </tbody>	
 			</table><br><br>
             <!--페이징바-->
@@ -327,9 +243,21 @@
 			$('#title').text("리뷰관리");
 			$("#menu2").addClass("active");
 			$("#menu2_5").addClass("active");
-
-
 		})
+		
+		function viewDetail(reviewNo) {
+			$.ajax({
+				url:"<%=contextPath%>/reviewDetail.re",
+				data:{reviewNo:reviewNo},
+				success: function(r){
+					데이터뿌리기
+				}, error: function(){
+					console.log("리뷰상세조회 ajax 통신실패")
+				}, complete: function(){
+					console.log("리뷰상세조회 ajax 통신완료")
+				}
+			})
+		}
 		
 	</script>
 </body>
