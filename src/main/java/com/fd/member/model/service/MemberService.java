@@ -35,18 +35,19 @@ public class MemberService {
 	 * @param m 
 	 * @return result 
 	 */
-	public int insertMember(Member m) {
+	public Member insertMember(Member m) {
 		
 		Connection conn = getConnection();
 		int result = new MemberDao().insertMember(conn, m);
-		
+		Member selectMember = null; // 적립금
 		if(result > 0) { 
 			commit(conn);
+			selectMember = new MemberDao().selectMember(conn, m.getUserId(), m.getUserPwd()); // 적립금
 		} else {
 			rollback(conn);
 		}
 		
-		return result;
+		return selectMember;
 		
 	}
 	
@@ -124,6 +125,10 @@ public class MemberService {
 		
 	}
 	
+	/** 핸드폰인증 api
+	 * @param map
+	 * @throws Exception
+	 */
 	public void sendMessage(HashMap<String, String> map) throws Exception {
 		
 		Message message = new Message(SmsConst.KEY, SmsConst.PWD);
@@ -136,7 +141,24 @@ public class MemberService {
 		
 	}
 	
-	
+	/** 회원가입축하 적립금
+	 * @param selectMember
+	 * @return
+	 */
+	public int insertPoint(Member selectMember) {
+		
+		Connection conn = getConnection();
+		int result2 = new MemberDao().insertPoint(conn, selectMember);
+		
+		if(result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result2;
+		
+	}
 	
 	
 	

@@ -297,7 +297,29 @@ public class MemberDao {
 		
 	}
 	
-	
+	public int insertPoint(Connection conn, Member selectMember) {
+		// insert문
+		int result2 = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertPoint");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, selectMember.getUserNo());
+			
+			
+			result2 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result2;
+		
+	}
 	
 	
 	

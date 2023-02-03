@@ -13,14 +13,12 @@ INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, SEQ_RESNO.CURRVAL, 3, 2, '넘 맛�
 INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, SEQ_RESNO.CURRVAL, 2, 1, '메롱~!', 4.5, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
 INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, SEQ_RESNO.CURRVAL, 3, 2, '여기 다시 올거같아요', 4.0, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
 
--- ATTACHMENT
-INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진1.jpg', '2023020309460940055', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
-INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진2.jpg', '2023020309460951785', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
-INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진3.jpg', '2023020309460910025', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
-
-DELETE FROM ATTACHMENT WHERE FILE_NO=6;
-
-
+-- 다솜
+INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'admin01', '1111', '푸딩01', '', '', '', '', '', '', '', 'A');
+INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'admin02', '2222', '푸딩02', '', '', '', '', '', '', '', 'A');
+INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user01', '1111', '팜하니', '농장주인', 'farmer@naver.com', '01000001111', 'F', '20040101', SYSDATE, SYSDATE, 'Y');
+INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user02', '2222', '강해린', '아기고양이', 'kitty@naver.com', '01000002222', 'F', '20040102', SYSDATE, SYSDATE, 'Y');
+INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user03', '3333', '김민지', '핫세', 'minji33@naver.com', '01000003333', 'F', '20040103', SYSDATE, SYSDATE, 'Y');
 
 
 COMMIT;
@@ -196,6 +194,10 @@ commit;
 	         )
 	</entry>
 
+
+
+
+
         SELECT
 		       REVIEW_NO
 		     , RES_NAME
@@ -211,23 +213,23 @@ commit;
 		 ORDER
             BY REVIEW_NO DESC;
 
--- 리뷰상세리스트
+-- 왜한줄씩 안나오지 리스트
         SELECT
 		       REVIEW_NO
-		     , RES_NO
-			 , USER_NO
-             , BOOK_NO
-             , REVIEW_CONTENT
-             , STAR
-             , CREATE_DATE
-             , MODIFY_DATE
-             , STATUS
-             , GOOD
-             , COUNT
-          FROM REVIEW V
-          JOIN BOOK B ON (V.BOOK_NO = B.BOOK_NO )
+		     , RES_NAME
+		     , REVIEW_CONTENT
+		     , STAR
+		     , TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') "CREATE_DATE"
+		  FROM REVIEW V
+		  JOIN BOOK B ON (V.BOOK_NO = B.BOOK_NO )
 		  JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
-	     WHERE REVIEW_NO = 4;
+		 WHERE V.STATUS = 'Y'
+		 ORDER
+            BY REVIEW_NO DESC;
+            
+        
+
+
 
 
 
