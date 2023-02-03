@@ -52,7 +52,7 @@ public class ReviewDao {
 						            rset.getString("res_name"),
 						            rset.getString("review_content"),
 						            rset.getDouble("star"),
-						            rset.getDate("create_date")));
+						            rset.getString("create_date")));
 			}
 			
 		} catch (SQLException e) {
@@ -83,9 +83,10 @@ public class ReviewDao {
 			pstmt = conn.prepareStatement(sql);
 			// 업체명 담아야함
 			pstmt.setString(1, r.getResNo());
-			pstmt.setInt(2, r.getUserNo());
-			pstmt.setString(3, r.getReviewContent());
-			pstmt.setDouble(4, r.getStar());
+			pstmt.setInt(2, r.getBookNo());
+			pstmt.setInt(3, r.getUserNo());
+			pstmt.setString(4, r.getReviewContent());
+			pstmt.setDouble(5, r.getStar());
 			
 			result = pstmt.executeUpdate();
 			

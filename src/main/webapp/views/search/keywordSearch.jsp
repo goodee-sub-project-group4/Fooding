@@ -139,9 +139,21 @@
 	                                별점 : <%= r.getStar() %> <br>
 	                                주소 : <%= r.getAddress() %> <br>
 	                                음식카테고리 : <%= r.getFoodCt() %> <br>
-	                                <span class="zzim">
-	                                    <img src="/Fooding/resources/images/heart.png" width="50px;">  
-	                                </span>
+	                                
+	                                <input type="hidden" value="<%= r.getResNo()%>">
+	                                
+									<!-- 로그인을 안 했을 경우 : 찜 비활성화 -->                                
+	                                <% if(loginUser == null){ %>
+	                                	<span class="zzim"> 
+                                    		<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="alertMsg();">
+	                               		</span>
+	                                <%} else { %>
+	                                	<span class="zzim"> 
+	                                    	<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="insertGood();">
+		                                </span>
+	                                <% } %>
+	                               
+	                                
 	                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
 	                                조회수: <%= r.getCount() %> <br>
 	                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
@@ -152,6 +164,8 @@
                         <% } %>
                         
 						
+                     
+                        
 						<div class="paging-area">
 						
 
@@ -169,6 +183,33 @@
 								        
 
 				        </div>
+				        
+				        <script>
+                        
+					        function insertGood(){
+					    		$.ajax({
+					    			url:"<%=contextPath%>/good.sh",
+					    			data:{
+					    				resNo:$(":hidden").val(),
+					    				userNo:<%= loginUser.getUserNo()%>
+					    			},
+					    			type:"get",
+					    			success:function(result){
+					    				console.log("일단!!"); 
+					    			},
+					    			error:function(){
+					    				console.log("ajax 통신 실패"); 
+					    			}
+					    		})
+					    	}
+                    	
+                        	
+                        	function alertMsg(){
+                        		alert("로그인한 유저만 이용가능한 서비스입니다!!");
+                        	}
+                        
+                        </script>
+
 
                     </div>
                       

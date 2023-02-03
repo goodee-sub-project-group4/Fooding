@@ -20,6 +20,7 @@ public class ReviewService {
 		Connection conn = getConnection();
 		ArrayList<Review> list = new ReviewDao().selectReviewList(conn);
 		close(conn);
+		System.out.println("왜안될까" + list);
 		return list;
 		
 	}
@@ -37,7 +38,6 @@ public class ReviewService {
 		int result1 = new ReviewDao().insertContentReview(conn, r);
 		int result2 = new ReviewDao().insertAttachmentList(conn, list);
 		
-		System.out.println(result1);
 		if (result1 > 0 && result2 > 0) {
 			commit(conn);
 		} else {
