@@ -297,6 +297,30 @@ public class AdminService {
 		return result;
 	}
 
+
+	/**메인배너 수정
+	 * @param at
+	 * @return
+	 */
+	public int updateBanner(Attachment at) {
+		Connection conn = getConnection();
+		int result = 1;
+		if(at != null) {
+			if(at.getFileNo() != 0) {
+				result = new AdminDao().updateBanner(conn, at);
+			}
+		}
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+
+
 	
 
 

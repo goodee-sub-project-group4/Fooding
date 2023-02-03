@@ -4,6 +4,7 @@
 
 <%
 	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
+	Attachment at = (Attachment)request.getAttribute("at");
 %>
 <!DOCTYPE html>
 <html>
@@ -58,44 +59,30 @@
 			<!-- 컨텐츠 작성부 -->
 			<br><br>
             <form align="center" action="<%=contextPath%>/baUpdate.ad" method="post" enctype="multipart/form-data">
-                <table>
-                    <% if(list.size()!=0){ %>
+                <table>          
 	                	<% for(int i=0; i<list.size(); i++){ %>
 		                    <tr>
 		                        <td>	
-		                            <img src="<%=contextPath %>/<%=list.get(i).getFilePath() + list.get(i).getChangeName() %>" id="bannerImg<%= i %>+1" class="bannerImg" width="791.47px" height="250" onclick="clickFile(<%= i %>+1);">
-		                        	<br><br>
+		                            <img src="<%=contextPath %>/<%=list.get(i).getFilePath() + list.get(i).getChangeName() %>" id='<%= "bannerImg" + String.valueOf(i+1)%>' class="bannerImg" width="791.47px" height="250" onclick="clickFile(<%= i %>+1);">
+                                    <br><br>
 		                        </td>
 		                    </tr>  
-		                <% } %>
-	                <% } else{ %>
-	                	<tr>
-	                        <td>
-	                            <img src="" width="791.47px" height="250">
-	                        </td>
-	                    </tr>  
-	                    <tr>
-	                        <td>
-	                            <br><img src="" width="791.47px" height="250">
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>
-	                            <br><img src="" width="791.47px" height="250">
-	                        </td>
-	                    </tr>   
-	                <% } %>
+		                <% } %>          
                     <tr><td><br></td></tr> 
                     <tr>
                         <td>
-                            <button type="submit" class="btn btn-danger">수정하기</button>
-                            <button class="btn btn-danger">취소하기</button>
+                            <button type="submit" class="btn btn-danger">수정하기</button>&nbsp;&nbsp;
+                            <button type="reset" class="btn btn-outline-danger" onclick="history.back();">취소하기</button>
                         </td>
                     </tr>               
                 </table>
 
                 <div id="file-area" style="display: none;">
-                    <input type="file" name="file1" onchange="loadImg(this, 1);" required>
+                
+                    <% if(at != null) {%>
+	                    <input type="hidden" name="originFileNo" value="<%=at.getFileNo()%>">
+					<% } %>
+                    <input type="file" name="file1" onchange="loadImg(this, 1);">
                     <input type="file" name="file2" onchange="loadImg(this, 2);">
                     <input type="file" name="file3" onchange="loadImg(this, 3);">
                 </div>
@@ -126,9 +113,12 @@
 		})
 
         function clickFile(num){
-            $('input[name=file'+num+']').click();
+        	$('input[name=file'+num+']').click();
         }
+		
         
+
+
         function loadImg(inputFile, num){
             if(inputFile.files.length == 1){
                 const reader = new FileReader();
