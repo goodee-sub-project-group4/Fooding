@@ -17,7 +17,8 @@
 		        SELECT ROWNUM RNUM, A.*
 		          FROM (
 		                  SELECT 
-		                           RES_NAME
+		                  		   RES_NO 
+		                         , RES_NAME
 		                         , ADDRESS || ' ' || D_ADDRESS "ADDRESS"
 		                         , R_IMG
 		                         , FOOD_CT
@@ -114,7 +115,8 @@
 		        SELECT ROWNUM RNUM, A.*
 		          FROM (
 		                  SELECT 
-		                           RES_NAME
+		                  		   RES_NO
+		                         , RES_NAME
 		                         , ADDRESS || ' ' || D_ADDRESS "ADDRESS"
 		                         , R_IMG
 		                         , FOOD_CT
@@ -131,4 +133,26 @@
 		        )
 		    WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	 
+	<entry key="insertGood">
+		INSERT 
+		  INTO GOOD
+		     (
+		       RES_NO
+		     , USER_NO
+		     , GOOD_DATE
+		     )
+		SELECT ?
+		     , ? 
+		     , SYSDATE
+		  FROM DUAL 
+		 WHERE EXISTS(SELECT COUNT 
+				        FROM (
+				                  SELECT COUNT(*) "COUNT"
+				                  FROM GOOD
+				                 WHERE RES_NO = ?
+				                   AND USER_NO = ?
+				              )         
+		      WHERE COUNT = 0) 
+	</entry>  
 </properties>

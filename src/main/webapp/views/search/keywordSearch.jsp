@@ -129,6 +129,7 @@
 							<!-- case2. 조회된 음식점이 있을 경우  -->
 							<% for(Restaurant r : list){ %>
 	                        <div class="searchRes">
+                                <input type="hidden" class="asd" value="<%= r.getResNo() %>" >
 	                            <!-- 음식점 사진-->
 	                            <div class="resThumbnail">
 	                                <img src="<%= contextPath %>/<%= r.getrImg() %>" style="width:400px;" height="300px;">
@@ -139,17 +140,20 @@
 	                                별점 : <%= r.getStar() %> <br>
 	                                주소 : <%= r.getAddress() %> <br>
 	                                음식카테고리 : <%= r.getFoodCt() %> <br>
+	                                업체번호 : <%= r.getResNo() %> <br> 
 	                                
-	                                <input type="hidden" value="<%= r.getResNo()%>">
 	                                
-									<!-- 로그인을 안 했을 경우 : 찜 비활성화 -->                                
+	                                
+									<!-- 로그인을 안 했을 경우 : alertMsg() 실행  -->                                
 	                                <% if(loginUser == null){ %>
 	                                	<span class="zzim"> 
                                     		<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="alertMsg();">
 	                               		</span>
+	                               	<!-- 로그인을 했을 경우 : insertGood() 실행 -->
 	                                <%} else { %>
 	                                	<span class="zzim"> 
 	                                    	<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="insertGood();">
+	                                    	<input type="hidden" class="resNumbers" value="<%= r.getResNo()%>">
 		                                </span>
 	                                <% } %>
 	                               
@@ -163,7 +167,38 @@
 	                        <% } %>
                         <% } %>
                         
-						
+                        <!-- 찜하기를 눌렀을 때 나타날 함수 스크립트 구문 -->
+                        
+						<script>
+                        
+					        function insertGood(){
+					        	
+					        	
+					    		$.ajax({
+					    			url:"<%=contextPath%>/good.sh",
+					    			data:{
+					    				resNo: $(this).parents($('.searchRes')).children().val()
+					    			},
+					    			type:"post",
+					    			success:function(result){
+					    				if(result > 0 ){ // 찜하기 성공 
+					    					alert("찜하기 성공"); 
+					    				}else{ // 찜하기 실패 
+					    					alert("찜하기 실패"); 
+					    				}
+					    			},
+					    			error:function(){
+					    				console.log("ajax 통신 실패"); 
+					    			}
+					    		})
+					    	}
+                    	
+                        	
+                        	function alertMsg(){
+                        		alert("로그인한 유저만 이용가능한 서비스입니다");
+                        	}
+                        
+                        </script>
                      
                         
 						<div class="paging-area">
@@ -184,31 +219,7 @@
 
 				        </div>
 				        
-				        <script>
-                        
-					        function insertGood(){
-					    		$.ajax({
-					    			url:"<%=contextPath%>/good.sh",
-					    			data:{
-					    				resNo:$(":hidden").val(),
-					    				userNo:<%= loginUser.getUserNo()%>
-					    			},
-					    			type:"get",
-					    			success:function(result){
-					    				console.log("일단!!"); 
-					    			},
-					    			error:function(){
-					    				console.log("ajax 통신 실패"); 
-					    			}
-					    		})
-					    	}
-                    	
-                        	
-                        	function alertMsg(){
-                        		alert("로그인한 유저만 이용가능한 서비스입니다!!");
-                        	}
-                        
-                        </script>
+				        
 
 
                     </div>

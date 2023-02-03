@@ -1,11 +1,16 @@
 package com.fd.search.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fd.member.model.vo.Member;
+import com.fd.restaurant.model.vo.Restaurant;
+import com.fd.search.model.service.SearchService;
 
 /**
  * Servlet implementation class GoodController
@@ -27,7 +32,15 @@ public class GoodController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("views/search/practiceGood.jsp");
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		System.out.println(userNo); 
+		
+		int resNo = Integer.parseInt(request.getParameter("resNo"));
+		System.out.println(resNo); 
+		
+		int result = new SearchService().insertGood(resNo, userNo); 
+		
+		response.getWriter().print(result); 
 	}
 
 	/**

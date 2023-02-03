@@ -207,8 +207,8 @@
 		        </div>
 		        <input type="hidden" name="cpage" value="1">
 		        <button type="submit" align="center">검색하기</button>
+		    	</form>
 		    </div>
-			</form>
 		</div>
 	</div>
 </body>

@@ -40,6 +40,9 @@ public class Restaurant {
 	private double star; // 별점 
 	private int count; // 조회수 
 	
+	// 한수가 추가한 필드2 (찜하기에서 사용!!) 
+	private int userNo; // 찜하기를 누른 회원의 번호 
+	
 	public Restaurant() {}
 	
 	// 식당 조회용 매개변수 생성자 - 태진
@@ -128,28 +131,9 @@ public class Restaurant {
 	}
 	
 	
-	// 한수가 만든 매개변수생성자1 (SearchDao클래스의 selectList()에서 사용!!)
-	/*
-	public Restaurant(String resName, String address, String foodCt) {
-		super();
-		this.resName = resName;
-		this.address = address;
-		this.foodCt = foodCt;
-	}
-	*/
+
 	
-	// 한수가 만든 매개변수 생성자3 (SearchDao의 selectList에서 사용)
-	public Restaurant(String resName, String address, String rImg, String foodCt, Double star, int count) {
-		super();
-		this.resName = resName;
-		this.address = address;
-		this.rImg = rImg;
-		this.foodCt = foodCt;
-		this.star = star;
-		this.count = count;
-	}
-	
-	// 한수가 만든 매개변수 생성자4(ResformController 에서 사용!! )
+	// 한수가 만든 매개변수 생성자1(ResformController 에서 사용!!)
 	
 	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String phone,
 			String cellphone, String email, String parking, String foodCt) {
@@ -167,7 +151,7 @@ public class Restaurant {
 	}
 	
 	
-	
+	// 한수가 추가한 매개변수 생성자2 
 	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String localCt,
 			String dLocalCt, String phone, String cellphone, String email, String parking, String foodCt) {
 		super();
@@ -184,9 +168,31 @@ public class Restaurant {
 		this.parking = parking;
 		this.foodCt = foodCt;
 	}
+	
+	// 한수가 추가한 매개변수 생성자3 (SearchDao의 selectList에서 사용!!)
+	
+	public Restaurant(int resNo, String resName, String address, String rImg, String foodCt, double star, int count) {
+		super();
+		this.resNo = resNo;
+		this.resName = resName;
+		this.address = address;
+		this.rImg = rImg;
+		this.foodCt = foodCt;
+		this.star = star;
+		this.count = count;
+	}
 
-	
-	
+
+	// 한수가 추가한 매개변수 생성자4 (SearchDao의 keywordList에서 사용!! )
+	public Restaurant(String resName, String address, String rImg, String foodCt, double star, int count) {
+		super();
+		this.resName = resName;
+		this.address = address;
+		this.rImg = rImg;
+		this.foodCt = foodCt;
+		this.star = star;
+		this.count = count;
+	}
 
 	public int getResNo () {
 		return resNo;
@@ -393,6 +399,16 @@ public class Restaurant {
 		this.listCount = listCount;
 	}
 	
+	
+	
+
+	public int getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 
 	public Double getStar() {
 		return star;
