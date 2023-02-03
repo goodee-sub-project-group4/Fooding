@@ -17,7 +17,6 @@ public class Review {
 	
 	public Review () {}
 	
-	// 리뷰리스트
 
 	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewTitle, String reviewContent, double star,
 			String createDate, String modifyDate, String status, String good, int count) {
@@ -47,7 +46,7 @@ public class Review {
 	}
 
 	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewContent, double star,
-			Date createDate, Date modifyDate, String good, int count) {
+			String createDate, String modifyDate, String good, int count) {
 		super();
 		this.reviewNo = reviewNo;
 		this.resNo = resNo;
