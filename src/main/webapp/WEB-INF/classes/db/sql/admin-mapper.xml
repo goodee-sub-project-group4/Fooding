@@ -343,4 +343,15 @@ SELECT
 	 WHERE BOARD_TYPE = 'B'
 </entry>
 
+<!-- 메인 배너 수정 -->
+<entry key="updateBanner">
+	UPDATE
+		   ATTACHMENT
+	   SET ORIGIN_NAME = ?
+	     , CHANGE_NAME = ?
+	     , FILE_PATH = ?
+	 WHERE FILE_NO = ?
+</entry>
+
+
 </properties>

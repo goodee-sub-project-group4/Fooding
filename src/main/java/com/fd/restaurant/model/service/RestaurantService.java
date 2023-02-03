@@ -184,5 +184,12 @@ public class RestaurantService {
 		return list;
 	}
 	
+	public Review selectReviewDetail(int reviewNo) {
+		Connection conn = getConnection();
+		Review r = new RestaurantDao().selectReviewDetail(conn, reviewNo);
+		close(conn);
+		return r;
+	}
+	
 
 }

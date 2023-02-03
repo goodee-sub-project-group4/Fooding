@@ -94,7 +94,7 @@
             <img id="logo" src="<%=contextPath%>/resources/images/logo.png" width="190">
         </div>
         <div id="div2">
-            <h3 id="title" width="500">페이지마다 수정되는 타이틀</h3>
+            <h3 id="title" width="500"></h3>
         </div>
         <div id="div3">
             <span onclick="location.href='<%= contextPath%>/logout.re.ad'">로그아웃</span>

@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 부트스트랩 4버전 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
        
     #outer2 {
@@ -177,6 +185,7 @@
                     </thead>
                     <tbody>
                         <tr>
+                            
                             <td><input type="checkbox"></td>
                             <td>1</td>
                             <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
@@ -188,114 +197,7 @@
                             <td>정상</td>
                             <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
-                            <td>박연진</td>
-                            <td>010-1111-2222</td>
-                            <td>여</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
-                            <td>박연진</td>
-                            <td>010-1111-2222</td>
-                            <td>여</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
-                            <td>박연진</td>
-                            <td>010-1111-2222</td>
-                            <td>여</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
-                            <td>박연진</td>
-                            <td>010-1111-2222</td>
-                            <td>여</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
-                            <td>박연진</td>
-                            <td>010-1111-2222</td>
-                            <td>여</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
-                            <td>박연진</td>
-                            <td>010-1111-2222</td>
-                            <td>여</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
-                            <td>박연진</td>
-                            <td>010-1111-2222</td>
-                            <td>여</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
-                            <td>박연진</td>
-                            <td>010-1111-2222</td>
-                            <td>여</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
-                            <td>박연진</td>
-                            <td>010-1111-2222</td>
-                            <td>여</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
+              
                     </tbody>	
                 </table>
                 

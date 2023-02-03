@@ -359,8 +359,12 @@ public class RestaurantDao {
 			while(rset.next()) {
 				Review r = new Review();
 				r.setReviewNo(rset.getInt("review_no"));
-				r.setUserNo(rset.getString("user_id"));
-				
+				r.setUserId(rset.getString("user_id"));
+				r.setReviewContent(rset.getString("review_content"));
+				r.setStar(rset.getDouble("star"));
+				r.setBookNo(rset.getInt("book_no"));
+				r.setCreateDate(rset.getString("create_date"));
+				r.setGood(rset.getString("good"));
 				list.add(r);
 			}
 		} catch (SQLException e) {
@@ -388,6 +392,7 @@ public class RestaurantDao {
 				q.setqTitle(rset.getString("q_title"));
 				q.setqContent(rset.getString("q_content"));
 				q.setCreateDate(rset.getString("create_date"));
+	
 				list.add(q);
 			}
 		} catch (SQLException e) {
@@ -424,5 +429,34 @@ public class RestaurantDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public Review selectReviewDetail(Connection conn, int reviewNo) {
+		Review r= null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReviewDetail");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				r = new Review();
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setUserId(rset.getString("user_id"));
+				r.setReviewContent(rset.getString("review_content"));
+				r.setStar(rset.getDouble("star"));
+				r.setBookNo(rset.getInt("book_no"));
+				r.setCreateDate(rset.getString("create_date"));
+				r.setGood(rset.getString("good"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return r;
 	}
 }

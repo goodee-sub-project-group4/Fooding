@@ -34,22 +34,32 @@
 		}
 
 		/* ↓↓↓ 컨텐츠용 스타일 */
-		
-		#area1 { /*신규예약건*/
-			height:400px
-		}
+		/*--------------------- 공통 -----------------------*/
 		#area1 h3, #area2 h3, #area3 h3 {
 			font-size: 24px;
 			font-weight: 700;
 			margin-bottom: 20px;
 			display: inline-block;
 		}
-		
-		.more { /*더보기 큰버튼*/
+		.more { /*더보기 버튼*/
 			float:right;
 			font-size: 17px;
 		}
-		#area1 span img { /*더보기 큰버튼*/
+		.badge { /*빨간색숫자뱃지*/
+			background-color: crimson;
+			font-size: 18px;
+			position:relative;
+			bottom:4px;
+		}
+		h3:hover, .more:hover, .data-box2:hover { /* 클릭효과*/
+			cursor:pointer;
+		}
+
+		/*---------------------area1=신규예약건+달력 -----------------------*/
+		#area1 { 
+			height:400px
+		}		
+		#area1 span img { /*더보기 버튼*/
 			margin-bottom:5px;
 		}
 		#area1>div {
@@ -65,37 +75,6 @@
 			margin-top: 12px;
 			background-color:whitesmoke;
 			border-color: whitesmoke;
-		}
-		
-		.data-box2 {
-			width:350px;
-			height:150px;
-			display:inline-block;
-			margin-right: 30px;
-			background-color:whitesmoke;
-			border-color: whitesmoke;
-			padding:20px;
-			border-radius: 8px;
-		}
-		.dafault { /*데이터가 2개미만이면 뜨는 박스*/
-			position: relative;
-			top:6px;
-			padding:45px;
-		}
-		.dafault img {
-			margin-left: 40px;
-			width:180px;
-			opacity: 0.3;
-		}
-		#area2, #area3 {
-			height:280px;
-			padding:30px;			
-		}
-		.badge {
-			background-color: crimson;
-			font-size: 18px;
-			position:relative;
-			bottom:4px;
 		}
 		
 		#calendar-area {
@@ -122,33 +101,65 @@
 		.booker { /*신규예약건-예약자*/
 			margin-left: 10px;			
 		}
-		#area2 p, #area3 p { /* . . . . . */
-			display: inline-block;
-			font-size: 100;
-			font-weight: 900;
-			color:rgb(69, 69, 69);
+		/*---------------------area2=문의, area3=리뷰 -----------------------*/
+		#area2, #area3 {
+			height:280px;
+			padding:30px;
+			position: relative;			
 		}
-		
+		.data-box2 {
+			width:350px;
+			height:150px;
+			display:inline-block;
+			margin-right: 30px;
+			background-color:whitesmoke;
+			border-color: whitesmoke;
+			padding:22px;
+			border-radius: 8px;
+			
+		}
+		/*데이터가 2개미만이면 뜨는 박스*/
+		.dafault { 
+			padding:45px;
+		}
+		.dafault img {
+			margin-left: 40px;
+			width:180px;
+			opacity: 0.3;
+		}	
 		.title {
 			font-weight: 900;
 			color:rgb(69, 69, 69);
 		}
 		.data-content {
-			display: inline-block;
-			margin-top: 10px;
+			display: block;
+			margin: auto;
 			height:50px;
+			width:300px;
+			/* text-align: center; */
+			padding:5px;
+			/* border:2px solid violet; */
 		}
-		.review {
-			margin-top: 15px;
-			height:68px;
+		.review { /*리뷰내용영역*/
+			margin-top: 11px;
+			height:62px;
 		}
-		.create-date {
+		.create-date { /*작성일자*/
 			float:right;
-			margin-top: 10px;
+			position: relative;
+			bottom: 11px;
 		}
-		h3:hover, .more:hover {
-			cursor:pointer;
+		
+
+		.dash { /* . . . . . */
+			display: inline-block;
+			font-size: 100;
+			font-weight: 900;
+			color:rgb(69, 69, 69);
+			position: absolute;
+			bottom:100px;
 		}
+
 		
 
 	</style>
@@ -200,17 +211,17 @@
 				</div>
 			</div>
 			<div id="area2">
-				<h3 onclick="toQna();">미답변문의</h3> <span class="badge"><%= qList.size() %></span>
+				<h3 onclick="toQna();">미답변문의</h3> <span class="badge" id="question-number"><%= qList.size() %></span>
 				<span class="more" onclick="toQna();">더보기 <img src="resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<% if(qList.size()>0) { %>
-				<div class="data-box2">
+				<div class="data-box2" onclick="toQna();">
 					<span class="title"><%=qList.get(0).getqTitle()%></span><br>
 					<%
 						String origin = qList.get(0).getqContent();
 						String preview = "";
-						if(origin.length()>40) {
-							preview = origin.substring(0,39)+"...";
+						if(origin.length()>20) {
+							preview = origin.substring(0,19)+"...";
 						}else {
 							preview = origin;
 						}
@@ -224,13 +235,13 @@
 				</div>
 				<% } %>
 				<% if(qList.size()>1) { %>
-				<div class="data-box2">
+				<div class="data-box2" onclick="toQna();">
 					<span class="title"><%=qList.get(1).getqTitle()%></span><br>
 					<%
 						String origin = qList.get(1).getqContent();
 						String preview = "";
-						if(origin.length()>40) {
-							preview = origin.substring(0,39)+"...";
+						if(origin.length()>20) {
+							preview = origin.substring(0,19)+"...";
 						}else {
 							preview = origin;
 						}
@@ -239,23 +250,23 @@
 					<span class="create-date"><%=qList.get(1).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div name="dafult" class="dafault data-box2 ">
+				<div id="question-default2" class="dafault data-box2 ">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
 				<% } %>
 				<p class="dash">. . . . .</p>
 			</div>
 			<div id="area3">
-				<h3 onclick="toReview();">리뷰</h3> <span class="badge"><%=rList.size() %></span>
+				<h3 onclick="toReview();">리뷰</h3> <span class="badge" id="review-number"><%=rList.size() %></span>
 				<span class="more" onclick="toReview();">더보기 <img src="resources/images/more.png" width="25"></span>
 				<br clear="both">
 				<% if(rList.size()>0) { %>
-				<div class="data-box2">
+				<div class="data-box2" onclick="toReview();">
 					<%
 						String origin = rList.get(0).getReviewContent();
 						String preview = "";
-						if(origin.length()>40) {
-							preview = origin.substring(0,39)+"...";
+						if(origin.length()>20) {
+							preview = origin.substring(0,19)+"...";
 						}else {
 							preview = origin;
 						}
@@ -269,7 +280,7 @@
 				</div>
 				<% } %>
 				<% if(rList.size()>1) { %>
-				<div class="data-box2">
+				<div class="data-box2" onclick="toReview();">
 					<%
 						String origin = rList.get(1).getReviewContent();
 						String preview = "";
@@ -283,11 +294,11 @@
 					<span class="create-date"><%=rList.get(1).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div name="dafult" class=" dafault data-box2 ">
+				<div id="review-default2" class="dafault data-box2">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
 				<% } %>				
-				<p class="dash">. . . . .</p>
+				<p class="dash" id="review-dash">. . . . .</p>
 			</div>
 			
 		</div>
@@ -300,14 +311,15 @@
 	<script>
 		$(function(){
 			$('#title').text("");
-			// 디폴트박스 뒤에 위치하면 .dash의 위치가 위로 올라가는 오류 해결하기
-			$('.dash').each(function(){
-				console.log($(this).prev().attr("name"));
-				if($(this).prev().attr("name") == "dafault") {
-					console.log(0);
-					$(this).val("진입");
-				}
-			})
+
+			//컨텐츠가 1개일때 디폴트박스가 내려가는 문제 해결
+			if($('#review-number').text()==1) {
+				$("#review-default2").css({"position":"relative", "bottom":"35px"})
+			}
+			if($('#question-number').text()==1) {
+				$("#question-default2").css({"position":"relative", "bottom":"35px"})
+			}
+			
 		})
 		
 		function toQna(){

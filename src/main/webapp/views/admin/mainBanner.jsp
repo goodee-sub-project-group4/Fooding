@@ -88,8 +88,8 @@
                     <tr><td><br></td></tr> 
                     <tr>
                         <td>
-                            <button type="submit" class="btn btn-danger">등록하기</button>&nbsp&nbsp
-                            <a href="<%=contextPath%>/baUpdateForm.ad" class="btn btn-danger">수정하기</a>&nbsp&nbsp
+                            <button type="submit" class="btn btn-danger">등록하기</button>&nbsp;&nbsp;
+                            <a href="<%=contextPath%>/baUpdateForm.ad" class="btn btn-danger">수정하기</a>&nbsp;&nbsp;
                             <a href="<%=contextPath%>/baDelete.ad" class="btn btn-outline-danger">삭제하기</a>
                         </td>
                     </tr>               

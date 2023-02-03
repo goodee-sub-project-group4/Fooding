@@ -611,6 +611,25 @@ public class AdminDao {
 		return result;
 	}
 
+	public int updateBanner(Connection conn, Attachment at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBanner");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getOriginName());
+			pstmt.setString(2, at.getChangeName());
+			pstmt.setString(3, at.getFilePath());
+			pstmt.setInt(4, at.getFileNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 	
 	

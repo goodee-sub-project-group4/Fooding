@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.review.model.vo.Review" %>
+<%
+	ArrayList<Review> list = (ArrayList<Review>)session.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,27 +80,40 @@
             float: right;
         }
 
-        /* 리뷰상세조회(모달) */      
+        /*----------------- 리뷰상세조회(모달) ----------------- */      
         .modal-body span { /*신고문구*/
         	color:gray;
         	font-size:12px;
             float: right;
+            margin-right:7px;
+            margin-top:7px;
         }
+        .modal-body span:hover {
+            cursor: pointer;
+            color: crimson;
+        }
+        .modal-body label { /*예약번호*/
+        	margin-left: 7px;
+        	margin-top:7px;
+        }
+        
         .modal-body img { /*리뷰사진*/
-            width:200px;
-            float:left;
-            margin-left: 10px;
+            width:400px;
+            margin:auto;
+            display: block;
+            margin: auto;
+           
         }
         .modal-body h3 { /*별점*/
             font-size:40px;
             float: right;
-            margin-right: 10px;
+            margin-right: 40px;
+            margin-bottom: 15px;
         }
         .modal-body p { /*리뷰내용*/
             /* border:1px solid red; */
-            display: inline-block;
-            width:235px;    
-            margin-left:15px;
+            width:400px;    
+            margin: auto;
             text-align: center;       
         }
         .modal-body label { /*리뷰번호*/
@@ -110,6 +127,9 @@
         #heart img {
             display: inline-block;
             width:100px;    
+        }
+        #heart img:hover {
+        	cursor:pointer;
         }
         #heart h4 {
             font-size: 18px;
@@ -161,7 +181,7 @@
 				<thead>
 					<tr class="table-secondary">
 						<th><input type="checkbox"></th>
-						<th>번호</th>
+						<th>순번</th>
 						<th>예약번호</th>
 						<th>별점</th>
 						<th>리뷰내용</th>
@@ -171,106 +191,27 @@
 					</tr>
                 </thead>
                 <tbody>
+                	<% for(int i=0; i<list.size(); i++) { %>
                     <tr>
                         <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♡</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
+                        <td><%=(list.size()-i)%></td>
+                        <td><%=list.get(i).getBookNo() %></td>
+                        <td><%=list.get(i).getStar() %></td>
+                        <%
+                        	String origin = list.get(i).getReviewContent();
+                        	String preview = "";
+                        	if(origin.length()>20) {
+                        		preview = origin.substring(0,19)+"...";
+                        	}else {
+                        		preview = origin;
+                        	}
+                        %>
+                        <td><%= preview %></td>
+                        <td><%=list.get(i).getCreateDate() %></td>
+                        <td><%=(list.get(i).getGood().equals("Y"))? "♥" : "♡" %></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail" onclick="viewDetail(<%=list.get(i).getReviewNo()%>)" >조회</button></td>
                     </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♥</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♡</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♡</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♡</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♡</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♥</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♥</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♥</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>8</td>
-                        <td>525</td>
-                        <td>5</td>
-                        <td>너무 맛있고 최고!</td>
-                        <td>2023/01/23</td>
-                        <td>♥</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#review-detail">조회</button></td>
-                    </tr>
+                    <% } %>
                 </tbody>	
 			</table><br><br>
             <!--페이징바-->
@@ -294,23 +235,26 @@
             <div class="modal-content">        
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <label>예약번호 453</label>
-                    <span>해당리뷰 신고하기</span>
-                    <br clear="both"><br><br><br>
-                    <img src="/Fooding/resources/images/forTest.png" class="rounded">
-                    <h3>★4.5</h3>
-                    <p>
-                        분위기도 너무 좋고 맛도 정말좋아요!다시 방문할게요~
-                    </p><br><br><br><br>
-                    <div id="heart" align="center">
+                    <label id="bookNo">예약번호 453</label>
+                    <span onclick="sendblack()">해당리뷰 신고하기</span>
+                    <br clear="both"><br><br>
+                    <h3 id="star">★4.5</h3>
+                    <img src="/Fooding/resources/images/forTest.png" class="rounded"><br>
+                    
+                    <p id="reviewContent">
+                        리뷰내용
+                    </p><br><br>
+                    <div id="heart" align="center" onclick="heartFull()">
                         <!-- 좋아요 전 -->
-                        <img src="/Fooding/resources/images/heart-empty.png"><br>
+                        <img src="<%=contextPath %>/resources/images/heart-empty.png" onclick="heartFull()"><br>
+                        <h4 onclick="heartFull()">좋아요 누르기</h4>
                         <!-- 좋아요 후 -->
-                        <!-- <img class="heart" src="/Fooding/resources/images/heart-filled.png"><br> -->
-                        <h4>좋아요 누르기</h4>
+                        <!-- <img class="heart" src="<%=contextPath %>/resources/images/heart-filled.png"><br>
+                        <h4 onclick="heartFull()">좋아요!</h4> -->
+                        
                     </div>
                     
-                    <br clear="both"><br>
+                    <br clear="both">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
                 </div>      
             </div>
@@ -327,9 +271,38 @@
 			$('#title').text("리뷰관리");
 			$("#menu2").addClass("active");
 			$("#menu2_5").addClass("active");
-
-
 		})
+		//하트누르기
+		function heartFull(){
+			$('#heart').children('img').attr("src","<%=contextPath %>/resources/images/heart-filled.png");
+			$('#heart').children('h4').text("좋아요!");
+		}
+
+        function viewDetail(reviewNo) {
+			$.ajax({
+				url:"<%=contextPath%>/reviewDetail.re",
+				data:{reviewNo:reviewNo},
+				success: function(r){
+					$('#bookNo').text("예약번호 : "+r.bookNo);
+					$('#star').text("★"+r.star);
+					$('#reviewContent').text(r.reviewContent);
+					if(r.good=="Y") {
+						
+					}else {
+						
+					}
+				}, error: function(){
+					console.log("리뷰상세조회 ajax 통신실패")
+				}, complete: function(){
+					console.log("리뷰상세조회 ajax 통신완료")
+				}
+			})
+		}
+        
+        //신고버튼
+        
+		
+		
 		
 	</script>
 </body>
