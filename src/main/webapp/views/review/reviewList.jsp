@@ -43,23 +43,26 @@
        
         /* 내용틀 */
         .review-content {height:180px; border-bottom:1px solid black; position:relative;}
-        #review-content1 {height:100%; width:5%; text-align:center; padding-top:70px;}
-        #review-content2 {height:100%; width:5%; position:absolute; top:0px; left:5%; text-align:center; padding-top:70px;}
-        #review-content3 {height:100%; width:20%; position:absolute; top:0px; left:10%;text-align:center; padding-top:20px;}
-        #review-content4 {height:100%; width:35%; position:absolute; top:0px; left:30%;}
-        #review-content5 {height:100%; width:10%; position:absolute; top:0px; left:65%; text-align:center; padding-top:70px;}
-        #review-content6 {height:100%; width:15%; position:absolute; top:0px; left:75%; text-align:center; padding-top:70px;}
-        #review-content7 {height:100%; width:10%; position:absolute; top:0px; left:90%; text-align:center; padding-top:65px;}
+        .review-content:hover {cursor:pointer;}
+        .review-content1 {height:100%; width:5%; text-align:center; padding-top:70px;}
+        .review-content2 {height:100%; width:5%; position:absolute; top:0px; left:5%; text-align:center; padding-top:70px;}
+        .review-content3 {height:100%; width:20%; position:absolute; top:0px; left:10%;text-align:center; padding-top:20px;}
+        .review-content4 {height:100%; width:35%; position:absolute; top:0px; left:30%;}
+        .review-content5 {height:100%; width:10%; position:absolute; top:0px; left:65%; text-align:center; padding-top:70px;}
+        .review-content6 {height:100%; width:15%; position:absolute; top:0px; left:75%; text-align:center; padding-top:70px;}
+        .review-content7 {height:100%; width:10%; position:absolute; top:0px; left:90%; text-align:center; padding-top:65px;}
 
         /* 내용 */
-        #review-content4-1 {height:30%; padding:20px; padding-top:40px; font-weight:600;}
-        #review-content4-2 {height:70%; padding:20px; color:rgb(86, 86, 86);}
-        #review-content7 button {height:35px;}
+        .review-content4-1 {height:30%; padding:20px; padding-top:40px; font-weight:600;}
+        .review-content4-2 {height:70%; padding:20px; color:rgb(86, 86, 86);}
+        .review-content7 button {height:35px;}
         
         /* 페이징 */
         #paging {margin-top: 50px;}
         .container a {color:red; }
-        .pagination {justify-content: center;}       
+        .pagination {justify-content: center;}  
+        
+        
         
         /* 리뷰쓰기모달 */
         .modal fade {border: none;}
@@ -68,40 +71,43 @@
         .close {margin-top: -80px;}
 
         /* content2 */
-        .review-content2 {height: 200px; position: relative; border-top: 1px solid black; border-bottom: 1px solid black; margin-top: -45px;}
-        #review-content2-1 {height: 100%; width: 18%; }
-        #review-content2-2 {height: 100%; width: 50%; position: absolute; top: 0px; left: 25%;}
-        #review-content2-3 {height: 100%; width: 20%; position: absolute; top: 0px; left: 80%;}
+        .review-content22 {height: 200px; position: relative; border-top: 1px solid black; border-bottom: 1px solid black; margin-top: -45px;}
+        #review-content22-1 {height: 100%; width: 18%; }
+        #review-content22-2 {height: 100%; width: 50%; position: absolute; top: 0px; left: 25%;}
+        #review-content22-3 {height: 100%; width: 20%; position: absolute; top: 0px; left: 80%;}
 
         /* content2 내용 */
-        #review-content2-1 img {margin: 20px;}
-		#review-content2-2 div {margin-top: 40px;}
-		#review-content2-2-1 {height: 15%; font-size: 23px; font-weight: 600; margin-top: 50px;}
-		#review-content2-3 p {width: 70px; position: absolute; top: 150px; right: 65px;}
-		#review-content2-3 select {height: 13%; position: absolute; top: 150px; right: 20px;}
+        #review-content22-1 img {margin: 20px;}
+		#review-content22-2 div {margin-top: 40px;}
+		#review-content22-2-1 {height: 15%; font-size: 23px; font-weight: 600; margin-top: 50px;}
+		#review-content22-3 p {width: 70px; position: absolute; top: 150px; right: 65px;}
+		#review-content22-3 select {height: 13%; position: absolute; top: 150px; right: 20px;}
 
         /* content3 */
-        .review-content3 {height: 230px; position: relative;}
+        .review-content33 {height: 230px; position: relative;}
 
-        #review-content3-1 {height: 100%; width: 15%;}
-		#review-content3-2 {height: 100%; width: 85%; position: absolute; top: 0px; right: 0px;}
+        #review-content33-1 {height: 100%; width: 15%;}
+		#review-content33-2 {height: 100%; width: 85%; position: absolute; top: 0px; right: 0px;}
 
         /* content3 내용 */
-        #review-content3-1 p,
-        #review-content5-1 p {margin: 20px; font-weight: 600; font-size: 15px;}
+        #review-content33-1 p,
+        #review-content55-1 p {margin: 20px; font-weight: 600; font-size: 15px;}
 
-        #review-content3-2 textarea {margin-left: 40px; height: 90%; width: 540px; margin-top: 20px; border-radius: 5px;}
+        #review-content33-2 textarea {margin-left: 40px; height: 90%; width: 540px; margin-top: 20px; border-radius: 5px;}
 
         /* content4 */
-        .review-content4 {height: 340px; position: relative;}
-        #review-content4-1 {height: 50%; width: 100%; position: absolute; left:0px; padding-left:10px;}
-        #review-content4-1 p {margin: 10px; font-size: 16px; font-weight: 600;}
-		#review-content4-2 {height: 50%; width: 100%; position: absolute; top: 35%; padding: 10px;}
-		#review-content4-2 p {color: rgb(190, 190, 190); font-size: 13px; padding-left: 20px;}
-		#review-content4-2 img {margin: 20px;margin-top: 10px;}
+        .review-content44 {height: 340px; position: relative; border:1px solid pink;}
+        #review-content44-1 {height: 50%; width: 100%; position: absolute; left:0px; padding-left:10px;}
+        #review-content44-1 p {margin: 10px; font-size: 16px; font-weight: 600;}
+		#review-content44-2 {height: 50%; width: 70%; margin:auto; padding:10px; border:1px solid pink;}
+        #img {position: absolute; left:100px; }
+        #img {position: absolute; left:200px;}
+		#review-content44-2 p {color: rgb(190, 190, 190); font-size: 13px; padding-left: 20px;}
+
+		/* #img1, #img2, #img3 {margin: 20px; margin-top: -110px;} */
 
       	/* content5 */
-      	#review-content5 {width: 60px; margin: auto; padding-top: 70px;} 
+      	#review-content55 {width: 60px; margin: auto; padding-top: 70px;} 
       
     </style>
     
@@ -132,11 +138,13 @@
         <!-- case2. 리뷰가 있을 경우 -->
         <% for(Review r : list) { %>
         <div class="review-content">
-            <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
-            <div id="review-content2"><%= r.getReviewNo() %></div>
-            <div id="review-content3"><img src="" width="125" height="140"></div>
-            <div id="review-content4">
-                <div id="review-content4-1"><%= r.getResNo() %></div>
+        	<input type="hidden" value="<%= r.getReviewNo() %>">
+            <div class="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
+            <div class="review-content2"><%= r.getReviewNo() %></div>
+            <div class="review-content3"><img src="" width="125" height="140" data-toggle="modal" data-target="#reviewDetailModal"></div>
+            <div class="review-content4" data-toggle="modal" data-target="#reviewDetailModal">
+            	
+                <div class="review-content4-1"><%= r.getResNo() %></div>
              	<%
              		String rc = r.getReviewContent();
              		String finalRc = "";
@@ -146,11 +154,11 @@
              			finalRc = r.getReviewContent();
              		}
              	%>
-                <div id="review-content4-2" style="border:1px solid red;"><%= finalRc %></div>
+                <div class="review-content4-2"><%= finalRc %></div>
             </div>
-            <div id="review-content5">★ <%= r.getStar() %></div>
-            <div id="review-content6"><%= r.getCreateDate() %></div>
-            <div id="review-content7"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reviewModifyModal">수정</button></div>
+            <div class="review-content5">★ <%= r.getStar() %></div>
+            <div class="review-content6"><%= r.getCreateDate() %></div>
+            <div class="review-content7"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reviewDetailModal">수정</button></div>
             
         </div>
        <% } %>
@@ -173,7 +181,7 @@
     
 	<!-- 리뷰쓰기모달  -->
                 <!-- The Modal -->
-                <div class="modal fade" id="reviewModifyModal">
+                <div class="modal fade" id="reviewDetailModal">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
@@ -184,17 +192,18 @@
                             </div>
 
                             <!-- Modal body -->
-                            <form action="<%= contextPath%>/reviewForm.re" id="review-form" method="post" enctype="multipart/form-data">
+                            
+                            <form action="<%=contextPath%>/reviewDetail.re" id="reviewDetail" method="post">
                                 <div class="modal-body"></div>
-                                    <div class="review-content2">
-                                        <div id="review-content2-1"><img src="" width="130" height="160"></div> <!-- 업체이미지 가져와야함 -->
-                                        <div id="review-content2-2">
-                                            <div id="review-content2-2-1">업체명</div> <!-- 업체명 가져와야함  -->
+                                    <div class="review-content22">
+                                        <div id="review-content22-1"><img src="" width="130" height="160"></div> <!-- 업체이미지 가져와야함 -->
+                                        <div id="review-content22-2">
+                                            <div id="review-content22-2-1">업체명</div> <!-- 업체명 가져와야함  -->
                                             <!-- <input type="hidden" name="resNo" value="">
                                             <input type="hidden" name="userNo" value=""> -->
                                             
                                         </div>
-                                        <div id="review-content2-3">
+                                        <div id="review-content22-3">
                                             <p>★ 별점</p>
                                             <select name="star" id="star">
                                                 <option value="1.0">1.0</option>
@@ -209,21 +218,22 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="review-content3">
-                                        <div id="review-content3-1">
+                                    <div class="review-content33">
+                                        <div id="review-content33-1">
                                             <p>내용</p>
                                         </div>
-                                        <div id="review-content3-2"><textarea name="reviewContent" style="resize:none"
+                                        <div id="review-content33-2"><textarea name="reviewContent" style="resize:none"
                                                 required></textarea></div>
                                     </div>
-                                    <div class="review-content4">
-                                        <div id="review-content4-1">
+                                    <div class="review-content44">
+                                        <div id="review-content44-1">
                                             <p>사진첨부</p>
                                         </div>
-                                        <div id="review-content4-2">
-                                            <img id="img1" src="" width="150" height="150" onclick="clickFile(1);">
-                                            <img id="img2" src="" width="150" height="150" onclick="clickFile(2);">
-                                            <img id="img3" src="" width="150" height="150" onclick="clickFile(3);">
+                                        <div id="review-content44-2">
+                                        	<!-- src: 저장경로+실제파일명 -->
+                                            <img id="img1" src="" width="150" height="150">
+                                            <img id="img2" src="" width="150" height="150">
+                                            <img id="img3" src="" width="150" height="150">
 
                                             <div id="file-area" style="display:none">
                                                 <input type="file" name="file1" onchange="loadImg(this, 1);">
@@ -246,11 +256,11 @@
 
                                     <!-- Modal footer -->
                                     <div class="modal-footer" style="border:none;">
-                                        <input type="submit" class="btn btn-danger" style="width:90px;" value="등록">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="width:90px;">확인</button>
                                     </div>
                                     <br>
                             </form>
-
+                            
                             <!-- 사진첨부 스크립트 -->
                             <script>
                             	// 클릭했을 때 파일첨부 가능
@@ -289,13 +299,22 @@
                          			}
                                     
                                 }
-
+                            
                             </script>
+                            
+                            <!-- 상세페이지 -->
+                            <%-- <script>
+                            	$(".review-content").click(function() {
+                            		location.herf = "<%=contextPath%>/reviewDetail.re?no=" + $(this.children('input')).val();
+                            		console.log("성공");
+                            	})
+                            </script> --%>
+                           
                             
                         </div>
                     </div>
                 </div>
-                </div>
+              </div>
     
    
 </body>

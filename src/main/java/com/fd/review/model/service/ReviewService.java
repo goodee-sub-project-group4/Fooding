@@ -1,5 +1,9 @@
 package com.fd.review.model.service;
 
+import static com.fd.common.JDBCTemplate.close;
+import static com.fd.common.JDBCTemplate.commit;
+import static com.fd.common.JDBCTemplate.getConnection;
+import static com.fd.common.JDBCTemplate.rollback;
 import static com.fd.common.JDBCTemplate.*;
 
 import java.sql.Connection;
@@ -20,7 +24,6 @@ public class ReviewService {
 		Connection conn = getConnection();
 		ArrayList<Review> list = new ReviewDao().selectReviewList(conn);
 		close(conn);
-		System.out.println("왜안될까" + list);
 		return list;
 		
 	}
@@ -47,6 +50,24 @@ public class ReviewService {
 		close(conn);
 		
 		return result1 * result2;
+		
+	}
+	
+	
+	/** 조회수증가
+	 * @param reviewNo
+	 * @return
+	 */
+	public int increaseCount(int reviewNo) {
+		Connection conn = getConnection();
+		int result = new ReviewDao().increaseCount(conn, reviewNo);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 		
 	}
 	
