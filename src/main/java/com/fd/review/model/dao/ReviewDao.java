@@ -137,6 +137,32 @@ public class ReviewDao {
 		
 	}
 	
+	/** 조회수증가
+	 * @param conn
+	 * @param reviewNo
+	 * @return result
+	 */
+	public int increaseCount(Connection conn, int reviewNo) {
+		// update => 처리된행수
+	 	int result = 0;
+	    PreparedStatement pstmt = null;
+	    String sql = prop.getProperty("increaseCount");
+	    
+	    try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	    
+	    return result;
+	
+	}
+	
 	
 	
 	

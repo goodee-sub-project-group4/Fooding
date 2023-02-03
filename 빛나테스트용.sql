@@ -13,6 +13,16 @@ INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, SEQ_RESNO.CURRVAL, 3, 2, '넘 맛�
 INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, SEQ_RESNO.CURRVAL, 2, 1, '메롱~!', 4.5, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
 INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, SEQ_RESNO.CURRVAL, 3, 2, '여기 다시 올거같아요', 4.0, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
 
+-- ATTACHMENT
+INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진1.jpg', '2023020309460940055', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
+INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진2.jpg', '2023020309460951785', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
+INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진3.jpg', '2023020309460910025', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
+
+DELETE FROM ATTACHMENT WHERE FILE_NO=6;
+
+
+
+
 COMMIT;
 -- RESTAURANT
 --일반업체 / 아이디 : 1200
@@ -186,10 +196,6 @@ commit;
 	         )
 	</entry>
 
-
-
-
-
         SELECT
 		       REVIEW_NO
 		     , RES_NAME
@@ -205,7 +211,23 @@ commit;
 		 ORDER
             BY REVIEW_NO DESC;
 
-
+-- 리뷰상세리스트
+        SELECT
+		       REVIEW_NO
+		     , RES_NO
+			 , USER_NO
+             , BOOK_NO
+             , REVIEW_CONTENT
+             , STAR
+             , CREATE_DATE
+             , MODIFY_DATE
+             , STATUS
+             , GOOD
+             , COUNT
+          FROM REVIEW V
+          JOIN BOOK B ON (V.BOOK_NO = B.BOOK_NO )
+		  JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
+	     WHERE REVIEW_NO = 4;
 
 
 
