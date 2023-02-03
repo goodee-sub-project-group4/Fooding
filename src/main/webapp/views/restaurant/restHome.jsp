@@ -138,6 +138,10 @@
 			margin-top: 10px;
 			height:50px;
 		}
+		.review {
+			margin-top: 15px;
+			height:68px;
+		}
 		.create-date {
 			float:right;
 			margin-top: 10px;
@@ -235,7 +239,7 @@
 					<span class="create-date"><%=qList.get(1).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div name="dafult" class="data-box2 dafault">
+				<div name="dafult" class="dafault data-box2 ">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
 				<% } %>
@@ -256,11 +260,11 @@
 							preview = origin;
 						}
 					%>
-					<span class="data-content"><%=preview%></span><br>
+					<span class="data-content review"><%=preview%></span><br>
 					<span class="create-date"><%=rList.get(0).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div name="dafult" class="data-box2 dafault">
+				<div name="dafult" class=" dafault data-box2 ">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
 				<% } %>
@@ -275,11 +279,11 @@
 							preview = origin;
 						}
 					%>
-					<span class="data-content"><%=preview%></span><br>
+					<span class="data-content review"><%=preview%></span><br>
 					<span class="create-date"><%=rList.get(1).getCreateDate()%></span>
 				</div>
 				<% } else { %>
-				<div name="dafult" class="data-box2 dafault">
+				<div name="dafult" class=" dafault data-box2 ">
 					<img src="<%=contextPath%>/resources/images/logo.png">
 				</div>
 				<% } %>				
@@ -296,10 +300,12 @@
 	<script>
 		$(function(){
 			$('#title').text("");
+			// 디폴트박스 뒤에 위치하면 .dash의 위치가 위로 올라가는 오류 해결하기
 			$('.dash').each(function(){
-				console.log($(this).prev());
-				if($(this).prev().attr("name")=="dafault") {
-					$(this).css("color:red");
+				console.log($(this).prev().attr("name"));
+				if($(this).prev().attr("name") == "dafault") {
+					console.log(0);
+					$(this).val("진입");
 				}
 			})
 		})

@@ -358,7 +358,8 @@ public class RestaurantDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Review r = new Review();
-				
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setUserNo(rset.getString("user_id"));
 				
 				list.add(r);
 			}

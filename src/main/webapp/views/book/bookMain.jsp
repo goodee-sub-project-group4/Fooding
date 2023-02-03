@@ -518,6 +518,15 @@
                                 <div id="menu-payment" style="width: 300px; height: 50px; margin: auto; padding-top: 10px;">
                                     <button type="button" onclick="payment();" class="btn btn-danger btn-lg payment" style="float: left; width: 100px;" >결제</button>
                                     <button type="button" class="btn btn-secondary btn-lg cancel" style="float: right; width: 100px;" >취소</button>
+                                    <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
+                                    <input type="hidden" name="resNo" value="<%= restaurant.getResNo() %>">
+                                    <input type="hidden" name="bookName" value="">
+                                    <input type="hidden" name="bookPhone" value="">
+                                    <input type="hidden" name="bookDate" value="">
+                                    <input type="hidden" name="bookTime" value="">
+                                    <input type="hidden" name="people" value="">
+                                    <input type="hidden" name="email" value="">
+                                    <input type="hidden" name="request" value="">
                                 </div>
                             </div>
                         </div>

@@ -6,6 +6,7 @@ public class Review {
 	private int reviewNo;
 	private String resNo;
 	private int userNo;
+	private String userId;
 	private int bookNo;
 	private String reviewContent;
 	private double star;
@@ -42,13 +43,36 @@ public class Review {
 		this.star = star;
 		this.createDate = createDate;
 	}
-	
+
+	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewContent, double star,
+			String createDate, String modifyDate, String good, int count) {
+		super();
+		this.reviewNo = reviewNo;
+		this.resNo = resNo;
+		this.userNo = userNo;
+		this.bookNo = bookNo;
+		this.reviewContent = reviewContent;
+		this.star = star;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+		this.good = good;
+		this.count = count;
+	}
+
 	public int getReviewNo() {
 		return reviewNo;
 	}
 
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
+	}
+	
+	public String getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getResNo() {
@@ -139,4 +163,4 @@ public class Review {
 	}
 	
 }
-	
+
