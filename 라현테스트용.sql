@@ -36,21 +36,28 @@ INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진1.jpg', '202302030946
 INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진2.jpg', '2023020309460951785', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
 INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진3.jpg', '2023020309460910025', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
 ------------- POINT 적립금 -------------
---2번회원에게 적립금 추가하는 구문
 INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
 ,'새해맞이이벤트', 'B', '2000','2000',SYSDATE);
 INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
 ,'구매10%', 'B', '3000','5000',SYSDATE);
 
-INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
-,'구매', 'B', 500, (SELECT POINT_NOW+500 FROM POINT WHERE USER_NO=2 AND ROWNUM=1 ORDER BY POINT_NO DESC),SYSDATE);
-
---2번 회원의 현재적립금
-SELECT POINT_NOW+500
-FROM POINT
-WHERE USER_NO=2
-AND ROWNUM=1
-ORDER BY POINT_NO DESC;
+--인서트 sql문
+INSERT 
+  INTO POINT 
+  VALUES 
+  (
+    SEQ_PNO.NEXTVAL
+  , NULL
+  , ? -- 회원번호
+  , NULL
+  , ? -- pointName
+  , 'B' -- 적립일때므로 'B'
+  , ? -- pointTrade값 (사용일시 -값을 넣어야한다)
+  ,(
+    SELECT SUM(POINT_TRADE)
+      FROM POINT 
+     WHERE USER_NO= ? /*회원번호*/) + ? /*pointTrade값 */
+  , SYSDATE);
 
 ----------------------------------------------------
 

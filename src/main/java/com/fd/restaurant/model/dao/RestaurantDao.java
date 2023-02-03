@@ -467,8 +467,10 @@ public class RestaurantDao {
 		String sql = prop.getProperty("insertBlack");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			
+			pstmt.setString(1, b.getbPerson());
+			pstmt.setString(2, b.gettPerson());
+			pstmt.setString(3, b.getBlackContent());
+						
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

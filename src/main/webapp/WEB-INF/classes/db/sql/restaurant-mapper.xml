@@ -240,16 +240,20 @@
 		  INTO BLACK
 		  (
 		    BLACK_NO
-		  ,  
+		  , B_PERSON
+		  , T_PERSON
+		  , BLACK_TITEL
+		  , BLACK_CONTENT
+		  , BLACK_TYPE 
 		  )
 		  VALUES
 		  (
 		    SEQ_MNO.NEXTVAL
 		  , ?
 		  , ?
+		  , '업체 리뷰 신고'
 		  , ?
-		  , ?
-		  , ?  
+		  , 'RV'
 		  )	
 	</entry>
 </properties>
