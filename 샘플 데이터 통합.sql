@@ -1,7 +1,8 @@
 -- TB_USER
 --관리자
-INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'admin01', '1111', '푸딩01', '', '', '', '', '', '', '', 'A');
-INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'admin02', '2222', '푸딩02', '', '', '', '', '', '', '', 'A');
+INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'fooding01', '1111', '푸딩01', '', '', '', '', '', '', '', 'A');
+INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'fooding02', '2222', '푸딩02', '', '', '', '', '', '', '', 'A');
+INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'fooding03', '3333', '푸딩03', '', '', '', '', '', '', '', 'A');
 --유저
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user01', '1111', '팜하니', '농장주인', 'farmer@naver.com', '01000001111', 'F', '20040101', SYSDATE, SYSDATE, 'Y');
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user02', '2222', '강해린', '아기고양이', 'kitty@naver.com', '01000002222', 'F', '20040102', SYSDATE, SYSDATE, 'Y');
@@ -47,6 +48,31 @@ INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
 ,'새해맞이이벤트', 'B', '2000','2000',SYSDATE);
 INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
 ,'구매10%', 'B', '3000','5000',SYSDATE);
+
+------------- NOTICE 회원/업체 공지사항 -------------
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '푸딩 이용약관 개정 안내', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '푸딩 이용약관 개정 안내', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '개인정보 처리방침 전면 개정 안내', '안녕하세요. 푸딩입니다. ', '23/01/05', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '개인정보 처리방침 전면 개정 안내', '안녕하세요. 푸딩입니다. ', '23/01/05', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '검색 기능 장애 발생 안내', '안녕하세요. 푸딩입니다. ', '23/01/07', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '검색 기능 장애 발생 안내', '안녕하세요. 푸딩입니다. ', '23/01/07', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '서비스 이용약관 개정 안내(01.15)', '안녕하세요. 푸딩입니다. ', '23/01/10', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '서비스 이용약관 개정 안내(01.15)', '안녕하세요. 푸딩입니다. ', '23/01/10', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '시스템 점검 안내', '안녕하세요. 푸딩입니다. ', '23/01/20', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '시스템 점검 안내', '안녕하세요. 푸딩입니다. ', '23/01/20', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '문자 메세지 안내 시스템 점검(01.25)', '안녕하세요. 푸딩입니다. ', '23/01/20', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '문자 메세지 안내 시스템 점검(01.25)', '안녕하세요. 푸딩입니다. ', '23/01/20', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '신한카드 시스템 정기점검 안내(01.27)', '안녕하세요. 푸딩입니다. ', '23/01/22', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, 'LGU+ 휴대폰 결제 및 본인확인 서비스 정기점검 예정(01.28)', '안녕하세요. 푸딩입니다. ', '23/01/25', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, 'SKT 휴대폰 결제 및 본인확인 서비스 정기점검 예정(01.29)', '안녕하세요. 푸딩입니다. ', '23/01/25', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '푸딩 소비자 분쟁해결 기준 안내', '안녕하세요. 푸딩입니다. ', '23/01/30', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '푸딩 소비자 분쟁해결 기준 안내', '안녕하세요. 푸딩입니다. ', '23/01/30', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '시스템 점검으로 서비스 이용 일시 중단 안내', '안녕하세요. 푸딩입니다. ', '23/02/02', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '시스템 점검으로 서비스 이용 일시 중단 안내', '안녕하세요. 푸딩입니다. ', '23/02/02', '', 0, 'R', 'Y');
+
+------------- FAQ 회원/업체 -------------
+
+
 
 --첫로그인 상태로 바꾸기
 UPDATE RESTAURANT SET STATUS='C' WHERE RES_NO=1201;
