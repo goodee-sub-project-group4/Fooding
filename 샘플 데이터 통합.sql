@@ -31,7 +31,7 @@ INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user12', 'aA223#', '김제니', '�
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user30', 'cC123@', '공유', '커피프린스', 'coffelover@naver.com', '01099991111', 'M', '19811203', SYSDATE, SYSDATE, 'Y');
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user13', 'aA223$', '김로제', '챙람쥐', 'rosie13@naver.com', '01000001113', 'N', '19960303', SYSDATE, SYSDATE, 'Y');
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user23', 'bB223#', '한지성', '다람지', 'han23@naver.com', '01045673333', 'M', '20001003', SYSDATE, SYSDATE, 'Y');
-INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user18', 'bB123#', '홍은채', '만채', 'hong18@naver.com', '01022771111', 'F', '200601210', SYSDATE, SYSDATE, 'S');
+INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user18', 'bB123#', '홍은채', '만채', 'hong18@naver.com', '01022771111', 'F', '20061210', SYSDATE, SYSDATE, 'S');
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user24', 'bB223$', '이용복', '필깅이', 'felixlee@naver.com', '01056781111', 'N', '20040201', SYSDATE, SYSDATE, 'Y');
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user25', 'bB323!', '황현진', '황자님', 'prince25@naver.com', '01067891111', 'M', '20040401', SYSDATE, SYSDATE, 'N');
 
@@ -53,26 +53,23 @@ INSERT INTO QUESTION VALUES
 , SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'R');
 
 -- 관리자
-INSERT INTO QUESTION VALUES
-(SEQ_QNO.NEXTVAL, 'MP', '적립금이요...', '더 주실 수 없나요?'
-, SYSDATE, SYSDATE, NULL, '아니요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
-INSERT INTO QUESTION VALUES
-(SEQ_QNO.NEXTVAL, 'MU', '', '빨간색 카드지갑인데 혹시 분실물 있나요?'
-, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
-INSERT INTO QUESTION VALUES
-(SEQ_QNO.NEXTVAL, 'MU', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
-, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
-INSERT INTO QUESTION VALUES
-(SEQ_QNO.NEXTVAL, 'ME', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
-, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
-INSERT INTO QUESTION VALUES
-(SEQ_QNO.NEXTVAL, 'ME', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
-, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
+--INSERT INTO QUESTION VALUES
+--(SEQ_QNO.NEXTVAL, 'MP', '적립금이요...', '더 주실 수 없나요?'
+--, SYSDATE, SYSDATE, NULL, '아니요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
+--INSERT INTO QUESTION VALUES
+--(SEQ_QNO.NEXTVAL, 'MU', '', '빨간색 카드지갑인데 혹시 분실물 있나요?'
+--, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
+--INSERT INTO QUESTION VALUES
+--(SEQ_QNO.NEXTVAL, 'MU', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
+--, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
+--INSERT INTO QUESTION VALUES
+--(SEQ_QNO.NEXTVAL, 'ME', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
+--, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
+--INSERT INTO QUESTION VALUES
+--(SEQ_QNO.NEXTVAL, 'ME', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
+--, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
 
 -- 업체
-
-
-
 
 
 ------------- BOOK 예약 -------------
@@ -106,7 +103,6 @@ INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 3, NULL
 ,'새해맞이이벤트', 'B', '2000','2000',SYSDATE);
 INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 3, NULL
 ,'구매10%', 'B', '3000','5000',SYSDATE);
-
 
 ------------- NOTICE 회원/업체 공지사항 -------------
 INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
@@ -150,198 +146,134 @@ INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '푸딩 소비자 분쟁해결 �
 INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '시스템 점검으로 서비스 이용 일시 중단 안내', '안녕하세요. 푸딩입니다. ', '23/02/02', '', 0, 'U', 'Y');
 INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '시스템 점검으로 서비스 이용 일시 중단 안내', '안녕하세요. 푸딩입니다. ', '23/02/02', '', 0, 'R', 'Y');
 
-
 ------------- FAQ 회원/업체 -------------
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 FAQ 제목','■ 회원 FAQ 내용
 ',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 2
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 FAQ 제목','■ 회원 FAQ 내용
 ',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 3
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 FAQ 제목','■ 회원 FAQ 내용
 ',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 4
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 FAQ 제목','■ 회원 FAQ 내용
 ',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 5
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 FAQ 제목','■ 회원 FAQ 내용
 ',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 6
-INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 FAQ 제목','■ 회원 FAQ 내용
-',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 7
-INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 FAQ 제목','■ 회원 FAQ 내용
-',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 8
-INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 FAQ 제목','■ 회원 FAQ 내용
-',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 9
-INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 FAQ 제목','■ 회원 FAQ 내용
-',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 10
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caP','적립금은 언제 지급되나요?','■ 적립금 지급 시점
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 11
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caP','적립금은 어떻게 누적하나요?','■ 적립금 누적 방법 안내
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 12
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caP','적립금은 언제까지 사용할 수 있나요?','■ 적립금 사용 방법
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 13
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caP','발급 받은 적립금은 어디서 확인할 수 있나요?','■ 적립금 확인 방법
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 14
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caP','예약 취소 시, 사용한 적립금은 복원 되나요?','■ 적립금 복원 안내
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 15
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caS','이용 후기는 어떻게 작성하나요?','■ 이용 후기 작성 방법
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 16
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caS','푸딩은 어떤 회사인가요?','■ About 푸딩
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 17
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caS','예약 내역은 어떻게 확인하나요?','■ 예약 내역 확인 방법
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 18
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 탈퇴를 하고 싶습니다.','■ 탈퇴 방법 안내
 
 푸딩홈 상단 [마이페이지]>개인정보수정>[회원탈퇴]버튼
 
 - 고객님의 개인정보를 위해 직접 탈퇴만 가능합니다.
 - 잔여 적립금은 탈퇴와 함께 소멸되며 별도의 환불처리는 불가합니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 19
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 탈퇴 후, 재가입이 가능한가요?','■ 회원 재가입 안내
 
 회원 탈퇴 후, 재가입 가능합니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 20
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 가입시 어떠한 혜택이 있나요?','■ 회원가입 혜택
 
 - 푸딩에서 진행하는 다양한 이벤트를 적용받을 수 있습니다.
 - 신규가입 시, 신규회원 대상의 적립금 혜택도 주어집니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 21
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','회원 정보를 바꾸고 싶습니다.','■ 회원정보 변경 안내
 
 푸딩홈 상단 [마이페이지]>개인정보수정
 
 - 위의 경로를 통해 회원정보를 직접 변경하실 수 있습니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 22
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caM','아이디, 비밀번호를 잊어버렸습니다.','■ 아이디, 비밀번호 찾기 안내
 
 [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
 
 - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능합니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 23
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caB','전화로 예약 할 수 있나요?','■ 전화(유선상) 예약 불가
 
 - 예약주문은 불가하며, 푸딩은 현재 인터넷으로만 예약이 가능합니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 24
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caB','예약하는 방법이 궁금합니다.','■ 가게 예약 방법
 
 [카테고리] 선택 > [검색하기] > 가게 조회 > [예약] > [날짜 선택] > [시간 선택] > [메뉴 선택] > [예약인원] > [예약하기]
 
 - 위의 경로를 통해 가게 예약을 하실 수 있습니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 25
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caB','결제 영수증은 어떻게 발급 받나요?','■ 결제 영수증 출력
 
 - 결제하신 주문건의 영수증 출력과 관련하여 직접 조회가 어려우십니다.
   해당 내용은 푸딩 고객센터로 문의 부탁드립니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'U','Y');
---행 26
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,1,'caR','업체 FAQ 제목','■ 업체 FAQ 내용
 ',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 27
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,1,'caR','업체 FAQ 제목','■ 업체 FAQ 내용
 ',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 28
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,1,'caR','업체 FAQ 제목','■ 업체 FAQ 내용
 ',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 29
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,1,'caR','업체 FAQ 제목','■ 업체 FAQ 내용
 ',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 30
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,1,'caR','업체 FAQ 제목','■ 업체 FAQ 내용
 ',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 31
-INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,1,'caR','업체 FAQ 제목','■ 업체 FAQ 내용
-',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 32
-INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,1,'caR','업체 FAQ 제목','■ 업체 FAQ 내용
-',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 33
-INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,1,'caR','업체 FAQ 제목','■ 업체 FAQ 내용
-',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 34
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caP','적립금은 언제 지급되나요?','■ 적립금 지급 시점
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 35
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caP','적립금은 어떻게 누적하나요?','■ 적립금 누적 방법 안내
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 36
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caP','적립금은 언제까지 사용할 수 있나요?','■ 적립금 사용 방법
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 37
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caP','발급 받은 적립금은 어디서 확인할 수 있나요?','■ 적립금 확인 방법
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 38
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caP','예약 취소 시, 사용한 적립금은 복원 되나요?','■ 적립금 복원 안내
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 39
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caS','이용 후기는 어떻게 작성하나요?','■ 이용 후기 작성 방법
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 40
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caS','푸딩은 어떤 회사인가요?','■ About 푸딩
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 41
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caS','예약 내역은 어떻게 확인하나요?','■ 예약 내역 확인 방법
 
 -',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 42
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caR','업체 탈퇴를 하고 싶습니다.','■ 탈퇴 방법 안내
 
 푸딩홈 상단 [마이페이지]>개인정보수정>[회원탈퇴]버튼
 
 - 고객님의 개인정보를 위해 직접 탈퇴만 가능합니다.
 - 잔여 적립금은 탈퇴와 함께 소멸되며 별도의 환불처리는 불가합니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 43
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caR','업체 탈퇴 후, 재가입이 가능한가요?','■ 회원 재가입 안내
 
 회원 탈퇴 후, 재가입 가능합니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 44
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caR','업체 정보를 바꾸고 싶습니다.','■ 업체정보 변경 안내
 
 - 위의 경로를 통해 회원정보를 직접 변경하실 수 있습니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 45
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caR','아이디, 비밀번호를 잊어버렸습니다.','■ 아이디, 비밀번호 찾기 안내
 
 - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능합니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 46
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caB','예약하는 방법이 궁금합니다.','■ 가게 예약 방법
 
 [카테고리] 선택 > [검색하기] > 가게 조회 > [예약] > [날짜 선택] > [시간 선택] > [메뉴 선택] > [예약인원] > [예약하기]
 
 - 위의 경로를 통해 가게 예약을 하실 수 있습니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
---행 47
 INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE, MODIFY_DATE, COUNT, WHO, STATUS) VALUES (SEQ_FAQNO.NEXTVAL,2,'caB','결제 영수증은 어떻게 발급 하나요?','■ 결제 영수증 출력
 
 - 결제하신 주문건의 영수증 출력과 관련하여 직접 조회가 어려우십니다.
   해당 내용은 푸딩 고객센터로 문의 부탁드립니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
-
-
-
 
 
 -- payment
