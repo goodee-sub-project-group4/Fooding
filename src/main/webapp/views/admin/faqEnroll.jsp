@@ -89,12 +89,11 @@
                         <td>
                             <select id="select" name="category">
                                 <option>구분</option>
-                                <option>회원</option>
-                                <option>업체</option>
-                                <option>예약</option>
-                                <option>결제/취소</option>
-                                <option>적립금</option>
-                                <option>서비스이용</option>
+                                <option value="caM">회원</option>
+                                <option value="caR">업체</option>
+                                <option value="caB">예약/결제/취소</option>
+                                <option value="caP">적립금</option>
+                                <option value="caS">서비스이용</option>
                             </select>
                         </td>
                     </tr>

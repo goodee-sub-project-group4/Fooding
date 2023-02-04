@@ -379,8 +379,6 @@
 		  FROM TB_USER U
 		 WHERE 
 		   NOT STATUS = 'A'
-		 ORDER
-		    BY USER_NO DESC
 	</entry>
 	
 	<!-- 해당 회원 상세 조회 -->
@@ -415,6 +413,25 @@
 		 WHERE USER_NO = ?
 	</entry>
 
+	<!-- 해당 회원 이용내역 조회 -->
+	<entry key="selectUse">
+	SELECT P.USER_NO
+	     , USER_ID
+	     , BOOK_DATE
+	     , RES_NAME
+	     , BOOK_TIME
+	     , PEOPLE
+	     , PAY_TOTAL
+	     , PAY_POINT
+	     , PAY_TOTAL - PAY_POINT "PAY_FINAL"
+	     , (PAY_TOTAL - PAY_POINT)*0.01 "PLUS_POINT"
+	     , PAY_OP
+	  FROM PAYMENT P
+	  JOIN TB_USER U ON (P.USER_NO = U.USER_NO)
+	  JOIN BOOK B ON (P.BOOK_NO = B.BOOK_NO)
+	  JOIN restaurant R ON (P.RES_NO = R.RES_NO)
+	 WHERE P.USER_NO = ?
+	</entry>
 
 
 

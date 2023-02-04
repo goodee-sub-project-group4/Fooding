@@ -131,11 +131,11 @@
                 <table class="table list-area">
                     <thead>
                         <tr>
-                            <th><input type="checkbox"></th>
-                            <th>번호</th>
-                            <th>제목</th>
+                            <th width="50px"><input type="checkbox"></th>
+                            <th width="70px">번호</th>
+                            <th width="500px">제목</th>
                             <th>작성자</th>
-                            <th>조회수</th>
+                            <th width="80px">조회수</th>
                             <th>작성일</th>
                         </tr>
                     </thead>
@@ -145,7 +145,7 @@
                         <tr class="memberList">
                             <td><input type="checkbox"></td>
                             <td><%= n1.getNoticeNo() %></td>
-                            <td><%= n1.getNoticeTitle() %></td>
+                            <td style="text-align: left;"><%= n1.getNoticeTitle() %></td>
                             <td><%= n1.getUserNo() %></td>
                             <td><%= n1.getCount() %></td>
                             <td><%= n1.getCreateDate() %></td>
@@ -156,7 +156,7 @@
                         <tr class="restList">
                             <td><input type="checkbox"></td>
                             <td><%= n2.getNoticeNo() %></td>
-                            <td><%= n2.getNoticeTitle() %></td>
+                            <td style="text-align: left;"><%= n2.getNoticeTitle() %></td>
                             <td><%= n2.getUserNo() %></td>
                             <td><%= n2.getCount() %></td>
                             <td><%= n2.getCreateDate() %></td>
