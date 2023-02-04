@@ -162,7 +162,6 @@ public class BookDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return po;
 	}
 

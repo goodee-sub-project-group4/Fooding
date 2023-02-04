@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fd.book.model.service.BookService;
 import com.fd.book.model.vo.Point;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class AjaxPointSelectController
@@ -33,7 +34,7 @@ public class AjaxPointSelectController extends HttpServlet {
 		int userNo = Integer.parseInt(request.getParameter("input"));
 		
 		Point po = new BookService().selectPoint(userNo);
-		response.getWriter().print(po);
+		new Gson().toJson(po, response.getWriter());
 	}
 
 	/**

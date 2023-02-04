@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ 
 	page import="com.fd.restaurant.model.vo.Restaurant, com.fd.restaurant.model.vo.Menu,
-				 com.fd.review.model.vo.Review"
+				 com.fd.review.model.vo.Review, com.fd.book.model.vo.Point"
 %>
 
 <%@ page import="java.util.ArrayList" %>
@@ -476,11 +476,11 @@
                                     <table style="width: 100%;">
                                         <tr>
                                             <td style="width: 50%;">현재 적립금</td>
-                                            <td style="width: 50%; text-align: right;">25,000원</td>
+                                            <td style="width: 50%; text-align: right;" id="pointNow">원</td>
                                         </tr>
                                         <tr>
                                             <td>적립금 사용</td>
-                                            <td style="text-align: right;"><input style="width: 80px; text-align: right;" type="number" class="quantity" value="5000">원</td>
+                                            <td style="text-align: right;"><input style="width: 80px; text-align: right;" type="number" class="quantity" value="0">원</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2"><hr></td>
@@ -491,7 +491,7 @@
                                         </tr>
                                         <tr>
                                             <td>적립금 사용</td>
-                                            <td style="text-align: right;">- 사용금액</td>
+                                            <td style="text-align: right;" id="usePoint">원</td>
                                         </tr>
                                         <tr>
                                             <td>예상 적립금</td>
@@ -499,7 +499,7 @@
                                         </tr>
                                         <tr>
                                             <td style="font-weight: 700; font-size: 25px;">최종 결제 금액</td>
-                                            <td class="sum-payment" style="text-align: right; font-weight: 600; font-size: 20px; color: brown;"></td>
+                                            <td class="sum-payment" id="payment-sum" style="text-align: right; font-weight: 600; font-size: 20px; color: brown;"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -834,17 +834,27 @@
 
                     <!-- 예약하기 버튼 -->
                     <script>
-                        $('#book-final').click(function(){
-                            $.ajax({
-                                url:"<%= contextPath %>/select.po",
-                                data:{input:<%= loginUser.getUserNo() %>},
-                                success:function(){
-                                	$('#point').text( "원");
-                                },
-                                error:function(){
-                                	
-                                }
-                            });
+                    	<% if(loginUser != null){ %>
+                    		$('#book-final').click(function(){
+                                $.ajax({
+                                    url:"<%= contextPath %>/select.po",
+                                    data:{input:<%= loginUser.getUserNo() %>},
+                                    type:"post",
+                                    success:function(result){
+                                    	if(result != null){
+                                    		console.log(result)
+                                    		console.log(result[pointNow])
+                                    		const pointNow = result["pointNow"]
+                                    		$('#pointNow').text(pointNow + "원");
+                                    	}else{
+                                    		$('#pointNow').text(result.pointNow + "원")
+                                    	}
+                                    },
+                                    error:function(){
+                                    	
+                                    }
+                                });
+                        <% } %>
 
 
                             $('#general-condition-detail1').slideUp();
