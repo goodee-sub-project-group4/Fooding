@@ -498,7 +498,7 @@
                                         </tr>
                                         <tr>
                                             <td>예상 적립금</td>
-                                            <td style="text-align: right;" id="pointResult"></td>
+                                            <td style="text-align: right;" id="pointResult">원</td>
                                         </tr>
                                         <tr>
                                             <td style="font-weight: 700; font-size: 25px;">최종 결제 금액</td>
@@ -548,19 +548,26 @@
                         $('#pointUse').keyup(function(){
                             let pointUse = $('#pointUse');
                             let pointUse2 =  $('#pointUse2');
-                            let price = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
-                            let point = parseInt(pointUse.val());
-                            let paymentReuslt = price - point
                             if(pointUse.val() > parseInt($('#pointNow').text().replace(/[^0-9]/g, ""))){
                                 alert('보유 적립금 이상으로 입력할 수 없습니다.')
                                 pointUse.val(parseInt($('#pointNow').text().replace(/[^0-9]/g, "")));
                             }else if(pointUse.val() < 0){
                                 alert('0보다 작은 숫자는 입력할 수 없습니다.')
+                                pointUse.val(0)
                                 pointUse2.text(0 + '원')
                             }
-                            console.log(paymentReuslt)
-                            $('.sum-payment').text(paymentReuslt.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-                            $('#pointResult').text(String(paymentReuslt/100).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+                            let price = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
+                            let point = parseInt(pointUse.val());
+                            let paymentReuslt = price - point
+                            if(pointUse.val() != ""){
+                                pointUse2.text(String(point).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                                $('.sum-payment').text(String(paymentReuslt).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                                $('#pointResult').text(String(parseInt(paymentReuslt/100)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            }else{
+                                pointUse2.text(0 + '원');
+                                $('.sum-payment').text(String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                                $('#pointResult').text(String(parseInt(price/100)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            }
                         });
                         
                         

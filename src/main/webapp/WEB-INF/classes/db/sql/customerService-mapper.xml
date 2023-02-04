@@ -10,7 +10,7 @@
 		     , USER_ID <!-- USER_NO으로 조인 -->
 		     , COUNT
 		     , CREATE_DATE
-		  FORM NOTICE N
+		  FROM NOTICE N
 		  JOIN TB_USER USING (USER_NO)
 		 WHERE N.STATUS = 'Y'
 		 ORDER
