@@ -53,26 +53,23 @@ INSERT INTO QUESTION VALUES
 , SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'R');
 
 -- 관리자
-INSERT INTO QUESTION VALUES
-(SEQ_QNO.NEXTVAL, 'MP', '적립금이요...', '더 주실 수 없나요?'
-, SYSDATE, SYSDATE, NULL, '아니요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
-INSERT INTO QUESTION VALUES
-(SEQ_QNO.NEXTVAL, 'MU', '', '빨간색 카드지갑인데 혹시 분실물 있나요?'
-, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
-INSERT INTO QUESTION VALUES
-(SEQ_QNO.NEXTVAL, 'MU', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
-, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
-INSERT INTO QUESTION VALUES
-(SEQ_QNO.NEXTVAL, 'ME', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
-, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
-INSERT INTO QUESTION VALUES
-(SEQ_QNO.NEXTVAL, 'ME', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
-, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
+--INSERT INTO QUESTION VALUES
+--(SEQ_QNO.NEXTVAL, 'MP', '적립금이요...', '더 주실 수 없나요?'
+--, SYSDATE, SYSDATE, NULL, '아니요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
+--INSERT INTO QUESTION VALUES
+--(SEQ_QNO.NEXTVAL, 'MU', '', '빨간색 카드지갑인데 혹시 분실물 있나요?'
+--, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
+--INSERT INTO QUESTION VALUES
+--(SEQ_QNO.NEXTVAL, 'MU', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
+--, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
+--INSERT INTO QUESTION VALUES
+--(SEQ_QNO.NEXTVAL, 'ME', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
+--, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
+--INSERT INTO QUESTION VALUES
+--(SEQ_QNO.NEXTVAL, 'ME', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
+--, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'A');
 
 -- 업체
-
-
-
 
 
 ------------- BOOK 예약 -------------
