@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.fd.admin.model.vo.Black;
 import com.fd.admin.model.vo.Question;
+import com.fd.book.model.vo.Book;
 import com.fd.common.model.vo.Attachment;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
@@ -497,6 +498,34 @@ public class RestaurantDao {
 				at.setChangeName(rset.getString("change_name"));
 				at.setFilePath(rset.getString("file_path"));
 				list.add(at);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public ArrayList<Book> selectBookList(Connection conn, int resNo) {
+		ArrayList<Book> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBookList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Book b = new Book();
+				b.setBookNo(rset.getInt("book_no"));
+				b.setBookA(rset.getString("book_a"));
+				b.setBookName(rset.getString("book_name"));
+				b.setBookDate(rset.getString("book_date"));
+				b.setBookTime(rset.getString("book_time"));
+				b.setStatus(rset.getString("status"));
+				list.add(b);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

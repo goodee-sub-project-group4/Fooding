@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.book.model.vo.*" %>
+<%
+	ArrayList<Book> list = (ArrayList<Book>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,7 +139,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr class="table-secondary">
-						<th>번호</th>
+						<th>순번</th>
 						<th>예약번호</th>
 						<th>접수날짜</th>
 						<th>성명</th>
@@ -146,106 +150,26 @@
 					</tr>
                 </thead>
                 <tbody>
+                	<% for(int i=0; i<list.size(); i++) { %>
                     <tr>
-                        <td>10</td>
-                        <td>258</td>
-                        <td>2022/12/30</td>
-                        <td>채치수</td>
-                        <td>2023/01/23</td>
-                        <td>15:00</td>
-                        <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
+                        <td><%=list.size()-i %></td>
+                        <td><%=list.get(i).getBookNo() %></td>
+                        <td><%=list.get(i).getBookA() %></td>
+                        <td><%=list.get(i).getBookName() %></td>
+                        <td><%=list.get(i).getBookDate() %></td>
+                        <td><%=list.get(i).getBookTime() %></td>
+                        <%
+                        	String status = "";
+                        	switch(list.get(i).getStatus()){
+                        		case "B" : status = "예약완료"; break;
+                        		case "C" : status = "예약취소"; break;
+                        		case "D" : status = "이용완료"; break;
+                        	}
+                        %>
+                        <td><%=status %></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail" onclick="location.href='<%=contextPath%>/bookDetail.re?no='+<%= list.get(i).getBookNo()%>">조회</button></td>
                     </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>258</td>
-                        <td>2022/12/30</td>
-                        <td>채치수</td>
-                        <td>2023/01/23</td>
-                        <td>15:00</td>
-                        <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>258</td>
-                        <td>2022/12/30</td>
-                        <td>채치수</td>
-                        <td>2023/01/23</td>
-                        <td>15:00</td>
-                        <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>258</td>
-                        <td>2022/12/30</td>
-                        <td>채치수</td>
-                        <td>2023/01/23</td>
-                        <td>15:00</td>
-                        <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>258</td>
-                        <td>2022/12/30</td>
-                        <td>채치수</td>
-                        <td>2023/01/23</td>
-                        <td>15:00</td>
-                        <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>258</td>
-                        <td>2022/12/30</td>
-                        <td>채치수</td>
-                        <td>2023/01/23</td>
-                        <td>15:00</td>
-                        <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>258</td>
-                        <td>2022/12/30</td>
-                        <td>채치수</td>
-                        <td>2023/01/23</td>
-                        <td>15:00</td>
-                        <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>258</td>
-                        <td>2022/12/30</td>
-                        <td>채치수</td>
-                        <td>2023/01/23</td>
-                        <td>15:00</td>
-                        <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>258</td>
-                        <td>2022/12/30</td>
-                        <td>채치수</td>
-                        <td>2023/01/23</td>
-                        <td>15:00</td>
-                        <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>258</td>
-                        <td>2022/12/30</td>
-                        <td>채치수</td>
-                        <td>2023/01/23</td>
-                        <td>15:00</td>
-                        <td>예약완료</td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail">조회</button></td>
-                    </tr>
+             		<% } %>
                 </tbody>	
 			</table><br><br>
             <!--페이징바-->

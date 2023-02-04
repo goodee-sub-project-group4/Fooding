@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.fd.admin.model.vo.Black;
 import com.fd.admin.model.vo.Question;
+import com.fd.book.model.vo.Book;
 import com.fd.common.model.vo.Attachment;
 import com.fd.restaurant.model.dao.RestaurantDao;
 import com.fd.restaurant.model.vo.Menu;
@@ -207,6 +208,13 @@ public class RestaurantService {
 	public ArrayList<Attachment> selectReviewAttachment(int reviewNo){
 		Connection conn = getConnection();
 		ArrayList<Attachment> list = new RestaurantDao().selectReviewAttachment(conn, reviewNo);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Book> selectBookList(int resNo) {
+		Connection conn = getConnection();
+		ArrayList<Book> list = new RestaurantDao().selectBookList(conn, resNo);
 		close(conn);
 		return list;
 	}

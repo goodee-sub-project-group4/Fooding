@@ -96,7 +96,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr class="table-secondary">
-						<th>번호</th>
+						<th>순번</th>
 						<th>작성일</th>
 						<th>작성자ID</th>
 						<th>문의유형</th>
@@ -107,7 +107,7 @@
                 <tbody>
                 	<% for(int i=0; i<list.size(); i++) { %>
                     <tr onclick="location.href='<%=contextPath%>/qnaDetail.re?no='+<%=list.get(i).getqNo() %>">
-                        <td><%=list.get(i).getqNo()%></td>
+                        <td><%=list.size()-i %></td>
                         <td><%=list.get(i).getCreateDate() %></td>
                         <td><%=list.get(i).getqPerson() %></td>
 						<td><%=list.get(i).getCategory() %></td>
