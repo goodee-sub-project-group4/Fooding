@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.fd.book.model.vo.Point;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
 import com.fd.review.model.vo.Review;
@@ -138,6 +139,31 @@ public class BookDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public Point selectPoint(Connection conn, int userNo) {
+		Point po = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPoint");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				po = new Point();
+				po.setPointNow(rset.getInt("point_now"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return po;
 	}
 
 //	public ArrayList<Review> selectReview(int resNo, Connection conn) {

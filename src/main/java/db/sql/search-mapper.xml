@@ -50,10 +50,14 @@
 		      , CELPHONE
 		      , EMAIL
 		      , APPLY_DATE
-		      , LONGTITUDE
-		      , LATITUDE
 		      , FOOD_CT
 		      , PARKING
+		      , OPEN
+			  , CLOSE
+  			  , BREAKS
+			  , BREAKE
+  		      , LONGTITUDE
+		      , LATITUDE
 		      )
 		 VALUES
 		      (
@@ -68,9 +72,14 @@
 		      , ?
 		      , ?
 		      , ?
+		      , ?
 		      , SYSDATE
-		      , '10'
-		      , '20'
+		      , ?
+		      , ?
+		      , ?
+		      , ?
+		      , ?
+		      , ?
 		      , ?
 		      , ?
 		      )
