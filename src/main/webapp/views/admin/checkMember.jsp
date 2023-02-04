@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, com.fd.member.model.vo.Member"%>
+<%
+	ArrayList<Member> list = (ArrayList)request.getAttribute("list");
+	Member m = (Member)request.getAttribute("m");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,26 +101,41 @@
     #moneyModal-body{
         margin: auto;
     }
+
     /*회원 조회 모달*/
+    #selectModal-body tr{
+        height: 40px;
+    }
     #selectModal-body th{
+        padding-left: 30px;
         text-align: left;
         color: gray;
         font-weight: 500;
+        width: 100px;
     }
     #selectModal-body td{
-        padding-left: 60px;
+        padding-left: 40px;
         text-align: left;
+        width: 250px;
     }
+
     /*회원 수정 모달*/
+    #updateModal-body tr{
+        height: 40px;
+    }
     #updateModal-body th{
+        padding-left: 30px;
         text-align: left;
         color: gray;
         font-weight: 500;
+        width: 100px;
     }
     #updateModal-body td{
-        padding-left: 60px;
+        padding-left: 40px;
         text-align: left;
+        width: 250px;
     }
+
     /*이용내역 조회 모달*/
     .selectUseModal-body{
         padding: 50px;
@@ -126,10 +146,6 @@
         color:rgb(221,45,45)
     }
 
-    
-    
-    
-    
 </style>
 </head>
 <body>
@@ -172,31 +188,34 @@
                             <th>성별</th>
                             <th>예약</th>
                             <th>리뷰</th>
+                            <th>신고</th>
                             <th>
                                 <select id="selectStatus">
                                     <option value="">상태</option>
-                                    <option value="">정상</option>
-                                    <option value="">이용정지</option>
-                                    <option value="">탈퇴</option>
+                                    <option value="Y">정상</option>
+                                    <option value="S">이용정지</option>
+                                    <option value="N">탈퇴</option>
                                 </select>
                             </th>
                             <th>이용내역</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            
+                    	<% for(int i=0; i<list.size(); i++) { %>
+                        <tr>                     
                             <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="userId">user01</td>
-                            <td>박연진</td>
-                            <td>010-1111-2222</td>
-                            <td>여</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                            <td><%= list.get(i).getUserNo() %></td>
+                            <td data-toggle="modal" data-target="#selectModal" onclick="viewDetail(<%=list.get(i).getUserNo()%>)"><%= list.get(i).getUserId() %></td>
+                            <td><%= list.get(i).getUserName() %></td>
+                            <td><%= list.get(i).getUserPhone() %></td>
+                            <td><%= (list.get(i).getGender().equals("M")) ? "남" : (list.get(i).getGender().equals("F")) ? "여" : "-" %></td>
+                            <td><%= Integer.parseInt(list.get(i).getBookCount()) %></td>
+                            <td><%= Integer.parseInt(list.get(i).getReviewCount()) %></td>
+                            <td><%= Integer.parseInt(list.get(i).getBlackCount()) %></td>
+                            <td><%= (list.get(i).getStatus().equals("Y")) ? "정상" : (list.get(i).getStatus().equals("S")) ? "이용정지" : "탈퇴" %></td>
+                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal" onclick="useDetail(<%=list.get(i).getUserNo()%>)" >조회</button></td>
                         </tr>
+                        <% } %>
               
                     </tbody>	
                 </table>
@@ -292,7 +311,7 @@
                 </div>
             </div>
 
-
+			
             <!-- 회원 조회 모달 -->
             <div class="modal" id="selectModal">
                 <div class="modal-dialog" >
@@ -306,56 +325,49 @@
                     <!-- Modal body -->
                     <div class="modal-body" align="center">
                         <table id="selectModal-body">
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>회원번호</th>
-                                <td>01</td>
+                                <td id="userNo"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>아이디</th>
-                                <td>user01</td>
+                                <td id="userId"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>이름</th>
-                                <td>박연진</td>
+                                <td id="userName"></td>
                             </tr>       
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>닉네임</th>
-                                <td>연진아</td>
+                                <td id="nickname"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>전화번호</th>
-                                <td>010-1111-2222</td>
+                                <td id="userPhone"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>이메일</th>
-                                <td>user01@naver.com</td>
+                                <td id="userEmail"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>생년월일</th>
-                                <td>1999.01.01</td>
+                                <td id="birth"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>성별</th>
-                                <td>
-                                    <input type="radio" id="noSelect" name="gender" value="" checked>
-                                    <label for="noSelect">선택안함</label>
-                                    <input type="radio" id="M" name="gender" value="" style="width: 20px;">
-                                    <label for="M">남</label>
-                                    <input type="radio" id="F" name="gender" value="" style="width: 20px;">
-                                    <label for="F">여</label> <br>
-                                </td>
+                                <td id="gender"></td>
                             </tr> 
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>가입일</th>
-                                <td>2023.01.01</td>
+                                <td id="enrollDate"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>적립금</th>
-                                <td>2000</td>
+                                <td id="pointNow"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>상태</th>
-                                <td>정상</td>
+                                <td id="status"></td>
                             </tr>
                         </table>
                         <br>
@@ -369,6 +381,7 @@
                 </div>
                 </div>
             </div>
+            
 
 
             <!-- 회원 수정 모달 -->
@@ -384,35 +397,35 @@
                     <!-- Modal body -->
                     <div class="modal-body" align="center">
                         <table id="updateModal-body">
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>회원번호</th>
                                 <td>01</td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>아이디</th>
                                 <td>user01</td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>이름</th>
                                 <td><input type="text" placeholder="박연진"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>닉네임</th>
                                 <td><input type="text" placeholder="연진아"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>전화번호</th>
                                 <td><input type="text" placeholder="010-1111-2222"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>이메일</th>
                                 <td><input type="text" placeholder="user01@naver.com"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>생년월일</th>
                                 <td>1999.01.01</td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>성별</th>
                                 <td>
                                     <input type="radio" id="noSelect" name="gender" value="" checked>
@@ -423,15 +436,15 @@
                                     <label for="genderF">여</label> <br>
                                 </td>
                             </tr> 
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>가입일</th>
                                 <td>2023.01.01</td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>적립금</th>
                                 <td><input type="text" placeholder="2000"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>상태</th>
                                 <td>
                                     <select name="" id="" style="height: 30px;">
@@ -529,50 +542,6 @@
                                         <td>+400</td>
                                         <td>카드</td>
                                     </tr>
-                                    <tr>
-                                        <td>2023.01.03</td>
-                                        <td>재준이가게</td>
-                                        <td>오후 12:30</td>
-                                        <td>2</td>
-                                        <td>40,000</td>
-                                        <td>-2,000</td>
-                                        <td>38,000</td>
-                                        <td>+400</td>
-                                        <td>카드</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2023.01.03</td>
-                                        <td>재준이가게</td>
-                                        <td>오후 12:30</td>
-                                        <td>2</td>
-                                        <td>40,000</td>
-                                        <td>-2,000</td>
-                                        <td>38,000</td>
-                                        <td>+400</td>
-                                        <td>카드</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2023.01.03</td>
-                                        <td>재준이가게</td>
-                                        <td>오후 12:30</td>
-                                        <td>2</td>
-                                        <td>40,000</td>
-                                        <td>-2,000</td>
-                                        <td>38,000</td>
-                                        <td>+400</td>
-                                        <td>카드</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2023.01.03</td>
-                                        <td>재준이가게</td>
-                                        <td>오후 12:30</td>
-                                        <td>2</td>
-                                        <td>40,000</td>
-                                        <td>-2,000</td>
-                                        <td>38,000</td>
-                                        <td>+400</td>
-                                        <td>카드</td>
-                                    </tr>
                                 </tbody>
                                 
 
@@ -613,6 +582,62 @@
             $("td").addClass("align-middle");
 
 		})
+
+        // 회원 상세 조회
+        function viewDetail(userNo) {
+			$.ajax({
+				url:"<%=contextPath%>/selectMember.ad",
+				data:{userNo:userNo},
+				success: function(m){
+					$('#userNo').text(m.userNo);
+					$('#userId').text(m.userId);
+                    $('#userName').text(m.userName);
+                    $('#nickname').text(m.nickname);
+                    $('#userPhone').text(m.userPhone);
+                    $('#userEmail').text(m.userEmail);
+                    $('#birth').text(m.birth);
+                    if(m.gender=="M"){
+                        $('#gender').text("남")
+                    }else if(m.gender=="F"){
+                        $('#gender').text("여")
+                    }else{
+                        $('#gender').text("-")
+                    };
+                    $('#enrollDate').text(m.enrollDate);
+                    $('#pointNow').text(m.pointNow);
+                    if(m.status=="Y"){
+                        $('#status').text("정상")
+                    }else if(m.status=="S"){
+                        $('#status').text("이용정지")
+                    }else if(m.status=="N"){
+                        $('#status').text("탈퇴")
+                    };
+					
+				}, error: function(){
+					console.log("회원상세조회 ajax 통신실패")
+				}, complete: function(){
+					console.log("회원상세조회 ajax 통신완료")
+				}
+			})
+		}
+
+        // 회원 상제 수정 (아직 안함)
+        function updateDetail(userNo){
+            $.ajax({
+                url:"<%=contextPath%>/updateMember.ad",
+                data:{userNo:userNo},
+                success: function(list){
+                    $('#userNo').text(list.userNo);
+                    
+                }
+
+            })
+        }
+
+        // 회원 이용 내역 조회
+        function useDetail(userNo){
+            
+        }
 
 	</script>
 </body>

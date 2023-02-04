@@ -127,7 +127,7 @@
     <h2 id="page-name">관리자 페이지</h2>
     <div id="menu">
         <ul>
-            <li id="menu1" onclick = "location.href='<%= request.getContextPath()%>/member.ad'">회원 관리<span>></span></li>
+            <li id="menu1" onclick = "location.href='<%= request.getContextPath()%>/mList.ad'">회원 관리<span>></span></li>
             <li id="menu2" onclick = "location.href='<%= request.getContextPath()%>/rest.ad'">업체 관리<span>></span></a></li>
             <li id="menu3">사이트 관리<span>></span></li>
             <li id="menu4">고객센터 관리<span>></span></li>

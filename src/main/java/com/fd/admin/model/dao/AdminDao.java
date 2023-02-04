@@ -630,9 +630,77 @@ public class AdminDao {
 		return result;
 	}
 
+	
+// ==========================================================================
+
+	/**회원 리스트 조회
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Member> selectMemberList(Connection conn) {
+		ArrayList<Member> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMemberList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Member(rset.getInt("USER_NO"),
+									rset.getString("USER_ID"),
+									rset.getString("USER_NAME"),
+									rset.getString("USER_PHONE"),
+									rset.getString("GENDER"),
+									rset.getString("BOOK_COUNT"),
+									rset.getString("REVIEW_COUNT"),
+									rset.getString("BLACK_COUNT"),
+									rset.getString("STATUS")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 
 	
-	
-	
+	/**회원 상세 조회
+	 * @param conn
+	 * @return
+	 */
+	public Member selectMember(Connection conn, int userNo) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMember");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = new Member(rset.getInt("user_no"),
+							   rset.getString("user_id"),
+							   rset.getString("user_name"),
+							   rset.getString("nickname"),
+							   rset.getString("user_phone"),
+							   rset.getString("user_email"),
+							   rset.getString("birth"),
+							   rset.getString("gender"),
+							   rset.getDate("enroll_date"),
+							   rset.getInt("point_now"),
+							   rset.getString("status"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+	}
+
+
 	
 }

@@ -11,24 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fd.admin.model.service.AdminService;
-import com.fd.admin.model.vo.Notice;
+import com.fd.member.model.vo.Member;
 
 /**
- * Servlet implementation class AdminNoticeListController
+ * Servlet implementation class AdminCheckMemberList
  */
-@WebServlet("/noList.ad")
-public class AdminNoticeListController extends HttpServlet {
+@WebServlet("/mList.ad")
+public class AdminCheckMemberListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeListController() {
+    public AdminCheckMemberListController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**회원 공지사항 목록 조회
+	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,12 +37,12 @@ public class AdminNoticeListController extends HttpServlet {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
 			response.sendRedirect(request.getContextPath()+"/rest.admin");
 		}else {		
-			ArrayList<Notice> list1 = new AdminService().selectNoticeListU();
-			ArrayList<Notice> list2 = new AdminService().selectNoticeListR();
 			
-			request.setAttribute("list1", list1);
-			request.setAttribute("list2", list2);
-			request.getRequestDispatcher("views/admin/noticeListView.jsp").forward(request, response);
+			// 회원 리스트 조회
+			ArrayList<Member> list = new AdminService().selectMemberList();
+			request.setAttribute("list", list);
+			
+			request.getRequestDispatcher("views/admin/checkMember.jsp").forward(request, response);
 		}
 	}
 

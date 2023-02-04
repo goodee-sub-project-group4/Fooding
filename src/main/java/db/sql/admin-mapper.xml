@@ -2,366 +2,418 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-<!-- 관리자 로그인 -->
-<entry key="loginAdmin">
-	SELECT
-		   USER_NO
-		 , USER_ID
-		 , USER_PWD
-		 , USER_NAME
-		 , STATUS
-	  FROM TB_USER
-	 WHERE USER_ID = ?
-	   AND USER_PWD = ?
-	   AND STATUS = 'A'
-</entry>
-
-<!-- 회원 공지사항 목록 조회 -->
-<entry key="selectNoticeListU">
-	SELECT
-		   NOTICE_NO
-		 , NOTICE_TITLE
-		 , USER_NAME 
-		 , COUNT
-		 , CREATE_DATE
-	  FROM NOTICE N
-	  JOIN TB_USER USING(USER_NO)
-	 WHERE N.STATUS = 'Y'
-	   AND N.TO_WHOM = 'U'
-	 ORDER
-	    BY NOTICE_NO DESC	 
-</entry>
-
-<!-- 업체 공지사항 목록 조회 -->
-<entry key="selectNoticeListR">
-	SELECT
-		   NOTICE_NO
-		 , NOTICE_TITLE
-		 , USER_NAME 
-		 , COUNT
-		 , CREATE_DATE
-	  FROM NOTICE N
-	  JOIN TB_USER USING(USER_NO)
-	 WHERE N.STATUS = 'Y'
-	   AND N.TO_WHOM = 'R'
-	 ORDER
-	    BY NOTICE_NO DESC	 
-</entry>
-
-<!-- 공지사항 등록 -->
-<!-- 1. 공지사항 등록(제목, 내용, 작성자) -->
-<entry key="insertNotice">
-	INSERT
-	  INTO NOTICE
-	  (
-	  	NOTICE_NO		
-	  , NOTICE_TITLE
-	  , NOTICE_CONTENT	
-	  , USER_NO			<!-- 로그인한회원번호 -->
-	  , TO_WHOM			<!-- 회원U / 업체R -->
-	  )
-	  VALUES
-	  (
-	  	SEQ_NONO.NEXTVAL
-	  , ?
-	  , ?
-	  , ?
-	  , ?				<!-- ? 로 설정해서 값 가져오기 -->
-	  )
-</entry>
-
-<!-- 2. 공지사항 등록 (첨부파일) -->
-<entry key="insertNoticeAttachment">
-	INSERT
-	  INTO ATTACHMENT
-	  (
-	    FILE_NO
-	  , REF_BNO
-	  , ORIGIN_NAME
-	  , CHANGE_NAME
-	  , FILE_PATH
-	  , BOARD_TYPE
-	  )
-	  VALUES
-	  (
-	    SEQ_ATNO.NEXTVAL	
-	  , SEQ_NONO.CURRVAL
-	  , ?		<!-- 첨부파일의 원본명 -->
-	  , ?		<!-- 첨부파일의 실제 업로드된 파일명 -->
-	  , ?		<!-- 저장경로 -->
-	  , 'N'		<!-- 공지사항 N / 리뷰 R / 1:1문의 Q -->
-	  )
-</entry>
-
-
-<!-- 공지사항 상세 조회 -->
-<!-- 1. 공지사항 조회수 증가 -->
-<entry key="increseCountNotice">
-	UPDATE NOTICE
-		   SET COUNT = COUNT + 1
-	 WHERE NOTICE_NO = ?
-	   AND STATUS = 'Y'
-</entry>
-
-<!-- 2. 공지사항 게시글 정보 조회 -->
-<entry key="selectNotice">
-	SELECT
-		   NOTICE_NO
-		 , NOTICE_TITLE
-		 , NOTICE_CONTENT
-		 , USER_NAME
-		 , CREATE_DATE
-	  FROM NOTICE
-	  JOIN TB_USER USING(USER_NO)
-	 WHERE NOTICE_NO = ?
-</entry>
-
-<!-- 3. 공지사항 첨부파일 정보 조회 -->
-<entry key="selectNoticeAttachment">
-	SELECT
-		   FILE_NO
-		 , ORIGIN_NAME
-		 , CHANGE_NAME
-		 , FILE_PATH
-	  FROM ATTACHMENT
-	 WHERE REF_BNO = ?
-	   AND BOARD_TYPE = 'N'
-</entry>
-
-
-<!-- 공지사항 수정하기 -->
-<!-- 1. 게시글 정보 update -->
-<entry key="updateNotice">
-	UPDATE
-		   NOTICE
-	   SET NOTICE_TITLE = ?
-	     , NOTICE_CONTENT = ?
-	     , MODIFY_DATE = SYSDATE
-	 WHERE NOTICE_NO = ?
-</entry>
-<!-- 2_0. 새로 넘어온 첨부파일이 없을 경우 => 1. updateNotice실행 -->
-<!-- 2_1. 새로 넘어온 첨부파일이 있고, 기존의 첨부파일이 있었을 경우 -->
-<entry key="updateNoticeAttachment">
-	UPDATE
-		   ATTACHMENT
-	   SET ORIGIN_NAME = ?
-	     , CHANGE_NAME = ?
-	     , FILE_PATH = ?
-	 WHERE FILE_NO = ?
-</entry>
-
-<!-- 2_2. 새로 넘어온 첨부파일이 있고, 기존의 첨부파일이 없었을 경우 -->
-<entry key="insertNewNoticeAttachment">
-	INSERT
-	  INTO ATTACHMENT
-	  (
-	  	FILE_NO
-	  , REF_BNO
-	  , ORIGIN_NAME
-	  , CHANGE_NAME
-	  , FILE_PATH
-	  , BOARD_TYPE
-	  )
-	  VALUES
-	  (
-	    SEQ_ATNO.NEXTVAL
-	  , ?
-	  , ?
-	  , ?
-	  , ?
-	  , 'N'
-	  )
-</entry>
-
-<!-- 공지사항 삭제 -->
-<entry key="deleteNotice">
-	UPDATE NOTICE
-	   SET STATUS = 'N'
-	 WHERE NOTICE_NO = ?
-</entry>
-
-
-<!-- ============================================================================= -->
-
-<!-- 회원 FAQ 목록 / 상세 조회 -->
-<entry key="selectFaqListU">
-	SELECT
+	<!-- 관리자 로그인 -->
+	<entry key="loginAdmin">
+		SELECT
+			   USER_NO
+			 , USER_ID
+			 , USER_PWD
+			 , USER_NAME
+			 , STATUS
+		  FROM TB_USER
+		 WHERE USER_ID = ?
+		   AND USER_PWD = ?
+		   AND STATUS = 'A'
+	</entry>
+	
+	<!-- 회원 공지사항 목록 조회 -->
+	<entry key="selectNoticeListU">
+		SELECT
+			   NOTICE_NO
+			 , NOTICE_TITLE
+			 , USER_NAME 
+			 , COUNT
+			 , CREATE_DATE
+		  FROM NOTICE N
+		  JOIN TB_USER USING(USER_NO)
+		 WHERE N.STATUS = 'Y'
+		   AND N.TO_WHOM = 'U'
+		 ORDER
+		    BY NOTICE_NO DESC	 
+	</entry>
+	
+	<!-- 업체 공지사항 목록 조회 -->
+	<entry key="selectNoticeListR">
+		SELECT
+			   NOTICE_NO
+			 , NOTICE_TITLE
+			 , USER_NAME 
+			 , COUNT
+			 , CREATE_DATE
+		  FROM NOTICE N
+		  JOIN TB_USER USING(USER_NO)
+		 WHERE N.STATUS = 'Y'
+		   AND N.TO_WHOM = 'R'
+		 ORDER
+		    BY NOTICE_NO DESC	 
+	</entry>
+	
+	<!-- 공지사항 등록 -->
+	<!-- 1. 공지사항 등록(제목, 내용, 작성자) -->
+	<entry key="insertNotice">
+		INSERT
+		  INTO NOTICE
+		  (
+		  	NOTICE_NO		
+		  , NOTICE_TITLE
+		  , NOTICE_CONTENT	
+		  , USER_NO			<!-- 로그인한회원번호 -->
+		  , TO_WHOM			<!-- 회원U / 업체R -->
+		  )
+		  VALUES
+		  (
+		  	SEQ_NONO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?				<!-- ? 로 설정해서 값 가져오기 -->
+		  )
+	</entry>
+	
+	<!-- 2. 공지사항 등록 (첨부파일) -->
+	<entry key="insertNoticeAttachment">
+		INSERT
+		  INTO ATTACHMENT
+		  (
+		    FILE_NO
+		  , REF_BNO
+		  , ORIGIN_NAME
+		  , CHANGE_NAME
+		  , FILE_PATH
+		  , BOARD_TYPE
+		  )
+		  VALUES
+		  (
+		    SEQ_ATNO.NEXTVAL	
+		  , SEQ_NONO.CURRVAL
+		  , ?		<!-- 첨부파일의 원본명 -->
+		  , ?		<!-- 첨부파일의 실제 업로드된 파일명 -->
+		  , ?		<!-- 저장경로 -->
+		  , 'N'		<!-- 공지사항 N / 리뷰 R / 1:1문의 Q -->
+		  )
+	</entry>
+	
+	
+	<!-- 공지사항 상세 조회 -->
+	<!-- 1. 공지사항 조회수 증가 -->
+	<entry key="increseCountNotice">
+		UPDATE NOTICE
+			   SET COUNT = COUNT + 1
+		 WHERE NOTICE_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
+	<!-- 2. 공지사항 게시글 정보 조회 -->
+	<entry key="selectNotice">
+		SELECT
+			   NOTICE_NO
+			 , NOTICE_TITLE
+			 , NOTICE_CONTENT
+			 , USER_NAME
+			 , CREATE_DATE
+		  FROM NOTICE
+		  JOIN TB_USER USING(USER_NO)
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
+	<!-- 3. 공지사항 첨부파일 정보 조회 -->
+	<entry key="selectNoticeAttachment">
+		SELECT
+			   FILE_NO
+			 , ORIGIN_NAME
+			 , CHANGE_NAME
+			 , FILE_PATH
+		  FROM ATTACHMENT
+		 WHERE REF_BNO = ?
+		   AND BOARD_TYPE = 'N'
+	</entry>
+	
+	
+	<!-- 공지사항 수정하기 -->
+	<!-- 1. 게시글 정보 update -->
+	<entry key="updateNotice">
+		UPDATE
+			   NOTICE
+		   SET NOTICE_TITLE = ?
+		     , NOTICE_CONTENT = ?
+		     , MODIFY_DATE = SYSDATE
+		 WHERE NOTICE_NO = ?
+	</entry>
+	<!-- 2_0. 새로 넘어온 첨부파일이 없을 경우 => 1. updateNotice실행 -->
+	<!-- 2_1. 새로 넘어온 첨부파일이 있고, 기존의 첨부파일이 있었을 경우 -->
+	<entry key="updateNoticeAttachment">
+		UPDATE
+			   ATTACHMENT
+		   SET ORIGIN_NAME = ?
+		     , CHANGE_NAME = ?
+		     , FILE_PATH = ?
+		 WHERE FILE_NO = ?
+	</entry>
+	
+	<!-- 2_2. 새로 넘어온 첨부파일이 있고, 기존의 첨부파일이 없었을 경우 -->
+	<entry key="insertNewNoticeAttachment">
+		INSERT
+		  INTO ATTACHMENT
+		  (
+		  	FILE_NO
+		  , REF_BNO
+		  , ORIGIN_NAME
+		  , CHANGE_NAME
+		  , FILE_PATH
+		  , BOARD_TYPE
+		  )
+		  VALUES
+		  (
+		    SEQ_ATNO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , 'N'
+		  )
+	</entry>
+	
+	<!-- 공지사항 삭제 -->
+	<entry key="deleteNotice">
+		UPDATE NOTICE
+		   SET STATUS = 'N'
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
+	
+	<!-- ============================================================================= -->
+	
+	<!-- 회원 FAQ 목록 / 상세 조회 -->
+	<entry key="selectFaqListU">
+		SELECT
+			   FAQ_NO
+			 , CATEGORY
+			 , FAQ_TITLE
+			 , FAQ_CONTENT
+		  FROM FAQ
+		 WHERE STATUS = 'Y'
+		   AND WHO = 'U'
+		 ORDER
+		    BY FAQ_NO DESC	 
+	</entry>
+	
+	<!-- 업체 FAQ 목록 / 상세 조회 -->
+	<entry key="selectFaqListR">
+		SELECT
+			   FAQ_NO
+			 , CATEGORY
+			 , FAQ_TITLE
+			 , FAQ_CONTENT
+		  FROM FAQ
+		 WHERE STATUS = 'Y'
+		   AND WHO = 'R'
+		 ORDER
+		    BY FAQ_NO DESC	 
+	</entry>
+	
+	
+	<!-- ============================================================================= -->
+	
+	<!-- 회원 FAQ 목록 / 상세 조회 -->
+	<entry key="selectFaqListU">
+		SELECT
+			   FAQ_NO
+			 , CATEGORY
+			 , FAQ_TITLE
+			 , FAQ_CONTENT
+		  FROM FAQ
+		 WHERE STATUS = 'Y'
+		   AND WHO = 'U'
+		 ORDER
+		    BY FAQ_NO DESC	 
+	</entry>
+	
+	<!-- 업체 FAQ 목록 / 상세 조회 -->
+	<entry key="selectFaqListR">
+		SELECT
+			   FAQ_NO
+			 , CATEGORY
+			 , FAQ_TITLE
+			 , FAQ_CONTENT
+		  FROM FAQ
+		 WHERE STATUS = 'Y'
+		   AND WHO = 'R'
+		 ORDER
+		    BY FAQ_NO DESC	 
+	</entry>
+	
+	<!-- 카테고리 조회 -->
+	<entry key = "selectCategoryList">
+		SELECT DISTINCT
+			   CATEGORY
+		  FROM FAQ
+	</entry>
+	
+	<!-- FAQ 등록(카테고리, 제목, 내용) -->
+	<entry key="insertFaq">
+		INSERT
+		  INTO FAQ
+		  (
+		  	FAQ_NO
+		  , USER_NO			<!-- 로그인한회원번호 -->
+		  , CATEGORY		
+		  , FAQ_TITLE
+		  , FAQ_CONTENT	
+		  , WHO				<!-- 회원U / 업체R -->
+		  )
+		  VALUES
+		  (
+		  	SEQ_FAQNO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?				
+		  )
+	</entry>
+	
+	<!-- FAQ 조회 -->
+	<entry key="selectFaq">
+	SELECT 
 		   FAQ_NO
 		 , CATEGORY
 		 , FAQ_TITLE
 		 , FAQ_CONTENT
 	  FROM FAQ
-	 WHERE STATUS = 'Y'
-	   AND WHO = 'U'
-	 ORDER
-	    BY FAQ_NO DESC	 
-</entry>
-
-<!-- 업체 FAQ 목록 / 상세 조회 -->
-<entry key="selectFaqListR">
-	SELECT
-		   FAQ_NO
-		 , CATEGORY
-		 , FAQ_TITLE
-		 , FAQ_CONTENT
-	  FROM FAQ
-	 WHERE STATUS = 'Y'
-	   AND WHO = 'R'
-	 ORDER
-	    BY FAQ_NO DESC	 
-</entry>
-
-
-<!-- ============================================================================= -->
-
-<!-- 회원 FAQ 목록 / 상세 조회 -->
-<entry key="selectFaqListU">
-	SELECT
-		   FAQ_NO
-		 , CATEGORY
-		 , FAQ_TITLE
-		 , FAQ_CONTENT
-	  FROM FAQ
-	 WHERE STATUS = 'Y'
-	   AND WHO = 'U'
-	 ORDER
-	    BY FAQ_NO DESC	 
-</entry>
-
-<!-- 업체 FAQ 목록 / 상세 조회 -->
-<entry key="selectFaqListR">
-	SELECT
-		   FAQ_NO
-		 , CATEGORY
-		 , FAQ_TITLE
-		 , FAQ_CONTENT
-	  FROM FAQ
-	 WHERE STATUS = 'Y'
-	   AND WHO = 'R'
-	 ORDER
-	    BY FAQ_NO DESC	 
-</entry>
-
-<!-- 카테고리 조회 -->
-<entry key = "selectCategoryList">
-	SELECT DISTINCT
-		   CATEGORY
-	  FROM FAQ
-</entry>
-
-<!-- FAQ 등록(카테고리, 제목, 내용) -->
-<entry key="insertFaq">
-	INSERT
-	  INTO FAQ
-	  (
-	  	FAQ_NO
-	  , USER_NO			<!-- 로그인한회원번호 -->
-	  , CATEGORY		
-	  , FAQ_TITLE
-	  , FAQ_CONTENT	
-	  , WHO				<!-- 회원U / 업체R -->
-	  )
-	  VALUES
-	  (
-	  	SEQ_FAQNO.NEXTVAL
-	  , ?
-	  , ?
-	  , ?
-	  , ?
-	  , ?				
-	  )
-</entry>
-
-<!-- FAQ 조회 -->
-<entry key="selectFaq">
-SELECT 
-	   FAQ_NO
-	 , CATEGORY
-	 , FAQ_TITLE
-	 , FAQ_CONTENT
-  FROM FAQ
- WHERE FAQ_NO = ? 
-</entry>
-
-<!-- FAQ 수정(카테고리, 제목, 내용, 수정일) -->
-<entry key="updateFaq">
-	UPDATE FAQ
-	   SET CATEGORY = ?
-	     , FAQ_TITLE = ?
-	     , FAQ_CONTENT = ?
-	     , MODIFY_DATE = SYSDATE
-	 WHERE FAQ_NO = ?
-</entry>
-
-<!-- FAQ 삭제 -->
-<entry key="deleteFaq">
-	UPDATE FAQ
-	   SET STATUS = 'N'
-	 WHERE FAQ_NO = ?
-</entry>
-
-
-<!-- ============================================================================= -->
-
-<!-- 메인 배너 -->
-<entry key="insertBanner">
-	INSERT
-	  INTO ATTACHMENT
-	  (
-	  	FILE_NO
-	  , ORIGIN_NAME
-	  , CHANGE_NAME
-	  , FILE_PATH
-	  , BOARD_TYPE
-	  )
-	  VALUES
-	  (
-	    SEQ_ATNO.NEXTVAL
-	  , ?
-	  , ?
-	  , ?
-	  , 'B'
-	  )
-</entry>
-
-<!-- 메인 배너 조회 -->
-<entry key="selectBanner">
-	SELECT
-		   FILE_NO
-		 , ORIGIN_NAME
-		 , CHANGE_NAME
-		 , FILE_PATH
-	  FROM ATTACHMENT
-	 WHERE STATUS = 'Y'
-	   AND BOARD_TYPE = 'B'
-</entry>
-
-<!-- 메인 배너 삭제 -->
-<entry key="deleteBanner">
-	UPDATE ATTACHMENT
-	   SET STATUS = 'N'
-	 WHERE BOARD_TYPE = 'B'
-</entry>
-
-<!-- 메인 배너 수정 -->
-<entry key="updateBanner">
-	UPDATE
-		   ATTACHMENT
-	   SET ORIGIN_NAME = ?
-	     , CHANGE_NAME = ?
-	     , FILE_PATH = ?
-	 WHERE FILE_NO = ?
-</entry>
-
-
-<!-- ============================================================================= -->
-
-<!-- 회원 리스트 조회 -->
-<entry key="selectMember">
- 
-</entry>
-
-
+	 WHERE FAQ_NO = ? 
+	</entry>
+	
+	<!-- FAQ 수정(카테고리, 제목, 내용, 수정일) -->
+	<entry key="updateFaq">
+		UPDATE FAQ
+		   SET CATEGORY = ?
+		     , FAQ_TITLE = ?
+		     , FAQ_CONTENT = ?
+		     , MODIFY_DATE = SYSDATE
+		 WHERE FAQ_NO = ?
+	</entry>
+	
+	<!-- FAQ 삭제 -->
+	<entry key="deleteFaq">
+		UPDATE FAQ
+		   SET STATUS = 'N'
+		 WHERE FAQ_NO = ?
+	</entry>
+	
+	
+	<!-- ============================================================================= -->
+	
+	<!-- 메인 배너 -->
+	<entry key="insertBanner">
+		INSERT
+		  INTO ATTACHMENT
+		  (
+		  	FILE_NO
+		  , ORIGIN_NAME
+		  , CHANGE_NAME
+		  , FILE_PATH
+		  , BOARD_TYPE
+		  )
+		  VALUES
+		  (
+		    SEQ_ATNO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , 'B'
+		  )
+	</entry>
+	
+	<!-- 메인 배너 조회 -->
+	<entry key="selectBanner">
+		SELECT
+			   FILE_NO
+			 , ORIGIN_NAME
+			 , CHANGE_NAME
+			 , FILE_PATH
+		  FROM ATTACHMENT
+		 WHERE STATUS = 'Y'
+		   AND BOARD_TYPE = 'B'
+	</entry>
+	
+	<!-- 메인 배너 삭제 -->
+	<entry key="deleteBanner">
+		UPDATE ATTACHMENT
+		   SET STATUS = 'N'
+		 WHERE BOARD_TYPE = 'B'
+	</entry>
+	
+	<!-- 메인 배너 수정 -->
+	<entry key="updateBanner">
+		UPDATE
+			   ATTACHMENT
+		   SET ORIGIN_NAME = ?
+		     , CHANGE_NAME = ?
+		     , FILE_PATH = ?
+		 WHERE FILE_NO = ?
+	</entry>
+	
+	
+	<!-- ============================================================================= -->
+	
+	<!-- 회원 리스트 조회 -->
+	<entry key="selectMemberList">
+		SELECT U.USER_NO, 
+		       USER_ID, 
+		       USER_NAME, 
+		       USER_PHONE, 
+		       GENDER,
+		       (SELECT
+		               COUNT(*)
+		          FROM BOOK
+		         WHERE USER_NO = U.USER_NO) "BOOK_COUNT",
+		       (SELECT
+		               COUNT(*)
+		          FROM REVIEW
+		         WHERE USER_NO = U.USER_NO) "REVIEW_COUNT",
+		       (SELECT
+		               COUNT(*)
+		          FROM BLACK
+		         WHERE T_PERSON = U.USER_NO) "BLACK_COUNT",
+		       STATUS
+		  FROM TB_USER U
+		 WHERE 
+		   NOT STATUS = 'A'
+		 ORDER
+		    BY USER_NO DESC
+	</entry>
+	
+	<!-- 해당 회원 상세 조회 -->
+	<entry key="selectMember">
+		SELECT 
+		       U.USER_NO,
+		       USER_ID,
+		       USER_NAME,
+		       NICKNAME,
+		       USER_PHONE,
+		       USER_EMAIL,
+		       BIRTH,
+		       GENDER,
+		       ENROLL_DATE,
+		       POINT_NOW,
+		       U.STATUS
+		  FROM TB_USER U
+		  LEFT JOIN POINT P ON (U.USER_NO = P.USER_NO)
+		 WHERE U.USER_NO = ?
+		   AND ROWNUM = 1
+		 ORDER BY POINT_NO DESC
+	</entry>
+	
+	<!-- 해당 회원 수정 -->
+	<entry key="updateMember">
+		UPDATE TB_USER
+		   SET USER_NAME = ?
+		     , NICKNAME = ?
+		     , USER_PHONE = ?
+		     , USER_EMAIL = ?
+		     , STATUS = ?
+		 WHERE USER_NO = ?
+	</entry>
 
 
 

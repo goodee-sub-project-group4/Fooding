@@ -319,10 +319,29 @@ public class AdminService {
 		return result;
 	}
 
-
+// ==========================================================================
 
 	
+	/**회원 리스트 조회
+	 * @return
+	 */
+	public ArrayList<Member> selectMemberList() {
+		Connection conn = getConnection();
+		ArrayList<Member> list = new AdminDao().selectMemberList(conn);
+		close(conn);
+		return list;
+	}
 
+
+	/**회원 상세 조회
+	 * @return
+	 */
+	public Member selectMember(int userNo) {
+		Connection conn = getConnection();
+		Member m = new AdminDao().selectMember(conn, userNo);
+		close(conn);
+		return m;
+	}
 
 
 

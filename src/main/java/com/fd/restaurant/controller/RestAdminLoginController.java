@@ -59,7 +59,7 @@ public class RestAdminLoginController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("loginAdmin", loginAdmin);
 				//request.getRequestDispatcher("views/admin/checkMember.jsp").forward(request, response);
-				response.sendRedirect(request.getContextPath()+"/member.ad");
+				response.sendRedirect(request.getContextPath()+"/mList.ad");
 			}			
 		}	
 	}

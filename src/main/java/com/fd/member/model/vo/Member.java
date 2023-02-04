@@ -18,6 +18,14 @@ public class Member {
 	private Date modifyDate;
 	private String status;
 	
+	// 예약횟수, 리뷰횟수, 신고횟수 추가
+	private String bookCount;
+	private String reviewCount;
+	private String blackCount;
+	
+	// 적립금 추가
+	private int pointNow;
+	
 
 	public Member () {}
 
@@ -67,7 +75,7 @@ public class Member {
 		this.birth = birth;
 	}
 
-	// 관리자로그인 조회할 때 사용
+	// 관리자- 관리자 로그인 조회할 때 사용
 	public Member(int userNo, String userId, String userPwd, String userName, String status) {
 		super();
 		this.userNo = userNo;
@@ -76,6 +84,40 @@ public class Member {
 		this.userName = userName;
 		this.status = status;
 	}
+
+	// 관리자 - 회원 리스트 조회할 때 사용
+	public Member(int userNo, String userId, String userName, String userPhone, String gender,
+			 String bookCount, String reviewCount, String blackCount, String status) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userName = userName;
+		this.userPhone = userPhone;
+		this.gender = gender;
+		this.bookCount = bookCount;
+		this.reviewCount = reviewCount;
+		this.blackCount = blackCount;
+		this.status = status;
+	}
+	
+	// 관리자 - 회원 상세 조회할 때 사용
+	public Member(int userNo, String userId, String userName, String nickname, String userPhone, String userEmail, 
+			String birth, String gender, Date enrollDate, int pointNow, String status) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userName = userName;
+		this.nickname = nickname;
+		this.userPhone = userPhone;
+		this.userEmail = userEmail;
+		this.birth = birth;
+		this.gender = gender;
+		this.enrollDate = enrollDate;
+		this.pointNow = pointNow;
+		this.status = status;
+	}
+	
+	
 
 	public int getUserNo() {
 		return userNo;
@@ -180,13 +222,49 @@ public class Member {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+		
+	
+	public String getBookCount() {
+		return bookCount;
+	}
+
+	public void setBookCount(String bookCount) {
+		this.bookCount = bookCount;
+	}
+
+	public String getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(String reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+	
+	
+	public String getBlackCount() {
+		return blackCount;
+	}
+
+	public void setBlackCount(String blackCount) {
+		this.blackCount = blackCount;
+	}
+
+	public int getPointNow() {
+		return pointNow;
+	}
+
+	public void setPointNow(int pointNow) {
+		this.pointNow = pointNow;
+	}
 
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", updatePwd=" + updatePwd
 				+ ", userName=" + userName + ", nickname=" + nickname + ", userEmail=" + userEmail + ", userPhone="
 				+ userPhone + ", gender=" + gender + ", birth=" + birth + ", enrollDate=" + enrollDate + ", modifyDate="
-				+ modifyDate + ", status=" + status + "]";
+				+ modifyDate + ", status=" + status + ", bookCount=" + bookCount + ", reviewCount=" + reviewCount
+				+ ", blackCount=" + blackCount + "]";
 	}
 
+	
 }
