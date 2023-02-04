@@ -74,26 +74,34 @@
 	<!-- 리뷰상세페이지 -->
 	<entry key="selectContentReview">
 		SELECT
-		     A.REVIEW_NO
-		    ,A.RES_NO
-		    ,A.REVIEW_CONTENT
-		    ,A.STAR
-		    ,B.RES_NAME
-		FROM review A
-			LEFT OUTER JOIN restaurant B ON A.RES_NO = B.RES_NO
-			LEFT OUTER JOIN attachment C ON A.RES_NO = c.ref_bno AND c.BOARD_TYPE = 'R'
-		WHERE
-			A.REVIEW_NO = ?
+		       A.REVIEW_NO
+		     , A.RES_NO
+		     , A.REVIEW_CONTENT
+		     , A.STAR
+		     , B.RES_NAME
+		  FROM REVIEW A
+          LEFT OUTER JOIN restaurant B ON A.RES_NO = B.RES_NO
+		  LEFT OUTER JOIN attachment C ON A.RES_NO = c.ref_bno AND c.BOARD_TYPE = 'R'
+		 WHERE A.REVIEW_NO = ?
    </entry>
 	  
-<!-- 리뷰상세페이지 파일첨부 가져오기 -->
+	<!-- 리뷰상세페이지 파일첨부 가져오기 -->
 	<entry key="selectContentReviewFiles">
-		select 
-		     ref_bno
-		    ,change_name
-		    ,file_path
-		from attachment where ref_bno = ?
+		SELECT
+		       REF_BNO
+		     , CHANGE_NAME
+		     , FILE_PATH
+		  FROM ATTACHMENT
+		 WHERE REF_BNO = ?
    </entry>
-
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 </properties>

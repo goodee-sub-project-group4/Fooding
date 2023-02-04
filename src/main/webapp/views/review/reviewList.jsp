@@ -325,7 +325,7 @@
 								let html = "";
 								
 								html += '<div id="review-content44-2" name="reviewImages">'
-								for (let i = 0; i < resData.length; i++) {
+								for (let i=0; i<resData.length; i++) {
 									console.log(resData[i].filePath + resData[i].changeName)
 									html += '<img src="' + resData[i].filePath + resData[i].changeName + '" width="150" height="150">'
 								}
