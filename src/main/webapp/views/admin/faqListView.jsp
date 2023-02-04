@@ -45,6 +45,10 @@
         line-height: 25px;     
     }
 
+    .left{
+        display: inline-block;
+    }
+
     .right{
         float: right;
     }
@@ -118,9 +122,6 @@
         width: 150px;
         text-align: center;
     }
-    #faqTitle{
-        width: 300px;
-    }
 
     #mdButton{
         display: inline-flex;
@@ -154,15 +155,15 @@
             <br><br>
             <form action="<%=contextPath%>/faqEnroll.ad">
                 
+                <div class="left">
                 <!--카테고리-->
                 <div class="categoryU">
                     <select class="select" name="category" onchange="changeCategory()">
                         <option>구분</option>
-                        <option>회원</option>
-                        <option>예약</option>
-                        <option>결제/취소</option>
-                        <option>적립금</option>
-                        <option>서비스이용</option>
+                        <option value="caM">회원</option>
+                        <option value="caB">예약/결제/취소</option>
+                        <option value="caP">적립금</option>
+                        <option value="caS">서비스이용</option>
                     </select>
                 </div>
 
@@ -170,12 +171,12 @@
                 <div class="categoryR">
                     <select class="select" name="category" onchange="changeCategory()">
                         <option>구분</option>
-                        <option>업체</option>
-                        <option>예약</option>
-                        <option>결제/취소</option>
-                        <option>적립금</option>
-                        <option>서비스이용</option>
+                        <option value="caR">업체</option>
+                        <option value="caB">예약/결제/취소</option>
+                        <option value="caP">적립금</option>
+                        <option value="caS">서비스이용</option>
                     </select>
+                </div>
                 </div>
 
                 <div class="right">
@@ -209,7 +210,9 @@
                         <div>
                             <div id="checkbox"><input type="checkbox"></div>
                             <div id="number"><%= f1.getFaqNo() %></div>
-                            <div id="category"><%= f1.getCategory() %></div>
+                            <div id="category">
+                            	<%= (f1.getCategory().equals("caM")) ? "회원" : (f1.getCategory().equals("caB")) ? "예약/결제/취소" : (f1.getCategory().equals("caP")) ? "적립금" : "서비스이용" %>
+                            </div>
                             <div id="faqTitle">
                                 <div><%= f1.getFaqTitle() %></div>
                             </div>
@@ -233,7 +236,9 @@
                         <div>
                             <div id="checkbox"><input type="checkbox"></div>
                             <div id="number"><%= f2.getFaqNo() %></div>
-                            <div id="category"><%= f2.getCategory() %></div>
+                            <div id="category">
+                            	<%= (f2.getCategory().equals("caR")) ? "업체" : (f2.getCategory().equals("caB")) ? "예약/결제/취소" : (f2.getCategory().equals("caP")) ? "적립금" : "서비스이용" %>
+                            </div>
                             <div id="faqTitle">
                                 <div><%= f2.getFaqTitle() %></div>
                             </div>
@@ -303,6 +308,7 @@
                 
             }
 		}
+
 
         // 카테고리 조회,,
         // function changeCategory(){

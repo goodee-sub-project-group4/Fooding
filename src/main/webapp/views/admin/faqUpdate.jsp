@@ -94,13 +94,14 @@
                         <th width="70">구분 <span id="required">*</span></th>
                         <td id="category">
                             <select id="select" name="category">
-                                <option value="<%=f.getCategory()%>"><%=f.getCategory()%></option>
-                                <option>회원</option>
-                                <option>업체</option>
-                                <option>예약</option>
-                                <option>결제/취소</option>
-                                <option>적립금</option>
-                                <option>서비스이용</option>
+                                <option value="<%=f.getCategory()%>">
+                                	<%= (f.getCategory().equals("caM")) ? "회원" : (f.getCategory().equals("caR")) ? "업체" : (f.getCategory().equals("caB")) ? "예약/결제/취소" : (f.getCategory().equals("caP")) ? "적립금" : "서비스이용" %>
+                                </option>
+                                <option value="caM">회원</option>
+                                <option value="caR">업체</option>
+                                <option value="caB">예약/결제/취소</option>
+                                <option value="caP">적립금</option>
+                                <option value="caS">서비스이용</option>
                             </select>
                         </td>
                     </tr>

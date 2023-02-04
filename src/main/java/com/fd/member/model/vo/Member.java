@@ -117,11 +117,23 @@ public class Member {
 		this.status = status;
 	}
 	
+	// 관리자 - 회원 수정할 때 사용
+	public Member(int userNo, String userName, String nickname, String userPhone, String userEmail, String status) {
+		super();
+		this.userNo = userNo;
+		this.userName = userName;
+		this.nickname = nickname;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.status = status;
+	}
+	
 	
 
 	public int getUserNo() {
 		return userNo;
 	}
+
 
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
