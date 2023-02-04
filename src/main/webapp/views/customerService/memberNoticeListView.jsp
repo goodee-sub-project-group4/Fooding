@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Notice" %>
+<%
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,13 +35,14 @@
         .pagination a{
         color:red;
         }
+
     </style>
 
 </head>
 <body>
 
 	<%@ include file="/views/common/head.jsp" %>
-	<%@ include file="/views/common/CustomerServiceSidebar.jsp" %>
+	<%@ include file="/views/common/customerServiceSidebar.jsp" %>
 
     <div id="content2-padding">
         <div id="notice-area">
@@ -48,85 +53,31 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
+                        <th width="100px">번호</th>
+                        <th width="450px">제목</th>
+                        <th width="120px">작성자</th>
                         <th>조회수</th>
                         <th>작성일</th>
                     </tr>
                 </thead>
                 <tbody>
+                <% if(list.isEmpty()) { %>
+                    <!-- 공지글이 없을 경우 -->
                     <tr>
-                        <td>1</td>
-                        <td id="noticeTitle">푸딩 공지사항</td>
-                        <td>푸딩</td>
-                        <td>0</td>
-                        <td>2023.01.22</td>
+                    	<td colspan=5><b>존재하는 공지사항이 없습니다.</b></td>
                     </tr>
+                <% } else { %>    
+                    <!-- 공지글이 있을 경우 -->
+                    <% for(Notice n : list) { %>
                     <tr>
-                        <td>1</td>
-                        <td id="noticeTitle">푸딩 공지사항</td>
-                        <td>푸딩</td>
-                        <td>0</td>
-                        <td>2023.01.22</td>
+                        <td><%=n.getNoticeNo()%></td>
+                        <td><%=n.getNoticeTitle()%></td>
+                        <td><%=n.getUserNo()%></td>
+                        <td><%=n.getCount()%></td>
+                        <td><%=n.getCreateDate()%></td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td id="noticeTitle">푸딩 공지사항</td>
-                        <td>푸딩</td>
-                        <td>0</td>
-                        <td>2023.01.22</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td id="noticeTitle">푸딩 공지사항</td>
-                        <td>푸딩</td>
-                        <td>0</td>
-                        <td>2023.01.22</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td id="noticeTitle">푸딩 공지사항</td>
-                        <td>푸딩</td>
-                        <td>0</td>
-                        <td>2023.01.22</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td id="noticeTitle">푸딩 공지사항</td>
-                        <td>푸딩</td>
-                        <td>0</td>
-                        <td>2023.01.22</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td id="noticeTitle">푸딩 공지사항</td>
-                        <td>푸딩</td>
-                        <td>0</td>
-                        <td>2023.01.22</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td id="noticeTitle">푸딩 공지사항</td>
-                        <td>푸딩</td>
-                        <td>0</td>
-                        <td>2023.01.22</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td id="noticeTitle">푸딩 공지사항</td>
-                        <td>푸딩</td>
-                        <td>0</td>
-                        <td>2023.01.22</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td id="noticeTitle">푸딩 공지사항</td>
-                        <td>푸딩</td>
-                        <td>0</td>
-                        <td>2023.01.22</td>
-                    </tr>
-
+                    <% } %>
+                <% } %>
                 </tbody>	
             </table>
     

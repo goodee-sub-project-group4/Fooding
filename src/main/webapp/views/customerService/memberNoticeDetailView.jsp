@@ -32,7 +32,7 @@
 <body>
 	
     <%@ include file="/views/common/head.jsp" %>
-	<%@ include file="/views/common/CustomerServiceSidebar.jsp" %>
+	<%@ include file="/views/common/customerServiceSidebar.jsp" %>
 
     <div id="content2-padding">
         <div id="notice-area">

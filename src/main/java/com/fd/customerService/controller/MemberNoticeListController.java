@@ -1,6 +1,7 @@
-package com.fd.book.controller;
+package com.fd.customerService.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fd.book.model.service.BookService;
-import com.fd.book.model.vo.Point;
-import com.google.gson.Gson;
+import com.fd.admin.model.vo.Notice;
+import com.fd.customerService.model.service.MemberNoticeService;
 
 /**
- * Servlet implementation class AjaxPointSelectController
+ * Servlet implementation class MemberNoticeListController
  */
-@WebServlet("/select.po")
-public class AjaxPointSelectController extends HttpServlet {
+@WebServlet("/notice.me")
+public class MemberNoticeListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxPointSelectController() {
+    public MemberNoticeListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +31,20 @@ public class AjaxPointSelectController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json; charset=UTF-8");
-		int userNo = Integer.parseInt(request.getParameter("input"));
 		
-		Point po = new BookService().selectPoint(userNo);
-		new Gson().toJson(po, response.getWriter());
+		// 1)
+		
+		// 2) db
+		ArrayList<Notice> list = new MemberNoticeService().selectMemberNoticeList();
+		
+		
+		// 3) 처음으로 페이지 응답
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/customerService/memberNoticeListView.jsp").forward(request, response);
+		
+		
+		
+		
 	}
 
 	/**

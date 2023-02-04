@@ -143,7 +143,7 @@ public class MemberService {
 	
 	/** 회원가입축하 적립금
 	 * @param selectMember
-	 * @return
+	 * @return result2
 	 */
 	public int insertPoint(Member selectMember) {
 		
@@ -159,6 +159,8 @@ public class MemberService {
 		return result2;
 		
 	}
+	
+	
 	
 	
 	
