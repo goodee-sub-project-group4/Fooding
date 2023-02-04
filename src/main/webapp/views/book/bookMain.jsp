@@ -461,7 +461,7 @@
                                         <tfoot>
                                         <tr>
                                             <td colspan="2" style="font-weight: 700; font-size: 25px;">총액</td>
-                                            <td class="sum" style="text-align: right; font-weight: 600; font-size: 20px; color: brown;"></td>
+                                            <td class="sum" id="sum" style="text-align: right; font-weight: 600; font-size: 20px; color: brown;"></td>
                                         </tr>
                                         <tr>
                                             <td colspan="3"><hr></td>
@@ -480,8 +480,11 @@
                                         </tr>
                                         <tr>
                                             <td>적립금 사용</td>
-                                            <td style="text-align: right;"><input style="width: 80px; text-align: right;" type="number" class="quantity" value="0">원</td>
+                                            <td style="text-align: right;"><input style="width: 80px; text-align: right;" type="number" id="pointUse" value="0">원</td>
                                         </tr>
+                                        <script>
+                                           
+                                        </script>
                                         <tr>
                                             <td colspan="2"><hr></td>
                                         </tr>
@@ -491,18 +494,23 @@
                                         </tr>
                                         <tr>
                                             <td>적립금 사용</td>
-                                            <td style="text-align: right;" id="usePoint">원</td>
+                                            <td style="text-align: right;" id="pointUse2">원</td>
                                         </tr>
                                         <tr>
                                             <td>예상 적립금</td>
-                                            <td style="text-align: right;">+ </td>
+                                            <td style="text-align: right;" id="pointResult"></td>
                                         </tr>
                                         <tr>
                                             <td style="font-weight: 700; font-size: 25px;">최종 결제 금액</td>
-                                            <td class="sum-payment" id="payment-sum" style="text-align: right; font-weight: 600; font-size: 20px; color: brown;"></td>
+                                            <td class="sum-payment" id="sum-payment" style="text-align: right; font-weight: 600; font-size: 20px; color: brown;"></td>
                                         </tr>
                                     </table>
                                 </div>
+
+                                <script>
+                                    
+                                  </script>
+
                                 <div id="menu-selected" style="width: 300px; height: 50px; margin: auto; padding-top: 10px;">
                                     <button type="button" class="btn btn-primary btn-lg check" style="float: left; width: 100px;" >확인</button>
                                     <button type="button" class="btn btn-secondary btn-lg cancel" style="float: right; width: 100px;" >취소</button>
@@ -526,14 +534,37 @@
                         </div>
                     </form>
 
-                    <script>
-                        $(function(){
-                            
-                        });
-                    </script>
-
                     <!-- 메뉴 / 결제창 -->
                     <script>
+                        // 결제 박스
+                        $(document).on('keyup', '#pointUse', function(e){
+                            if(!((e.keyCode > 95 && e.keyCode < 106)
+                            || (e.keyCode > 47 && e.keyCode < 58) 
+                            || e.keyCode == 8)) {
+                                return false;
+                            }
+                        });
+                            
+                        $('#pointUse').keyup(function(){
+                            let pointUse = $('#pointUse');
+                            let pointUse2 =  $('#pointUse2');
+                            let price = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
+                            let point = parseInt(pointUse.val());
+                            let paymentReuslt = price - point
+                            if(pointUse.val() > parseInt($('#pointNow').text().replace(/[^0-9]/g, ""))){
+                                alert('보유 적립금 이상으로 입력할 수 없습니다.')
+                                pointUse.val(parseInt($('#pointNow').text().replace(/[^0-9]/g, "")));
+                            }else if(pointUse.val() < 0){
+                                alert('0보다 작은 숫자는 입력할 수 없습니다.')
+                                pointUse2.text(0 + '원')
+                            }
+                            console.log(paymentReuslt)
+                            $('.sum-payment').text(paymentReuslt.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('#pointResult').text(String(paymentReuslt/100).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+                        });
+                        
+                        
+
                         // 메뉴 추가
                         $('.menuAdd.btn.btn-secondary.btn-sm').click(function(){
                             const addMenu = $(this).parent().prev().children();
@@ -583,6 +614,7 @@
                                 i++
                             })
                             $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('#sum-payment').text(($('#sum').text().replace(/[^0-9]/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         });
                         
                         $('.menuRemove.btn.btn-danger.btn-sm').click(function(){
@@ -601,6 +633,7 @@
                                 i++
                             })
                             $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('#sum-payment').text(($('#sum').text().replace(/[^0-9]/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         })
                             
                         // 수량 추가, 삭제
@@ -629,6 +662,7 @@
                                 i++
                             })
                             $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('#sum-payment').text(($('#sum').text().replace(/[^0-9]/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         });
                         $(document).on('click', '.plus', function(){
                             const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
@@ -654,6 +688,7 @@
                                 i++
                             })
                             $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('#sum-payment').text(($('#sum').text().replace(/[^0-9]/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         });
                         $(document).on('keyup', '.quantity', function(){
                             const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
@@ -683,6 +718,7 @@
                                     i++
                                 })
                                 $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                                $('#sum-payment').text(($('#sum').text().replace(/[^0-9]/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                             });
                         });
                         // - / + 입력 방지
@@ -697,7 +733,7 @@
                         $('.cancel').click(function(){
                             $('.menu-select').css('display', 'none');
                         });
-
+                        
                             
                         var IMP = window.IMP; 
                         IMP.init("imp44408883"); 
@@ -736,6 +772,8 @@
                             });
                         }
                       </script>
+
+                      
 
                     <div class="book-category">
                         예약인원
@@ -841,13 +879,11 @@
                                     data:{input:<%= loginUser.getUserNo() %>},
                                     type:"post",
                                     success:function(result){
+                                        console.log(typeof(result))
                                     	if(result != null){
-                                    		console.log(result)
-                                    		console.log(result[pointNow])
-                                    		const pointNow = result["pointNow"]
-                                    		$('#pointNow').text(pointNow + "원");
+                                    		$('#pointNow').text(result.pointNow + "원");
                                     	}else{
-                                    		$('#pointNow').text(result.pointNow + "원")
+                                    		$('#pointNow').text("0원")
                                     	}
                                     },
                                     error:function(){
