@@ -35,6 +35,14 @@ public class SearchDao {
 		}
 	}
 	
+	/**
+	 * 카테고리 검색시, 검색결과 총 갯수를 반환하는 메소드 (검색된 음식점의 총 갯수)
+	 * @param conn
+	 * @param localCt
+	 * @param dLocalCt
+	 * @param foodCt
+	 * @return int listCount
+	 */
 	public int selectListCount(Connection conn, String localCt, String dLocalCt, String foodCt) {
 		// select => ResultSet(숫자 한 개 ) => int 
 		
@@ -67,6 +75,15 @@ public class SearchDao {
 		
 	}
 	
+	/**
+	 * 카테고리 검색시, 검색된 업체의 '업체번호, 업체명, 주소(주소+상세주소), 이미지경로, 업종(음식카테고리명), 별점평균, 조회수'가 담긴 객체들의 리스트를 반환하는 메소드
+	 * @param conn
+	 * @param pi
+	 * @param localCt
+	 * @param dLocalCt
+	 * @param foodCt
+	 * @return ArrayList<Restaurant> list
+	 */
 	public ArrayList<Restaurant> selectList(Connection conn,PageInfo pi, String localCt, String dLocalCt, String foodCt){
 		ArrayList<Restaurant> list = new ArrayList<>();
 		PreparedStatement pstmt = null; 
@@ -84,8 +101,11 @@ public class SearchDao {
 			pstmt.setString(1, localCt);
 			pstmt.setString(2, dLocalCt);
 			pstmt.setString(3, foodCt);
-			pstmt.setInt(4, startRow);
-			pstmt.setInt(5, endRow);
+			pstmt.setString(4, localCt);
+			pstmt.setString(5, dLocalCt);
+			pstmt.setString(6, foodCt);
+			pstmt.setInt(7, startRow);
+			pstmt.setInt(8, endRow);
 			
 			rset = pstmt.executeQuery(); 
 			
@@ -96,8 +116,9 @@ public class SearchDao {
 										rset.getString("address"),
 										rset.getString("r_img"),
 										rset.getString("food_ct"),
-										rset.getDouble("star"),
-										rset.getInt("count")
+										rset.getDouble("review_avg"),
+										rset.getInt("count"),
+										rset.getInt("total_review")
 										)); 		
 				
 			}
@@ -113,6 +134,12 @@ public class SearchDao {
 		
 	}
 	
+	/**
+	 * 업체등록요청폼 메소드1 (성공적으로 등록이 되었을 경우 result 값으로 1 반환)
+	 * @param conn
+	 * @param r
+	 * @return int result
+	 */
 	public int insertRes(Connection conn, Restaurant r) {
 		
 		int result = 0; 
@@ -148,6 +175,12 @@ public class SearchDao {
 		return result; 
 	}
 	
+	/**
+	 * 업체등록폼 메소드 2 (업체의 첨부파일 사진을 저장하는 메소드)
+	 * @param conn
+	 * @param at
+	 * @return int result
+	 */
 	public int insertAttachment(Connection conn, Attachment at) {
 		
 		int result = 0;
@@ -172,6 +205,12 @@ public class SearchDao {
 		
 	}
 	
+	/**
+	 * 키워드 검색시, 해당 키워드로 검색된 업체의 총 갯수를 반환하는 메소드 
+	 * @param conn
+	 * @param keyword
+	 * @return int listCount 
+	 */
 	public int keywordListCount(Connection conn, String keyword) {
 		// select => ResultSet(숫자 한 개 ) => int 
 		
@@ -207,6 +246,14 @@ public class SearchDao {
 	}
 	
 	
+		/**
+		 * 키워드 검색시, 해당 키워드로 검색된 업체들의 정보를 담은 객체들이 담긴 리스트를 반환하는 메소드 
+		 * @param conn
+		 * @param pi
+		 * @param keyword
+		 * @return ArrayList<Restraunt> list
+		 */
+		/*
 		public ArrayList<Restaurant> keywordList(Connection conn, PageInfo pi, String keyword){
 		
 			ArrayList<Restaurant> list = new ArrayList<>();
@@ -255,10 +302,17 @@ public class SearchDao {
 			return list; 
 		
 		}
+		*/
 		
 		
 		
-		
+		/**
+		 * 사용자가 찜하기를 눌렀을 경우, GOOD 테이블에 해당 정보를 INSERT하는 메소드 
+		 * @param conn
+		 * @param resNo
+		 * @param userNo
+		 * @return int result
+		 */
 		public int insertGood(Connection conn, int resNo, int userNo) {
 			int result = 0; 
 			PreparedStatement pstmt = null; 

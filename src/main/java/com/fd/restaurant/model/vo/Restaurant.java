@@ -33,12 +33,11 @@ public class Restaurant {
 	private String menuDes;
 	private String img;
 	
-	
-
 	// 한수가 추가한 필드 (SearchController 및 search와 관련된 파일에서만 사용)
 	private int listCount; // 검색결과 총 갯수
-	private double star; // 별점 
+	private double star; // 별점  
 	private int count; // 조회수 
+	private int totalReview; // 한 업체당 달린 리뷰 총 갯수 
 	
 	// 한수가 추가한 필드2 (찜하기에서 사용!!) 
 	private int userNo; // 찜하기를 누른 회원의 번호 
@@ -130,9 +129,7 @@ public class Restaurant {
 		this.foodCt = foodCt;
 	}
 	
-	
 
-	
 	// 한수가 만든 매개변수 생성자1(ResformController 에서 사용!!)
 	
 	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String phone,
@@ -170,7 +167,7 @@ public class Restaurant {
 	}
 	
 	// 한수가 추가한 매개변수 생성자3 (SearchDao의 selectList에서 사용!!)
-	
+	/*
 	public Restaurant(int resNo, String resName, String address, String rImg, String foodCt, double star, int count) {
 		super();
 		this.resNo = resNo;
@@ -181,9 +178,10 @@ public class Restaurant {
 		this.star = star;
 		this.count = count;
 	}
-
+	*/
 
 	// 한수가 추가한 매개변수 생성자4 (SearchDao의 keywordList에서 사용!! )
+	/*
 	public Restaurant(String resName, String address, String rImg, String foodCt, double star, int count) {
 		super();
 		this.resName = resName;
@@ -193,12 +191,30 @@ public class Restaurant {
 		this.star = star;
 		this.count = count;
 	}
+	*/
+	
+	
+	// 한수가 추가한 매개변수 생성자5 (SearchDao의 selectList에서 사용)
+	public Restaurant(int resNo, String resName, String address, String rImg, String foodCt, double reviewAvg,
+			int count, int totalReview) {
+		super();
+		this.resNo = resNo;
+		this.resName = resName;
+		this.address = address;
+		this.rImg = rImg;
+		this.foodCt = foodCt;
+		this.reviewAvg = reviewAvg; // 한업체에 달린 별점평점
+		this.count = count; // 한업체의 조회수 
+		this.totalReview = totalReview; // 한 업체에 달린 리뷰 총 갯수 
+	}
+	
 
+	// getter/setter
+	
 	public int getResNo () {
 		return resNo;
 	}
 
-	
 
 	public void setResNo(int resNo) {
 		this.resNo = resNo;
@@ -484,6 +500,15 @@ public class Restaurant {
 
 	public void setReviewAvg(double reviewAvg) {
 		this.reviewAvg = reviewAvg;
+	}
+	
+	
+	public int getTotalReview() {
+		return totalReview;
+	}
+
+	public void setTotalReview(int totalReview) {
+		this.totalReview = totalReview;
 	}
 
 	@Override
