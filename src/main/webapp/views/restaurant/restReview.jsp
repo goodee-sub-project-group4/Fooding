@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Fooding</title>
 	<style>
 		/* ↓↓↓ 기본골격용 스타일들 */
 		#outer2 {
@@ -292,8 +292,12 @@
 					}else {
 						
 					}
-					$('#photo1').attr("src", "<%=contextPath%>/" +set[1].filePath+set[1].changeName);
-					console.log("<%=contextPath%>/" +set[1].filePath + set[1].changeName);
+					if(set[1]>0) {
+						$('#photo1').attr("src", "<%=contextPath%>/" +set[2].filePath+set[2].changeName);
+					}else {
+						$('#photo1').attr("src", "");
+					}
+					
 				}, error: function(){
 					console.log("리뷰상세조회 ajax 통신실패")
 				}

@@ -1,29 +1,26 @@
 package com.fd.book.model.vo;
 
-import java.util.Date;
 
 public class Book {
-
+	
 	private int bookNo;
 	private int userNo;
 	private int resNo;
 	private String bookName;
 	private String bookPhone;
-	private Date bookDate;
+	private String bookDate;
 	private String bookTime;
 	private int people;
 	private String email;
 	private String request;
 	private String status;
-	private Date modifyDate;
-	private Date bookA;
+	private String modifyDate;
+	private String bookA;
 	
-	public Book() {
-		super();
-	}
+	public Book() {}
 
-	public Book(int bookNo, int userNo, int resNo, String bookName, String bookPhone, Date bookDate, String bookTime,
-			int people, String email, String request, String status, Date modifyDate, Date bookA) {
+	public Book(int bookNo, int userNo, int resNo, String bookName, String bookPhone, String bookDate, String bookTime,
+			int people, String email, String request, String status, String modifyDate, String bookA) {
 		super();
 		this.bookNo = bookNo;
 		this.userNo = userNo;
@@ -80,11 +77,11 @@ public class Book {
 		this.bookPhone = bookPhone;
 	}
 
-	public Date getBookDate() {
+	public String getBookDate() {
 		return bookDate;
 	}
 
-	public void setBookDate(Date bookDate) {
+	public void setBookDate(String bookDate) {
 		this.bookDate = bookDate;
 	}
 
@@ -128,19 +125,19 @@ public class Book {
 		this.status = status;
 	}
 
-	public Date getModifyDate() {
+	public String getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 
-	public Date getBookA() {
+	public String getBookA() {
 		return bookA;
 	}
 
-	public void setBookA(Date bookA) {
+	public void setBookA(String bookA) {
 		this.bookA = bookA;
 	}
 
@@ -151,6 +148,7 @@ public class Book {
 				+ people + ", email=" + email + ", request=" + request + ", status=" + status + ", modifyDate="
 				+ modifyDate + ", bookA=" + bookA + "]";
 	}
-
 	
+	
+
 }

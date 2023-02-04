@@ -39,13 +39,11 @@ public class AjaxRestReviewDatailController extends HttpServlet {
 		
 		//리뷰정보와 사진을 담을 set 객체
 		ArrayList set = new ArrayList();
-		set.add(r);
+		set.add(r); //set의 0번 인덱스에 리뷰상세정보를 담는다.
+		set.add(atList.size()); //set의 1번인덱스에는 첨부파일 갯수의 크기를 담는다.
 		for(Attachment at : atList) {
-			set.add(at);
+			set.add(at); //set의 2번인덱스부터 첨부사진을 담는다.
 		}
-		
-		
-		System.out.println(atList);
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(set, response.getWriter());
 	}
