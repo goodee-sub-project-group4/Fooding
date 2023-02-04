@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import com.fd.admin.model.vo.Black;
 import com.fd.admin.model.vo.Question;
 import com.fd.book.model.vo.Book;
+import com.fd.book.model.vo.BookMenu;
+import com.fd.book.model.vo.Payment;
 import com.fd.common.model.vo.Attachment;
 import com.fd.restaurant.model.dao.RestaurantDao;
 import com.fd.restaurant.model.vo.Menu;
@@ -217,6 +219,27 @@ public class RestaurantService {
 		ArrayList<Book> list = new RestaurantDao().selectBookList(conn, resNo);
 		close(conn);
 		return list;
+	}
+	
+	public Book selectBook(int bookNo) {
+		Connection conn = getConnection();
+		Book b = new RestaurantDao().selectBook(conn, bookNo);
+		close(conn);
+		return b;
+	}
+	
+	public ArrayList<BookMenu> selectBookMenu(int bookNo) {
+		Connection conn = getConnection();
+		ArrayList<BookMenu> list = new RestaurantDao().selectBookMenu(conn, bookNo);
+		close(conn);
+		return list;
+	}
+	
+	public Payment selectPayment(int bookNo) {
+		Connection conn = getConnection();
+		Payment p = new RestaurantDao().selectPayment(conn, bookNo);
+		close(conn);
+		return p;
 	}
 	
 

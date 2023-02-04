@@ -6,6 +6,7 @@ public class BookMenu {
 	private int bookNo;
 	private String menuNo;
 	private int menuCount;
+	private int price;
 	private int bmPrice;
 	
 	public BookMenu() {}
@@ -49,6 +50,15 @@ public class BookMenu {
 
 	public void setMenuCount(int menuCount) {
 		this.menuCount = menuCount;
+	}
+
+	
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public int getBmPrice() {

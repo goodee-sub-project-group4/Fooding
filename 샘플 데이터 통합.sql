@@ -1,4 +1,4 @@
--- TB_USER
+------------- TB_USER 관리자,회원 -------------
 --관리자
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'fooding01', '1111', '푸딩01', '', '', '', '', '', '', '', 'A');
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'fooding02', '2222', '푸딩02', '', '', '', '', '', '', '', 'A');
@@ -8,12 +8,11 @@ INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user01', '1111', '팜하니', '농
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user02', '2222', '강해린', '아기고양이', 'kitty@naver.com', '01000002222', 'F', '20040102', SYSDATE, SYSDATE, 'Y');
 INSERT INTO TB_USER VALUES (SEQ_UNO.NEXTVAL, 'user03', '3333', '김민지', '핫세', 'minji33@naver.com', '01000003333', 'F', '20040103', SYSDATE, SYSDATE, 'Y');
 
-
 ------------- RESTAURANT  업체 -------------
-INSERT INTO RESTAURANT VALUES --일반업체 / 아이디 : 1200
-(SEQ_RESNO.NEXTVAL,'1234', '미미식당', '김미미',  '899-52-52007', '서울시 금천구 가산동', '대륭3차 11층', '서울특별시', '금천구', '02-555-6666', '010-6666-7777', 'FOODY@EMAIL.COM', 'Y', SYSDATE, SYSDATE, SYSDATE, 'Y', '12345123', '12345123', null, '8:00', '21:00', '15:00', '16:00', 'japanese', 0);
-INSERT INTO RESTAURANT VALUES --첫로그인 테스트용 업체 / 아이디 1201
-(SEQ_RESNO.NEXTVAL,'1234', '루키식당', '하이루',  '777-52-52007', '서울시 금천구 가산동', '대륭3차 11층', '서울특별시', '금천구', '02-555-6666', '010-6666-7777', 'FOODY@EMAIL.COM', 'Y', SYSDATE, SYSDATE, SYSDATE, 'C', '12345123', '12345123', null, '8:00', '19:00', null , null, 'bar',0);
+INSERT INTO RESTAURANT VALUES -- 첫로그인 테스트용 업체 / 아이디 : 1200
+(SEQ_RESNO.NEXTVAL,'1234', '미미식당', '김미미',  '899-52-52007', '서울시 금천구 가산동', '대륭3차 11층', '서울특별시', '금천구', '02-555-6666', '010-6666-7777', 'FOODY@EMAIL.COM', 'Y', SYSDATE, SYSDATE, SYSDATE, 'C', '12345123', '12345123', null, '8:00', '21:00', '15:00', '16:00', 'japanese', 0);
+INSERT INTO RESTAURANT VALUES -- 일반테스트 업체 / 아이디 1201
+(SEQ_RESNO.NEXTVAL,'1234', '루키식당', '하이루',  '777-52-52007', '서울시 금천구 가산동', '대륭3차 11층', '서울특별시', '금천구', '02-555-6666', '010-6666-7777', 'FOODY@EMAIL.COM', 'Y', SYSDATE, SYSDATE, SYSDATE, 'Y', '12345123', '12345123', 'resources/restaurantSample/1_rosebud.jpg', '8:00', '19:00', null , null, 'bar',0);
 
 ------------- QUESTION 문의답변 -------------
 INSERT INTO QUESTION VALUES
@@ -22,14 +21,17 @@ INSERT INTO QUESTION VALUES
 INSERT INTO QUESTION VALUES
 (SEQ_QNO.NEXTVAL, '이용문의', '애견동반 가능한가요?', '애견동반이라는 얘기가 있어서 문의드려요'
 , SYSDATE, NULL, NULL, NULL, NULL, 'N', '2', 'U', 1201, 'R');
+INSERT INTO QUESTION VALUES
+(SEQ_QNO.NEXTVAL, '예약문의', '지난 예약때 물건을 놓고 온것 같아요.', '빨간색 카드지갑인데 혹시 분실물 있나요?'
+, SYSDATE, SYSDATE, NULL, '네. 보관중입니다. 찾으러 오세요.^^', SYSDATE, 'Y', '3', 'U', 1201, 'R');
 
 ------------- BOOK 예약 -------------
-INSERT INTO BOOK VALUES (SEQ_BKNO.NEXTVAL, 1, 1201, '김미미', '01055556666'
-, '2023/01/01', '15:30', 3, 'EMAIL.COM', NULL, 'B', SYSDATE, SYSDATE);
-INSERT INTO BOOK VALUES (SEQ_BKNO.NEXTVAL, 1, 1201, '김미미', '01055556666'
-, '2023/02/01', '15:30', 3, 'EMAIL.COM', NULL, 'B', SYSDATE, SYSDATE);
-INSERT INTO BOOK VALUES (SEQ_BKNO.NEXTVAL, 1, 1201, '한나', '01055556666'
-, '2023/02/02', '15:30', 3, 'EMAIL.COM', NULL, 'B', SYSDATE, SYSDATE);
+INSERT INTO BOOK VALUES (SEQ_BKNO.NEXTVAL, 1, 1201, '팜하니', '01055556666'
+, '2023/01/21', '18:30', 3, 'hello@gmail.com', NULL, 'D', SYSDATE, SYSDATE);
+INSERT INTO BOOK VALUES (SEQ_BKNO.NEXTVAL, 2, 1201, '김미미', '01055556666'
+, '2023/02/01', '12:30', 2, 'nice@gmail.com', NULL, 'B', SYSDATE, SYSDATE);
+INSERT INTO BOOK VALUES (SEQ_BKNO.NEXTVAL, 3, 1201, '한나', '01055556666'
+, '2023/02/12', '17:00', 4, 'true@gmail.com', '주차관련으로 문의남겨놨어요', 'B', SYSDATE, SYSDATE);
 
 -- REVIEW
 INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, SEQ_RESNO.CURRVAL, 1, 2, '너무 맛있어요 분위기도 넘 좋아요~!', 4.5, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
@@ -39,9 +41,9 @@ INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, SEQ_RESNO.CURRVAL, 2, 1, '메롱~!'
 INSERT INTO REVIEW VALUES (SEQ_RVNO.NEXTVAL, SEQ_RESNO.CURRVAL, 3, 2, '여기 다시 올거같아요', 4.0, SYSDATE, SYSDATE, 'Y', 'N', DEFAULT);
 
 ------------- ATTACHMENT 첨부파일 -------------
-INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진1.jpg', '2023020309460951785', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
-INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진2.jpg', '2023020301010996124', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
-INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진3.jpg', '2023020309442613989', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
+INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1201, '사진1.jpg', '2023020309460951785.jpg', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
+INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1201, '사진2.jpg', '2023020416174051873.jpg', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
+INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1201, '사진3.jpg', '2023020309442613989.jpg', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');
 
 ------------- POINT 적립금 -------------
 INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL

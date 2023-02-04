@@ -167,7 +167,7 @@
                         	}
                         %>
                         <td><%=status %></td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail" onclick="location.href='<%=contextPath%>/bookDetail.re?no='+<%= list.get(i).getBookNo()%>">조회</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail" onclick="viewDetail(<%= list.get(i).getBookNo()%>)">조회</button></td>
                     </tr>
              		<% } %>
                 </tbody>	
@@ -210,10 +210,10 @@
                             <th>예약인원</th>
                         </tr>
                         <tr class="table-light">
-                            <td>12</td>
-                            <td>2023-02-15</td>
-                            <td>15:00</td>
-                            <td>2</td>
+                            <td id="bookNo">12</td>
+                            <td id="bookDate">2023-02-15</td>
+                            <td id="bookTime">15:00</td>
+                            <td id="people">2</td>
                         </tr>
                     </table>
                     <br>
@@ -310,8 +310,27 @@
 		$(function(){
 			$('#title').text("예약관리");
 			$("#menu1").addClass("active");
-
 		})
+		
+		function viewDetail(bookNo){
+			$.ajax({
+				url:"<%=contextPath%>/bookDetail.re",
+				data:{no:bookNo},
+				success: function(set){
+					console.log(set[0]);
+					console.log(set[1]);
+					console.log(set[2]);
+					$('#bookNo').text(set[0].bookNo);
+					$('#bookDate').text(set[0].bookDate);
+					$('#bookTime').text(set[0].bookTime);
+					$('#people').text(set[0].people);
+					
+					
+				}, error: function() {
+					console.log("예약상세조회 ajax통신실패")
+				}
+			})
+		}
 		
 	</script>
 </body>
