@@ -47,7 +47,7 @@
                    <div id="content1-1"><h2><b>마이페이지</b></h2></div>
                    <div id="content1-2">
                        <div><a href="<%=request.getContextPath()%>/check.bo">예약/결제내역<span class="arrow">></span></a></div>
-                       <div><a href="<%=request.getContextPath()%>/reviewList.re">리뷰조회<span class="arrow">></span></a></div>
+                       <div><a href="<%=request.getContextPath()%>/reviewList.me">리뷰조회<span class="arrow">></span></a></div>
                        <div><a href="">적립금조회<span class="arrow">></span></a></div>
                        <div><a href="">찜하기조회<span class="arrow">></span></a></div>
                        <div><a href="<%=request.getContextPath()%>/myPageConfirmPwd.me">개인정보수정<span class="arrow">></span></a></div>

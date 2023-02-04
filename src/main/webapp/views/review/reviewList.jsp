@@ -1,11 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.fd.review.model.vo.Review" %>
-<%
-	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
-	
-%>
-    
+<% ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,7 +184,7 @@
                 <!-- Modal Header -->
                 <div class="modal-header1">
                     <h3 class="modal-title"><b>리뷰</b></h3><br>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" onclick="modalClose();" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
@@ -204,16 +200,16 @@
                             </div>
                             <div id="review-content22-3">
                                 <p>★ 별점</p>
-                                <select name="star" id="star">
-                                    <option value="1.0">1.0</option>
+                                <select name="selectBoxStar" id="selectBoxStar">
+                                    <option value="1">1.0</option>
                                     <option value="1.5">1.5</option>
-                                    <option value="2.0">2.0</option>
+                                    <option value="2">2.0</option>
                                     <option value="2.5">2.5</option>
-                                    <option value="3.0">3.0</option>
+                                    <option value="3">3.0</option>
                                     <option value="3.5">3.5</option>
-                                    <option value="4.0">4.0</option>
+                                    <option value="4">4.0</option>
                                     <option value="4.5">4.5</option>
-                                    <option value="5.0" selected>5.0</option>
+                                    <option value="5">5.0</option>
                                 </select>
                             </div>
                         </div>
@@ -221,16 +217,17 @@
                             <div id="review-content33-1">
                                 <p>내용</p>
                             </div>
-                            <div id="review-content33-2"><textarea name="reviewContent" style="resize:none"
-                                    required></textarea></div>
+                            <div id="review-content33-2">
+                            	<textarea name="reviewContent" style="resize:none" required readonly></textarea>
+							</div>
                         </div>
                         <div class="review-content44">
                             <div id="review-content44-1">
                                 <p>사진첨부</p>
                             </div>
-                            <div id="review-content44-2">
+                            <div id="review-content44-2" name="reviewImages">
                             	<!-- src: 저장경로+실제파일명 -->
-                                <img id="img1" src="" width="150" height="150">
+                                <!-- <img id="img1" src="" width="150" height="150">
                                 <img id="img2" src="" width="150" height="150">
                                 <img id="img3" src="" width="150" height="150">
 
@@ -238,7 +235,7 @@
                                     <input type="file" name="file1" onchange="loadImg(this, 1);">
                                     <input type="file" name="file2" onchange="loadImg(this, 2);">
                                     <input type="file" name="file3" onchange="loadImg(this, 3);">
-                                </div>
+                                </div> -->
 
                                 <br>
                                 <p> - 사진은 최대 8 장까지, 30 MB 이하의 이미지만 업로드가 가능합니다. <br>
@@ -255,7 +252,7 @@
 
                         <!-- Modal footer -->
                         <div class="modal-footer" style="border:none;">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" style="width:90px;">확인</button>
+                            <button type="button" class="btn btn-danger" onclick="modalClose();" data-dismiss="modal" style="width:90px;">확인</button>
                         </div>
                         <br>
                 </form>
@@ -301,23 +298,54 @@
                 	
                 	/* 리뷰상세보기 */
                 	function viewDetail(reviewNo) {
+                		
+                		// 리뷰 상세 텍스트
 						$.ajax({
 							url:"<%=contextPath%>/reviewDetail.me",
 							data:{reviewNo:reviewNo},
-							success: function(r){
-								$('#review-content22-2-1').text("업체명 : ");
-								$('#review-content22-3 p').val();
-								$('#review-content33-2 textarea[name=reviewContent]').text();
-								/* 사진첨부는...? */
-								
-							}, error: function(){
+							success: function(resData) {
+								console.log("리뷰 상세 텍스트")
+								console.log(resData);
+								$('#review-content22-2-1').text(resData.resName);
+								$("#selectBoxStar").val(resData.star).prop("selected", true);
+								$('#review-content33-2 textarea[name=reviewContent]').text(resData.reviewContent);
+							}, error: function() {
 								console.log("리뷰상세조회 ajax 통신실패")
-							}, complete: function(){
-								console.log("리뷰상세조회 ajax 통신완료")
 							}
-						})
+						});
+						
+                		// 리뷰 상세 파일첨부 가져오기
+						$.ajax({
+							url:"<%=contextPath%>/reviewDetailFile.me",
+							data:{reviewNo:reviewNo},
+							success: function(resData) {
+								console.log("리뷰 상세 파일")
+								console.log(resData);
+								
+								let html = "";
+								
+								html += '<div id="review-content44-2" name="reviewImages">'
+								for (let i = 0; i < resData.length; i++) {
+									console.log(resData[i].filePath + resData[i].changeName)
+									html += '<img src="' + resData[i].filePath + resData[i].changeName + '" width="150" height="150">'
+								}
+								html += '</div>'
+								
+								const htmlId = $("#review-content44-2");
+								htmlId.append(html);
+								
+							}, error: function() {
+								console.log("리뷰상세조회 ajax 통신실패")
+							}
+						});
+						
 					}
-		                	
+				
+                	// 모달 닫기
+                	const modalClose = () => {
+                		$("#review-content44-2").empty()	// 모달 닫을때 이미지 제거
+                	}
+                	
                 </script>
                 
             </div>

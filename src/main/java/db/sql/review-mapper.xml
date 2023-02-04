@@ -14,8 +14,7 @@
 		  JOIN BOOK B ON (V.BOOK_NO = B.BOOK_NO )
 		  JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
 		 WHERE V.STATUS = 'Y'
-		 ORDER
-            BY REVIEW_NO DESC	  
+		 ORDER BY REVIEW_NO DESC  
 	</entry>
 
 	<!-- 리뷰쓰기 -->
@@ -68,32 +67,33 @@
 	<entry key="increaseCount">
 		UPDATE
 		       REVIEW
-		   SET COUNT = COUNT+1
+		   SET COUNT = COUNT + 1
 		 WHERE REVIEW_NO = ?
-		   AND STATUS = 'Y'
 	</entry>
 	
 	<!-- 리뷰상세페이지 -->
 	<entry key="selectContentReview">
 		SELECT
-		       REVIEW_NO
-		     , RES_NO
-			 , USER_NO
-             , BOOK_NO
-             , REVIEW_CONTENT
-             , STAR
-             , CREATE_DATE
-             , MODIFY_DATE
-             , STATUS
-             , GOOD
-             , COUNT
-          FROM REVIEW
-          JOIN BOOK B ON (V.BOOK_NO = B.BOOK_NO )
-		  JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
-	     WHERE REVIEW_NO = ?
-   </entry>       
+		     A.REVIEW_NO
+		    ,A.RES_NO
+		    ,A.REVIEW_CONTENT
+		    ,A.STAR
+		    ,B.RES_NAME
+		FROM review A
+			LEFT OUTER JOIN restaurant B ON A.RES_NO = B.RES_NO
+			LEFT OUTER JOIN attachment C ON A.RES_NO = c.ref_bno AND c.BOARD_TYPE = 'R'
+		WHERE
+			A.REVIEW_NO = ?
+   </entry>
 	  
-
+<!-- 리뷰상세페이지 파일첨부 가져오기 -->
+	<entry key="selectContentReviewFiles">
+		select 
+		     ref_bno
+		    ,change_name
+		    ,file_path
+		from attachment where ref_bno = ?
+   </entry>
 
 
 </properties>

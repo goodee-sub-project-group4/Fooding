@@ -72,7 +72,8 @@ public class ReviewFormController extends HttpServlet {
 					// 있는 경우 => Attachment생성 + 원본명, 수정명, 저장경로, 파일레벨 담기
 					Attachment at = new Attachment();
 					at.setOriginName(multiRequest.getOriginalFileName(key));
-					at.setChangeName(multiRequest.getOriginalFileName(key));
+					// at.setChangeName(multiRequest.getOriginalFileName(key));
+					at.setChangeName(multiRequest.getFilesystemName(key));
 					at.setFilePath("resources/review_upfiles/");
 					at.setBoardType("R");
 					
@@ -86,12 +87,12 @@ public class ReviewFormController extends HttpServlet {
 			if(result > 0) {
 				// 성공 => 리뷰리스트 페이지 (/reviewList.re)
 				session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
-				response.sendRedirect(request.getContextPath() + "/reviewList.re");
+				response.sendRedirect(request.getContextPath() + "/reviewList.me");
 				
 			} else {
 				// 실패 => 에러페이지 
 				session.setAttribute("alertMsg", "실패했습니다.");
-				response.sendRedirect(request.getContextPath() + "/reviewList.re");
+				response.sendRedirect(request.getContextPath() + "/reviewList.me");
 			}
 			
 			
