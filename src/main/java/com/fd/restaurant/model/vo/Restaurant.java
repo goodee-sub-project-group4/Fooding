@@ -202,6 +202,7 @@ public class Restaurant {
 	
 	
 	// 한수가 추가한 매개변수 생성자2 
+	/*
 	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String localCt,
 			String dLocalCt, String phone, String cellphone, String email, String parking, String foodCt) {
 		super();
@@ -218,6 +219,7 @@ public class Restaurant {
 		this.parking = parking;
 		this.foodCt = foodCt;
 	}
+	*/
 	
 	// 한수가 추가한 매개변수 생성자3 (SearchDao의 selectList에서 사용!!)
 	/*
@@ -261,12 +263,31 @@ public class Restaurant {
 		this.totalReview = totalReview; // 한 업체에 달린 리뷰 총 갯수 
 	}
 	
+	// 한수가 추가한 매개변수 생성자6 (ResformController에서 사용)
+	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String latitude,
+			String longtitude, String localCt, String dLocalCt, String phone, String cellphone, String email,
+			String parking, String foodCt) {
+		super();
+		this.resName = resName;
+		this.ceo = ceo;
+		this.permitNo = permitNo;
+		this.address = address;
+		this.dAddress = dAddress;
+		this.latitude = latitude;
+		this.longtitude = longtitude;
+		this.localCt = localCt;
+		this.dLocalCt = dLocalCt;
+		this.phone = phone;
+		this.cellphone = cellphone;
+		this.email = email;
+		this.parking = parking;
+		this.foodCt = foodCt;
+	}
 
 	// getter/setter
 	public int getResNo () {
 		return resNo;
 	}
-
 
 	public void setResNo(int resNo) {
 		this.resNo = resNo;

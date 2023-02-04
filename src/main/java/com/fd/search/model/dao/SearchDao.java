@@ -154,21 +154,15 @@ public class SearchDao {
 			pstmt.setString(3, r.getPermitNo());
 			pstmt.setString(4, r.getAddress());
 			pstmt.setString(5, r.getdAddress());
-			// localCt
 			pstmt.setString(6, r.getLocalCt());
-			// dLocalCt 
 			pstmt.setString(7, r.getdLocalCt());
 			pstmt.setString(8, r.getPhone()); 
 			pstmt.setString(9, r.getCellphone());
 			pstmt.setString(10, r.getEmail()); 
 			pstmt.setString(11, r.getFoodCt());
 			pstmt.setString(12, r.getParking());
-			pstmt.setString(13, r.getOpen());
-			pstmt.setString(14, r.getClose());
-			pstmt.setString(15, r.getBreakS());
-			pstmt.setString(16, r.getBreakE());
-			pstmt.setString(17, r.getLongtitude());
-			pstmt.setString(18, r.getLatitude());
+			pstmt.setString(13, r.getLongtitude());
+			pstmt.setString(14, r.getLatitude());
 			
 			result = pstmt.executeUpdate(); 
 			

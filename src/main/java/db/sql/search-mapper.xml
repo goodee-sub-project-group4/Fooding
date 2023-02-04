@@ -50,6 +50,7 @@
 		  INTO RESTAURANT
 		     (
 		        RES_NO
+              , USER_PWD
 		      , RES_NAME
 		      , CEO
 		      , PERMIT_NO
@@ -58,21 +59,18 @@
 		      , LOCAL_CT
 		      , DLOCAL_CT
 		      , PHONE
-		      , CELPHONE
+		      , CELLPHONE
 		      , EMAIL
 		      , APPLY_DATE
 		      , FOOD_CT
 		      , PARKING
-		      , OPEN
-			  , CLOSE
-  			  , BREAKS
-			  , BREAKE
   		      , LONGTITUDE
 		      , LATITUDE
 		      )
 		 VALUES
 		      (
 		        SEQ_RESNO.NEXTVAL
+              , '1234'
 		      , ?
 		      , ?
 		      , ?
@@ -83,12 +81,7 @@
 		      , ?
 		      , ?
 		      , ?
-		      , ?
 		      , SYSDATE
-		      , ?
-		      , ?
-		      , ?
-		      , ?
 		      , ?
 		      , ?
 		      , ?
@@ -110,7 +103,7 @@
 		  VALUES
 		  (
 		    SEQ_RESNO.NEXTVAL
-		  , SEQ_RESNO.CURRVAL
+          , SEQ_RESNO.CURRVAL
 		  , ?
 		  , ?
 		  , ?
