@@ -43,7 +43,6 @@ public class BookMainController extends HttpServlet {
 		int bookNo = new BookService().selectBookNo(resNo);
 		// 식당 정보 조회
 		Restaurant restaurant = new BookService().selectRes(resNo);	
-		
 		if(restaurant == null) {
 			request.setAttribute("errorMsg", "식당 조회 오류발생");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

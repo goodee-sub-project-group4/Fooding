@@ -163,6 +163,12 @@ public class SearchDao {
 			pstmt.setString(10, r.getEmail()); 
 			pstmt.setString(11, r.getFoodCt());
 			pstmt.setString(12, r.getParking());
+			pstmt.setString(13, r.getOpen());
+			pstmt.setString(14, r.getClose());
+			pstmt.setString(15, r.getBreakS());
+			pstmt.setString(16, r.getBreakE());
+			pstmt.setString(17, r.getLongtitude());
+			pstmt.setString(18, r.getLatitude());
 			
 			result = pstmt.executeUpdate(); 
 			

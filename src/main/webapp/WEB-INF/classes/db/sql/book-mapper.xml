@@ -60,6 +60,14 @@
 		   AND R.STATUS = 'Y'
 	</entry>
 	
+	<entry key="selectPoint">
+		SELECT 
+			   POINT_NO
+			 , POINT_NOW
+		  FROM POINT
+		 WHERE USER_NO = ?
+	</entry>
+	
 	<!-- <entry key="selectReview">
 		SELECT
 			   REVIEW_NO

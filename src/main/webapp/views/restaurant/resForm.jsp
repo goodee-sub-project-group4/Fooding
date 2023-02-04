@@ -106,11 +106,33 @@
                         <input class="inputBar" type="text" name="permitNo" id="permitNo" required> <br> 
                         <span id="permitNoHelper" class="ss"></span>
                     </div>
+                    <br>
+
+                    <div class="inputForm">
+                        <b class="inputName">영업 시작 시간</b> <span style="color:red;">*</span>  <br>
+                        <input type="text" class="inputBar" name="opne" placeholder="00:00 형식" required>
+                    </div>
+                    <br>
+
+                    <div class="inputForm">
+                        <b class="inputName">영업 종료 시간</b> <span style="color:red;">*</span>  <br>
+                        <input type="text" class="inputBar" name="close" placeholder="00:00 형식" required>
+                    </div>
+                    <br>
+
+                    <div class="inputForm">
+                        <b class="inputName">브레이크 타임 시작 시간</b> <span style="color:red;">*</span>  <br>
+                        <input type="text" class="inputBar" name="breakS" placeholder="00:00 형식" required>
+                    </div>
+                    <br>
+
+                    <div class="inputForm">
+                        <b class="inputName">브레이크 타임 종료 시간</b> <span style="color:red;">*</span>  <br>
+                        <input type="text" class="inputBar" name="breakE" placeholder="00:00 형식" required>
+                    </div>
+
                     <br><br><br>
 
-                    <div>
-                        
-                    </div>
                     <div class="inputForm">
                         <b class="inputName">주소</b> <span style="color:red;">*</span>  <br>
                         <input class="inputBar" type="text" name="address" value="" id="address" required> <br> 
@@ -160,8 +182,8 @@
                             map: map // 마커를 표시할 지도 객체
                         });
                         $('#mapSearch').click(function(){
-                            const address = $('#address').val() + $('#dAddress').val()
-                            console.log
+                            let address = $('#address').val() + ' ' + $('#dAddress').val()
+                            console.log(address)
                             // 주소-좌표 변환 객체를 생성합니다
                             var geocoder = new kakao.maps.services.Geocoder();
 
@@ -192,8 +214,6 @@
                             let lng = latlng.getLng().toFixed(6);
                             let lat = latlng.getLat().toFixed(6);
 
-                            console.log(lng + ', ' + lat);
-                                
                             $('#longtitude').attr('value', lng);
                             $('#latitude').attr('value', lat);
                             });

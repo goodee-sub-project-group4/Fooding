@@ -82,12 +82,12 @@
         #map{height: 350px; box-sizing: border-box;}
         /* 예약 펼치기 버튼 */
         #content3-2{height: 100px; box-sizing: border-box;}
-        #book-btn{width: 100%; height: 100%; border: none; font-size: 3em; box-sizing: border-box;}
+        .book-btn{width: 100%; height: 100%; border: none; box-sizing: border-box;}
 
         /* 예약 내용 */
         #content3-3{visibility: hidden;}
         /* 예약 업체명 */
-        #book-title{height: 70px; line-height: 70px; text-align: center; background-color: antiquewhite;}
+        #book-title{height: 70px; line-height: 70px; font-size: 30px; text-align: center; background-color: antiquewhite;}
         /* 예약 카테고리 */
         .book-category, .menu-slide{
             height: 70px; text-align: center; line-height: 70px; margin-bottom: 2px; font-size: 20px; font-weight: 600; font-size: 1.5em; 
@@ -162,17 +162,17 @@
                         </div>
                         <div id="content-main">
                             <div id="main1">
-                                <b style="font-size: 2em;"><%= restaurant.getResName() %></b>
+                                <b style="font-size: 2em;">&nbsp; <%= restaurant.getResName() %></b>
                                 <table style="text-align: center;">
-                                    <tr>
-                                        <th style="width: 60px;">조회수</th>
-                                        <th style="width: 60px;">리뷰수</th>
-                                        <th style="width: 60px;">좋아요</th>
+                                    <tr style="height: 40px;">
+                                        <th style="width: 80px; height: 30px; font-size: 20px;">조회수</th>
+                                        <th style="width: 80px; font-size: 20px;">리뷰수</th>
+                                        <th style="width: 80px; font-size: 20px;"">평점</th>
                                     </tr>
                                     <tr>
-                                        <td><img style="width: 15px; height: 15px;" src="<%= contextPath %>/resources/images/조회수.png" alt=""> <%= restaurant.getCount() %></td>
-                                        <td><img style="width: 15px; height: 15px;" src="<%= contextPath %>/resources/images/리뷰수2.png" alt=""> <%= restaurant.getReviewCount() %></td>
-                                        <td><img style="width: 15px; height: 15px;" src="<%= contextPath %>/resources/images/찜하기.png" alt=""> <%= Math.round(restaurant.getReviewAvg() * 100.0) / 100.0 %></td>
+                                        <td style="height: 30px;"><img style="width: 25px; height: 25px;" src="<%= contextPath %>/resources/images/select.png" alt=""> <%= restaurant.getCount() %></td>
+                                        <td><img style="width: 25px; height: 25px;" src="<%= contextPath %>/resources/images/pencil.png" alt=""> <%= restaurant.getReviewCount() %></td>
+                                        <td><img style="width: 25px; height: 25px;" src="<%= contextPath %>/resources/images/star.png" alt=""> <%= Math.round(restaurant.getReviewAvg() * 100.0) / 100.0 %></td>
                                     </tr>
                                 </table>
                                 <br>
@@ -310,12 +310,16 @@
                     <div id="map"></div>
                 </div>
                 <div id="content3-2">
-                    <button type="button" id="book-btn">예약</button>
+                    <% if(loginUser != null) { %>
+                    <button type="button" class="book-btn btn btn-danger" style="font-size: 40px;">예 약</button>
+                    <% }else{ %>
+                    <button type="button" class="book-btn btn btn-secondary" style="font-size: 30px;" disabled>로그인 후 예약 가능</button>
+                    <% } %>
                 </div>
                 <br>
                 <div id="content3-3">
                     <div>
-                        <div id="book-title">업체명</div>
+                        <div id="book-title"><%= restaurant.getResName() %></div>
                     </div>
                     <br>
                     <div class="menu-slide" id="book-date">날짜 선택</div>
@@ -425,7 +429,7 @@
                                      	<% if(!menuList.isEmpty()) { %>
                                      		<% for(Menu m : menuList) {%>
 	                                        <div class="menu-detail">
-	                                            <img src="" alt="">
+	                                            <img src="<%= m.getmImg() %>" alt="">
 	                                            <div class="menu-datail1">
 	                                                <div style="font-weight: 1000; font-size: 20px;"><%= m.getMenuName() %></div>
 	                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b><%= m.getPrice() %></b></div>
@@ -792,7 +796,6 @@
                                 </tr>
                         </table>
                         
-                        
                         <div></div>
                     </div>
                     <br>
@@ -832,6 +835,20 @@
                     <!-- 예약하기 버튼 -->
                     <script>
                         $('#book-final').click(function(){
+                            $.ajax({
+                                url:"<%= contextPath %>/select.po",
+                                data:{input:<%= loginUser.getUserNo() %>},
+                                success:function(){
+                                	$('#point').text( "원");
+                                },
+                                error:function(){
+                                	
+                                }
+                            });
+
+
+                            $('#general-condition-detail1').slideUp();
+                            $('#general-condition-detail2').slideUp();
                             $('.bookName').val($('.bookUserName').val());
                             $('.bookPhone').val($('.bookUserPhone').val());
                             $('.email').val($('.bookEmail').val());
@@ -856,7 +873,6 @@
                                 $('#menu-payment').css('display', 'block');
                                 $('#menu-selected').css('display', 'none');
                                 // 예약 정보 데이터
-                                
                             }
                         });
                     </script>
@@ -954,7 +970,7 @@
 
             // 예약 버튼 활성화/비활성화 ----------------------------------------------------------
             $(function(){
-                $('#book-btn').click(function(){
+                $('.book-btn').click(function(){
                     if($('#content3-3').css('visibility') == 'hidden'){
                         $('#content3-3').css('visibility', 'visible')
                     }else{
