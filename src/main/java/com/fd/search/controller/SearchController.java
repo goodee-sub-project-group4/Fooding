@@ -40,6 +40,12 @@ public class SearchController extends HttpServlet {
 		String dLocalCt = request.getParameter("county"); 
 		String foodCt = request.getParameter("foodCt"); 
 		
+		System.out.println(localCt);
+		System.out.println(dLocalCt); 
+		System.out.println(foodCt); 
+		
+		
+		
 		// 2) 페이징처리를 위한 변수 설정 
 		int listCount; 		// 현재 게시글 총 갯수 ( => 검색결과 총 갯수로 쓰자!! )
 		int currentPage; 	// 사용자가 요청한 페이지 ( == 현재 페이지)
