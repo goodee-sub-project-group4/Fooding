@@ -52,14 +52,20 @@ public class MemberInsertController extends HttpServlet {
 		Member m = new Member(userId, userPwd, userName, nickname, userEmail, userPhone, gender, birth);
 		
 		// 2) 
-		int result = new MemberService().insertMember(m);
+		Member selectMember = new MemberService().insertMember(m);
 		
 		// 3) 
-		if(result > 0) {
+		if(selectMember != null) {
+			
+			// 회원가입축하 적립금 조회
+			int result2 = new MemberService().insertPoint(selectMember);
+			
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다.");
 			// 성공 => index페이지
 			response.sendRedirect(request.getContextPath());
+			
 		} else {
 			// 실패 => 에러페이지
 			request.setAttribute("errorMsg", "회원가입 실패했습니다.");

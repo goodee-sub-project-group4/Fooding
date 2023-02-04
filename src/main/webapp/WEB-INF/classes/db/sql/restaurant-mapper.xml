@@ -234,6 +234,35 @@
 		  FROM REVIEW
 		  JOIN TB_USER USING (USER_NO)
 		 WHERE REVIEW_NO = ?
-	
+	</entry>	
+	<entry key="insertBlack">
+		INSERT
+		  INTO BLACK
+		  (
+		    BLACK_NO
+		  , B_PERSON
+		  , T_PERSON
+		  , BLACK_TITEL
+		  , BLACK_CONTENT
+		  , BLACK_TYPE 
+		  )
+		  VALUES
+		  (
+		    SEQ_MNO.NEXTVAL
+		  , ?
+		  , ?
+		  , '업체 리뷰 신고'
+		  , ?
+		  , 'RV'
+		  )	
+	</entry>
+	<entry key="selectReviewAttachment">
+		SELECT
+		       FILE_NO
+		     , CHANGE_NAME
+		     , FILE_PATH
+		  FROM ATTACHMENT
+		 WHERE REF_BNO = ?
+		   AND STATUS = 'Y'
 	</entry>	
 </properties>

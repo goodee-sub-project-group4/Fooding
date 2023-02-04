@@ -8,7 +8,9 @@ import static com.fd.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.fd.admin.model.vo.Black;
 import com.fd.admin.model.vo.Question;
+import com.fd.common.model.vo.Attachment;
 import com.fd.restaurant.model.dao.RestaurantDao;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
@@ -189,6 +191,24 @@ public class RestaurantService {
 		Review r = new RestaurantDao().selectReviewDetail(conn, reviewNo);
 		close(conn);
 		return r;
+	}
+	
+	public int insertBlack(Black b) {
+		Connection conn = getConnection();
+		int result = new RestaurantDao().insertBlack(conn, b);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public ArrayList<Attachment> selectReviewAttachment(int reviewNo){
+		Connection conn = getConnection();
+		ArrayList<Attachment> list = new RestaurantDao().selectReviewAttachment(conn, reviewNo);
+		close(conn);
+		return list;
 	}
 	
 

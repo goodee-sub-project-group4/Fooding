@@ -1,4 +1,4 @@
-package com.fd.search.controller;
+package com.fd.restaurant.controller;
 
 import java.io.IOException;
 
@@ -7,22 +7,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.fd.member.model.vo.Member;
+import com.fd.admin.model.vo.Black;
+import com.fd.restaurant.model.service.RestaurantService;
 import com.fd.restaurant.model.vo.Restaurant;
-import com.fd.search.model.service.SearchService;
 
 /**
- * Servlet implementation class GoodController
+ * Servlet implementation class AjaxRestBlackController
  */
-@WebServlet("/good.sh")
-public class GoodController extends HttpServlet {
+@WebServlet("/black.re")
+public class AjaxRestBlackController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoodController() {
+    public AjaxRestBlackController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +32,21 @@ public class GoodController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String reviewNo = request.getParameter("reviewNo");
+		String blackContent = request.getParameter("blackContent");
+		HttpSession session = request.getSession();
+		int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
+		Black b = new Black();
+		b.setBlackContent(blackContent);
+		b.setbPerson(String.valueOf(resNo));
+		b.settPerson(reviewNo);
 		
-		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-		System.out.println(userNo); 
+		//요청처리하러가기
+		int result = new RestaurantService().insertBlack(b);
 		
-		int resNo = Integer.parseInt(request.getParameter("resNo"));
-		System.out.println(resNo); 
-		
-		int result = new SearchService().insertGood(resNo, userNo); 
-		
-		response.getWriter().print(result); 
+		//결과보내기
+		response.setContentType("text/html; charset=UTF-8"); 
+		response.getWriter().print(result);		
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package com.fd.restaurant.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,9 +35,19 @@ public class AjaxRestReviewDatailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		Review r = new RestaurantService().selectReviewDetail(reviewNo);
-		//Attachment at = new RestaurantService().selectReviewAttachment(reviewNo);
+		ArrayList<Attachment> atList = new RestaurantService().selectReviewAttachment(reviewNo);
+		
+		//리뷰정보와 사진을 담을 set 객체
+		ArrayList set = new ArrayList();
+		set.add(r);
+		for(Attachment at : atList) {
+			set.add(at);
+		}
+		
+		
+		System.out.println(atList);
 		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(r, response.getWriter());
+		new Gson().toJson(set, response.getWriter());
 	}
 
 	/**

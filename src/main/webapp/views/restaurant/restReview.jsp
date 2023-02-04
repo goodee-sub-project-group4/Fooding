@@ -236,10 +236,10 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <label id="bookNo">예약번호 453</label>
-                    <span onclick="sendblack()">해당리뷰 신고하기</span>
+                    <span onclick="sendBlack()">해당리뷰 신고하기</span>
                     <br clear="both"><br><br>
                     <h3 id="star">★4.5</h3>
-                    <img src="/Fooding/resources/images/forTest.png" class="rounded"><br>
+                    <img id="photo1" src="/Fooding/resources/images/forTest.png" class="rounded"><br>
                     
                     <p id="reviewContent">
                         리뷰내용
@@ -282,26 +282,51 @@
 			$.ajax({
 				url:"<%=contextPath%>/reviewDetail.re",
 				data:{reviewNo:reviewNo},
-				success: function(r){
-					$('#bookNo').text("예약번호 : "+r.bookNo);
-					$('#star').text("★"+r.star);
-					$('#reviewContent').text(r.reviewContent);
-					if(r.good=="Y") {
+				success: function(set){
+					$('#bookNo').text("예약번호 : "+set[0].bookNo);
+					$('#bookNo').val(set[0].bookNo);
+					$('#star').text("★"+set[0].star);
+					$('#reviewContent').text(set[0].reviewContent);
+					if(set[0].good=="Y") {
 						
 					}else {
 						
 					}
+					$('#photo1').attr("src", "<%=contextPath%>/" +set[1].filePath+set[1].changeName);
+					console.log("<%=contextPath%>/" +set[1].filePath + set[1].changeName);
 				}, error: function(){
 					console.log("리뷰상세조회 ajax 통신실패")
-				}, complete: function(){
-					console.log("리뷰상세조회 ajax 통신완료")
 				}
 			})
 		}
         
         //신고버튼
         
-		
+		function sendBlack(){
+        	if(confirm('해당 리뷰를 신고하시겠습니까?')) {
+        		let blackContent = prompt('신고사유 : ');
+        		while(blackContent=="") {
+        			alert("신고사유 입력은 필수입니다.");
+        			blackContent = prompt('신고사유 : ');
+        		}
+        		let reviewNo = $('#bookNo').val();
+        		$.ajax({
+        			url:"<%=contextPath%>/black.re",
+        			data:{reviewNo:reviewNo, blackContent:blackContent},
+        			success:function(result){
+        				if(result>0) {
+        					alert('신고가 완료되었습니다. 처리에는 3~7일이 소요됩니다.');
+        				}else {
+        					alert('요청처리에 실패했습니다. 고객센터로 문의하여주세요.');
+        				}
+        			}, error: function(){
+        				console.log("리뷰신고 ajax 통신실패")
+    				}
+        		})
+        	}
+        	;
+        	
+        }
 		
 		
 	</script>

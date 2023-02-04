@@ -68,7 +68,6 @@ public class SearchDao {
 	}
 	
 	public ArrayList<Restaurant> selectList(Connection conn,PageInfo pi, String localCt, String dLocalCt, String foodCt){
-		
 		ArrayList<Restaurant> list = new ArrayList<>();
 		PreparedStatement pstmt = null; 
 		ResultSet rset = null; 
@@ -92,6 +91,7 @@ public class SearchDao {
 			
 			while(rset.next()) {
 				list.add(new Restaurant(
+										rset.getInt("res_no"),
 										rset.getString("res_name"),
 										rset.getString("address"),
 										rset.getString("r_img"),
@@ -209,51 +209,80 @@ public class SearchDao {
 	
 		public ArrayList<Restaurant> keywordList(Connection conn, PageInfo pi, String keyword){
 		
-		ArrayList<Restaurant> list = new ArrayList<>();
-		PreparedStatement pstmt = null; 
-		ResultSet rset = null; 
-		String sql = prop.getProperty("keywordList"); 
-		
-		try {
-			pstmt = conn.prepareStatement(sql); // 미완성된 sql문 
+			ArrayList<Restaurant> list = new ArrayList<>();
+			PreparedStatement pstmt = null; 
+			ResultSet rset = null; 
+			String sql = prop.getProperty("keywordList"); 
 			
-			// 사용자로부터 입력받은 값으로 sql문 채우기 
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; 
-			int endRow = startRow + pi.getBoardLimit() - 1;  
-			
-			pstmt.setString(1, keyword);
-			pstmt.setString(2, keyword);
-			pstmt.setString(3, keyword);
-			pstmt.setString(4, keyword);
-			pstmt.setString(5, keyword);
-			pstmt.setInt(6, startRow);
-			pstmt.setInt(7, endRow);
-			
-			rset = pstmt.executeQuery(); 
-			
-			while(rset.next()) {
-				list.add(new Restaurant(
-										rset.getString("res_name"),
-										rset.getString("address"),
-										rset.getString("r_img"),
-										rset.getString("food_ct"),
-										rset.getDouble("star"),
-										rset.getInt("count")
-										)); 		
+			try {
+				pstmt = conn.prepareStatement(sql); // 미완성된 sql문 
 				
+				// 사용자로부터 입력받은 값으로 sql문 채우기 
+				
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; 
+				int endRow = startRow + pi.getBoardLimit() - 1;  
+				
+				pstmt.setString(1, keyword);
+				pstmt.setString(2, keyword);
+				pstmt.setString(3, keyword);
+				pstmt.setString(4, keyword);
+				pstmt.setString(5, keyword);
+				pstmt.setInt(6, startRow);
+				pstmt.setInt(7, endRow);
+				
+				rset = pstmt.executeQuery(); 
+				
+				while(rset.next()) {
+					list.add(new Restaurant(
+											rset.getInt("res_no"),
+											rset.getString("res_name"),
+											rset.getString("address"),
+											rset.getString("r_img"),
+											rset.getString("food_ct"),
+											rset.getDouble("star"),
+											rset.getInt("count")
+											)); 		
+					
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt); 
 			}
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt); 
+			return list; 
+		
 		}
 		
-		return list; 
 		
-	}
+		
+		
+		public int insertGood(Connection conn, int resNo, int userNo) {
+			int result = 0; 
+			PreparedStatement pstmt = null; 
+			String sql = prop.getProperty("insertGood"); 
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, resNo);
+				pstmt.setInt(2, userNo);
+				pstmt.setInt(3, resNo);
+				pstmt.setInt(4, userNo);
+				
+				result = pstmt.executeUpdate(); 
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt); 
+			}
+			
+			return result; 
+		}
+		
+	
 	
 	
 	

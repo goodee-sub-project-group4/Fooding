@@ -67,6 +67,18 @@ public class SearchService {
 			ArrayList<Restaurant> list= new SearchDao().keywordList(conn, pi, keyword); 
 			close(conn); 
 			return list;
-		}
+	}
+		
+		public int insertGood(int resNo, int userNo) {
+			Connection conn = getConnection(); 
+			int result = new SearchDao().insertGood(conn, resNo, userNo); 
+			if(result > 0) {
+				commit(conn); 
+			}else {
+				rollback(conn); 
+			}
+			close(conn); 
+			return result; 
+	}
 		
 }

@@ -80,7 +80,6 @@ public class BookDao {
 								  , rset.getDouble("REVIEW_AVG")
 								  , rset.getInt("count"));
 			}
-			System.out.println(re);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -117,6 +116,28 @@ public class BookDao {
 		}
 		
 		return list;
+	}
+
+	public int selectBookNo(Connection conn, int resNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBookNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				result = rset.getInt("book_no");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 //	public ArrayList<Review> selectReview(int resNo, Connection conn) {
