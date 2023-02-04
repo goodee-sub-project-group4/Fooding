@@ -157,19 +157,20 @@
 						
 						<div class="paging-area">
 						
+							<%if(!list.isEmpty()) {%>
 
-				        	<% if(pi.getCurrentPage() != 1){ %>
-			            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()-1%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';">&lt;</button>
-				            <% } %>
-				
-							<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=p%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';"><%= p %></button>
-				            <% } %>
-				
-							<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()+1%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';">&gt;</button>
-							<% } %>
-								        
+					        	<% if(pi.getCurrentPage() != 1){ %>
+				            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()-1%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';">&lt;</button>
+					            <% } %>
+					
+								<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+					            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=p%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';"><%= p %></button>
+					            <% } %>
+					
+								<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+					            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()+1%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';">&gt;</button>
+								<% } %>
+							<% } %>        
 
 				        </div>
 

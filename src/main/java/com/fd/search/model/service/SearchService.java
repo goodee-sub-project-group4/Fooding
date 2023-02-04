@@ -61,7 +61,7 @@ public class SearchService {
 		return listCount; 
 	}
 		
-		/*
+		
 		public ArrayList<Restaurant> keywordList(PageInfo pi, String keyword){ //currentPage에 보여질 게시물 리스
 			
 			Connection conn = getConnection();
@@ -69,7 +69,7 @@ public class SearchService {
 			close(conn); 
 			return list;
 	}
-	*/	
+		
 		public int insertGood(int resNo, int userNo) {
 			Connection conn = getConnection(); 
 			int result = new SearchDao().insertGood(conn, resNo, userNo); 
