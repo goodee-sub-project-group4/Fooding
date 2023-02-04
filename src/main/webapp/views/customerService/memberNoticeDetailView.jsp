@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.fd.admin.model.vo.Notice" %>
+<%
+	Notice n = (Notice)request.getAttribute("notice");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,21 +47,21 @@
             <table class="table">
                 <tr>
                     <th>제목</th>
-                    <td>푸딩 공지사항</td>
+                    <td><%=n.getNoticeTitle()%></td>
                 </tr>
                 <tr>
                     <th width="70">작성자</th>
-                    <td>푸딩 공지사항</td>
+                    <td><%=n.getUserNo()%></td>
                 </tr>
                 <tr>
                     <th width="70">작성일</th>
-                    <td>2023.01.22</td>
+                    <td><%=n.getCreateDate()%></td>
                 </tr>     
                 <tr>
                     <td colspan="2">
                         <br>
                         <p>
-                            푸딩공지사항 
+                            <%=n.getNoticeContent()%>
                         </p>
                         <br>
                     </td>
@@ -67,7 +71,7 @@
         </div>
 
         <div id="btn-area" align="center">
-            <a href="" class="btn btn-danger">수정하기</a>
+            <a href="<%=request.getContextPath()%>/notice.me" class="btn btn-danger">목록가기</a>
         </div>
 
     </div>

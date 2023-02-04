@@ -24,12 +24,14 @@
         /*#content2-padding div {border:1px solid green;}*/
         #notice-area {width: 100%; height: 135px; font-size: 30px; text-align: center;}
         /* 목록부분 */
-        #list-area {height: 600px;}
+        .list-area {height: 600px;}
         table td, table th {
         margin:auto;
         text-align: center;
         line-height: 25px;     
         }
+        
+        tbody:hover {cursor:pointer;}
 
         /*페이징바*/
         .pagination a{
@@ -49,7 +51,8 @@
             <b>공지사항</b>
         </div>
 
-        <div id="list-area">
+	
+        <div class="list-area">
             <table class="table">
                 <thead>
                     <tr>
@@ -80,6 +83,19 @@
                 <% } %>
                 </tbody>	
             </table>
+            <script>
+            	
+            	$(function() {
+            		$(".table>tbody>tr").click(function() {
+            			
+            			const num = $(this).children().eq(0).text() // 클릭했을 때 글번호
+            			
+            			location.href = "<%=contextPath%>/noticeDetail.me?no=" + num;
+            		})
+            	})
+            
+            
+            </script>
     
         </div>
         <div>

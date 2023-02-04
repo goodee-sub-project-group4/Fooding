@@ -1,7 +1,6 @@
 package com.fd.customerService.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.fd.admin.model.vo.Notice;
 import com.fd.customerService.model.service.MemberNoticeService;
 
 /**
- * Servlet implementation class MemberNoticeListController
+ * Servlet implementation class MemberNoticeDetailController
  */
-@WebServlet("/notice.me")
-public class MemberNoticeListController extends HttpServlet {
+@WebServlet("/noticeDetail.me")
+public class MemberNoticeDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberNoticeListController() {
+    public MemberNoticeDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +31,26 @@ public class MemberNoticeListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 1)
+		int noticeNo = Integer.parseInt(request.getParameter("no")); // 조회한 글번호
 		
-		// 2) db
-		ArrayList<Notice> list = new MemberNoticeService().selectMemberNoticeList();
+		int result = new MemberNoticeService().increaseCount(noticeNo);
+		
+		if(result > 0) { // 조회가능한 공지사항
+			// 성공 => views/customerService/memberNoticeDetailView.jsp
+			// 상세조회해야함
+			Notice n = new MemberNoticeService().selectMemberNoticeDetail(noticeNo);
+			
+			request.setAttribute("notice", n);
+			request.getRequestDispatcher("views/customerService/memberNoticeDetailView.jsp").forward(request, response);
+			
+		} else {
+			// 실패 => 에러페이지
+		
+		}
 		
 		
-		// 3) 처음으로 페이지 응답
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/customerService/memberNoticeListView.jsp").forward(request, response);
+		
+		
 		
 	}
 

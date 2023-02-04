@@ -101,24 +101,30 @@
                         <span>&nbsp;|&nbsp;</span>
                         <span><a href="<%= contextPath%>/loginForm.me">로그인</a></span>
                         <span>&nbsp;|&nbsp;</span>
+                        
+                        <span class="dropdown">
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
                             <span class="dropdown-menu">
-                                <a class="dropdown-item" href="#">공지사항</a>
+                                <a class="dropdown-item" href="<%=contextPath%>/notice.me">공지사항</a>
                                 <a class="dropdown-item" href="#">FAQ</a>
                                 <a class="dropdown-item" href="#">1:1문의</a>
                                 <a class="dropdown-item" href="<%= contextPath %>/enrollForm.re">업체등록</a>
                             </span>
+                        </span>
+                         
                     </div>
 				<% } else { %>
 				
                     <!--  case2. 로그인 후 -->
                     <div id="header3-1">
                         <span><%= loginUser.getUserName() %>님</span>
+                        
                         <span>&nbsp;|&nbsp;</span>
+                        
                         <span>
                             <button type="button" data-toggle="dropdown">마이페이지</button>
                             <span class="dropdown-menu">
-	                            <a class="dropdown-item" href="<%=request.getContextPath()%>/check.bo">예약/결제 내역</a>
+	                            <a class="dropdown-item" href="<%=contextPath%>/check.bo">예약/결제 내역</a>
 	                            <a class="dropdown-item" href="<%= contextPath%>/reviewList.re">리뷰</a>
 	                            <a class="dropdown-item" href="#">찜하기</a>
 	                            <a class="dropdown-item" href="#">적립금</a>
@@ -126,18 +132,22 @@
 	                            <a class="dropdown-item" href="<%= contextPath%>/logout.me">로그아웃</a>
                             </span>
                         </span>
+                        
                         <span>&nbsp;|&nbsp;</span>
+                        
                         <span class="dropdown">
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
                             <span class="dropdown-menu">
-                                <a class="dropdown-item" href="#">공지사항</a>
+                                <a class="dropdown-item" href="<%=contextPath%>/notice.me">공지사항</a>
                                 <a class="dropdown-item" href="#">FAQ</a>
                                 <a class="dropdown-item" href="#">1:1문의</a>
                                 <a class="dropdown-item" href="<%= contextPath %>/enrollForm.re">업체등록</a>
                             </span>
                         </span>
+                        
                     </div>
 				<% } %>
+				
 				<script>
                     $(function(){
                     	$("button[data-toggle=dropdown]").click(function(){

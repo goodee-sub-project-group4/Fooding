@@ -62,5 +62,81 @@ public class MemberNoticeDao {
 		return list;
 		
 	}
+	
+	/** 조회수
+	 * @param conn
+	 * @param noticeNo
+	 * @return result (유효한 공지사항인지 1 또는 0)
+	 */
+	public int increaseCount(Connection conn, int noticeNo) {
+		// update
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	/** 공지사항 리스트 상세조회
+	 * @author 빛나
+	 * @param conn
+	 * @param noticeNo
+	 * @return n
+	 */
+	public Notice selectMemberNoticeDetail(Connection conn, int noticeNo) {
+		// select
+		Notice n = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMemberNoticeDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				n = new Notice(rset.getInt("notice_no"),
+						       rset.getString("notice_title"),
+						       rset.getString("notice_content"),
+						       rset.getString("user_id"),
+						       rset.getDate("create_date"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return n;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -10,12 +10,34 @@
 		     , USER_ID <!-- USER_NO으로 조인 -->
 		     , COUNT
 		     , CREATE_DATE
-		  FORM NOTICE N
+		  FROM NOTICE N
 		  JOIN TB_USER USING (USER_NO)
 		 WHERE N.STATUS = 'Y'
 		 ORDER
 		    BY NOTICE_NO DESC
 	</entry>
+	
+	<!-- 조회수 증가 -->
+	<entry key="increaseCount">
+		UPDATE NOTICE
+		   SET COUNT = COUNT+1
+		 WHERE NOTICE_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
+	<!-- 공지사항 리스트 상세조회 -->
+	<entry key="selectMemberNoticeDetail">
+		SELECT
+		       NOTICE_NO
+		     , NOTICE_TITLE
+		     , NOTICE_CONTENT
+		     , USER_ID
+		     , CREATE_DATE
+		  FROM NOTICE
+		  JOIN TB_USER USING (USER_NO)
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
 
 
 </properties>
