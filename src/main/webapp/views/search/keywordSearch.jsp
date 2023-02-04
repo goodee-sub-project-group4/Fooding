@@ -129,7 +129,6 @@
 							<!-- case2. 조회된 음식점이 있을 경우  -->
 							<% for(Restaurant r : list){ %>
 	                        <div class="searchRes">
-                                <input type="hidden" class="asd" value="<%= r.getResNo() %>" >
 	                            <!-- 음식점 사진-->
 	                            <div class="resThumbnail">
 	                                <img src="<%= contextPath %>/<%= r.getrImg() %>" style="width:400px;" height="300px;">
@@ -137,90 +136,42 @@
 	                            <!-- 음식점 사진 아래 간단 설명 -->
 	                            <div class="resDescription" style="width:400px;">
 	                                음식점 이름 : <%= r.getResName()%> <br>
-	                                별점 : <%= r.getStar() %> <br>
+	                                업체번호 : <%= r.getResNo() %> <br>
 	                                주소 : <%= r.getAddress() %> <br>
 	                                음식카테고리 : <%= r.getFoodCt() %> <br>
-	                                업체번호 : <%= r.getResNo() %> <br> 
-	                                
-	                                
-	                                
-									<!-- 로그인을 안 했을 경우 : alertMsg() 실행  -->                                
-	                                <% if(loginUser == null){ %>
-	                                	<span class="zzim"> 
-                                    		<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="alertMsg();">
-	                               		</span>
-	                               	<!-- 로그인을 했을 경우 : insertGood() 실행 -->
-	                                <%} else { %>
-	                                	<span class="zzim"> 
-	                                    	<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="insertGood();">
-	                                    	<input type="hidden" class="resNumbers" value="<%= r.getResNo()%>">
-		                                </span>
-	                                <% } %>
-	                               
-	                                
+	                                <span class="zzim">
+	                                    <img src="/Fooding/resources/images/heart.png" width="50px;">  
+	                                </span>
+	                                별점총점: <%= r.getReviewAvg() %> <br>
 	                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
 	                                조회수: <%= r.getCount() %> <br>
 	                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
-	                                리뷰수: 54
+	                                리뷰수: <%= r.getTotalReview() %>
 	                            </div>
 	                        </div>
 	                        <% } %>
                         <% } %>
                         
-                        <!-- 찜하기를 눌렀을 때 나타날 함수 스크립트 구문 -->
-                        
-						<script>
-                        
-					        function insertGood(){
-					        	
-					        	
-					    		$.ajax({
-					    			url:"<%=contextPath%>/good.sh",
-					    			data:{
-					    				resNo: $(this).parents($('.searchRes')).children().val()
-					    			},
-					    			type:"post",
-					    			success:function(result){
-					    				if(result > 0 ){ // 찜하기 성공 
-					    					alert("찜하기 성공"); 
-					    				}else{ // 찜하기 실패 
-					    					alert("찜하기 실패"); 
-					    				}
-					    			},
-					    			error:function(){
-					    				console.log("ajax 통신 실패"); 
-					    			}
-					    		})
-					    	}
-                    	
-                        	
-                        	function alertMsg(){
-                        		alert("로그인한 유저만 이용가능한 서비스입니다");
-                        	}
-                        
-                        </script>
-                     
-                        
+						
 						<div class="paging-area">
 						
+							<%if(!list.isEmpty()) {%>
 
-				        	<% if(pi.getCurrentPage() != 1){ %>
-			            	<button onclick="location.href='<%=contextPath%>/keyword.sh?cpage=<%=pi.getCurrentPage()-1%>&keyword=<%=keyword%>';">&lt;</button>
-				            <% } %>
-				
-							<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-				            	<button onclick="location.href='<%=contextPath%>/keyword.sh?cpage=<%=p%>&keyword=<%=keyword%>';"><%= p %></button>
-				            <% } %>
-				
-							<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-				            	<button onclick="location.href='<%=contextPath%>/keyword.sh?cpage=<%=pi.getCurrentPage()+1%>&keyword=<%=keyword%>';">&gt;</button>
-							<% } %>
-								        
+					        	<% if(pi.getCurrentPage() != 1){ %>
+				            	<button onclick="location.href='<%=contextPath%>/keyword.sh?cpage=<%=pi.getCurrentPage()-1%>&keyword=<%=keyword%>';">&lt;</button>
+					            <% } %>
+					
+								<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+					            	<button onclick="location.href='<%=contextPath%>/keyword.sh?cpage=<%=p%>&keyword=<%=keyword%>';"><%= p %></button>
+					            <% } %>
+					
+								<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+					            	<button onclick="location.href='<%=contextPath%>/keyword.sh?cpage=<%=pi.getCurrentPage()+1%>&keyword=<%=keyword%>';">&gt;</button>
+								<% } %>
+								
+							<% } %>        
 
 				        </div>
-				        
-				        
-
 
                     </div>
                       

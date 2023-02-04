@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.fd.book.model.dao.BookDao;
+import com.fd.book.model.vo.Point;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
 import com.fd.review.model.vo.Review;
@@ -51,7 +52,17 @@ public class BookService {
 	public int selectBookNo(int resNo) {
 		Connection conn = getConnection();
 		int result = new BookDao().selectBookNo(conn, resNo);
+		close(conn);
 		return result;
+	}
+
+
+
+	public Point selectPoint(int userNo) {
+		Connection conn = getConnection();
+		Point po = new BookDao().selectPoint(conn, userNo);
+		close(conn);
+		return po;
 	}
 
 

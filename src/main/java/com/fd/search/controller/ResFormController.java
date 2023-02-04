@@ -102,14 +102,20 @@ public class ResFormController extends HttpServlet {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/search_upfiles/");
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			
 			String resName = multiRequest.getParameter("resName");
 			String ceo = multiRequest.getParameter("ceo");
 			String permitNo = multiRequest.getParameter("permitNo"); 
+			String open = multiRequest.getParameter("open");
+			String close = multiRequest.getParameter("close");
+			String breakS = multiRequest.getParameter("breakS");
+			String breakE = multiRequest.getParameter("breakE");
 			
 			// 나중에 지도 API로 받아올 변수 (address와 dAddress)
 			String address = multiRequest.getParameter("address");
 			String dAddress = multiRequest.getParameter("dAddress"); 
+			
+			String latitude = multiRequest.getParameter("latitude");
+			String longtitude = multiRequest.getParameter("longtitude");
 			
 			// 시/도 (지역 카테고리가 될 변수)
 			String localCt = multiRequest.getParameter("city"); 
@@ -123,7 +129,9 @@ public class ResFormController extends HttpServlet {
 			String parking = multiRequest.getParameter("parking"); 
 			String foodCt = multiRequest.getParameter("foodCt");
 			
-			Restaurant r = new Restaurant(resName, ceo, permitNo, address, dAddress, localCt, dLocalCt, phone, cellphone, email, parking, foodCt);
+			Restaurant r = new Restaurant(resName, ceo, permitNo, open, close, breakS, breakE, address,
+					dAddress, latitude, longtitude, localCt, dLocalCt, phone, cellphone, email, parking, 
+					foodCt);
 			
 			Attachment at = null;
 			

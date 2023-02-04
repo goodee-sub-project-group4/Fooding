@@ -163,6 +163,12 @@ public class SearchDao {
 			pstmt.setString(10, r.getEmail()); 
 			pstmt.setString(11, r.getFoodCt());
 			pstmt.setString(12, r.getParking());
+			pstmt.setString(13, r.getOpen());
+			pstmt.setString(14, r.getClose());
+			pstmt.setString(15, r.getBreakS());
+			pstmt.setString(16, r.getBreakE());
+			pstmt.setString(17, r.getLongtitude());
+			pstmt.setString(18, r.getLatitude());
 			
 			result = pstmt.executeUpdate(); 
 			
@@ -226,7 +232,6 @@ public class SearchDao {
 			pstmt.setString(2, keyword);
 			pstmt.setString(3, keyword);
 			pstmt.setString(4, keyword);
-			pstmt.setString(5, keyword);
 			
 			rset = pstmt.executeQuery();
 			
@@ -253,7 +258,6 @@ public class SearchDao {
 		 * @param keyword
 		 * @return ArrayList<Restraunt> list
 		 */
-		/*
 		public ArrayList<Restaurant> keywordList(Connection conn, PageInfo pi, String keyword){
 		
 			ArrayList<Restaurant> list = new ArrayList<>();
@@ -274,8 +278,11 @@ public class SearchDao {
 				pstmt.setString(3, keyword);
 				pstmt.setString(4, keyword);
 				pstmt.setString(5, keyword);
-				pstmt.setInt(6, startRow);
-				pstmt.setInt(7, endRow);
+				pstmt.setString(6, keyword);
+				pstmt.setString(7, keyword);
+				pstmt.setString(8, keyword);
+				pstmt.setInt(9, startRow);
+				pstmt.setInt(10, endRow);
 				
 				rset = pstmt.executeQuery(); 
 				
@@ -286,8 +293,9 @@ public class SearchDao {
 											rset.getString("address"),
 											rset.getString("r_img"),
 											rset.getString("food_ct"),
-											rset.getDouble("star"),
-											rset.getInt("count")
+											rset.getDouble("review_avg"),
+											rset.getInt("count"),
+											rset.getInt("total_review")
 											)); 		
 					
 				}
@@ -302,7 +310,6 @@ public class SearchDao {
 			return list; 
 		
 		}
-		*/
 		
 		
 		
