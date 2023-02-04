@@ -50,6 +50,27 @@ INSERT INTO POINT VALUES (SEQ_PNO.NEXTVAL, NULL, 2, NULL
 ,'구매10%', 'B', '3000','5000',SYSDATE);
 
 ------------- NOTICE 회원/업체 공지사항 -------------
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '회원 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '업체 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '업체 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '업체 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '업체 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '업체 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '업체 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '업체 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '업체 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '업체 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '업체 공지사항', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
+
 INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '푸딩 이용약관 개정 안내', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'U', 'Y');
 INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '푸딩 이용약관 개정 안내', '안녕하세요. 푸딩입니다. ', '23/01/01', '', 0, 'R', 'Y');
 INSERT INTO NOTICE VALUES(SEQ_NONO.NEXTVAL, 1, '개인정보 처리방침 전면 개정 안내', '안녕하세요. 푸딩입니다. ', '23/01/05', '', 0, 'U', 'Y');
