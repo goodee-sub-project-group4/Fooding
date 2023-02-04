@@ -138,16 +138,17 @@
 	                            <!-- 음식점 사진 아래 간단 설명 -->
 	                            <div class="resDescription" style="width:400px;">
 	                                음식점 이름 : <%= r.getResName()%> <br>
-	                                별점 : <%= r.getStar() %> <br>
+	                                업체번호 : <%= r.getResNo() %> <br>
 	                                주소 : <%= r.getAddress() %> <br>
 	                                음식카테고리 : <%= r.getFoodCt() %> <br>
 	                                <span class="zzim">
 	                                    <img src="/Fooding/resources/images/heart.png" width="50px;">  
 	                                </span>
+	                                별점총점: <%= r.getReviewAvg() %> <br>
 	                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
 	                                조회수: <%= r.getCount() %> <br>
 	                                <img src="/Fooding/resources/images/리뷰수2.png" width="20px;">
-	                                리뷰수: 54
+	                                리뷰수: <%= r.getTotalReview() %>
 	                            </div>
 	                        </div>
 	                        <% } %>

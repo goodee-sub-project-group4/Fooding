@@ -12,26 +12,37 @@
 	</entry>
 	
 	<entry key="selectList">
-		SELECT *
-		  FROM (
-		        SELECT ROWNUM RNUM, A.*
-		          FROM (
-		                  SELECT 
-		                  		   RES_NO R
-		                         , RES_NAME
-		                         , ADDRESS || ' ' || D_ADDRESS "ADDRESS"
-		                         , R_IMG
-		                         , FOOD_CT
-		                         , STAR 
-		                         , COUNT
-		                      FROM RESTAURANT R 
-		                      JOIN REVIEW USING (RES_NO)
-		                     WHERE LOCAL_CT = ?
-		                       AND DLOCAL_CT = ?
-		                       AND FOOD_CT = ?    
-		               ) A
-		        )
-		    WHERE RNUM BETWEEN ? AND ?
+SELECT *
+FROM (
+    SELECT ROWNUM RNUM, A.*
+      FROM ( 
+             SELECT RES_NO
+                  , RES_NAME
+                  , ADDRESS || ' ' || D_ADDRESS "ADDRESS"
+                  , R_IMG
+                  , FOOD_CT
+                  , REVIEW_AVG
+                  , R.COUNT 
+                  , NVL(TOTAL_REVIEW, 0) "TOTAL_REVIEW"
+              FROM RESTAURANT R
+              LEFT JOIN (
+                    SELECT RES_NO, ROUND(AVG(STAR),1) "REVIEW_AVG", COUNT(*) "TOTAL_REVIEW"
+                      FROM REVIEW 
+                     WHERE RES_NO IN (
+                                        SELECT RES_NO
+                                          FROM RESTAURANT 
+                                         WHERE LOCAL_CT = ?
+                                           AND DLOCAL_CT = ?
+                                           AND FOOD_CT = ?
+                                      )
+                    GROUP BY RES_NO
+                    ) USING (RES_NO) 
+            WHERE LOCAL_CT = ?
+            AND DLOCAL_CT = ?
+            AND FOOD_CT = ?
+           ) A
+    )
+WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 	<entry key="insertRes">

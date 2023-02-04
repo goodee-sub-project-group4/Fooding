@@ -9,10 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.fd.common.model.vo.Attachment;
 import com.fd.review.model.vo.Review;
+import com.fd.review.model.vo.ReviewDetailFileVo;
+import com.fd.review.model.vo.ReviewDetailVo;
 
 public class ReviewDao {
 	
@@ -163,8 +166,73 @@ public class ReviewDao {
 	
 	}
 	
+	/** 리뷰상세조회
+	 * @param reviewNo
+	 * @return
+	 */
+	public ReviewDetailVo selectContentReview(Connection conn, int reviewNo) {
+		ReviewDetailVo detailVo = new ReviewDetailVo();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectContentReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				detailVo = new ReviewDetailVo(rset.getInt("REVIEW_NO")
+												,rset.getString("RES_NO")
+												,rset.getString("REVIEW_CONTENT")
+												,rset.getString("STAR")
+												,rset.getString("RES_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return detailVo;
+	}
 	
 	
-	
+	/** 리뷰상세조회 파일첨부 가져오기
+	 * @author 빛나
+	 * @param conn
+	 * @return list
+	 */
+	public ArrayList<ReviewDetailFileVo> selectContentReviewFiles(Connection conn, int reviewNo) {
+		// select
+		ArrayList<ReviewDetailFileVo> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectContentReviewFiles");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reviewNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new ReviewDetailFileVo(rset.getInt("ref_bno")
+									            ,rset.getString("change_name")
+									            ,rset.getString("file_path")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
 	
 }

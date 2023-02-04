@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import com.fd.common.model.vo.Attachment;
 import com.fd.review.model.dao.ReviewDao;
 import com.fd.review.model.vo.Review;
+import com.fd.review.model.vo.ReviewDetailFileVo;
+import com.fd.review.model.vo.ReviewDetailVo;
 
 public class ReviewService {
 	
@@ -69,6 +71,28 @@ public class ReviewService {
 		close(conn);
 		return result;
 		
+	}
+	
+	/** 리뷰상세조회
+	 * @param reviewNo
+	 * @return
+	 */
+	public ReviewDetailVo selectContentReview(int reviewNo) {
+		Connection conn = getConnection();
+		ReviewDetailVo detailVo = new ReviewDao().selectContentReview(conn, reviewNo);
+		close(conn);
+		return detailVo;
+	}
+
+	/** 리뷰상세조회 파일첨부 가져오기
+	 * @param reviewNo
+	 * @return
+	 */
+	public ArrayList<ReviewDetailFileVo> selectContentReviewFiles(int reviewNo) {
+		Connection conn = getConnection();
+		ArrayList<ReviewDetailFileVo> reviewDetailVo = new ReviewDao().selectContentReviewFiles(conn, reviewNo); 
+		close(conn);
+		return reviewDetailVo;
 	}
 	
 	

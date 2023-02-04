@@ -13,6 +13,9 @@ import java.util.Properties;
 
 import com.fd.admin.model.vo.Black;
 import com.fd.admin.model.vo.Question;
+import com.fd.book.model.vo.Book;
+import com.fd.book.model.vo.BookMenu;
+import com.fd.book.model.vo.Payment;
 import com.fd.common.model.vo.Attachment;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
@@ -505,5 +508,114 @@ public class RestaurantDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public ArrayList<Book> selectBookList(Connection conn, int resNo) {
+		ArrayList<Book> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBookList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Book b = new Book();
+				b.setBookNo(rset.getInt("book_no"));
+				b.setBookA(rset.getString("book_a"));
+				b.setBookName(rset.getString("book_name"));
+				b.setBookDate(rset.getString("book_date"));
+				b.setBookTime(rset.getString("book_time"));
+				b.setStatus(rset.getString("status"));
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public Book selectBook(Connection conn, int bookNo) {
+		Book b = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBook");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				b = new Book();
+				b.setBookNo(rset.getInt("book_no"));
+				b.setBookDate(rset.getString("book_date"));
+				b.setBookTime(rset.getString("book_time"));
+				b.setPeople(rset.getInt("people"));
+				b.setBookName(rset.getString("book_name"));
+				b.setBookPhone(rset.getString("book_phone"));
+				b.setEmail(rset.getString("email"));
+				b.setRequest(rset.getString("request"));
+				b.setStatus(rset.getString("status"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return b;
+	}
+	
+	public ArrayList<BookMenu> selectBookMenu(Connection conn, int bookNo) {
+		ArrayList<BookMenu> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBookMenu");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				BookMenu bm = new BookMenu();
+				bm.setMenuNo(rset.getString("menu_name"));
+				bm.setMenuCount(rset.getInt("menu_count"));
+				bm.setPrice(rset.getInt("price"));
+				bm.setBmPrice(rset.getInt("bm_price"));
+				list.add(bm);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public Payment selectPayment(Connection conn, int bookNo) {
+		Payment p = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPayment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				p = new Payment();
+				p.setPayNo(rset.getInt("pay_no"));
+				p.setPayDate(rset.getString("pay_date"));
+				p.setPayOp(rset.getString("pay_op"));
+				p.setPayTotal(rset.getInt("pay_total"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return p;
 	}
 }

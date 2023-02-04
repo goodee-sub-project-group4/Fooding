@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fd.review.model.service.ReviewService;
 import com.fd.review.model.vo.Review;
+import com.fd.review.model.vo.ReviewDetailVo;
 import com.google.gson.Gson;
 
 /**
@@ -37,8 +38,14 @@ public class AjaxReviewDetailController extends HttpServlet {
 		ReviewService rs = new ReviewService();
 		// 조회수 증가
 		int result = rs.increaseCount(reviewNo);
+		
 		if (result > 0) {
-			// 성공 => 상세페이지 (업체사진, 업체명, 별점, 리뷰내용, 첨부파일)
+			System.out.println("reviewNo ==> " + reviewNo);
+			
+			ReviewDetailVo detailVo = rs.selectContentReview(reviewNo);
+			System.out.println("detailVo ==> " + detailVo);
+			response.setContentType("application/json; charset=UTF-8");
+			new Gson().toJson(detailVo, response.getWriter());	
 			
 		} else {
 			// 실패 => 에러페이지

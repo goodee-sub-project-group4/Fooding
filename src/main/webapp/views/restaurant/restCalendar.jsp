@@ -80,6 +80,9 @@
 			position: relative;
 			bottom:90px;
 		}
+		#prev-area img {
+			right:8px;
+		}
 		#book-list-title {
 			font-size: 20px;
 			font-weight: 600;

@@ -265,4 +265,52 @@
 		 WHERE REF_BNO = ?
 		   AND STATUS = 'Y'
 	</entry>	
+	<entry key="selectBookList">
+		SELECT
+		       BOOK_NO
+		     , TO_CHAR(BOOK_A, 'YYYY/MM/DD') "BOOK_A"
+		     , BOOK_NAME
+		     , BOOK_DATE
+		     , BOOK_TIME
+		     , STATUS		
+
+		  FROM BOOK
+		 WHERE RES_NO = ?
+		 ORDER
+		    BY BOOK_NO DESC
+	</entry>
+	<entry key="selectBook">
+		SELECT
+		       BOOK_NO
+			 , BOOK_DATE
+			 , BOOK_TIME
+			 , PEOPLE
+		     , BOOK_NAME
+		     , BOOK_PHONE
+		     , EMAIL
+		     , REQUEST
+		     , STATUS
+		  FROM BOOK
+		 WHERE BOOK_NO = ?
+	</entry>
+	<entry key="selectBookMenu">
+		SELECT
+		       BM_NO
+			 , MENU_NAME
+			 , MENU_COUNT
+			 , PRICE
+			 , BM_PRICE
+		  FROM BOOK_MENU
+		  JOIN MENU USING (MENU_NO)
+		 WHERE BOOK_NO = ?
+	</entry>
+	<entry key="selectPayment">
+		SELECT
+		       PAY_NO
+			 , PAY_DATE
+			 , PAY_OP
+			 , PAY_TOTAL
+		  FROM PAYMENT
+		 WHERE BOOK_NO = ?
+	</entry>
 </properties>

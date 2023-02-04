@@ -1,6 +1,5 @@
 package com.fd.book.model.vo;
 
-import java.util.Date;
 
 public class Payment {
 
@@ -11,7 +10,7 @@ public class Payment {
 	private int payPoint;
 	private int payTotal;
 	private String payOp;
-	private Date payDate;
+	private String payDate;
 	private String status;
 	
 	
@@ -20,7 +19,7 @@ public class Payment {
 	}
 
 
-	public Payment(int payNo, int bookNo, int resNo, int userNo, int payPoint, int payTotal, String payOp, Date payDate,
+	public Payment(int payNo, int bookNo, int resNo, int userNo, int payPoint, int payTotal, String payOp, String payDate,
 			String status) {
 		super();
 		this.payNo = payNo;
@@ -105,12 +104,12 @@ public class Payment {
 	}
 
 
-	public Date getPayDate() {
+	public String getPayDate() {
 		return payDate;
 	}
 
 
-	public void setPayDate(Date payDate) {
+	public void setPayDate(String payDate) {
 		this.payDate = payDate;
 	}
 
