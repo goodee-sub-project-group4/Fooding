@@ -242,5 +242,16 @@ public class RestaurantService {
 		return p;
 	}
 	
+	public int updateBookStatus(int bookNo, String status) {
+		Connection conn = getConnection();
+		int result = new RestaurantDao().updateBookStatus(conn, bookNo, status);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }

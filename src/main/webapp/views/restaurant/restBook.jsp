@@ -229,7 +229,7 @@
                             <td id="bookName">강백호</td>
                             <td id="bookPhone">010-9999-9999</td>
                             <td id="email">fooding@gmail.com</td>
-                            <td id="request">주차관련해서 문의드렸는데 확인부탁드립니다.</td>
+                            <td id="request">-</td>
                         </tr>
                     </table>
                     <br>
@@ -264,14 +264,15 @@
                     </table>
                     <br>
                     <h3>예약상태</h3>
-                    <form action="">
-                        <select name="bookStatus" id="bookStatus">
+                    <form action="<%=contextPath%>/bookStatus.re">
+                    	<input type="hidden" name="statusBookNo" val="0" id="statusBookNo">
+                        <select name="bookStatus" id="bookStatus" disabled>
                             <option value="B">예약완료</option>
                             <option value="C">취소</option>
                             <option value="D">이용완료</option>
                         </select>
-                        <button type="button" class="btn btn-danger btn-sm">저장</button>
-                        <button type="reset" class="btn btn-secondary btn-sm">취소</button>
+                        <button type="submit" class="btn btn-danger btn-sm" disabled>저장</button>
+                        <button type="reset" class="btn btn-secondary btn-sm" disabled>취소</button>
                     </form>
                     <span>*예약상태는 변경 후 되돌릴 수 없으니 신중히 선택해주세요.</span>
                     
@@ -302,17 +303,18 @@
 				url:"<%=contextPath%>/bookDetail.re",
 				data:{no:bookNo},
 				success: function(set){
-					console.log(set[0]); //예약정보
-					console.log(set[1]); //메뉴정보(배열)
-					console.log(set[2]); //결제정보
 					//기본정보 채우기
 					$('#bookNo').text(set[0].bookNo);
+					$('#statusBookNo').val(set[0].bookNo);
 					$('#bookDate').text(set[0].bookDate);
 					$('#bookTime').text(set[0].bookTime);
 					$('#people').text(set[0].people);
 					$('#bookName').text(set[0].bookName);
 					$('#bookPhone').text(set[0].bookPhone);
 					$('#email').text(set[0].email);
+					//request는 null이 가능한데, null일경우 이전에 조회했던 내용이 뜬다
+					// >> 한번 비워주고 실행한다.
+					$('#request').text("-");
 					$('#request').text(set[0].request);
 					$('#payDate').text(set[2].payDate);
 					$('#payOp').text(set[2].payOp);
@@ -330,16 +332,20 @@
 	                        '</tr>'));
 					}
 					
-					//예약상태설정
+					//[예약상태] 설정을 위해 하단의 each함수를 넣었으나, 이것만 있으면 상세조회를 누를때 이전 조회에 영향을 받는다.
+					// >> 이전에 변경한 값들을 지워주고 시작한다.
+					$('#bookStatus').attr("disabled", true);
+					$('#bookStatus').siblings().attr("disabled", true);
 					$('#bookStatus').children().each(function(){
-						if($(this).val==set[0].status) {
+						if($(this).val()==set[0].status) {
 							$(this).attr("selected",true);
+							if(set[0].status=="B") {
+								//예약완료 상태는 버튼 활성화
+								$('#bookStatus').attr("disabled", false);
+								$('#bookStatus').siblings().attr("disabled", false);
+							}
 						}
 					})
-					
-					
-					
-					
 				}, error: function() {
 					console.log("예약상세조회 ajax통신실패")
 				}

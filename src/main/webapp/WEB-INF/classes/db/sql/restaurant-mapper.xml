@@ -315,4 +315,10 @@
 		  FROM PAYMENT
 		 WHERE BOOK_NO = ?
 	</entry>
+	<entry key="updateBookStatus">
+		UPDATE BOOK
+           SET MODIFY_DATE = SYSDATE
+			 , STATUS = ?
+         WHERE BOOK_NO = ?	
+	</entry>
 </properties>

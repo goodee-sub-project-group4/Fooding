@@ -618,4 +618,23 @@ public class RestaurantDao {
 		}
 		return p;
 	}
+	
+	public int updateBookStatus(Connection conn, int bookNo, String status) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBookStatus");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setInt(2, bookNo);
+						
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
