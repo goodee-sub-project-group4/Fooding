@@ -60,7 +60,7 @@
             /* background-color: ; */
             border-radius: 4px;
             width: 50px;
-            height: 33px;
+            /* height: 33px; */
             margin-left:5px;
         }
         #keyword {
@@ -226,16 +226,16 @@
                             <th>요청사항</th>
                         </tr>
                         <tr class="table-light">
-                            <td>강백호</td>
-                            <td>010-9999-9999</td>
-                            <td>fooding@gmail.com</td>
-                            <td>주차관련해서 문의드렸는데 확인부탁드립니다.</td>
+                            <td id="bookName">강백호</td>
+                            <td id="bookPhone">010-9999-9999</td>
+                            <td id="email">fooding@gmail.com</td>
+                            <td id="request">주차관련해서 문의드렸는데 확인부탁드립니다.</td>
                         </tr>
                     </table>
                     <br>
                     <h3>주문내역</h3>
                     <table class="table table-sm">
-                        <tr class="table-secondary">
+                        <tr class="table-secondary" id="menu-start">
                             <th>메뉴</th>
                             <th>수량</th>
                             <th>단가</th>
@@ -247,18 +247,6 @@
                             <td>19000</td>
                             <td>19000</td>
                         </tr>
-                        <tr class="table-light">
-                            <td>먹물파스타</td>
-                            <td>1</td>
-                            <td>22000</td>
-                            <td>22000</td>
-                        </tr>
-                        <tr class="table-light">
-                            <td>콜라</td>
-                            <td>2</td>
-                            <td>2000</td>
-                            <td>4000</td>
-                        </tr>
                     </table>
                     <br>
                     <h3>결제정보</h3>
@@ -269,31 +257,28 @@
                             <th>결제금액</th>
                         </tr>
                         <tr class="table-light">
-                            <td>23-01-07 15:30:25</td>
-                            <td>카드</td>
-                            <td>45000</td>
+                            <td id="payDate">23-01-07 15:30:25</td>
+                            <td id="payOp">카드</td>
+                            <td id="payTotal">45000</td>
                         </tr>
                     </table>
                     <br>
                     <h3>예약상태</h3>
                     <form action="">
-                        <select name="" id="">
-                            <option value="">예약완료</option>
-                            <option value="">취소</option>
-                            <option value="">이용완료</option>
+                        <select name="bookStatus" id="bookStatus">
+                            <option value="B">예약완료</option>
+                            <option value="C">취소</option>
+                            <option value="D">이용완료</option>
                         </select>
-                        <button type="button" class="btn btn-danger">저장</button>
-                        <button type="reset" class="btn btn-secondary">취소</button>
+                        <button type="button" class="btn btn-danger btn-sm">저장</button>
+                        <button type="reset" class="btn btn-secondary btn-sm">취소</button>
                     </form>
                     <span>*예약상태는 변경 후 되돌릴 수 없으니 신중히 선택해주세요.</span>
                     
-                    
-
                 </div>
         
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
                 </div>
         
@@ -317,13 +302,42 @@
 				url:"<%=contextPath%>/bookDetail.re",
 				data:{no:bookNo},
 				success: function(set){
-					console.log(set[0]);
-					console.log(set[1]);
-					console.log(set[2]);
+					console.log(set[0]); //예약정보
+					console.log(set[1]); //메뉴정보(배열)
+					console.log(set[2]); //결제정보
+					//기본정보 채우기
 					$('#bookNo').text(set[0].bookNo);
 					$('#bookDate').text(set[0].bookDate);
 					$('#bookTime').text(set[0].bookTime);
 					$('#people').text(set[0].people);
+					$('#bookName').text(set[0].bookName);
+					$('#bookPhone').text(set[0].bookPhone);
+					$('#email').text(set[0].email);
+					$('#request').text(set[0].request);
+					$('#payDate').text(set[2].payDate);
+					$('#payOp').text(set[2].payOp);
+					$('#payTotal').text(set[2].payTotal);
+					
+					//[메뉴조회]를 위해 하단의 for문을 넣었으나, 이것만 있으면 상세조회를 누를때마다 쌓인다.
+					// >> 이전에 쌓은 요소들을 먼저 지워주고 시작한다.
+					$('#menu-start').siblings().remove();
+					for(let i=0; i<set[1].length; i++) {
+						$('#menu-start').after($('<tr class="table-light">'+
+	                            '<td>'+set[1][i].menuNo+'</td>'+
+	                            '<td>'+set[1][i].menuCount+'</td>'+
+	                            '<td>'+set[1][i].price+'</td>'+
+	                            '<td>'+set[1][i].bmPrice+'</td>'+
+	                        '</tr>'));
+					}
+					
+					//예약상태설정
+					$('#bookStatus').children().each(function(){
+						if($(this).val==set[0].status) {
+							$(this).attr("selected",true);
+						}
+					})
+					
+					
 					
 					
 				}, error: function() {

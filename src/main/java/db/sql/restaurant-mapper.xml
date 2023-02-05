@@ -303,6 +303,8 @@
 		  FROM BOOK_MENU
 		  JOIN MENU USING (MENU_NO)
 		 WHERE BOOK_NO = ?
+		 ORDER
+		    BY BM_NO DESC
 	</entry>
 	<entry key="selectPayment">
 		SELECT
