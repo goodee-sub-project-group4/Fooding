@@ -1,12 +1,18 @@
 package com.fd.customerService.model.service;
 
-import static com.fd.common.JDBCTemplate.*;
+import static com.fd.common.JDBCTemplate.close;
+import static com.fd.common.JDBCTemplate.commit;
+import static com.fd.common.JDBCTemplate.getConnection;
+import static com.fd.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
+import com.fd.admin.model.vo.Question;
 import com.fd.customerService.model.dao.MemberNoticeDao;
+
 
 public class MemberNoticeService {
 	
@@ -55,7 +61,41 @@ public class MemberNoticeService {
 		return n;
 	}
 	
+	/** FAQ 리스트
+	 * @author 빛나
+	 * @return list
+	 */
+	public ArrayList<Faq> selectFAQList() {
+		
+		Connection conn = getConnection();
+		ArrayList<Faq> list = new MemberNoticeDao().selectFAQList(conn);
+		close(conn);
+		return list;
+	}
 	
+	
+	/** 1:1문의(업체)리스트
+	 * @return listA
+	 */
+	public ArrayList<Question> selectMemberQuestionListR() {
+		
+		Connection conn = getConnection();
+		ArrayList<Question> listR = new MemberNoticeDao().selectMemberQuestionListR(conn);
+		close(conn);
+		return listR;
+	}
+	
+	/** 1:1문의(관리자)리스트
+	 * @return listR
+	 */
+	public ArrayList<Question> selectMemberQuestionListA() {
+		
+		Connection conn = getConnection();
+		ArrayList<Question> listA = new MemberNoticeDao().selectMemberQuestionListA(conn);
+		close(conn);
+		return listA;
+		
+	}
 	
 
 }

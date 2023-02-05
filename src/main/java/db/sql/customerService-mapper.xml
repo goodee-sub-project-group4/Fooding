@@ -38,6 +38,48 @@
 		 WHERE NOTICE_NO = ?
 	</entry>
 	
+	<!-- FAQ 리스트 -->
+	<entry key="selectFAQList">
+		SELECT 
+		       FAQ_NO
+			 , CATEGORY
+			 , FAQ_TITLE
+			 , FAQ_CONTENT
+		  FROM FAQ
+		 WHERE STATUS = 'Y'
+		   AND WHO = 'U'
+		 ORDER
+		    BY FAQ_NO DESC
+	</entry>
+	
+	<!-- 1:1문의(업체)리스트 -->
+	<entry key="selectMemberQuestionListR">
+		SELECT
+			   Q_NO
+			 , Q_TITLE
+			 , TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') "CREATE_DATE"
+			 , STATUS
+		  FROM QUESTION
+		 WHERE Q_WHO = 'U'
+		   AND A_WHO = 'R'
+		 ORDER
+		    BY Q_NO DESC
+	</entry>
+	
+	<!-- 1:1문의(관리자)리스트 -->
+	<entry key="selectMemberQuestionListA">
+		SELECT
+			   Q_NO
+			 , Q_TITLE
+			 , TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') "CREATE_DATE"
+			 , STATUS
+		  FROM QUESTION
+		 WHERE Q_WHO = 'U'
+		   AND A_WHO = 'A'
+		 ORDER
+		    BY Q_NO DESC
+	</entry>
+	
 
 
 </properties>

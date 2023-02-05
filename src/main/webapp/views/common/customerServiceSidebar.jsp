@@ -46,8 +46,8 @@
                 <div id="content1-1"><h2><b>고객센터</b></h2></div>
                 <div id="content1-2">
                     <div><a href="<%=request.getContextPath()%>/notice.me">공지사항<span class="arrow">></span></a></div>
-                    <div><a href="">FAQ<span class="arrow">></span></a></div>
-                    <div><a href="">1 : 1 문의<span class="arrow">></span></a></div> 
+                    <div><a href="<%=request.getContextPath()%>/faq.me">FAQ<span class="arrow">></span></a></div>
+                    <div><a href="<%=request.getContextPath()%>/question.me">1 : 1 문의<span class="arrow">></span></a></div> 
                 </div>
             </div>
         </div>

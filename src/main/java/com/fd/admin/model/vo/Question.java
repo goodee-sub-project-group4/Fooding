@@ -37,7 +37,17 @@ public class Question {
 		this.aPerson = aPerson;
 		this.aWho = aWho;
 	}
-
+	
+	// (회원)1:1문의리스트
+	public Question(int qNo, String qTitle, String createDate,  String status) {
+		super();
+		this.qNo = qNo;
+		this.qTitle = qTitle;
+		this.createDate = createDate;
+		this.status = status;
+		
+	}
+	
 	public int getqNo() {
 		return qNo;
 	}

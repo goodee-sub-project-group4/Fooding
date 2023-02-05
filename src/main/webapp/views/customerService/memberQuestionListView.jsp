@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Question" %>
+<%
+	ArrayList<Question> listR = (ArrayList<Question>)request.getAttribute("listR");
+	ArrayList<Question> listA = (ArrayList<Question>)request.getAttribute("listA");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +17,10 @@
     #notice-area {width: 100%; height: 135px; font-size: 30px; text-align: center; display: inline-block;}
 	/* 상단타이틀 */
     #question-list {height: 60px; border-bottom: black; position:relative;}
-    #question-list button {width:160px; height:60px; font-size:20px; font-weight:500; background-color:transparent; border:none; }
+    #question-list button {width:160px; height:60px; font-size:20px; font-weight:500; background-color:transparent; border:none;
+     padding-bottom: 50px; color:red;}
     #question-list button:hover {font-weight:600;}
-    #question-list input {width:60px; height:35px; padding:3px; position:absolute; right:10px; bottom:10px;}
+    #question-list input {width:60px; height:35px; padding:3px; position:absolute; right:24px; bottom:10px;}
 
     #list-area {height: 650px;}
     .table {text-align:center;}
@@ -35,8 +42,8 @@
                 <b>내가 쓴 1 : 1 문의</b>
             </div>
             <div id="question-list">
-                <button type="button">매장 문의</button>
-                <button type="button">관리자 문의</button>
+                <button type="button" id="res-btn">매장 문의</button>
+                <button type="button" id="admin-btn">관리자 문의</button>
                 <input type="button" class="btn btn-outline-danger" value="삭제">
             </div>
             <div id="list-area">
@@ -44,93 +51,44 @@
                     <thead>
                         <tr>
                             <th colspan="2" width="60px" id="num">번호</th>
-                            <th width="510px">제목</th>
+                            <th width="450px">제목</th>
                             <th width="110px">작성일</th>
                             <th width="110px">상태</th>
                             <th width="110px">수정버튼</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr id="">
+                    
+                        <!-- 문의한 내역이 없을 경우 -->
+                        <!-- <tr>
+                            <td colspan="5"><b>문의한 내역이 없습니다.</b></td>
+                        </tr> -->
+                        
+                    
+                        <!-- 문의한 내역이 있을 경우 -->
+                        <% for(Question qR : listR) { %>
+                        <tr class="res-list">
                             <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px; "></td>
-                            <td>3</td>
-                            <td>결제가 안되는데~~~~</td>
-                            <td>23.01.23</td>
-                            <td>완료</td>
+                            <td><%=qR.getqNo()%></td>
+                            <td><%=qR.getqTitle()%></td>
+                            <td><%=qR.getCreateDate()%></td>
+                            <td><%=qR.getStatus()%></td>
                             <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
                         </tr>
-                        <tr id="">
-                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px;"></td>
-                            <td>3</td>
-                            <td>결제가 안되는데~~~~</td>
-                            <td>23.01.23</td>
-                            <td>완료</td>
+                       <% } %>
+                        
+                       <% for(Question qA : listA) { %>
+                        <tr class="admin-list">
+                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px; "></td>
+                            <td><%=qA.getqNo()%></td>
+                            <td><%=qA.getqTitle()%></td>
+                            <td><%=qA.getCreateDate()%></td>
+                            <td><%=qA.getStatus()%></td>
                             <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
                         </tr>
-                        <tr id="">
-                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px;"></td>
-                            <td>3</td>
-                            <td>결제가 안되는데~~~~</td>
-                            <td>23.01.23</td>
-                            <td>완료</td>
-                            <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px;"></td>
-                            <td>3</td>
-                            <td>결제가 안되는데~~~~</td>
-                            <td>23.01.23</td>
-                            <td>완료</td>
-                            <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px;"></td>
-                            <td>3</td>
-                            <td>결제가 안되는데~~~~</td>
-                            <td>23.01.23</td>
-                            <td>완료</td>
-                            <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px;"></td>
-                            <td>3</td>
-                            <td>결제가 안되는데~~~~</td>
-                            <td>23.01.23</td>
-                            <td>완료</td>
-                            <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px;"></td>
-                            <td>3</td>
-                            <td>결제가 안되는데~~~~</td>
-                            <td>23.01.23</td>
-                            <td>완료</td>
-                            <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px;"></td>
-                            <td>3</td>
-                            <td>결제가 안되는데~~~~</td>
-                            <td>23.01.23</td>
-                            <td>완료</td>
-                            <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px;"></td>
-                            <td>3</td>
-                            <td>결제가 안되는데~~~~</td>
-                            <td>23.01.23</td>
-                            <td>완료</td>
-                            <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px;"></td>
-                            <td>3</td>
-                            <td>결제가 안되는데~~~~</td>
-                            <td>23.01.23</td>
-                            <td>완료</td>
-                            <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
-                        </tr>
+                        <% } %>
+                        
+                   
                     </tbody>	
                 </table>
 
@@ -150,6 +108,21 @@
             <br><br><br>
 
         </div>
+        
+       <script>
+	     	// 업체 버튼 클릭시
+	        $("#res-btn").click(function() {
+	            $(".res-list").show();
+	            $(".admin-list").hide();
+	        });
+	        // 관리자 버튼 클릭시
+	        $("#admin-btn").click(function() {
+	        	$(".admin-list").show();
+	            $(".res-list").hide();
+	        });
+	       
+        </script>
+        
 
 </body>
 </html>

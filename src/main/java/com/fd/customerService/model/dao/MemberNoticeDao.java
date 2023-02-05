@@ -1,5 +1,7 @@
 package com.fd.customerService.model.dao;
 
+import static com.fd.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,9 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
-
-import static com.fd.common.JDBCTemplate.*;
+import com.fd.admin.model.vo.Question;
 
 public class MemberNoticeDao {
 	
@@ -130,7 +132,108 @@ public class MemberNoticeDao {
 		
 	}
 	
+	/** FAQ 리스트
+	 * @param conn
+	 * @return list
+	 */
+	public ArrayList<Faq> selectFAQList(Connection conn) {
+		// select
+		ArrayList<Faq> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectFAQList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+		    while(rset.next()) {
+		    	list.add(new Faq(rset.getInt("faq_no"),
+		    			         rset.getString("category"),
+		    			         rset.getString("faq_title"),
+		    			         rset.getString("faq_content")));
+		    }
+		    
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
 	
+	/** 1:1문의(업체)리스트
+	 * @return listR
+	 */
+	public ArrayList<Question> selectMemberQuestionListR(Connection conn) {
+		// select
+		ArrayList<Question> listR = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMemberQuestionListR");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listR.add(new Question(rset.getInt("q_no"),
+						               rset.getString("q_title"),
+						               rset.getString("create_date"),
+						               rset.getString("status")));
+			} 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listR;
+		
+	}
+	
+	/** 1:1문의(관리자)리스트
+	 * @return
+	 */
+	public ArrayList<Question> selectMemberQuestionListA(Connection conn) {
+		// select
+		ArrayList<Question> listA = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMemberQuestionListA");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listA.add(new Question(rset.getInt("q_no"),
+						               rset.getString("q_title"),
+						               rset.getString("create_date"),
+						               rset.getString("status")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listA;
+
+	}
 	
 	
 	

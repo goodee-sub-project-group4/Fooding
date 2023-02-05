@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Faq" %>
+<%
+	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,8 +56,9 @@
     <div class="wrap">
         <div id="content2-padding">
             <div id="notice-area">
-                <b>공지사항</b>
+                <b>FAQ</b>
             </div>
+
             <div id="list-area">
                 <table class="table">
                     <tr style="border-bottom: 2px solid rgb(223, 223, 223); height: 50px;">
@@ -62,217 +67,29 @@
                         <th>제목</th>
                     </tr>
                 </table>
+				<% for(Faq f : list) { %>
                 <ul>
                     <div class="list">
+                    
                         <div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
+                            <div id="number"><%=f.getFaqNo()%></div>
+                            <div id="category"><%=f.getCategory()%></div>
                             <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
+                                <div><%=f.getFaqTitle()%></div>
                             </div>
                         </div>
+                        
                     </div>
+                   
                     <div class="content">
+                    
                         <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                            
+                           <%=f.getFaqContent()%>
                         </div>
+                        
                     </div>
                 </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                            
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                            
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                            
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                            
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                            
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                            
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                            
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                            
-                        </div>
-                    </div>
-                </ul>
-                <ul>
-                    <div class="list">
-                        <div>
-                            <div id="number">1</div>
-                            <div id="category">회원</div>
-                            <div id="faqTitle">
-                                <div>아이디, 비밀번호를 잊어버렸습니다</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id="answer">
-                            ■ 아이디, 비밀번호 찾기 안내
-
-                            - 하기 경로를 통해 아이디 및 비밀번호 찾기가 가능하며, 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.
-
-                            [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]
-                            
-                        </div>
-                    </div>
-                </ul>
-
+                <% } %>
             </div>
 
             <div>
