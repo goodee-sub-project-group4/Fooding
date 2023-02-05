@@ -108,6 +108,7 @@
                     </div>
                     <br>
 
+					<!-- 
                     <div class="inputForm">
                         <b class="inputName">영업 시작 시간</b> <span style="color:red;">*</span>  <br>
                         <input type="text" class="inputBar" name="opne" placeholder="00:00 형식" required>
@@ -130,8 +131,7 @@
                         <b class="inputName">브레이크 타임 종료 시간</b> <span style="color:red;">*</span>  <br>
                         <input type="text" class="inputBar" name="breakE" placeholder="00:00 형식" required>
                     </div>
-
-                    <br><br><br>
+                    -->
 
                     <div class="inputForm">
                         <b class="inputName">주소</b> <span style="color:red;">*</span>  <br>
@@ -449,12 +449,15 @@
                         $("#phoneHelper").html("필수정보입니다."); 
                     }else{ 
                         // 전화번호 값이 null 값이 아니라면 --> 유효성체크(0xx-xxx-xxxx 형식 또는 0x-xxx-xxxx 형식)) 
+                        <!--
                         regExp = /^0\d{1,2}-\d{3}-\d{4}$/;
                         if(!regExp.test($("#phone").val())){
                             $("#phoneHelper").html("0xx-xxx-xxxx 형식으로 입력해주세요!"); 
                         }else{
                             $("#phoneHelper").html(""); 
                         }
+                        -->
+                        $("#phoneHelper").html("");
 
                     }
                 })
@@ -468,12 +471,16 @@
                         $("#cellHelper").html("필수정보입니다."); 
                     }else{
                         // 휴대폰번호 값이 null 값이 아니라면 --> 유효성체크(0xx-xxxx-xxxx 형식)
+                        <!--
                         regExp = /^0\d{2}-\d{4}-\d{4}$/;
                         if(!regExp.test($("#cellPhone").val())){
                             $("#cellHelper").html("0xx-xxxx-xxxx 형식으로 입력해주세요!"); 
                         }else{
                             $("#cellHelper").html(""); 
                         }
+                        -->
+                        $("#cellHelper").html("");
+                        
                     }
                 })
 
