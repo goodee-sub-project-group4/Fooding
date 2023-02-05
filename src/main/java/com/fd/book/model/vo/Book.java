@@ -36,6 +36,20 @@ public class Book {
 		this.modifyDate = modifyDate;
 		this.bookA = bookA;
 	}
+	
+	public Book(int userNo, int resNo, String bookName, String bookPhone, String bookDate, String bookTime,
+			int people, String email, String request) {
+		super();
+		this.userNo = userNo;
+		this.resNo = resNo;
+		this.bookName = bookName;
+		this.bookPhone = bookPhone;
+		this.bookDate = bookDate;
+		this.bookTime = bookTime;
+		this.people = people;
+		this.email = email;
+		this.request = request;
+	}
 
 	public int getBookNo() {
 		return bookNo;

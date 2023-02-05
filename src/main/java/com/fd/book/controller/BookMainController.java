@@ -40,7 +40,7 @@ public class BookMainController extends HttpServlet {
 		// 리뷰 정보 조회
 //		ArrayList<Review> reviewList = new BookService().selectReview(resNo);
 		// 예약 번호 조회
-		int bookNo = new BookService().selectBookNo(resNo);
+		int bookNo = new BookService().selectBookNo();
 		// 식당 정보 조회
 		Restaurant restaurant = new BookService().selectRes(resNo);	
 		if(restaurant == null) {
