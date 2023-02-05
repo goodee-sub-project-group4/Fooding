@@ -363,4 +363,12 @@
 		   AND NOT_YEAR = ?
 		   AND NOT_MONTH = ?
 	</entry>
+	<entry key="deleteNotAble">
+		DELETE
+		  FROM NOT_ABLE
+		 WHERE RES_NO = ?
+		   AND NOT_YEAR=?
+		   AND NOT_MONTH=?
+		   AND NOT_DATE=? 
+	</entry>
 </properties>

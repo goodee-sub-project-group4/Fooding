@@ -139,7 +139,7 @@
 			<br><br><br>
 			<h2><%=month%>월</h2><div id="space"></div>
 			<input type="hidden" id="which-date" value="">
-			<button type="button" class="btn btn-outline-danger">예약가능 변경</button>
+			<button type="button" class="btn btn-outline-danger" onclick="enAble();">예약가능 변경</button>
 			<button type="button" class="btn btn-outline-danger" onclick="notAble();">예약불가 변경</button>
 			<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-list">예약내역 보기</button><br>
 			
@@ -297,7 +297,6 @@
 				$('.thisMonth').css("background-color","");
 				$(this).css("background-color","rgb(255, 240, 142)");
 				$('#which-date').val($(this).text());
-				console.log($('#which-date').val());
 			});
 		})
 
@@ -331,8 +330,8 @@
 				url:"<%=contextPath%>/insertNotAble.re",
 				data:{year:year, month:month, date:notAbleDate},
 				success:function(result) {
-					if(result==0) { //실패하였을때
-						alert('날짜 설정에 실패하였습니다. 고객센터로 문의하여주세요.');
+					if(result==0) { //insert실패하였을때
+						alert('이미 예약 불가 상태입니다.');
 					}else { //성공했을때
 						//X자 이미지 붙이기
 						$('#'+notAbleDate).append('<img src="<%=contextPath%>/resources/images/xIcon.png" class="x-icon">');
@@ -345,10 +344,24 @@
 		
 		//예약가능 변경
 		function enAble(){
-			let notAbleDate = $('#which-date').val();
-			$('#'+notAbleDate).append('<img src="<%=contextPath%>/resources/images/xIcon.png" class="x-icon">');
-			$('#'+notAbleDate).css("background-color","");
+			let enAbleDate = $('#which-date').val();
+			$('#'+enAbleDate).css("background-color","");
+			$.ajax({
+				url:"<%=contextPath%>/deleteNotAble.re",
+				date:{year:year, month:month, date:enAbleDate},
+				success:function(result) {
+					if(result==0) {//delete실패하였을때
+						alert('이미 예약 가능 상태입니다.');
+					}else {
+						//x자 이미지 삭제하기
+						$('#'+enAbleDate).children().remove();
+					}
+				}, error:function(){
+					console.log('notAble delete ajax통신 실패');
+				}
+			});
 		}
+		
 		
 		
 		
