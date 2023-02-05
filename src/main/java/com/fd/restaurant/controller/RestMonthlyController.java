@@ -38,6 +38,7 @@ public class RestMonthlyController extends HttpServlet {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
 			response.sendRedirect(request.getContextPath()+"/rest.admin");
 		}else {
+			//데이터뽑기
 			int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
 			String year =  request.getParameter("year");
 			String month = request.getParameter("month");
@@ -45,12 +46,15 @@ public class RestMonthlyController extends HttpServlet {
 				month = "0"+month;
 			}
 			String lastDay = request.getParameter("lastDay");
-			System.out.println(resNo+"/"+year+"/"+month+"/"+lastDay);
+			
+			//데이터 가공하기
 			String startDay = year+"/"+month+"/01";
 			String endDay = year+"/"+month+"/"+lastDay;
+			//DB 조회해온 후 포워딩보내기
 			ArrayList<Payment> list = new RestaurantService().selectMonthlyPayment(resNo, startDay, endDay);
-			
 			request.setAttribute("list", list);
+			request.setAttribute("year", year);
+			request.setAttribute("month", month);
 			request.getRequestDispatcher("views/restaurant/restMonthly.jsp").forward(request, response);
 		}
 		

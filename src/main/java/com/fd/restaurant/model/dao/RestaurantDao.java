@@ -674,10 +674,15 @@ public class RestaurantDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, resNo);
+			pstmt.setString(2, startDay);
+			pstmt.setString(3, endDay);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Payment p = new Payment();
-				
+				p.setPayNo(rset.getInt("pay_no"));
+				p.setBookNo(rset.getInt("book_no"));
+				p.setModifyDate(rset.getString("modify_date"));
+				p.setPayTotal(rset.getInt("pay_total"));
 
 				list.add(p);
 			}

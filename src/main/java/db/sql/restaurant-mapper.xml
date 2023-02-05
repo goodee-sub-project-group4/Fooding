@@ -325,12 +325,14 @@
 		SELECT
 		       PAY_NO
 		     , BOOK_NO
-		     , 
+		     , TO_CHAR(MODIFY_DATE, 'YYYY/MM/DD') "MODIFY_DATE"
+		     , PAY_TOTAL
 		  FROM PAYMENT P
 		  JOIN BOOK B USING (BOOK_NO) 
 		 WHERE B.RES_NO = ?
 		   AND B.STATUS = 'D'
+		   AND MODIFY_DATE + (INTERVAL '7' DAY) BETWEEN ? AND ?
 		 ORDER
-		    BY BOOK_NO DESC	
+		    BY MODIFY_DATE ASC
 	</entry>
 </properties>

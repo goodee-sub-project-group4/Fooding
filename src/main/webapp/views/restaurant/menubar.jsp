@@ -145,9 +145,9 @@
         })
         
         function goMonthly(){
-        	//현재 연,월,마지막일 알아내기
+        	//현재 현재달의 이전달의 연,월,마지막일 알아내기
         	let year = new Date().getFullYear();
-        	let month = new Date().getMonth()+1;
+        	let month = new Date().getMonth();
         	let lastDay = new Date(year, month, 0).getDate();
         	location.href='/Fooding/monthly.re?year='+year+'&month='+month+'&lastDay='+lastDay;
         }
