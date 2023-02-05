@@ -179,5 +179,30 @@
 		      WHERE COUNT = 0) 
 	</entry>  
 	
+	<entry key="deleteGood">
+		 DELETE
+		   FROM GOOD
+		 WHERE RES_NO = ?
+		   AND USER_NO = ?
+	</entry>
+	
+	<entry key="selectGoodCount">
+		SELECT
+		 COUNT(*) count
+		  FROM GOOD
+		 WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="selectGoodList">
+		SELECT RES_NO
+		      , RES_NAME
+		      , ADDRESS || ' ' || D_ADDRESS "ADDRESS"
+		      , R_IMG
+		      , FOOD_CT
+		  FROM RESTAURANT
+		  LEFT JOIN GOOD USING (RES_NO)
+		  WHERE USER_NO = ?
+	</entry>
+	
 	
 </properties>

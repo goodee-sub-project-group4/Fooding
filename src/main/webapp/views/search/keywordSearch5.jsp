@@ -142,23 +142,9 @@
 	                                업체번호 : <%= r.getResNo() %> <br>
 	                                주소 : <%= r.getAddress() %> <br>
 	                                음식카테고리 : <%= r.getFoodCt() %> <br>
-	                                
-	                                
-	                                <!-- 로그인을 안 했을 경우 : alertMsg() 실행  -->                                
-	                                <% if(loginUser == null){ %>
-	                                	<span class="zzim"> 
-                                    		<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="alertMsg();">
-	                               		</span>
-	                               	<!-- 로그인을 했을 경우 : insertGood() 실행 -->
-	                                <%} else { %>
-	                                	<span class="zzim"> 
-	                                    	<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="insertGood();">
-	                                    	<input type="hidden" class="resNumbers" value="<%= r.getResNo()%>">
-		                                </span>
-	                                <% } %>
-	                                
-	                                
-	                                
+	                                <span class="zzim">
+	                                    <img src="/Fooding/resources/images/heart.png" width="50px;">  
+	                                </span>
 	                                별점총점: <%= r.getReviewAvg() %> <br>
 	                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
 	                                조회수: <%= r.getCount() %> <br>
@@ -186,44 +172,47 @@
 					            	<button onclick="location.href='<%=contextPath%>/keyword.sh?cpage=<%=pi.getCurrentPage()+1%>&keyword=<%=keyword%>';">&gt;</button>
 								<% } %>
 								
-							<% } %>   
-							
-							<!-- 찜하기 -->
-							
-							<script>
-                        
-					        function insertGood(){
-					        	
-					        	
-					    		$.ajax({
-					    			url:"<%=contextPath%>/good.sh",
-					    			data:{
-					    				resNo: $(this).parents($('.searchRes')).children().val()
-					    			},
-					    			type:"post",
-					    			success:function(result){
-					    				if(result > 0 ){ // 찜하기 성공 
-					    					alert("찜하기 성공"); 
-					    				}else{ // 찜하기 실패 
-					    					alert("찜하기 실패"); 
-					    				}
-					    			},
-					    			error:function(){
-					    				console.log("ajax 통신 실패"); 
-					    			}
-					    		})
-					    	}
-                    	
-                        	
-                        	function alertMsg(){
-                        		alert("로그인한 유저만 이용가능한 서비스입니다");
-                        	}
-                        
-                        </script>     
+							<% } %>        
 
 				        </div>
 				        
+				        <!-- 
 				        
+				            1) 별점순 | 조회순 | 리뷰순을 onclick()의 파라미터 값으로 구분
+				            2) 파라미터 값과 list를 ajax controller로 보낸다 
+				            3) ajax 컨트롤러에서 if문으로 그 객체의 필드에 담긴 값을 비교해서 새로운 리스트를 만들어서 거기다 그 순서로 담아줌 
+				            4) jsp (이 페이지에서) 그걸 다시 돌려 받고 화면에 뿌려주면 똑같은 이름으로 뿌려주면 끝 아님?? 
+				  
+				         -->
+				         
+				         <script>
+				         
+				         	function filterBy(a){
+				         		
+				         		const sth = a; 
+				         		
+				         		$.ajax({
+				         			url:"<%=contextPath%>/filter.res",
+				         			dataType:"json",
+				         			traditional:true, 
+				         			data:{
+				         				standard:sth
+				         				list:<%= list %>
+				         			},
+				         			type:"post",
+				         			success:function(result){
+				         				alert("일단 통신은 성공");
+				         			},
+				         			error:function(){
+				         				console.log("ajax 통신 에러");
+				         			}
+				         		
+				         		})
+				         	}
+				         
+				         </script>
+				         
+				         
 
                     </div>
                       

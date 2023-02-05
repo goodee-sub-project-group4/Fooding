@@ -40,6 +40,12 @@ public class GoodController extends HttpServlet {
 		
 		int result = new SearchService().insertGood(resNo, userNo); 
 		
+		/*
+		 * result 값이 0일 경우, 이미 찜하기가 되어있다는 얘기 이므로, 되어있는 찜을 삭제할 메소드
+		if(result < 1) {
+			result = new SearchService().deleteGood(resNo, userNo);
+		}
+		*/
 		response.getWriter().print(result); 
 	}
 

@@ -338,6 +338,98 @@ public class SearchDao {
 		}
 		
 
+		public int deleteGood(Connection conn, int resNo, int userNo) {
+			int result = 0; 
+			PreparedStatement pstmt = null; 
+			String sql = prop.getProperty("deleteGood"); 
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, resNo);
+				pstmt.setInt(2, userNo);
+				
+				result = pstmt.executeUpdate(); 
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt); 
+			}
+			
+			return result; 
+		}
+		
+		
+		
+		public int selectGoodCount(Connection conn, int userNo) {
+			// select => ResultSet(숫자 한 개 ) => int 
+			
+			int listCount = 0; // 총 검색결과 갯수
+			PreparedStatement pstmt = null; 
+			ResultSet rset = null;
+			String sql = prop.getProperty("selectGoodCount"); 
+			
+			try {
+				pstmt = conn.prepareStatement(sql); // 미완성된 sql문 
+				
+				pstmt.setInt(1, userNo);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					listCount = rset.getInt("count"); 
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return listCount; 
+			
+		}
+		
+		public ArrayList<Restaurant> selectGoodList(Connection conn,PageInfo pi, int userNo){
+			ArrayList<Restaurant> list = new ArrayList<>();
+			PreparedStatement pstmt = null; 
+			ResultSet rset = null; 
+			String sql = prop.getProperty("selectGoodList"); 
+			
+			try {
+				pstmt = conn.prepareStatement(sql); // 미완성된 sql문 
+				
+				// 사용자로부터 입력받은 값으로 sql문 채우기 
+				
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; 
+				int endRow = startRow + pi.getBoardLimit() - 1;  
+				
+				pstmt.setInt(1, userNo);
+				
+				rset = pstmt.executeQuery(); 
+				
+				while(rset.next()) {
+					list.add(new Restaurant(
+											rset.getInt("res_no"),
+											rset.getString("res_name"),
+											rset.getString("address"),
+											rset.getString("r_img"),
+											rset.getString("food_ct")
+											)); 		
+					
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt); 
+			}
+			
+			return list; 
+			
+		}
 	
 
 }
