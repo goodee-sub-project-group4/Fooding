@@ -115,9 +115,7 @@
 
                     <!-- 검색결과 필터링: 별점순|방문자순|리뷰순-->
                     <div id="searchFilter">
-                        <span onclick="filterBy('reviewAvg');">별점순</span> |
-                        <span onclick="filterBy('count');">조회순</span> |
-                        <span onclick="filterBy('totalReview');">리뷰순</span>
+                        <b>별점순</b> | 방문자순 | 리뷰순
                     </div>
 
                     <!-- 검색결과 조회된 음식점 목록들 -->
@@ -174,17 +172,6 @@
 							<% } %>        
 
 				        </div>
-				        
-				        <!-- 
-				        
-				            1) 별점순 | 조회순 | 리뷰순을 onclick()의 파라미터 값으로 구분
-				            2) 파라미터 값과 list를 ajax controller로 보낸다 
-				            3) ajax 컨트롤러에서 if문으로 그 객체의 필드에 담긴 값을 비교해서 새로운 리스트를 만들어서 거기다 그 순서로 담아줌 
-				            4) jsp (이 페이지에서) 그걸 다시 돌려 받고 화면에 뿌려주면 똑같은 이름으로 뿌려주면 끝 아님?? 
-				  
-				         -->
-				         
-				         
 
                     </div>
                       

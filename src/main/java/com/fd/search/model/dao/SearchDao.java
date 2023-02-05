@@ -337,9 +337,7 @@ public class SearchDao {
 			return result; 
 		}
 		
-	
-	
-	
+
 	
 
 }
