@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Faq" %>
+<%@ page import="java.util.ArrayList, com.fd.common.model.vo.PageInfo, com.fd.admin.model.vo.Faq" %>
 <%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -73,7 +75,7 @@
                     
                         <div>
                             <div id="number"><%=f.getFaqNo()%></div>
-                            <div id="category"><%=f.getCategory()%></div>
+                            <div id="category"><%= (f.getCategory().equals("caM")) ? "회원" : (f.getCategory().equals("caB")) ? "예약/결제/취소" : (f.getCategory().equals("caP")) ? "적립금" : "서비스이용" %></div>
                             <div id="faqTitle">
                                 <div><%=f.getFaqTitle()%></div>
                             </div>
@@ -94,13 +96,17 @@
 
             <div>
                 <ul class="pagination justify-content-center" style="margin:50px 0">
-                    <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+                	<% if(pi.getCurrentPage() != 1) { %>
+                    	<li class="page-item"><button class="page-link">&lt;</button></li>
+                    <% } %>
+                    
+                    <% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++) { %>
+                    	<li class="page-item"><button class="page-link"><%=p%></button></li>
+                    <% } %>
+                    
+                    <% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
+                    <li class="page-item"><button class="page-link">&gt;</button></li>
+                    <% } %>
                 </ul>
             </div> 
         </div>

@@ -7,6 +7,7 @@
 	 	 WHERE RES_NO = ?
 	 	   AND STATUS = 'Y'
 	</entry>
+	
 	<entry key="selectRes">
 		SELECT 
 			   RES_NO
@@ -40,6 +41,7 @@
 		 WHERE RS.RES_NO = ?
 	       AND STATUS = 'Y'
 	</entry>
+	
 	<entry key="selectMenu">
 		SELECT 
 			   MENU_NO
@@ -51,21 +53,6 @@
 		  JOIN MENU M ON (RS.RES_NO = M.RES_NO)
 		 WHERE RS.RES_NO = ?
 	       AND STATUS = 'Y'
-	</entry>
-	<entry key="selectBookNo">
-		SELECT BOOK_NO
-		  FROM BOOK B
-		  JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
-		 WHERE B.RES_NO = ?
-		   AND R.STATUS = 'Y'
-	</entry>
-	
-	<entry key="selectPoint">
-		SELECT 
-			   POINT_NO
-			 , POINT_NOW
-		  FROM POINT
-		 WHERE USER_NO = ?
 	</entry>
 	
 	<!-- <entry key="selectReview">
@@ -86,4 +73,49 @@
 		 WHERE RE.RES_NO = ?
 		   AND RE.STATUS = 'Y'  
 	</entry> -->
+	
+	<entry key="selectBookNo">
+		SELECT BOOK_NO
+		  FROM BOOK B
+	</entry>
+	
+	<entry key="selectPoint">
+		SELECT 
+			   POINT_NO
+			 , POINT_NOW
+		  FROM POINT
+		 WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="insertBook">
+		INSERT 
+		  INTO BOOK
+		     (
+		       BOOK_NO
+			 , USER_NO
+			 , RES_NO
+			 , BOOK_NAME
+			 , BOOK_PHONE
+			 , BOOK_DATE
+			 , BOOK_TIME
+			 , PEOPLE
+			 , EMAIL
+			 , REQUEST
+			 , STATUS
+             )
+		VALUES
+		     (
+		       SEQ_BKNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , 'B'
+		     )
+	</entry>
 </properties>

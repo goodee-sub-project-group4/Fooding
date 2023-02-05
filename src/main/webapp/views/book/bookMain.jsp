@@ -482,9 +482,7 @@
                                             <td>적립금 사용</td>
                                             <td style="text-align: right;"><input style="width: 80px; text-align: right;" type="number" id="pointUse" value="0">원</td>
                                         </tr>
-                                        <script>
-                                           
-                                        </script>
+                               
                                         <tr>
                                             <td colspan="2"><hr></td>
                                         </tr>
@@ -533,9 +531,10 @@
                             </div>
                         </div>
                     </form>
-
                     <!-- 메뉴 / 결제창 -->
                     <script>
+                        const transNumber = /[^0-9]/g;
+
                         // 결제 박스
                         $(document).on('keyup', '#pointUse', function(e){
                             if(!((e.keyCode > 95 && e.keyCode < 106)
@@ -548,16 +547,17 @@
                         $('#pointUse').keyup(function(){
                             let pointUse = $('#pointUse');
                             let pointUse2 =  $('#pointUse2');
-                            if(pointUse.val() > parseInt($('#pointNow').text().replace(/[^0-9]/g, ""))){
+                            if(pointUse.val() > parseInt($('#pointNow').text().replace(transNumber, ""))){
                                 alert('보유 적립금 이상으로 입력할 수 없습니다.')
-                                pointUse.val(parseInt($('#pointNow').text().replace(/[^0-9]/g, "")));
+                                pointUse.val(parseInt($('#pointNow').text().replace(transNumber, "")));
                             }else if(pointUse.val() < 0){
                                 alert('0보다 작은 숫자는 입력할 수 없습니다.')
                                 pointUse.val(0)
                                 pointUse2.text(0 + '원')
                             }
-                            let price = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
+                            let price = parseInt($('#sum').text().replace(transNumber, ""));
                             let point = parseInt(pointUse.val());
+                            orderPrice = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
                             let paymentReuslt = price - point
                             if(pointUse.val() != ""){
                                 pointUse2.text(String(point).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
@@ -570,14 +570,12 @@
                             }
                         });
                         
-                        
-
                         // 메뉴 추가
                         $('.menuAdd.btn.btn-secondary.btn-sm').click(function(){
                             const addMenu = $(this).parent().prev().children();
                             const table = $('#menu-select-border2>table>tbody>tr').length;
                             const tableData = $('#menu-select-border2>table>tbody>tr').text();
-                            //console.log(tableData);
+
                             if(table == 0) {
                                     $('#menu-select-border2 tbody:first').append(
                                     '<tr class="menu-choice">'
@@ -616,17 +614,20 @@
                             sum = 0;
                             $(".menu-choice").each(function(){
                                 i = 0;
-                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
+                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber, ""));
                                 sum += menuPrice[i];
                                 i++
                             })
                             $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-                            $('#sum-payment').text(($('#sum').text().replace(/[^0-9]/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('#sum-payment').text(($('#sum').text().replace(transNumber, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            let orderPrice = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
+                            $('#pointResult').text(String(parseInt(orderPrice/100)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('.sum-payment').text(String(parseInt($('#sum').text().replace(transNumber, "")) - parseInt($('#pointUse').val())).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         });
                         
                         $('.menuRemove.btn.btn-danger.btn-sm').click(function(){
                             const addMenu = $(this).parent().prev().children();
-                            console.log(addMenu);
+
                             $(".menu-choice").each(function(){
                                 if($(this).children().eq(0).text() == addMenu.eq(0).text()){
                                     $(this).remove();
@@ -635,12 +636,15 @@
                             sum = 0;
                             $(".menu-choice").each(function(){
                                 i = 0;
-                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
+                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber, ""));
                                 sum += menuPrice[i];
                                 i++
                             })
                             $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
-                            $('#sum-payment').text(($('#sum').text().replace(/[^0-9]/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('#sum-payment').text(($('#sum').text().replace(transNumber, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            let orderPrice = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
+                            $('#pointResult').text(String(parseInt(orderPrice/100)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('.sum-payment').text(String(parseInt($('#sum').text().replace(transNumber, "")) - parseInt($('#pointUse').val())).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         })
                             
                         // 수량 추가, 삭제
@@ -649,6 +653,7 @@
                             const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
                             let price = $(this).parents('.menu-choice').children().eq(2);
                             let value = $(this).next();
+                            
                             if($(this).next().val() > 1){
                                 value.val(parseInt(value.val()) - 1);
                                 $('.menuAdd.btn.btn-secondary.btn-sm').each(function(){
@@ -664,12 +669,15 @@
                             sum = 0;
                             $(".menu-choice").each(function(){
                                 i = 0;
-                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
+                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber, ""));
                                 sum += menuPrice[i];
                                 i++
                             })
                             $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                             $('#sum-payment').text(($('#sum').text().replace(/[^0-9]/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            let orderPrice = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
+                            $('#pointResult').text(String(parseInt(orderPrice/100)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('.sum-payment').text(String(parseInt($('#sum').text().replace(transNumber, "")) - parseInt($('#pointUse').val())).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         });
                         $(document).on('click', '.plus', function(){
                             const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
@@ -690,19 +698,22 @@
                             sum = 0;
                             $(".menu-choice").each(function(){
                                 i = 0;
-                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
+                                menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber, ""));
                                 sum += menuPrice[i];
                                 i++
                             })
                             $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                             $('#sum-payment').text(($('#sum').text().replace(/[^0-9]/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            let orderPrice = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
+                            $('#pointResult').text(String(parseInt(orderPrice/100)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                            $('.sum-payment').text(String(parseInt($('#sum').text().replace(transNumber, "")) - parseInt($('#pointUse').val())).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         });
                         $(document).on('keyup', '.quantity', function(){
                             const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
                             const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
                             let price = $(this).parents('.menu-choice').children().eq(2);
                             let value = $(this);
-                            $(this).val().replace(transNumber);
+                            $(this).val().replace(transNumber, "");
                             if($(this).val() == 0 && $(this).val() != ''){
                                 alert('1 이상의 숫자만 입력해주세요')
                                 $(this).val(1)
@@ -720,12 +731,15 @@
                                 sum = 0;
                                 $(".menu-choice").each(function(){
                                     i = 0;
-                                    menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber));
+                                    menuPrice[i] = parseInt($(this).children().eq(2).text().replace(/,/g, "").replace(transNumber, ""));
                                     sum += menuPrice[i];
                                     i++
                                 })
                                 $('.sum').text(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                                 $('#sum-payment').text(($('#sum').text().replace(/[^0-9]/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                                let orderPrice = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
+                                $('#pointResult').text(String(parseInt(orderPrice/100)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
+                                $('.sum-payment').text(String(parseInt($('#sum').text().replace(transNumber, "")) - parseInt($('#pointUse').val())).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                             });
                         });
                         // - / + 입력 방지
@@ -740,43 +754,63 @@
                         $('.cancel').click(function(){
                             $('.menu-select').css('display', 'none');
                         });
-                        
                             
-                        var IMP = window.IMP; 
+                        const IMP = window.IMP; 
                         IMP.init("imp44408883"); 
+
                         function payment() {
+                            <% if(loginUser != null) { %>
                             const menuChoice = document.querySelectorAll(".menuName"); // [td, td, ..]
                             let menu = [];
+                            let i = 1;
                             for(i=0; i<menuChoice.length; i++){
                                 menu.push(menuChoice[i].innerText);
                             }
                             // ["xx", "bb"]
-                            console.log($('.bookName').val())
-                            // IMP.request_pay(param, callback) 결제창 호출
+                            // IMP.request_pay(param, callback)
+
                             IMP.request_pay({ // param
                                 pg: "html5_inicis",
                                 pay_method: "card",
-                                merchant_uid: "<%= bookNo + 1 %>2",
+                                <% if(bookNo == 0) { %>
+                                    merchant_uid: "FOODING-pay" + i + "-1",
+                                <% }else{ %>
+                                    merchant_uid: "FOODING-pay" + i + "-<%= bookNo + 1 %>",
+                                <% } %>
                                 name: menu.join("<br>"),
-                                amount: 1,
+                                amount: $('#sum-payment').text().replace(transNumber, ""),
                                 buyer_email: $('.email').val(),
                                 buyer_name: $('.bookName').val(),
-                                buyer_tel: $('.bookPhone').val(),
+                                buyer_tel: $('.bookPhone').val()
                             }, function (rsp) { // callback
+                                let reservation = {
+                                    amount: rsp.amount,
+                                    bookName: rsp.buyer_name,
+                                    bookPhone: rsp.buyer_tel,
+                                    email: rsp.buyer_email,
+                                    bookDate: $('.bookDate').val(),
+                                    bookTime: $('.bookTime').val(),
+                                    people: $('.people').val(),
+                                    request: $('.request').val(),
+                                    userNo: <%= loginUser.getUserNo() %>,
+                                    resNo: <%= restaurant.getResNo() %>
+                                }
                                 if (rsp.success) {
-                                    ajax({
-                                        url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
+                                    $.ajax({
+                                        url: "<%= contextPath %>/insert.bo", // 예: https://www.myservice.com/payments/complete
                                         method: "POST",
                                         headers: { "Content-Type": "application/json" },
-                                        data: {
-                                            imp_uid: rsp.imp_uid,
-                                            merchant_uid: rsp.merchant_uid
-                                        }
+                                        data: JSON.stringify(reservation),
+                                        dataType:"json",
+                                        contentType:"application/json; charset=UTF-8"
                                     })
+                                    i++
+                                    location.href = "<%= contextPath %>/check.bo"
                                 } else {
                                     alert("결제에 실패했습니다.")
                                 }
                             });
+                            <% } %>
                         }
                       </script>
 
@@ -886,7 +920,6 @@
                                     data:{input:<%= loginUser.getUserNo() %>},
                                     type:"post",
                                     success:function(result){
-                                        console.log(typeof(result))
                                     	if(result != null){
                                     		$('#pointNow').text(result.pointNow + "원");
                                     	}else{
@@ -942,7 +975,6 @@
             let variable = 0;
             let plus = 0;
             // 문자가 섞인 숫자 => 숫자로 변환해주는 변수
-            const transNumber = /[^0-9]/g;
 
             // 카카오 지도 api ---------------------------------------------------------------------- 
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

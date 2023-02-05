@@ -744,4 +744,24 @@ public class RestaurantDao {
 		}
 		return list;		
 	}
+	
+	public int deleteNotAble(Connection conn, NotAble na) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteNotAble");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, na.getResNo());
+			pstmt.setString(2, na.getYear());
+			pstmt.setString(3, na.getMonth());
+			pstmt.setString(4, na.getDate());
+						
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

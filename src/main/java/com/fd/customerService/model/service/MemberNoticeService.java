@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
 import com.fd.admin.model.vo.Question;
+import com.fd.common.model.vo.PageInfo;
 import com.fd.customerService.model.dao.MemberNoticeDao;
 
 
@@ -61,16 +62,28 @@ public class MemberNoticeService {
 		return n;
 	}
 	
-	/** FAQ 리스트
+	/** 페이징 포함 FAQ 리스트 조회
 	 * @author 빛나
 	 * @return list
 	 */
-	public ArrayList<Faq> selectFAQList() {
+	public ArrayList<Faq> selectFAQList(PageInfo pi) {
 		
 		Connection conn = getConnection();
-		ArrayList<Faq> list = new MemberNoticeDao().selectFAQList(conn);
+		ArrayList<Faq> list = new MemberNoticeDao().selectFAQList(conn, pi);
 		close(conn);
 		return list;
+	}
+	
+	/** FAQ 페이징
+	 * @return listCount
+	 */
+	public int selectListCount() {
+		
+		Connection conn = getConnection();
+		int listCount = new MemberNoticeDao().selectListCount(conn);
+		close(conn);
+		return listCount;
+		
 	}
 	
 	
@@ -96,6 +109,27 @@ public class MemberNoticeService {
 		return listA;
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }

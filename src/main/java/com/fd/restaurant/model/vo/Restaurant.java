@@ -290,6 +290,16 @@ public class Restaurant {
 		this.parking = parking;
 		this.foodCt = foodCt;
 	}
+	
+	// 한수가 추가한 매개변수 생성자7 
+	public Restaurant(int resNo, String resName, String address, String rImg, String foodCt) {
+		super();
+		this.resNo = resNo;
+		this.resName = resName;
+		this.address = address;
+		this.rImg = rImg;
+		this.foodCt = foodCt;
+	}
 
 	// 관리자 - 업체 리스트 조회할 때 사용
 	public Restaurant(int resNo, String resName, String bookCount, String reviewCountR,

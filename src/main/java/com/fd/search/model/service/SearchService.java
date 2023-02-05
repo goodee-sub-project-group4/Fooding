@@ -70,6 +70,7 @@ public class SearchService {
 			return list;
 	}
 		
+		
 		public int insertGood(int resNo, int userNo) {
 			Connection conn = getConnection(); 
 			int result = new SearchDao().insertGood(conn, resNo, userNo); 
@@ -81,6 +82,36 @@ public class SearchService {
 			close(conn); 
 			return result; 
 	}
+	
+		public int deleteGood(int resNo, int userNo) {
+			Connection conn = getConnection(); 
+			int result = new SearchDao().deleteGood(conn, resNo, userNo); 
+			if(result > 0) {
+				commit(conn); 
+			}else {
+				rollback(conn); 
+			}
+			close(conn); 
+			return result; 
+	}
+		
+		// jsp파일 만들면 사용할  메소드 
+		public int selectGoodCount(int userNo) {
+			
+			Connection conn = getConnection();
+			int listCount = new SearchDao().selectGoodCount(conn, userNo); 
+			close(conn); 
+			return listCount; 
+		}
+		
+		// jsp 파일 만들면 사용할 메소드 
+		public ArrayList<Restaurant> selectGoodList(PageInfo pi, int userNo){ //currentPage에 보여질 게시물 리스
+			
+			Connection conn = getConnection();
+			ArrayList<Restaurant> list= new SearchDao().selectGoodList(conn, pi, userNo); 
+			close(conn); 
+			return list;
+		}
 		
 
 		

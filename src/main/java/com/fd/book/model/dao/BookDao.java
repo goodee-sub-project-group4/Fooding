@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.fd.book.model.vo.Book;
 import com.fd.book.model.vo.Point;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
@@ -119,7 +120,7 @@ public class BookDao {
 		return list;
 	}
 
-	public int selectBookNo(Connection conn, int resNo) {
+	public int selectBookNo(Connection conn) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -127,7 +128,6 @@ public class BookDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, resNo);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -140,6 +140,39 @@ public class BookDao {
 		}
 		return result;
 	}
+	
+//	public ArrayList<Review> selectReview(int resNo, Connection conn) {
+//	ArrayList<Review> list = new ArrayList<>();
+//	PreparedStatement pstmt = null;
+//	ResultSet rset = null;
+//	String sql = prop.getProperty("selectReview");
+//	
+//	try {
+//		pstmt = conn.prepareStatement(sql);
+//		pstmt.setInt(1, resNo);
+//		rset = pstmt.executeQuery();
+//		
+//		while(rset.next()) {
+//			list.add(new Review(rset.getInt("review_no")
+//							  , rset.getString("RES_NO")
+//							  , rset.getInt("USER_NO")
+//							  , rset.getInt("book_no")
+//							  , rset.getString("REVIEW_CONTENT")
+//							  , rset.getDouble("star")
+//							  , rset.getString("CREATE_DATE")
+//							  , rset.getString("MODIFY_DATE")
+//							  , rset.getString("good")
+//							  , rset.getInt("count")));
+//		}
+//	} catch (SQLException e) {
+//		e.printStackTrace();
+//	} finally {
+//		close(rset);
+//		close(pstmt);
+//	}
+//	
+//	return list;
+//}
 
 	public Point selectPoint(Connection conn, int userNo) {
 		Point po = null;
@@ -165,37 +198,36 @@ public class BookDao {
 		return po;
 	}
 
-//	public ArrayList<Review> selectReview(int resNo, Connection conn) {
-//		ArrayList<Review> list = new ArrayList<>();
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		String sql = prop.getProperty("selectReview");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, resNo);
-//			rset = pstmt.executeQuery();
-//			
-//			while(rset.next()) {
-//				list.add(new Review(rset.getInt("review_no")
-//								  , rset.getString("RES_NO")
-//								  , rset.getInt("USER_NO")
-//								  , rset.getInt("book_no")
-//								  , rset.getString("REVIEW_CONTENT")
-//								  , rset.getDouble("star")
-//								  , rset.getString("CREATE_DATE")
-//								  , rset.getString("MODIFY_DATE")
-//								  , rset.getString("good")
-//								  , rset.getInt("count")));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		
-//		return list;
-//	}
+	public int insertBook(Connection conn, Book book) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertBook");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, book.getUserNo());
+			pstmt.setInt(2, book.getResNo());
+			pstmt.setString(3, book.getBookName());
+			pstmt.setString(4, book.getBookPhone());
+			pstmt.setString(5, book.getBookDate());
+			pstmt.setString(6, book.getBookTime());
+			pstmt.setInt(7, book.getPeople());
+			pstmt.setString(8, book.getEmail());
+			pstmt.setString(9, book.getRequest());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 
 }

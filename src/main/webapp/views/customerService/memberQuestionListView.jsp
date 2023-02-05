@@ -72,7 +72,7 @@
                             <td><%=qR.getqNo()%></td>
                             <td><%=qR.getqTitle()%></td>
                             <td><%=qR.getCreateDate()%></td>
-                            <td><%=qR.getStatus()%></td>
+                            <td style="color:red;"><%=(qR.getStatus().equals("Y")) ? "처리완료" : "처리중" %></td>
                             <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
                         </tr>
                        <% } %>
@@ -83,12 +83,11 @@
                             <td><%=qA.getqNo()%></td>
                             <td><%=qA.getqTitle()%></td>
                             <td><%=qA.getCreateDate()%></td>
-                            <td><%=qA.getStatus()%></td>
+                            <td style="color:red;"><%= (qA.getStatus().equals("Y")) ? "처리완료" : "처리중" %></td>
                             <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
                         </tr>
                         <% } %>
                         
-                   
                     </tbody>	
                 </table>
 

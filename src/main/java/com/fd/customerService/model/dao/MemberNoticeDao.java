@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
 import com.fd.admin.model.vo.Question;
+import com.fd.common.model.vo.PageInfo;
 
 public class MemberNoticeDao {
 	
@@ -132,11 +133,11 @@ public class MemberNoticeDao {
 		
 	}
 	
-	/** FAQ 리스트
+	/** 페이징 포함 FAQ 리스트 조회
 	 * @param conn
 	 * @return list
 	 */
-	public ArrayList<Faq> selectFAQList(Connection conn) {
+	public ArrayList<Faq> selectFAQList(Connection conn, PageInfo pi) {
 		// select
 		ArrayList<Faq> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -146,6 +147,12 @@ public class MemberNoticeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -165,6 +172,39 @@ public class MemberNoticeDao {
 		
 		return list;
 		
+	}
+	
+	/** FAQ 페이징
+	 * @author 빛나
+	 * @param conn
+	 * @return listCount
+	 */
+	public int selectListCount(Connection conn) {
+		// select
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	
 	}
 	
 	/** 1:1문의(업체)리스트
@@ -234,6 +274,18 @@ public class MemberNoticeDao {
 		return listA;
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

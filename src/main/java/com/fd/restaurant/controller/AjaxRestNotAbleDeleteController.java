@@ -1,28 +1,28 @@
-package com.fd.search.controller;
+package com.fd.restaurant.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.fd.member.model.vo.Member;
+import com.fd.book.model.vo.NotAble;
+import com.fd.restaurant.model.service.RestaurantService;
 import com.fd.restaurant.model.vo.Restaurant;
-import com.fd.search.model.service.SearchService;
 
 /**
- * Servlet implementation class GoodController
+ * Servlet implementation class AjaxRestNotAbleDeleteController
  */
-@WebServlet("/good.sh")
-public class GoodController extends HttpServlet {
+@WebServlet("/deleteNotAble.re")
+public class AjaxRestNotAbleDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoodController() {
+    public AjaxRestNotAbleDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +31,21 @@ public class GoodController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
+		String month = request.getParameter("month");
+		String date = request.getParameter("date");
+		String year = request.getParameter("year");
+		NotAble na = new NotAble();
+		na.setResNo(resNo);
+		na.setMonth(month);
+		na.setYear(year);
+		na.setDate(date);
+		System.out.println(na);
 		
-		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-		System.out.println(userNo); 
-		
-		int resNo = Integer.parseInt(request.getParameter("resNo"));
-		System.out.println(resNo); 
-		
-		int result = new SearchService().insertGood(resNo, userNo); 
-		
-		/*
-		 * result 값이 0일 경우, 이미 찜하기가 되어있다는 얘기 이므로, 되어있는 찜을 삭제할 메소드
-		if(result < 1) {
-			result = new SearchService().deleteGood(resNo, userNo);
-		}
-		*/
-		response.getWriter().print(result); 
+		//db 처리하고온 후 결과 전달하기
+		int result = new RestaurantService().deleteNotAble(na);
+		response.getWriter().print(result);
 	}
 
 	/**
