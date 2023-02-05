@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import com.fd.admin.model.dao.AdminDao;
 import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
+import com.fd.book.model.vo.Point;
 import com.fd.common.model.vo.Attachment;
 import com.fd.member.model.vo.Member;
+import com.fd.restaurant.model.vo.Restaurant;
 
 public class AdminService {
 	
@@ -334,6 +336,7 @@ public class AdminService {
 
 
 	/**회원 상세 조회
+	 * @param userNo
 	 * @return
 	 */
 	public Member selectMember(int userNo) {
@@ -343,6 +346,64 @@ public class AdminService {
 		return m;
 	}
 
+
+	/**회원 상세 수정
+	 * @param userNo
+	 * @return
+	 */
+	public int updateMember(Member u, int userNo) {
+		Connection conn = getConnection();
+		int result = new AdminDao().updateMember(conn, u, userNo);
+		if(result>0){
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+
+	/**회원 이용내역 조회
+	 * @param userNo
+	 * @return
+	 */
+	public ArrayList<Member> selectUseList(int userNo) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = new AdminDao().selectUseList(conn, userNo);
+		close(conn);
+		return list;
+	}
+
+	
+	/**회원 적립금 지급
+	 * @param p
+	 * @return
+	 */
+	public int givePoint(Point p) {
+		Connection conn = getConnection();
+		int result = new AdminDao().givePoint(conn, p);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	
+// ==========================================================================
+
+	/**업체 리스트 조회
+	 * @return
+	 */
+	public ArrayList<Restaurant> selectRestList() {
+		Connection conn = getConnection();
+		ArrayList<Restaurant> list = new AdminDao().selectRestList(conn);
+		close(conn);
+		return list;
+	}
 
 
 

@@ -414,27 +414,67 @@
 	</entry>
 
 	<!-- 해당 회원 이용내역 조회 -->
-	<entry key="selectUse">
-	SELECT P.USER_NO
-	     , USER_ID
-	     , BOOK_DATE
-	     , RES_NAME
-	     , BOOK_TIME
-	     , PEOPLE
-	     , PAY_TOTAL
-	     , PAY_POINT
-	     , PAY_TOTAL - PAY_POINT "PAY_FINAL"
-	     , (PAY_TOTAL - PAY_POINT)*0.01 "PLUS_POINT"
-	     , PAY_OP
-	  FROM PAYMENT P
-	  JOIN TB_USER U ON (P.USER_NO = U.USER_NO)
-	  JOIN BOOK B ON (P.BOOK_NO = B.BOOK_NO)
-	  JOIN restaurant R ON (P.RES_NO = R.RES_NO)
-	 WHERE P.USER_NO = ?
+	<entry key="selectUseList">
+		SELECT P.USER_NO
+		     , USER_ID
+		     , BOOK_DATE
+		     , RES_NAME
+		     , BOOK_TIME
+		     , PEOPLE
+		     , PAY_TOTAL
+		     , PAY_POINT
+		     , PAY_TOTAL - PAY_POINT "PAY_FINAL"
+		     , (PAY_TOTAL - PAY_POINT)*0.01 "PLUS_POINT"
+		     , PAY_OP
+		  FROM PAYMENT P
+		  JOIN TB_USER U ON (P.USER_NO = U.USER_NO)
+		  JOIN BOOK B ON (P.BOOK_NO = B.BOOK_NO)
+		  JOIN restaurant R ON (P.RES_NO = R.RES_NO)
+		 WHERE P.USER_NO = ?
 	</entry>
 
-
-
-
+	<!-- 회원 적립급 지급.. -->
+	<entry key="givePoint">
+		INSERT 
+		  INTO POINT 
+		  VALUES 
+		  (
+		    SEQ_PNO.NEXTVAL
+		  , NULL
+		  , ? 	<!-- 회원번호 -->
+		  , NULL
+		  , ? 	<!-- pointName -->
+		  , 'B' <!-- 적립일때므로 'B' -->
+		  , ? 	<!-- pointTrade값 -->
+		  ,(SELECT SUM(POINT_TRADE)
+		      FROM POINT 
+		     WHERE USER_NO = ? <!-- 회원번호 -->) + ? <!-- pointTrade값 -->    
+		  , SYSDATE
+		  )
+	</entry>
+	
+	<!-- ============================================================================= -->
+	
+	<!-- 업체 리스트 조회 -->
+	<entry key="selectRestList">
+		SELECT RES_NO
+		  	 , RES_NAME
+		  	 , (SELECT
+		               COUNT(*)
+		          FROM BOOK
+		         WHERE RES_NO = R.RES_NO) "BOOK_COUNT"
+		     , (SELECT
+		               COUNT(*)
+		          FROM REVIEW
+		         WHERE RES_NO = R.RES_NO) "REVIEW_COUNT"
+		     , (SELECT
+		               COUNT(*)
+		          FROM BLACK
+		         WHERE T_PERSON = R.RES_NO) "BLACK_COUNT"
+		     , STATUS
+		  FROM RESTAURANT R
+		 WHERE STATUS IN ('Y', 'S')
+	</entry>
+	
 
 </properties>

@@ -26,6 +26,17 @@ public class Member {
 	// 적립금 추가
 	private int pointNow;
 	
+	// 
+	private String bookDate;
+	private String resName;
+	private String bookTime;
+	private int people;
+	private int payTotal;
+	private int payPoint;
+	private int payFinal;
+	private int plusPoint;
+	private String payOp;
+	
 
 	public Member () {}
 
@@ -128,6 +139,22 @@ public class Member {
 		this.status = status;
 	}
 	
+	// 관리자 - 회원 이용내역 조회할 때 사용
+	public Member(int userNo, String userId, String bookDate, String resName, String bookTime, int people, int payTotal,
+			int payPoint, int payFinal, int plusPoint, String payOp) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.bookDate = bookDate;
+		this.resName = resName;
+		this.bookTime = bookTime;
+		this.people = people;
+		this.payTotal = payTotal;
+		this.payPoint = payPoint;
+		this.payFinal = payFinal;
+		this.plusPoint = plusPoint;
+		this.payOp = payOp;
+	}
 	
 
 	public int getUserNo() {
@@ -267,6 +294,80 @@ public class Member {
 
 	public void setPointNow(int pointNow) {
 		this.pointNow = pointNow;
+	}
+	
+	
+
+	public String getBookDate() {
+		return bookDate;
+	}
+
+	public void setBookDate(String bookDate) {
+		this.bookDate = bookDate;
+	}
+
+	public String getResName() {
+		return resName;
+	}
+
+	public void setResName(String resName) {
+		this.resName = resName;
+	}
+
+	public String getBookTime() {
+		return bookTime;
+	}
+
+	public void setBookTime(String bookTime) {
+		this.bookTime = bookTime;
+	}
+
+	public int getPeople() {
+		return people;
+	}
+
+	public void setPeople(int people) {
+		this.people = people;
+	}
+
+	public int getPayTotal() {
+		return payTotal;
+	}
+
+	public void setPayTotal(int payTotal) {
+		this.payTotal = payTotal;
+	}
+
+	public int getPayPoint() {
+		return payPoint;
+	}
+
+	public void setPayPoint(int payPoint) {
+		this.payPoint = payPoint;
+	}
+
+	public int getPayFinal() {
+		return payFinal;
+	}
+
+	public void setPayFinal(int payFinal) {
+		this.payFinal = payFinal;
+	}
+
+	public int getPlusPoint() {
+		return plusPoint;
+	}
+
+	public void setPlusPoint(int plusPoint) {
+		this.plusPoint = plusPoint;
+	}
+
+	public String getPayOp() {
+		return payOp;
+	}
+
+	public void setPayOp(String payOp) {
+		this.payOp = payOp;
 	}
 
 	@Override

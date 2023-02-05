@@ -1,10 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, com.fd.restaurant.model.vo.Restaurant"%>
+<%
+	ArrayList<Restaurant> list = (ArrayList)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 부트스트랩 4버전 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
        
     #outer2 {
@@ -151,134 +163,35 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox"></th>
-                            <th>번호</th>
-                            <th>아이디</th>
+                            <th>업체번호</th>
                             <th>상호명</th>
-                            <th>전화번호</th>
                             <th>예약</th>
                             <th>리뷰</th>
+                            <th>신고</th>
                             <th>
                                 <select id="selectStatus">
                                     <option value="">상태</option>
-                                    <option value="">정상</option>
-                                    <option value="">이용정지</option>
-                                    <option value="">탈퇴</option>
+                                    <option value="Y">정상</option>
+                                    <option value="S">이용정지</option>
+                                    <option value="N">탈퇴</option>
                                 </select>
                             </th>
                             <th>예약현황</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <% for(int i=0; i<list.size(); i++) { %>
                         <tr>
-                            <td><input type="checkbox"></td>
-                            <td class="">1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId">rest01</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>0507-1490-2120</td>
-                            <td>60</td>
-                            <td>20</td>
+                            <td><input type="checkbox" name="listCheck" ></td>
+                            <td data-toggle="modal" data-target="#selectModal" id="restId"><%= list.get(i).getResNo() %></td>
+                            <td><%= list.get(i).getResName() %></td>
+                            <td><%= Integer.parseInt(list.get(i).getBookCount()) %></td>
+                            <td><%= Integer.parseInt(list.get(i).getReviewCountR()) %></td>
+                            <td><%= Integer.parseInt(list.get(i).getBlackCount()) %></td>
                             <td>정상</td>
                             <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId">rest01</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>0507-1490-2120</td>
-                            <td>60</td>
-                            <td>20</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId">rest01</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>0507-1490-2120</td>
-                            <td>60</td>
-                            <td>20</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId">rest01</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>0507-1490-2120</td>
-                            <td>60</td>
-                            <td>20</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId">rest01</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>0507-1490-2120</td>
-                            <td>60</td>
-                            <td>20</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId">rest01</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>0507-1490-2120</td>
-                            <td>60</td>
-                            <td>20</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId">rest01</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>0507-1490-2120</td>
-                            <td>60</td>
-                            <td>20</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId">rest01</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>0507-1490-2120</td>
-                            <td>60</td>
-                            <td>20</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId">rest01</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>0507-1490-2120</td>
-                            <td>60</td>
-                            <td>20</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId">rest01</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>0507-1490-2120</td>
-                            <td>60</td>
-                            <td>20</td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
-                        </tr>
+                        <% } %>
                     </tbody>	
                 </table>
 

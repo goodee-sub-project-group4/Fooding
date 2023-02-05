@@ -4,6 +4,7 @@
 <%
 	ArrayList<Member> list = (ArrayList)request.getAttribute("list");
 	Member m = (Member)request.getAttribute("m");
+	ArrayList<Member> useList = (ArrayList)request.getAttribute("useList");
 %>
 <!DOCTYPE html>
 <html>
@@ -97,6 +98,12 @@
         margin-right: -20px;
     }
 
+    /*아이디 커서*/
+    #userIdcursor:hover{
+        cursor: pointer;
+        color: rgb(221,45,45);
+    }
+
     /*적립급 지급 모달*/
     #moneyModal-body{
         margin: auto;
@@ -167,12 +174,12 @@
                     <option value="">예약 순</option>
                     <option value="">리뷰 순</option>
                 </select>
-                <input type="text" id="search" placeholder="아이디 검색" name="keyword">
+                <input type="text" id="search" placeholder="아이디 검색" name="keyword"> <!--data-toggle="modal" data-target="#moneyModal"-->
                 <input type="submit" id="sButton" value="검색">
             
             
                 <button type="button" class="btn btn-danger btn-sm" id="deleteMember" data-toggle="modal" data-target="#deleteModal">회원 탈퇴</button>
-                <button type="button" class="btn btn-danger btn-sm" id="giveMoney" data-toggle="modal" data-target="#moneyModal">적립금 지급</button>
+                <button type="button" class="btn btn-danger btn-sm" id="giveMoney" onclick="clickPoint()">적립금 지급</button>
                 <div></div>
                 <br> 
 
@@ -184,7 +191,6 @@
                             <th>번호</th>
                             <th>아이디</th>
                             <th>이름</th>
-                            <th>전화번호</th>
                             <th>성별</th>
                             <th>예약</th>
                             <th>리뷰</th>
@@ -197,23 +203,25 @@
                                     <option value="N">탈퇴</option>
                                 </select>
                             </th>
-                            <th>이용내역</th>
+                            <th>수정</th>
+                            <th>이용</th>
                         </tr>
                     </thead>
                     <tbody>
                     	<% for(int i=0; i<list.size(); i++) { %>
                         <tr>                     
-                            <td><input type="checkbox"></td>
-                            <td><%= list.get(i).getUserNo() %></td>
-                            <td data-toggle="modal" data-target="#selectModal" onclick="viewDetail(<%=list.get(i).getUserNo()%>)"><%= list.get(i).getUserId() %></td>
+                            <td><input type="checkbox" name="listCheck" value="<%= list.get(i).getUserNo() %>"></td>
+                            <td><%= list.get(i).getUserNo() %> </td>
+                            <td id="userIdcursor" data-toggle="modal" data-target="#selectModal" onclick="viewDetail(<%=list.get(i).getUserNo()%>)"><%= list.get(i).getUserId() %></td>
                             <td><%= list.get(i).getUserName() %></td>
-                            <td><%= list.get(i).getUserPhone() %></td>
                             <td><%= (list.get(i).getGender().equals("M")) ? "남" : (list.get(i).getGender().equals("F")) ? "여" : "-" %></td>
                             <td><%= Integer.parseInt(list.get(i).getBookCount()) %></td>
                             <td><%= Integer.parseInt(list.get(i).getReviewCount()) %></td>
                             <td><%= Integer.parseInt(list.get(i).getBlackCount()) %></td>
                             <td><%= (list.get(i).getStatus().equals("Y")) ? "정상" : (list.get(i).getStatus().equals("S")) ? "이용정지" : "탈퇴" %></td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal" onclick="useDetail(<%=list.get(i).getUserNo()%>)" >조회</button></td>
+                            <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#updateModal" name="modifiyClick" value="<%=list.get(i).getUserNo()%>" onclick="updateDetail(<%=list.get(i).getUserNo()%>)" >수정</button></td>
+                            <!-- <td><input type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#updateModal" name="modifiyClick" value="<%=list.get(i).getUserNo()%>" onclick="updateDetail(<%=list.get(i).getUserNo()%>)"></td> -->
+                            <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#selectUseModal" onclick="useDetail(<%=list.get(i).getUserNo()%>)" >조회</button></td>             
                         </tr>
                         <% } %>
               
@@ -273,7 +281,7 @@
                             </tr>
                         </table>
                         <br>
-                        <button type="submit" class="btn btn-danger" style="width: 150px;">확인</button>
+                        <button type="submit" class="btn btn-danger" style="width: 150px;" onclick=givePoint()>확인</button>
                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal" style="width: 150px;">취소</button>
                         <br><br>
                     </div>
@@ -371,8 +379,7 @@
                             </tr>
                         </table>
                         <br>
-                        <button type="submit" class="btn btn-danger" style="width: 150px;" data-toggle="modal" data-target="#updateModal">수정</button>
-                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" style="width: 150px;">닫기</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 150px;">닫기</button>
                         <br><br>
                     </div>
             
@@ -393,79 +400,80 @@
                     <div class="modal-header" style="margin-top: 20px;">
                         <h3 class="modal-title" style="margin: auto;">회원 수정</h3>   
                     </div>
-            
+                    
+                    <form action="<%=contextPath%>/updateMember.ad">
                     <!-- Modal body -->
                     <div class="modal-body" align="center">
                         <table id="updateModal-body">
                             <tr>
                                 <th>회원번호</th>
-                                <td>01</td>
+                                <td id="userNoU" name="userNo"></td>
                             </tr>
                             <tr>
                                 <th>아이디</th>
-                                <td>user01</td>
+                                <td id="userIdU"></td>
                             </tr>
                             <tr>
                                 <th>이름</th>
-                                <td><input type="text" placeholder="박연진"></td>
+                                <td><input id="userNameU" name="userName" type="text" value="" placeholder=""></td>
                             </tr>
                             <tr>
                                 <th>닉네임</th>
-                                <td><input type="text" placeholder="연진아"></td>
+                                <td><input id="nicknameU" name="nickname" type="text" value="" placeholder=""></td>
                             </tr>
                             <tr>
                                 <th>전화번호</th>
-                                <td><input type="text" placeholder="010-1111-2222"></td>
+                                <td><input id="userPhoneU" name="userPhone" type="text" value="" placeholder=""></td>
                             </tr>
                             <tr>
                                 <th>이메일</th>
-                                <td><input type="text" placeholder="user01@naver.com"></td>
+                                <td><input id="userEmailU" name="userEmail" type="text" value="" placeholder=""></td>
                             </tr>
                             <tr>
                                 <th>생년월일</th>
-                                <td>1999.01.01</td>
+                                <td id="birthU"></td>
                             </tr>
                             <tr>
                                 <th>성별</th>
-                                <td>
-                                    <input type="radio" id="noSelect" name="gender" value="" checked>
+                                <td id="genderU">
+                                    <input type="radio" id="noSelect" name="gender" value="N">
                                     <label for="noSelect">선택안함</label>
-                                    <input type="radio" id="genderM" name="gender" value="" style="width: 20px;">
+                                    <input type="radio" id="genderM" name="gender" value="M" style="width: 20px;">
                                     <label for="genderM">남</label>
-                                    <input type="radio" id="genderF" name="gender" value="" style="width: 20px;">
+                                    <input type="radio" id="genderF" name="gender" value="F" style="width: 20px;">
                                     <label for="genderF">여</label> <br>
                                 </td>
                             </tr> 
                             <tr>
                                 <th>가입일</th>
-                                <td>2023.01.01</td>
+                                <td id="enrollDateU">2023.01.01</td>
                             </tr>
                             <tr>
                                 <th>적립금</th>
-                                <td><input type="text" placeholder="2000"></td>
+                                <td id="pointNowU"></td>
                             </tr>
                             <tr>
                                 <th>상태</th>
                                 <td>
-                                    <select name="" id="" style="height: 30px;">
-                                        <option value="">정상</option>
-                                        <option value="">탈퇴</option>
-                                        <option value="">이용정지</option>
+                                    <select id="statusU" name="status" style="height: 30px;">
+                                        <option value="Y">정상</option>
+                                        <option value="N">탈퇴</option>
+                                        <option value="S">이용정지</option>
                                     </select>
                                 </td>
                             </tr>
                         </table>
                         <br>
-                        <button type="submit" class="btn btn-danger" style="width: 150px;" data-toggle="modal" data-target="#updateConfirmModal1">수정완료</button>
+                        <button type="submit" class="btn btn-danger" style="width: 150px;" data-toggle="modal" >수정완료</button> <!--id="updateMember" data-target="#updateConfirmModal1"-->
                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal" style="width: 150px;">닫기</button>
                         <br><br>
                     </div>
-            
-                    
+                    </form>
             
                 </div>
                 </div>
             </div>
+            
 
             <!-- 회원 수정 완료 모달 -->
             <div class="modal" id="updateConfirmModal1">
@@ -511,12 +519,12 @@
 
                         <div class="selectUseModal-body">
                             <div align="center" style="font-size:20px;">
-                                <span style="color: gray;">회원 번호&nbsp;&nbsp;</span> 01 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span style="color: gray;">아이디&nbsp;&nbsp;</span> user01
+                                <span style="color: gray;" id="userNoB">회원 번호&nbsp;&nbsp;</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color: gray;" id="userIdB">아이디&nbsp;&nbsp;</span> 
                             </div>
                             <br>
                             <p>예약/결제 내역</p>
-                            <table class="table">
+                            <table class="table" id="useTable">
                                 <thead>
                                     <tr>
                                         <th>예약날짜</th>
@@ -530,18 +538,12 @@
                                         <th>결제수단</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>2023.01.03</td>
-                                        <td>재준이가게</td>
-                                        <td>오후 12:30</td>
-                                        <td>2</td>
-                                        <td>40,000</td>
-                                        <td>-2,000</td>
-                                        <td>38,000</td>
-                                        <td>+400</td>
-                                        <td>카드</td>
-                                    </tr>
+                                <tbody> 
+  
+	                                    <tr>
+
+	                                    </tr>
+	                                    
                                 </tbody>
                                 
 
@@ -584,60 +586,194 @@
 		})
 
         // 회원 상세 조회
-        function viewDetail(userNo) {
-			$.ajax({
-				url:"<%=contextPath%>/selectMember.ad",
-				data:{userNo:userNo},
-				success: function(m){
-					$('#userNo').text(m.userNo);
-					$('#userId').text(m.userId);
-                    $('#userName').text(m.userName);
-                    $('#nickname').text(m.nickname);
-                    $('#userPhone').text(m.userPhone);
-                    $('#userEmail').text(m.userEmail);
-                    $('#birth').text(m.birth);
-                    if(m.gender=="M"){
-                        $('#gender').text("남")
-                    }else if(m.gender=="F"){
-                        $('#gender').text("여")
-                    }else{
-                        $('#gender').text("-")
-                    };
-                    $('#enrollDate').text(m.enrollDate);
-                    $('#pointNow').text(m.pointNow);
-                    if(m.status=="Y"){
-                        $('#status').text("정상")
-                    }else if(m.status=="S"){
-                        $('#status').text("이용정지")
-                    }else if(m.status=="N"){
-                        $('#status').text("탈퇴")
-                    };
+        // function viewDetail(userNo) {
+		// 	$.ajax({
+		// 		url:"<%=contextPath%>/selectMember.ad",
+		// 		data:{userNo:userNo},
+		// 		success: function(m){
+		// 			$('#userNo').text(m.userNo);
+        //             $('#userNo').val(m.userNo);
+		// 			$('#userId').text(m.userId);
+        //             $('#userName').text(m.userName);
+        //             $('#nickname').text(m.nickname);
+        //             $('#userPhone').text(m.userPhone);
+        //             $('#userEmail').text(m.userEmail);
+        //             $('#birth').text(m.birth);
+        //             if(m.gender=="M"){
+        //                 $('#gender').text("남")
+        //             }else if(m.gender=="F"){
+        //                 $('#gender').text("여")
+        //             }else{
+        //                 $('#gender').text("-")
+        //             };
+        //             $('#enrollDate').text(m.enrollDate);
+        //             $('#pointNow').text(m.pointNow);
+        //             if(m.status=="Y"){
+        //                 $('#status').text("정상")
+        //             }else if(m.status=="S"){
+        //                 $('#status').text("이용정지")
+        //             }else if(m.status=="N"){
+        //                 $('#status').text("탈퇴")
+        //             };
 					
-				}, error: function(){
-					console.log("회원상세조회 ajax 통신실패")
-				}, complete: function(){
-					console.log("회원상세조회 ajax 통신완료")
-				}
-			})
-		}
+		// 		}, error: function(){
+		// 			console.log("회원상세조회 ajax 통신실패")
+		// 		}, complete: function(){
+		// 			console.log("회원상세조회 ajax 통신완료")
+        //             console.log($('#userNo').val())
+		// 		}
+		// 	})
+		// }
 
         // 회원 상제 수정 (아직 안함)
         function updateDetail(userNo){
             $.ajax({
-                url:"<%=contextPath%>/updateMember.ad",
-                data:{userNo:userNo},
-                success: function(list){
-                    $('#userNo').text(list.userNo);
-                    
-                }
+                url:"<%=contextPath%>/selectMember.ad",
+				data:{userNo:userNo},
+				success: function(m){
+					$('#userNoU').val(m.userNo);
+                    $('#userNoU').text(m.userNo);
+					$('#userIdU').text(m.userId);
+                    $('#userNameU').attr("placeholder", m.userName);
+                    $('#nicknameU').attr("placeholder", m.nickname);
+                    $('#userPhoneU').attr("placeholder", m.userPhone);
+                    $('#userEmailU').attr("placeholder", m.userEmail);
+                    $('#birthU').text(m.birth);
+                    if(m.gender == "M"){
+                        $("input:radio[name='gender']:radio[value='M']").attr("checked", true);
+                    }else if(m.gender=="F"){
+                        $("input:radio[name='gender']:radio[value='F']").attr("checked", true);
+                    }else{
+                        $("input:radio[name='gender']:radio[value='N']").attr("checked", true);
+                    }
+                    $("input:radio[name='gender']").attr('disabled', true);
+                    $('#enrollDateU').text(m.enrollDate);
+                    $('#pointNowU').text(m.pointNow);
+                    if(m.status == "Y"){
+                        $("#statusU").val("Y").prop("selected", true);
+                    }else if(m.status == "S"){
+                        $("#statusU").val("S").prop("selected", true);
+                    }else if(m.status == "N"){
+                        $("#statusU").val("N").prop("selected", true);
+                    }
+                }, error: function(){
+					console.log("회원상세수정목록 ajax 통신실패")
+				}, complete: function(){
+					console.log("회원상세수정목록 ajax 통신완료")
+				}
+            });          
 
-            })
         }
+        
+
+        // 수정완료 클릭시...... 안됨...
+        // $("#updateMember").on("click", function(){
+        //     let userNo = $("button[name='modifiyClick']").val();
+        //     $.ajax({
+        //         url:"<%=contextPath%>/updateMember.ad",
+        //         data:{userNo:userNo, userName:userName, nickname:nickname, userPhone:userPhone, userEmail:userEmail, status:status},
+        //         contentType: false,
+        //         processData: false,
+        //         type:'post',
+        //         success:function(result){
+        //             if(result>0){
+        //                 alert("수정 완료");
+        //             }else{
+        //                 alert("수정 실패");
+        //             }
+        //         }, error: function(){
+        //             console.log("회원상세수정 ajax 통신실패")
+        //         }, complete: function(){
+        //             console.log("회원상세수정 ajax 통신완료")
+        //         }
+        //     })
+        // });
+
 
         // 회원 이용 내역 조회
         function useDetail(userNo){
+            $.ajax({
+                url:"<%=contextPath%>/selectMember.ad",
+				data:{userNo:userNo},
+				success: function(m){
+                    $('#userNoB').text("회원 번호 : " + m.userNo);
+                    $('#userIdB').text(m.userId);
+                }
+            })
+            $.ajax({
+				url:"<%=contextPath%>/useMember.ad",
+				data:{userNo:userNo},
+				success: function(result){
+                    
+                    let value="";
+                    
+					for(let i=0; i<result.length; i++){
+                        userid = result[i].userId
+						value += "<tr>"
+									+ "<td>" + result[i].bookDate + "</td>"
+									+ "<td>" + result[i].resName + "</td>"
+									+ "<td>" + result[i].bookTime + "</td>"
+									+ "<td>" + result[i].people + "</td>"
+                                    + "<td>" + result[i].payTotal + "</td>"
+                                    + "<td>" + result[i].payPoint + "</td>"
+                                    + "<td>" + result[i].payFinal + "</td>"
+                                    + "<td>" + result[i].plusPoint + "</td>"
+                                    + "<td>" + result[i].payOp + "</td>"
+							   + "</tr>";							
+					}
+                    $("#useTable tbody").html(value);
+					if(result==0){
+                        value = "<tr>" + "<td colspan=9>" + "이용 내역이 없습니다." + "</td>"+ "</tr>";	
+                        $("#useTable tbody").html(value);
+                    }
+				}, error: function(){
+					console.log("회원이용조회 ajax 통신실패")
+				}, complete: function(){
+					console.log("회원이용조회 ajax 통신완료")
+                    console.log($('#userNo').val())
+				}
+			})
+        }
+
+        // 적립금 지급
+        function clickPoint(){
+            
+
+            if(confirm('적립금을 지급하시겠습니까?')){
+                let pointName = prompt('적립금명 : ');
+                while(pointName=="") {
+        			alert("적립금액을 입력해주세요");
+        			pointName = prompt('적립금명 : ');
+        		}
+                let pointTrade = prompt('적립금액 : ');
+                while(pointTrade==""){
+                    alert("적립금액을 입력해주세요.");
+                    pointTrade = prompt('적립금명 : ');
+                }
+                var userNo = $("input:checkbox[name='listCheck']:checked").val();
+                $.ajax({
+                    url:"<%=contextPath%>/point.ad",
+                    data:{pointName:pointName, pointTrade:pointTrade, userNo:userNo},
+                    success:function(result){
+                        if(result>0){
+                            alert("적립금이 지급되었습니다.")
+                        }else{
+                            alert("요청처리에 실패했습니다.")
+                        }
+                    }, error: function(){
+                        console.log("적립금지급 ajax 통신실패")
+                    }
+                })
+            }
+
+            // $("input:checkbox[name='listCheck']:checked").each(function() {
+            //     checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+            //     console.log(checkBoxArr);
             
         }
+
+        
+
 
 	</script>
 </body>

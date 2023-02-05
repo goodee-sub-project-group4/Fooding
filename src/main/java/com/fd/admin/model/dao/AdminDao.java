@@ -12,8 +12,10 @@ import static com.fd.common.JDBCTemplate.*;
 
 import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
+import com.fd.book.model.vo.Point;
 import com.fd.common.model.vo.Attachment;
 import com.fd.member.model.vo.Member;
+import com.fd.restaurant.model.vo.Restaurant;
 
 
 public class AdminDao {
@@ -700,7 +702,130 @@ public class AdminDao {
 		}
 		return m;
 	}
+	
 
+	/**회원 상세 수정
+	 * @param conn
+	 * @param u
+	 * @return
+	 */
+	public int updateMember(Connection conn, Member u, int userNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMember");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u.getUserName());
+			pstmt.setString(2, u.getNickname());
+			pstmt.setString(3, u.getUserPhone());
+			pstmt.setString(4, u.getUserEmail());
+			pstmt.setString(5, u.getStatus());
+			pstmt.setInt(6, userNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
+	/**회원 이용내역 조회
+	 * @param conn
+	 * @param userNo
+	 * @return
+	 */
+	public ArrayList<Member> selectUseList(Connection conn, int userNo) {
+		ArrayList<Member> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectUseList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Member(rset.getInt("user_no"),
+								    rset.getString("user_id"),
+								    rset.getString("book_date"),
+								    rset.getString("res_name"),
+								    rset.getString("book_time"),
+								    rset.getInt("people"),
+								    rset.getInt("pay_total"),
+								    rset.getInt("pay_point"),
+								    rset.getInt("pay_final"),
+								    rset.getInt("plus_point"),
+								    rset.getString("pay_op")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	
+	/**회원 적립금 지급
+	 * @param conn
+	 * @param p
+	 * @return
+	 */
+	public int givePoint(Connection conn, Point p) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("givePoint");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, p.getUserNo());
+			pstmt.setString(2, p.getPointName());
+			pstmt.setInt(3, p.getPointTrade());
+			pstmt.setInt(4, p.getUserNo());
+			pstmt.setInt(5, p.getPointTrade());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
+// ==========================================================================
+
+	/**회원 리스트 조회
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Restaurant> selectRestList(Connection conn) {
+		ArrayList<Restaurant> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRestList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Restaurant(rset.getInt("res_no"),
+										rset.getString("res_name"),
+										rset.getString("book_count"),
+										rset.getString("review_count"),
+										rset.getString("black_count"),
+										rset.getString("status")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
 
 	
 }

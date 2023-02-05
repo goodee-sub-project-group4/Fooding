@@ -43,6 +43,13 @@ public class Restaurant {
 	// 한수가 추가한 필드2 (찜하기에서 사용!!) 
 	private int userNo; // 찜하기를 누른 회원의 번호 
 	
+	// 관리자 - 업체 조회용 
+	private String bookCount;
+	private String reviewCountR;
+	private String blackCount;
+	
+	
+	
 	public Restaurant() {}
 	
 	// 식당 조회용 매개변수 생성자 - 태진
@@ -284,10 +291,24 @@ public class Restaurant {
 		this.foodCt = foodCt;
 	}
 
+	// 관리자 - 업체 리스트 조회할 때 사용
+	public Restaurant(int resNo, String resName, String bookCount, String reviewCountR,
+			String blackCount, String status) {
+		super();
+		this.resNo = resNo;
+		this.resName = resName;
+		this.bookCount = bookCount;
+		this.reviewCountR = reviewCountR;
+		this.blackCount = blackCount;
+		this.status = status;
+	}
+	
+
 	// getter/setter
 	public int getResNo () {
 		return resNo;
 	}
+
 
 	public void setResNo(int resNo) {
 		this.resNo = resNo;
@@ -582,6 +603,33 @@ public class Restaurant {
 
 	public void setTotalReview(int totalReview) {
 		this.totalReview = totalReview;
+	}
+	
+	
+	
+
+	public String getBookCount() {
+		return bookCount;
+	}
+
+	public void setBookCount(String bookCount) {
+		this.bookCount = bookCount;
+	}
+
+	public String getReviewCountR() {
+		return reviewCountR;
+	}
+
+	public void setReviewCountR(String reviewCountR) {
+		this.reviewCountR = reviewCountR;
+	}
+
+	public String getBlackCount() {
+		return blackCount;
+	}
+
+	public void setBlackCount(String blackCount) {
+		this.blackCount = blackCount;
 	}
 
 	@Override
