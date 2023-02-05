@@ -131,7 +131,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<span>
+				<span style="text-align:left;">
 					* 확정날짜는 이용완료날로부터 7일 후 입니다<br>
 					** 입금날짜는 익월 15일 입니다.
 				</span><br clear="both">

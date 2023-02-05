@@ -12,8 +12,18 @@ public class Payment {
 	private String payOp;
 	private String payDate;
 	private String status;
+	private String modifyDate;
 	
-	
+	public String getModifyDate() {
+		return modifyDate;
+	}
+
+
+	public void setModifyDate(String modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
+
 	public Payment() {
 		super();
 	}

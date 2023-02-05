@@ -253,5 +253,19 @@ public class RestaurantService {
 		close(conn);
 		return result;
 	}
+	
+	public ArrayList<Book> selectNewBook(int resNo) {
+		Connection conn = getConnection();
+		ArrayList<Book> list = new RestaurantDao().selectNewBook(conn, resNo);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Payment> selectMonthlyPayment(int resNo, String startDay, String endDay){
+		Connection conn = getConnection();
+		ArrayList<Payment> list = new RestaurantDao().selectMonthlyPayment(conn, resNo, startDay, endDay);
+		close(conn);
+		return list;
+	}
 
 }

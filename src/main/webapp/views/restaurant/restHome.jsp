@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.*, com.fd.review.model.vo.Review" %>
+<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.*, com.fd.review.model.vo.Review, com.fd.book.model.vo.Book" %>
 <%
-	ArrayList<Question> qList = (ArrayList<Question>)session.getAttribute("qList");
-	ArrayList<Review> rList = (ArrayList<Review>)session.getAttribute("rList");
+	ArrayList<Question> qList = (ArrayList<Question>)request.getAttribute("qList");
+	ArrayList<Review> rList = (ArrayList<Review>)request.getAttribute("rList");
+	ArrayList<Book> bList = (ArrayList<Book>)request.getAttribute("bList");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -51,7 +53,7 @@
 			position:relative;
 			bottom:4px;
 		}
-		h3:hover, .more:hover, .data-box2:hover { /* 클릭효과*/
+		h3:hover, .more:hover, .data-box2:hover, .alert:hover { /* 클릭효과*/
 			cursor:pointer;
 		}
 
@@ -89,9 +91,11 @@
 		}
 		.alert button { /*신규예약건-조회버튼*/
 			margin-left: 10px;
+			float:right;
 			/* line-height: 100%; */
 			position: relative;
-			bottom:2px;
+			top: 8px;
+			right:8px;			
 		}
 		.book-date { /*신규예약건-예약날짜*/
 			font-weight: 700;
@@ -101,6 +105,13 @@
 		.booker { /*신규예약건-예약자*/
 			margin-left: 10px;			
 		}
+
+		.book-default { /*예약 디폴트박스*/
+			width:30px;
+			margin-top:8px;
+			opacity: 0.3;
+		}
+
 		/*---------------------area2=문의, area3=리뷰 -----------------------*/
 		#area2, #area3 {
 			height:280px;
@@ -177,30 +188,23 @@
 			<!-- 컨텐츠 작성부 -->			
 			<div id="area1"><br>
 				<div>					
-					<h3 onclick="toBook();">신규예약건 </h3> <span class="badge">2</span>
+					<h3 onclick="toBook();">신규예약건 </h3> <span class="badge"><%=bList.size() %></span>
 					<span class="more" onclick="toBook();">더보기 <img src="resources/images/more.png" width="25"></span>
 					
-					<div class="alert alert-secondary">
-						<img class="user" src="/Fooding/resources/images/userIcon3.png">
-						<span class="book-date">2023-02-07 15:00</span>
-						<span class="booker">강개순</span>
-						<span>(3명)</span>
+					<% for(int i=0; i<bList.size() && i<3 ; i++) { %>
+					<div class="alert alert-secondary" onclick="toBook();">
+						<img class="user" src="<%=contextPath %>/resources/images/userIcon3.png">
+						<span class="book-date"><%=bList.get(i).getBookDate() %> <%=bList.get(i).getBookTime() %></span>
+						<span class="booker"><%=bList.get(i).getBookName() %></span>
+						<span>(<%=bList.get(i).getPeople() %>명)</span>
 						<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button>
 					</div>
-					<div class="alert alert-secondary">
-						<img class="user" src="/Fooding/resources/images/userIcon3.png">
-						<span class="book-date">2023-02-07 15:00</span>
-						<span class="booker">강백호</span>
-						<span>(5명)</span>
-						<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button>
+					<% } %>
+					<% for(int i=3; i>bList.size(); i--) { %>
+					<div class="alert alert-secondary" align="center" onclick="toBook();">
+						<img class="book-default" src="<%=contextPath%>/resources/images/heart-filled.png">
 					</div>
-					<div class="alert alert-secondary">
-						<img class="user" src="/Fooding/resources/images/userIcon3.png">
-						<span class="book-date">2023-02-07 15:00</span>
-						<span class="booker">서태웅</span>
-						<span>(1명)</span>
-						<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button>
-					</div>
+					<% } %>
 				</div>
 				<div>
 					<h3 onclick="toCalendar();">이달의 스케줄 </h3> <span class="more" onclick="toCalendar();">더보기 <img src="resources/images/more.png" width="25"></span>
@@ -209,7 +213,7 @@
 					</div>
 
 				</div>
-			</div>
+			</div><br>
 			<div id="area2">
 				<h3 onclick="toQna();">미답변문의</h3> <span class="badge" id="question-number"><%= qList.size() %></span>
 				<span class="more" onclick="toQna();">더보기 <img src="resources/images/more.png" width="25"></span>

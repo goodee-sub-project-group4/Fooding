@@ -74,6 +74,10 @@
         #search-option {
             float: right;
         }
+        
+        .status-b {
+        	color: dodgerblue;
+        }
 
         /* 예약상세조회(모달) */
         .modal-content {
@@ -166,7 +170,7 @@
                         		case "D" : status = "이용완료"; break;
                         	}
                         %>
-                        <td><%=status %></td>
+                        <td class="list-status"><%=status %></td>
                         <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-detail" onclick="viewDetail(<%= list.get(i).getBookNo()%>)">조회</button></td>
                     </tr>
              		<% } %>
@@ -296,6 +300,12 @@
 		$(function(){
 			$('#title').text("예약관리");
 			$("#menu1").addClass("active");
+			$('.list-status').each(function(){
+				if($(this).text()=="예약완료") {
+					$(this).addClass("status-b");
+				}
+			});
+			
 		})
 		
 		function viewDetail(bookNo){

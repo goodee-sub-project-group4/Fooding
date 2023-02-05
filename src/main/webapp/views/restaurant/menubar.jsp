@@ -113,7 +113,7 @@
             <li onclick= "location.href='/Fooding/menu.re'" id="menu2_3">메뉴정보<span>></span></li>
             <li onclick= "location.href='/Fooding/qna.re'" id="menu2_4">문의답변<span>></span></li>
             <li onclick= "location.href='/Fooding/review.re'" id="menu2_5">리뷰관리<span>></span></li>
-            <li onclick= "location.href='/Fooding/monthly.re'" id="menu2_6">정산<span>></span></li>
+            <li onclick= "goMonthly();" id="menu2_6">정산<span>></span></li>
         </ul>
     </div>
     
@@ -141,8 +141,16 @@
                     $(".detail").hide();
                 }
             });
-            
+      		
         })
+        
+        function goMonthly(){
+        	//현재 연,월,마지막일 알아내기
+        	let year = new Date().getFullYear();
+        	let month = new Date().getMonth()+1;
+        	let lastDay = new Date(year, month, 0).getDate();
+        	location.href='/Fooding/monthly.re?year='+year+'&month='+month+'&lastDay='+lastDay;
+        }
 
 
         

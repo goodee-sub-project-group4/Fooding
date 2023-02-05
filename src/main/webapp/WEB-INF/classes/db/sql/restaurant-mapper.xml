@@ -209,19 +209,6 @@
 		 ORDER
 		    BY CREATE_DATE DESC		
 	</entry>
-	<entry key="selectReviewDatail">
-		SELECT
-		       REVIEW_NO
-		     , USER_ID
-		     , REVIEW_CONTENT
-		     , STAR
-		     , BOOK_NO
-		     , TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') "CREATE_DATE"
-		     , GOOD
-		  FROM REVIEW
-		  JOIN TB_USER USING (USER_NO)
-		 WHERE REVIEW_NO = ?
-	</entry>
 	<entry key="selectReviewDetail">
 		SELECT
 		       REVIEW_NO
@@ -320,5 +307,30 @@
            SET MODIFY_DATE = SYSDATE
 			 , STATUS = ?
          WHERE BOOK_NO = ?	
+	</entry>
+	<entry key="selectNewBook">
+		SELECT
+		       BOOK_NO
+		     , BOOK_NAME
+		     , PEOPLE
+		     , BOOK_DATE
+		     , BOOK_TIME
+		  FROM BOOK 
+		 WHERE RES_NO = ?
+		   AND STATUS = 'B'
+		 ORDER
+		    BY BOOK_NO DESC	
+	</entry>
+	<entry key="selectMonthlyPayment">
+		SELECT
+		       PAY_NO
+		     , BOOK_NO
+		     , 
+		  FROM PAYMENT P
+		  JOIN BOOK B USING (BOOK_NO) 
+		 WHERE B.RES_NO = ?
+		   AND B.STATUS = 'D'
+		 ORDER
+		    BY BOOK_NO DESC	
 	</entry>
 </properties>
