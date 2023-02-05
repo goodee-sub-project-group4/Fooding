@@ -38,8 +38,30 @@
 		 WHERE NOTICE_NO = ?
 	</entry>
 	
-	<!-- FAQ 리스트 -->
+	<!-- 페이징 포함 FAQ 리스트 조회 -->
 	<entry key="selectFAQList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+				  FROM (
+						SELECT 
+						       FAQ_NO
+							 , CATEGORY
+							 , FAQ_TITLE
+							 , FAQ_CONTENT
+						  FROM FAQ
+						 WHERE STATUS = 'Y'
+						   AND WHO = 'U'
+						 ORDER
+						    BY FAQ_NO DESC
+				        ) A
+				
+		  		)
+		  WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- FAQ 리스트 -->
+	<!-- <entry key="selectFAQList">
 		SELECT 
 		       FAQ_NO
 			 , CATEGORY
@@ -50,6 +72,14 @@
 		   AND WHO = 'U'
 		 ORDER
 		    BY FAQ_NO DESC
+	</entry> -->
+	
+	<!-- FAQ 페이징 -->
+	<entry key="selectListCount">
+		SELECT
+		       COUNT(*) "COUNT"
+		  FROM FAQ
+		 WHERE STATUS = 'Y'     
 	</entry>
 	
 	<!-- 1:1문의(업체)리스트 -->
@@ -79,6 +109,7 @@
 		 ORDER
 		    BY Q_NO DESC
 	</entry>
+	
 	
 
 

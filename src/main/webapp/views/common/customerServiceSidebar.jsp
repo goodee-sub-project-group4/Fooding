@@ -21,7 +21,7 @@
     #content1-padding {float: left; margin: auto; padding: 5px; box-sizing:border-box; width: 25%;}
     #content1{box-sizing: border-box; height: 100%;}
     #content1-1 {height: 120px; box-sizing: border-box; padding:60px 60px 10px 60px;}
-    #content1-2 {height: 450px; box-sizing: border-box; padding:40px;}
+    #content1-2 {height: 330px; box-sizing: border-box; padding:40px;}
     #content1-2 a {text-decoration:none; color:black; display:block;}
     #content1-3 {height: 100px;}
     #content1-2 div { border:1px solid lightgrey; margin:0px; height:70px; padding:20px; font-size:17px; font-weight:600;}
@@ -36,6 +36,10 @@
         border-radius: 0px 50px 50px 0px;
         font-weight:500;
     }
+    #content1-3 div:hover {background-color: rgb(253, 251, 251); border:1px solid lightgrey;}
+    #content1-3 a {text-decoration:none; color:black; display:block;}
+
+
 
     </style>
 </head>
@@ -44,11 +48,17 @@
         <div id="content1-padding">
             <div id="content1">
                 <div id="content1-1"><h2><b>고객센터</b></h2></div>
+
                 <div id="content1-2">
                     <div><a href="<%=request.getContextPath()%>/notice.me">공지사항<span class="arrow">></span></a></div>
-                    <div><a href="<%=request.getContextPath()%>/faq.me">FAQ<span class="arrow">></span></a></div>
+                    <div><a href="<%=request.getContextPath()%>/faq.me?cpage=1">FAQ<span class="arrow">></span></a></div>
                     <div><a href="<%=request.getContextPath()%>/question.me">1 : 1 문의<span class="arrow">></span></a></div> 
                 </div>
+
+                <div id="content1-3">
+                    <div><a href=""><b>도움이 필요하신가요?</b><br><span>1 : 1 문의하기</span></a></div>
+                </div>
+
             </div>
         </div>
     </div>
