@@ -104,6 +104,11 @@
         color: rgb(221,45,45);
     }
 
+    /*체크 버튼*/
+    input{
+        accent-color: rgb(221,45,45);
+    } 
+
     /*적립급 지급 모달*/
     #moneyModal-body{
         margin: auto;
@@ -697,7 +702,7 @@
 				data:{userNo:userNo},
 				success: function(m){
                     $('#userNoB').text("회원 번호 : " + m.userNo);
-                    $('#userIdB').text(m.userId);
+                    $('#userIdB').text("아이디 : " + m.userId);
                 }
             })
             $.ajax({
@@ -708,7 +713,7 @@
                     let value="";
                     
 					for(let i=0; i<result.length; i++){
-                        userid = result[i].userId
+                        // userid = result[i].userId
 						value += "<tr>"
 									+ "<td>" + result[i].bookDate + "</td>"
 									+ "<td>" + result[i].resName + "</td>"

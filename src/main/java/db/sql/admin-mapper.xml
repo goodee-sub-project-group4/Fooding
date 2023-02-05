@@ -476,5 +476,44 @@
 		 WHERE STATUS IN ('Y', 'S')
 	</entry>
 	
+	<!-- 업체 상세 조회 -->
+	<entry key="selectRest">
+		SELECT 
+		       RES_NO
+		     , RES_NAME
+			 , CEO
+		     , PERMIT_NO
+		     , ADDRESS
+		     , D_ADDRESS
+		     , PHONE
+		     , CELLPHONE
+		     , EMAIL
+		     , FOOD_CT
+		     , PARKING
+		     , OPEN
+		     , CLOSE
+		     , BREAK_S
+		     , BREAK_E
+		     , ENROLL_DATE
+		     , STATUS
+		  FROM RESTAURANT
+		 WHERE RES_NO = ?
+	</entry>
+	
+	<!-- 업체 예약 조회 -->
+	<entry key="selectReserveList">
+		SELECT
+		       BOOK_NO
+		     , TO_CHAR(BOOK_A, 'YYYY/MM/DD') "BOOK_A"
+		     , BOOK_NAME
+		     , BOOK_DATE
+		     , BOOK_TIME
+		     , STATUS		
+
+		  FROM BOOK
+		 WHERE RES_NO = ?
+		 ORDER
+		    BY BOOK_NO DESC
+	</entry>
 
 </properties>

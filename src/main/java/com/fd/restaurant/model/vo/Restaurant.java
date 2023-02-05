@@ -303,12 +303,34 @@ public class Restaurant {
 		this.status = status;
 	}
 	
+	// 관리자 - 업체 상세 조회할 때 사용
+	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
+			String phone, String cellphone, String email, String foodCt, String parking, String open ,
+			String close, String breakS, String breakE, String enrollDate, String status) {
+		super();
+		this.resNo = resNo;
+		this.resName = resName;
+		this.ceo = ceo;
+		this.permitNo = permitNo;
+		this.address = address;
+		this.dAddress = dAddress;
+		this.phone = phone;
+		this.cellphone = cellphone;
+		this.email = email;
+		this.foodCt = foodCt;
+		this.parking = parking;
+		this.open = open;
+		this.close = close;
+		this.breakS = breakS;
+		this.breakE = breakE;
+		this.enrollDate = enrollDate;
+		this.status = status;
+	}
 
 	// getter/setter
 	public int getResNo () {
 		return resNo;
 	}
-
 
 	public void setResNo(int resNo) {
 		this.resNo = resNo;

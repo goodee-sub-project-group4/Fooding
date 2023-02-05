@@ -12,6 +12,7 @@ import static com.fd.common.JDBCTemplate.*;
 
 import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
+import com.fd.book.model.vo.Book;
 import com.fd.book.model.vo.Point;
 import com.fd.common.model.vo.Attachment;
 import com.fd.member.model.vo.Member;
@@ -796,7 +797,7 @@ public class AdminDao {
 	
 // ==========================================================================
 
-	/**회원 리스트 조회
+	/**업체 리스트 조회
 	 * @param conn
 	 * @return
 	 */
@@ -824,7 +825,83 @@ public class AdminDao {
 		}
 		return list;
 	}
+
 	
+	/**업체 상세 조회
+	 * @param conn
+	 * @param resNo
+	 * @return
+	 */
+	public Restaurant selectRest(Connection conn, int resNo) {
+		Restaurant r = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;	
+		String sql = prop.getProperty("selectRest");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				r = new Restaurant(rset.getInt("res_no"),
+								   rset.getString("res_name"),
+								   rset.getString("ceo"),
+								   rset.getString("permit_no"),
+								   rset.getString("address"),
+								   rset.getString("d_address"),
+								   rset.getString("phone"),
+								   rset.getString("cellphone"),
+								   rset.getString("email"),
+								   rset.getString("food_ct"),
+								   rset.getString("parking"),
+								   rset.getString("open"),
+								   rset.getString("close"),
+								   rset.getString("break_s"),
+								   rset.getString("break_e"),
+								   rset.getString("enroll_Date"),
+								   rset.getString("status"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return r;
+	}
+
+	
+	/**업체 예약 리스트 조회
+	 * @param conn
+	 * @param resNo
+	 * @return
+	 */
+	public ArrayList<Book> selectReserveList(Connection conn, int resNo) {
+		ArrayList<Book> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReserveList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Book b = new Book();
+				b.setBookNo(rset.getInt("book_no"));
+				b.setBookA(rset.getString("book_a"));
+				b.setBookName(rset.getString("book_name"));
+				b.setBookDate(rset.getString("book_date"));
+				b.setBookTime(rset.getString("book_time"));
+				b.setStatus(rset.getString("status"));
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 
 	

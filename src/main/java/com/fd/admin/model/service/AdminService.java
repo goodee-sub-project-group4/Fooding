@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.fd.admin.model.dao.AdminDao;
 import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
+import com.fd.book.model.vo.Book;
 import com.fd.book.model.vo.Point;
 import com.fd.common.model.vo.Attachment;
 import com.fd.member.model.vo.Member;
@@ -406,6 +407,28 @@ public class AdminService {
 	}
 
 
+	/**업체 상세 조회
+	 * @param resNo
+	 * @return
+	 */
+	public Restaurant selectRest(int resNo) {
+		Connection conn = getConnection();
+		Restaurant r = new AdminDao().selectRest(conn, resNo);
+		close(conn);
+		return r;
+	}
+
+
+	/**업체 예약 리스트 조회
+	 * @param resNo
+	 * @return
+	 */
+	public ArrayList<Book> selectReserveList(int resNo) {
+		Connection conn = getConnection();
+		ArrayList<Book> list = new AdminDao().selectReserveList(conn, resNo);
+		close(conn);
+		return list;
+	}
 
 
 

@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList, com.fd.restaurant.model.vo.Restaurant"%>
+<%@ page import = "java.util.ArrayList, com.fd.restaurant.model.vo.Restaurant, com.fd.book.model.vo.Book"%>
 <%
 	ArrayList<Restaurant> list = (ArrayList)request.getAttribute("list");
+	Restaurant r = (Restaurant)request.getAttribute("r");
+	ArrayList<Book> reserveList = (ArrayList)request.getAttribute("reserveList");
 %>
 <!DOCTYPE html>
 <html>
@@ -91,6 +93,13 @@
         margin-left: -20px;
         margin-right: -20px;
     }
+    
+    /*마우스 커서*/
+    #restNocursor:hover{
+        cursor: pointer;
+        color: rgb(221,45,45);
+    }
+    
     /*체크 버튼*/
     input{
         accent-color: rgb(221,45,45);
@@ -98,30 +107,43 @@
 
 
     /*업체 조회 모달*/
+    #selectModal-body tr{
+        height: 40px;
+    }
     #selectModal-body th{
+        padding-left: 30px;
         text-align: left;
         color: gray;
         font-weight: 500;
+        width: 300px;
     }
     #selectModal-body td{
-        padding-left: 60px;
+        padding-left: 40px;
         text-align: left;
+        width: 300px;
     }
+    
     /*업체 수정 모달*/
+    #updateModal-body tr{
+        height: 40px;
+    }
     #updateModal-body th{
+        padding-left: 30px;
         text-align: left;
         color: gray;
         font-weight: 500;
+        width: 100px;
     }
     #updateModal-body td{
-        padding-left: 60px;
+        padding-left: 40px;
         text-align: left;
+        width: 250px;
     }
+    
     /*예약현황 조회 모달*/
     .selectUseModal-body{
         padding: 50px;
     }
-
 
     /*페이징바*/
     .pagination a{
@@ -183,13 +205,13 @@
                         <% for(int i=0; i<list.size(); i++) { %>
                         <tr>
                             <td><input type="checkbox" name="listCheck" ></td>
-                            <td data-toggle="modal" data-target="#selectModal" id="restId"><%= list.get(i).getResNo() %></td>
+                            <td id="restNocursor" data-toggle="modal" data-target="#selectModal" onclick="viewDetail(<%=list.get(i).getResNo()%>)"><%= list.get(i).getResNo() %></td>
                             <td><%= list.get(i).getResName() %></td>
                             <td><%= Integer.parseInt(list.get(i).getBookCount()) %></td>
                             <td><%= Integer.parseInt(list.get(i).getReviewCountR()) %></td>
                             <td><%= Integer.parseInt(list.get(i).getBlackCount()) %></td>
-                            <td>정상</td>
-                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#selectUseModal">조회</button></td>
+                            <td><%= (list.get(i).getStatus().equals("Y")) ? "정상" : "이용정지"%></td>
+                            <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#selectUseModal" onclick="bookDetail(<%=list.get(i).getResNo()%>)" >조회</button></td>
                         </tr>
                         <% } %>
                     </tbody>	
@@ -197,7 +219,7 @@
 
                 <!--이용현황-->
                 <div style="float: right; color: rgb(141, 141, 141); padding: 10px;">
-                    정상 : &nbsp <span>n</span> 명 &nbsp&nbsp&nbsp 이용정지 : &nbsp <span>n</span> 명 &nbsp&nbsp&nbsp 탈퇴 : &nbsp <span>n</span> 명
+                    정상 : &nbsp; <span>n</span> 명 &nbsp;&nbsp;&nbsp; 이용정지 : &nbsp; <span>n</span> 명 &nbsp;&nbsp;&nbsp; 탈퇴 : &nbsp; <span>n</span> 명
                 </div>
                 
                 <br><br>
@@ -257,65 +279,67 @@
                     <!-- Modal body -->
                     <div class="modal-body" align="center">
                         <table id="selectModal-body">
-                            <tr style="height: 40px;">
-                                <th>업체번호</th>
-                                <td>01</td>
+                            <tr>
+                                <th width="1000px">업체번호</th>
+                                <td id="resNo" colspan="2"></td>
                             </tr>
-                            <tr style="height: 40px;">
-                                <th>아이디</th>
-                                <td>rest01</td>
-                            </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>상호명</th>
-                                <td>미오 도쿄 다이닝</td>
+                                <td id="resName" colspan="2"></td>
                             </tr>       
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>대표자명</th>
-                                <td>전재준</td>
+                                <td id="ceo" colspan="2"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>사업자 번호</th>
-                                <td>261-81-23567</td>
+                                <td id="permitNo" colspan="2"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>주소</th>
-                                <td style="font-size: 13px;">서울 특별시 성동구 연무장5가길 7</td>
+                                <td id="address" colspan="2"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th></th>
-                                <td style="font-size: 13px;">현대테라스타워 117호</td>
+                                <td id="dAddress" colspan="2"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>전화번호</th>
-                                <td>0507-1490-2120</td>
+                                <td id="phone" colspan="2"></td>
                             </tr> 
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>휴대폰번호</th>
-                                <td>010-1111-2222</td>
+                                <td id="cellphone" colspan="2"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>이메일</th>
-                                <td>rest01@naver.com</td>
+                                <td id="email" colspan="2"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>업종</th>
-                                <td>양식</td>
+                                <td id="foodCt" colspan="2"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>주차</th>
-                                <td>불가능</td>
+                                <td id="parking" colspan="2"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>영업시간</th>
-                                <td>11:30 - 22:00</td>
+                                <td id="open"></td>
+                                <td id="close"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>브레이크 타임</th>
-                                <td>15:00 - 17:30</td>
+                                <td id="breakS"></td>
+                                <td id="breakE"></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
+                                <th>등록일</th>
+                                <td id="enrollDate" colspan="2"></td>
+                            </tr>
+                            <tr>
                                 <th>상태</th>
-                                <td>정상</td>
+                                <td id="status" colspan="2"></td>
                             </tr>
                         </table>
                         <br>
@@ -484,19 +508,18 @@
 
                         <div class="selectUseModal-body">
                             <div align="center" style="font-size:20px;">
-                                <span style="color: gray;">업체 번호&nbsp;&nbsp;</span> 01 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span style="color: gray;">아이디&nbsp;&nbsp;</span> user01
+                                <span id="resNoR" style="color: gray;">업체 번호</span>  
                             </div>
                             <br>
                             <p>예약/결제 내역</p>
-                            <table class="table">
+                            <table class="table" id="reserveTable">
                                 <thead>
                                     <tr>
                                         <th>예약번호</th>
                                         <th>접수날짜</th>
+                                        <th>성명</th>
                                         <th>예약날짜</th>
-                                        <th>예약시간</th>
-                                        <th>결제금액</th>
+                                        <th>예약시간</th>    
                                         <th>상태</th>
                                         <th>상세조회</th>
                                     </tr>
@@ -511,42 +534,7 @@
                                         <td>예약완료</td>
                                         <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#useDetailModal">조회</button></td>
                                     </tr>
-                                    <tr>
-                                        <td>456456</td>
-                                        <td>2023.01.22</td>
-                                        <td>2323.02.22</td>
-                                        <td>15:30</td>
-                                        <td>40,000</td>
-                                        <td>예약완료</td>
-                                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#useDetailModal">조회</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>456456</td>
-                                        <td>2023.01.22</td>
-                                        <td>2323.02.22</td>
-                                        <td>15:30</td>
-                                        <td>40,000</td>
-                                        <td>예약완료</td>
-                                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#useDetailModal">조회</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>456456</td>
-                                        <td>2023.01.22</td>
-                                        <td>2323.02.22</td>
-                                        <td>15:30</td>
-                                        <td>40,000</td>
-                                        <td>예약완료</td>
-                                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#useDetailModal">조회</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>456456</td>
-                                        <td>2023.01.22</td>
-                                        <td>2323.02.22</td>
-                                        <td>15:30</td>
-                                        <td>40,000</td>
-                                        <td>예약완료</td>
-                                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#useDetailModal">조회</button></td>
-                                    </tr>
+                                
                                 </tbody>
 
                             </table>
@@ -612,7 +600,76 @@
             $("td").addClass("align-middle");
 		})
 
+        // 업체 상세 조회
+        function viewDetail(resNo){
+            $.ajax({
+                url:"<%=contextPath%>/selectRest.ad",
+                data:{resNo:resNo},
+                success: function(r){
+                    $('#resNo').text(resNo);
+                    $('#resName').text(r.resName);
+                    $('#ceo').text(r.ceo);
+                    $('#permitNo').text(r.permitNo);
+                    $('#address').text(r.address);
+                    $('#dAddress').text(r.dAddress);
+                    $('#phone').text(r.phone);
+                    $('#cellphone').text(r.cellphone);
+                    $('#email').text(r.email);
+                    $('#foodCt').text(r.foodCt);
+                    if(r.parking=="Y"){
+                        $('#parking').text("주차가능")
+                    }else if(r.parking=="S"){
+                        $('#parking').text("주차불가")
+                    };
+                    $('#open').text(r.open);
+                    $('#close').text(r.close);
+                    $('#breakS').text(r.breakS);
+                    $('#breakE').text(r.breakE);
+                    $('#enrollDate').text(r.enrollDate);
+                    if(r.status=="Y"){
+                        $('#status').text("정상")
+                    }else if(r.status=="S"){
+                        $('#status').text("이용정지")
+                    };
+                }, error: function(){
+                    console.log("업체상세목록 ahax 통신 실패")
+                }, complete: function(){
+                    console.log("업체상세목록 ahax 통신 성공")
+                }
+            })
+        }
 
+        // 업체 예약 상세 조회
+        function bookDetail(resNo){
+			$.ajax({
+				url:"<%=contextPath%>/reserveRest.ad",
+				success:function(result){		
+					let value="";
+					for(let i=0; i<result.length; i++){
+                        // userid = result[i].userId
+						value += "<tr>"
+                                    + "<td>" + result[i].bookNo + "</td>"
+									+ "<td>" + result[i].bookA + "</td>"
+									+ "<td>" + result[i].bookName + "</td>"
+									+ "<td>" + result[i].bookDate + "</td>"
+                                    + "<td>" + result[i].bookTime + "</td>"
+                                    + "<td>" + result[i].status + "</td>"
+                                    + "<td>" + <button> + </button> + "</td>"
+							   + "</tr>";							
+					}
+                    $("#reserveTable tbody").html(value);
+					if(result==0){
+                        value = "<tr>" + "<td colspan=9>" + "이용 내역이 없습니다." + "</td>"+ "</tr>";	
+                        $("#reserveTable tbody").html(value);
+                    }
+				}, error: function(){
+					console.log("회원이용조회 ajax 통신실패")
+				}, complete: function(){
+					console.log("회원이용조회 ajax 통신완료")
+				}
+			})
+        }
+  
 
 	</script>
 </body>
