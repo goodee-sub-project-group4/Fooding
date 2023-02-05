@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	int year = (int)request.getAttribute("year");
+	int month = (int)request.getAttribute("month");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +38,8 @@
 			display: inline-block;
 			border: 1px solid lightgray;
 			margin:10px;
+			box-sizing: border-box;
+			width:702px;
         }
         #calendar-outer>div>div { /*칸 낱개 스타일*/
             box-sizing: border-box;
@@ -50,15 +56,26 @@
             font-weight: 600;
             color:rgb(63, 63, 63);
         }
-        .line>div { /*날짜줄 스타일*/
-            padding:5px;
+
+		
+		.notThisMonth { /*지난달날짜칸*/
+			text-align: left;
+			padding:5px;
             font-size: 14px;
-            color:rgb(168, 166, 166);
+            color:rgb(210, 210, 210);
             text-align: left;
-        }
-		.line>div:hover {
+		}
+
+		.thisMonth:hover {
 			background-color:rgb(255, 240, 142);
 			cursor: pointer;
+		}
+		.thisMonth { /*이번달날짜칸*/
+			text-align: left;
+			padding:5px;
+            font-size: 14px;
+            color:rgb(128, 128, 128);
+            text-align: left;
 		}
 		#prev-area, #next-area {
 			width:50px;
@@ -91,7 +108,11 @@
 		.book-info {
 			font-size:16px;
 		}
-		
+		#which-year {
+			float:right;
+			color:gray;
+			margin-right:120px;
+		}
 	
 	</style>
 </head>
@@ -104,73 +125,52 @@
 		<div id="content" align="center">
 		<!-- 컨텐츠 작성부 -->
 			<br><br><br>
-			<h2>2월</h2><div id="space"></div>
+			<h2><%=month%>월</h2><div id="space"></div>
+			<input type="hidden" id="which-date" value="">
 			<button type="button" class="btn btn-outline-danger">예약가능 변경</button>
 			<button type="button" class="btn btn-outline-danger">예약불가 변경</button>
 			<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-list">예약내역 보기</button><br>
-			<div id="prev-area">
-				<img src="resources/images/prevButton.png" width="60">
+			
+			<div id="prev-area" >
+				<img src="resources/images/prevButton.png" width="60" onclick="prevMonth()">
 			</div>
+			
 			<div id="calendar-outer">
-				<div id="week">
-					<div>sun</div>
-					<div>mon</div>
-					<div>tue</div>
-					<div>wed</div>
-					<div>thu</div>
-					<div>fri</div>
-					<div>sat</div>
-				</div><br clear="both">
-				<div id="line-1st" class="line">
-					<div>29</div>
-					<div>30</div>
-					<div>31</div>
-					<div>1</div>
-					<div>2</div>
-					<div>3</div>
-					<div>4</div>
-				</div><br clear="both">
-				<div id="line-2nd" class="line">
-					<div>5</div>
-					<div>6</div>
-					<div>7</div>
-					<div>8</div>
-					<div>9</div>
-					<div>10</div>
-					<div>11</div>
-				</div><br clear="both">
-				<div id="line-3rd" class="line">
-					<div>12</div>
-					<div>13</div>
-					<div>14</div>
-					<div>15</div>
-					<div>16</div>
-					<div>17</div>
-					<div>18</div>
-				</div><br clear="both">
-				<div id="line-4th" class="line">
-					<div>19</div>
-					<div>20</div>
-					<div>21</div>
-					<div>22</div>
-					<div>23</div>
-					<div>24</div>
-					<div>25</div>
-				</div><br clear="both">
-				<div id="line-5th" class="line">
-					<div>26</div>
-					<div>27</div>
-					<div>28</div>
-					<div>1</div>
-					<div>2</div>
-					<div>3</div>
-					<div>4</div>
+	            <div id="week">
+	                <div>sun</div>
+	                <div>mon</div>
+	                <div>tue</div>
+	                <div>wed</div>
+	                <div>thu</div>
+	                <div>fri</div>
+	                <div>sat</div>
+	            </div><br clear="both">
+	            <div id="line-1st" class="line">
+					<!-- 동적으로 생성된 날짜가 들어올 자리 -->
+	            </div><br clear="both">
+	            <div id="line-2nd" class="line">
+	            	<!-- 동적으로 생성된 날짜가 들어올 자리 -->
+	            </div><br clear="both">
+	            <div id="line-3rd" class="line">
+	            	<!-- 동적으로 생성된 날짜가 들어올 자리 -->
+	            </div><br clear="both">
+	            <div id="line-4th" class="line">
+					<!-- 동적으로 생성된 날짜가 들어올 자리 -->
+	            </div><br clear="both">
+	            <div id="line-5th" class="line">
+					<!-- 동적으로 생성된 날짜가 들어올 자리 -->
+	            </div>
+				<div id="line-6th" class="line">
+					<!-- 동적으로 생성된 날짜가 들어올 자리 -->
 				</div>
-			</div>
+	        </div>
 			<div id="next-area">
-				<img src="resources/images/nextButton.png" width="60">
+				<img src="resources/images/nextButton.png" width="60" onclick="nextMonth()">
 			</div>
+			<br>
+	        <span id="which-year"><%=year%>년도</span>
 		</div>
+		
 	</div>
 
 	<div id="footer">
@@ -208,13 +208,106 @@
 		</div>
 	</div>
 	<script>
+		let year = <%=year%>;
+		let month = <%=month%>;
+
 		$(function(){
 			// Head.jsp 내의 요소, #title의 문구를 변경한다.
 			$('#title').text("달력설정");
 			$("#menu2").addClass("active");
 			$("#menu2_1").addClass("active");
-            
+			
+			//==============달력만들기===============
+			
+			
+			//이전달의 마지막 날 날짜와 요일 구하기
+	        let startDay = new Date(year, month-1, 0);
+	        let prevDate = startDay.getDate(); //31
+	        let prevDay = startDay.getDay(); //2
+	        
+	        //이번달의 마지막날 날짜와 요일 구하기
+	        let endDay = new Date(year, month, 0);
+	        let lastDate = endDay.getDate(); //28
+	        let lastDay = endDay.getDay(); //2
+	        
+	     	console.log(prevDate, prevDay, lastDate, lastDay);
+	        //첫째줄)지난달에 해당하는 칸 작성하기
+	        for(let i=prevDay; i>=0; i--) {
+	        	$('#line-1st').append('<div class="notThisMonth">'+(prevDate-i)+'<div>');
+	        }
+	        //첫째줄)이번달에 해당하는 칸 작성하기
+	        for(let i=1; i<=6-prevDay; i++) {
+	        	$('#line-1st').append('<div class="thisMonth">'+i+'</div>');
+	        }
+	        //두번째줄
+	        for(let i=(6-prevDay)+1; i<=(6-prevDay)+7; i++) {
+	        	$('#line-2nd').append('<div class="thisMonth">'+i+'</div>');
+	        }
+	        //세번째줄
+	        for(let i=(6-prevDay)+8; i<=(6-prevDay)+14; i++) {
+	        	$('#line-3rd').append('<div class="thisMonth">'+i+'</div>');
+	        }
+	      	//네번째줄
+	        for(let i=(6-prevDay)+15; i<=(6-prevDay)+21; i++) {
+	        	$('#line-4th').append('<div class="thisMonth">'+i+'</div>');
+	        }
+	      	//다섯번째줄이 마지막줄일수도 있고, 여섯번째 줄이 마지막줄일수도 있다.
+	      	if(lastDate<=(6-prevDay)+28) {
+	      		//다섯번째줄이 마지막인 경우
+	      		for(let i=(6-prevDay)+15; i<=lastDate; i++) {
+	        		$('#line-5th').append('<div class="thisMonth">'+i+'</div>');
+	        	}
+	      		for(let i=1; i<=(6-lastDay); i++) {
+	            	$('#line-5th').append('<div class="notThisMonth">'+i+'</div>');
+	            }
+	      	}else {
+	      		//여섯번째 줄이 마지막인 경우,
+	      		//다섯번째줄
+	      		for(let i=(6-prevDay)+22; i<=(6-prevDay)+28; i++) {
+	        		$('#line-5th').append('<div class="thisMonth">'+i+'</div>');
+	        	}
+	      		//여섯번째줄
+	      		for(let i=(6-prevDay)+29; i<=lastDate; i++) {
+	        		$('#line-6th').append('<div class="thisMonth">'+i+'</div>');
+	        	}
+	      		for(let i=1; i<=(6-lastDay); i++) {
+	            	$('#line-6th').append('<div class="notThisMonth">'+i+'</div>');
+	            }
+	      	}
+			//===============달력만들기 끝===============
+
+			//달력칸 클릭효과
+			$('.thisMonth').click(function(){
+				$('.thisMonth').css("background-color","");
+				$(this).css("background-color","rgb(255, 240, 142)");
+				$('#which-date').val($(this).text());
+				console.log($('#which-date').val());
+			});
 		})
+
+		//이전달력보기
+		function prevMonth(){
+			month = month-1;
+			if(month==0) {
+				year = year-1;
+				month = 12;
+			}
+			location.href='/Fooding/calendar.re?year='+year+'&month='+month;
+		}
+
+		//다음달력보기
+		function nextMonth(){
+			month = month+1;
+			if(month==13) {
+				year = year+1;
+				month = 1;
+			}
+			location.href='/Fooding/calendar.re?year='+year+'&month='+month;
+		}
+		
+		
+		
+		
 	</script>
 </body>
 </html>

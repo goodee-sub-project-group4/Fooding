@@ -32,6 +32,10 @@ public class RestCalendarController extends HttpServlet {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
 			response.sendRedirect(request.getContextPath()+"/rest.admin");
 		}else {
+			int year = Integer.parseInt(request.getParameter("year"));
+			int month = Integer.parseInt(request.getParameter("month"));
+			request.setAttribute("year", year);
+			request.setAttribute("month", month);
 			request.getRequestDispatcher("views/restaurant/restCalendar.jsp").forward(request, response);
 		}		
 	}

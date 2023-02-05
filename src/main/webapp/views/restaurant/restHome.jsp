@@ -82,7 +82,7 @@
 		#calendar-area {
 			/* border:1px solid pink; */
 			width:100%;
-			margin-top: 30px;
+			margin-top: 12px;
 		}
 
 		.user { /*신규예약건-유저아이콘*/

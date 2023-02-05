@@ -108,7 +108,7 @@
     
     <div id="menu2-detail" class="detail">
         <ul>
-            <li onclick="location.href='/Fooding/calendar.re'" id="menu2_1">달력설정<span>></span></li>
+            <li onclick="goCalendar()" id="menu2_1">달력설정<span>></span></li>
             <li onclick="location.href='/Fooding/info.re'" id="menu2_2">매장정보<span>></span></li>
             <li onclick= "location.href='/Fooding/menu.re'" id="menu2_3">메뉴정보<span>></span></li>
             <li onclick= "location.href='/Fooding/qna.re'" id="menu2_4">문의답변<span>></span></li>
@@ -150,6 +150,13 @@
         	let month = new Date().getMonth();
         	let lastDay = new Date(year, month, 0).getDate();
         	location.href='/Fooding/monthly.re?year='+year+'&month='+month+'&lastDay='+lastDay;
+        }
+        
+        function goCalendar(){
+        	//현재 연도와 월 구하기
+            let year = new Date().getFullYear();
+        	let month = new Date().getMonth()+1;
+        	location.href='/Fooding/calendar.re?year='+year+'&month='+month;        	
         }
 
 

@@ -52,7 +52,7 @@
 		#title-area h2 {
 			display: inline-block;
 			font-weight: 700;
-			font-size: 26px;
+			font-size: 27px;
 			color:rgb(77, 77, 77);
 			margin:50px;
 		}

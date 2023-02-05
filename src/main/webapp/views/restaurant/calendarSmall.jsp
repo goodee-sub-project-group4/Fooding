@@ -10,6 +10,9 @@
             #calendar-outer {
                 display: inline-block;
                 border: 1px solid lightgray;
+                width:408px;
+                box-sizing: border-box;
+
             }
             #calendar-outer>div>div { /*칸 낱개 스타일*/
                 box-sizing: border-box;
@@ -19,6 +22,7 @@
                 margin:0px; 
                 float: left;
             }
+                    
             #week>div { /*요일줄 스타일*/
                 background-color: whitesmoke;
                 line-height: 40px;
@@ -27,7 +31,15 @@
                 font-weight: 600;
                 color:rgb(63, 63, 63);
             }
-            .line>div { /*날짜줄 스타일*/
+
+            .notThisMonth { /*날짜칸*/
+                color:rgb(209, 209, 209);
+                padding:2px;
+                line-height: 36px;
+                font-size: 12px;
+                text-align: left;
+            }
+            .thisMonth { /*날짜칸*/
                 padding:2px;
                 line-height: 36px;
                 font-size: 12px;
@@ -50,54 +62,84 @@
                 <div>sat</div>
             </div><br clear="both">
             <div id="line-1st" class="line">
-                <div>29</div>
-                <div>30</div>
-                <div>31</div>
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
+				<!-- 동적으로 생성된 날짜가 들어올 자리 -->
             </div><br clear="both">
             <div id="line-2nd" class="line">
-                <div>5</div>
-                <div>6</div>
-                <div>7</div>
-                <div>8</div>
-                <div>9</div>
-                <div>10</div>
-                <div>11</div>
+            	<!-- 동적으로 생성된 날짜가 들어올 자리 -->
             </div><br clear="both">
             <div id="line-3rd" class="line">
-                <div>12</div>
-                <div>13</div>
-                <div>14</div>
-                <div>15</div>
-                <div>16</div>
-                <div>17</div>
-                <div>18</div>
+            	<!-- 동적으로 생성된 날짜가 들어올 자리 -->
             </div><br clear="both">
             <div id="line-4th" class="line">
-                <div>19</div>
-                <div>20</div>
-                <div>21</div>
-                <div>22</div>
-                <div>23</div>
-                <div>24</div>
-                <div>25</div>
+				<!-- 동적으로 생성된 날짜가 들어올 자리 -->
             </div><br clear="both">
             <div id="line-5th" class="line">
-                <div>26</div>
-                <div>27</div>
-                <div>28</div>
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
+				<!-- 동적으로 생성된 날짜가 들어올 자리 -->
+            </div>
+            <div id="line-6th" class="line">
+				<!-- 동적으로 생성된 날짜가 들어올 자리 -->
             </div>
         </div>
         
         <script>
-                  
+        //현재 연도와 월 구하기
+        let year = new Date().getFullYear();
+    	let month = new Date().getMonth()+1;
+    	
+        //이전달의 마지막 날 날짜와 요일 구하기
+        let startDay = new Date(year, month-1, 0);
+        let prevDate = startDay.getDate(); //31
+        let prevDay = startDay.getDay(); //2
+        
+        //이번달의 마지막날 날짜와 요일 구하기
+        let endDay = new Date(year, month, 0);
+        let lastDate = endDay.getDate(); //28
+        let lastDay = endDay.getDay(); //2
+        
+     	console.log(prevDate, prevDay, lastDate, lastDay);
+        //첫째줄)지난달에 해당하는 칸 작성하기
+        for(let i=prevDay; i>=0; i--) {
+        	$('#line-1st').append('<div class="notThisMonth" value="">'+(prevDate-i)+'<div>');
+        }
+        //첫째줄)이번달에 해당하는 칸 작성하기
+        for(let i=1; i<=6-prevDay; i++) {
+        	$('#line-1st').append('<div class="thisMonth" value="'+i+'">'+i+'</div>');
+        }
+        //두번째줄
+        for(let i=(6-prevDay)+1; i<=(6-prevDay)+7; i++) {
+        	$('#line-2nd').append('<div class="thisMonth" value="'+i+'">'+i+'</div>');
+        }
+        //세번째줄
+        for(let i=(6-prevDay)+8; i<=(6-prevDay)+14; i++) {
+        	$('#line-3rd').append('<div class="thisMonth" value="'+i+'">'+i+'</div>');
+        }
+      	//네번째줄
+        for(let i=(6-prevDay)+15; i<=(6-prevDay)+21; i++) {
+        	$('#line-4th').append('<div class="thisMonth" value="'+i+'">'+i+'</div>');
+        }
+      	//다섯번째줄이 마지막줄일수도 있고, 여섯번째 줄이 마지막줄일수도 있다.
+      	if(lastDate<=(6-prevDay)+28) {
+      		//다섯번째줄이 마지막인 경우
+      		for(let i=(6-prevDay)+15; i<=lastDate; i++) {
+        		$('#line-5th').append('<div class="thisMonth" value="'+i+'">'+i+'</div>');
+        	}
+      		for(let i=1; i<=(6-lastDay); i++) {
+            	$('#line-5th').append('<div class="notThisMonth" value="">'+i+'</div>');
+            }
+      	}else {
+      		//여섯번째 줄이 마지막인 경우,
+      		//다섯번째줄
+      		for(let i=(6-prevDay)+22; i<=(6-prevDay)+28; i++) {
+        		$('#line-5th').append('<div class="thisMonth" value="'+i+'">'+i+'</div>');
+        	}
+      		//여섯번째줄
+      		for(let i=(6-prevDay)+29; i<=lastDate; i++) {
+        		$('#line-6th').append('<div class="thisMonth" value="'+i+'">'+i+'</div>');
+        	}
+      		for(let i=1; i<=(6-lastDay); i++) {
+            	$('#line-6th').append('<div class="notThisMonth" value="">'+i+'</div>');
+            }
+      	}
 
         </script>
 
