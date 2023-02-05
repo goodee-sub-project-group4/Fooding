@@ -59,7 +59,7 @@
                     
                 <table class="table1">
                     <tr>
-                        <th>미오도쿄다이닝</th>
+                        <th><img src=""></th>
                         <td class="input-area2"><div></div></td> 
                         <td class="input-area3-id"></td>
                     </tr>
