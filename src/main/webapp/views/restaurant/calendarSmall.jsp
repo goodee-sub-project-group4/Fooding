@@ -88,15 +88,14 @@
     	
         //이전달의 마지막 날 날짜와 요일 구하기
         let startDay = new Date(year, month-1, 0);
-        let prevDate = startDay.getDate(); //31
-        let prevDay = startDay.getDay(); //2
+        let prevDate = startDay.getDate(); 
+        let prevDay = startDay.getDay(); 
         
         //이번달의 마지막날 날짜와 요일 구하기
         let endDay = new Date(year, month, 0);
-        let lastDate = endDay.getDate(); //28
-        let lastDay = endDay.getDay(); //2
+        let lastDate = endDay.getDate(); 
+        let lastDay = endDay.getDay(); 
         
-     	console.log(prevDate, prevDay, lastDate, lastDay);
         //첫째줄)지난달에 해당하는 칸 작성하기
         for(let i=prevDay; i>=0; i--) {
         	$('#line-1st').append('<div class="notThisMonth" value="">'+(prevDate-i)+'<div>');
@@ -120,7 +119,7 @@
       	//다섯번째줄이 마지막줄일수도 있고, 여섯번째 줄이 마지막줄일수도 있다.
       	if(lastDate<=(6-prevDay)+28) {
       		//다섯번째줄이 마지막인 경우
-      		for(let i=(6-prevDay)+15; i<=lastDate; i++) {
+      		for(let i=(6-prevDay)+22; i<=lastDate; i++) {
         		$('#line-5th').append('<div class="thisMonth" value="'+i+'">'+i+'</div>');
         	}
       		for(let i=1; i<=(6-lastDay); i++) {

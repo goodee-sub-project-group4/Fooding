@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.book.model.vo.*" %>    
 <%
 	int year = (int)request.getAttribute("year");
 	int month = (int)request.getAttribute("month");
+	ArrayList<NotAble> naList = (ArrayList<NotAble>)request.getAttribute("naList");
 %>
 <!DOCTYPE html>
 <html>
@@ -97,6 +99,9 @@
 			position: relative;
 			bottom:90px;
 		}
+		#prev-area img:hover, #next-area img:hover { 
+			cursor:pointer;
+		}
 		#prev-area img {
 			right:8px;
 		}
@@ -113,6 +118,13 @@
 			color:gray;
 			margin-right:120px;
 		}
+		.x-icon {
+			width:35px;
+			float: right;
+			margin-right:25px;
+			margin-top:18px;
+			opacity: 0.3;
+		}
 	
 	</style>
 </head>
@@ -128,7 +140,7 @@
 			<h2><%=month%>월</h2><div id="space"></div>
 			<input type="hidden" id="which-date" value="">
 			<button type="button" class="btn btn-outline-danger">예약가능 변경</button>
-			<button type="button" class="btn btn-outline-danger">예약불가 변경</button>
+			<button type="button" class="btn btn-outline-danger" onclick="notAble();">예약불가 변경</button>
 			<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-list">예약내역 보기</button><br>
 			
 			<div id="prev-area" >
@@ -222,40 +234,39 @@
 			
 			//이전달의 마지막 날 날짜와 요일 구하기
 	        let startDay = new Date(year, month-1, 0);
-	        let prevDate = startDay.getDate(); //31
-	        let prevDay = startDay.getDay(); //2
+	        let prevDate = startDay.getDate(); 
+	        let prevDay = startDay.getDay(); 
 	        
 	        //이번달의 마지막날 날짜와 요일 구하기
 	        let endDay = new Date(year, month, 0);
-	        let lastDate = endDay.getDate(); //28
-	        let lastDay = endDay.getDay(); //2
+	        let lastDate = endDay.getDate(); 
+	        let lastDay = endDay.getDay(); 
 	        
-	     	console.log(prevDate, prevDay, lastDate, lastDay);
 	        //첫째줄)지난달에 해당하는 칸 작성하기
 	        for(let i=prevDay; i>=0; i--) {
 	        	$('#line-1st').append('<div class="notThisMonth">'+(prevDate-i)+'<div>');
 	        }
 	        //첫째줄)이번달에 해당하는 칸 작성하기
 	        for(let i=1; i<=6-prevDay; i++) {
-	        	$('#line-1st').append('<div class="thisMonth">'+i+'</div>');
+	        	$('#line-1st').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
 	        }
 	        //두번째줄
 	        for(let i=(6-prevDay)+1; i<=(6-prevDay)+7; i++) {
-	        	$('#line-2nd').append('<div class="thisMonth">'+i+'</div>');
+	        	$('#line-2nd').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
 	        }
 	        //세번째줄
 	        for(let i=(6-prevDay)+8; i<=(6-prevDay)+14; i++) {
-	        	$('#line-3rd').append('<div class="thisMonth">'+i+'</div>');
+	        	$('#line-3rd').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
 	        }
-	      	//네번째줄
+			//네번째줄
 	        for(let i=(6-prevDay)+15; i<=(6-prevDay)+21; i++) {
-	        	$('#line-4th').append('<div class="thisMonth">'+i+'</div>');
+	        	$('#line-4th').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
 	        }
-	      	//다섯번째줄이 마지막줄일수도 있고, 여섯번째 줄이 마지막줄일수도 있다.
+      		//다섯번째줄이 마지막줄일수도 있고, 여섯번째 줄이 마지막줄일수도 있다.      	
 	      	if(lastDate<=(6-prevDay)+28) {
 	      		//다섯번째줄이 마지막인 경우
-	      		for(let i=(6-prevDay)+15; i<=lastDate; i++) {
-	        		$('#line-5th').append('<div class="thisMonth">'+i+'</div>');
+	      		for(let i=(6-prevDay)+22; i<=lastDate; i++) {
+	        		$('#line-5th').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
 	        	}
 	      		for(let i=1; i<=(6-lastDay); i++) {
 	            	$('#line-5th').append('<div class="notThisMonth">'+i+'</div>');
@@ -264,17 +275,22 @@
 	      		//여섯번째 줄이 마지막인 경우,
 	      		//다섯번째줄
 	      		for(let i=(6-prevDay)+22; i<=(6-prevDay)+28; i++) {
-	        		$('#line-5th').append('<div class="thisMonth">'+i+'</div>');
+	        		$('#line-5th').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
 	        	}
 	      		//여섯번째줄
 	      		for(let i=(6-prevDay)+29; i<=lastDate; i++) {
-	        		$('#line-6th').append('<div class="thisMonth">'+i+'</div>');
+	        		$('#line-6th').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
 	        	}
 	      		for(let i=1; i<=(6-lastDay); i++) {
 	            	$('#line-6th').append('<div class="notThisMonth">'+i+'</div>');
 	            }
 	      	}
 			//===============달력만들기 끝===============
+			
+			//불가날짜 표기하기
+			<% for(NotAble na : naList){ %>
+				$('#'+<%=na.getDate()%>).append('<img src="<%=contextPath%>/resources/images/xIcon.png" class="x-icon">');
+			<% } %>
 
 			//달력칸 클릭효과
 			$('.thisMonth').click(function(){
@@ -303,6 +319,35 @@
 				month = 1;
 			}
 			location.href='/Fooding/calendar.re?year='+year+'&month='+month;
+		}
+
+		//예약불가 변경
+		function notAble(){
+			let notAbleDate = $('#which-date').val();
+			$('#'+notAbleDate).css("background-color","");
+			
+			//Ajax통신
+			$.ajax({
+				url:"<%=contextPath%>/insertNotAble.re",
+				data:{year:year, month:month, date:notAbleDate},
+				success:function(result) {
+					if(result==0) { //실패하였을때
+						alert('날짜 설정에 실패하였습니다. 고객센터로 문의하여주세요.');
+					}else { //성공했을때
+						//X자 이미지 붙이기
+						$('#'+notAbleDate).append('<img src="<%=contextPath%>/resources/images/xIcon.png" class="x-icon">');
+					}
+				}, error:function(){
+					console.log('notAble insert ajax통신 실패');
+				}
+			})
+		}
+		
+		//예약가능 변경
+		function enAble(){
+			let notAbleDate = $('#which-date').val();
+			$('#'+notAbleDate).append('<img src="<%=contextPath%>/resources/images/xIcon.png" class="x-icon">');
+			$('#'+notAbleDate).css("background-color","");
 		}
 		
 		

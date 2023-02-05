@@ -12,6 +12,7 @@ import com.fd.admin.model.vo.Black;
 import com.fd.admin.model.vo.Question;
 import com.fd.book.model.vo.Book;
 import com.fd.book.model.vo.BookMenu;
+import com.fd.book.model.vo.NotAble;
 import com.fd.book.model.vo.Payment;
 import com.fd.common.model.vo.Attachment;
 import com.fd.restaurant.model.dao.RestaurantDao;
@@ -264,6 +265,25 @@ public class RestaurantService {
 	public ArrayList<Payment> selectMonthlyPayment(int resNo, String startDay, String endDay){
 		Connection conn = getConnection();
 		ArrayList<Payment> list = new RestaurantDao().selectMonthlyPayment(conn, resNo, startDay, endDay);
+		close(conn);
+		return list;
+	}
+	
+	public int insertNotAble(NotAble na) {
+		Connection conn = getConnection();
+		int result = new RestaurantDao().insertNotAble(conn, na);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<NotAble> selectNotAble(NotAble na) {
+		Connection conn = getConnection();
+		ArrayList<NotAble> list = new RestaurantDao().selectNotAble(conn, na);
 		close(conn);
 		return list;
 	}

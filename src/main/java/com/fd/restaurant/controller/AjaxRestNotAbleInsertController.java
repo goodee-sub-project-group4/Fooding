@@ -1,7 +1,6 @@
 package com.fd.restaurant.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +14,16 @@ import com.fd.restaurant.model.service.RestaurantService;
 import com.fd.restaurant.model.vo.Restaurant;
 
 /**
- * Servlet implementation class RestCalendarController
+ * Servlet implementation class AjaxRestNotAbleInsertController
  */
-@WebServlet("/calendar.re")
-public class RestCalendarController extends HttpServlet {
+@WebServlet("/insertNotAble.re")
+public class AjaxRestNotAbleInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RestCalendarController() {
+    public AjaxRestNotAbleInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,29 +33,20 @@ public class RestCalendarController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("loginRest")==null) {
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			response.sendRedirect(request.getContextPath()+"/rest.admin");
-		}else {
-			int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
-			//달력 구성에 필요한 정보 담기
-			int year = Integer.parseInt(request.getParameter("year"));
-			int month = Integer.parseInt(request.getParameter("month"));
-			request.setAttribute("year", year);
-			request.setAttribute("month", month);
-			
-			//불가날짜 담기
-			NotAble na = new NotAble();
-			na.setResNo(resNo);
-			na.setYear(String.valueOf(year));
-			na.setMonth(String.valueOf(month));
-			ArrayList<NotAble> naList = new RestaurantService().selectNotAble(na);
-			request.setAttribute("naList", naList);
-			
-			//일별예약정보담기
-			
-			request.getRequestDispatcher("views/restaurant/restCalendar.jsp").forward(request, response);
-		}		
+		int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
+		String month = request.getParameter("month");
+		String date = request.getParameter("date");
+		String year = request.getParameter("year");
+		NotAble na = new NotAble();
+		na.setResNo(resNo);
+		na.setMonth(month);
+		na.setYear(year);
+		na.setDate(date);
+		
+		//db 처리하고온 후 결과 전달하기
+		int result = new RestaurantService().insertNotAble(na);
+		response.getWriter().print(result);
+	
 	}
 
 	/**

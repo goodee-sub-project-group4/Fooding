@@ -335,4 +335,32 @@
 		 ORDER
 		    BY MODIFY_DATE ASC
 	</entry>
+	<entry key="insertNotAble">
+		INSERT
+		  INTO NOT_ABLE
+		  (
+		    NOT_NO
+		  , RES_NO
+		  , NOT_YEAR
+		  , NOT_MONTH
+		  , NOT_DATE
+		  )
+		  VALUES
+		  (
+		    SEQ_NANO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ? 
+		  )	
+	</entry>
+	<entry key="selectNotAble">
+		SELECT
+		       NOT_NO
+		     , NOT_DATE
+		  FROM NOT_ABLE 
+		 WHERE RES_NO = ?
+		   AND NOT_YEAR = ?
+		   AND NOT_MONTH = ?
+	</entry>
 </properties>

@@ -84,8 +84,10 @@ INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CR
 INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CREATE_DATE, STATUS, GOOD, COUNT) VALUES
 (SEQ_RVNO.NEXTVAL, 1201, 2, 11,  '굿입니다. 아주 굿', 5, SYSDATE, 'Y', 'Y', 0);
 
-
-----------------------------------------------------
+------------- NOT_ABLE 예약불가날짜 -------------
+INSERT INTO NOT_ABLE VALUES
+(SEQ_NANO.NEXTVAL, 1201, 2023, 2, 8);
+---------------------------------------------------
 
 --첫로그인 상태로 바꾸기
 UPDATE RESTAURANT SET STATUS='C' WHERE RES_NO=1200;
@@ -96,19 +98,7 @@ DELETE FROM QUESTION WHERE Q_NO=10;
 
 --반드시 커밋후 테스트할것!!
 COMMIT;
-SELECT
-		       REVIEW_NO
-		     , USER_ID
-		     , REVIEW_CONTENT
-		     , STAR
-		     , BOOK_NO
-		     , TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') "CREATE_DATE"
-		     , GOOD
-		  FROM REVIEW
-		  JOIN TB_USER USING (USER_NO)
-		 WHERE RES_NO = 1201
-		 ORDER
-		    BY REVIEW_NO DESC	;
+
 ROLLBACK;
 
 

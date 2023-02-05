@@ -15,6 +15,7 @@ import com.fd.admin.model.vo.Black;
 import com.fd.admin.model.vo.Question;
 import com.fd.book.model.vo.Book;
 import com.fd.book.model.vo.BookMenu;
+import com.fd.book.model.vo.NotAble;
 import com.fd.book.model.vo.Payment;
 import com.fd.common.model.vo.Attachment;
 import com.fd.restaurant.model.vo.Menu;
@@ -693,5 +694,54 @@ public class RestaurantDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public int insertNotAble(Connection conn, NotAble na) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNotAble");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, na.getResNo());
+			pstmt.setString(2, na.getYear());
+			pstmt.setString(3, na.getMonth());
+			pstmt.setString(4, na.getDate());
+						
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	public ArrayList<NotAble> selectNotAble(Connection conn, NotAble na) {
+		ArrayList<NotAble> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNotAble");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, na.getResNo());
+			pstmt.setString(2, na.getYear());
+			pstmt.setString(3, na.getMonth());
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				NotAble nota = new NotAble();
+				nota.setNotNo(rset.getInt("not_no"));
+				nota.setDate(rset.getString("not_date"));
+				
+				list.add(nota);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;		
 	}
 }
