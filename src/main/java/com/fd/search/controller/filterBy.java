@@ -31,17 +31,23 @@ public class filterBy extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Restaurant> list1 = (ArrayList<Restaurant>)request.getAttribute("list"); 
-		String standard = (String)request.getAttribute("standard"); 
+		String standard = (String)request.getParameter("standard"); 
+		//String list1 = (String)request.getParameter("list1");
+		//ArrayList<Restaurant> list1 = (ArrayList<Restaurant>)request.getAttribute("list1"); 
 		
 		
 		System.out.println(standard); 
-		//System.out.println(list1); 
+		//System.out.println(list1);
+		
+		//ArrayList<Restaurant> list = (ArrayList<Restaurant>)session.getAttribute("list"); 
+		
+		//System.out.println(list); 
+		
+		 
 		
 		
 		int result = 0; 
 		
-		response.setContentType("text/html; charset=UTF-8"); // 한글포함문자열 돌려줄 때 
 		response.getWriter().print(result);
 		
 	}

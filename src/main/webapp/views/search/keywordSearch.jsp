@@ -5,6 +5,7 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Restaurant> list = (ArrayList<Restaurant>)request.getAttribute("list");
 	String keyword = (String)request.getAttribute("keyword");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -115,9 +116,9 @@
 
                     <!-- 검색결과 필터링: 별점순|방문자순|리뷰순-->
                     <div id="searchFilter">
-                        <span onclick="filterBy('reviewAvg');">별점순</span> |
-                        <span onclick="filterBy('count');">조회순</span> |
-                        <span onclick="filterBy('totalReview');">리뷰순</span>
+                        <span onclick="filterBy('stars');">별점순</span> 
+                        <span onclick="filterBy('counts');">조회순</span> 
+                        <span onclick="filterBy('reviews');">리뷰순</span>
                     </div>
 
                     <!-- 검색결과 조회된 음식점 목록들 -->
@@ -183,6 +184,33 @@
 				            4) jsp (이 페이지에서) 그걸 다시 돌려 받고 화면에 뿌려주면 똑같은 이름으로 뿌려주면 끝 아님?? 
 				  
 				         -->
+				         
+				         <script>
+				         
+				         	function filterBy(a){
+				         		
+				         		const sth = a; 
+				         		
+				         		$.ajax({
+				         			url:"<%=contextPath%>/filter.res",
+				         			dataType:"json",
+				         			traditional:true, 
+				         			data:{
+				         				standard:sth
+				         				list:<%= list %>
+				         			},
+				         			type:"post",
+				         			success:function(result){
+				         				alert("일단 통신은 성공");
+				         			},
+				         			error:function(){
+				         				console.log("ajax 통신 에러");
+				         			}
+				         		
+				         		})
+				         	}
+				         
+				         </script>
 				         
 				         
 
