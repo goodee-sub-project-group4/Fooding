@@ -41,8 +41,8 @@ public class RestCalendarController extends HttpServlet {
 		}else {
 			int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
 			//달력 구성에 필요한 정보 담기
-			String year = request.getParameter("year");
-			String month = request.getParameter("month");
+			String year = (String)session.getAttribute("sessionYear");
+			String month = (String)session.getAttribute("sessionMonth");
 			request.setAttribute("year", year);
 			request.setAttribute("month", month);
 			

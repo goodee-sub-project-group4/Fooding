@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.fd.review.model.vo.Review" %>
-
-<% 
+<%
 	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+	
 %>
-
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,20 +42,20 @@
         #review-title6 {height:100%; width:10%; position:absolute; top:0px; left:90%;}
        
         /* 내용틀 */
-        .review-content {height:180px; border-bottom:1px solid black; position:relative;}
-        .review-content:hover {cursor:pointer;}
-        .review-content1 {height:100%; width:5%; text-align:center; padding-top:70px;}
-        .review-content2 {height:100%; width:5%; position:absolute; top:0px; left:5%; text-align:center; padding-top:70px;}
-        .review-content3 {height:100%; width:20%; position:absolute; top:0px; left:10%;text-align:center; padding-top:20px;}
-        .review-content4 {height:100%; width:35%; position:absolute; top:0px; left:30%;}
-        .review-content5 {height:100%; width:10%; position:absolute; top:0px; left:65%; text-align:center; padding-top:70px;}
-        .review-content6 {height:100%; width:15%; position:absolute; top:0px; left:75%; text-align:center; padding-top:70px;}
-        .review-content7 {height:100%; width:10%; position:absolute; top:0px; left:90%; text-align:center; padding-top:65px;}
+        #review-content {height:180px; border-bottom:1px solid black; position:relative;}
+        #review-content:hover {cursor:pointer;}
+        #review-content1 {height:100%; width:5%; text-align:center; padding-top:70px;}
+        #review-content2 {height:100%; width:5%; position:absolute; top:0px; left:5%; text-align:center; padding-top:70px;}
+        #review-content3 {height:100%; width:20%; position:absolute; top:0px; left:10%;text-align:center; padding-top:20px;}
+        #review-content4 {height:100%; width:35%; position:absolute; top:0px; left:30%;}
+        #review-content5 {height:100%; width:10%; position:absolute; top:0px; left:65%; text-align:center; padding-top:70px;}
+        #review-content6 {height:100%; width:15%; position:absolute; top:0px; left:75%; text-align:center; padding-top:70px;}
+        #review-content7 {height:100%; width:10%; position:absolute; top:0px; left:90%; text-align:center; padding-top:65px;}
 
         /* 내용 */
-        .review-content4-1 {height:30%; padding:20px; padding-top:40px; font-weight:600;}
-        .review-content4-2 {height:70%; padding:20px; color:rgb(86, 86, 86);}
-        .review-content7 button {height:35px;}
+        #review-content4-1 {height:30%; padding:20px; padding-top:40px; font-weight:600;}
+        #review-content4-2 {height:70%; padding:20px; color:rgb(86, 86, 86);}
+        #review-content7 button {height:35px;}
         
         /* 페이징 */
         #paging {margin-top: 50px;}
@@ -136,14 +137,13 @@
 	<% } else { %>
         <!-- case2. 리뷰가 있을 경우 -->
         <% for(Review r : list) { %>
-        <div class="review-content">
-        	
-            <div class="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
-            <div class="review-content2"><%= r.getReviewNo() %></div>
-            <div class="review-content3"><img src="" width="125" height="140" data-toggle="modal" data-target="#reviewDetailModal" onclick="viewDetail(<%=r.getReviewNo()%>)"></div>
-            <div class="review-content4" data-toggle="modal" data-target="#reviewDetailModal" onclick="viewDetail(<%=r.getReviewNo()%>)">
+        <div id="review-content">
+            <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
+            <div id="review-content2"><%= r.getReviewNo() %></div>
+            <div id="review-content3"><img src="" width="125" height="140" data-toggle="modal" data-target="#reviewDetailModal"></div>
+            <div id="review-content4" data-toggle="modal" data-target="#reviewDetailModal">
             	
-                <div class="review-content4-1"><%= r.getResNo() %></div>
+                <div id="review-content4-1"><%= r.getResNo() %></div>
              	<%
              		String rc = r.getReviewContent();
              		String finalRc = "";
@@ -153,11 +153,11 @@
              			finalRc = r.getReviewContent();
              		}
              	%>
-                <div class="review-content4-2"><%= finalRc %></div>
+                <div id="review-content4-2"><%= finalRc %></div>
             </div>
-            <div class="review-content5">★ <%= r.getStar() %></div>
-            <div class="review-content6"><%= r.getCreateDate() %></div>
-            <div class="review-content7"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reviewDetailModal">수정</button></div>
+            <div id="review-content5">★ <%= r.getStar() %></div>
+            <div id="review-content6"><%= r.getCreateDate() %></div>
+            <div id="review-content7"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reviewDetailModal">수정</button></div>
             
         </div>
        <% } %>
@@ -179,182 +179,132 @@
     </div>
     
 	<!-- 리뷰쓰기모달  -->
-    <!-- The Modal -->
-    <div class="modal fade" id="reviewDetailModal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+                <!-- The Modal -->
+                <div class="modal fade" id="reviewDetailModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
 
-                <!-- Modal Header -->
-                <div class="modal-header1">
-                    <h3 class="modal-title"><b>리뷰</b></h3><br>
-                    <button type="button" onclick="modalClose();" class="close" data-dismiss="modal">&times;</button>
+                            <!-- Modal Header -->
+                            <div class="modal-header1">
+                                <h3 class="modal-title"><b>리뷰</b></h3><br>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <form action="<%= contextPath%>/reviewForm.re" id="review-form" method="post" enctype="multipart/form-data">
+                                <div class="modal-body"></div>
+                                    <div class="review-content22">
+                                        <div id="review-content22-1"><img src="" width="130" height="160"></div> <!-- 업체이미지 가져와야함 -->
+                                        <div id="review-content22-2">
+                                            <div id="review-content22-2-1">업체명</div> <!-- 업체명 가져와야함  -->
+                                            <!-- <input type="hidden" name="resNo" value="">
+                                            <input type="hidden" name="userNo" value=""> -->
+                                            
+                                        </div>
+                                        <div id="review-content22-3">
+                                            <p>★ 별점</p>
+                                            <select name="star" id="star">
+                                                <option value="1.0">1.0</option>
+                                                <option value="1.5">1.5</option>
+                                                <option value="2.0">2.0</option>
+                                                <option value="2.5">2.5</option>
+                                                <option value="3.0">3.0</option>
+                                                <option value="3.5">3.5</option>
+                                                <option value="4.0">4.0</option>
+                                                <option value="4.5">4.5</option>
+                                                <option value="5.0" selected>5.0</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="review-content33">
+                                        <div id="review-content33-1">
+                                            <p>내용</p>
+                                        </div>
+                                        <div id="review-content33-2"><textarea name="reviewContent" style="resize:none"
+                                                required></textarea></div>
+                                    </div>
+                                    <div class="review-content44">
+                                        <div id="review-content44-1">
+                                            <p>사진첨부</p>
+                                        </div>
+                                        <div id="review-content44-2">
+                                        	<!-- src: 저장경로+실제파일명 -->
+                                            <img id="img1" src="" width="150" height="150">
+                                            <img id="img2" src="" width="150" height="150">
+                                            <img id="img3" src="" width="150" height="150">
+
+                                            <div id="file-area" style="display:none">
+                                                <input type="file" name="file1" onchange="loadImg(this, 1);">
+                                                <input type="file" name="file2" onchange="loadImg(this, 2);">
+                                                <input type="file" name="file3" onchange="loadImg(this, 3);">
+                                            </div>
+
+                                            <br>
+                                            <p> - 사진은 최대 8 장까지, 30 MB 이하의 이미지만 업로드가 가능합니다. <br>
+                                                - 상품과 무관하거나 반복되는 동일 단어 / 문장을 사용하여 후기로 볼 수
+                                                없는 <br>&nbsp 글, 판매자와 고객의 후기 이용을 방해한다고 판단되는 경우,
+                                                배송 박스, 구매 <br>&nbsp 상품을 구분할 수 없는 전체 사진, 화면캡쳐, 음란 및 부적절하
+                                                거나 불법적인 <br>&nbsp 내용은 통보없이 삭제 및 적립금 회수될 수 있습니다. <br>
+                                                - 전화번호, 이메일, 주소, 계좌번호 등 개인정보가 노출되지 않도록 주의해
+                                                주<br>&nbsp세요. <br>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer" style="border:none;">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="width=90px;">확인</button>
+                                    </div>
+                                    <br>
+                            </form>
+                            
+                            <!-- 사진첨부 스크립트 -->
+                            <script>
+                            	// 클릭했을 때 파일첨부 가능
+                            	function clickFile(num) {
+                            		$("input[name=file" + num + "]" ).click();
+                            	}
+                            
+                            
+                         		// inputFile : input type="file" 요소객체 / num : input요소에 변화가 생겼는지 구분숫자(해당 img 영역)
+                                function loadImg(inputFile, num) {
+                                    
+                         			if(inputFile.files.length == 1) { // 파일이 있다면 미리보기
+                         				// 파일 읽을 FileReader 객체생성
+                         				const reader = new FileReader();
+                         				// 파일 읽어들이는 메소드 실행
+                         				reader.readAsDataURL(inputFile.files[0]);
+                         				// 이 파일만의 고유한 url 부여됨
+                         				
+                         				// 읽기 완료. 실행할 함수
+                         				reader.onload = function(e) { 
+                         					// e.target.result : url 경로
+                         					switch(num) {
+                         					case 1 : $("#img1").attr("src", e.target.result); break;
+                         					case 2 : $("#img2").attr("src", e.target.result); break;
+                         					case 3 : $("#img3").attr("src", e.target.result); break;
+                         					}
+                         				}
+                         				
+                         			} else { // 미리보기 취소
+                         				switch(num) {
+                     					case 1 : $("#img1").attr("src", null); break;
+                     					case 2 : $("#img2").attr("src", null); break;
+                     					case 3 : $("#img3").attr("src", null); break;
+                     					}
+                         				
+                         			}
+                                    
+                                }
+                            
+                            </script>
+                           
+                            
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Modal body -->
-                <form action= id="reviewDetail" method="post">
-                    <div class="modal-body"></div>
-                        <div class="review-content22">
-                            <div id="review-content22-1"><img src="" width="130" height="160"></div> <!-- 업체이미지 가져와야함 -->
-                            <div id="review-content22-2">
-                                <div id="review-content22-2-1">업체명</div> <!-- 업체명 가져와야함  -->
-                                <!-- <input type="hidden" name="resNo" value="">
-                                <input type="hidden" name="userNo" value=""> -->
-                                
-                            </div>
-                            <div id="review-content22-3">
-                                <p>★ 별점</p>
-                                <select name="selectBoxStar" id="selectBoxStar">
-                                    <option value="1">1.0</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="2">2.0</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="3">3.0</option>
-                                    <option value="3.5">3.5</option>
-                                    <option value="4">4.0</option>
-                                    <option value="4.5">4.5</option>
-                                    <option value="5">5.0</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="review-content33">
-                            <div id="review-content33-1">
-                                <p>내용</p>
-                            </div>
-                            <div id="review-content33-2">
-                            	<textarea name="reviewContent" style="resize:none" required readonly></textarea>
-							</div>
-                        </div>
-                        <div class="review-content44">
-                            <div id="review-content44-1">
-                                <p>사진첨부</p>
-                            </div>
-                            <div id="review-content44-2" name="reviewImages">
-                            	<!-- src: 저장경로+실제파일명 -->
-                                <!-- <img id="img1" src="" width="150" height="150">
-                                <img id="img2" src="" width="150" height="150">
-                                <img id="img3" src="" width="150" height="150">
-
-                                <div id="file-area" style="display:none">
-                                    <input type="file" name="file1" onchange="loadImg(this, 1);">
-                                    <input type="file" name="file2" onchange="loadImg(this, 2);">
-                                    <input type="file" name="file3" onchange="loadImg(this, 3);">
-                                </div> -->
-
-                                <br>
-                                <p> - 사진은 최대 8 장까지, 30 MB 이하의 이미지만 업로드가 가능합니다. <br>
-                                    - 상품과 무관하거나 반복되는 동일 단어 / 문장을 사용하여 후기로 볼 수
-                                    없는 <br>&nbsp 글, 판매자와 고객의 후기 이용을 방해한다고 판단되는 경우,
-                                    배송 박스, 구매 <br>&nbsp 상품을 구분할 수 없는 전체 사진, 화면캡쳐, 음란 및 부적절하
-                                    거나 불법적인 <br>&nbsp 내용은 통보없이 삭제 및 적립금 회수될 수 있습니다. <br>
-                                    - 전화번호, 이메일, 주소, 계좌번호 등 개인정보가 노출되지 않도록 주의해
-                                    주<br>&nbsp세요. <br>
-                                </p>
-                            </div>
-                        </div>
-                        <br>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer" style="border:none;">
-                            <button type="button" class="btn btn-danger" onclick="modalClose();" data-dismiss="modal" style="width:90px;">확인</button>
-                        </div>
-                        <br>
-                </form>
-                
-                <!-- 사진첨부 스크립트 -->
-                <script>
-                	// 클릭했을 때 파일첨부 가능
-                	function clickFile(num) {
-                		$("input[name=file" + num + "]" ).click();
-                	}
-                
-                
-             		// inputFile : input type="file" 요소객체 / num : input요소에 변화가 생겼는지 구분숫자(해당 img 영역)
-                    function loadImg(inputFile, num) {
-                        
-             			if(inputFile.files.length == 1) { // 파일이 있다면 미리보기
-             				// 파일 읽을 FileReader 객체생성
-             				const reader = new FileReader();
-             				// 파일 읽어들이는 메소드 실행
-             				reader.readAsDataURL(inputFile.files[0]);
-             				// 이 파일만의 고유한 url 부여됨
-             				
-             				// 읽기 완료. 실행할 함수
-             				reader.onload = function(e) { 
-             					// e.target.result : url 경로
-             					switch(num) {
-             					case 1 : $("#img1").attr("src", e.target.result); break;
-             					case 2 : $("#img2").attr("src", e.target.result); break;
-             					case 3 : $("#img3").attr("src", e.target.result); break;
-             					}
-             				}
-             				
-             			} else { // 미리보기 취소
-             				switch(num) {
-         					case 1 : $("#img1").attr("src", null); break;
-         					case 2 : $("#img2").attr("src", null); break;
-         					case 3 : $("#img3").attr("src", null); break;
-         					}
-             				
-             			}
-                        
-                    }
-                	
-                	/* 리뷰상세보기 */
-                	function viewDetail(reviewNo) {
-                		
-                		// 리뷰 상세 텍스트
-						$.ajax({
-							url:"<%=contextPath%>/reviewDetail.me",
-							data:{reviewNo:reviewNo},
-							success: function(resData) {
-								console.log("리뷰 상세 텍스트")
-								console.log(resData);
-								$('#review-content22-2-1').text(resData.resName);
-								$("#selectBoxStar").val(resData.star).prop("selected", true);
-								$('#review-content33-2 textarea[name=reviewContent]').text(resData.reviewContent);
-							}, error: function() {
-								console.log("리뷰상세조회 ajax 통신실패")
-							}
-						});
-						
-                		// 리뷰 상세 파일첨부 가져오기
-						$.ajax({
-							url:"<%=contextPath%>/reviewDetailFile.me",
-							data:{reviewNo:reviewNo},
-							success: function(resData) {
-								console.log("리뷰 상세 파일")
-								console.log(resData);
-								
-								let html = "";
-								
-								html += '<div id="review-content44-2" name="reviewImages">'
-								for (let i=0; i<resData.length; i++) {
-									console.log(resData[i].filePath + resData[i].changeName)
-									html += '<img src="' + resData[i].filePath + resData[i].changeName + '" width="150" height="150">'
-								}
-								html += '</div>'
-								
-								const htmlId = $("#review-content44-2");
-								htmlId.append(html);
-								
-							}, error: function() {
-								console.log("리뷰상세조회 ajax 통신실패")
-							}
-						});
-						
-					}
-				
-                	// 모달 닫기
-                	const modalClose = () => {
-                		$("#review-content44-2").empty()	// 모달 닫을때 이미지 제거
-                	}
-                	
-                </script>
-                
-            </div>
-        </div>
-    </div>
-  </div>
+              </div>
     
    
 </body>

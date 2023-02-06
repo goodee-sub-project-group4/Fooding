@@ -32,10 +32,10 @@ public class AjaxPointSelectController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json; charset=UTF-8");
-		int userNo = Integer.parseInt(request.getParameter("input"));
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
-		Point po = new BookService().selectPoint(userNo);
-		new Gson().toJson(po, response.getWriter());
+		int pointNow = new BookService().selectPoint(userNo);
+		response.getWriter().print(pointNow);
 	}
 
 	/**

@@ -8,8 +8,8 @@
 <%
 	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
 	ArrayList<Menu> menuList = (ArrayList<Menu>)request.getAttribute("menuList");
-	int bookNo = (int)request.getAttribute("bookNo");
-	//ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
+	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
+    Point point = (Point)request.getAttribute("point");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -58,7 +58,7 @@
         .menu img{width: 180px; height: 100px;}
 
         /* 리뷰 */
-        #content2-2{margin-top: 20px; float: left; max-height: 1700px; overflow: auto;}
+        #content2-2{width: 100%; margin-top: 20px; float: left; min-height: 500px;  max-height: 1700px; overflow: auto;}
         #content2-2 div{box-sizing: border-box;}
         #review-head{height: 50px; border: 2px solid gainsboro; padding: 5px; margin-bottom: 4px;}
         .review-content div{float: left; padding: 5px;}
@@ -66,10 +66,10 @@
         /* 리뷰 제목 */
         .review-content1-2{width: 80%; height: 60px; border-top: 2px solid gainsboro; border-right: 2px solid gainsboro;}
         /* 리뷰 작성자 */
-        .review-content2-1{width: 20%; height: 355px; border-left: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
-        .review-content2-2{width: 80%; height: 355px; border-right: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
+        .review-content2-1{width: 20%; height: 255px; border-left: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
+        .review-content2-2{width: 80%; height: 255px; border-right: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
         /* 리뷰 내용 */
-        .review-text{width: 100%; height: 200px;}
+        .review-text{width: 100%; height: 100px;}
         /* 리뷰 사진 */
         .review-picture{width: 100%; height: 150px; padding: 10px; text-align: center;}
         .review-picture img{width: 140px; height: 120px;}
@@ -231,76 +231,44 @@
                         </div>
                     </div>
                     <div id="content2-2">
-                        <div id="review-head">
+                        <div id="review-head" style="font-size: 25px; font-weight: 700;">
                             사용자 리뷰
                         </div>
-                        <!-- <% //if(!reviewList.isEmpty()) { %> -->
-                        	<!-- <% //for(Review r : reviewList) { %> -->
+                        <% if(reviewList.isEmpty()) { %>
+                            <div class="review-content">
+                                <div style="margin-top: 20px; width: 100%; height: 200px; line-height: 200px; font-size: 20px; font-weight: 600; color: gray; text-align: center; border: 2px solid gainsboro;">
+                                    조회된 리뷰가 없습니다.
+                                </div>
+                            </div>
+                        <% }else{ %>
+                        	<% for(Review r : reviewList) { %>
 	                        <div class="review-content">
 	                            <div class="review-content1-1">
 	                            </div>
 	                            <div class="review-content1-2">
-	                                리뷰 작성일<br>
-	                                리뷰 제목
+	                                <%= r.getCreateDate() %>
 	                            </div>
 	                            <div class="review-content2-1">
-	                                홍길동<br>
-	                                별점
+	                                <%= r.getNickName() %><br>
+	                                <%= r.getStar() %>
 	                            </div>
 	                            <div class="review-content2-2">
-	                                <div class="review-text"></div>
+	                                <div class="review-text">
+                                        <%= r.getReviewContent() %>
+                                    </div>
 	                                <div class="review-picture">
-	                                    <img src="sample2.jpeg" alt="">
+	                                    <img src="" alt="">
 	                                    <img src="sample2.jpeg" alt="">
 	                                    <img src="sample2.jpeg" alt="">
 	                                </div>
 	                            </div>
 	                        </div>
-                        	<!-- <% //} %>
-                        <% //} %> -->
-                        <div class="review-content">
-                            <div class="review-content1-1">
+                        	<% } %>
+                            <div class="paging">
+                                < 1 2 3 4 5 6 7 8 9 >
                             </div>
-                            <div class="review-content1-2">
-                                리뷰 작성일<br>
-                                리뷰 제목
-                            </div>
-                            <div class="review-content2-1">
-                                홍길동<br>
-                                별점
-                            </div>
-                            <div class="review-content2-2">
-                                <div class="review-text"></div>
-                                <div class="review-picture">
-                                    <img src="sample2.jpeg" alt="">
-                                    <img src="sample2.jpeg" alt="">
-                                    <img src="sample2.jpeg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-content">
-                            <div class="review-content1-1">
-                            </div>
-                            <div class="review-content1-2">
-                                리뷰 작성일<br>
-                                리뷰 제목
-                            </div>
-                            <div class="review-content2-1">
-                                홍길동<br>
-                                별점
-                            </div>
-                            <div class="review-content2-2">
-                                <div class="review-text"></div>
-                                <div class="review-picture">
-                                    <img src="sample2.jpeg" alt="">
-                                    <img src="sample2.jpeg" alt="">
-                                    <img src="sample2.jpeg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="paging">
-                            < 1 2 3 4 5 6 7 8 9 >
-                        </div>
+                        <% } %>
+                        
                     </div>
                     
                 </div>
@@ -476,7 +444,7 @@
                                     <table style="width: 100%;">
                                         <tr>
                                             <td style="width: 50%;">현재 적립금</td>
-                                            <td style="width: 50%; text-align: right;" id="pointNow">원</td>
+                                            <td style="width: 50%; text-align: right;" id="pointNow">0원</td>
                                         </tr>
                                         <tr>
                                             <td>적립금 사용</td>
@@ -492,11 +460,11 @@
                                         </tr>
                                         <tr>
                                             <td>적립금 사용</td>
-                                            <td style="text-align: right;" id="pointUse2">원</td>
+                                            <td style="text-align: right;" id="pointUse2">0원</td>
                                         </tr>
                                         <tr>
                                             <td>예상 적립금</td>
-                                            <td style="text-align: right;" id="pointResult">원</td>
+                                            <td style="text-align: right;" id="pointResult">0원</td>
                                         </tr>
                                         <tr>
                                             <td style="font-weight: 700; font-size: 25px;">최종 결제 금액</td>
@@ -534,6 +502,7 @@
                     <!-- 메뉴 / 결제창 -->
                     <script>
                         const transNumber = /[^0-9]/g;
+                        let f = 1; // 결제 번호 증가용
 
                         // 결제 박스
                         $(document).on('keyup', '#pointUse', function(e){
@@ -551,7 +520,7 @@
                                 alert('보유 적립금 이상으로 입력할 수 없습니다.')
                                 pointUse.val(parseInt($('#pointNow').text().replace(transNumber, "")));
                             }else if(pointUse.val() < 0){
-                                alert('0보다 작은 숫자는 입력할 수 없습니다.')
+                                alert('0보다 작은 숫자는 입력할 수 없습니다.');
                                 pointUse.val(0)
                                 pointUse2.text(0 + '원')
                             }
@@ -762,21 +731,18 @@
                             <% if(loginUser != null) { %>
                             const menuChoice = document.querySelectorAll(".menuName"); // [td, td, ..]
                             let menu = [];
+                            let num = f + 1;
+                            console.log(f)
                             for(let i=0; i<menuChoice.length; i++){
                                 menu.push(menuChoice[i].innerText);
                             }
                             // ["xx", "bb"]
                             // IMP.request_pay(param, callback)
-                            let f = 1;
                             console.log($('#pointUse').val())
                             IMP.request_pay({ // param
                                 pg: "html5_inicis",
                                 pay_method: "card",
-                                <% if(bookNo == 0) { %>
-                                    merchant_uid: "FOODING-pay" + f + "-1",
-                                <% }else{ %>
-                                    merchant_uid: "FOODING-pay" + "exam"+ f + "-<%= bookNo + 1 %>",
-                                <% } %>
+                                merchant_uid: "FOODING-pay" + "exam7"+ num,
                                 name: menu.join("<br>"),
                                 amount: $('#sum-payment').text().replace(transNumber, ""),
                                 buyer_email: $('.email').val(),
@@ -784,8 +750,8 @@
                                 buyer_tel: $('.bookPhone').val()
                             }, function (rsp) { // callback
                                 let reservation = {
-                                    bookNo: <%= bookNo + 1 %>,
                                     payPoint: $('#pointUse').val(),
+                                    savePoint: $('#pointResult').text().replace(transNumber, ""),
                                     amount: $('#sum-payment').text().replace(transNumber, ""),
                                     payMethod: rsp.pay_method,
                                     bookName: rsp.buyer_name,
@@ -796,9 +762,9 @@
                                     people: $('.people').val(),
                                     request: $('.request').val(),
                                     userNo: <%= loginUser.getUserNo() %>,
-                                    resNo: <%= restaurant.getResNo() %>
+                                    resNo: <%= restaurant.getResNo() %>,
+                                    resName: "<%= restaurant.getResName() %>"
                                 }
-                                f++
                                 if (rsp.success) {
                                     $.ajax({
                                         url: "<%= contextPath %>/insert.bo", // 예: https://www.myservice.com/payments/complete
@@ -811,10 +777,10 @@
                                     location.href = "<%= contextPath %>/check.bo"
                                 } else {
                                     alert("결제에 실패했습니다.")
-                                }
+                                };
                             });
                             <% } %>
-                        }
+                        };
                       </script>
 
                       
@@ -877,7 +843,6 @@
                                     </td>
                                 </tr>
                         </table>
-                        
                         <div></div>
                     </div>
                     <br>
@@ -920,11 +885,11 @@
                     		$('#book-final').click(function(){
                                 $.ajax({
                                     url:"<%= contextPath %>/select.po",
-                                    data:{input:<%= loginUser.getUserNo() %>},
+                                    data:{userNo:<%= loginUser.getUserNo() %>},
                                     type:"post",
-                                    success:function(result){
-                                    	if(result != null){
-                                    		$('#pointNow').text(result.pointNow + "원");
+                                    success:function(pointNow){
+                                    	if(pointNow != null){
+                                    		$('#pointNow').text(pointNow + "원");
                                     	}else{
                                     		$('#pointNow').text("0원")
                                     	}

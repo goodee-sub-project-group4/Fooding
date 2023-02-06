@@ -29,9 +29,8 @@ public class Payment {
 	}
 
 
-	public Payment(int bookNo, int resNo, int userNo, int payPoint, int payTotal, String payOp) {
+	public Payment(int resNo, int userNo, int payPoint, int payTotal, String payOp) {
 		super();
-		this.bookNo = bookNo;
 		this.resNo = resNo;
 		this.userNo = userNo;
 		this.payPoint = payPoint;

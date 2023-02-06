@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fd.book.model.service.BookService;
 import com.fd.book.model.vo.Book;
 import com.fd.book.model.vo.Payment;
+import com.fd.book.model.vo.Point;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -56,18 +57,21 @@ public class AjaxBookInsertController extends HttpServlet {
 		int people = element.getAsJsonObject().get("people").getAsInt();
 		String email = element.getAsJsonObject().get("email").getAsString();
 		String userRequest = element.getAsJsonObject().get("request").getAsString();
-		
 		Book book = new Book(userNo, resNo, bookName, bookPhone, bookDate, bookTime, people, email, userRequest);
-		new BookService().insertBook(book);
 		
 		// 결제 인설트
-		int bookNo = element.getAsJsonObject().get("bookNo").getAsInt();
 		int payPoint = element.getAsJsonObject().get("payPoint").getAsInt();
 		int payTotal = element.getAsJsonObject().get("amount").getAsInt();
 		String payOp = element.getAsJsonObject().get("payMethod").getAsString();
+		Payment payment = new Payment(resNo, userNo, payPoint, payTotal, payOp);
 		
-		Payment payment = new Payment(bookNo, resNo, userNo, payPoint, payTotal, payOp);
-		new BookService().insertPayment(payment);
+		// 포인트 인설트
+		String pointName = bookDate + " " + element.getAsJsonObject().get("resName").getAsString();
+		int pointTrade = element.getAsJsonObject().get("savePoint").getAsInt();
+		Point point = new Point(userNo, resNo, pointName, pointTrade, payPoint);
+		
+		
+		new BookService().insertBook(book, payment, point);
 		
 		
 		response.setContentType("application/json; charset=UTF-8");

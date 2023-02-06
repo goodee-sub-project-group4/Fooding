@@ -15,6 +15,7 @@ import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
 import com.fd.admin.model.vo.Question;
 import com.fd.common.model.vo.PageInfo;
+import com.fd.customerService.model.vo.Attachment;
 
 public class MemberNoticeDao {
 	
@@ -275,9 +276,67 @@ public class MemberNoticeDao {
 
 	}
 	
+	/** 1:1문의(관리자)글쓰기
+	 * @param conn
+	 * @param q
+	 * @return result1
+	 */
+	public int insertQuestionAdmin(Connection conn, Question q) {
+		// insert
+		int result1 = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertQuestionAdmin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, q.getCategory());
+			pstmt.setString(2, q.getqTitle());
+			pstmt.setString(3, q.getqContent());
+			pstmt.setString(4, q.getqPerson());
+			
+			result1 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result1;
+		
+	}
 	
+	/** 1:1문의(관리자)글쓰기 사진첨부
+	 * @param conn
+	 * @param at
+	 * @return result2
+	 */
+	public int insertQuestionAttachment(Connection conn, Attachment at) {
+		// insert
+		int result2 = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertQuestionAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getOriginName());
+			pstmt.setString(2, at.getChangeName());
+			pstmt.setString(3, at.getFilePath());
+			
+			
+			result2 = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 	
-	
+		return result2;
+		
+	}
 	
 	
 	

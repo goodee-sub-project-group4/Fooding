@@ -13,6 +13,7 @@ import com.fd.admin.model.vo.Notice;
 import com.fd.admin.model.vo.Question;
 import com.fd.common.model.vo.PageInfo;
 import com.fd.customerService.model.dao.MemberNoticeDao;
+import com.fd.customerService.model.vo.Attachment;
 
 
 public class MemberNoticeService {
@@ -107,6 +108,32 @@ public class MemberNoticeService {
 		ArrayList<Question> listA = new MemberNoticeDao().selectMemberQuestionListA(conn);
 		close(conn);
 		return listA;
+		
+	}
+	
+	/** 1:1문의(관리자)글쓰기
+	 * @author 빛나
+	 * @param q
+	 * @param at
+	 * @return 
+	 */
+	public int insertQuestion(Question q, Attachment at) {
+		
+		Connection conn = getConnection();
+		int result1 = new MemberNoticeDao().insertQuestionAdmin(conn, q);
+		
+		int result2 = 1;
+		if(at != null) {
+			result2 = new MemberNoticeDao().insertQuestionAttachment(conn, at);
+		} 
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result1*result2;
 		
 	}
 	

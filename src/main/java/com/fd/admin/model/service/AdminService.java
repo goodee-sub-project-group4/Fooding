@@ -460,10 +460,61 @@ public class AdminService {
 	}
 
 
+	// ==========================================================================
 
+	/**업체 등록 요청 리스트
+	 * @return
+	 */
+	public ArrayList<Restaurant> selectRegisterList() {
+		Connection conn = getConnection();
+		ArrayList<Restaurant> list = new AdminDao().selectRegisterList(conn);
+		close(conn);
+		return list;
+	}
 
 	
-	
+	// 업체 등록 상세 조회
+	/**조회수
+	 * @param resNo
+	 * @return
+	 */
+	public int increseCountRes(int resNo) {
+		Connection conn = getConnection();
+		int result = new AdminDao().increseCountRegister(conn, resNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	/**게시물 조회
+	 * @param resNo
+	 * @return
+	 */
+	public Restaurant selectRegister(int resNo) {
+		Connection conn = getConnection();
+		Restaurant r = new AdminDao().selectRegister(conn, resNo);
+		close(conn);
+		return r;
+	}
+
+	/**게시물 첨부파일 조회
+	 * @param resNo
+	 * @return
+	 */
+	public Attachment selectRegisterAttachment(int resNo) {
+		Connection conn = getConnection();
+		Attachment at = new AdminDao().selectRegisterAttachment(conn, resNo);
+		close(conn);
+		return at;
+	}
+
+
+
+
 	
 	
 }

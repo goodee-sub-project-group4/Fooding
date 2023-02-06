@@ -60,19 +60,29 @@ public class BookService {
 
 
 
-	public Point selectPoint(int userNo) {
+	public int selectPoint(int userNo) {
 		Connection conn = getConnection();
-		Point po = new BookDao().selectPoint(conn, userNo);
+		int pointNow = new BookDao().selectPoint(conn, userNo);
 		close(conn);
-		return po;
+		return pointNow;
 	}
 
 
 
-	public void insertBook(Book book) {
+	public void insertBook(Book book, Payment payment, Point point) {
 		Connection conn = getConnection();
-		int result = new BookDao().insertBook(conn, book);
-		if(result > 0) {
+		int insertBook = new BookDao().insertBook(conn, book);
+		int insertPayment = new BookDao().insertPayment(conn, payment);
+		if(payment.getPayPoint() > 0) {
+			int insertPayPoint = new BookDao().insertPayPoint(conn, point);
+			if(insertPayPoint > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		}
+		int insertSavePoint = new BookDao().insertSavePoint(conn, point);
+		if(insertBook > 0 && insertPayment > 0 && insertSavePoint > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
@@ -82,38 +92,23 @@ public class BookService {
 
 
 
-	public void insertPayment(Payment payment) {
+	public ArrayList<Review> selectReview(int resNo) {
 		Connection conn = getConnection();
-		int result = new BookDao().insertBook(conn, payment);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
+		ArrayList<Review> list = new BookDao().selectReview(resNo, conn);
 		close(conn);
+		return list;
 	}
-
-
-
-//	public ArrayList<Review> selectReview(int resNo) {
-//		Connection conn = getConnection();
-//		ArrayList<Review> list = new BookDao().selectReview(resNo, conn);
-//		close(conn);
-//		return list;
-//	}
 	
 	/** (마이페이지) 예약/결제 내역 리스트
 	 * @author 빛나 
 	 * @return result
 	 */
-	public int selectBookList(int userNo) {
-		
-		Connection conn = getConnection();
-		int result = new BookDao().selectBookList(conn, userNo);
-		close(conn);
-		return result;
-		
-	}
+//	public int selectBookList(int userNo) {
+//		Connection conn = getConnection();
+//		int result = new BookDao().selectBookList(conn, userNo);
+//		close(conn);
+//		return result;
+//	}
 
 	
 }

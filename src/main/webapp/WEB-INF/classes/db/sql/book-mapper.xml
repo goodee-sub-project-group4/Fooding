@@ -55,11 +55,11 @@
 	       AND STATUS = 'Y'
 	</entry>
 	
-	<!-- <entry key="selectReview">
+	<entry key="selectReview">
 		SELECT
 			   REVIEW_NO
 			 , RE.RES_NO
-			 , USER_NO
+			 , RE.USER_NO
 			 , BOOK_NO
 			 , REVIEW_CONTENT
 			 , RE.STAR
@@ -67,12 +67,14 @@
 			 , RE.MODIFY_DATE
 			 , GOOD
 			 , RE.COUNT
+             , NICKNAME
 		  FROM REVIEW RE
 		  JOIN RESTAURANT RS ON (RE.RES_NO = RS.RES_NO)
 		  JOIN ATTACHMENT AT ON (REF_BNO = REVIEW_NO)
+          JOIN TB_USER U ON (U.USER_NO = RE.USER_NO)
 		 WHERE RE.RES_NO = ?
-		   AND RE.STATUS = 'Y'  
-	</entry> -->
+		   AND RE.STATUS = 'Y' 
+	</entry>
 	
 	<entry key="selectBookNo">
 		SELECT BOOK_NO
@@ -80,11 +82,13 @@
 	</entry>
 	
 	<entry key="selectPoint">
-		SELECT 
-			   POINT_NO
-			 , POINT_NOW
-		  FROM POINT
-		 WHERE USER_NO = ?
+		SELECT POINT_NOW
+          FROM (SELECT POINT_NOW
+                  FROM POINT
+                 WHERE USER_NO = ?
+                 ORDER 
+                    BY POINT_NOW DESC)
+          WHERE ROWNUM = 1
 	</entry>
 	
 	<entry key="insertBook">
@@ -135,13 +139,77 @@
 		VALUES
 		     (
 		       SEQ_PMNO.NEXTVAL
-		     , ?
+		     , SEQ_BKNO.CURRVAL
 		     , ?
 		     , ?
 		     , ?
 		     , ?
 		     , ?
 		     , 'Y'
+		     )
+	</entry>
+	
+	<entry key="insertPayPoint">
+		INSERT 
+		  INTO POINT
+		     (
+		       POINT_NO
+			 , PAY_NO
+			 , USER_NO
+			 , RES_NO	
+			 , POINT_NAME
+			 , STATUS
+			 , POINT_TRADE
+			 , POINT_NOW
+             )
+		VALUES
+		     (
+		       SEQ_PNO.NEXTVAL
+		     , SEQ_PMNO.CURRVAL
+		     , ?
+		     , ?
+		     , ?
+		     , 'U'
+		     , ?
+		     , (SELECT POINT_NOW - ?
+                  FROM (SELECT POINT_NOW
+                          FROM POINT
+                         WHERE USER_NO = ?
+                         ORDER 
+                            BY POINT_NOW DESC)
+                  WHERE ROWNUM = 1)
+		     )
+	</entry>
+	
+	<entry key="insertSavePoint">
+		INSERT 
+		  INTO POINT
+		     (
+		       POINT_NO
+			 , PAY_NO
+			 , USER_NO
+			 , RES_NO	
+			 , POINT_NAME
+			 , STATUS
+			 , POINT_TRADE
+			 , POINT_NOW
+             )
+		VALUES
+		     (
+		       SEQ_PNO.NEXTVAL
+		     , SEQ_PMNO.CURRVAL
+		     , ?
+		     , ?
+		     , ?
+		     , 'B'
+		     , ?
+		     , (SELECT POINT_NOW + ?
+                  FROM (SELECT POINT_NOW
+                          FROM POINT
+                         WHERE USER_NO = ?
+                         ORDER 
+                            BY POINT_NOW DESC)
+                  WHERE ROWNUM = 1)
 		     )
 	</entry>
 </properties>

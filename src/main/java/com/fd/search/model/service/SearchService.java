@@ -116,10 +116,10 @@ public class SearchService {
 		}
 		
 		// jsp 파일 만들면 사용할 메소드 
-		public ArrayList<Restaurant> selectGoodList(PageInfo pi, int userNo){ //currentPage에 보여질 게시물 리스
+		public ArrayList<Restaurant> selectGoodList(int userNo){ //currentPage에 보여질 게시물 리스
 			
 			Connection conn = getConnection();
-			ArrayList<Restaurant> list= new SearchDao().selectGoodList(conn, pi, userNo); 
+			ArrayList<Restaurant> list= new SearchDao().selectGoodList(conn, userNo); 
 			close(conn); 
 			return list;
 		}
