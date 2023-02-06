@@ -154,7 +154,7 @@
 	                               	<!-- 로그인을 했을 경우 : insertGood() 실행 -->
 	                                <%} else { %>
 	                                	<span class="zzim"> 
-	                                    	<img src="/Fooding/resources/images/heart-empty.png" width="50px;" onclick="insertGood(<%= r.getResNo()%>);">
+	                                    	<img id="<%= r.getResNo() %>" src="/Fooding/resources/images/heart-empty.png" width="50px;" onclick="insertGood(<%= r.getResNo()%>);">
 		                                </span>
 	                                <% } %>
 	                                
@@ -194,11 +194,15 @@
 							<script>
                         
 					        function insertGood(a){
-					        	console.log($('#zzim').val());
+					        	//console.log($('#zzim').val());
 					        	
 					        	//추가코드 아래 두줄
 					        	//const $heartImg = $("img").attr("src"); 
 					        	//$heartImg.text("/Fooding/resources/images/heart.png");
+					        	
+					        	$('#'+a).attr("src", "/Fooding/resources/images/heart-filled.png"); 
+					        	
+					        	//$(".zzim").children("img").attr("src", "/Fooding/resources/images/heart-empty.png"); 
 					        	
 					    		$.ajax({
 					    			url:"<%=contextPath%>/good.sh",
@@ -210,7 +214,9 @@
 					    				if(result > 0 ){ // 찜하기 성공 
 					    					alert("해당 음식점이 찜목록에 추가되었습니다.");
 					    				}else{ // 찜하기 실패 
+					    					$('#'+a).attr("src", "/Fooding/resources/images/heart-empty.png");
 					    					alert("해당 음식점이 찜목록에서 삭제되었습니다."); 
+					    				
 					    				}
 					    			},
 					    			error:function(){
