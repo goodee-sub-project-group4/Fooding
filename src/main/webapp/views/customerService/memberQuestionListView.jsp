@@ -28,6 +28,8 @@
 
     /*페이징바*/
     .pagination a{color:red;}
+    
+    .done {color:red;}
 
 
 </style>
@@ -72,7 +74,7 @@
                             <td><%=qR.getqNo()%></td>
                             <td><%=qR.getqTitle()%></td>
                             <td><%=qR.getCreateDate()%></td>
-                            <td style="color:red;"><%=(qR.getStatus().equals("Y")) ? "처리완료" : "처리중" %></td>
+                            <td class="status"><%=(qR.getStatus().equals("Y")) ? "처리완료" : "처리중" %></td>
                             <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
                         </tr>
                        <% } %>
@@ -109,6 +111,14 @@
         </div>
         
        <script>
+       		$(function() {
+       			$(".status").each(function() {
+       				if($(this).text() == "처리중") {
+       					$(this).addClass("done");
+       				}
+       			});
+       		});
+       
 	     	// 업체 버튼 클릭시
 	        $("#res-btn").click(function() {
 	            $(".res-list").show();

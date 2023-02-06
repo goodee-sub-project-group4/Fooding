@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.common.model.vo.PageInfo, com.fd.restaurant.model.vo.Restaurant" %>
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Restaurant> list = (ArrayList<Restaurant>)request.getAttribute("list"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,77 +31,80 @@
         th {width:25%; height:80px; text-align: right; padding-right:10px;}
         /* 두번째 칸 input */
         .input-area2 {width:50%;}
-        .input-area2 div {width:450px; height:140px; margin:20px; font-size:small; padding-left:10px; border:1px solid red;}
+        .input-area2 div {width:450px; height:140px; margin:20px; font-size:small; padding-left:10px; border:1px solid red; font-size: 18px;}
         .gender-area input {margin:20px;}
         .gender-area {font-weight:600;}
         .birth-area input {margin:20px; width:80px; padding-left:20px; font-weight:600;}
         .check-terms input {margin:20px 10px 0px 20px;}
         /* 세번째 칸 */
         .input-area3 {width:20%;}
-        .input-area3-phone button {margin-left:5px;}
-        .input-area3-nickname button { margin-left:5px; width:125px;}
         .terms {height: 120px;}
         .terms div {padding-left:20px; margin-top:-10px;}
         .terms a {color:black; text-decoration:none; font-weight:600; font-size:14px;}
+        .input-area3-id button {width:110px;}
         /*  가입버튼 */
         #change-btn input {width:130px; height:50px; font-weight:500;}
         #change-btn button {width:130px; height:50px; font-weight:500;}
 
+		/* 페이징 */
+    	.paging-area{height: 50px; text-align: center; padding-top: 20px;}
     </style>
 </head>
 <body>
 	
 	<%@ include file="/views/common/head.jsp" %>
 	<%@ include file="/views/common/myPageSidebar.jsp" %>
+	<%
+		String userId = loginUser.getUserId(); 
+	%>
 
 	<div id="content2-padding">
         <div id="change-area">
-            <b>찜한 음식점 (2)</b>
+            <b>찜 목록 (<%= pi.getListCount() %>)</b>
         </div>
         
         <div id="change-infomation">
             
-                    
-                <table class="table1">
-                    <tr>
-                        <th><img src=""></th>
-                        <td class="input-area2"><div></div></td> 
-                        <td class="input-area3-id"></td>
-                    </tr>
-                    <tr>
-                        <th>미오도쿄다이닝</th>
-                        <td class="input-area2"><div></div></td>
-                        <td class="input-area3"></td>
-                    </tr>
-                    <tr>
-                        <th>미오도쿄다이닝</th>
-                        <td class="input-area2"><div></div></td>
-                        <td class="input-area3"></td>
-                    </tr>
-                    <tr>
-                        <th>미오도쿄다이닝</th>
-                        <td class="input-area2"><div></div></td>
-                        <td class="input-area3"></td>
-                    </tr>
-                    <tr>
-                        <th>미오도쿄다이닝</th>
-                        <td class="input-area2"><div></div></td>
-                        <td class="input-area3"></td>
-                    </tr>
-                    <tr>
-                        <th>미오도쿄다이닝</th>
-                        <td class="input-area2"><div></div></td>
-                        <td class="input-area3"></td>
-                    </tr>
-                    
-                </table>
-                
-                
-                
-                
+			<table class="table1">
+				<% if(list.isEmpty()) { %>
+	               		<tr> <td> 목록이 비어있습니다.</td> </tr>
+	            <% } else { %>
+               		<% for(Restaurant r : list) { %>
+	                    <tr>
+	                        <th><img src="" width="140px" height="140px"></th>
+	                        <td class="input-area2">
+	                            <div>
+	                                음식점 이름: <%= r.getResName()%> <br> 
+	                                업체번호: <%= r.getResNo() %> <br>
+	                                주소: <%= r.getAddress() %> <br>
+	                            </div>
+	                        </td> 
+	                        <td class="input-area3-id">
+	                            <button type="button" class="btn btn-danger">삭제</button>
+	                        </td>
+	                    </tr>
+					<% } %>
+				<% } %>
+			</table>			 
+         </div>
 
+		<div class="paging-area">
+			<%if(!list.isEmpty()) {%>
+
+	        	<% if(pi.getCurrentPage() != 1){ %>
+            	<button onclick="location.href='<%=contextPath%>/goodList.sh?cpage=<%=pi.getCurrentPage()-1%>';">&lt;</button>
+	            <% } %>
+	
+				<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+	            	<button onclick="location.href='<%=contextPath%>/goodList.sh?cpage=<%=p%>';"><%= p %></button>
+	            <% } %>
+	
+				<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+	            	<button onclick="location.href='<%=contextPath%>/goodList.sh?cpage=<%=pi.getCurrentPage()+1%>';">&gt;</button>
+				<% } %>
+			<% } %> 
         </div>
-
+        
     </div>
 
     

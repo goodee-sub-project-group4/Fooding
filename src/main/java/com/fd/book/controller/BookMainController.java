@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fd.book.model.service.BookService;
+import com.fd.book.model.vo.Point;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
 
@@ -39,8 +40,6 @@ public class BookMainController extends HttpServlet {
 		ArrayList<Menu> menuList = new BookService().selectMenu(resNo);
 		// 리뷰 정보 조회
 //		ArrayList<Review> reviewList = new BookService().selectReview(resNo);
-		// 예약 번호 조회
-		int bookNo = new BookService().selectBookNo();
 		// 식당 정보 조회
 		Restaurant restaurant = new BookService().selectRes(resNo);	
 		if(restaurant == null) {
@@ -49,7 +48,6 @@ public class BookMainController extends HttpServlet {
 		}else {
 			request.setAttribute("restaurant", restaurant);
 			request.setAttribute("menuList", menuList);
-			request.setAttribute("bookNo", bookNo);
 //			request.setAttribute("menuList", reviewList);
 			request.getRequestDispatcher("views/book/bookMain.jsp").forward(request, response);
 		}

@@ -41,7 +41,6 @@ public class AjaxRestNotAbleDeleteController extends HttpServlet {
 		na.setMonth(month);
 		na.setYear(year);
 		na.setDate(date);
-		System.out.println(na);
 		
 		//db 처리하고온 후 결과 전달하기
 		int result = new RestaurantService().deleteNotAble(na);

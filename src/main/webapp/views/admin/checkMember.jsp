@@ -421,7 +421,7 @@
                             </tr>
                             <tr>
                                 <th>이름</th>
-                                <td><input id="userNameU" name="userName" type="text" value="" placeholder=""></td>
+                                <td><input id="userNameU" name="userName" type="text" value="" placeholder="">이름</td>
                             </tr>
                             <tr>
                                 <th>닉네임</th>

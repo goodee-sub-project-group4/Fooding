@@ -108,30 +108,6 @@
                     </div>
                     <br>
 
-					<!-- 
-                    <div class="inputForm">
-                        <b class="inputName">영업 시작 시간</b> <span style="color:red;">*</span>  <br>
-                        <input type="text" class="inputBar" name="opne" placeholder="00:00 형식" required>
-                    </div>
-                    <br>
-
-                    <div class="inputForm">
-                        <b class="inputName">영업 종료 시간</b> <span style="color:red;">*</span>  <br>
-                        <input type="text" class="inputBar" name="close" placeholder="00:00 형식" required>
-                    </div>
-                    <br>
-
-                    <div class="inputForm">
-                        <b class="inputName">브레이크 타임 시작 시간</b> <span style="color:red;">*</span>  <br>
-                        <input type="text" class="inputBar" name="breakS" placeholder="00:00 형식" required>
-                    </div>
-                    <br>
-
-                    <div class="inputForm">
-                        <b class="inputName">브레이크 타임 종료 시간</b> <span style="color:red;">*</span>  <br>
-                        <input type="text" class="inputBar" name="breakE" placeholder="00:00 형식" required>
-                    </div>
-                    -->
 
                     <div class="inputForm">
                         <b class="inputName">주소</b> <span style="color:red;">*</span>  <br>
@@ -365,7 +341,7 @@
 
             //업체등록요청 버튼을 누르지 않아도 입력칸에서 focusout 이벤트가 발생하는 순간, 바로바로 유효성체크가 이뤄지도록) 
 
-            // 유효성체크할 목록: 대표자명, 사업자등록번호, 전화번호, 휴대폰번호
+            // 유효성체크할 목록: 대표자명, 사업자등록번호 
             
             $(function(){
 

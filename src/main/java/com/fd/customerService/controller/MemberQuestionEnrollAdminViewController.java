@@ -1,4 +1,4 @@
-package com.fd.book.controller;
+package com.fd.customerService.controller;
 
 import java.io.IOException;
 
@@ -8,21 +8,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fd.book.model.service.BookService;
-import com.fd.book.model.vo.Point;
-import com.google.gson.Gson;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.fd.common.MyFileRenamePolicy;
+import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class AjaxPointSelectController
+ * Servlet implementation class MemberQuestionEnrollAdminViewController
  */
-@WebServlet("/select.po")
-public class AjaxPointSelectController extends HttpServlet {
+@WebServlet("/questionEnrollAdmin.me")
+public class MemberQuestionEnrollAdminViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxPointSelectController() {
+    public MemberQuestionEnrollAdminViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +32,9 @@ public class AjaxPointSelectController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json; charset=UTF-8");
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
-		int pointNow = new BookService().selectPoint(userNo);
-		response.getWriter().print(pointNow);
+		request.getRequestDispatcher("/views/customerService/memberQuestionEnrollAdmin.jsp").forward(request, response);
+		
 	}
 
 	/**

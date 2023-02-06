@@ -56,7 +56,7 @@
                 </div>
 
                 <div id="content1-3">
-                    <div><a href=""><b>도움이 필요하신가요?</b><br><span>1 : 1 문의하기</span></a></div>
+                    <div><a href="<%=request.getContextPath()%>/questionEnrollAdmin.me"><b>도움이 필요하신가요?</b><br><span>1 : 1 문의하기</span></a></div>
                 </div>
 
             </div>

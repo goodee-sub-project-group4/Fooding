@@ -21,14 +21,10 @@
         #notice-area {width: 100%; height: 135px; font-size: 30px; text-align: center; display: inline-block;}
 
         form{margin: 30px;}
+
         th{vertical-align: top; padding-top: 10px;}
-    	#select{
-        height: 40px;
-        padding-left: 15px;
-        border-radius: 6px;}
-        
+    	
     	#qCategory, #qTitle, #qContent, #qImg, #aContent{
-        /*그냥 border-radius 하면 적용안됨*/
         border-collapse: collapse;
         border-radius: 2px;
         border-style: hidden;
@@ -36,17 +32,10 @@
         box-sizing: border-box;
         width: 700px;}
 
-    	#qCategory, #qTitle{padding: 10px; padding-left: 20px;}
+    	#qCategory, #qTitle, #aContent{padding:10px;}
 
-        #qContent{height: 400px;padding: 20px;}
+    	#qContent{height: 250px; padding :10px; }
 
-    	#qImg{height: 250px; text-align: center;}
-
-    	img{margin: 8px;}
-
-    	#aContent{padding: 20px;}
-
-    	#enroll-answer textarea{resize: none;}
     </style>
     
 </head>
@@ -59,48 +48,60 @@
                 <b>내가 쓴 1 : 1 문의</b>
             </div>
             <div id="question-write-area">
-                <form action="" id="enroll-answer" method="post">
+                <form action="<%=contextPath%>/questionAdmin.me" id="enroll-answer" method="post" enctype="multipart/form-data">
                 
                     <table>  
                         <tr>
-                            <th width="70">문의</th>
-                            <td id="qCategory">
-                                
+                            <th width="70">유형</th>
+                            <td>
+                                <select name="category" id="qCategory">
+                                    <option value="">유형선택</option>
+                                    <option value="MP">적립금</option>
+                                    <option value="MU">이용문의</option>
+                                    <option value="ME">기타문의</option>
+                                </select>
                             </td>
                         </tr>
-                        <tr><td height="15px"></td></tr>
+
+                        <tr><td height="20px"></td></tr>
+
                         <tr>
-                            <th></th>              
-                            <td id="qTitle"> 문의 제목</td>
+                            <th>제목</th>              
+                            <td><input type="text" placeholder="제목을 입력해주세요" name="qTitle" id="qTitle"></td>
                         </tr>
-                        <tr><td height="15px"></td></tr>
+
+                        <tr><td height="20px"></td></tr>
+
                         <tr>
-                            <th></th>
-                            <td id="qContent">
-                                기존 문의 내용
+                            <th>내용</th>
+                            <td colspan="2">
+                                <textarea name="qContent" id="qContent" cols="30" rows="10" placeholder="내용을 입력해주세요"></textarea>
                             </td>
                         </tr>
-                        <tr><td height="15px"></td></tr>
+
+                        <tr><td height="10px"></td></tr>
+
                         <tr>
-                            <th></th>
-                            <td id="qImg">
-                                <img src="../../resources/images/chicken.jpg" width="320" height="210">
-                                <img src="../../resources/images/chicken.jpg" width="320" height="210">
-                            </td>
+                            <th>첨부파일</th>
+                            <td><input type="file" name="upfile"></td>
+
                         </tr>
-                        <tr><td><br></td></tr>
-                        <tr>
+
+                        <tr><td height="10px"></td></tr>
+
+                        <tr style="display:none">
                             <th>답변</th>
                             <td colspan="2">
-                                <textarea name="" id="aContent" cols="30" rows="10"></textarea>
+                                <textarea name="" id="aContent" cols="30" rows="10">답변</textarea>
                             </td>
                         </tr>
+
                     </table>
     
                     <br><br>
                     <div align="center">
-                        <button type="submit" class="btn btn-danger" style="width:100px;">확인</button>&nbsp&nbsp
-                        <button type="submit" class="btn btn-outline-danger" style="width:100px;">수정</button>
+                        <button type="submit" class="btn btn-danger" style="width:90px;">확인</button>&nbsp&nbsp
+                        <button type="button" class="btn btn-outline-danger" style="width:90px;">취소</button>
                     </div>
                     <br><br><br><br>
                 </form>
