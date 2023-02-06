@@ -228,13 +228,31 @@ commit;
             BY REVIEW_NO DESC;
             
         
+-- 적립금
+		INSERT 
+	      INTO POINT 
+	    VALUES 
+	  		 (
+	           SEQ_PNO.NEXTVAL
+	         , NULL
+	         , 2
+	         , NULL
+			 , '회원가입축하' 
+			 , 'B' 
+			 , 1000 
+			 ,(SELECT SUM(POINT_TRADE)
+	     		 FROM POINT 
+	     		WHERE USER_NO= 2) + 1000 
+	     	, SYSDATE
+	     	);
 
 
 
 
 
-
-
+SELECT SUM(POINT_TRADE)
+	     		 FROM POINT 
+	     		WHERE USER_NO= 3;
 
 
 

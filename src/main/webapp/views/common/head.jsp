@@ -106,7 +106,7 @@
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
                             <span class="dropdown-menu">
                                 <a class="dropdown-item" href="<%=contextPath%>/notice.me">공지사항</a>
-                                <a class="dropdown-item" href="<%=contextPath%>/faq.me">FAQ</a>
+                                <a class="dropdown-item" href="<%=contextPath%>/faq.me?cpage=1">FAQ</a>
                                 <a class="dropdown-item" href="<%=contextPath%>/question.me">1:1문의</a>
                                 <a class="dropdown-item" href="<%= contextPath %>/enrollForm.re">업체등록</a>
                             </span>
