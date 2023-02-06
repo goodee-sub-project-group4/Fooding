@@ -638,10 +638,9 @@
                                 <option value="C">취소</option>
                                 <option value="D">이용완료</option>
                             </select>
-                            <button type="submit" class="btn btn-danger btn-sm" disabled>저장</button>
-                            <button type="reset" class="btn btn-secondary btn-sm" disabled>취소</button>
+                        
                         </form>
-                        <span>*예약상태는 변경 후 되돌릴 수 없으니 신중히 선택해주세요.</span>
+                        
                         
                     </div>
             
@@ -718,7 +717,7 @@
 									+ "<td>" + result[i].bookDate   + "</td>"
                                     + "<td>" + result[i].bookTime   + "</td>"
                                     + "<td>" + result[i].status + "</td>"
-                                    + "<td>" + '<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#useDetailModal" onclick="viewDetail(' +result[i].bookNo + ')" >조회</button>' + "</td>"
+                                    + "<td>" + '<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#useDetailModal" onclick="reserveDetailView(' +result[i].bookNo + ')" >조회</button>' + "</td>"
 							    + "</tr>"							
 					}
                     $("#reserveTable tbody").html(value);
@@ -729,9 +728,9 @@
                         $("#reserveTable tbody").html(value);
                     }
 				}, error: function(){
-					console.log("회원이용조회 ajax 통신실패")
+					console.log("업체이용조회 ajax 통신실패")
 				}, complete: function(){
-					console.log("회원이용조회 ajax 통신완료")
+					console.log("업체이용조회 ajax 통신완료")
 				}
 			})
         
@@ -743,13 +742,13 @@
         
         }
        
-        function viewDetail(bookNo){
+        function reserveDetailView(bookNo){
 			$.ajax({
 				url:"<%=contextPath%>/bookDetail.ad",
 				data:{bookNo:bookNo},
 				success: function(set){
 					//기본정보 채우기
-					$('#bookNo').text(set[0].bookNo);
+					$('#bookNo').text(bookNo);
 					$('#statusBookNo').val(set[0].bookNo);
 					$('#bookDate').text(set[0].bookDate);
 					$('#bookTime').text(set[0].bookTime);
@@ -793,6 +792,8 @@
 					})
 				}, error: function() {
 					console.log("예약상세조회 ajax통신실패")
+				}, complete: function(){
+					console.log("예약상세조회 ajax통신완료")
 				}
 			})
 		}

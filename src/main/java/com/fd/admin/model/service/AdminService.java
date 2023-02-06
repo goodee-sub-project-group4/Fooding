@@ -434,6 +434,10 @@ public class AdminService {
 	}
 
 
+	/**업체 예약 리스트 상세 조회
+	 * @param bookNo
+	 * @return
+	 */
 	public Book selectBook(int bookNo) {
 		Connection conn = getConnection();
 		Book b = new RestaurantDao().selectBook(conn, bookNo);
@@ -441,14 +445,12 @@ public class AdminService {
 		return b;
 	}
 
-
 	public ArrayList<BookMenu> selectBookMenu(int bookNo) {
 		Connection conn = getConnection();
 		ArrayList<BookMenu> list = new RestaurantDao().selectBookMenu(conn, bookNo);
 		close(conn);
 		return list;
 	}
-
 
 	public Payment selectPayment(int bookNo) {
 		Connection conn = getConnection();

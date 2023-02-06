@@ -52,15 +52,15 @@ public class AjaxAdminUpdateMemberController extends HttpServlet {
 		
 		int result = new AdminService().updateMember(u);
 		
-		response.setContentType("text/html; charset=UTF-8"); 
-		new Gson().toJson(result, response.getWriter());	
-//		if(result>0) {
-//			request.getSession().setAttribute("alertMsg", "회원 수정 완료");
-//			response.sendRedirect(request.getContextPath() + "/mList.ad");
-//		}else {
-//			request.getSession().setAttribute("errorMsg", "회원 수정 실패");
-//			response.sendRedirect(request.getContextPath() + "/mList.ad");
-//		}
+//		response.setContentType("text/html; charset=UTF-8"); 
+//		new Gson().toJson(result, response.getWriter());	
+		if(result>0) {
+			request.getSession().setAttribute("alertMsg", "회원 수정 완료");
+			response.sendRedirect(request.getContextPath() + "/mList.ad");
+		}else {
+			request.getSession().setAttribute("errorMsg", "회원 수정 실패");
+			response.sendRedirect(request.getContextPath() + "/mList.ad");
+		}
 			
 	
 	}
