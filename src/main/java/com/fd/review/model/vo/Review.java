@@ -15,6 +15,11 @@ public class Review {
 	private String status;
 	private String good;
 	private int count;
+	private String nickName;
+	private String changeName;
+	private String filePath;
+	private int reviewCount;
+	private double reviewAvg;
 	
 	public Review () {}
 
@@ -34,6 +39,22 @@ public class Review {
 		this.count = count;
 	}
 	
+	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewContent, double star,
+			String createDate, String modifyDate, String good, int count, String nickName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.resNo = resNo;
+		this.userNo = userNo;
+		this.bookNo = bookNo;
+		this.reviewContent = reviewContent;
+		this.star = star;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+		this.good = good;
+		this.count = count;
+		this.nickName = nickName;
+	}
+
 	// 리뷰리스트
 	public Review(int reviewNo, String resNo, String reviewContent, double star, String createDate) {
 		super();
@@ -42,6 +63,13 @@ public class Review {
 		this.reviewContent = reviewContent;
 		this.star = star;
 		this.createDate = createDate;
+	}
+
+	public Review(int count, double reviewAvg, int reviewCount) {
+		super();
+		this.count = count;
+		this.reviewCount = reviewCount;
+		this.reviewAvg = reviewAvg;
 	}
 
 	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewContent, double star,
@@ -57,6 +85,46 @@ public class Review {
 		this.modifyDate = modifyDate;
 		this.good = good;
 		this.count = count;
+	}
+
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public double getReviewAvg() {
+		return reviewAvg;
+	}
+
+	public void setReviewAvg(double reviewAvg) {
+		this.reviewAvg = reviewAvg;
+	}
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public int getReviewNo() {

@@ -80,10 +80,13 @@
             .gender-area input {
                 margin: 20px;
                 accent-color: crimson;
+                
             }
 
             .gender-area {
                 font-weight: 600;
+                
+                border:1px solid red;
             }
 
             .birth-area input {
@@ -207,15 +210,19 @@
                                         class="btn btn-danger doubleCheck">인증번호 확인</button></td>
 
                             </tr>
-                            <th>성별&nbsp;&nbsp;&nbsp; </th>
+                            
+                            
+                            
                             <tr>
+                            	<th>성별&nbsp;&nbsp;&nbsp; </th>
                                 <td class="gender-area">
-                                    <input type="radio" style="width:17px; height:17px;" name="gender" value="M">남자
-                                    <input type="radio" style="width:17px; height:17px;" name="gender" value="F">여자
-                                    <input type="radio" style="width:17px; height:17px;" name="gender" value="N">선택안함
+                                    <input type="radio" style="width:30px; height:17px;" name="gender" value="M">남자
+                                    <input type="radio" style="width:30px; height:17px;" name="gender" value="F">여자
+                                    <input type="radio" style="width:30px; height:17px;" name="gender" value="N">선택안함
                                 </td>
                                 <td class="input-area3"></td>
-                            </tr>
+                           	</tr>
+                            
                             <tr>
                                 <th>생년월일&nbsp;&nbsp;&nbsp; </th>
                                 <td class="birth-area" width="500px">
@@ -310,9 +317,9 @@
                         /* 닉네임 중복체크 */
                         function nicknameCheck() {
                             const $nicknameInput = $(".enroll-form input[name=nickname]");
-
+							
                             $.ajax({
-                                url: "<%=contextPath%>/nicknameCheck.me",
+                                url: "<%=contextPath%>/nicknameCheck.me?checkNickname=" + $nicknameInput.val(),
                                 date: { checkNickname: $nicknameInput.val() },
                                 success: function (result2) {
                                     if (result2 == "NNN") { // 사용불가능
@@ -326,7 +333,8 @@
                                             $nicknameInput.focus();
                                         }
                                     }
-                                }, error: function () {
+                                }, 
+                                error: function () {
                                     cosole.log("닉네임 중복체크 ajax 실패");
                                 }
                             });

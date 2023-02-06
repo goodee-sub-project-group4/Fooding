@@ -9,6 +9,7 @@ import com.fd.book.model.dao.BookDao;
 import com.fd.book.model.vo.Book;
 import com.fd.book.model.vo.Payment;
 import com.fd.book.model.vo.Point;
+import com.fd.common.model.vo.Attachment;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
 import com.fd.review.model.vo.Review;
@@ -92,25 +93,41 @@ public class BookService {
 
 
 
-//	public ArrayList<Review> selectReview(int resNo) {
-//		Connection conn = getConnection();
-//		ArrayList<Review> list = new BookDao().selectReview(resNo, conn);
-//		close(conn);
-//		return list;
-//	}
+	public ArrayList<Review> selectReview(int resNo) {
+		Connection conn = getConnection();
+		ArrayList<Review> list = new BookDao().selectReview(resNo, conn);
+		close(conn);
+		return list;
+	}
+
+
+
+	public Review selectReviewData(int resNo) {
+		Connection conn = getConnection();
+		Review review = new BookDao().selectReviewData(resNo, conn);
+		close(conn);
+		return review;
+	}
+
+
+
+	public ArrayList<Attachment> selectAttachment(int reviewNo, int resNo) {
+		Connection conn = getConnection();
+		ArrayList<Attachment> attachment = new BookDao().selectAttachment(reviewNo, resNo, conn);
+		close(conn);
+		return attachment;
+	}
 	
 	/** (마이페이지) 예약/결제 내역 리스트
 	 * @author 빛나 
 	 * @return result
 	 */
-	public int selectBookList(int userNo) {
-		
-		Connection conn = getConnection();
-		int result = new BookDao().selectBookList(conn, userNo);
-		close(conn);
-		return result;
-		
-	}
+//	public int selectBookList(int userNo) {
+//		Connection conn = getConnection();
+//		int result = new BookDao().selectBookList(conn, userNo);
+//		close(conn);
+//		return result;
+//	}
 
 	
 }
