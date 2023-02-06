@@ -5,6 +5,7 @@
 	ArrayList<Restaurant> list = (ArrayList)request.getAttribute("list");
 	Restaurant r = (Restaurant)request.getAttribute("r");
 	ArrayList<Book> reserveList = (ArrayList)request.getAttribute("reserveList");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -205,13 +206,13 @@
                         <% for(int i=0; i<list.size(); i++) { %>
                         <tr>
                             <td><input type="checkbox" name="listCheck" ></td>
-                            <td id="restNocursor" data-toggle="modal" data-target="#selectModal" onclick="viewDetail(<%=list.get(i).getResNo()%>)"><%= list.get(i).getResNo() %></td>
+                            <td id="restNocursor" data-toggle="modal" data-target="#selectModal" onclick="viewDetail(<%= list.get(i).getResNo() %>)"><%= list.get(i).getResNo() %></td>
                             <td><%= list.get(i).getResName() %></td>
                             <td><%= Integer.parseInt(list.get(i).getBookCount()) %></td>
                             <td><%= Integer.parseInt(list.get(i).getReviewCountR()) %></td>
                             <td><%= Integer.parseInt(list.get(i).getBlackCount()) %></td>
-                            <td><%= (list.get(i).getStatus().equals("Y")) ? "정상" : "이용정지"%></td>
-                            <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#selectUseModal" onclick="bookDetail(<%=list.get(i).getResNo()%>)" >조회</button></td>
+                            <td><%= (list.get(i).getStatus().equals("Y")) ? "정상" : "이용정지" %></td>
+                            <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#selectUseModal" onclick="reserveDetailList(<%= list.get(i).getResNo() %>)" >조회</button></td>
                         </tr>
                         <% } %>
                     </tbody>	
@@ -525,16 +526,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>456456</td>
-                                        <td>2023.01.22</td>
-                                        <td>2323.02.22</td>
-                                        <td>15:30</td>
-                                        <td>40,000</td>
-                                        <td>예약완료</td>
-                                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#useDetailModal">조회</button></td>
-                                    </tr>
-                                
+                                    
                                 </tbody>
 
                             </table>
@@ -564,22 +556,93 @@
 
             <!-- 예약 상세 조회 모달 -->
             <div class="modal" id="useDetailModal">
-                <div class="modal-dialog" >
+                <div class="modal-dialog modal-lg" >
                 <div class="modal-content">
             
                     <!-- Modal Header -->
-                    <div class="modal-header" style="margin-top: 20px;">
-                        <h3 class="modal-title" style="margin: auto;">업체 조회</h3>   
+                    <div class="modal-header">
+                        <h4>예약상세조회</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
             
                     <!-- Modal body -->
-                    <div class="modal-body" align="center">
-                        <table id="useDetailModal-body">
-                            
+                    <div class="modal-body">
+                        <br>
+                        <h3>예약정보</h3>
+                        <table class="table table-sm">
+                            <tr class="table-secondary">
+                                <th>예약번호</th>
+                                <th>예약날짜</th>
+                                <th>예약시간</th>
+                                <th>예약인원</th>
+                            </tr>
+                            <tr class="table-light">
+                                <td id="bookNo">12</td>
+                                <td id="bookDate">2023-02-15</td>
+                                <td id="bookTime">15:00</td>
+                                <td id="people">2</td>
+                            </tr>
                         </table>
                         <br>
-                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" style="width: 150px;">닫기</button>
-                        <br><br>
+                        <h3>예약자정보</h3>
+                        <table class="table table-sm">
+                            <tr class="table-secondary">
+                                <th>이름</th>
+                                <th>연락처</th>
+                                <th>이메일</th>
+                                <th>요청사항</th>
+                            </tr>
+                            <tr class="table-light">
+                                <td id="bookName">강백호</td>
+                                <td id="bookPhone">010-9999-9999</td>
+                                <td id="email">fooding@gmail.com</td>
+                                <td id="request">-</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <h3>주문내역</h3>
+                        <table class="table table-sm">
+                            <tr class="table-secondary" id="menu-start">
+                                <th>메뉴</th>
+                                <th>수량</th>
+                                <th>단가</th>
+                                <th>금액</th>
+                            </tr>
+                            <tr class="table-light">
+                                <td>시금치파스타</td>
+                                <td>1</td>
+                                <td>19000</td>
+                                <td>19000</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <h3>결제정보</h3>
+                        <table class="table table-sm">
+                            <tr class="table-secondary">
+                                <th>결제시간</th>
+                                <th>결제수단</th>
+                                <th>결제금액</th>
+                            </tr>
+                            <tr class="table-light">
+                                <td id="payDate">23-01-07 15:30:25</td>
+                                <td id="payOp">카드</td>
+                                <td id="payTotal">45000</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <h3>예약상태</h3>
+                        <form action="<%=contextPath%>/bookStatus.re">
+                            <input type="hidden" name="statusBookNo" val="0" id="statusBookNo">
+                            <select name="bookStatus" id="bookStatus" disabled>
+                                <option value="B">예약완료</option>
+                                <option value="C">취소</option>
+                                <option value="D">이용완료</option>
+                            </select>
+                            <button type="submit" class="btn btn-danger btn-sm" disabled>저장</button>
+                            <button type="reset" class="btn btn-secondary btn-sm" disabled>취소</button>
+                        </form>
+                        <span>*예약상태는 변경 후 되돌릴 수 없으니 신중히 선택해주세요.</span>
+                        
                     </div>
             
                     
@@ -640,26 +703,29 @@
         }
 
         // 업체 예약 상세 조회
-        function bookDetail(resNo){
+        function reserveDetailList(resNo){
 			$.ajax({
-				url:"<%=contextPath%>/reserveRest.ad",
-				success:function(result){		
+				url:"<%= contextPath %>/reserveRest.ad",
+                data:{resNo: resNo},
+				success:function(result){	
+                    $('#resNoR').text("업체 번호 : " + resNo);
 					let value="";
 					for(let i=0; i<result.length; i++){
-                        // userid = result[i].userId
 						value += "<tr>"
-                                    + "<td>" + result[i].bookNo + "</td>"
-									+ "<td>" + result[i].bookA + "</td>"
-									+ "<td>" + result[i].bookName + "</td>"
-									+ "<td>" + result[i].bookDate + "</td>"
-                                    + "<td>" + result[i].bookTime + "</td>"
+                                    + "<td>" + result[i].bookNo     + "</td>"
+									+ "<td>" + result[i].bookA      + "</td>"
+									+ "<td>" + result[i].bookName   + "</td>"
+									+ "<td>" + result[i].bookDate   + "</td>"
+                                    + "<td>" + result[i].bookTime   + "</td>"
                                     + "<td>" + result[i].status + "</td>"
-                                    + "<td>" + <button> + </button> + "</td>"
-							   + "</tr>";							
+                                    + "<td>" + '<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#useDetailModal" onclick="viewDetail(' +result[i].bookNo + ')" >조회</button>' + "</td>"
+							    + "</tr>"							
 					}
                     $("#reserveTable tbody").html(value);
 					if(result==0){
-                        value = "<tr>" + "<td colspan=9>" + "이용 내역이 없습니다." + "</td>"+ "</tr>";	
+                        value = "<tr>" 
+                                    + "<td colspan=9>" + "이용 내역이 없습니다." + "</td>"
+                                + "</tr>";	
                         $("#reserveTable tbody").html(value);
                     }
 				}, error: function(){
@@ -668,8 +734,69 @@
 					console.log("회원이용조회 ajax 통신완료")
 				}
 			})
+        
+            if($('.bookStatus').text() == 'B'){
+                $('.bookStatus').text('예약완료');
+            }else if($('.bookStatus').text() == 'C'){
+                $('.bookStatus').text('예약취소');
+            }
+        
         }
-  
+       
+        function viewDetail(bookNo){
+			$.ajax({
+				url:"<%=contextPath%>/bookDetail.ad",
+				data:{bookNo:bookNo},
+				success: function(set){
+					//기본정보 채우기
+					$('#bookNo').text(set[0].bookNo);
+					$('#statusBookNo').val(set[0].bookNo);
+					$('#bookDate').text(set[0].bookDate);
+					$('#bookTime').text(set[0].bookTime);
+					$('#people').text(set[0].people);
+					$('#bookName').text(set[0].bookName);
+					$('#bookPhone').text(set[0].bookPhone);
+					$('#email').text(set[0].email);
+					//request는 null이 가능한데, null일경우 이전에 조회했던 내용이 뜬다
+					// >> 한번 비워주고 실행한다.
+					$('#request').text("-");
+					$('#request').text(set[0].request);
+					$('#payDate').text(set[2].payDate);
+					$('#payOp').text(set[2].payOp);
+					$('#payTotal').text(set[2].payTotal);
+					
+					//[메뉴조회]를 위해 하단의 for문을 넣었으나, 이것만 있으면 상세조회를 누를때마다 쌓인다.
+					// >> 이전에 쌓은 요소들을 먼저 지워주고 시작한다.
+					$('#menu-start').siblings().remove();
+					for(let i=0; i<set[1].length; i++) {
+						$('#menu-start').after($('<tr class="table-light">'+
+	                            '<td>'+set[1][i].menuNo+'</td>'+
+	                            '<td>'+set[1][i].menuCount+'</td>'+
+	                            '<td>'+set[1][i].price+'</td>'+
+	                            '<td>'+set[1][i].bmPrice+'</td>'+
+	                        '</tr>'));
+					}
+					
+					//[예약상태] 설정을 위해 하단의 each함수를 넣었으나, 이것만 있으면 상세조회를 누를때 이전 조회에 영향을 받는다.
+					// >> 이전에 변경한 값들을 지워주고 시작한다.
+					$('#bookStatus').attr("disabled", true);
+					$('#bookStatus').siblings().attr("disabled", true);
+					$('#bookStatus').children().each(function(){
+						if($(this).val()==set[0].status) {
+							$(this).attr("selected",true);
+							if(set[0].status=="B") {
+								//예약완료 상태는 버튼 활성화
+								$('#bookStatus').attr("disabled", false);
+								$('#bookStatus').siblings().attr("disabled", false);
+							}
+						}
+					})
+				}, error: function() {
+					console.log("예약상세조회 ajax통신실패")
+				}
+			})
+		}
+        
 
 	</script>
 </body>

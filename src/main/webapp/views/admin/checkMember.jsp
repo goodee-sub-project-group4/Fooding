@@ -591,49 +591,49 @@
 		})
 
         // 회원 상세 조회
-        // function viewDetail(userNo) {
-		// 	$.ajax({
-		// 		url:"<%=contextPath%>/selectMember.ad",
-		// 		data:{userNo:userNo},
-		// 		success: function(m){
-		// 			$('#userNo').text(m.userNo);
-        //             $('#userNo').val(m.userNo);
-		// 			$('#userId').text(m.userId);
-        //             $('#userName').text(m.userName);
-        //             $('#nickname').text(m.nickname);
-        //             $('#userPhone').text(m.userPhone);
-        //             $('#userEmail').text(m.userEmail);
-        //             $('#birth').text(m.birth);
-        //             if(m.gender=="M"){
-        //                 $('#gender').text("남")
-        //             }else if(m.gender=="F"){
-        //                 $('#gender').text("여")
-        //             }else{
-        //                 $('#gender').text("-")
-        //             };
-        //             $('#enrollDate').text(m.enrollDate);
-        //             $('#pointNow').text(m.pointNow);
-        //             if(m.status=="Y"){
-        //                 $('#status').text("정상")
-        //             }else if(m.status=="S"){
-        //                 $('#status').text("이용정지")
-        //             }else if(m.status=="N"){
-        //                 $('#status').text("탈퇴")
-        //             };
+        function viewDetail(userNo) {
+			$.ajax({
+				url:"<%=contextPath%>/selectMember.ad",
+				data:{userNo:userNo},
+				success: function(m){
+					$('#userNo').text(m.userNo);
+                    $('#userNo').val(m.userNo);
+					$('#userId').text(m.userId);
+                    $('#userName').text(m.userName);
+                    $('#nickname').text(m.nickname);
+                    $('#userPhone').text(m.userPhone);
+                    $('#userEmail').text(m.userEmail);
+                    $('#birth').text(m.birth);
+                    if(m.gender=="M"){
+                        $('#gender').text("남")
+                    }else if(m.gender=="F"){
+                        $('#gender').text("여")
+                    }else{
+                        $('#gender').text("-")
+                    };
+                    $('#enrollDate').text(m.enrollDate);
+                    $('#pointNow').text(m.pointNow);
+                    if(m.status=="Y"){
+                        $('#status').text("정상")
+                    }else if(m.status=="S"){
+                        $('#status').text("이용정지")
+                    }else if(m.status=="N"){
+                        $('#status').text("탈퇴")
+                    };
 					
-		// 		}, error: function(){
-		// 			console.log("회원상세조회 ajax 통신실패")
-		// 		}, complete: function(){
-		// 			console.log("회원상세조회 ajax 통신완료")
-        //             console.log($('#userNo').val())
-		// 		}
-		// 	})
-		// }
+				}, error: function(){
+					console.log("회원상세조회 ajax 통신실패")
+				}, complete: function(){
+					console.log("회원상세조회 ajax 통신완료")
+                    console.log($('#userNo').val())
+				}
+			})
+		}
 
         // 회원 상제 수정 (아직 안함)
         function updateDetail(userNo){
             $.ajax({
-                url:"<%=contextPath%>/selectMember.ad",
+                url:"<%=contextPath%>/updateMember.ad",
 				data:{userNo:userNo},
 				success: function(m){
 					$('#userNoU').val(m.userNo);

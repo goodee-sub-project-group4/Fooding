@@ -12,9 +12,12 @@ import com.fd.admin.model.dao.AdminDao;
 import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
 import com.fd.book.model.vo.Book;
+import com.fd.book.model.vo.BookMenu;
+import com.fd.book.model.vo.Payment;
 import com.fd.book.model.vo.Point;
 import com.fd.common.model.vo.Attachment;
 import com.fd.member.model.vo.Member;
+import com.fd.restaurant.model.dao.RestaurantDao;
 import com.fd.restaurant.model.vo.Restaurant;
 
 public class AdminService {
@@ -352,9 +355,9 @@ public class AdminService {
 	 * @param userNo
 	 * @return
 	 */
-	public int updateMember(Member u, int userNo) {
+	public int updateMember(Member u) {
 		Connection conn = getConnection();
-		int result = new AdminDao().updateMember(conn, u, userNo);
+		int result = new AdminDao().updateMember(conn, u);
 		if(result>0){
 			commit(conn);
 		}else {
@@ -428,6 +431,30 @@ public class AdminService {
 		ArrayList<Book> list = new AdminDao().selectReserveList(conn, resNo);
 		close(conn);
 		return list;
+	}
+
+
+	public Book selectBook(int bookNo) {
+		Connection conn = getConnection();
+		Book b = new RestaurantDao().selectBook(conn, bookNo);
+		close(conn);
+		return b;
+	}
+
+
+	public ArrayList<BookMenu> selectBookMenu(int bookNo) {
+		Connection conn = getConnection();
+		ArrayList<BookMenu> list = new RestaurantDao().selectBookMenu(conn, bookNo);
+		close(conn);
+		return list;
+	}
+
+
+	public Payment selectPayment(int bookNo) {
+		Connection conn = getConnection();
+		Payment p = new RestaurantDao().selectPayment(conn, bookNo);
+		close(conn);
+		return p;
 	}
 
 

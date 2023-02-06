@@ -43,24 +43,24 @@ public class AjaxAdminUpdateMemberController extends HttpServlet {
 		String status = request.getParameter("status");
 		
 		Member u = new Member();
-//		u.setUserNo(userNo);
+		u.setUserNo(userNo);
 		u.setUserName(userName);
 		u.setNickname(nickname);
 		u.setUserPhone(userPhone);
 		u.setUserEmail(userEmail);
 		u.setStatus(status);
 		
-		int result = new AdminService().updateMember(u, userNo);
+		int result = new AdminService().updateMember(u);
 		
-//		response.setContentType("text/html; charset=UTF-8"); 
-//		new Gson().toJson(result, response.getWriter());	
-		if(result>0) {
-			request.getSession().setAttribute("alertMsg", "회원 수정 완료");
-			response.sendRedirect(request.getContextPath() + "/mList.ad");
-		}else {
-			request.getSession().setAttribute("errorMsg", "회원 수정 실패");
-			response.sendRedirect(request.getContextPath() + "/mList.ad");
-		}
+		response.setContentType("text/html; charset=UTF-8"); 
+		new Gson().toJson(result, response.getWriter());	
+//		if(result>0) {
+//			request.getSession().setAttribute("alertMsg", "회원 수정 완료");
+//			response.sendRedirect(request.getContextPath() + "/mList.ad");
+//		}else {
+//			request.getSession().setAttribute("errorMsg", "회원 수정 실패");
+//			response.sendRedirect(request.getContextPath() + "/mList.ad");
+//		}
 			
 	
 	}
