@@ -35,7 +35,7 @@
     #content1-1{
         height: 30%; /*150px*/
         box-sizing: border-box;
-        margin-bottom:50px;
+        margin-bottom:30px;
 
     }
     /* 음식 카테고리 상위 칸*/
