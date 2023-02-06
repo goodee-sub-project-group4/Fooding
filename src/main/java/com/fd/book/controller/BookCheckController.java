@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fd.book.model.service.BookService;
 import com.fd.member.model.vo.Member;
 
 /**
@@ -34,7 +35,7 @@ public class BookCheckController extends HttpServlet {
 		HttpSession session = request.getSession();
 		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
 		
-		int result = 
+		int result = new BookService().selectBookList(userNo);
 		
 		request.getRequestDispatcher("views/book/bookCheck.jsp").forward(request, response);
 	}
