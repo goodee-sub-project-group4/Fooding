@@ -129,21 +129,36 @@ public class ResFormController extends HttpServlet {
 			String parking = multiRequest.getParameter("parking"); 
 			String foodCt = multiRequest.getParameter("foodCt");
 			
+			/* 원래있던 코드1 일단 주석처리... (삭제하지 말 것!!)
 			Restaurant r = new Restaurant(resName, ceo, permitNo,  address,
 					dAddress, latitude, longtitude, localCt, dLocalCt, 
 					phone, cellphone, email, parking, 
 					foodCt);
-			
+			*/
 			Attachment at = null;
 			
 			if(multiRequest.getOriginalFileName("rImg") != null) { // 첨부파일이 있을 경우
 				at = new Attachment();
 				at.setOriginName(multiRequest.getOriginalFileName("rImg"));
 				at.setChangeName(multiRequest.getFilesystemName("rImg"));
-				at.setFilePath("resources/search_upfiles/");
+				at.setFilePath("resources/rest_upfiles/");
 			}
 			
+			//추가한 코드 1
+			String rImg= at.getFilePath() + at.getChangeName();
+			
+			//추가한 코드 2 
+			Restaurant r = new Restaurant(resName, ceo, permitNo,  address,
+					dAddress, latitude, longtitude, localCt, dLocalCt, 
+					phone, cellphone, email, parking, 
+					foodCt, rImg);
+			
+			/* 원래 있던 코드2 일단 주석처리 (지우지 말 것!!)
 			int result = new SearchService().insertRes(r, at);
+			*/
+			
+			// 추가한 코드3 
+			int result = new SearchService().insertRes(r);
 			
 			if(result > 0) {
 				

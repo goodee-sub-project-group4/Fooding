@@ -66,6 +66,7 @@
 		      , PARKING
   		      , LONGTITUDE
 		      , LATITUDE
+		      , R_IMG
 		      )
 		 VALUES
 		      (
@@ -82,6 +83,7 @@
 		      , ?
 		      , ?
 		      , SYSDATE
+		      , ?
 		      , ?
 		      , ?
 		      , ?

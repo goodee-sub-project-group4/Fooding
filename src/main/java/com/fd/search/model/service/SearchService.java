@@ -30,18 +30,29 @@ public class SearchService {
 		return list;
 	}
 	
-	public int insertRes(Restaurant r, Attachment at) {
+	public int insertRes(Restaurant r/*, Attachment at*/) {
 		
 		Connection conn = getConnection();
 		
 		int result1 = new SearchDao().insertRes(conn, r);
 		
+		/* 원래있던 코드1 일단 주석처리 
 		int result2 = 1;
 		if(at != null) {
 			result2 = new SearchDao().insertAttachment(conn, at);
 		}
+		*/
 		
+		/* 원래있던 코드2 일단 주석처리
 		if(result1 > 0 && result2 > 0) {
+			commit(conn); 
+		}else {
+			rollback(conn);
+		}
+		*/
+		
+		// 추가한 코드1 
+		if(result1 > 0) {
 			commit(conn); 
 		}else {
 			rollback(conn);
@@ -49,7 +60,7 @@ public class SearchService {
 		
 		close(conn);
 		
-		return result1 * result2;
+		return result1 /** result2*/;
 		
 	}
 	
