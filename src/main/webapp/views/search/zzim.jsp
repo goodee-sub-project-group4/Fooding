@@ -31,7 +31,7 @@
         th {width:25%; height:80px; text-align: right; padding-right:10px;}
         /* 두번째 칸 input */
         .input-area2 {width:50%;}
-        .input-area2 div {width:450px; height:140px; margin:20px; font-size:small; padding-left:10px; border:1px solid red; font-size: 18px;}
+        .input-area2 div {width:450px; height:140px; margin:20px; font-size:small; padding-left:10px; /*border:1px solid red;*/ font-size: 18px; text-align:"center";}
         .gender-area input {margin:20px;}
         .gender-area {font-weight:600;}
         .birth-area input {margin:20px; width:80px; padding-left:20px; font-weight:600;}
@@ -48,6 +48,9 @@
 
 		/* 페이징 */
     	.paging-area{height: 50px; text-align: center; padding-top: 20px;}
+    	
+    	.trStyle{border:1px solid red; margin-bottom:10px;}
+    	
     </style>
 </head>
 <body>
@@ -70,17 +73,19 @@
 	               		<tr> <td> 목록이 비어있습니다.</td> </tr>
 	            <% } else { %>
                		<% for(Restaurant r : list) { %>
-	                    <tr>
+	                    <tr class="trStyle">
 	                        <th><img src="<%= r.getrImg() %>" width="140px" height="140px"></th>
 	                        <td class="input-area2">
 	                            <div>
+	                            	<br>
 	                                음식점 이름: <%= r.getResName()%> <br> 
-	                                업체번호: <%= r.getResNo() %> <br>
 	                                주소: <%= r.getAddress() %> <br>
 	                            </div>
 	                        </td> 
 	                        <td class="input-area3-id">
-	                            <button type="button" class="btn btn-danger">삭제</button>
+	                        	<!-- 
+	                            <button type="button" class="btn btn-danger";">삭제</button>
+	                        	 -->
 	                        </td>
 	                    </tr>
 					<% } %>
@@ -88,11 +93,8 @@
 			</table>			 
          </div>
 
-		
-        
     </div>
-
-    
+ 
 
 </body>
 </html>
