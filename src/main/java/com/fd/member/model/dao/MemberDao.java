@@ -178,6 +178,7 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
+		
 		return count2;
 		
 	}

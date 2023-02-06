@@ -35,7 +35,7 @@ public class AjaxNicknameCheckController extends HttpServlet {
 		int count2 = new MemberService().nicknameCheck(checkNickname);
 		
 		response.setContentType("text/html; charset=UTF-8"); // 한글포함
-		
+		System.out.println("checkNickname : " + checkNickname);
 		if(count2 > 0) { // 존재 아이디 있음 => 사용불가능(NNN)
 			response.getWriter().print("NNN");
 		} else { // 존재 아이디 없음 => 사용가능(YYY)

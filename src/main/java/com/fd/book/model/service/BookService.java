@@ -92,25 +92,23 @@ public class BookService {
 
 
 
-//	public ArrayList<Review> selectReview(int resNo) {
-//		Connection conn = getConnection();
-//		ArrayList<Review> list = new BookDao().selectReview(resNo, conn);
-//		close(conn);
-//		return list;
-//	}
+	public ArrayList<Review> selectReview(int resNo) {
+		Connection conn = getConnection();
+		ArrayList<Review> list = new BookDao().selectReview(resNo, conn);
+		close(conn);
+		return list;
+	}
 	
 	/** (마이페이지) 예약/결제 내역 리스트
 	 * @author 빛나 
 	 * @return result
 	 */
-	public int selectBookList(int userNo) {
-		
-		Connection conn = getConnection();
-		int result = new BookDao().selectBookList(conn, userNo);
-		close(conn);
-		return result;
-		
-	}
+//	public int selectBookList(int userNo) {
+//		Connection conn = getConnection();
+//		int result = new BookDao().selectBookList(conn, userNo);
+//		close(conn);
+//		return result;
+//	}
 
 	
 }
