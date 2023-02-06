@@ -29,6 +29,17 @@ public class Payment {
 	}
 
 
+	public Payment(int bookNo, int resNo, int userNo, int payPoint, int payTotal, String payOp) {
+		super();
+		this.bookNo = bookNo;
+		this.resNo = resNo;
+		this.userNo = userNo;
+		this.payPoint = payPoint;
+		this.payTotal = payTotal;
+		this.payOp = payOp;
+	}
+
+
 	public Payment(int payNo, int bookNo, int resNo, int userNo, int payPoint, int payTotal, String payOp, String payDate,
 			String status) {
 		super();

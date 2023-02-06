@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.fd.book.model.vo.Book;
+import com.fd.book.model.vo.Payment;
 import com.fd.book.model.vo.Point;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
@@ -82,6 +83,7 @@ public class BookDao {
 								  , rset.getDouble("REVIEW_AVG")
 								  , rset.getInt("count"));
 			}
+		System.out.println(re);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -215,6 +217,33 @@ public class BookDao {
 			pstmt.setInt(7, book.getPeople());
 			pstmt.setString(8, book.getEmail());
 			pstmt.setString(9, book.getRequest());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertBook(Connection conn, Payment payment) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertPayment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, payment.getBookNo());
+			pstmt.setInt(2, payment.getUserNo());
+			pstmt.setInt(3, payment.getResNo());
+			pstmt.setInt(4, payment.getPayPoint());
+			pstmt.setInt(5, payment.getPayTotal());
+			pstmt.setString(6, payment.getPayOp());
 			
 			result = pstmt.executeUpdate();
 			

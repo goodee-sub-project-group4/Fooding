@@ -762,20 +762,20 @@
                             <% if(loginUser != null) { %>
                             const menuChoice = document.querySelectorAll(".menuName"); // [td, td, ..]
                             let menu = [];
-                            let i = 1;
-                            for(i=0; i<menuChoice.length; i++){
+                            for(let i=0; i<menuChoice.length; i++){
                                 menu.push(menuChoice[i].innerText);
                             }
                             // ["xx", "bb"]
                             // IMP.request_pay(param, callback)
-
+                            let f = 1;
+                            console.log($('#pointUse').val())
                             IMP.request_pay({ // param
                                 pg: "html5_inicis",
                                 pay_method: "card",
                                 <% if(bookNo == 0) { %>
-                                    merchant_uid: "FOODING-pay" + i + "-1",
+                                    merchant_uid: "FOODING-pay" + f + "-1",
                                 <% }else{ %>
-                                    merchant_uid: "FOODING-pay" + i + "-<%= bookNo + 1 %>",
+                                    merchant_uid: "FOODING-pay" + "exam"+ f + "-<%= bookNo + 1 %>",
                                 <% } %>
                                 name: menu.join("<br>"),
                                 amount: $('#sum-payment').text().replace(transNumber, ""),
@@ -784,7 +784,10 @@
                                 buyer_tel: $('.bookPhone').val()
                             }, function (rsp) { // callback
                                 let reservation = {
-                                    amount: rsp.amount,
+                                    bookNo: <%= bookNo + 1 %>,
+                                    payPoint: $('#pointUse').val(),
+                                    amount: $('#sum-payment').text().replace(transNumber, ""),
+                                    payMethod: rsp.pay_method,
                                     bookName: rsp.buyer_name,
                                     bookPhone: rsp.buyer_tel,
                                     email: rsp.buyer_email,
@@ -795,6 +798,7 @@
                                     userNo: <%= loginUser.getUserNo() %>,
                                     resNo: <%= restaurant.getResNo() %>
                                 }
+                                f++
                                 if (rsp.success) {
                                     $.ajax({
                                         url: "<%= contextPath %>/insert.bo", // 예: https://www.myservice.com/payments/complete
@@ -804,7 +808,6 @@
                                         dataType:"json",
                                         contentType:"application/json; charset=UTF-8"
                                     })
-                                    i++
                                     location.href = "<%= contextPath %>/check.bo"
                                 } else {
                                     alert("결제에 실패했습니다.")

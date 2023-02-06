@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.fd.book.model.dao.BookDao;
 import com.fd.book.model.vo.Book;
+import com.fd.book.model.vo.Payment;
 import com.fd.book.model.vo.Point;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
@@ -68,7 +69,7 @@ public class BookService {
 
 
 
-	public int insertBook(Book book) {
+	public void insertBook(Book book) {
 		Connection conn = getConnection();
 		int result = new BookDao().insertBook(conn, book);
 		if(result > 0) {
@@ -77,7 +78,19 @@ public class BookService {
 			rollback(conn);
 		}
 		close(conn);
-		return result;
+	}
+
+
+
+	public void insertPayment(Payment payment) {
+		Connection conn = getConnection();
+		int result = new BookDao().insertBook(conn, payment);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
 	}
 
 
