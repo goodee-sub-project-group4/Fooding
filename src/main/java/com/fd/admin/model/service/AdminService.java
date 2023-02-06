@@ -283,7 +283,7 @@ public class AdminService {
 	 */
 	public ArrayList<Attachment> selectBanner() {
 		Connection conn = getConnection();
-		ArrayList list = new AdminDao().selectBanner(conn);
+		ArrayList<Attachment> list = new AdminDao().selectBanner(conn);
 		close(conn);
 		return list;
 	}

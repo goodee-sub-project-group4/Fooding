@@ -571,7 +571,7 @@ public class AdminDao {
 	 * @param conn
 	 * @return
 	 */
-	public ArrayList selectBanner(Connection conn) {
+	public ArrayList<Attachment> selectBanner(Connection conn) {
 		ArrayList<Attachment> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
