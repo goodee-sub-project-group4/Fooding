@@ -93,6 +93,23 @@
 
 	<%@ include file="views/common/head.jsp" %>
 	<%@ include file="views/common/searchSidebar.jsp" %>
+	
+	<script>
+		$(function(){
+			$.ajax({
+                url:"<%= contextPath %>/banner.ad",
+                type:"post",
+                success:function(list){
+               		for(let i=0; i<list.length; i++) { 
+               			$('#banner'+i).attr('src', list[i].filePath + '/' + list[i].changeName);
+               		} 
+                },
+                error:function(){
+                	
+                }
+            });
+		})
+	</script>
    
 	<!-- 메인영역 -->
 	<div class="wrap">
@@ -115,14 +132,14 @@
 					
 					<!-- The slideshow -->
 					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<img src="" alt="" width="791.47" height="250">
+						<div class="carousel-item active" >
+							<img id="banner0" src="" alt="" width="791.47" height="250">
 						</div>
 						<div class="carousel-item">
-							<img src="" alt="" width="791.47" height="250">
+							<img id="banner1" src="" alt="" width="791.47" height="250">
 						</div>
 						<div class="carousel-item">
-							<img src="" alt="" width="791.47" height="250">
+							<img id="banner2" src="" alt="" width="791.47" height="250">
 						</div>
 						
 					</div>
@@ -142,7 +159,7 @@
 		    <div id="area2" align="center">
 		        <h2>리뷰 best ></h2>
 		        <div class="restaurant">
-	       			<a href="<%= contextPath %>/main.bo?resNo=1200">
+	       			<a href="<%= contextPath %>/main.bo?resNo=1201">
 		            <img src="/Fooding/resources/images/forTest.png"><br>
 		            <span class="rest-name">미미식당</span> <span style="float:right">★4.8(618)</span><br>
 		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>

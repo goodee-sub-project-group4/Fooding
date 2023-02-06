@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ page import="com.fd.restaurant.model.vo.Restaurant"%>
+<%@ page import="com.fd.restaurant.model.vo.Restaurant, com.fd.book.model.vo.Book
+			   , java.util.ArrayList"%>
 <%
-//Restaurant restaurant = (Restaurant)
-String resName = "브룩클린 더 버거 조인트";
-int resNo = 1200;
-int userNo = 1;
-int bookNo = 2;
+	ArrayList<Book> book = (ArrayList<Book>)request.getAttribute("book");
 %>
 
 <html>
@@ -436,59 +433,62 @@ int bookNo = 2;
 				<option value="oneY">1년</option>
 			</select>
 		</div>
-		<div class="selectList-main">
-			<b style="font-size: larger;">결제일시 &nbsp;&nbsp;&nbsp; 2023.01.01</b>
-			<hr
-				style="display: block; margin-top: 5px; margin-bottom: 30px; background: black; height: 2px;">
-
-			<div>
-				<div class="selectList-no" style="font-size: 20px;">01</div>
-				<img src="" alt="" class="selectList-img">
-				<div>
-					<div class="selectList-text">
-
-						<table>
-							<tr>
-								<th style="width: 80px; height: 70px;">업체명</th>
-								<td style="width: 250px;">업체이름</td>
-							</tr>
-							<tr>
-								<td style="height: 40px;">예약일시</td>
-								<td>2022-12-25 (금) 오후 14:00</td>
-							</tr>
-							<tr>
-								<td style="height: 40px;">예약인원</td>
-								<td>5명</td>
-							</tr>
-							<tr>
-								<td style="height: 40px;">결제금액</td>
-								<td>53,000원</td>
-							</tr>
-						</table>
-					</div>
-					<div class="selectList-btn">
-						<div class="allways-btn">
-							<div>
-								<button type="button" class="btn btn-outline-secondary">상세조회</button>
+		<% if(!book.isEmpty()) { %>
+			<% for(Book b : book) { %>
+				<div class="selectList-main">
+					<b style="font-size: larger;">결제일시 &nbsp;&nbsp;&nbsp; <%= b.getBookA() %></b>
+					<hr
+						style="display: block; margin-top: 5px; margin-bottom: 30px; background: black; height: 2px;">
+		
+					<div>
+						<div class="selectList-no" style="font-size: 20px;"><%= b.getBookNo() %></div>
+						<img src="" alt="" class="selectList-img">
+						<div>
+							<div class="selectList-text">
+		
+								<table>
+									<tr>
+										<th style="width: 80px; height: 70px;">업체명</th>
+										<td style="width: 250px;"><%= b.getResNo() %></td>
+									</tr>
+									<tr>
+										<td style="height: 40px;">예약일시</td>
+										<td><%= b.getBookDate() %> <%= b.getBookTime() %></td>
+									</tr>
+									<tr>
+										<td style="height: 40px;">예약인원</td>
+										<td><%= b.getPeople() %>명</td>
+									</tr>
+									<tr>
+										<td style="height: 40px;">결제금액</td>
+										<td>53,000원</td>
+									</tr>
+								</table>
 							</div>
-							<div>
-								<button type="button" class="btn btn-outline-secondary">문의하기</button>
-							</div>
-						</div>
-						<div class="service-complete-btn">
-							<div>
-								<button type="button" class="btn btn-outline-danger"
-									data-toggle="modal" data-target="#reviewModal">리뷰쓰기</button>
-							</div>
-							<div>
-								<button type="button" class="btn btn-outline-danger">신고하기</button>
+							<div class="selectList-btn">
+								<div class="allways-btn">
+									<div>
+										<button type="button" class="btn btn-outline-secondary">상세조회</button>
+									</div>
+									<div>
+										<button type="button" class="btn btn-outline-secondary">문의하기</button>
+									</div>
+								</div>
+								<div class="service-complete-btn">
+									<div>
+										<button type="button" class="btn btn-outline-danger"
+											data-toggle="modal" data-target="#reviewModal">리뷰쓰기</button>
+									</div>
+									<div>
+										<button type="button" class="btn btn-outline-danger">신고하기</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-
+			<% } %>
+		<% } %>
 		<br>
 		<br>
 		<br>
@@ -521,11 +521,11 @@ int bookNo = 2;
 						</div>
 						<!-- 업체이미지 가져와야함 -->
 						<div id="review-content2-2">
-							<div id="review-content2-2-1"><%=resName%></div>
+							<div id="review-content2-2-1"></div>
 							<!-- 업체명 가져와야함  -->
-							<input type="hidden" name="resNo" value="<%=resNo%>"> <input
-								type="hidden" name="userNo" value="<%=userNo%>"> <input
-								type="hidden" name="bookNo" value="<%=bookNo%>">
+							<input type="hidden" name="resNo" value=""> <input
+								type="hidden" name="userNo" value=""> <input
+								type="hidden" name="bookNo" value="">
 
 						</div>
 						<div id="review-content2-3">

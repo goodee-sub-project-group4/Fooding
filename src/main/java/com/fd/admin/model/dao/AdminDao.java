@@ -571,7 +571,7 @@ public class AdminDao {
 	 * @param conn
 	 * @return
 	 */
-	public ArrayList selectBanner(Connection conn) {
+	public ArrayList<Attachment> selectBanner(Connection conn) {
 		ArrayList<Attachment> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -935,7 +935,7 @@ public class AdminDao {
 	
 	
 	// 업체 등록 상세 조회
-	/**조회수
+	/**업체 등록 조회수
 	 * @param conn
 	 * @param resNo
 	 * @return
@@ -956,7 +956,7 @@ public class AdminDao {
 		return result;
 	}
 
-	/**게시물 조회
+	/**업체 등록 게시물 조회
 	 * @param conn
 	 * @param resNo
 	 * @return
@@ -968,14 +968,23 @@ public class AdminDao {
 		String sql = prop.getProperty("selectRegister");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, noticeNo);
+			pstmt.setInt(1, resNo);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				n = new Notice(rset.getInt("notice_no")
-							 , rset.getString("notice_title")
-							 , rset.getString("notice_content")
-							 , rset.getString("user_name")
-							 , rset.getDate("create_date"));
+				r = new Restaurant(rset.getInt("RES_NO")
+								 , rset.getString("apply_date")
+								 , rset.getString("ceo")
+							 	 , rset.getString("res_name")
+							 	 , rset.getString("permit_no")
+							 	 , rset.getString("address")
+								 , rset.getString("D_ADDRESS")
+								 , rset.getString("PHONE")
+								 , rset.getString("CELLPHONE")
+								 , rset.getString("EMAIL")
+								 , rset.getString("FOOD_CT")
+								 , rset.getString("PARKING")
+								 , rset.getString("r_img")
+								 , rset.getString("status"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -984,62 +993,52 @@ public class AdminDao {
 			close(pstmt);
 		}
 		
-		return n;
+		return r;
 	}
 
-	/**게시물 첨부파일 조회
+	/**업체 등록 승인(C)
 	 * @param conn
 	 * @param resNo
 	 * @return
 	 */
-	public Attachment selectRegisterAttachment(Connection conn, int resNo) {
-		return null;
-	}
-	
-
-	
-
-
-	/**2.공지사항 게시글 정보 조회
-	 * @param conn
-	 * @param noticeNo
-	 * @return
-	 */
-	public Notice selectNotice(Connection conn, int noticeNo) {
-
-	}
-
-	/**3. 공지사항 첨부파일 정보 조회
-	 * @param conn
-	 * @param noticeNo
-	 * @return
-	 */
-	public Attachment selectNoticeAttachment(Connection conn, int noticeNo) {
-		Attachment at = null;
+	public int restStatusY(Connection conn, int resNo) {
+		int result = 0;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectNoticeAttachment");
+		String sql = prop.getProperty("restStatusY");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, noticeNo);
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				at = new Attachment(rset.getInt("file_no")
-								  , rset.getString("origin_name")
-								  , rset.getString("change_name")
-								  , rset.getString("file_path"));
-			}
+			pstmt.setInt(1, resNo);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
-		}
-		return at;
+		}	
+		return result;
 	}
-	
-	
-	
+
+	/**업체 등록 승인(N)
+	 * @param conn
+	 * @param resNo
+	 * @return
+	 */
+	public int restStatusN(Connection conn, int resNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("restStatusN");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}	
+		return result;
+	}
+
+
 	
 	
 	

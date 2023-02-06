@@ -325,24 +325,31 @@ public class BookDao {
 		return review;
 	}
 
-	public ArrayList<Attachment> selectAttachment(int reviewNo, int resNo, Connection conn) {
-		ArrayList<Attachment> attachment = new ArrayList<>(); 
+	public ArrayList<Attachment> selectAttachment(ArrayList<Review> reviewList, int resNo, Connection conn) {
+		ArrayList<Attachment> at = new ArrayList<>(); 
+		Attachment attachment = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectAttachment");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
-			pstmt.setInt(2, resNo);
-			rset = pstmt.executeQuery();
 			
-			while(rset.next()) {
-				attachment.add(new Attachment(rset.getString("change_name")
-											, rset.getString("file_path")));
+			for(Review r : reviewList) {
+				pstmt.setInt(1, r.getReviewNo());
+				pstmt.setInt(2, resNo);
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					attachment = new Attachment(rset.getInt("res_no")
+											  ,	rset.getInt("ref_bno")
+											  ,	rset.getString("change_name")
+								 			  , rset.getString("file_path"));
+					at.add(attachment);
+				}
 			}
-			System.out.println(reviewNo);
-			System.out.println(attachment);
+			
+			System.out.println(at);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -350,7 +357,42 @@ public class BookDao {
 			close(pstmt);
 		}
 		
-		return attachment;
+		return at;
+	}
+
+	public ArrayList<Book> selectBookList(int userNo, Connection conn) {
+		ArrayList<Book> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBookList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Book(rset.getInt("book_no")
+								, rset.getInt("res_no")
+								, rset.getString("book_name")
+								, rset.getString("book_phone")
+								, rset.getString("book_date")
+								, rset.getString("book_time")
+								, rset.getInt("people")
+								, rset.getString("email")
+								, rset.getString("request")
+								, rset.getString("status")
+								, rset.getString("modify_date")
+								, rset.getString("book_a")));
+			}
+			System.out.println(list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 

@@ -539,13 +539,66 @@
 		   SET COUNT = COUNT + 1
 	 WHERE RES_NO = ?
 	</entry>
+	
 	<!-- 업체 등록 게시물 조회 -->
 	<entry key="selectRegister">
-	
+		SELECT
+			   RES_NO
+			 , TO_CHAR(APPLY_DATE, 'YYYY/MM/DD') "APPLY_DATE" 
+			 , CEO
+			 , RES_NAME
+			 , PERMIT_NO 
+			 , ADDRESS
+			 , D_ADDRESS
+             , PHONE
+             , CELLPHONE
+             , EMAIL
+             , FOOD_CT
+             , PARKING
+             , R_IMG
+             , STATUS
+		  FROM RESTAURANT
+		 WHERE STATUS IN ('W', 'N', 'C')
+           AND RES_NO = ?
 	</entry>
-	<!-- 업체 등록 첨부파일 조회 -->
-	<entry key="selectRegisterAttachment">
-	
+	<entry key="restStatusY"> <!-- 승인 -->
+	 	UPDATE RESTAURANT
+           SET STATUS = 'C'
+         WHERE RES_NO = ?
+    </entry>
+    <entry key="restStatusN"> <!-- 반려 -->
+	 	UPDATE RESTAURANT
+           SET STATUS = 'N'
+         WHERE RES_NO = ?
+    </entry>
+
+
+	<!-- ============================================================================= -->
+	<!-- 1:1 문의 조회(회원) -->
+	<entry key="selectQuestionListU">
+	    SELECT
+			   Q_NO
+			 , Q_TITLE
+			 , TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') "CREATE_DATE"
+			 , STATUS
+		  FROM QUESTION
+		 WHERE Q_WHO = 'U'
+		   AND A_WHO = 'A'
+		 ORDER
+		    BY Q_NO DESC
+	</entry>
+	<!-- 1:1 문의 조회(업체) -->
+	<entry key="selectQuestionListU">
+	    SELECT
+			   Q_NO
+			 , Q_TITLE
+			 , TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') "CREATE_DATE"
+			 , STATUS
+		  FROM QUESTION
+		 WHERE Q_WHO = 'R'
+		   AND A_WHO = 'A'
+		 ORDER
+		    BY Q_NO DESC
 	</entry>
 	
 	

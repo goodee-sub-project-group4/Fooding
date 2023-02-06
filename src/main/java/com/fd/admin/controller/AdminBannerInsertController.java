@@ -61,7 +61,7 @@ public class AdminBannerInsertController extends HttpServlet {
 			int result = new AdminService().insertBanner(list);
 			if(result>0) {
 				session.setAttribute("alertMsg", "등록 완료");
-				response.sendRedirect(request.getContextPath()+"/banner.ad");
+				response.sendRedirect(request.getContextPath()+"/mList.ad");
 //				request.getRequestDispatcher("views/admin/mainBanner.jsp").forward(request, response);
 			}else {
 				request.setAttribute("errorMsg", "등록 실패");

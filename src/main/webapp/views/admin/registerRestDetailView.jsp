@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "com.fd.restaurant.model.vo.Restaurant" %>
+<%
+	Restaurant r = (Restaurant)request.getAttribute("r");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,45 +90,49 @@
                 <table class="table">
                     <tr>
                         <th width="70">업체명</th>
-                        <td>미오 도쿄 다이닝</td>
+                        <td><%=r.getResName() %></td>
                     </tr>
                     <tr>
                         <th>작성일</th>
-                        <td>2023.01.22</td>
+                        <td><%=r.getApplyDate() %></td>
                     </tr>    
                     <tr>
                         <td colspan="2" id="registerContent">
                             <div class="contentDetail">
-                                <div class="detailTitle">대표자명</div><div class="inputContent">입력받은대표자명</div><br>
-                                <div class="detailTitle">상호명</div><div class="inputContent">입력받은상호명</div><br>
-                                <div class="detailTitle">사업자등록번호</div><div class="inputContent">입력받은사업자등록번호</div><br>
-                                <div class="detailTitle">주소</div><div class="inputContent">입력받은주소</div><br>
-                                <div class="detailTitle">상세주소</div><div class="inputContent">입력받은상세주소</div><br>
-                                <div class="detailTitle">전화번호</div><div class="inputContent">입력받은전화번호</div><br>
-                                <div class="detailTitle">휴대폰번호</div><div class="inputContent">입력받은휴대폰번호</div><br>
-                                <div class="detailTitle">이메일</div><div class="inputContent">입력받은이메일</div><br>
-                                <div class="detailTitle">사업체유형(업종)</div><div class="inputContent">입력받은업종</div><br>
-                                <div class="detailTitle">주차여부</div><div class="inputContent">입력받은주차여부</div><br>
-                                <div class="detailTitle">업체사진등록</div><div class="inputContent" style="width: 300px; height: 200px;">입력받은업체사진</div><br>
+                                <input type="hidden" name="resNo" value="<%=r.getResNo() %>">
+                                <div class="detailTitle">대표자명</div><div class="inputContent"><%= r.getCeo() %></div><br>
+                                <div class="detailTitle">상호명</div><div class="inputContent"><%=r.getResName() %></div><br>
+                                <div class="detailTitle">사업자등록번호</div><div class="inputContent"><%=r.getPermitNo() %></div><br>
+                                <div class="detailTitle">주소</div><div class="inputContent"><%=r.getAddress() %></div><br>
+                                <div class="detailTitle">상세주소</div><div class="inputContent"><%=r.getdAddress() %></div><br>
+                                <div class="detailTitle">전화번호</div><div class="inputContent"><%=r.getPhone() %></div><br>
+                                <div class="detailTitle">휴대폰번호</div><div class="inputContent"><%=r.getCellphone() %></div><br>
+                                <div class="detailTitle">이메일</div><div class="inputContent"><%=r.getEmail() %></div><br>
+                                <div class="detailTitle">사업체유형(업종)</div><div class="inputContent"><%=r.getFoodCt() %></div><br>
+                                <div class="detailTitle">주차여부</div><div class="inputContent">
+                                											<%= (r.getParking().equals("Y")) ? "주차 가능" : (r.getParking().equals("N")) ? "주차 불가" : "" %>
+                                											
+                                									</div><br>
+                                <div class="detailTitle">업체사진등록</div><div class="inputContent" style="width: 300px; height: 200px;"><img src="<%=contextPath %><%=r.getImg() %>" alt=""></div><br>
+                      			
                             </div>
-
-                            
 
                         </td>
                     </tr>
                     
                 </table>
 
+                <div align="center">
+                    <button type="button" class="btn btn-outline-danger" style="width:90px" onclick="history.back();">확인</button>&nbsp&nbsp 
+                    <button type="submit" class="btn btn-danger" style="width:90px" formaction="<%=contextPath%>/setY.ad" <%=(r.getStatus().equals("C"))? "disabled" : ""%> <%=(r.getStatus().equals("N"))? "disabled" : ""%>>업체등록</button>&nbsp&nbsp
+                    <button type="submit" class="btn btn-danger" style="width:90px" formaction="<%=contextPath%>/setN.ad" <%=(r.getStatus().equals("C"))? "disabled" : ""%> <%=(r.getStatus().equals("N"))? "disabled" : ""%>>반려</button>
+                </div>
+                <br><br><br><br><br>
 
             </form>
             
             
-            <div align="center">
-                <a href="" class="btn btn-outline-danger" style="width:90px">확인</a>&nbsp&nbsp
-                <a href="" class="btn btn-danger" style="width:90px">업체등록</a>&nbsp&nbsp
-                <a href="" class="btn btn-danger" style="width:90px">반려</a>
-            </div>
-            <br><br><br><br><br>
+            
 		</div>
 
 

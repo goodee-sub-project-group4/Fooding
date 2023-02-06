@@ -137,7 +137,7 @@
     
     <div id="menu3-detail" class="detail">
         <ul>
-            <li id="menu3-detail-1" onclick = "location.href='<%= request.getContextPath()%>/banner.ad'">메인 배너<span>></span></a></li>
+            <li id="menu3-detail-1" onclick = "location.href='<%= request.getContextPath()%>/baEnroll.ad'">메인 배너<span>></span></a></li>
             <li id="menu3-detail-2" onclick = "location.href='<%= request.getContextPath()%>/terms.ad'">이용약관<span>></span></a></li>
         </ul>
     </div>

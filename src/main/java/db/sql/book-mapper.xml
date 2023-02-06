@@ -81,8 +81,10 @@
 	</entry>
 	
 	<entry key="selectAttachment">
-		SELECT
-			   CHANGE_NAME
+		SELECT 
+			   RES_NO
+			 , REF_BNO
+			 , CHANGE_NAME
 			 , FILE_PATH
 		  FROM ATTACHMENT
 		 WHERE REF_BNO = ?
@@ -221,5 +223,23 @@
                             BY POINT_NOW DESC)
                   WHERE ROWNUM = 1)
 		     )
+	</entry>
+	
+	<entry key="selectBookList">
+		SELECT BOOK_NO
+		     , USER_NO
+		     , RES_NO
+		     , BOOK_NAME
+		     , BOOK_PHONE
+		     , BOOK_DATE
+		     , BOOK_TIME
+		     , PEOPLE
+		     , EMAIL
+		     , REQUEST
+		     , STATUS
+		     , MODIFY_DATE
+		     , BOOK_A
+		  FROM BOOK
+		 WHERE USER_NO = ?
 	</entry>
 </properties>

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.fd.admin.model.dao.AdminDao;
 import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
+import com.fd.admin.model.vo.Question;
 import com.fd.book.model.vo.Book;
 import com.fd.book.model.vo.BookMenu;
 import com.fd.book.model.vo.Payment;
@@ -282,7 +283,7 @@ public class AdminService {
 	 */
 	public ArrayList<Attachment> selectBanner() {
 		Connection conn = getConnection();
-		ArrayList list = new AdminDao().selectBanner(conn);
+		ArrayList<Attachment> list = new AdminDao().selectBanner(conn);
 		close(conn);
 		return list;
 	}
@@ -490,7 +491,7 @@ public class AdminService {
 		return result;
 	}
 
-	/**게시물 조회
+	/**업체 등록 게시물 상세 조회
 	 * @param resNo
 	 * @return
 	 */
@@ -501,15 +502,47 @@ public class AdminService {
 		return r;
 	}
 
-	/**게시물 첨부파일 조회
+	/**업체 등록 승인(C)
 	 * @param resNo
 	 * @return
 	 */
-	public Attachment selectRegisterAttachment(int resNo) {
+	public int restStatusY(int resNo) {
 		Connection conn = getConnection();
-		Attachment at = new AdminDao().selectRegisterAttachment(conn, resNo);
+		int result = new AdminDao().restStatusY(conn, resNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
-		return at;
+		return result;
+	}
+
+	/**업체 등록 승인(N)
+	 * @param resNo
+	 * @return
+	 */
+	public int restStatusN(int resNo) {
+		Connection conn = getConnection();
+		int result = new AdminDao().restStatusN(conn, resNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+
+	// ==========================================================================
+
+	/**1:1 문의 조회(업체)
+	 * @return
+	 */
+	public ArrayList<Question> selectQuestionListU() {
+		
+		return null;
 	}
 
 

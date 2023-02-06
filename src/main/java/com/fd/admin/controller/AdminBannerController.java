@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fd.admin.model.service.AdminService;
 import com.fd.common.model.vo.Attachment;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class AdminMainBannerController
@@ -32,15 +33,9 @@ public class AdminBannerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loginAdmin")==null) {
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			response.sendRedirect(request.getContextPath()+"/rest.admin");
-		}else {	
-			ArrayList<Attachment> list = new AdminService().selectBanner();
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/admin/mainBanner.jsp").forward(request, response);
-		}
+		response.setContentType("application/json; charset=UTF-8");
+		ArrayList<Attachment> list = new AdminService().selectBanner();
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**
