@@ -110,7 +110,53 @@
 		    BY Q_NO DESC
 	</entry>
 	
+	<!-- 1:1문의(관리자)글쓰기 -->
+	<entry key="insertQuestionAdmin">
+		INSERT
+		  INTO QUESTION
+		     ( 
+		       Q_NO
+		     , CATEGORY
+		     , Q_TITLE
+		     , Q_CONTENT
+		     , Q_PERSON
+		     , Q_WHO
+		     , A_WHO
+		     )
+		VALUES 
+		     (
+		       SEQ_QNO.NEXTVAL
+		     , ? <!-- 사용자가 넘긴 카테고리 -->
+		     , ?
+		     , ?
+		     , ?
+		     , 'U'
+		     , 'A'
+		     )      
+		     
+	</entry>
 	
-
-
+	<!-- 1:1문의(관리자)글쓰기 사진첨부 -->
+	<entry key="insertQuestionAttachment">
+		INSERT
+		  INTO ATTACHMENT
+		     (
+		       FILE_NO
+		     , REF_BNO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , FILE_PATH
+		     , BOARD_TYPE
+		     )
+	    VALUES
+	         (
+	           SEQ_ATNO.NEXTVAL
+	         , SEQ_QNO.CURRVAL
+	         , ? <!-- 첨부파일의원본명 -->
+	         , ? <!-- 첨부파일의실제업로드명 -->
+	         , ? <!-- 저장경로 -->
+	         , 'Q' <!-- 타입 -->
+	         )
+	</entry>
+	
 </properties>
