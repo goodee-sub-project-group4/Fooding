@@ -93,6 +93,21 @@
 
 	<%@ include file="views/common/head.jsp" %>
 	<%@ include file="views/common/searchSidebar.jsp" %>
+	
+	<script>
+		$(function(){
+			$.ajax({
+                url:"<%= contextPath %>/banner.ad",
+                type:"post",
+                success:function(list){
+               		console.log(list);
+                },
+                error:function(){
+                	
+                }
+            });
+		})
+	</script>
    
 	<!-- 메인영역 -->
 	<div class="wrap">
