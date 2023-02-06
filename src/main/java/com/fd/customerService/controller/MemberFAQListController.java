@@ -35,7 +35,7 @@ public class MemberFAQListController extends HttpServlet {
 	
 		// 페이징
 		int listCount; // 현재게시글 총 개수
-		int currentPage; // 사용자가 요청한 페이지 == 현재페이지
+		int currentPage = 0; // 사용자가 요청한 페이지 == 현재페이지
 		int pageLimit; // 페이징바의 페이지 최대갯수
 		int boardLimit; // 페이지에 보여질 게시글 개수
 		

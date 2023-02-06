@@ -347,8 +347,8 @@
 			let enAbleDate = $('#which-date').val();
 			$('#'+enAbleDate).css("background-color","");
 			$.ajax({
-				url:"<%=contextPath%>/deleteNotAble.re",
-				date:{year:year, month:month, date:enAbleDate},
+				url:"<%=contextPath%>/deleteNotAble.re?month="+month+"&year="+year+"&date="+enAbleDate,
+				date:{},
 				success:function(result) {
 					if(result==0) {//delete실패하였을때
 						alert('이미 예약 가능 상태입니다.');

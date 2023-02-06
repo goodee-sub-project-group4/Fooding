@@ -92,7 +92,8 @@
                             $("#rest").attr("class", "btn btn-danger");
                             $('#which').val('rest');
                         });
-    
+                        
+                       
                     </script>
     
                     <div id="login-id"><input type="text" name="userId" placeholder="아이디를 입력해주세요" required></div>

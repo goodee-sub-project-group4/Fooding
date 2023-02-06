@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fd.admin.model.vo.Question;
 import com.fd.book.model.vo.Book;
+import com.fd.book.model.vo.NotAble;
 import com.fd.restaurant.model.service.RestaurantService;
 import com.fd.restaurant.model.vo.Restaurant;
 import com.fd.review.model.vo.Review;
@@ -47,16 +48,39 @@ public class RestHomeFirstInController extends HttpServlet {
 			}else if(rest.getStatus().equals("Y")) { //정상적으로 이용중인 업체
 				//홈화면을 꾸며줄 데이터들 조회해오기
 				int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
+				
 				//새로운 예약건 조회해오기
 				ArrayList<Book> bList = new RestaurantService().selectNewBook(resNo);
 				request.setAttribute("bList", bList);
+				
+				//달력 구성에 필요한 정보 담기
+				int year = Integer.parseInt(request.getParameter("year"));
+				int month = Integer.parseInt(request.getParameter("month"));
+				request.setAttribute("year", year);
+				request.setAttribute("month", month);
+				
+				//불가날짜 담기
+				NotAble na = new NotAble();
+				na.setResNo(resNo);
+				na.setYear(String.valueOf(year));
+				na.setMonth(String.valueOf(month));
+				ArrayList<NotAble> naList = new RestaurantService().selectNotAble(na);
+				request.setAttribute("naList", naList);
+				
 				//새로운 문의 조회해오기
 				ArrayList<Question> qList = new RestaurantService().selectNewQuestion(resNo);
 				request.setAttribute("qList", qList);
+				
 				//새로운 리뷰 조회해오기
 				ArrayList<Review> rList = new RestaurantService().selectNewReview(resNo);
 				request.setAttribute("rList", rList);
+				
+				
+				
+				
 				request.getRequestDispatcher("views/restaurant/restHome.jsp").forward(request, response);
+				
+				
 			}
 		}
 	}
