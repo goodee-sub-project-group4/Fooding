@@ -261,7 +261,9 @@
                                     <% if(!attachment.isEmpty()) { %>
 	                                <div class="review-picture">
 	                                	<% for(Attachment at : attachment) { %>
-	                                    <img src="<%= at.getFilePath() %>/<%= at.getChangeName() %>" alt="">
+	                                		<% if(r.getReviewNo() == at.getRefBoardNo()) { %>
+	                                    		<img src="<%= at.getFilePath() %>/<%= at.getChangeName() %>" alt="">
+	                                    	<% } %>
 	                                    <% } %>
 	                                </div>
 	                                <% } %>

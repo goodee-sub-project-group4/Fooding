@@ -111,23 +111,21 @@ public class BookService {
 
 
 
-	public ArrayList<Attachment> selectAttachment(int reviewNo, int resNo) {
+	public ArrayList<Attachment> selectAttachment(ArrayList<Review> reviewList, int resNo) {
 		Connection conn = getConnection();
-		ArrayList<Attachment> attachment = new BookDao().selectAttachment(reviewNo, resNo, conn);
+		ArrayList<Attachment> attachment = new BookDao().selectAttachment(reviewList, resNo, conn);
 		close(conn);
 		return attachment;
 	}
-	
-	/** (마이페이지) 예약/결제 내역 리스트
-	 * @author 빛나 
-	 * @return result
-	 */
-//	public int selectBookList(int userNo) {
-//		Connection conn = getConnection();
-//		int result = new BookDao().selectBookList(conn, userNo);
-//		close(conn);
-//		return result;
-//	}
+
+
+
+	public ArrayList<Book> selectBookList(int userNo) {
+		Connection conn = getConnection();
+		ArrayList<Book> list = new BookDao().selectBookList(userNo, conn);
+		close(conn);
+		return list;
+	}
 
 	
 }

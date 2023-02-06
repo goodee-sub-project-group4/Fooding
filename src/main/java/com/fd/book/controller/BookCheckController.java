@@ -1,6 +1,7 @@
 package com.fd.book.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fd.book.model.service.BookService;
+import com.fd.book.model.vo.Book;
 import com.fd.member.model.vo.Member;
 
 /**
@@ -31,9 +33,9 @@ public class BookCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
 		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		ArrayList<Book> list = new BookService().selectBookList(userNo);
 		
 
 		int result = new BookService().selectBookList(userNo);
