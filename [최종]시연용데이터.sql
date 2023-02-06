@@ -1,5 +1,11 @@
 
 
+---------------------------------------
+--     [확인필수] fooding_최종.sql 파일을 스크립트 실행해도 기존 데이터가 삭제안되고 그대로 남아있는 증상 있음
+--     [해결방법]
+--               "해당 계정의 모든테이블 및 제약조건 삭제"
+--               >> 해당 구문을 드래그해서 별도 실행한 후에 전체 스크립트 실행할것!
+----------------------------------------
 
 
 
@@ -91,11 +97,11 @@ INSERT INTO PAYMENT VALUES (SEQ_PMNO.NEXTVAL, 21, 1201, 3, 0, 51000, '신용카�
 
 ------------- REIVEW 리뷰 -------------
 INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CREATE_DATE, STATUS, GOOD, COUNT) VALUES
-(SEQ_RVNO.NEXTVAL, 1201, 1, 2, '정말 맛있어요! 리뷰도 길게 남기고 사진도 함께 남길께요. 정말 맛있어요! 리뷰도 길게 남기고 사진도 함께 남길께요.', 5, SYSDATE, 'Y', 'N', 0);
+(SEQ_RVNO.NEXTVAL, 1201, 1, 25, '정말 맛있어요! 리뷰도 길게 남기고 사진도 함께 남길께요. 정말 맛있어요! 리뷰도 길게 남기고 사진도 함께 남길께요.', 5, SYSDATE, 'Y', 'N', 0);
 INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CREATE_DATE, STATUS, GOOD, COUNT) VALUES
-(SEQ_RVNO.NEXTVAL, 1201, 4, 10,  '머리카락ㅡㅡ나왔어요. 위생별로인듯', 1, SYSDATE, 'Y', 'N', 0);
+(SEQ_RVNO.NEXTVAL, 1201, 4, 30,  '머리카락ㅡㅡ나왔어요. 위생별로인듯', 1, SYSDATE, 'Y', 'N', 0);
 INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CREATE_DATE, STATUS, GOOD, COUNT) VALUES
-(SEQ_RVNO.NEXTVAL, 1201, 2, 11,  '굿입니다. 아주 굿', 5, SYSDATE, 'Y', 'Y', 0);
+(SEQ_RVNO.NEXTVAL, 1201, 2, 38,  '굿입니다. 아주 굿', 5, SYSDATE, 'Y', 'Y', 0);
 
 ------------- ATTACHMENT 첨부파일 -------------
 INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진1.jpg', '2023020309460951785.jpg', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');

@@ -1,5 +1,5 @@
 
---- 한수 
+---------------- 한수 시연용 업체 ---------------- 
 -- 서울특별시 금천구 western 
 INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT)
 VALUES (SEQ_RESNO.NEXTVAL, '1234', '맥도날드', '김점순', '789-25-14752', '서울시 금천구 가산동', '대륭 3차 11층', '서울특별시', '금천구', '02-123-1234', '010-1234-1234', 'mimi@naver.com', SYSDATE, 
