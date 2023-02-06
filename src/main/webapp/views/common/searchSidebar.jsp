@@ -35,6 +35,7 @@
     #content1-1{
         height: 30%; /*150px*/
         box-sizing: border-box;
+        margin-bottom:50px;
 
     }
     /* 음식 카테고리 상위 칸*/
@@ -82,6 +83,11 @@
         margin-left:30px;
         margin-top:15px;
     }
+    
+   .icon{margin-right:10px; margin-left:5px;}
+   #confirm-btn{margin-top:40px; margin-left: 50px; width: 120px;}
+   
+   
 </style>
 </head>
 <body>
@@ -166,7 +172,7 @@
 		        </div>
 		        <div id="content1-2">
 		            <!--로고랑 카테고리 이름-->
-		            <img src="/Fooding/resources/images/002-chicken-1.png" width="30px" height="30px" class="icon">
+		            <img src="/Fooding/resources/images/푸딩.png" width="30px" height="30px" class="icon">
 		            <div class="ctName">음식</div>
 		
 		            <!--음식카테고리-->
@@ -211,7 +217,8 @@
 		            </div>
 		        </div>
 		        <input type="hidden" name="cpage" value="1">
-		        <button type="submit" align="center">검색하기</button>
+		        
+		        <button type="submit" id="confirm-btn" class="btn btn-danger">검색</button>
 		    	</form>
 		    </div>
 		</div>
