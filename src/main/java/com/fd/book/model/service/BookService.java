@@ -60,32 +60,29 @@ public class BookService {
 
 
 
-	public Point selectPoint(int userNo) {
+	public int selectPoint(int userNo) {
 		Connection conn = getConnection();
-		Point po = new BookDao().selectPoint(conn, userNo);
+		int pointNow = new BookDao().selectPoint(conn, userNo);
 		close(conn);
-		return po;
+		return pointNow;
 	}
 
 
 
-	public void insertBook(Book book) {
+	public void insertBook(Book book, Payment payment, Point point) {
 		Connection conn = getConnection();
-		int result = new BookDao().insertBook(conn, book);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
+		int insertBook = new BookDao().insertBook(conn, book);
+		int insertPayment = new BookDao().insertPayment(conn, payment);
+		if(payment.getPayPoint() > 0) {
+			int insertPayPoint = new BookDao().insertPayPoint(conn, point);
+			if(insertPayPoint > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
 		}
-		close(conn);
-	}
-
-
-
-	public void insertPayment(Payment payment) {
-		Connection conn = getConnection();
-		int result = new BookDao().insertBook(conn, payment);
-		if(result > 0) {
+		int insertSavePoint = new BookDao().insertSavePoint(conn, point);
+		if(insertBook > 0 && insertPayment > 0 && insertSavePoint > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);

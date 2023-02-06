@@ -13,11 +13,12 @@ public class Point {
 	private int pointTrade;
 	private int pointNow;
 	private Date pointDate;
+	private int payPoint;
 
 	public Point() {
 		super();
 	}
-
+	
 	public Point(int pointNo, int payNo, int userNo, int resNo, String pointName, String status, int pointTrade,
 			int pointNow, Date pointDate) {
 		super();
@@ -30,6 +31,23 @@ public class Point {
 		this.pointTrade = pointTrade;
 		this.pointNow = pointNow;
 		this.pointDate = pointDate;
+	}
+	
+	public Point(int userNo, int resNo, String pointName, int pointTrade, int payPoint) {
+		super();
+		this.userNo = userNo;
+		this.resNo = resNo;
+		this.pointName = pointName;
+		this.pointTrade = pointTrade;
+		this.payPoint = payPoint;
+	}
+
+	public int getPayPoint() {
+		return payPoint;
+	}
+
+	public void setPayPoint(int payPoint) {
+		this.payPoint = payPoint;
 	}
 
 	public int getPointNo() {
