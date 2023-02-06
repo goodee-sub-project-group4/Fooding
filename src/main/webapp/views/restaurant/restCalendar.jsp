@@ -80,6 +80,7 @@
             font-size: 14px;
             color:rgb(128, 128, 128);
             text-align: left;
+			position: relative;
 		}
 		#prev-area, #next-area {
 			width:50px;
@@ -115,17 +116,35 @@
 		.book-info {
 			font-size:16px;
 		}
-		#which-year {
+		#which-year { /* 하단연도표시*/
 			float:right;
 			color:gray;
 			margin-right:120px;
 		}
-		.x-icon {
+		.x-icon { /*엑스표시*/
 			width:35px;
-			float: right;
-			margin-right:25px;
-			margin-top:18px;
-			opacity: 0.3;
+			opacity: 0.5;
+			position: absolute;
+			left:36px;
+			top:22px;
+			z-index: 1000;
+
+		}
+		.bookCount { /*예약갯수 뱃지*/
+			background-color:rgb(236, 2, 2);
+			opacity: 0.9;
+			width:40px;
+			height:40px;
+			color:white;
+			font-size:25px;
+			font-weight: 900;
+			border-radius : 20px;
+			line-height: 40px;
+			float:right;
+			margin-right:20px;
+			margin-top:15px;
+			z-index: 500;
+
 		}
 	
 	</style>
@@ -142,7 +161,7 @@
 			<h2><%=month%>월</h2><div id="space"></div>
 			<input type="hidden" id="which-date" value="">
 			<button type="button" class="btn btn-outline-danger" onclick="enAble();">예약가능 변경</button>
-			<button type="button" class="btn btn-outline-danger" onclick="notAble();">예약불가 변경</button>
+			<button type="button" class="btn btn-outline-danger" onclick="notAble()();">예약불가 변경</button>
 			<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-list">예약내역 보기</button><br>
 			
 			<div id="prev-area" >
@@ -302,14 +321,17 @@
 			});
 			
 			//예약건수 표기하기
-			<% 
-			for(int i=0; i<bList.size(); i++) {
-				int 
-				
-			}
-			
-			
-			%>
+			<% for(int i=0; i<bList.size(); i++) { %>
+				<% String bookDate = (bList.get(i).getBookDate()).substring(8); %>
+				if($('#'+<%=bookDate%>).val()==1) {
+					//기존에 데이터가 추가된 경우
+					let count = $('#'+<%= bookDate %>).children('div').text();
+					$('#'+<%= bookDate %>).children('div').text(Number(count)+1);
+				}else {
+					$('#'+<%= bookDate %>).append('<div class="bookCount" align="center">1</div>');
+					$('#'+<%=bookDate%>).val("1");
+				}
+			<% }%>
 				
 			
 		})
@@ -333,12 +355,15 @@
 			}
 			location.href='/Fooding/calendar.re?year='+year+'&month='+month;
 		}
+		
+		
+		//예약불가인지 검증하는 함수
 
+		
 		//예약불가 변경
 		function notAble(){
-			let notAbleDate = $('#which-date').val();
+			let notAbleDate = $('#which-date').val();	
 			$('#'+notAbleDate).css("background-color","");
-			
 			//Ajax통신
 			$.ajax({
 				url:"<%=contextPath%>/insertNotAble.re",

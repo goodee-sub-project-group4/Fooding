@@ -85,8 +85,7 @@ INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CR
 (SEQ_RVNO.NEXTVAL, 1201, 2, 11,  '굿입니다. 아주 굿', 5, SYSDATE, 'Y', 'Y', 0);
 
 ------------- NOT_ABLE 예약불가날짜 -------------
-INSERT INTO NOT_ABLE VALUES
-(SEQ_NANO.NEXTVAL, 1201, 2023, 2, 8);
+INSERT INTO NOT_ABLE VALUES (SEQ_NANO.NEXTVAL, 1201, 2023, 2, 8);
 ---------------------------------------------------
 
 --첫로그인 상태로 바꾸기
@@ -98,13 +97,7 @@ DELETE FROM QUESTION WHERE Q_NO=10;
 
 --반드시 커밋후 테스트할것!!
 COMMIT;
-        SELECT
-		       BOOK_NO
-		     , BOOK_DATE
-		  FROM BOOK 
-		 WHERE RES_NO = 1201
-		   AND SUBSTR(BOOK_DATE,0,4) = '2023'
-		   AND SUBSTR(BOOK_DATE,6,2) = '02';
+
 ROLLBACK;
 
 

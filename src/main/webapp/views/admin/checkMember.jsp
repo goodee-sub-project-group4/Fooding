@@ -420,7 +420,7 @@
                             </tr>
                             <tr>
                                 <th>이름</th>
-                                <td><input id="userNameU" name="userName" type="text" value="" placeholder=""></td>
+                                <td><input id="userNameU" name="userName" type="text" value="" placeholder="">이름</td>
                             </tr>
                             <tr>
                                 <th>닉네임</th>
@@ -639,10 +639,10 @@
 					$('#userNoU').val(m.userNo);
                     $('#userNoU').text(m.userNo);
 					$('#userIdU').text(m.userId);
-                    $('#userNameU').html(m.userName);
-                    $('#nicknameU').text(m.nickname);
-                    $('#userPhoneU').text(m.userPhone);
-                    $('#userEmailU').text(m.userEmail);
+                    $('#userNameU').val(m.userName);
+                    $('#nicknameU').val(m.nickname);
+                    $('#userPhoneU').val(m.userPhone);
+                    $('#userEmailU').val(m.userEmail);
                     $('#birthU').text(m.birth);
                     if(m.gender == "M"){
                         $("input:radio[name='gender']:radio[value='M']").attr("checked", true);
