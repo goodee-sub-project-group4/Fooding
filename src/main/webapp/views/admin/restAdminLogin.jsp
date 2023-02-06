@@ -93,12 +93,22 @@
                             $('#which').val('rest');
                         });
                         
+                        //업체달력표기에 필요한 데이터 넘기기
+                        $(function(){
+                        	//현재 연도와 월 구하기
+                            let year = new Date().getFullYear();
+                        	let month = new Date().getMonth()+1;
+                        	$('#sessionYear').val(year);
+                        	$('#sessionMonth').val(month);                        	
+                        })
                        
                     </script>
     
                     <div id="login-id"><input type="text" name="userId" placeholder="아이디를 입력해주세요" required></div>
                     <div id="login-pwd"><input type="password" name="userPwd" placeholder="비밀번호를 입력해주세요" required></div>
                     <div id="login-btn"><input type="submit" class="btn btn-danger" value="로그인"></div>
+                    <input type="hidden" id="sessionYear" name="sessionYear" value="">
+                    <input type="hidden" id="sessionMonth" name="sessionMonth" value="">
                 </form>
     
             </div>
