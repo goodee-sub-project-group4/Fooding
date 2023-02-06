@@ -8,7 +8,7 @@
 <%
 	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
 	ArrayList<Menu> menuList = (ArrayList<Menu>)request.getAttribute("menuList");
-	//ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
+	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
     Point point = (Point)request.getAttribute("point");
 %>
 <!DOCTYPE html>
@@ -58,7 +58,7 @@
         .menu img{width: 180px; height: 100px;}
 
         /* 리뷰 */
-        #content2-2{margin-top: 20px; float: left; max-height: 1700px; overflow: auto;}
+        #content2-2{width: 100%; margin-top: 20px; float: left; min-height: 500px;  max-height: 1700px; overflow: auto;}
         #content2-2 div{box-sizing: border-box;}
         #review-head{height: 50px; border: 2px solid gainsboro; padding: 5px; margin-bottom: 4px;}
         .review-content div{float: left; padding: 5px;}
@@ -66,10 +66,10 @@
         /* 리뷰 제목 */
         .review-content1-2{width: 80%; height: 60px; border-top: 2px solid gainsboro; border-right: 2px solid gainsboro;}
         /* 리뷰 작성자 */
-        .review-content2-1{width: 20%; height: 355px; border-left: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
-        .review-content2-2{width: 80%; height: 355px; border-right: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
+        .review-content2-1{width: 20%; height: 255px; border-left: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
+        .review-content2-2{width: 80%; height: 255px; border-right: 2px solid gainsboro; border-bottom: 2px solid gainsboro; margin-bottom: 2px;}
         /* 리뷰 내용 */
-        .review-text{width: 100%; height: 200px;}
+        .review-text{width: 100%; height: 100px;}
         /* 리뷰 사진 */
         .review-picture{width: 100%; height: 150px; padding: 10px; text-align: center;}
         .review-picture img{width: 140px; height: 120px;}
@@ -231,76 +231,44 @@
                         </div>
                     </div>
                     <div id="content2-2">
-                        <div id="review-head">
+                        <div id="review-head" style="font-size: 25px; font-weight: 700;">
                             사용자 리뷰
                         </div>
-                        <!-- <% //if(!reviewList.isEmpty()) { %> -->
-                        	<!-- <% //for(Review r : reviewList) { %> -->
+                        <% if(reviewList.isEmpty()) { %>
+                            <div class="review-content">
+                                <div style="margin-top: 20px; width: 100%; height: 200px; line-height: 200px; font-size: 20px; font-weight: 600; color: gray; text-align: center; border: 2px solid gainsboro;">
+                                    조회된 리뷰가 없습니다.
+                                </div>
+                            </div>
+                        <% }else{ %>
+                        	<% for(Review r : reviewList) { %>
 	                        <div class="review-content">
 	                            <div class="review-content1-1">
 	                            </div>
 	                            <div class="review-content1-2">
-	                                리뷰 작성일<br>
-	                                리뷰 제목
+	                                <%= r.getCreateDate() %>
 	                            </div>
 	                            <div class="review-content2-1">
-	                                홍길동<br>
-	                                별점
+	                                <%= r.getNickName() %><br>
+	                                <%= r.getStar() %>
 	                            </div>
 	                            <div class="review-content2-2">
-	                                <div class="review-text"></div>
+	                                <div class="review-text">
+                                        <%= r.getReviewContent() %>
+                                    </div>
 	                                <div class="review-picture">
-	                                    <img src="sample2.jpeg" alt="">
+	                                    <img src="" alt="">
 	                                    <img src="sample2.jpeg" alt="">
 	                                    <img src="sample2.jpeg" alt="">
 	                                </div>
 	                            </div>
 	                        </div>
-                        	<!-- <% //} %>
-                        <% //} %> -->
-                        <div class="review-content">
-                            <div class="review-content1-1">
+                        	<% } %>
+                            <div class="paging">
+                                < 1 2 3 4 5 6 7 8 9 >
                             </div>
-                            <div class="review-content1-2">
-                                리뷰 작성일<br>
-                                리뷰 제목
-                            </div>
-                            <div class="review-content2-1">
-                                홍길동<br>
-                                별점
-                            </div>
-                            <div class="review-content2-2">
-                                <div class="review-text"></div>
-                                <div class="review-picture">
-                                    <img src="sample2.jpeg" alt="">
-                                    <img src="sample2.jpeg" alt="">
-                                    <img src="sample2.jpeg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-content">
-                            <div class="review-content1-1">
-                            </div>
-                            <div class="review-content1-2">
-                                리뷰 작성일<br>
-                                리뷰 제목
-                            </div>
-                            <div class="review-content2-1">
-                                홍길동<br>
-                                별점
-                            </div>
-                            <div class="review-content2-2">
-                                <div class="review-text"></div>
-                                <div class="review-picture">
-                                    <img src="sample2.jpeg" alt="">
-                                    <img src="sample2.jpeg" alt="">
-                                    <img src="sample2.jpeg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="paging">
-                            < 1 2 3 4 5 6 7 8 9 >
-                        </div>
+                        <% } %>
+                        
                     </div>
                     
                 </div>
@@ -875,7 +843,6 @@
                                     </td>
                                 </tr>
                         </table>
-                        
                         <div></div>
                     </div>
                     <br>

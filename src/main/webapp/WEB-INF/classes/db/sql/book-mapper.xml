@@ -55,11 +55,11 @@
 	       AND STATUS = 'Y'
 	</entry>
 	
-	<!-- <entry key="selectReview">
+	<entry key="selectReview">
 		SELECT
 			   REVIEW_NO
 			 , RE.RES_NO
-			 , USER_NO
+			 , RE.USER_NO
 			 , BOOK_NO
 			 , REVIEW_CONTENT
 			 , RE.STAR
@@ -67,12 +67,14 @@
 			 , RE.MODIFY_DATE
 			 , GOOD
 			 , RE.COUNT
+             , NICKNAME
 		  FROM REVIEW RE
 		  JOIN RESTAURANT RS ON (RE.RES_NO = RS.RES_NO)
 		  JOIN ATTACHMENT AT ON (REF_BNO = REVIEW_NO)
+          JOIN TB_USER U ON (U.USER_NO = RE.USER_NO)
 		 WHERE RE.RES_NO = ?
-		   AND RE.STATUS = 'Y'  
-	</entry> -->
+		   AND RE.STATUS = 'Y' 
+	</entry>
 	
 	<entry key="selectBookNo">
 		SELECT BOOK_NO
