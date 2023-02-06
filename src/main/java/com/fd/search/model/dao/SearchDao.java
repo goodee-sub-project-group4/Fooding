@@ -394,7 +394,7 @@ public class SearchDao {
 			
 		}
 		
-		public ArrayList<Restaurant> selectGoodList(Connection conn,PageInfo pi, int userNo){
+		public ArrayList<Restaurant> selectGoodList(Connection conn, int userNo){
 			ArrayList<Restaurant> list = new ArrayList<>();
 			PreparedStatement pstmt = null; 
 			ResultSet rset = null; 
@@ -402,14 +402,8 @@ public class SearchDao {
 			
 			try {
 				pstmt = conn.prepareStatement(sql); // 미완성된 sql문 
-				
 				// 사용자로부터 입력받은 값으로 sql문 채우기 
-				
-				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; 
-				int endRow = startRow + pi.getBoardLimit() - 1;  
-				
 				pstmt.setInt(1, userNo);
-				
 				rset = pstmt.executeQuery(); 
 				
 				while(rset.next()) {

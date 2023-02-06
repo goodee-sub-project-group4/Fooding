@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.restaurant.model.vo.Restaurant" %>
+<% 
+   ArrayList<Restaurant> list = (ArrayList)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,7 +113,7 @@
                 </div>
 
                 <!--등록요청 표-->
-                <table class="table">
+                <table class="table list-area">
                     <thead>
                         <tr>
                             <th><input type="checkbox"></th>
@@ -120,77 +124,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                    	<% for(Restaurant r : list) {%>
                         <tr>
                             <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">2023.01.22</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>미확인</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">2023.01.22</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>미확인</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">2023.01.22</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>미확인</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">2023.01.22</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>미확인</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">2023.01.22</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>미확인</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">2023.01.22</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>미확인</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">2023.01.22</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>미확인</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">2023.01.22</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>미확인</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">2023.01.22</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>미확인</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td id="noticeTitle">2023.01.22</td>
-                            <td>미오 도쿄 다이닝</td>
-                            <td>미확인</td>
-                        </tr>
-                        
+                            <td><%= r.getResNo() %></td>
+                            <td><%= r.getApplyDate() %></td>
+                            <td><%= r.getResName() %></td>
+                            <td>
+                            	<%= (r.getStatus().equals("W")) ? "승인대기" : (r.getStatus().equals("N")) ? "반려" : "승인"  %>
+
+                            </td>
+                        </tr>  
+                        <% } %>                     
                     </tbody>	
                 </table>
             </form>
@@ -228,6 +173,19 @@
                $("#menu4-detail-4").addClass("active");
                
         })
+        
+        $(function(){
+            $(".list-area tbody").on('click', 'tr td:not(:first-child)', function(){
+                const tr = $(this).parent('tr');
+                const td = tr.children();
+                let tdArray = new Array();
+                td.each(function(i){
+                    tdArray.push(td.eq(i).text());
+                });
+                location.href = '<%=contextPath%>/rrDetail.ad?no=' + tdArray[1];
+            })
+        })
+ 
 
 	</script>
 </body>

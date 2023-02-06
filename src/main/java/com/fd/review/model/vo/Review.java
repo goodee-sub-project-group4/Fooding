@@ -15,6 +15,9 @@ public class Review {
 	private String status;
 	private String good;
 	private int count;
+	private String nickName;
+	private String changeName;
+	private String filePath;
 	
 	public Review () {}
 
@@ -34,6 +37,22 @@ public class Review {
 		this.count = count;
 	}
 	
+	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewContent, double star,
+			String createDate, String modifyDate, String good, int count, String nickName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.resNo = resNo;
+		this.userNo = userNo;
+		this.bookNo = bookNo;
+		this.reviewContent = reviewContent;
+		this.star = star;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+		this.good = good;
+		this.count = count;
+		this.nickName = nickName;
+	}
+
 	// 리뷰리스트
 	public Review(int reviewNo, String resNo, String reviewContent, double star, String createDate) {
 		super();
@@ -57,6 +76,30 @@ public class Review {
 		this.modifyDate = modifyDate;
 		this.good = good;
 		this.count = count;
+	}
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public int getReviewNo() {

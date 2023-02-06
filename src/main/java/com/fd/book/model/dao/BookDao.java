@@ -142,38 +142,39 @@ public class BookDao {
 		return result;
 	}
 	
-//	public ArrayList<Review> selectReview(int resNo, Connection conn) {
-//	ArrayList<Review> list = new ArrayList<>();
-//	PreparedStatement pstmt = null;
-//	ResultSet rset = null;
-//	String sql = prop.getProperty("selectReview");
-//	
-//	try {
-//		pstmt = conn.prepareStatement(sql);
-//		pstmt.setInt(1, resNo);
-//		rset = pstmt.executeQuery();
-//		
-//		while(rset.next()) {
-//			list.add(new Review(rset.getInt("review_no")
-//							  , rset.getString("RES_NO")
-//							  , rset.getInt("USER_NO")
-//							  , rset.getInt("book_no")
-//							  , rset.getString("REVIEW_CONTENT")
-//							  , rset.getDouble("star")
-//							  , rset.getString("CREATE_DATE")
-//							  , rset.getString("MODIFY_DATE")
-//							  , rset.getString("good")
-//							  , rset.getInt("count")));
-//		}
-//	} catch (SQLException e) {
-//		e.printStackTrace();
-//	} finally {
-//		close(rset);
-//		close(pstmt);
-//	}
-//	
-//	return list;
-//}
+	public ArrayList<Review> selectReview(int resNo, Connection conn) {
+	ArrayList<Review> list = new ArrayList<>();
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	String sql = prop.getProperty("selectReview");
+	
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, resNo);
+		rset = pstmt.executeQuery();
+		
+		while(rset.next()) {
+			list.add(new Review(rset.getInt("review_no")
+							  , rset.getString("RES_NO")
+							  , rset.getInt("USER_NO")
+							  , rset.getInt("book_no")
+							  , rset.getString("REVIEW_CONTENT")
+							  , rset.getDouble("star")
+							  , rset.getString("CREATE_DATE")
+							  , rset.getString("MODIFY_DATE")
+							  , rset.getString("good")
+							  , rset.getInt("count")
+							  , rset.getString("nickname")));
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return list;
+}
 
 	public int selectPoint(Connection conn, int userNo) {
 		int pointNow = 0;

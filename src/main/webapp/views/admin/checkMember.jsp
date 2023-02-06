@@ -412,7 +412,8 @@
                         <table id="updateModal-body">
                             <tr>
                                 <th>회원번호</th>
-                                <td id="userNoU" name="userNo"></td>
+                                <td id="userNoS"></td>
+                                <input id="userNoU" type="hidden" name="userNo">
                             </tr>
                             <tr>
                                 <th>아이디</th>
@@ -637,7 +638,7 @@
 				data:{userNo:userNo},
 				success: function(m){
 					$('#userNoU').val(m.userNo);
-                    $('#userNoU').text(m.userNo);
+                    $('#userNoS').text(m.userNo);
 					$('#userIdU').text(m.userId);
                     $('#userNameU').val(m.userName);
                     $('#nicknameU').val(m.nickname);

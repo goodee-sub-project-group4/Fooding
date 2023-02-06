@@ -494,7 +494,7 @@
 		     , CLOSE
 		     , BREAK_S
 		     , BREAK_E
-		     , ENROLL_DATE
+		     , TO_CHAR(ENROLL_DATE, 'YYYY/MM/DD') "ENROLL_DATE"
 		     , STATUS
 		  FROM RESTAURANT
 		 WHERE RES_NO = ?
@@ -515,5 +515,39 @@
 		 ORDER
 		    BY BOOK_NO DESC
 	</entry>
+	
+	<!-- ============================================================================= -->
+	
+	<!-- 업체 등록 요청 리스트 -->
+	<entry key="selectRegisterList"> 
+		SELECT 
+				RES_NO
+			 ,  TO_CHAR(APPLY_DATE, 'YYYY/MM/DD') "APPLY_DATE" 
+			 , RES_NAME
+			 , STATUS
+	         FROM RESTAURANT
+	        WHERE STATUS IN ('W', 'N', 'C')
+	        ORDER
+		       BY APPLY_DATE DESC 
+	            , STATUS DESC
+	</entry>
+	
+	<!-- 업체 등록 게시물 상세 조회 -->
+	<!-- 업체 등록 조회수 증가 -->
+	<entry key="increseCountRegister">
+		UPDATE RESTAURANT
+		   SET COUNT = COUNT + 1
+	 WHERE RES_NO = ?
+	</entry>
+	<!-- 업체 등록 게시물 조회 -->
+	<entry key="selectRegister">
+	
+	</entry>
+	<!-- 업체 등록 첨부파일 조회 -->
+	<entry key="selectRegisterAttachment">
+	
+	</entry>
+	
+	
 
 </properties>

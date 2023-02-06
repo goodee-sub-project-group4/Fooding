@@ -61,7 +61,7 @@
 
 
     /* 컨텐트 가운데 영역 */
-    #content2-padding{width: 80%; height: 100%;}
+    #content2-padding{width: 70%; height: 100%;}
     /* 컨텐트 가운데 전체 높이 */
     /*#content2{height: 2450px;}*/
 
@@ -115,11 +115,13 @@
                     </div>
 
                     <!-- 검색결과 필터링: 별점순|방문자순|리뷰순-->
+                    <!--  
                     <div id="searchFilter">
                         <span onclick="filterBy('stars');">별점순</span> 
                         <span onclick="filterBy('counts');">조회순</span> 
                         <span onclick="filterBy('reviews');">리뷰순</span>
                     </div>
+                    -->
 
                     <!-- 검색결과 조회된 음식점 목록들 -->
                     <div id="content-main">
@@ -147,12 +149,12 @@
 	                                <!-- 로그인을 안 했을 경우 : alertMsg() 실행  -->                                
 	                                <% if(loginUser == null){ %>
 	                                	<span class="zzim"> 
-                                    		<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="alertMsg();">
+                                    		<img src="/Fooding/resources/images/heart-empty.png" width="50px;" onclick="alertMsg();">
 	                               		</span>
 	                               	<!-- 로그인을 했을 경우 : insertGood() 실행 -->
 	                                <%} else { %>
 	                                	<span class="zzim"> 
-	                                    	<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="insertGood(<%= r.getResNo()%>);">
+	                                    	<img src="/Fooding/resources/images/heart-empty.png" width="50px;" onclick="insertGood(<%= r.getResNo()%>);">
 		                                </span>
 	                                <% } %>
 	                                
@@ -193,6 +195,11 @@
                         
 					        function insertGood(a){
 					        	console.log($('#zzim').val());
+					        	
+					        	//추가코드 아래 두줄
+					        	//const $heartImg = $("img").attr("src"); 
+					        	//$heartImg.text("/Fooding/resources/images/heart.png");
+					        	
 					    		$.ajax({
 					    			url:"<%=contextPath%>/good.sh",
 					    			data:{

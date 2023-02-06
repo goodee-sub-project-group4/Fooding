@@ -1,5 +1,11 @@
 
 
+---------------------------------------
+--     [확인필수] fooding_최종.sql 파일을 스크립트 실행해도 기존 데이터가 삭제안되고 그대로 남아있는 증상 있음
+--     [해결방법]
+--               "해당 계정의 모든테이블 및 제약조건 삭제"
+--               >> 해당 구문을 드래그해서 별도 실행한 후에 전체 스크립트 실행할것!
+----------------------------------------
 
 
 
@@ -20,9 +26,9 @@ INSERT INTO RESTAURANT VALUES -- 일반테스트 업체 / 아이디 1201
 (SEQ_RESNO.NEXTVAL,'1234', '루키식당', '하이루',  '777-52-52007', '서울시 금천구 가산동', '대륭3차 11층', '서울특별시', '금천구', '02-555-6666', '010-6666-7777', 'FOODY@EMAIL.COM', 'Y', SYSDATE, SYSDATE, SYSDATE, 'Y', '12345123', '12345123', 'resources/restaurantSample/1_rosebud.jpg', '8:00', '19:00', null , null, 'bar',0);
 
 ------------- 시연용 MENU 메뉴 -------------
-INSERT INTO MENU VALUES (SEQ_MNO.NEXTVAL, 1201, '모짜렐라비프라자냐', 15000, NULL, 'resources/restaurantSample/모짜렐라비프라자냐.jpg');
-INSERT INTO MENU VALUES (SEQ_MNO.NEXTVAL, 1201, '멕시칸비프파히타', 18000, NULL, 'resources/restaurantSample/멕시칸비프파히타.jpg');
-INSERT INTO MENU VALUES (SEQ_MNO.NEXTVAL, 1201, '콜라', 2000, NULL, 'resources/restaurantSample/콜라.jpg');
+INSERT INTO MENU VALUES (SEQ_MNO.NEXTVAL, 1201, '모짜렐라비프라자냐', 15000, '모짜렐라 치즈가 들어간 비프라쟈냐 입니다.', 'resources/restaurantSample/모짜렐라비프라자냐.jpg');
+INSERT INTO MENU VALUES (SEQ_MNO.NEXTVAL, 1201, '멕시칸비프파히타', 18000, '멕시칸스타일의 비프파히타입니다.', 'resources/restaurantSample/멕시칸비프파히타.jpg');
+INSERT INTO MENU VALUES (SEQ_MNO.NEXTVAL, 1201, '콜라', 2000, '펩시콜라를 사용하고 있어요', 'resources/restaurantSample/콜라.jpg');
 
 ------------- QUESTION 문의답변 -------------
 INSERT INTO QUESTION VALUES
@@ -91,11 +97,11 @@ INSERT INTO PAYMENT VALUES (SEQ_PMNO.NEXTVAL, 21, 1201, 3, 0, 51000, '신용카�
 
 ------------- REIVEW 리뷰 -------------
 INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CREATE_DATE, STATUS, GOOD, COUNT) VALUES
-(SEQ_RVNO.NEXTVAL, 1201, 1, 2, '정말 맛있어요! 리뷰도 길게 남기고 사진도 함께 남길께요. 정말 맛있어요! 리뷰도 길게 남기고 사진도 함께 남길께요.', 5, SYSDATE, 'Y', 'N', 0);
+(SEQ_RVNO.NEXTVAL, 1201, 1, 25, '정말 맛있어요! 리뷰도 길게 남기고 사진도 함께 남길께요. 정말 맛있어요! 리뷰도 길게 남기고 사진도 함께 남길께요.', 5, SYSDATE, 'Y', 'N', 0);
 INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CREATE_DATE, STATUS, GOOD, COUNT) VALUES
-(SEQ_RVNO.NEXTVAL, 1201, 4, 10,  '머리카락ㅡㅡ나왔어요. 위생별로인듯', 1, SYSDATE, 'Y', 'N', 0);
+(SEQ_RVNO.NEXTVAL, 1201, 4, 30,  '머리카락ㅡㅡ나왔어요. 위생별로인듯', 1, SYSDATE, 'Y', 'N', 0);
 INSERT INTO REVIEW(REVIEW_NO, RES_NO, USER_NO, BOOK_NO, REVIEW_CONTENT, STAR, CREATE_DATE, STATUS, GOOD, COUNT) VALUES
-(SEQ_RVNO.NEXTVAL, 1201, 2, 11,  '굿입니다. 아주 굿', 5, SYSDATE, 'Y', 'Y', 0);
+(SEQ_RVNO.NEXTVAL, 1201, 2, 38,  '굿입니다. 아주 굿', 5, SYSDATE, 'Y', 'Y', 0);
 
 ------------- ATTACHMENT 첨부파일 -------------
 INSERT INTO ATTACHMENT VALUES (SEQ_ATNO.NEXTVAL, 1, '사진1.jpg', '2023020309460951785.jpg', 'resources/review_upfiles/', SYSDATE, NULL, 'Y', 'R');

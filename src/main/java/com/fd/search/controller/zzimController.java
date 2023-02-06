@@ -1,11 +1,17 @@
 package com.fd.search.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fd.member.model.vo.Member;
+import com.fd.restaurant.model.vo.Restaurant;
+import com.fd.search.model.service.SearchService;
 
 /**
  * Servlet implementation class zzimController
@@ -26,6 +32,13 @@ public class zzimController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<Restaurant> list = new SearchService().selectGoodList(userNo);
+		request.setAttribute("list", list);
+		
+		System.out.println(list);
 		
 		request.getRequestDispatcher("views/search/zzim.jsp").forward(request, response);
 		
