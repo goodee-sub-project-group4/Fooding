@@ -53,7 +53,8 @@ public class GoodListController extends HttpServlet {
 		
 		// * listCount : 총 게시글 갯수
 		listCount = new SearchService().selectGoodCount(userNo);
-	
+		System.out.println(listCount); 
+		
 		// * currentPage : 사용자가 요청한 페이지 (현재 페이지)
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		
