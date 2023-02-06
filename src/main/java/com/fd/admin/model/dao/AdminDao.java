@@ -585,7 +585,6 @@ public class AdminDao {
 				at.setFilePath(rset.getString("file_path"));
 				list.add(at);
 			}
-			System.out.println(list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
