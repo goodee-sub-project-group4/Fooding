@@ -39,6 +39,8 @@ public class GoodListController extends HttpServlet {
 		// 회원번호 뽑기 
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
+		System.out.println(userNo);
+		
 		// 페이징처리 
 		int listCount;		// 현재 게시글 총 갯수
 		int currentPage;	// 사용자가 요청한 페이지 (== 현재 페이지)
@@ -51,7 +53,8 @@ public class GoodListController extends HttpServlet {
 		
 		// * listCount : 총 게시글 갯수
 		listCount = new SearchService().selectGoodCount(userNo);
-	
+		System.out.println(listCount); 
+		
 		// * currentPage : 사용자가 요청한 페이지 (현재 페이지)
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		

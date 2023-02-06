@@ -98,6 +98,19 @@ public class BookService {
 //		close(conn);
 //		return list;
 //	}
+	
+	/** (마이페이지) 예약/결제 내역 리스트
+	 * @author 빛나 
+	 * @return result
+	 */
+	public int selectBookList(int userNo) {
+		
+		Connection conn = getConnection();
+		int result = new BookDao().selectBookList(conn, userNo);
+		close(conn);
+		return result;
+		
+	}
 
 	
 }

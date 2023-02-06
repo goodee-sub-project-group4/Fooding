@@ -141,9 +141,22 @@
 	                                업체번호 : <%= r.getResNo() %> <br>
 	                                주소 : <%= r.getAddress() %> <br>
 	                                음식카테고리 : <%= r.getFoodCt() %> <br>
-	                                <span class="zzim">
-	                                    <img src="/Fooding/resources/images/heart.png" width="50px;">  
-	                                </span>
+	                                
+	                                
+	                                <!-- 로그인을 안 했을 경우 : alertMsg() 실행  -->                                
+	                                <% if(loginUser == null){ %>
+	                                	<span class="zzim"> 
+                                    		<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="alertMsg();">
+	                               		</span>
+	                               	<!-- 로그인을 했을 경우 : insertGood() 실행 -->
+	                                <%} else { %>
+	                                	<span class="zzim"> 
+	                                    	<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="insertGood(<%= r.getResNo()%>);">
+		                                </span>
+	                                <% } %>
+	                                
+	                                
+	                                
 	                                별점총점: <%= r.getReviewAvg() %> <br>
 	                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
 	                                조회수: <%= r.getCount() %> <br>
@@ -170,7 +183,35 @@
 								<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
 					            	<button onclick="location.href='<%=contextPath%>/search.res?cpage=<%=pi.getCurrentPage()+1%>&city=<%=city%>&county=<%=county%>&foodCt=<%=foodCt%>';">&gt;</button>
 								<% } %>
-							<% } %>        
+							<% } %>  
+							
+							<script>
+						        function insertGood(a){
+						        	console.log($('#zzim').val());
+						    		$.ajax({
+						    			url:"<%=contextPath%>/goodCt.sh",
+						    			data:{
+						    				resNo: a
+						    			},
+						    			type:"post",
+						    			success:function(result){
+						    				if(result > 0 ){ // 찜하기 성공 
+						    					alert("해당 음식점이 찜목록에 추가되었습니다.");
+						    				}else{ // 찜하기 실패 
+						    					alert("해당 음식점이 찜목록에서 삭제되었습니다."); 
+						    				}
+						    			},
+						    			error:function(){
+						    				console.log("ajax 통신 실패"); 
+						    			}
+						    		})
+						    	}
+	                    	
+	                        	
+	                        	function alertMsg(){
+	                        		alert("로그인한 유저만 이용가능한 서비스입니다.");
+	                        	}
+                        	</script>       
 
 				        </div>
 
