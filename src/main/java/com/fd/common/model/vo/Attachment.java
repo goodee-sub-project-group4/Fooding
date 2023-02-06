@@ -12,6 +12,7 @@ public class Attachment {
 	private int fileLevel;
 	private String status;
 	private String BoardType;
+	private int resNo;
 	
 	public Attachment() {}
 
@@ -39,10 +40,20 @@ public class Attachment {
 		this.filePath = filePath;
 	}
 	
-	public Attachment(String changeName, String filePath) {
+	public Attachment(int resNo, int refBoardNo, String changeName, String filePath) {
 		super();
+		this.resNo = resNo;
+		this.refBoardNo = refBoardNo;
 		this.changeName = changeName;
 		this.filePath = filePath;
+	}
+	
+	public int getResNo() {
+		return resNo;
+	}
+
+	public void setResNo(int resNo) {
+		this.resNo = resNo;
 	}
 
 	public int getFileNo() {

@@ -44,10 +44,10 @@ public class BookMainController extends HttpServlet {
 		// 리뷰 정보 조회
 		ArrayList<Review> reviewList = new BookService().selectReview(resNo);
 		// 첨부 파일 조회
-		int reviewNo = review.getReviewNo();
-		ArrayList<Attachment> attachment = new BookService().selectAttachment(reviewNo, resNo);
+		ArrayList<Attachment> attachment = new BookService().selectAttachment(reviewList, resNo);
 		// 식당 정보 조회
 		Restaurant restaurant = new BookService().selectRes(resNo);	
+		System.out.println(attachment);
 		if(restaurant == null) {
 			request.setAttribute("errorMsg", "식당 조회 오류발생");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

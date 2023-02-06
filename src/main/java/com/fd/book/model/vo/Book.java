@@ -50,6 +50,23 @@ public class Book {
 		this.email = email;
 		this.request = request;
 	}
+	
+	public Book(int bookNo, int resNo, String bookName, String bookPhone, String bookDate, String bookTime, int people,
+			String email, String request, String status, String modifyDate, String bookA) {
+		super();
+		this.bookNo = bookNo;
+		this.resNo = resNo;
+		this.bookName = bookName;
+		this.bookPhone = bookPhone;
+		this.bookDate = bookDate;
+		this.bookTime = bookTime;
+		this.people = people;
+		this.email = email;
+		this.request = request;
+		this.status = status;
+		this.modifyDate = modifyDate;
+		this.bookA = bookA;
+	}
 
 	public int getBookNo() {
 		return bookNo;
