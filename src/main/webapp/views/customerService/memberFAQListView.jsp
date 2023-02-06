@@ -47,7 +47,7 @@
         #faqTitle { padding-left:10px;}
 
         /*페이징바*/
-        .pagination a {color:red; margin-top:20px;}
+        .pagination button {color:red; margin-top:20px;}
         
     </style>
 </head>
@@ -101,7 +101,7 @@
                     <% } %>
                     
                     <% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++) { %>
-                    	<li class="page-item"><button class="page-link"><%=p%></button></li>
+                    	<li class="page-item"><button class="page-link" onclick="location.href='/Fooding/faq.me?cpage=<%=p%>'"><%=p%></button></li>
                     <% } %>
                     
                     <% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
