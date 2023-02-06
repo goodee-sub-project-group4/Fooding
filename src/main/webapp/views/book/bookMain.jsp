@@ -261,7 +261,9 @@
                                     <% if(!attachment.isEmpty()) { %>
 	                                <div class="review-picture">
 	                                	<% for(Attachment at : attachment) { %>
-	                                    <img src="<%= at.getFilePath() %>/<%= at.getChangeName() %>" alt="">
+	                                		<% if(r.getReviewNo() == at.getRefBoardNo()) { %>
+	                                    		<img src="<%= at.getFilePath() %>/<%= at.getChangeName() %>" alt="">
+	                                    	<% } %>
 	                                    <% } %>
 	                                </div>
 	                                <% } %>
@@ -746,7 +748,7 @@
                             IMP.request_pay({ // param
                                 pg: "html5_inicis",
                                 pay_method: "card",
-                                merchant_uid: "FOODING-pay" + "exam7"+ num,
+                                merchant_uid: "FOODING-pay" + "exam8"+ num,
                                 name: menu.join("<br>"),
                                 amount: $('#sum-payment').text().replace(transNumber, ""),
                                 buyer_email: $('.email').val(),

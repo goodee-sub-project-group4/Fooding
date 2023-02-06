@@ -539,15 +539,39 @@
 		   SET COUNT = COUNT + 1
 	 WHERE RES_NO = ?
 	</entry>
+	
 	<!-- 업체 등록 게시물 조회 -->
 	<entry key="selectRegister">
-	
+		SELECT
+			   RES_NO
+			 , TO_CHAR(APPLY_DATE, 'YYYY/MM/DD') "APPLY_DATE" 
+			 , CEO
+			 , RES_NAME
+			 , PERMIT_NO 
+			 , ADDRESS
+			 , D_ADDRESS
+             , PHONE
+             , CELLPHONE
+             , EMAIL
+             , FOOD_CT
+             , PARKING
+             , R_IMG
+             , STATUS
+		  FROM RESTAURANT
+		 WHERE STATUS IN ('W', 'N', 'C')
+           AND RES_NO = ?
 	</entry>
-	<!-- 업체 등록 첨부파일 조회 -->
-	<entry key="selectRegisterAttachment">
-	
-	</entry>
-	
+	<entry key="restStatusY"> <!-- 승인 -->
+	 	UPDATE RESTAURANT
+           SET STATUS = 'C'
+         WHERE RES_NO = ?
+    </entry>
+    <entry key="restStatusN"> <!-- 반려 -->
+	 	UPDATE RESTAURANT
+           SET STATUS = 'N'
+         WHERE RES_NO = ?
+    </entry>
+
 	
 
 </properties>

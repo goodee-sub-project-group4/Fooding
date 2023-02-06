@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fd.admin.model.service.AdminService;
 import com.fd.admin.model.vo.Notice;
@@ -31,18 +32,23 @@ public class AdminNoticeUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int noticeNo = Integer.parseInt(request.getParameter("no"));
-		
-		AdminService aService = new AdminService();
-		
-		Notice n =aService.selectNotice(noticeNo);
-		Attachment at = aService.selectNoticeAttachment(noticeNo);
-		
-		request.setAttribute("n", n);
-		request.setAttribute("at", at);
-		
-		request.getRequestDispatcher("views/admin/noticeUpdate.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginAdmin")==null) {
+			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
+			response.sendRedirect(request.getContextPath()+"/rest.admin");
+		}else {	
+			int noticeNo = Integer.parseInt(request.getParameter("no"));
+			
+			AdminService aService = new AdminService();
+			
+			Notice n =aService.selectNotice(noticeNo);
+			Attachment at = aService.selectNoticeAttachment(noticeNo);
+			
+			request.setAttribute("n", n);
+			request.setAttribute("at", at);
+			
+			request.getRequestDispatcher("views/admin/noticeUpdate.jsp").forward(request, response);
+		}
 	}
 
 	/**
