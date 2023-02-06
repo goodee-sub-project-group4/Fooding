@@ -54,10 +54,10 @@ public class RestHomeFirstInController extends HttpServlet {
 				request.setAttribute("bList", bList);
 				
 				//달력 구성에 필요한 정보 담기
-				int year = Integer.parseInt(request.getParameter("year"));
-				int month = Integer.parseInt(request.getParameter("month"));
-				request.setAttribute("year", year);
-				request.setAttribute("month", month);
+				String year = (String)session.getAttribute("sessionYear");
+				String month = (String)session.getAttribute("sessionMonth");
+				request.setAttribute("year", Integer.parseInt(year));
+				request.setAttribute("month", Integer.parseInt(month));
 				
 				//불가날짜 담기
 				NotAble na = new NotAble();

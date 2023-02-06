@@ -1,7 +1,6 @@
 package com.fd.search.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,20 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fd.member.model.vo.Member;
-import com.fd.restaurant.model.vo.Restaurant;
 import com.fd.search.model.service.SearchService;
 
 /**
- * Servlet implementation class GoodController
+ * Servlet implementation class GoodCTController
  */
-@WebServlet("/good.sh")
-public class GoodController extends HttpServlet {
+@WebServlet("/goodCt.sh")
+public class GoodCTController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoodController() {
+    public GoodCTController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +29,7 @@ public class GoodController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		System.out.println(userNo); 
 		
@@ -56,6 +54,7 @@ public class GoodController extends HttpServlet {
 		// 찜하기가 성공적으로 DB에서 삭제되었을 경우 돌아올 result 값 => 0
 		
 		response.getWriter().print(result); 
+	
 	}
 
 	/**

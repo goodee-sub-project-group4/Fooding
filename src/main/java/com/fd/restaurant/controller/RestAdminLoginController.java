@@ -33,17 +33,27 @@ public class RestAdminLoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		String which = request.getParameter("which"); //관리자로그인인지 업체로그인인지 담음
 		if(which.equals("rest")) {
+			//로그인하는 사람이 업체인경우
+			
+			//세션에 연도, 월 정보담기(홈페이지 미니달력 용도)
+			String sessionYear = request.getParameter("sessionYear");
+			String sessionMonth = request.getParameter("sessionMonth");
+			session.setAttribute("sessionMonth", sessionMonth);
+			session.setAttribute("sessionYear", sessionYear);
+			
+			//로그인처리하기
 			int restNo = Integer.parseInt(userId);
 			Restaurant loginRest = new RestaurantService().loginRest(restNo, userPwd);
 			if(loginRest == null) {
 				request.setAttribute("errorMsg", "로그인에 실패했습니다.");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}else {
-				HttpSession session = request.getSession();
+				
 				session.setAttribute("loginRest", loginRest);
 				response.sendRedirect(request.getContextPath()+"/home.re");
 			}
@@ -56,7 +66,6 @@ public class RestAdminLoginController extends HttpServlet {
 				request.setAttribute("errorMsg", "로그인에 실패했습니다.");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);				
 			}else {
-				HttpSession session = request.getSession();
 				session.setAttribute("loginAdmin", loginAdmin);
 				//request.getRequestDispatcher("views/admin/checkMember.jsp").forward(request, response);
 				response.sendRedirect(request.getContextPath()+"/mList.ad");

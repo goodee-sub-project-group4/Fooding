@@ -32,7 +32,7 @@ public class AjaxAdminSelectReserveController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println(request.getParameter("resNo"));
 		int resNo = Integer.parseInt(request.getParameter("resNo"));
 
 		ArrayList<Book> reserveList = new AdminService().selectReserveList(resNo);

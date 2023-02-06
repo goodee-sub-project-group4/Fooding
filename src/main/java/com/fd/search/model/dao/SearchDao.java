@@ -164,6 +164,9 @@ public class SearchDao {
 			pstmt.setString(13, r.getLongtitude());
 			pstmt.setString(14, r.getLatitude());
 			
+			//추가한 코드1
+			pstmt.setString(15, r.getrImg()); 
+			
 			result = pstmt.executeUpdate(); 
 			
 		} catch (SQLException e) {

@@ -299,5 +299,12 @@ public class RestaurantService {
 		close(conn);
 		return result;
 	}
+	
+	public ArrayList<Book> selectBookForCalendar(int resNo, String year, String month) {
+		Connection conn = getConnection();
+		ArrayList<Book> list = new RestaurantDao().selectBookForCalendar(conn, resNo, year, month);
+		close(conn);
+		return list;
+	}
 
 }

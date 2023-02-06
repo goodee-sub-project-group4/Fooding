@@ -300,6 +300,33 @@ public class Restaurant {
 		this.rImg = rImg;
 		this.foodCt = foodCt;
 	}
+	
+	// 한수가 추가한 매개변수 생성자8
+	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String latitude,
+			String longtitude, String localCt, String dLocalCt, String phone, String cellphone, String email,
+			String parking, String foodCt, String rImg) {
+		super();
+		this.resName = resName;
+		this.ceo = ceo;
+		this.permitNo = permitNo;
+		this.address = address;
+		this.dAddress = dAddress;
+		this.latitude = latitude;
+		this.longtitude = longtitude;
+		this.localCt = localCt;
+		this.dLocalCt = dLocalCt;
+		this.phone = phone;
+		this.cellphone = cellphone;
+		this.email = email;
+		this.parking = parking;
+		this.foodCt = foodCt;
+		this.rImg = rImg;
+	}
+	
+	
+	
+	
+	
 
 	// 관리자 - 업체 리스트 조회할 때 사용
 	public Restaurant(int resNo, String resName, String bookCount, String reviewCountR,
@@ -313,6 +340,8 @@ public class Restaurant {
 		this.status = status;
 	}
 	
+	
+
 	// 관리자 - 업체 상세 조회할 때 사용
 	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
 			String phone, String cellphone, String email, String foodCt, String parking, String open ,

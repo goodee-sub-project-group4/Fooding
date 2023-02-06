@@ -224,7 +224,7 @@
                             <td><%= Integer.parseInt(list.get(i).getReviewCount()) %></td>
                             <td><%= Integer.parseInt(list.get(i).getBlackCount()) %></td>
                             <td><%= (list.get(i).getStatus().equals("Y")) ? "정상" : (list.get(i).getStatus().equals("S")) ? "이용정지" : "탈퇴" %></td>
-                            <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#updateModal" name="modifiyClick" value="<%=list.get(i).getUserNo()%>" onclick="updateDetail(<%=list.get(i).getUserNo()%>)" >수정</button></td>
+                            <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#updateModal" name="modifiyClick" value="<%=list.get(i).getUserNo()%>" onclick="viewDetail2(<%=list.get(i).getUserNo()%>)" >수정</button></td>
                             <!-- <td><input type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#updateModal" name="modifiyClick" value="<%=list.get(i).getUserNo()%>" onclick="updateDetail(<%=list.get(i).getUserNo()%>)"></td> -->
                             <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#selectUseModal" onclick="useDetail(<%=list.get(i).getUserNo()%>)" >조회</button></td>             
                         </tr>
@@ -406,7 +406,7 @@
                         <h3 class="modal-title" style="margin: auto;">회원 수정</h3>   
                     </div>
                     
-                    <form action="<%=contextPath%>/updateMember.ad">
+                    <form action="<%=contextPath%>/updateMember.ad" method="get">
                     <!-- Modal body -->
                     <div class="modal-body" align="center">
                         <table id="updateModal-body">
@@ -420,7 +420,7 @@
                             </tr>
                             <tr>
                                 <th>이름</th>
-                                <td><input id="userNameU" name="userName" type="text" value="" placeholder=""></td>
+                                <td><input id="userNameU" name="userName" type="text" value="" placeholder="">이름</td>
                             </tr>
                             <tr>
                                 <th>닉네임</th>
@@ -591,47 +591,47 @@
 		})
 
         // 회원 상세 조회
-        // function viewDetail(userNo) {
-		// 	$.ajax({
-		// 		url:"<%=contextPath%>/selectMember.ad",
-		// 		data:{userNo:userNo},
-		// 		success: function(m){
-		// 			$('#userNo').text(m.userNo);
-        //             $('#userNo').val(m.userNo);
-		// 			$('#userId').text(m.userId);
-        //             $('#userName').text(m.userName);
-        //             $('#nickname').text(m.nickname);
-        //             $('#userPhone').text(m.userPhone);
-        //             $('#userEmail').text(m.userEmail);
-        //             $('#birth').text(m.birth);
-        //             if(m.gender=="M"){
-        //                 $('#gender').text("남")
-        //             }else if(m.gender=="F"){
-        //                 $('#gender').text("여")
-        //             }else{
-        //                 $('#gender').text("-")
-        //             };
-        //             $('#enrollDate').text(m.enrollDate);
-        //             $('#pointNow').text(m.pointNow);
-        //             if(m.status=="Y"){
-        //                 $('#status').text("정상")
-        //             }else if(m.status=="S"){
-        //                 $('#status').text("이용정지")
-        //             }else if(m.status=="N"){
-        //                 $('#status').text("탈퇴")
-        //             };
+        function viewDetail(userNo) {
+			$.ajax({
+				url:"<%=contextPath%>/selectMember.ad",
+				data:{userNo:userNo},
+				success: function(m){
+					$('#userNo').text(m.userNo);
+                    $('#userNo').val(m.userNo);
+					$('#userId').text(m.userId);
+                    $('#userName').text(m.userName);
+                    $('#nickname').text(m.nickname);
+                    $('#userPhone').text(m.userPhone);
+                    $('#userEmail').text(m.userEmail);
+                    $('#birth').text(m.birth);
+                    if(m.gender=="M"){
+                        $('#gender').text("남")
+                    }else if(m.gender=="F"){
+                        $('#gender').text("여")
+                    }else{
+                        $('#gender').text("-")
+                    };
+                    $('#enrollDate').text(m.enrollDate);
+                    $('#pointNow').text(m.pointNow);
+                    if(m.status=="Y"){
+                        $('#status').text("정상")
+                    }else if(m.status=="S"){
+                        $('#status').text("이용정지")
+                    }else if(m.status=="N"){
+                        $('#status').text("탈퇴")
+                    };
 					
-		// 		}, error: function(){
-		// 			console.log("회원상세조회 ajax 통신실패")
-		// 		}, complete: function(){
-		// 			console.log("회원상세조회 ajax 통신완료")
-        //             console.log($('#userNo').val())
-		// 		}
-		// 	})
-		// }
+				}, error: function(){
+					console.log("회원상세조회 ajax 통신실패")
+				}, complete: function(){
+					console.log("회원상세조회 ajax 통신완료")
+                    console.log($('#userNo').val())
+				}
+			})
+		}
 
         // 회원 상제 수정 (아직 안함)
-        function updateDetail(userNo){
+        function viewDetail2(userNo){
             $.ajax({
                 url:"<%=contextPath%>/selectMember.ad",
 				data:{userNo:userNo},
@@ -639,10 +639,10 @@
 					$('#userNoU').val(m.userNo);
                     $('#userNoU').text(m.userNo);
 					$('#userIdU').text(m.userId);
-                    $('#userNameU').attr("placeholder", m.userName);
-                    $('#nicknameU').attr("placeholder", m.nickname);
-                    $('#userPhoneU').attr("placeholder", m.userPhone);
-                    $('#userEmailU').attr("placeholder", m.userEmail);
+                    $('#userNameU').val(m.userName);
+                    $('#nicknameU').val(m.nickname);
+                    $('#userPhoneU').val(m.userPhone);
+                    $('#userEmailU').val(m.userEmail);
                     $('#birthU').text(m.birth);
                     if(m.gender == "M"){
                         $("input:radio[name='gender']:radio[value='M']").attr("checked", true);

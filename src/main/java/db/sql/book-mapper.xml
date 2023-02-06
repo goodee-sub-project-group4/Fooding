@@ -118,4 +118,30 @@
 		     , 'B'
 		     )
 	</entry>
+	
+	<entry key="insertPayment">
+		INSERT 
+		  INTO PAYMENT
+		     (
+		       PAY_NO
+			 , BOOK_NO
+			 , RES_NO
+			 , USER_NO
+			 , PAY_POINT
+			 , PAY_TOTAL
+			 , PAY_OP
+			 , STATUS
+             )
+		VALUES
+		     (
+		       SEQ_PMNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , 'Y'
+		     )
+	</entry>
 </properties>

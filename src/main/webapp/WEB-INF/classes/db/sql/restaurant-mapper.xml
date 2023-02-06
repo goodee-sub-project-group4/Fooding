@@ -371,4 +371,13 @@
 		   AND NOT_MONTH=?
 		   AND NOT_DATE=? 
 	</entry>
+	<entry key="selectBookForCalendar">
+        SELECT
+		       BOOK_NO
+		     , BOOK_DATE
+		  FROM BOOK 
+		 WHERE RES_NO = ?
+		   AND SUBSTR(BOOK_DATE,0,4) = ?
+		   AND SUBSTR(BOOK_DATE,6,2) = ?
+	</entry>
 </properties>

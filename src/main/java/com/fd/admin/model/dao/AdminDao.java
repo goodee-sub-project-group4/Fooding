@@ -710,7 +710,7 @@ public class AdminDao {
 	 * @param u
 	 * @return
 	 */
-	public int updateMember(Connection conn, Member u, int userNo) {
+	public int updateMember(Connection conn, Member u) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateMember");
@@ -721,7 +721,7 @@ public class AdminDao {
 			pstmt.setString(3, u.getUserPhone());
 			pstmt.setString(4, u.getUserEmail());
 			pstmt.setString(5, u.getStatus());
-			pstmt.setInt(6, userNo);
+			pstmt.setInt(6, u.getUserNo());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
