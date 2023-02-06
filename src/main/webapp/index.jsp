@@ -100,7 +100,9 @@
                 url:"<%= contextPath %>/banner.ad",
                 type:"post",
                 success:function(list){
-               		console.log(list);
+               		for(let i=0; i<list.length; i++) { 
+               			$('#banner'+i).attr('src', list[i].filePath + '/' + list[i].changeName);
+               		} 
                 },
                 error:function(){
                 	
@@ -130,14 +132,14 @@
 					
 					<!-- The slideshow -->
 					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<img src="" alt="" width="791.47" height="250">
+						<div class="carousel-item active" >
+							<img id="banner0" src="" alt="" width="791.47" height="250">
 						</div>
 						<div class="carousel-item">
-							<img src="" alt="" width="791.47" height="250">
+							<img id="banner1" src="" alt="" width="791.47" height="250">
 						</div>
 						<div class="carousel-item">
-							<img src="" alt="" width="791.47" height="250">
+							<img id="banner2" src="" alt="" width="791.47" height="250">
 						</div>
 						
 					</div>

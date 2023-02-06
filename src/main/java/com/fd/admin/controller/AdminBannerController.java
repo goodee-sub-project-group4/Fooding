@@ -34,16 +34,8 @@ public class AdminBannerController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json; charset=UTF-8");
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loginAdmin")==null) {
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			response.sendRedirect(request.getContextPath()+"/rest.admin");
-		}else {	
-			ArrayList<Attachment> list = new AdminService().selectBanner();
-			request.getRequestDispatcher("views/admin/mainBannerEnroll.jsp").forward(request, response);	
-			System.out.println(list);
-			new Gson().toJson(list, response.getWriter());
-		}
+		ArrayList<Attachment> list = new AdminService().selectBanner();
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

@@ -571,7 +571,7 @@ public class AdminDao {
 	 * @param conn
 	 * @return
 	 */
-	public ArrayList selectBanner(Connection conn) {
+	public ArrayList<Attachment> selectBanner(Connection conn) {
 		ArrayList<Attachment> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -585,6 +585,7 @@ public class AdminDao {
 				at.setFilePath(rset.getString("file_path"));
 				list.add(at);
 			}
+			System.out.println(list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -115,7 +115,6 @@
 			$('#title').text("메인 배너");
 			$("#menu3").addClass("active");
 			$("#menu3-detail-1").addClass("active");
-
 		})
 
 	</script>
