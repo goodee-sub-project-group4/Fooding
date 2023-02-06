@@ -1,7 +1,6 @@
 package com.fd.admin.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import javax.servlet.http.HttpSession;
 import com.fd.admin.model.service.AdminService;
 
 /**
- * Servlet implementation class AdminNoticeDeleteController
+ * Servlet implementation class AdminRegisterUpdateNController
  */
-@WebServlet("/noDelete.ad")
-public class AdminNoticeDeleteController extends HttpServlet {
+@WebServlet("/setN.ad")
+public class AdminRegisterUpdateNController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeDeleteController() {
+    public AdminRegisterUpdateNController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +34,14 @@ public class AdminNoticeDeleteController extends HttpServlet {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
 			response.sendRedirect(request.getContextPath()+"/rest.admin");
 		}else {	
-			int noticeNo = Integer.parseInt(request.getParameter("no"));
-			int result = new AdminService().deleteNotice(noticeNo);
+			int resNo = Integer.parseInt(request.getParameter("resNo"));
+			int result = new AdminService().restStatusN(resNo);
 			if(result>0) {
-				request.getSession().setAttribute("alertMsg", "삭제 완료");
-				response.sendRedirect(request.getContextPath() + "/noList.ad");
+				session.setAttribute("alertMsg", "업체 등록 반려 완료");
+				response.sendRedirect(request.getContextPath()+"/rrList.ad");
 			}else {
-				request.setAttribute("errorMsg", "삭제 실패");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				session.setAttribute("alertMsg", "업체 등록 반려 실패");
+				response.sendRedirect(request.getContextPath()+"/rrDetail.ad");
 			}
 		}
 	}
