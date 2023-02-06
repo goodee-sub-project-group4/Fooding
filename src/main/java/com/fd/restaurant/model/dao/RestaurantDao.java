@@ -764,4 +764,32 @@ public class RestaurantDao {
 		}
 		return result;
 	}
+	
+	public ArrayList<Book> selectBookForCalendar(Connection conn, int resNo, String year, String month){
+		ArrayList<Book> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBookForCalendar");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			pstmt.setString(2, year);
+			pstmt.setString(3, month);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Book b = new Book();
+				b.setBookNo(rset.getInt("book_no"));
+				b.setBookDate(rset.getString("book_date"));
+				
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 }

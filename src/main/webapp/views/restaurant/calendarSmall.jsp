@@ -55,6 +55,13 @@
 	color: rgb(168, 166, 166);
 	text-align: left;
 }
+.x-icon {
+	width:15px;
+	float: right;
+	margin-right:14px;
+	margin-top:10px;
+	opacity: 0.2;
+}
 </style>
 </head>
 
@@ -154,8 +161,8 @@
   	}
   	//불가날짜 표기하기
 		<% for(NotAble na : naList){ %>
-		$('#'+<%=na.getDate()%>).append('<img src="<%=contextPath%> /resources/images/xIcon.png" class="x-icon">');
-		<%}%>
+		$('#'+<%=na.getDate()%>).append('<img src="/Fooding/resources/images/xIcon.png" class="x-icon">');
+	<%}%>
 		
 	</script>
 

@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.fd.book.model.vo.*" %>    
 <%
-	int year = (int)request.getAttribute("year");
-	int month = (int)request.getAttribute("month");
+	String year = (String)request.getAttribute("year");
+	String month = (String)request.getAttribute("month");
 	ArrayList<NotAble> naList = (ArrayList<NotAble>)request.getAttribute("naList");
+	ArrayList<Book> bList = (ArrayList<Book>)request.getAttribute("bList");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -298,6 +300,18 @@
 				$(this).css("background-color","rgb(255, 240, 142)");
 				$('#which-date').val($(this).text());
 			});
+			
+			//예약건수 표기하기
+			<% 
+			for(int i=0; i<bList.size(); i++) {
+				int 
+				
+			}
+			
+			
+			%>
+				
+			
 		})
 
 		//이전달력보기
