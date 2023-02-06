@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fd.admin.model.service.AdminService;
 import com.fd.common.model.vo.Attachment;
@@ -31,24 +32,25 @@ public class AdminRegisterRestDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginAdmin")==null) {
+			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
+			response.sendRedirect(request.getContextPath()+"/rest.admin");
+		}else {	
 
-		int resNo = Integer.parseInt(request.getParameter("no"));
-		
-		AdminService aService = new AdminService();
-		
-		int result = aService.increseCountRes(resNo);
-		if(result>0) {
-			Restaurant r = aService.selectRegister(resNo);
-			Attachment at = aService.selectRegisterAttachment(resNo);
-
-			request.setAttribute("n", r);
-			request.setAttribute("at", at);
-			request.getRequestDispatcher("views/admin/registerRestDetailView.jsp").forward(request, response);
+			int resNo = Integer.parseInt(request.getParameter("no"));	
 			
-		} else {
-			request.setAttribute("errorPage", "상세조회 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			int result = new AdminService().increseCountRes(resNo);
+			if(result>0) {
+				Restaurant r = new AdminService().selectRegister(resNo);
+	
+				request.setAttribute("r", r);
+				request.getRequestDispatcher("views/admin/registerRestDetailView.jsp").forward(request, response);
+				
+			} else {
+				request.setAttribute("errorPage", "상세조회 실패");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
 		}
 
 		

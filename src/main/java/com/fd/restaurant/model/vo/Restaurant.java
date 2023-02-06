@@ -371,12 +371,32 @@ public class Restaurant {
 		this.status = status;
 	}
 	
-
+	// 관리자 - 업체 등록 요청 상세 조회
+	public Restaurant(int resNo, String applyDate, String ceo, String resName, String permitNo, String address, String dAddress, String phone,
+			String cellphone, String email, String foodCt, String parking, String rImg, String status) {
+		super();
+		this.resNo = resNo;
+		this.applyDate = applyDate;
+		this.ceo = ceo;
+		this.resName = resName;
+		this.permitNo = permitNo;
+		this.address = address;
+		this.dAddress = dAddress;
+		this.phone = phone;
+		this.cellphone = cellphone;
+		this.email = email;
+		this.foodCt = foodCt;
+		this.parking = parking;
+		this.rImg = rImg;
+		this.status = status;
+	}
+	
 
 	// getter/setter
 	public int getResNo () {
 		return resNo;
 	}
+
 
 	public void setResNo(int resNo) {
 		this.resNo = resNo;

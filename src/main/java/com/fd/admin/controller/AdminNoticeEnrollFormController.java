@@ -28,11 +28,16 @@ public class AdminNoticeEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String toWhom =  request.getParameter("toWhom");
 		HttpSession session = request.getSession();
-		request.setAttribute("toWhom", toWhom);
-		
-		request.getRequestDispatcher("views/admin/noticeEnroll.jsp").forward(request, response);
+		if(session.getAttribute("loginAdmin")==null) {
+			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
+			response.sendRedirect(request.getContextPath()+"/rest.admin");
+		}else {	
+			String toWhom =  request.getParameter("toWhom");
+			request.setAttribute("toWhom", toWhom);
+			
+			request.getRequestDispatcher("views/admin/noticeEnroll.jsp").forward(request, response);
+		}
 		
 	}
 
