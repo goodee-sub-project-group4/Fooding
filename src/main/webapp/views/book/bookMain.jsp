@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ 
 	page import="com.fd.restaurant.model.vo.Restaurant, com.fd.restaurant.model.vo.Menu,
-				 com.fd.review.model.vo.Review, com.fd.book.model.vo.Point"
+				 com.fd.review.model.vo.Review, com.fd.book.model.vo.Point, com.fd.common.model.vo.Attachment"
 %>
 
 <%@ page import="java.util.ArrayList" %>
 <%
 	Restaurant restaurant = (Restaurant)request.getAttribute("restaurant");
 	ArrayList<Menu> menuList = (ArrayList<Menu>)request.getAttribute("menuList");
+	Review review = (Review)request.getAttribute("review");
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
     Point point = (Point)request.getAttribute("point");
+    ArrayList<Attachment> attachment = (ArrayList<Attachment>)request.getAttribute("attachment");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -170,9 +172,9 @@
                                         <th style="width: 80px; font-size: 20px;"">평점</th>
                                     </tr>
                                     <tr>
-                                        <td style="height: 30px;"><img style="width: 25px; height: 25px;" src="<%= contextPath %>/resources/images/select.png" alt=""> <%= restaurant.getCount() %></td>
-                                        <td><img style="width: 25px; height: 25px;" src="<%= contextPath %>/resources/images/pencil.png" alt=""> <%= restaurant.getReviewCount() %></td>
-                                        <td><img style="width: 25px; height: 25px;" src="<%= contextPath %>/resources/images/star.png" alt=""> <%= Math.round(restaurant.getReviewAvg() * 100.0) / 100.0 %></td>
+                                        <td style="height: 30px;"><img style="width: 25px; height: 25px;" src="<%= contextPath %>/resources/images/select.png" alt=""> <%= review.getReviewCount() %></td>
+                                        <td><img style="width: 25px; height: 25px;" src="<%= contextPath %>/resources/images/pencil.png" alt=""> <%= review.getCount() %></td>
+                                        <td><img style="width: 25px; height: 25px;" src="<%= contextPath %>/resources/images/star.png" alt=""> <%= Math.round(review.getReviewAvg() * 100.0) / 100.0 %></td>
                                     </tr>
                                 </table>
                                 <br>
@@ -256,11 +258,13 @@
 	                                <div class="review-text">
                                         <%= r.getReviewContent() %>
                                     </div>
+                                    <% if(!attachment.isEmpty()) { %>
 	                                <div class="review-picture">
-	                                    <img src="" alt="">
-	                                    <img src="sample2.jpeg" alt="">
-	                                    <img src="sample2.jpeg" alt="">
+	                                	<% for(Attachment at : attachment) { %>
+	                                    <img src="<%= at.getFilePath() %>/<%= at.getChangeName() %>" alt="">
+	                                    <% } %>
 	                                </div>
+	                                <% } %>
 	                            </div>
 	                        </div>
                         	<% } %>

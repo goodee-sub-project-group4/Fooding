@@ -22,7 +22,7 @@
 <style>
     .wrap{width: 1200px; margin: auto;}
     
-#content1, #content2, #content3{box-sizing: border-box; height: 100%;}
+	#content1, #content2, #content3{box-sizing: border-box; height: 100%;}
     #content1-padding, #content2-padding, #content3-padding{float: left; margin: auto; padding: 5px; box-sizing: border-box;}
 
 	#content1-padding{width: 20%; height: 500px;}
@@ -84,13 +84,15 @@
     #content-main{width: 100%; padding: 5px; float: left;}
     
     /*음식점정보(음식점 썸네일 사진+음식점 간단설명) 옆으로 붙도록 인라인 블럭처리*/
-    .searchRes{display:inline-block; margin: 30px;}
+    .searchRes{display:inline-block; margin: 30px; }
 
     /*찜하기*/
     .zzim{float:right;box-sizing: border-box; }
 
     /* 리뷰 페이징 */
     .paging-area{height: 50px; text-align: center; padding-top: 20px;}
+    
+   
 </style>
 </head>
 
@@ -101,7 +103,7 @@
         <%@ include file="../common/searchSidebar.jsp" %>
 
         <div class="content">
-            
+           
 
             <div id="content2-padding">
                 <div id="content2">
@@ -148,17 +150,16 @@
 	                                <!-- 로그인을 안 했을 경우 : alertMsg() 실행  -->                                
 	                                <% if(loginUser == null){ %>
 	                                	<span class="zzim"> 
-                                    		<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="alertMsg();">
+                                    		<img src="/Fooding/resources/images/heart-empty.png" width="50px;" onclick="alertMsg();">
 	                               		</span>
 	                               	<!-- 로그인을 했을 경우 : insertGood() 실행 -->
 	                                <%} else { %>
 	                                	<span class="zzim"> 
-	                                    	<img src="/Fooding/resources/images/heart.png" width="50px;" onclick="insertGood(<%= r.getResNo()%>);">
+	                                    	<img id="<%= r.getResNo() %>" src="/Fooding/resources/images/heart-empty.png" width="50px;" onclick="insertGood(<%= r.getResNo()%>);">
 		                                </span>
 	                                <% } %>
 	                                
-	                                
-	                                
+	    
 	                                별점총점: <%= r.getReviewAvg() %> <br>
 	                                <img src="/Fooding/resources/images/조회수.png" width="20px;">
 	                                조회수: <%= r.getCount() %> <br>
@@ -189,7 +190,11 @@
 							
 							<script>
 						        function insertGood(a){
-						        	console.log($('#zzim').val());
+						        	
+						        	
+						        	$('#'+a).attr("src", "/Fooding/resources/images/heart-filled.png"); 
+						        	
+						        	
 						    		$.ajax({
 						    			url:"<%=contextPath%>/goodCt.sh",
 						    			data:{
@@ -199,7 +204,8 @@
 						    			success:function(result){
 						    				if(result > 0 ){ // 찜하기 성공 
 						    					alert("해당 음식점이 찜목록에 추가되었습니다.");
-						    				}else{ // 찜하기 실패 
+						    				}else{ // 찜하기 실패
+						    					$('#'+a).attr("src", "/Fooding/resources/images/heart-empty.png");
 						    					alert("해당 음식점이 찜목록에서 삭제되었습니다."); 
 						    				}
 						    			},
@@ -222,7 +228,7 @@
                 </div>
             </div>
         </div>
-  
+  		
     </div>
 </body>
 </html>

@@ -54,8 +54,7 @@ public class Restaurant {
 	
 	// 식당 조회용 매개변수 생성자 - 태진
 	public Restaurant(int resNo, String resName, String ceo, String permitNo, String address, String dAddress,
-			String phone, String parking, String longtitude, String latitude, String rImg, String open, String close, String breakS, String breakE, String foodCt, int reviewCount,
-			double reviewAvg, int count) {
+			String phone, String parking, String longtitude, String latitude, String rImg, String open, String close, String breakS, String breakE, String foodCt) {
 		super();
 		this.resNo = resNo;
 		this.resName = resName;
@@ -73,9 +72,6 @@ public class Restaurant {
 		this.breakS = breakS;
 		this.breakE = breakE;
 		this.foodCt = foodCt;
-		this.setReviewCount(reviewCount);
-		this.setReviewAvg(reviewAvg);
-		this.count = count;
 	}
 	
 	

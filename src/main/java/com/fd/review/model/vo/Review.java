@@ -18,6 +18,8 @@ public class Review {
 	private String nickName;
 	private String changeName;
 	private String filePath;
+	private int reviewCount;
+	private double reviewAvg;
 	
 	public Review () {}
 
@@ -63,6 +65,13 @@ public class Review {
 		this.createDate = createDate;
 	}
 
+	public Review(int count, double reviewAvg, int reviewCount) {
+		super();
+		this.count = count;
+		this.reviewCount = reviewCount;
+		this.reviewAvg = reviewAvg;
+	}
+
 	public Review(int reviewNo, String resNo, int userNo, int bookNo, String reviewContent, double star,
 			String createDate, String modifyDate, String good, int count) {
 		super();
@@ -76,6 +85,22 @@ public class Review {
 		this.modifyDate = modifyDate;
 		this.good = good;
 		this.count = count;
+	}
+
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public double getReviewAvg() {
+		return reviewAvg;
+	}
+
+	public void setReviewAvg(double reviewAvg) {
+		this.reviewAvg = reviewAvg;
 	}
 
 	public String getChangeName() {
