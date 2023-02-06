@@ -366,6 +366,17 @@ public class Restaurant {
 		this.status = status;
 	}
 
+	// 관리자 - 업체 등록 요청 리스트
+	public Restaurant(int resNo, String applyDate, String resName, String status) {
+		super();
+		this.resNo = resNo;
+		this.applyDate = applyDate;
+		this.resName = resName;
+		this.status = status;
+	}
+	
+
+
 	// getter/setter
 	public int getResNo () {
 		return resNo;

@@ -412,7 +412,8 @@
                         <table id="updateModal-body">
                             <tr>
                                 <th>회원번호</th>
-                                <td id="userNoU" name="userNo"></td>
+                                <td id="userNoS"></td>
+                                <input id="userNoU" type="hidden" name="userNo">
                             </tr>
                             <tr>
                                 <th>아이디</th>
@@ -637,12 +638,12 @@
 				data:{userNo:userNo},
 				success: function(m){
 					$('#userNoU').val(m.userNo);
-                    $('#userNoU').text(m.userNo);
+                    $('#userNoS').text(m.userNo);
 					$('#userIdU').text(m.userId);
-                    $('#userNameU').html(m.userName);
-                    $('#nicknameU').text(m.nickname);
-                    $('#userPhoneU').text(m.userPhone);
-                    $('#userEmailU').text(m.userEmail);
+                    $('#userNameU').val(m.userName);
+                    $('#nicknameU').val(m.nickname);
+                    $('#userPhoneU').val(m.userPhone);
+                    $('#userEmailU').val(m.userEmail);
                     $('#birthU').text(m.birth);
                     if(m.gender == "M"){
                         $("input:radio[name='gender']:radio[value='M']").attr("checked", true);
