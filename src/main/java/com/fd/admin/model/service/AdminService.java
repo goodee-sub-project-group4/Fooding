@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.fd.admin.model.dao.AdminDao;
 import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
+import com.fd.admin.model.vo.Question;
 import com.fd.book.model.vo.Book;
 import com.fd.book.model.vo.BookMenu;
 import com.fd.book.model.vo.Payment;
@@ -501,7 +502,7 @@ public class AdminService {
 		return r;
 	}
 
-	/**업체 등록 승인(Y)
+	/**업체 등록 승인(C)
 	 * @param resNo
 	 * @return
 	 */
@@ -531,6 +532,17 @@ public class AdminService {
 		}
 		close(conn);
 		return result;
+	}
+	
+
+	// ==========================================================================
+
+	/**1:1 문의 조회(업체)
+	 * @return
+	 */
+	public ArrayList<Question> selectQuestionListU() {
+		
+		return null;
 	}
 
 

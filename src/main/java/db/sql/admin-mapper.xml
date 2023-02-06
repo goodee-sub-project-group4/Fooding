@@ -572,6 +572,35 @@
          WHERE RES_NO = ?
     </entry>
 
+
+	<!-- ============================================================================= -->
+	<!-- 1:1 문의 조회(회원) -->
+	<entry key="selectQuestionListU">
+	    SELECT
+			   Q_NO
+			 , Q_TITLE
+			 , TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') "CREATE_DATE"
+			 , STATUS
+		  FROM QUESTION
+		 WHERE Q_WHO = 'U'
+		   AND A_WHO = 'A'
+		 ORDER
+		    BY Q_NO DESC
+	</entry>
+	<!-- 1:1 문의 조회(업체) -->
+	<entry key="selectQuestionListU">
+	    SELECT
+			   Q_NO
+			 , Q_TITLE
+			 , TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') "CREATE_DATE"
+			 , STATUS
+		  FROM QUESTION
+		 WHERE Q_WHO = 'R'
+		   AND A_WHO = 'A'
+		 ORDER
+		    BY Q_NO DESC
+	</entry>
+	
 	
 
 </properties>

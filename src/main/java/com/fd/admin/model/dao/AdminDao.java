@@ -935,7 +935,7 @@ public class AdminDao {
 	
 	
 	// 업체 등록 상세 조회
-	/**조회수
+	/**업체 등록 조회수
 	 * @param conn
 	 * @param resNo
 	 * @return
@@ -956,7 +956,7 @@ public class AdminDao {
 		return result;
 	}
 
-	/**게시물 조회
+	/**업체 등록 게시물 조회
 	 * @param conn
 	 * @param resNo
 	 * @return
@@ -996,7 +996,7 @@ public class AdminDao {
 		return r;
 	}
 
-	/**업체 등록 승인(Y)
+	/**업체 등록 승인(C)
 	 * @param conn
 	 * @param resNo
 	 * @return
@@ -1017,6 +1017,11 @@ public class AdminDao {
 		return result;
 	}
 
+	/**업체 등록 승인(N)
+	 * @param conn
+	 * @param resNo
+	 * @return
+	 */
 	public int restStatusN(Connection conn, int resNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
