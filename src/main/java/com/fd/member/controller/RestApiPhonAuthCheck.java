@@ -17,6 +17,7 @@ import com.fd.member.model.service.MemberService;
  * Servlet implementation class RestApiPhonAuthCheck
  */
 @WebServlet("/RestApiPhonAuthCheck.me")
+
 public class RestApiPhonAuthCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

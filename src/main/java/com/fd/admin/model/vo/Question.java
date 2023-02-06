@@ -47,7 +47,16 @@ public class Question {
 		this.status = status;
 		
 	}
-	
+	// 1:1문의상세조회
+	public Question(int qNo, String category, String qTitle, String qContent, String aContent) {
+		super();
+		this.qNo = qNo;
+		this.category = category;
+		this.qTitle = qTitle;
+		this.qContent = qContent;
+		this.aContent = aContent;
+	}
+
 	public int getqNo() {
 		return qNo;
 	}

@@ -338,8 +338,109 @@ public class MemberNoticeDao {
 		
 	}
 	
+	/** 1:1문의 조회수
+	 * @param conn
+	 * @param qNo
+	 * @return result
+	 */
+	public int increaseCountQ(Connection conn, int qNo) {
+		// update
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCountQ");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
+	/** 1:1문의 상세조회
+	 * @param conn
+	 * @param qNo
+	 * @return q
+	 */
+	public Question selectQuestion(Connection conn, int qNo) {
+		// select
+		Question q = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				q = new Question(rset.getInt("q_no"),
+						         rset.getString("category"),
+						         rset.getString("q_title"),
+						         rset.getString("q_content"),
+						         rset.getString("a_content"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return q;
+		
+	}
 	
+	/** 1:1문의 상세조회 사진첨부
+	 * @param conn
+	 * @param qNo
+	 * @return at
+	 */
+	public Attachment selectAttachment(Connection conn, int qNo) {
+		// select
+		Attachment at = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				at = new Attachment(rset.getInt("file_no"),
+						            rset.getString("origin_name"),
+						            rset.getString("change_name"),
+						            rset.getString("file_path"),
+						            rset.getString("board_type"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return at;
+	
+	}
 	
 	
 	

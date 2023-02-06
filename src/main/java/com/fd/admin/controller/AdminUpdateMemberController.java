@@ -17,13 +17,13 @@ import com.google.gson.Gson;
  * Servlet implementation class AjaxAdminUpdateMemberController
  */
 @WebServlet("/updateMember.ad")
-public class AjaxAdminUpdateMemberController extends HttpServlet {
+public class AdminUpdateMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxAdminUpdateMemberController() {
+    public AdminUpdateMemberController() {
         super();
         // TODO Auto-generated constructor stub
     }

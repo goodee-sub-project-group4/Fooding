@@ -29,6 +29,16 @@ public class Attachment {
 		this.status = status;
 		this.boardType = boardType;
 	}
+	
+	// 1:1문의 상세조회 사진첨부
+	public Attachment(int fileNo, String originName, String changeName, String filePath, String boardType) {
+		super();
+		this.fileNo = fileNo;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.filePath = filePath;
+		this.boardType = boardType;
+	}
 
 	public int getFileNo() {
 		return fileNo;
