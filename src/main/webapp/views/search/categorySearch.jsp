@@ -62,7 +62,7 @@
 
 
     /* 컨텐트 가운데 영역 */
-    #content2-padding{width: 80%; height: 100%;}
+    #content2-padding{width: 70%; height: 100%;}
     /* 컨텐트 가운데 전체 높이 */
     /*#content2{height: 2450px;}*/
 
@@ -116,10 +116,12 @@
                     </div>
 
                     <!-- 검색결과 필터링: 별점순|방문자순|리뷰순-->
+                    <!--  
                     <div id="searchFilter">
                         <b>별점순</b> | 방문자순 | 리뷰순
                     </div>
-
+					-->
+					
                     <!-- 검색결과 조회된 음식점 목록들 -->
                     <div id="content-main">
                     

@@ -60,7 +60,7 @@
 
 	<div id="content2-padding">
         <div id="change-area">
-            <b>찜 목록 (<%= pi.getListCount() %>)</b>
+            <b>찜 목록 </b>
         </div>
         
         <div id="change-infomation">
@@ -71,7 +71,7 @@
 	            <% } else { %>
                		<% for(Restaurant r : list) { %>
 	                    <tr>
-	                        <th><img src="" width="140px" height="140px"></th>
+	                        <th><img src="<%= r.getrImg() %>" width="140px" height="140px"></th>
 	                        <td class="input-area2">
 	                            <div>
 	                                음식점 이름: <%= r.getResName()%> <br> 
@@ -88,22 +88,7 @@
 			</table>			 
          </div>
 
-		<div class="paging-area">
-			<%if(!list.isEmpty()) {%>
-
-	        	<% if(pi.getCurrentPage() != 1){ %>
-            	<button onclick="location.href='<%=contextPath%>/goodList.sh?cpage=<%=pi.getCurrentPage()-1%>';">&lt;</button>
-	            <% } %>
-	
-				<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-	            	<button onclick="location.href='<%=contextPath%>/goodList.sh?cpage=<%=p%>';"><%= p %></button>
-	            <% } %>
-	
-				<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-	            	<button onclick="location.href='<%=contextPath%>/goodList.sh?cpage=<%=pi.getCurrentPage()+1%>';">&gt;</button>
-				<% } %>
-			<% } %> 
-        </div>
+		
         
     </div>
 
