@@ -3,7 +3,7 @@
 <%@ page import="java.util.ArrayList, com.fd.common.model.vo.PageInfo, com.fd.restaurant.model.vo.Restaurant" %>
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	ArrayList<Restaurant> list = (ArrayList<Restaurant>)request.getAttribute("list");
+	ArrayList<Restaurant> list = (ArrayList<Restaurant>)request.getAttribute("list"); 
 %>
 <!DOCTYPE html>
 <html>
@@ -104,6 +104,7 @@
 				<% } %>
 			<% } %> 
         </div>
+        
     </div>
 
     

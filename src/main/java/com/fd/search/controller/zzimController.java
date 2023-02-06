@@ -26,7 +26,7 @@ public class zzimController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		request.getRequestDispatcher("views/search/zzim.jsp").forward(request, response);
 		
 	}
