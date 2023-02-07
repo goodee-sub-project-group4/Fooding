@@ -81,6 +81,7 @@
             color:rgb(128, 128, 128);
             text-align: left;
 			position: relative;
+			z-index: 900;
 		}
 		#prev-area, #next-area {
 			width:50px;
@@ -127,7 +128,7 @@
 			position: absolute;
 			left:36px;
 			top:22px;
-			z-index: 1000;
+			z-index: 800;
 
 		}
 		.bookCount { /*예약갯수 뱃지*/
@@ -143,7 +144,7 @@
 			float:right;
 			margin-right:20px;
 			margin-top:15px;
-			z-index: 500;
+			z-index: 100;
 
 		}
 	
@@ -161,8 +162,8 @@
 			<h2><%=month%>월</h2><div id="space"></div>
 			<input type="hidden" id="which-date" value="">
 			<button type="button" class="btn btn-outline-danger" onclick="enAble();">예약가능 변경</button>
-			<button type="button" class="btn btn-outline-danger" onclick="notAble()();">예약불가 변경</button>
-			<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-list">예약내역 보기</button><br>
+			<button type="button" class="btn btn-outline-danger" onclick="validate();">예약불가 변경</button>
+			<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#book-list" onclick="detail();">예약내역 보기</button><br>
 			
 			<div id="prev-area" >
 				<img src="resources/images/prevButton.png" width="60" onclick="prevMonth()">
@@ -218,18 +219,11 @@
 			<div class="modal-body" align="center">
 				<br><br>
 				<h4 id="book-list-title">
-					2023-02-10 <br>
+					<span id="book-date">2023-02-10</span><br>
 					예약내역
-				</h4><br>
-				<h4 class="book-info">
-					15:30 채치수(2명)
+					<span id="book-list"></span>
 				</h4>
-				<h4 class="book-info">
-					18:30 정대만(2명)
-				</h4>
-				<h4 class="book-info">
-					15:30 강백호(5명)
-				</h4><br>
+				<br>
 			</div>
 	
 			<!-- Modal footer -->
@@ -269,41 +263,41 @@
 	        }
 	        //첫째줄)이번달에 해당하는 칸 작성하기
 	        for(let i=1; i<=6-prevDay; i++) {
-	        	$('#line-1st').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
+	        	$('#line-1st').append('<div class="thisMonth" id="'+i+'"><span>'+i+'</span></div>');
 	        }
 	        //두번째줄
 	        for(let i=(6-prevDay)+1; i<=(6-prevDay)+7; i++) {
-	        	$('#line-2nd').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
+	        	$('#line-2nd').append('<div class="thisMonth" id="'+i+'"><span>'+i+'</span></div>');
 	        }
 	        //세번째줄
 	        for(let i=(6-prevDay)+8; i<=(6-prevDay)+14; i++) {
-	        	$('#line-3rd').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
+	        	$('#line-3rd').append('<div class="thisMonth" id="'+i+'"><span>'+i+'</span></div>');
 	        }
 			//네번째줄
 	        for(let i=(6-prevDay)+15; i<=(6-prevDay)+21; i++) {
-	        	$('#line-4th').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
+	        	$('#line-4th').append('<div class="thisMonth" id="'+i+'"><span>'+i+'</span></div>');
 	        }
       		//다섯번째줄이 마지막줄일수도 있고, 여섯번째 줄이 마지막줄일수도 있다.      	
 	      	if(lastDate<=(6-prevDay)+28) {
 	      		//다섯번째줄이 마지막인 경우
 	      		for(let i=(6-prevDay)+22; i<=lastDate; i++) {
-	        		$('#line-5th').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
+	        		$('#line-5th').append('<div class="thisMonth" id="'+i+'"><span>'+i+'</span></div>');
 	        	}
 	      		for(let i=1; i<=(6-lastDay); i++) {
-	            	$('#line-5th').append('<div class="notThisMonth">'+i+'</div>');
+	            	$('#line-5th').append('<div class="notThisMonth"><span>'+i+'</span></div>');
 	            }
 	      	}else {
 	      		//여섯번째 줄이 마지막인 경우,
 	      		//다섯번째줄
 	      		for(let i=(6-prevDay)+22; i<=(6-prevDay)+28; i++) {
-	        		$('#line-5th').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
+	        		$('#line-5th').append('<div class="thisMonth" id="'+i+'"><span>'+i+'</span></div>');
 	        	}
 	      		//여섯번째줄
 	      		for(let i=(6-prevDay)+29; i<=lastDate; i++) {
-	        		$('#line-6th').append('<div class="thisMonth" id="'+i+'">'+i+'</div>');
+	        		$('#line-6th').append('<div class="thisMonth" id="'+i+'"><span>'+i+'</span></div>');
 	        	}
 	      		for(let i=1; i<=(6-lastDay); i++) {
-	            	$('#line-6th').append('<div class="notThisMonth">'+i+'</div>');
+	            	$('#line-6th').append('<div class="notThisMonth"><span>'+i+'</span></div>');
 	            }
 	      	}
 			//===============달력만들기 끝===============
@@ -317,53 +311,68 @@
 			$('.thisMonth').click(function(){
 				$('.thisMonth').css("background-color","");
 				$(this).css("background-color","rgb(255, 240, 142)");
-				$('#which-date').val($(this).text());
+				$('#which-date').val($(this).children('span').text());
 			});
 			
 			//예약건수 표기하기
 			<% for(int i=0; i<bList.size(); i++) { %>
 				<% String bookDate = (bList.get(i).getBookDate()).substring(8); %>
-				if($('#'+<%=bookDate%>).val()==1) {
+				if($('#'+<%=bookDate%>).val()==5) {
 					//기존에 데이터가 추가된 경우
 					let count = $('#'+<%= bookDate %>).children('div').text();
 					$('#'+<%= bookDate %>).children('div').text(Number(count)+1);
 				}else {
 					$('#'+<%= bookDate %>).append('<div class="bookCount" align="center">1</div>');
-					$('#'+<%=bookDate%>).val("1");
+					$('#'+<%=bookDate%>).val(5);
 				}
 			<% }%>
 				
 			
-		})
-
-		//이전달력보기
-		function prevMonth(){
-			month = month-1;
-			if(month==0) {
-				year = year-1;
-				month = 12;
-			}
-			location.href='/Fooding/calendar.re?year='+year+'&month='+month;
-		}
-
-		//다음달력보기
-		function nextMonth(){
-			month = month+1;
-			if(month==13) {
-				year = year+1;
-				month = 1;
-			}
-			location.href='/Fooding/calendar.re?year='+year+'&month='+month;
+		})	
+		
+		//예약내역 확인하는 함수
+		function detail() {
+			let date = $('#which-date').val();	
+			let month = <%=month%>;
+			let year = <%=year%>;
+			$.ajax({
+				url:"<%=contextPath%>/selectDateBook.re",
+				data:{date:date, month:month, year:year},
+				success:function(result) {
+					
+					//이전내역지우기
+					$('#book-list-title').children('h4').remove();
+					$('#book-list-title').children('br').remove();
+					
+					//해당 예약 정보 띄우기
+					$('#book-date').text(year+"-"+month+"-"+date);
+					$('#book-list-title').append('<br><br><br>');
+					for(let i=0; i<result.length; i++) {
+						$('#book-list-title').append("<h4 class='book-info'>"+
+								result[i].bookTime+" "+result[i].bookName+"("+result[i].people+")"+"</h4>");
+					}
+				}, error:function(){
+					console.log('예약내역조회 ajax통신 실패');
+				}
+			})
 		}
 		
 		
 		//예약불가인지 검증하는 함수
-
+		function validate(){
+			let date = $('#which-date').val(); 
+			if($('#'+date).val() == 5) {
+				alert("이미 예약건이 있는 경우에는 불가처리를 할 수 없습니다. 예약취소를 먼저 진행해주세요.");
+			}else {
+				return notAble();
+			}
+		}
 		
 		//예약불가 변경
 		function notAble(){
 			let notAbleDate = $('#which-date').val();	
 			$('#'+notAbleDate).css("background-color","");
+			
 			//Ajax통신
 			$.ajax({
 				url:"<%=contextPath%>/insertNotAble.re",
@@ -399,6 +408,26 @@
 					console.log('notAble delete ajax통신 실패');
 				}
 			});
+		}
+		
+		//이전달력보기
+		function prevMonth(){
+			month = month-1;
+			if(month==0) {
+				year = year-1;
+				month = 12;
+			}
+			location.href='/Fooding/calendar.re?year='+year+'&month='+month+"&flag=1";
+		}
+
+		//다음달력보기
+		function nextMonth(){
+			month = month+1;
+			if(month==13) {
+				year = year+1;
+				month = 1;
+			}
+			location.href='/Fooding/calendar.re?year='+year+'&month='+month+"&flag=1";
 		}
 		
 		

@@ -500,11 +500,13 @@
 		$('.btn.btn-outline-danger.review').click(function(){
 			const resName = $(this).parent().parent().parent().prev().children().children().children().eq(0).children().eq(1).text();
 			const imgSrc = $(this).parent().parent().parent().parent().prev().attr('src');
-			console.log(imgSrc)
+			const bookNo = $(this).parent().parent().parent().parent().prev().prev().text();
 			const a = $('#review-content2-1').children().attr('src', imgSrc);
-			console.log(a)
+
+			console.log(bookNo)
 			$('#review-content2-2').text(resName);
-		});
+			$('#bookNo').val(bookNo);
+		}); 
 	</script>
 
 	<!-- 리뷰쓰기모달  -->
@@ -525,6 +527,7 @@
 				<!-- Modal body -->
 				<form action="<%=contextPath%>/reviewForm.me" id="review-form"
 					method="post" enctype="multipart/form-data">
+					<input id="bookNo" type="hidden" name="bookNo" value="">	
 					<div class="modal-body"></div>
 					<div class="review-content2">
 						<div id="review-content2-1">
@@ -534,9 +537,7 @@
 						<div id="review-content2-2">
 							<div id="review-content2-2-1"></div>
 							<!-- 업체명 가져와야함  -->
-							<input type="hidden" name="resNo" value=""> <input
-								type="hidden" name="userNo" value=""> <input
-								type="hidden" name="bookNo" value="">
+							
 						<script>
 							$(function(){
 								$('#review-content2-1')
@@ -653,7 +654,6 @@
 
 					}
 				</script>
-
 			</div>
 		</div>
 	</div>

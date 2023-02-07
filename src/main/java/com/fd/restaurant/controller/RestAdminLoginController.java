@@ -1,6 +1,7 @@
 package com.fd.restaurant.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fd.admin.model.service.AdminService;
+import com.fd.book.model.vo.NotAble;
 import com.fd.member.model.vo.Member;
 import com.fd.restaurant.model.service.RestaurantService;
 import com.fd.restaurant.model.vo.Restaurant;
@@ -41,19 +43,21 @@ public class RestAdminLoginController extends HttpServlet {
 			//로그인하는 사람이 업체인경우
 			
 			//세션에 연도, 월 정보담기(홈페이지 미니달력 용도)
-			String sessionYear = request.getParameter("sessionYear");
-			String sessionMonth = request.getParameter("sessionMonth");
-			session.setAttribute("sessionMonth", sessionMonth);
-			session.setAttribute("sessionYear", sessionYear);
+			String year = request.getParameter("sessionYear");
+			String month = request.getParameter("sessionMonth");
+			session.setAttribute("sessionMonth", month);
+			session.setAttribute("sessionYear", year);
 			
 			//로그인처리하기
 			int restNo = Integer.parseInt(userId);
 			Restaurant loginRest = new RestaurantService().loginRest(restNo, userPwd);
+			
+			
+			
 			if(loginRest == null) {
 				request.setAttribute("errorMsg", "로그인에 실패했습니다.");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			}else {
-				
+			}else {				
 				session.setAttribute("loginRest", loginRest);
 				response.sendRedirect(request.getContextPath()+"/home.re");
 			}

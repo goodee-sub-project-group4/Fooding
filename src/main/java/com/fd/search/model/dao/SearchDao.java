@@ -412,9 +412,8 @@ public class SearchDao {
 											rset.getString("res_name"),
 											rset.getString("address"),
 											rset.getString("r_img"),
-											rset.getString("food_ct")
+											rset.getString("phone")
 											)); 		
-					
 				}
 				
 			} catch (SQLException e) {

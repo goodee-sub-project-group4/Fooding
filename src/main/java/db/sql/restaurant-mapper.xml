@@ -443,4 +443,14 @@
 		    BY COUNT DESC
 		     , AVG(STAR) ASC
 	</entry>
+	<entry key="selectCalendarBook">
+		SELECT
+		       BOOK_TIME
+		     , BOOK_NAME
+		     , PEOPLE  
+		  FROM BOOK
+		 WHERE RES_NO = ?
+		   AND BOOK_DATE = ?
+		   AND STATUS IN ('B','D')		   
+	</entry>
 </properties>

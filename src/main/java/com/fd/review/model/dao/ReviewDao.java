@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.fd.book.model.vo.Book;
 import com.fd.common.model.vo.Attachment;
 import com.fd.review.model.vo.Review;
 import com.fd.review.model.vo.ReviewDetailFileVo;
@@ -75,7 +76,7 @@ public class ReviewDao {
 	 * @param r (리뷰쓰기 데이터)
 	 * @return result
 	 */
-	public int insertContentReview(Connection conn, Review r) {
+	public int insertContentReview(Connection conn, Book book, int bookNo, double star, String reviewContent) {
 		// insert
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -85,14 +86,13 @@ public class ReviewDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			// 업체명 담아야함
-			pstmt.setString(1, r.getResNo());
-			pstmt.setInt(2, r.getBookNo());
-			pstmt.setInt(3, r.getUserNo());
-			pstmt.setString(4, r.getReviewContent());
-			pstmt.setDouble(5, r.getStar());
+			pstmt.setInt(1, book.getResNo());
+			pstmt.setInt(2, bookNo);
+			pstmt.setInt(3, book.getUserNo());
+			pstmt.setString(4, reviewContent);
+			pstmt.setDouble(5, star);
 			
 			result = pstmt.executeUpdate();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -183,10 +183,10 @@ public class ReviewDao {
 			
 			if (rset.next()) {
 				detailVo = new ReviewDetailVo(rset.getInt("REVIEW_NO")
-												,rset.getString("RES_NO")
-												,rset.getString("REVIEW_CONTENT")
-												,rset.getString("STAR")
-												,rset.getString("RES_NAME"));
+											, rset.getString("RES_NO")
+											, rset.getString("REVIEW_CONTENT")
+											, rset.getString("STAR")
+											, rset.getString("RES_NAME"));
 			}
 			
 		} catch (SQLException e) {
@@ -220,8 +220,8 @@ public class ReviewDao {
 			
 			while(rset.next()) {
 				list.add(new ReviewDetailFileVo(rset.getInt("ref_bno")
-									            ,rset.getString("change_name")
-									            ,rset.getString("file_path")));
+									          , rset.getString("change_name")
+									          , rset.getString("file_path")));
 			}
 			
 		} catch (SQLException e) {
@@ -233,6 +233,29 @@ public class ReviewDao {
 		
 		return list;
 		
+	}
+
+	public Book selectBook(Connection conn, int bookNo) {
+		Book book = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBook");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				book = new Book();
+				book.setResNo(rset.getInt("res_no"));
+				book.setUserNo(rset.getInt("user_no"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return book;
 	}
 	
 }
