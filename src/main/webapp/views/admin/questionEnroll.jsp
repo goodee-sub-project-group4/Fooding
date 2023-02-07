@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.fd.admin.model.vo.Question" %>
+<%
+	Question q = (Question)request.getAttribute("q");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,27 +101,27 @@
 			<!-- 컨텐츠 작성부 -->
 			<br><br>
 
-            <form action="" id="enroll-answer" method="post">
-                
+            <form action="<%=contextPath%>/insertAnswer.ad" id="enroll-answer" method="post">
+                <input type="hidden" name="qNo" value="<%=q.getqNo()%>">
                 <table>  
                     <tr>
                         <th width="70">문의</th>
                         <td id="qCategory">
-                            기존 카테고리 유형
+                            <%= (q.getCategory().equals("MP")) ? "적립금" : (q.getCategory().equals("MU")) ? "이용문의" : (q.getCategory().equals("RU")) ? "이용문의" : (q.getCategory().equals("RB")) ? "예약문의" : "기타" %>
                         </td>
                     </tr>
                     <tr><td height="15px"></td></tr>
                     <tr>
                         <th></th>              
                         <td id="qTitle">
-                            기존 문의 제목
+                            <%= q.getqTitle() %>
                         </td>
                     </tr>
                     <tr><td height="15px"></td></tr>
                     <tr>
                         <th></th>
                         <td id="qContent">
-                            기존 문의 내용
+                            <%= q.getqContent() %>
                         </td>
                     </tr>
                     <tr><td height="15px"></td></tr>
@@ -132,15 +136,15 @@
                     <tr>
                         <th>답변</th>
                         <td colspan="2">
-                            <textarea name="" id="aContent" cols="30" rows="10"></textarea>
+                            <textarea id="aContent" cols="30" rows="10" name="aContent" <%=(q.getStatus().equals("Y"))? "readonly" : ""%> ><%=(q.getaContent()==null)? "" : q.getaContent() %></textarea>
                         </td>
                     </tr>
                 </table>
 
                 <br><br>
                 <div align="center">
-                    <button type="submit" class="btn btn-danger">답변하기</button>&nbsp&nbsp
-                    <button type="submit" class="btn btn-outline-danger" onclick="history.back();">취소하기</button>
+                    <button type="submit" class="btn btn-danger" <%=(q.getStatus().equals("Y"))? "disabled" : ""%>>답변하기</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-outline-danger" onclick="history.back();">취소하기</button>
                 </div>
                 <br><br><br><br>
             </form>

@@ -37,8 +37,10 @@ public class AdminQuestionListController extends HttpServlet {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
 			response.sendRedirect(request.getContextPath()+"/rest.admin");
 		}else {	
-			ArrayList<Question> list = new AdminService().selectQuestionListU();
-			request.setAttribute("list", list);
+			ArrayList<Question> listU = new AdminService().selectQuestionListU();
+			ArrayList<Question> listR = new AdminService().selectQuestionListR();
+			request.setAttribute("listU", listU);
+			request.setAttribute("listR", listR);
 			request.getRequestDispatcher("views/admin/questionListView.jsp").forward(request, response);
 		}
 	}

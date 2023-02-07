@@ -11,19 +11,18 @@ import javax.servlet.http.HttpSession;
 
 import com.fd.admin.model.service.AdminService;
 import com.fd.member.model.vo.Member;
-import com.google.gson.Gson;
 
 /**
  * Servlet implementation class AjaxAdminUpdateMemberController
  */
 @WebServlet("/updateMember.ad")
-public class AdminUpdateMemberController extends HttpServlet {
+public class AdminCheckMemberUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminUpdateMemberController() {
+    public AdminCheckMemberUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -52,8 +51,6 @@ public class AdminUpdateMemberController extends HttpServlet {
 		
 		int result = new AdminService().updateMember(u);
 		
-//		response.setContentType("text/html; charset=UTF-8"); 
-//		new Gson().toJson(result, response.getWriter());	
 		if(result>0) {
 			request.getSession().setAttribute("alertMsg", "회원 수정 완료");
 			response.sendRedirect(request.getContextPath() + "/mList.ad");

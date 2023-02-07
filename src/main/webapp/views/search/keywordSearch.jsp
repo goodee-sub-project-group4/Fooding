@@ -19,9 +19,9 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-    .wrap{width: 1200px; margin: auto;}
+    .wrap{width: 1400px; margin: auto;}
     
-#content1, #content2, #content3{box-sizing: border-box; height: 100%;}
+	#content1, #content2, #content3{box-sizing: border-box; height: 100%;}
     #content1-padding, #content2-padding, #content3-padding{float: left; margin: auto; padding: 5px; box-sizing: border-box;}
 
 	#content1-padding{width: 20%; height: 500px;}
@@ -83,13 +83,15 @@
     #content-main{width: 100%; padding: 5px; float: left;}
     
     /*음식점정보(음식점 썸네일 사진+음식점 간단설명) 옆으로 붙도록 인라인 블럭처리*/
-    .searchRes{display:inline-block; margin: 30px;}
+    .searchRes{display:inline-block; margin: 15px; }
 
     /*찜하기*/
-    .zzim{float:right;box-sizing: border-box; }
+    .zzim {float:right;box-sizing: border-box;}
 
     /* 리뷰 페이징 */
     .paging-area{height: 50px; text-align: center; padding-top: 20px;}
+    
+   
 </style>
 </head>
 

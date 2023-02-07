@@ -208,7 +208,7 @@
                                     <option value="N">탈퇴</option>
                                 </select>
                             </th>
-                            <th>수정</th>
+                            <th>상세</th>
                             <th>이용</th>
                         </tr>
                     </thead>
@@ -225,7 +225,6 @@
                             <td><%= Integer.parseInt(list.get(i).getBlackCount()) %></td>
                             <td><%= (list.get(i).getStatus().equals("Y")) ? "정상" : (list.get(i).getStatus().equals("S")) ? "이용정지" : "탈퇴" %></td>
                             <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#updateModal" name="modifiyClick" value="<%=list.get(i).getUserNo()%>" onclick="viewDetail2(<%=list.get(i).getUserNo()%>)" >수정</button></td>
-                            <!-- <td><input type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#updateModal" name="modifiyClick" value="<%=list.get(i).getUserNo()%>" onclick="updateDetail(<%=list.get(i).getUserNo()%>)"></td> -->
                             <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#selectUseModal" onclick="useDetail(<%=list.get(i).getUserNo()%>)" >조회</button></td>             
                         </tr>
                         <% } %>
@@ -631,7 +630,7 @@
 			})
 		}
 
-        // 회원 상제 수정 (아직 안함)
+        // 회원 상제 수정
         function viewDetail2(userNo){
             $.ajax({
                 url:"<%=contextPath%>/selectMember.ad",
@@ -671,30 +670,6 @@
 
         }
         
-
-        // 수정완료 클릭시...... 안됨...
-        // $("#updateMember").on("click", function(){
-        //     let userNo = $("button[name='modifiyClick']").val();
-        //     $.ajax({
-        //         url:"<%=contextPath%>/updateMember.ad",
-        //         data:{userNo:userNo, userName:userName, nickname:nickname, userPhone:userPhone, userEmail:userEmail, status:status},
-        //         contentType: false,
-        //         processData: false,
-        //         type:'post',
-        //         success:function(result){
-        //             if(result>0){
-        //                 alert("수정 완료");
-        //             }else{
-        //                 alert("수정 실패");
-        //             }
-        //         }, error: function(){
-        //             console.log("회원상세수정 ajax 통신실패")
-        //         }, complete: function(){
-        //             console.log("회원상세수정 ajax 통신완료")
-        //         }
-        //     })
-        // });
-
 
         // 회원 이용 내역 조회
         function useDetail(userNo){

@@ -121,7 +121,7 @@
     #selectModal-body td{
         padding-left: 40px;
         text-align: left;
-        width: 300px;
+        width: 500px;
     }
     
     /*업체 수정 모달*/
@@ -129,16 +129,19 @@
         height: 40px;
     }
     #updateModal-body th{
-        padding-left: 30px;
+        padding-left: 40px;
         text-align: left;
         color: gray;
         font-weight: 500;
-        width: 100px;
+        width: 300px;
     }
     #updateModal-body td{
         padding-left: 40px;
         text-align: left;
-        width: 250px;
+        width: 400px;
+    }
+    #updateModal-body input{
+        width:240px;
     }
     
     /*예약현황 조회 모달*/
@@ -199,6 +202,7 @@
                                     <option value="N">탈퇴</option>
                                 </select>
                             </th>
+                            <th width="70px">상세</th>
                             <th>예약현황</th>
                         </tr>
                     </thead>
@@ -212,6 +216,7 @@
                             <td><%= Integer.parseInt(list.get(i).getReviewCountR()) %></td>
                             <td><%= Integer.parseInt(list.get(i).getBlackCount()) %></td>
                             <td><%= (list.get(i).getStatus().equals("Y")) ? "정상" : "이용정지" %></td>
+                            <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#updateModal" name="modifiyClick" value="<%=list.get(i).getResNo()%>" onclick="viewDetail2(<%=list.get(i).getResNo()%>)" >수정</button></td>
                             <td><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#selectUseModal" onclick="reserveDetailList(<%= list.get(i).getResNo() %>)" >조회</button></td>
                         </tr>
                         <% } %>
@@ -282,69 +287,66 @@
                         <table id="selectModal-body">
                             <tr>
                                 <th width="1000px">업체번호</th>
-                                <td id="resNo" colspan="2"></td>
+                                <td id="resNo"></td>
                             </tr>
                             <tr>
                                 <th>상호명</th>
-                                <td id="resName" colspan="2"></td>
+                                <td id="resName"></td>
                             </tr>       
                             <tr>
                                 <th>대표자명</th>
-                                <td id="ceo" colspan="2"></td>
+                                <td id="ceo"></td>
                             </tr>
                             <tr>
                                 <th>사업자 번호</th>
-                                <td id="permitNo" colspan="2"></td>
+                                <td id="permitNo"></td>
                             </tr>
                             <tr>
                                 <th>주소</th>
-                                <td id="address" colspan="2"></td>
+                                <td id="address"></td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <td id="dAddress" colspan="2"></td>
+                                <td id="dAddress"></td>
                             </tr>
                             <tr>
                                 <th>전화번호</th>
-                                <td id="phone" colspan="2"></td>
+                                <td id="phone"></td>
                             </tr> 
                             <tr>
                                 <th>휴대폰번호</th>
-                                <td id="cellphone" colspan="2"></td>
+                                <td id="cellphone"></td>
                             </tr>
                             <tr>
                                 <th>이메일</th>
-                                <td id="email" colspan="2"></td>
+                                <td id="email"></td>
                             </tr>
                             <tr>
                                 <th>업종</th>
-                                <td id="foodCt" colspan="2"></td>
+                                <td id="foodCt"></td>
                             </tr>
                             <tr>
                                 <th>주차</th>
-                                <td id="parking" colspan="2"></td>
+                                <td id="parking"></td>
                             </tr>
                             <tr>
                                 <th>영업시간</th>
-                                <td id="open"></td>
-                                <td id="close"></td>
+                                <td><span id="open"></span><span id="blank1"></span><span id="close"></span></td>
                             </tr>
                             <tr>
                                 <th>브레이크 타임</th>
-                                <td id="breakS"></td>
-                                <td id="breakE"></td>
+                                <td><span id="breakS"></span><span id="blank2"></span><span id="breakE"></span></td>
                             </tr>
                             <tr>
                                 <th>등록일</th>
-                                <td id="enrollDate" colspan="2"></td>
+                                <td id="enrollDate"></td>
                             </tr>
                             <tr>
                                 <th>상태</th>
-                                <td id="status" colspan="2"></td>
+                                <td id="status"></td>
                             </tr>
                         </table>
                         <br>
-                        <button type="submit" class="btn btn-danger" style="width: 150px;" data-toggle="modal" data-target="#updateModal">수정</button>
                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal" style="width: 150px;">닫기</button>
                         <br><br>
                     </div>
@@ -365,54 +367,52 @@
                     <div class="modal-header" style="margin-top: 20px;">
                         <h3 class="modal-title" style="margin: auto;">업체 수정</h3>   
                     </div>
-            
+                    
+                    <form action="<%=contextPath%>/updateRest.ad">
                     <!-- Modal body -->
                     <div class="modal-body" align="center">
                         <table id="updateModal-body">
-                            <tr style="height: 40px;">
-                                <th>업체번호</th>
-                                <td>01</td>
+                            <tr>
+                                <th width="1000px">업체번호</th>
+                                <td id="resNoS"></td>
+                                <input type="hidden" id="resNoU" name="resNo">
                             </tr>
-                            <tr style="height: 40px;">
-                                <th>아이디</th>
-                                <td>rest01</td>
-                            </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>상호명</th>
-                                <td><input type="text" placeholder="미오 도쿄 다이닝"></td>
+                                <td><input id="resNameU" name="resName" type="text" placeholder=""></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>대표자명</th>
-                                <td><input type="text" placeholder="전재준"></td>
+                                <td><input id="ceoU" name="ceo" type="text" placeholder=""></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>사업자 번호</th>
-                                <td><input type="text" placeholder="261-81-23567"></td>
+                                <td><input id="permitNoU" name="permitNo" type="text" placeholder=""></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>주소</th>
-                                <td><input type="text" placeholder="서울 특별시 성동구 연무장5가길 7"></td>
+                                <td><input id="addressU" name="address" type="text" placeholder=""></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th></th>
-                                <td><input type="text" placeholder="현대테라스타워 117호"></td>
+                                <td><input id="dAddressU" name="dAddress" type="text" placeholder=""></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>전화번호</th>
-                                <td><input type="text" placeholder="0507-1490-2120"></td>
+                                <td><input id="phoneU" name="phone" type="text" placeholder=""></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>휴대폰번호</th>
-                                <td><input type="text" placeholder="010-1111-2222"></td>
+                                <td><input id="cellphoneU" name="cellphone" type="text" placeholder=""></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>이메일</th>
-                                <td><input type="text" placeholder="rest01@naver.com"></td>
+                                <td><input id="emailU" name="email" type="text" placeholder=""></td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>업종</th>
                                 <td>
-                                    <select name="" id="" style="height: 30px;">
+                                    <select name="foodCt" id="foodCtU" style="height: 30px;">
                                         <option value="western">양식</option>
                                         <option value="japanese">일식</option>
                                         <option value="chinese">중식</option>
@@ -424,42 +424,50 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>주차</th>
-                                <td>
-                                    <input type="radio" id="parkingY" name="parking" value="" style="width: 20px;">
+                                <td id="parkingU">
+                                    <input type="radio" id="parkingY" name="parking" value="Y" style="width: 20px;">
                                     <label for="parkingY">가능</label>
-                                    <input type="radio" id="parkingN" name="parking" value="" style="width: 20px;">
+                                    <input type="radio" id="parkingN" name="parking" value="N" style="width: 20px;">
                                     <label for="parkingN">불가능</label> <br>
                                 </td>
                             </tr> 
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>영업시간</th>
-                                <td><input type="text" placeholder="11:30 - 22:00"></td>
+                                <td>
+                                    <span><input style="width:100px" id="openU" name="open" type="text" placeholder=""></span><span id="blank1">~</span>
+                                    <span><input style="width:100px" id="closeU" name="close" type="text" placeholder=""></span>
+                                </td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
                                 <th>브레이크 타임</th>
-                                <td><input type="text" placeholder="15:00 - 17:30"></td>
+                                <td>
+                                    <span><input style="width:100px" id="breakSU" name="breakS" type="text" placeholder=""></span><span id="blank2">~</span>
+                                    <span><input style="width:100px" id="breakEU" name="breakE" type="text" placeholder=""></span>
+                                </td>
                             </tr>
-                            <tr style="height: 40px;">
+                            <tr>
+                                <th>등록일</th>
+                                <td id="enrollDateU"></td>
+                            </tr>
+                            <tr>
                                 <th>상태</th>
                                 <td>
-                                    <select name="" id="" style="height: 30px;">
-                                        <option value="">정상</option>
-                                        <option value="">탈퇴</option>
-                                        <option value="">이용정지</option>
+                                    <select name="status" id="statusU" style="height: 30px;">
+                                        <option value="Y">정상</option>
+                                        <option value="S">이용정지</option>
                                     </select>
                                 </td>
                             </tr>
                         </table>
                         <br>
-                        <button type="submit" class="btn btn-danger" style="width: 150px;" data-toggle="modal" data-target="#updateConfirmModal1">수정완료</button>
+                        <button type="submit" class="btn btn-danger" style="width: 150px;" data-toggle="modal" >수정완료</button>
                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal" style="width: 150px;">닫기</button>
                         <br><br>
-                    </div>
-            
-                    
-            
+                    </div>             
+                    </form>
+  
                 </div>
                 </div>
             </div>
@@ -577,10 +585,10 @@
                                 <th>예약인원</th>
                             </tr>
                             <tr class="table-light">
-                                <td id="bookNo">12</td>
-                                <td id="bookDate">2023-02-15</td>
-                                <td id="bookTime">15:00</td>
-                                <td id="people">2</td>
+                                <td id="bookNo"></td>
+                                <td id="bookDate"></td>
+                                <td id="bookTime"></td>
+                                <td id="people"></td>
                             </tr>
                         </table>
                         <br>
@@ -593,10 +601,10 @@
                                 <th>요청사항</th>
                             </tr>
                             <tr class="table-light">
-                                <td id="bookName">강백호</td>
-                                <td id="bookPhone">010-9999-9999</td>
-                                <td id="email">fooding@gmail.com</td>
-                                <td id="request">-</td>
+                                <td id="bookName"></td>
+                                <td id="bookPhone"></td>
+                                <td id="email"></td>
+                                <td id="request"></td>
                             </tr>
                         </table>
                         <br>
@@ -609,10 +617,10 @@
                                 <th>금액</th>
                             </tr>
                             <tr class="table-light">
-                                <td>시금치파스타</td>
-                                <td>1</td>
-                                <td>19000</td>
-                                <td>19000</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </table>
                         <br>
@@ -624,9 +632,9 @@
                                 <th>결제금액</th>
                             </tr>
                             <tr class="table-light">
-                                <td id="payDate">23-01-07 15:30:25</td>
-                                <td id="payOp">카드</td>
-                                <td id="payTotal">45000</td>
+                                <td id="payDate"></td>
+                                <td id="payOp"></td>
+                                <td id="payTotal"></td>
                             </tr>
                         </table>
                         <br>
@@ -684,8 +692,10 @@
                         $('#parking').text("주차불가")
                     };
                     $('#open').text(r.open);
+                    $('#blank1').text(' ~ ');
                     $('#close').text(r.close);
                     $('#breakS').text(r.breakS);
+                    $('#blank2').text(' ~ ');
                     $('#breakE').text(r.breakE);
                     $('#enrollDate').text(r.enrollDate);
                     if(r.status=="Y"){
@@ -700,6 +710,69 @@
                 }
             })
         }
+
+        // 업체 상세 수정
+        function viewDetail2(resNo){
+            $.ajax({
+                url:"<%=contextPath%>/selectRest.ad",
+                data:{resNo:resNo},
+                success: function(r){
+                    $('#resNoU').val(r.resNo)
+                    $('#resNoS').text(r.resNo);
+                    $('#resNameU').val(r.resName);
+                    $('#ceoU').val(r.ceo);
+                    $('#permitNoU').val(r.permitNo);
+                    $('#addressU').val(r.address);
+                    $('#dAddressU').val(r.dAddress);
+                    $('#phoneU').val(r.phone);
+                    $('#cellphoneU').val(r.cellphone);
+                    $('#emailU').val(r.email);
+                    $('#foodCtU').val(r.foodCt);
+
+                    if(r.foodCt == "western"){
+                        $("#foodCtU").val("western").prop("selected", true);
+                    }else if(r.foodCt == "japanese"){
+                        $("#foodCtU").val("japanese").prop("selected", true);
+                    }else if(r.foodCt == "chinese"){
+                        $("#foodCtU").val("chinese").prop("selected", true);
+                    }else if(r.foodCt == "chicken"){
+                        $("#foodCtU").val("chicken").prop("selected", true);
+                    }else if(r.foodCt == "asia"){
+                        $("#foodCtU").val("asia").prop("selected", true);
+                    }else if(r.foodCt == "buffet"){
+                        $("#foodCtU").val("buffet").prop("selected", true);
+                    }else if(r.foodCt == "bar"){
+                        $("#foodCtU").val("bar").prop("selected", true);
+                    }else if(r.foodCt == "cafe"){
+                        $("#foodCtU").val("cafe").prop("selected", true);
+                    }
+
+                    if(r.parking == "Y"){
+                        $("input:radio[name='parking']:radio[value='Y']").attr("checked", true);
+                    }else if(r.parking=="N"){
+                        $("input:radio[name='parking']:radio[value='N']").attr("checked", true);
+                    };
+                    $('#openU').val(r.open);
+                    $('#blank1').text(' ~ ');
+                    $('#closeU').val(r.close);
+                    $('#breakSU').val(r.breakS);
+                    $('#blank2').text(' ~ ');
+                    $('#breakEU').val(r.breakE);
+                    $('#enrollDateU').text(r.enrollDate);
+                    if(r.status == "Y"){
+                        $("#statusU").val("Y").prop("selected", true);
+                    }else if(r.status == "S"){
+                        $("#statusU").val("S").prop("selected", true);
+                    }
+                }, error: function(){
+                    console.log("업체상세수정목록 ahax 통신 실패")
+                }, complete: function(){
+                    console.log("업체상세수정목록 ahax 통신 성공")
+                }
+            })
+        }
+
+
 
         // 업체 예약 상세 조회
         function reserveDetailList(resNo){
@@ -798,6 +871,7 @@
 			})
 		}
         
+
 
 	</script>
 </body>
