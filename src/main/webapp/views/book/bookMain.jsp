@@ -1082,7 +1082,8 @@
 
             
         </script>
-        <%@ include file="/views/common/footer.jsp" %>
+        
     </div>
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
