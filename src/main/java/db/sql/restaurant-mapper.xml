@@ -381,6 +381,67 @@
 		   AND SUBSTR(BOOK_DATE,6,2) = ?
 	</entry>
 	<entry key="selectRestReviewAvg">
-		
+		SELECT 
+		       RE.RES_NO "RES_NO"
+		     , RES_NAME
+		     , ADDRESS
+		     , D_ADDRESS
+		     , PHONE
+		     , R_IMG
+		     , OPEN
+		     , CLOSE
+		     , BREAK_S
+		     , BREAK_E
+		     , AVG(STAR) "AVG_STAR"
+		     , RS.COUNT "COUNT"
+		  FROM REVIEW RE
+		  JOIN restaurant RS ON (RE.RES_NO = RS.RES_NO)
+		 GROUP
+		    BY RE.RES_NO
+		     , RES_NAME
+		     , ADDRESS
+		     , D_ADDRESS
+		     , PHONE
+		     , R_IMG
+		     , OPEN
+		     , CLOSE
+		     , BREAK_S
+		     , BREAK_E
+		     , RS.COUNT
+		 ORDER
+		    BY AVG(STAR) DESC
+	</entry>
+	<entry key="selectRestCount">
+		SELECT 
+		       RE.RES_NO
+		     , RES_NAME
+		     , ADDRESS
+		     , D_ADDRESS
+		     , PHONE
+		     , R_IMG
+		     , OPEN
+		     , CLOSE
+		     , BREAK_S
+		     , BREAK_E
+		     , AVG(STAR) "AVG_STAR"
+		     , RS.COUNT
+		  FROM REVIEW RE
+		  JOIN restaurant RS ON (RE.RES_NO = RS.RES_NO)
+		 GROUP
+		    BY RE.RES_NO
+		     , RES_NAME
+		     , ADDRESS
+		     , D_ADDRESS
+		     , PHONE
+		     , R_IMG
+		     , OPEN
+		     , CLOSE
+		     , BREAK_S
+		     , BREAK_E
+		     , RS.COUNT
+             , RE.COUNT
+		 ORDER
+		    BY RS.COUNT DESC
+             , AVG(STAR) DESC
 	</entry>
 </properties>

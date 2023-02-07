@@ -804,8 +804,50 @@ public class RestaurantDao {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				rest.add(new Restaurant())
+				rest.add(new Restaurant(rset.getInt("res_no")
+									  , rset.getString("res_name")
+									  , rset.getString("address")
+									  , rset.getString("d_address")
+									  , rset.getString("phone")
+									  , rset.getString("r_img")
+									  , rset.getString("open")
+									  , rset.getString("close")
+									  , rset.getString("break_s")
+									  , rset.getString("break_e")
+									  , rset.getDouble("avg_star")
+									  , rset.getInt("count")));
 			}
+			System.out.println(rest);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rest;
+	}
+
+	public ArrayList<Restaurant> selectRestCount(Connection conn) {
+		ArrayList<Restaurant> rest = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRestCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				rest.add(new Restaurant(rset.getInt("res_no")
+									  , rset.getString("res_name")
+									  , rset.getString("address")
+									  , rset.getString("d_address")
+									  , rset.getString("phone")
+									  , rset.getString("r_img")
+									  , rset.getString("open")
+									  , rset.getString("close")
+									  , rset.getString("break_s")
+									  , rset.getString("break_e")
+									  , rset.getDouble("avg_star")
+									  , rset.getInt("count")));
+			}
+			System.out.println(rest);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

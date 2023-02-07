@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fd.restaurant.model.service.RestaurantService;
 import com.fd.restaurant.model.vo.Restaurant;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class AjaxSelectRestReviewAvgController
@@ -31,8 +32,10 @@ public class AjaxSelectRestReviewAvgController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json; charset=UTF-8");
 		ArrayList<Restaurant> rest = new RestaurantService().selectRestReviewAvg();
 		
+		new Gson().toJson(rest, response.getWriter());
 	}
 
 	/**

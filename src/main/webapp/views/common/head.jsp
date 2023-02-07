@@ -85,7 +85,7 @@
                 <form action="/Fooding/keyword.sh" id="header2-search">
                     <!-- 돋보기 클릭시 검색가능 -->
                     <div id="search">
-                        <input type="text" name="keyword" size="45">&nbsp;&nbsp;<img src="/Fooding/resources/images/search.png" width="25" height="25" >
+                        <input type="text" name="keyword" size="45">&nbsp;&nbsp; <!--  <img src="/Fooding/resources/images/search.png" width="25" height="25" > --> 
                     </div>
                     <input type="hidden" name="cpage" value="1">
                 </form>
@@ -167,7 +167,7 @@
                     <!-- 헤더바3-2 -->
                     <div id="header3-2">
                         <!-- 각 이미지 클릭시 찜하기, (최근 본 게시물,) 리뷰페이지로 이동가능 -->
-                        <div id="part1"><img src="/Fooding/resources/images/heart.png" width="27" height="27"></div>
+                        <div id="part1"><img src="/Fooding/resources/images/heart.png" onclick="location.href='<%=contextPath%>/zzim.is'" width="27" height="27"></div>
                         <div id="part2"><img src="/Fooding/resources/images/alert.png" width="35" height="35"></div>
                         <div id="part3"><img src="/Fooding/resources/images/review.png" onclick="location.href='<%=contextPath%>/check.bo'"width="30" height="30"></div>
                     </div>
