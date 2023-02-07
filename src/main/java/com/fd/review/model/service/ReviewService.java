@@ -4,11 +4,11 @@ import static com.fd.common.JDBCTemplate.close;
 import static com.fd.common.JDBCTemplate.commit;
 import static com.fd.common.JDBCTemplate.getConnection;
 import static com.fd.common.JDBCTemplate.rollback;
-import static com.fd.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.fd.book.model.vo.Book;
 import com.fd.common.model.vo.Attachment;
 import com.fd.review.model.dao.ReviewDao;
 import com.fd.review.model.vo.Review;
@@ -36,11 +36,11 @@ public class ReviewService {
 	 * @param list
 	 * @return result1 * result2
 	 */
-	public int insertReview(Review r, ArrayList<Attachment> list) {
+	public int insertReview(int bookNo, double star, String reviewContent, ArrayList<Attachment> list) {
 		
 		Connection conn = getConnection();
-		
-		int result1 = new ReviewDao().insertContentReview(conn, r);
+		Book book = new ReviewDao().selectBook(conn, bookNo);
+		int result1 = new ReviewDao().insertContentReview(conn, book, bookNo, star, reviewContent);
 		int result2 = new ReviewDao().insertAttachmentList(conn, list);
 		
 		if (result1 > 0 && result2 > 0) {
