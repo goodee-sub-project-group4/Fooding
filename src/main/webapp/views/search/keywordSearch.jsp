@@ -138,10 +138,10 @@
 	                        <div class="searchRes">
 	                            <!-- 음식점 사진-->
 	                            <div class="resThumbnail">
-	                                <img src="<%= contextPath %>/<%= r.getrImg() %>" style="width:400px;" height="300px;">
+	                                <img src="<%= contextPath %>/<%= r.getrImg() %>" style="width:370px;" height="300px;">
 	                            </div>
 	                            <!-- 음식점 사진 아래 간단 설명 -->
-	                            <div class="resDescription" style="width:400px;">
+	                            <div class="resDescription" style="width:370px;">
 	                                음식점 이름 : <%= r.getResName()%> <br>
 	                                업체번호 : <%= r.getResNo() %> <br>
 	                                주소 : <%= r.getAddress() %> <br>
