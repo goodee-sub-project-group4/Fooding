@@ -115,7 +115,7 @@
 				success:function(rest){
 					console.log(rest)
 					let list = "";
-					for(let i=0; i<3; i++) {
+					for(let i=0; i<rest.length; i++) {
 						list += "<div class='restaurant'>"
 							  + "<a href='<%= contextPath %>/main.bo?resNo=" + rest[i].resNo + "'>"
 							  + "<img src=" + rest[i].rImg + "><br>"
@@ -129,9 +129,9 @@
 				url:"<%= contextPath %>/selectRest.rc",
 				type:"post",
 				success:function(rest){
-					console.log(rest)
+					console.log(rest[0].resNo)
 					let list = "";
-					for(let i=0; i<3; i++) {
+					for(let i=0; i<rest.length; i++) {
 						list += "<div class='restaurant'>"
 							  + "<a href='<%= contextPath %>/main.bo?resNo=" + rest[i].resNo + "'>"
 							  + "<img src=" + rest[i].rImg + "><br>"
