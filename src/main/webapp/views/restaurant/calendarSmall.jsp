@@ -60,7 +60,7 @@
 	float: right;
 	margin-right:14px;
 	margin-top:10px;
-	opacity: 0.2;
+	opacity: 0.5;
 }
 </style>
 </head>
