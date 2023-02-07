@@ -113,7 +113,11 @@
                                 											<%= (r.getParking().equals("Y")) ? "주차 가능" : (r.getParking().equals("N")) ? "주차 불가" : "" %>
                                 											
                                 									</div><br>
-                                <div class="detailTitle">업체사진등록</div><div class="inputContent" style="width: 300px; height: 200px;"><img src="<%=contextPath %><%=r.getImg() %>" alt=""></div><br>
+                                <div class="detailTitle">업체사진등록</div>
+                                <div>
+                                    <img style="width: 400px; height: 350px;" src="<%=r.getrImg() %>" alt="">
+                                </div>
+                                <br>
                       			
                             </div>
 

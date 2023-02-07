@@ -19,9 +19,9 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-    .wrap{width: 1200px; margin: auto;}
+    .wrap{width: 1400px; margin: auto;}
     
-#content1, #content2, #content3{box-sizing: border-box; height: 100%;}
+	#content1, #content2, #content3{box-sizing: border-box; height: 100%;}
     #content1-padding, #content2-padding, #content3-padding{float: left; margin: auto; padding: 5px; box-sizing: border-box;}
 
 	#content1-padding{width: 20%; height: 500px;}
@@ -83,13 +83,15 @@
     #content-main{width: 100%; padding: 5px; float: left;}
     
     /*음식점정보(음식점 썸네일 사진+음식점 간단설명) 옆으로 붙도록 인라인 블럭처리*/
-    .searchRes{display:inline-block; margin: 30px;}
+    .searchRes{float: left; margin: 15px; height: 500px;}
 
     /*찜하기*/
-    .zzim{float:right;box-sizing: border-box; }
+    .zzim {float:right;box-sizing: border-box;}
 
+	
     /* 리뷰 페이징 */
-    .paging-area{height: 50px; text-align: center; padding-top: 20px;}
+    .paging-area{display:block; height: 50px; text-align: center; padding-top: 20px; margin:auto;}
+   
 </style>
 </head>
 
@@ -114,14 +116,6 @@
                         <b>총 <%= pi.getListCount() %>건</b>
                     </div>
 
-                    <!-- 검색결과 필터링: 별점순|방문자순|리뷰순-->
-                    <!--  
-                    <div id="searchFilter">
-                        <span onclick="filterBy('stars');">별점순</span> 
-                        <span onclick="filterBy('counts');">조회순</span> 
-                        <span onclick="filterBy('reviews');">리뷰순</span>
-                    </div>
-                    -->
 
                     <!-- 검색결과 조회된 음식점 목록들 -->
                     <div id="content-main">
@@ -136,12 +130,11 @@
 	                        <div class="searchRes">
 	                            <!-- 음식점 사진-->
 	                            <div class="resThumbnail">
-	                                <img src="<%= contextPath %>/<%= r.getrImg() %>" style="width:400px;" height="300px;">
+	                                <img src="<%= contextPath %>/<%= r.getrImg() %>" style="width:370px;" height="300px;">
 	                            </div>
 	                            <!-- 음식점 사진 아래 간단 설명 -->
-	                            <div class="resDescription" style="width:400px;">
+	                            <div class="resDescription" style="width:370px;">
 	                                음식점 이름 : <%= r.getResName()%> <br>
-	                                업체번호 : <%= r.getResNo() %> <br>
 	                                주소 : <%= r.getAddress() %> <br>
 	                                음식카테고리 : <%= r.getFoodCt() %> <br>
 	                                
@@ -170,8 +163,8 @@
 	                        <% } %>
                         <% } %>
                         
-						
-						<div class="paging-area">
+                    </div>
+                      <div class="paging-area">
 						
 							<%if(!list.isEmpty()) {%>
 
@@ -189,20 +182,13 @@
 								
 							<% } %>   
 							
-							<!-- 찜하기 -->
-							
-							<script>
+				        </div>
+				        
+				        <script>
                         
 					        function insertGood(a){
-					        	//console.log($('#zzim').val());
-					        	
-					        	//추가코드 아래 두줄
-					        	//const $heartImg = $("img").attr("src"); 
-					        	//$heartImg.text("/Fooding/resources/images/heart.png");
 					        	
 					        	$('#'+a).attr("src", "/Fooding/resources/images/heart-filled.png"); 
-					        	
-					        	//$(".zzim").children("img").attr("src", "/Fooding/resources/images/heart-empty.png"); 
 					        	
 					    		$.ajax({
 					    			url:"<%=contextPath%>/good.sh",
@@ -230,14 +216,7 @@
                         		alert("로그인한 유저만 이용가능한 서비스입니다");
                         	}
                         
-                        </script>     
-
-				        </div>
-				        
-				        
-
-                    </div>
-                      
+                        </script>  
                 </div>
             </div>
         </div>

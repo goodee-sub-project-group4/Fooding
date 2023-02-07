@@ -45,6 +45,7 @@ public class AjaxRestBookDetailController extends HttpServlet {
 		set.add(b);
 		set.add(bmList);
 		set.add(p);
+		System.out.println(bmList);
 		//데이터 넘기기
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(set, response.getWriter());

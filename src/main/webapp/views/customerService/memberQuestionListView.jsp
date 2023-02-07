@@ -29,9 +29,12 @@
     /*페이징바*/
     .pagination a{color:red;}
     
+    /* 상태 컬러 */
     .done {color:red;}
-
-
+    
+    .res-list>td:hover {cursor:pointer;}
+	
+	
 </style>
 </head>
 <body>
@@ -46,7 +49,7 @@
             <div id="question-list">
                 <button type="button" id="res-btn">매장 문의</button>
                 <button type="button" id="admin-btn">관리자 문의</button>
-                <input type="button" class="btn btn-outline-danger" value="삭제">
+                <!-- <input type="button" class="btn btn-outline-danger" value="삭제"> -->
             </div>
             <div id="list-area">
                 <table class="table">
@@ -70,12 +73,12 @@
                         <!-- 문의한 내역이 있을 경우 -->
                         <% for(Question qR : listR) { %>
                         <tr class="res-list">
-                            <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px; "></td>
+                            <!-- <td><input type="checkbox" style="accent-color:red; width:20px; height:20px; margin-top:3px; "></td> -->
                             <td><%=qR.getqNo()%></td>
                             <td><%=qR.getqTitle()%></td>
                             <td><%=qR.getCreateDate()%></td>
                             <td class="status"><%=(qR.getStatus().equals("Y")) ? "처리완료" : "처리중" %></td>
-                            <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td>
+                            <!-- <td><input type="button" class="btn btn-outline-danger" value="수정" style="margin-top:-5px;"></td> -->
                         </tr>
                        <% } %>
                         
@@ -130,6 +133,15 @@
 	            $(".res-list").hide();
 	        });
 	       
+	        // 리스트 상세조회시 번호 넘김
+	        $(function() {
+	        	$(".table>tbody>tr").click(function() {
+	        		location.href='<%=contextPath%>/questionDetail.me?no='+ $(this).children().eq(1).text();
+	        	});
+	        });
+	        
+	        
+	        
         </script>
         
 

@@ -40,6 +40,7 @@ public class AdminRegisterRestListController extends HttpServlet {
 			ArrayList<Restaurant> list = new AdminService().selectRegisterList();
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/admin/registerRestListView.jsp").forward(request, response);
+			System.out.println(list);
 		}
 	}
 

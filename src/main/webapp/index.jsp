@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.fd.common.model.vo.Attachment" %>
+<%@ page import="java.util.ArrayList, com.fd.common.model.vo.Attachment
+			   , com.fd.restaurant.model.vo.Restaurant" %>
 <%
 	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
 %>
@@ -77,7 +78,7 @@
     }
     .restaurant img { /*대표이미지*/
         width:240px;
-        height: 100px;   
+        height: 170px;   
     }
     .rest-name {
         font-weight: 600;
@@ -105,6 +106,42 @@
                		} 
                 }
             });
+			$.ajax({
+				url:"<%= contextPath %>/selectRest.ra",
+				type:"post",
+				success:function(restStar){
+					let list = "";
+					console.log(restStar)
+					for(let i=0; i<3; i++) {
+						if(restStar[i] != null){
+							list += "<div class='restaurant'>"
+								  + "<a href='<%= contextPath %>/main.bo?resNo=" + restStar[i].resNo + "'>"
+								  + "<img src=" + restStar[i].rImg + "><br>"
+								  + "<span class='rest-name'>" + restStar[i].resName + "</span><span style='float:right;'>★" + Math.round(restStar[i].reviewAvg * 100) / 100 + " (" + restStar[i].count + ")</span><br>"
+						          + "</a></div>"
+						}
+					}
+					$('#starBest').html(list);
+				}
+			});
+			$.ajax({
+				url:"<%= contextPath %>/selectRest.rc",
+				type:"post",
+				success:function(restCount){
+					let list = "";
+					for(let i=0; i<3; i++) {
+						if(restCount[i] != null){
+							list += "<div class='restaurant'>"
+								  + "<a href='<%= contextPath %>/main.bo?resNo=" + restCount[i].resNo + "'>"
+								  + "<img src=" + restCount[i].rImg + "><br>"
+								  + "<span class='rest-name'>" + restCount[i].resName + "</span><span style='float:right;'>★" + Math.round(restCount[i].reviewAvg * 100) / 100 + " (" + restCount[i].count + ")</span><br>"
+								  + "</a></div>"
+						}
+					}
+					$('#reviewCount').html(list);
+				}
+			});
+		});
 	</script>
    
 	<!-- 메인영역 -->
@@ -153,63 +190,13 @@
 
 		    </div><br>
 		    <div id="area2" align="center">
-		        <h2>리뷰 best ></h2>
-		        <div class="restaurant">
-	       			<a href="<%= contextPath %>/main.bo?resNo=1201">
-		            <img src="/Fooding/resources/images/forTest.png"><br>
-		            <span class="rest-name">미미식당</span> <span style="float:right">★4.8(618)</span><br>
-		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>
-		            </a>
-		            
-		        </div>
-		        <div class="restaurant">
-		            <img src="/Fooding/resources/images/forTest.png"><br>
-		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
-		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>
-		        </div>
-		        <div class="restaurant">
-		            <img src="/Fooding/resources/images/forTest.png"><br>
-		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
-		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>
-		        </div>
+		        <h2 >조회수 best </h2>
+				<div id="reviewCount"></div>
 		    </div>
 		    <div id="area3" align="center">
-		        <h2>별점 best ></h2>
-		        <div class="restaurant">
-		            <img src="/Fooding/resources/images/forTest.png"><br>
-		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
-		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>
-		        </div>
-		        <div class="restaurant">
-		            <img src="/Fooding/resources/images/forTest.png"><br>
-		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
-		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>
-		        </div>
-		        <div class="restaurant">
-		            <img src="/Fooding/resources/images/forTest.png"><br>
-		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
-		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>
-		        </div>
+		        <h2>별점 best </h2>
+				<div id="starBest"></div>
 		    </div>
-		    <div id="area4" align="center">
-		        <h2>지역별 best ></h2>
-		        <div class="restaurant">
-		            <img src="/Fooding/resources/images/forTest.png"><br>
-		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
-		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>
-		        </div>
-		        <div class="restaurant">
-		            <img src="/Fooding/resources/images/forTest.png"><br>
-		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
-		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>
-		        </div>
-		        <div class="restaurant">
-		            <img src="/Fooding/resources/images/forTest.png"><br>
-		            <span class="rest-name">뮤땅</span> <span style="float:right">★4.8(618)</span><br>
-		            <span>레스토랑에 대한 설명..어쩌고 저쩌고..레스토랑에 대한 설명..어쩌고 저쩌고..</span>
-		        </div>
-		    </div>
-		</div>
 		
 		<%@ include file="views/common/footer.jsp" %>
 	</div>

@@ -18,6 +18,14 @@
 	</entry>
 
 	<!-- 리뷰쓰기 -->
+	<entry key="selectBook">
+		SELECT 
+			   RES_NO
+			 , USER_NO
+  		  FROM BOOK
+ 		  WHERE BOOK_NO = ?
+	</entry>
+	
 	<entry key="insertContentReview">
 		INSERT
 		  INTO REVIEW

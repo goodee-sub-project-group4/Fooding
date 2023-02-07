@@ -36,6 +36,7 @@ public class BookMainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int resNo = Integer.parseInt(request.getParameter("resNo"));
 		// 식당 조회수 1 증가
+		System.out.println(resNo);
 		int countUp = new BookService().selectCountUp(resNo);
 		// 메뉴 정보 조회
 		ArrayList<Menu> menuList = new BookService().selectMenu(resNo);
@@ -47,7 +48,7 @@ public class BookMainController extends HttpServlet {
 		ArrayList<Attachment> attachment = new BookService().selectAttachment(reviewList, resNo);
 		// 식당 정보 조회
 		Restaurant restaurant = new BookService().selectRes(resNo);	
-		System.out.println(attachment);
+		System.out.println(restaurant);
 		if(restaurant == null) {
 			request.setAttribute("errorMsg", "식당 조회 오류발생");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

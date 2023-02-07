@@ -37,7 +37,6 @@ public class BookCheckController extends HttpServlet {
 		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
 		ArrayList<Book> list = new BookService().selectBookList(userNo);
 		
-
 		int result = new BookService().selectBookList(userNo);
 
 		request.getRequestDispatcher("views/book/bookCheck.jsp").forward(request, response);

@@ -40,7 +40,7 @@
     
 </head>
 <body>
-<%@ include file="/views/common/head.jsp" %>
+		<%@ include file="/views/common/head.jsp" %>
         <%@ include file="/views/common/customerServiceSidebar.jsp" %>
     
         <div id="content2-padding">
@@ -75,7 +75,7 @@
                         <tr>
                             <th>내용</th>
                             <td colspan="2">
-                                <textarea name="qContent" id="qContent" cols="30" rows="10" placeholder="내용을 입력해주세요"></textarea>
+                                <textarea name="qContent" id="qContent" cols="30" rows="10" placeholder="내용을 입력해주세요" style="resize:none"></textarea>
                             </td>
                         </tr>
 
@@ -84,17 +84,9 @@
                         <tr>
                             <th>첨부파일</th>
                             <td><input type="file" name="upfile"></td>
-
                         </tr>
 
                         <tr><td height="10px"></td></tr>
-
-                        <tr style="display:none">
-                            <th>답변</th>
-                            <td colspan="2">
-                                <textarea name="" id="aContent" cols="30" rows="10">답변</textarea>
-                            </td>
-                        </tr>
 
                     </table>
     

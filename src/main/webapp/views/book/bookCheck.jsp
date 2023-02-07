@@ -442,14 +442,14 @@
 		
 					<div>
 						<div class="selectList-no" style="font-size: 20px;"><%= b.getBookNo() %></div>
-						<img src="" alt="" class="selectList-img">
+						<img src="asdasd" alt="" class="selectList-img">
 						<div>
 							<div class="selectList-text">
 		
 								<table>
 									<tr>
 										<th style="width: 80px; height: 70px;">업체명</th>
-										<td style="width: 250px;"><%= b.getResNo() %></td>
+										<td style="width: 250px;" class="ResName"><%= b.getResNo() %></td>
 									</tr>
 									<tr>
 										<td style="height: 40px;">예약일시</td>
@@ -476,7 +476,7 @@
 								</div>
 								<div class="service-complete-btn">
 									<div>
-										<button type="button" class="btn btn-outline-danger"
+										<button id="<%= b.getResNo() %>" type="button" class="btn btn-outline-danger review"
 											data-toggle="modal" data-target="#reviewModal">리뷰쓰기</button>
 									</div>
 									<div>
@@ -496,6 +496,19 @@
 		<div class="paging">< 1 2 3 4 5 6 7 8 9></div>
 	</div>
 
+	<script>
+		$('.btn.btn-outline-danger.review').click(function(){
+			const resName = $(this).parent().parent().parent().prev().children().children().children().eq(0).children().eq(1).text();
+			const imgSrc = $(this).parent().parent().parent().parent().prev().attr('src');
+			const bookNo = $(this).parent().parent().parent().parent().prev().prev().text();
+			const a = $('#review-content2-1').children().attr('src', imgSrc);
+
+			console.log(bookNo)
+			$('#review-content2-2').text(resName);
+			$('#bookNo').val(bookNo);
+		}); 
+	</script>
+
 	<!-- 리뷰쓰기모달  -->
 	<!-- The Modal -->
 	<div class="modal fade" id="reviewModal">
@@ -514,6 +527,7 @@
 				<!-- Modal body -->
 				<form action="<%=contextPath%>/reviewForm.me" id="review-form"
 					method="post" enctype="multipart/form-data">
+					<input id="bookNo" type="hidden" name="bookNo" value="">	
 					<div class="modal-body"></div>
 					<div class="review-content2">
 						<div id="review-content2-1">
@@ -523,10 +537,12 @@
 						<div id="review-content2-2">
 							<div id="review-content2-2-1"></div>
 							<!-- 업체명 가져와야함  -->
-							<input type="hidden" name="resNo" value=""> <input
-								type="hidden" name="userNo" value=""> <input
-								type="hidden" name="bookNo" value="">
-
+							
+						<script>
+							$(function(){
+								$('#review-content2-1')
+							})
+						</script>
 						</div>
 						<div id="review-content2-3">
 							<p>★ 별점</p>
@@ -638,7 +654,6 @@
 
 					}
 				</script>
-
 			</div>
 		</div>
 	</div>

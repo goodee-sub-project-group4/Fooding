@@ -39,14 +39,14 @@ public class AdminRegisterRestDetailController extends HttpServlet {
 		}else {	
 
 			int resNo = Integer.parseInt(request.getParameter("no"));	
-			
+			System.out.println(resNo);
 			int result = new AdminService().increseCountRes(resNo);
+			System.out.println(result);
 			if(result>0) {
 				Restaurant r = new AdminService().selectRegister(resNo);
-	
+				System.out.println(r);
 				request.setAttribute("r", r);
 				request.getRequestDispatcher("views/admin/registerRestDetailView.jsp").forward(request, response);
-				
 			} else {
 				request.setAttribute("errorPage", "상세조회 실패");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

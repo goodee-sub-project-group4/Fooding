@@ -54,14 +54,9 @@ public class ReviewFormController extends HttpServlet {
 			/* int userNo = ((Member)session.getAttribute("loginUser")).getUserNo(); */
 			
 			
-			Review r = new Review();
-			
-			r.setBookNo(Integer.parseInt(multiRequest.getParameter("bookNo")));
-			r.setResNo(multiRequest.getParameter("resNo"));
-			r.setUserNo(Integer.parseInt(multiRequest.getParameter("userNo")));
-			r.setReviewContent(multiRequest.getParameter("reviewContent"));
-			r.setStar(Double.parseDouble(multiRequest.getParameter("star")));
-			
+			int bookNo = Integer.parseInt(multiRequest.getParameter("bookNo"));
+			double star = Double.parseDouble(multiRequest.getParameter("star"));
+			String reviewContent = multiRequest.getParameter("reviewContent");
 			
 			// Attachment 데이터 담기
 			ArrayList<Attachment> list = new ArrayList<>();
@@ -82,7 +77,7 @@ public class ReviewFormController extends HttpServlet {
 				} 
 			}
 			
-			int result = new ReviewService().insertReview(r, list);
+			int result = new ReviewService().insertReview(bookNo, star, reviewContent, list);
 			
 			if(result > 0) {
 				// 성공 => 리뷰리스트 페이지 (/reviewList.re)

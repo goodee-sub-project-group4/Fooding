@@ -40,10 +40,9 @@ public class AjaxReviewDetailController extends HttpServlet {
 		int result = rs.increaseCount(reviewNo);
 		
 		if (result > 0) {
-			System.out.println("reviewNo ==> " + reviewNo);
 			
 			ReviewDetailVo detailVo = rs.selectContentReview(reviewNo);
-			System.out.println("detailVo ==> " + detailVo);
+			
 			response.setContentType("application/json; charset=UTF-8");
 			new Gson().toJson(detailVo, response.getWriter());	
 			
@@ -51,10 +50,7 @@ public class AjaxReviewDetailController extends HttpServlet {
 			// 실패 => 에러페이지
 		}
 		
-//		Review r = new ReviewService().selectReviewDetail(reviewNo);
-//		Attachment at = new RestaurantService().selectReviewAttachment(reviewNo);
-//		response.setContentType("application/json; charset=UTF-8");
-//		new Gson().toJson(r, response.getWriter());
+
 		
 		
 		

@@ -37,7 +37,7 @@ public class AjaxReviewDetailFileController extends HttpServlet {
 		
 		ReviewService rs = new ReviewService();
 		ArrayList<ReviewDetailFileVo> detailFileVos = rs.selectContentReviewFiles(reviewNo);
-		System.out.println("detailFileVos ==> " + detailFileVos);
+		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(detailFileVos, response.getWriter());	
 		

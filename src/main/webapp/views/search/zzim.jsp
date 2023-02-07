@@ -49,7 +49,7 @@
 		/* 페이징 */
     	.paging-area{height: 50px; text-align: center; padding-top: 20px;}
     	
-    	.trStyle{border:1px solid red; margin-bottom:10px;}
+    	.trStyle{border-bottom:1px solid black; margin-bottom:10px;}
     	
     </style>
 </head>
@@ -80,21 +80,30 @@
 	                            	<br>
 	                                음식점 이름: <%= r.getResName()%> <br> 
 	                                주소: <%= r.getAddress() %> <br>
+	                                전화번호: <%= r.getPhone() %>
 	                            </div>
 	                        </td> 
 	                        <td class="input-area3-id">
-	                        	<!-- 
-	                            <button type="button" class="btn btn-danger";">삭제</button>
-	                        	 -->
+	                        	
+	                            <button type="button" class="btn btn-danger";" onclick="deleteHeart(<%=r.getResNo()%>);">삭제</button>
+	                        	 
 	                        </td>
 	                    </tr>
 					<% } %>
 				<% } %>
+				
 			</table>			 
          </div>
 
     </div>
  
+ 	<script>
+ 	
+ 		function deleteHeart(resNo){
+ 			
+ 			location.href="<%=contextPath%>/deleteListZzim.sh?resNo="+resNo;
+ 		}
+ 	</script>
 
 </body>
 </html>

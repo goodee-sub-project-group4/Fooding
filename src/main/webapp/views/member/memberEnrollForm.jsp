@@ -86,7 +86,6 @@
             .gender-area {
                 font-weight: 600;
                 
-                border:1px solid red;
             }
 
             .birth-area input {
@@ -198,14 +197,14 @@
                             </tr>
                             <tr>
                                 <th>휴대폰 <span class="required">*</span></th>
-                                <td class="input-area2"><input type="text" size="55" name="userPhone" id="phone"
+                                <td class="input-area2"><input type="text" size="11" name="userPhone" id="phone"
                                         placeholder="숫자만 입력해주세요" required></td>
                                 <td class="input-area3-phone"><button type="button" id="sendNum"
                                         class="btn btn-danger doubleCheck">인증번호 받기</button></td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <td class="input-area2"><input type="text" size="55" id="phone2" disabled></td>
+                                <td class="input-area2"><input type="text" size="10" id="phone2"></td>
                                 <td class="input-area3-phone"><button type="button" id="sendNum2"
                                         class="btn btn-danger doubleCheck">인증번호 확인</button></td>
 
@@ -317,7 +316,6 @@
                         /* 닉네임 중복체크 */
                         function nicknameCheck() {
                             const $nicknameInput = $(".enroll-form input[name=nickname]");
-							
                             $.ajax({
                                 url: "<%=contextPath%>/nicknameCheck.me?checkNickname=" + $nicknameInput.val(),
                                 date: { checkNickname: $nicknameInput.val() },
@@ -357,9 +355,53 @@
                             });
                         });
 
-                        /* 휴대폰 인증 */
-
-                        const code = "";
+                        
+                        const randomNumber = Math.floor(Math.random() * 10000) + 1;
+                
+                		// 인증번호 발송
+    					$('#sendNum').click(function() {
+    						const phone = document.getElementById("phone").value;
+        					if (phone.length == 0) {
+        						alert("번호를 입력해 주세요.");
+        						return false;
+        					}
+        					
+        					console.log(phone)
+        					console.log("숫자 4자리 : ", randomNumber)
+        					
+                            $.ajax ({
+                            	url: "<%=contextPath%>/RestApiPhonAuthCheck.me",
+                                type: 'POST',
+                                data: {
+                                to : phone,
+    	                		text : randomNumber },
+                            	success: function(resData) {
+                            		alert("암호를 발송했습니다.");
+                            	}
+    	                		
+                            });
+    	
+    					});
+                            
+                            	// 인증번호 확인
+        	    				$('#sendNum2').click(function() {
+        	    					
+        	    					console.log(randomNumber)
+        	    					console.log(document.querySelector("#phone2").value)
+        	    					
+        	    					if (randomNumber == document.querySelector("#phone2").value) {
+        	    						alert("같다")
+        	    					} else {
+        	    						alert("다르다")
+        	    					}
+        	    					
+        	    					
+        	                    });
+                            	
+    	                 	
+                        
+                        
+                        <%-- const code = "";
                         $("#sendNum").click(function() {
                         	alert("인증번호가 발송되었습니다.");
 
@@ -368,7 +410,6 @@
                         	$.ajax({
                         		type:"get",
                         		url:"<%=contextPath%>/phoneCheck.me",
-                        // 		cache:false,
                                 data: { "userPhone": phone },
                         		success:function(data) {
                                     const checkNum = data;
@@ -385,11 +426,11 @@
 
                                     });
               
-                        		}
+                        		} 
 
                         	});
 
-                        });
+                        });--%>
 
                     </script>
 

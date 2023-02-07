@@ -500,6 +500,27 @@
 		 WHERE RES_NO = ?
 	</entry>
 	
+	<!-- 업체 상세 수정 -->
+	<entry key="updateRest">
+		UPDATE RESTAURANT
+		   SET RES_NAME = ?
+		     , CEO = ?
+		     , PERMIT_NO = ?
+		     , ADDRESS = ?
+		     , D_ADDRESS = ?
+             , PHONE = ?
+             , CELLPHONE = ?
+             , EMAIL = ?
+             , FOOD_CT = ?
+             , PARKING = ?
+             , OPEN = ?
+             , CLOSE = ?
+             , BREAK_S = ?
+             , BREAK_E = ?
+             , STATUS = ?
+		 WHERE RES_NO = ?
+	</entry>
+	
 	<!-- 업체 예약 조회 -->
 	<entry key="selectReserveList">
 		SELECT
@@ -572,6 +593,57 @@
          WHERE RES_NO = ?
     </entry>
 
+
+	<!-- ============================================================================= -->
+	<!-- 1:1 문의 조회(회원) -->
+	<entry key="selectQuestionListU">
+  	    SELECT
+			   Q_NO
+			 , CATEGORY
+			 , Q_TITLE
+			 , Q_CONTENT
+			 , TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') "CREATE_DATE"
+			 , Q.STATUS
+			 , USER_ID
+		  FROM QUESTION Q
+          JOIN TB_USER U ON (Q.Q_PERSON = U.USER_NO)     
+		 WHERE Q_WHO = 'U'
+		   AND A_WHO = 'A'
+		 ORDER
+		    BY STATUS
+	</entry>
+	
+	<!-- 1:1 문의 조회(업체) -->
+	<entry key="selectQuestionListR">
+	    SELECT
+			   Q_NO
+			 , CATEGORY
+			 , Q_TITLE
+			 , Q_CONTENT
+			 , TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') "CREATE_DATE"
+			 , STATUS
+			 , Q_PERSON
+		  FROM QUESTION
+		 WHERE Q_WHO = 'R'
+		   AND A_WHO = 'A'
+		 ORDER
+		    BY STATUS
+	</entry>
+	
+	<!-- 1:1 문의 상세 조회(회원) -->
+	<entry key="selectDetailQuestion">
+		SELECT
+		       Q_NO
+		     , CATEGORY
+		     , Q_TITLE
+		     , Q_PERSON
+		     , STATUS
+		     , TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') "CREATE_DATE"
+		     , Q_CONTENT
+		     , A_CONTENT
+		  FROM QUESTION
+		 WHERE Q_NO = ?	
+	</entry>
 	
 
 </properties>

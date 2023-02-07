@@ -124,18 +124,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                    	<% for(Restaurant r : list) {%>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td><%= r.getResNo() %></td>
-                            <td><%= r.getApplyDate() %></td>
-                            <td><%= r.getResName() %></td>
-                            <td>
-                            	<%= (r.getStatus().equals("W")) ? "승인대기" : (r.getStatus().equals("N")) ? "반려" : "승인"  %>
-
-                            </td>
-                        </tr>  
-                        <% } %>                     
+                    	<% if(!list.isEmpty()) {%> 
+	                    	<% for(Restaurant r : list) {%>
+	                        <tr>
+	                            <td><input type="checkbox"></td>
+	                            <td><%= r.getResNo() %></td>
+	                            <td><%= r.getApplyDate() %></td>
+	                            <td><%= r.getResName() %></td>
+	                            <td>
+	                            	<%= (r.getStatus().equals("W")) ? "승인대기" : (r.getStatus().equals("N")) ? "반려" : "승인"  %>
+	
+	                            </td>
+	                        </tr>  
+	                        <% } %>
+	                        <tr>조회된 업체가 없습니다</tr>
+	                	<% } %>                      
                     </tbody>	
                 </table>
             </form>

@@ -380,4 +380,79 @@
 		   AND SUBSTR(BOOK_DATE,0,4) = ?
 		   AND SUBSTR(BOOK_DATE,6,2) = ?
 	</entry>
+	<entry key="selectRestReviewAvg">
+		SELECT 
+		       RE.RES_NO "RES_NO"
+		     , RES_NAME
+		     , ADDRESS
+		     , D_ADDRESS
+		     , PHONE
+		     , R_IMG
+		     , OPEN
+		     , CLOSE
+		     , BREAK_S
+		     , BREAK_E
+		     , AVG(STAR) "AVG_STAR"
+		     , RS.COUNT "COUNT"
+		  FROM REVIEW RE
+		  JOIN restaurant RS ON (RE.RES_NO = RS.RES_NO)
+		 WHERE RS.STATUS = 'Y'
+		 GROUP
+		    BY RE.RES_NO
+		     , RES_NAME
+		     , ADDRESS
+		     , D_ADDRESS
+		     , PHONE
+		     , R_IMG
+		     , OPEN
+		     , CLOSE
+		     , BREAK_S
+		     , BREAK_E
+		     , RS.COUNT
+		 ORDER
+		    BY AVG(STAR) DESC
+	</entry>
+	<entry key="selectRestCount">
+		SELECT 
+		       RS.RES_NO
+		     , RES_NAME
+		     , ADDRESS
+		     , D_ADDRESS
+		     , PHONE
+		     , R_IMG
+		     , OPEN
+		     , CLOSE
+		     , BREAK_S
+		     , BREAK_E
+		     , NVL(AVG(STAR), 0) "AVG_STAR"
+		     , RS.COUNT
+		  FROM RESTAURANT RS
+		  LEFT JOIN REVIEW RE ON (RS.RES_NO = RE.RES_NO)
+		 WHERE RS.STATUS = 'Y'
+		 GROUP
+		    BY RS.RES_NO
+		     , RES_NAME
+		     , ADDRESS
+		     , D_ADDRESS
+		     , PHONE
+		     , R_IMG
+		     , OPEN
+		     , CLOSE
+		     , BREAK_S
+		     , BREAK_E
+		     , RS.COUNT
+		 ORDER
+		    BY COUNT DESC
+		     , AVG(STAR) ASC
+	</entry>
+	<entry key="selectCalendarBook">
+		SELECT
+		       BOOK_TIME
+		     , BOOK_NAME
+		     , PEOPLE  
+		  FROM BOOK
+		 WHERE RES_NO = ?
+		   AND BOOK_DATE = ?
+		   AND STATUS IN ('B','D')		   
+	</entry>
 </properties>

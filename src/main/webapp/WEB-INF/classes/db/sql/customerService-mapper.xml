@@ -159,4 +159,50 @@
 	         )
 	</entry>
 	
+	<!-- 1:1문의 상세조회 -->
+	<entry key="selectQuestion">	
+		SELECT 
+		       Q_NO
+		     , CATEGORY
+		     , Q_TITLE
+		     , Q_CONTENT
+		     , A_CONTENT
+		  FROM QUESTION
+		 WHERE Q_NO = ?
+	</entry>	   
+	
+	<!-- 1:1문의 상세조회 사진첨부 -->
+	<entry key="selectAttachment">
+		SELECT
+		       FILE_NO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , FILE_PATH
+		     , BOARD_TYPE
+		  FROM ATTACHMENT
+		 WHERE REF_BNO = ?
+	</entry>
+	
+	<!-- 1:1문의 조회수 -->
+	<entry key="increaseCountQ">
+		UPDATE
+		       QUESTION
+		   SET COUNT = COUNT + 1
+		 WHERE Q_NO = ?
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </properties>

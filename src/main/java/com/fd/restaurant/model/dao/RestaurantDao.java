@@ -792,4 +792,92 @@ public class RestaurantDao {
 		}
 		return list;
 	}
+
+	public ArrayList<Restaurant> selectRestReviewAvg(Connection conn) {
+		ArrayList<Restaurant> rest = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRestReviewAvg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				rest.add(new Restaurant(rset.getInt("res_no")
+									  , rset.getString("res_name")
+									  , rset.getString("address")
+									  , rset.getString("d_address")
+									  , rset.getString("phone")
+									  , rset.getString("r_img")
+									  , rset.getString("open")
+									  , rset.getString("close")
+									  , rset.getString("break_s")
+									  , rset.getString("break_e")
+									  , rset.getDouble("avg_star")
+									  , rset.getInt("count")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return rest;
+	}
+
+	public ArrayList<Restaurant> selectRestCount(Connection conn) {
+		ArrayList<Restaurant> rest = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRestCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				rest.add(new Restaurant(rset.getInt("res_no")
+									  , rset.getString("res_name")
+									  , rset.getString("address")
+									  , rset.getString("d_address")
+									  , rset.getString("phone")
+									  , rset.getString("r_img")
+									  , rset.getString("open")
+									  , rset.getString("close")
+									  , rset.getString("break_s")
+									  , rset.getString("break_e")
+									  , rset.getDouble("avg_star")
+									  , rset.getInt("count")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return rest;
+	}
+	public ArrayList<Book> selectCalendarBook(Connection conn, int resNo, String bookDate){
+		ArrayList<Book> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCalendarBook");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			pstmt.setString(2, bookDate);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Book b = new Book();
+				b.setBookTime(rset.getString("book_time"));
+				b.setBookName(rset.getString("book_name"));
+				b.setPeople(rset.getInt("people"));
+				
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 }

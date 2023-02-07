@@ -76,6 +76,23 @@ public class Restaurant {
 	
 	
 	
+	public Restaurant(int resNo, String resName, String address, String dAddress, String phone, String rImg, String open,
+			String close, String breakS, String breakE, double reviewAvg, int count) {
+		super();
+		this.resNo = resNo;
+		this.resName = resName;
+		this.address = address;
+		this.dAddress = dAddress;
+		this.phone = phone;
+		this.rImg = rImg;
+		this.open = open;
+		this.close = close;
+		this.breakS = breakS;
+		this.breakE = breakE;
+		this.reviewAvg = reviewAvg;
+		this.count = count;
+	}
+
 	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String localCt,
 			String dLocalCt, String phone, String cellphone, String email, String parking, String longtitude,
 			String latitude, String open, String close, String breakS, String breakE, String foodCt) {
@@ -287,16 +304,17 @@ public class Restaurant {
 		this.foodCt = foodCt;
 	}
 	
-	// 한수가 추가한 매개변수 생성자7 
-	public Restaurant(int resNo, String resName, String address, String rImg, String foodCt) {
+	
+	// 한수가 추가한 매개변수 생성자 7
+	public Restaurant(int resNo, String resName, String address, String rImg, String phone) {
 		super();
 		this.resNo = resNo;
 		this.resName = resName;
 		this.address = address;
 		this.rImg = rImg;
-		this.foodCt = foodCt;
+		this.phone = phone;
 	}
-	
+
 	// 한수가 추가한 매개변수 생성자8
 	public Restaurant(String resName, String ceo, String permitNo, String address, String dAddress, String latitude,
 			String longtitude, String localCt, String dLocalCt, String phone, String cellphone, String email,
