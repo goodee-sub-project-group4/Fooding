@@ -346,11 +346,13 @@
 				url:"<%=contextPath%>/selectDateBook.re",
 				data:{date:date, month:month, year:year},
 				success:function(result) {
-					console.log(result);
+					console.log(result[1]);
 					$('#book-date').text(year+"-"+month+"-"+date);
-					
-					
-					
+					console.log(res)
+					//for(result.size) {
+					//	$('#book-list-title').append("<h4 class='book-info'>"+
+					//			result[i].bookTime+" "+rest[i]+"("+result[i].people+")"+"</h4>");
+					//}
 				}, error:function(){
 					console.log('예약내역조회 ajax통신 실패');
 				}
