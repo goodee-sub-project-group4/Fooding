@@ -189,10 +189,12 @@
                                         <th>영업시간</th>
                                         <td><b id="open"><%= restaurant.getOpen() %></b> ~ <b id="close"><%= restaurant.getClose() %></b></td>
                                     </tr>
+                                    <% if(restaurant.getBreakS() != null) { %>
                                     <tr>
                                         <th>브레이크 타임</th>
                                         <td><b id="breakS"><%= restaurant.getBreakS() %></b> ~ <b id="breakE"><%= restaurant.getBreakE() %></b></td>
                                     </tr>
+                                    <% } %>
                                     <tr>
                                         <th>주차</th>
                   	                    <% if(restaurant.getParking().equals("Y")){ %> 
