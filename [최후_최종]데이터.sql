@@ -55,8 +55,35 @@ Insert into FOODING.RESTAURANT (RES_NO,USER_PWD,RES_NAME,CEO,PERMIT_NO,ADDRESS,D
 Insert into FOODING.RESTAURANT (RES_NO,USER_PWD,RES_NAME,CEO,PERMIT_NO,ADDRESS,D_ADDRESS,LOCAL_CT,DLOCAL_CT,PHONE,CELLPHONE,EMAIL,PARKING,APPLY_DATE,ENROLL_DATE,MODIFY_DATE,STATUS,LONGTITUDE,LATITUDE,R_IMG,OPEN,CLOSE,BREAK_S,BREAK_E,FOOD_CT,COUNT) values 
 (1224,'1234','쏭타이','쏭타이','981-25-12378','서울 용산구 이태원로20가길 7-2','2층','서울특별시','용산구','0507-1303-2495','010-9987-9127','tailover@naver.com','Y',to_date('23/02/07','RR/MM/DD'),null,null,'Y','126.992680','37.533728','resources/rest_upfiles/2023020710492618751.jpeg',null,null,null,null,'asia',0);
 
-
-
+--한수
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT)VALUES 
+(1225, '1234', '세라즈피자펍', '변백현', '149-25-14542', '서울시 금천구 가산동', '371-28 A동 2F 222호', '서울특별시', '금천구', '02-852-0415', '010-1744-1425', 'mimi@naver.com', SYSDATE, '126.891778', '37.476875', 'resources/rest_upfiles/fp1DaSojK3yF9OmtMXNZVlzz.jpeg.jpg', 'western', '25');  
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT)VALUES 
+(1226, '1234', '아웃백스테이크하우스', '설현', '189-22-14772', '서울시 금천구 가산동', '60-8 7F', '서울특별시', '금천구', '02-2136-9971', '010-1234-1234', 'mimi@naver.com', SYSDATE, '126.891778', '37.476875', 'resources/rest_upfiles/네이버플레이스_코어_3(1200x970)_블랙라벨.jpg', 'western', '7');  
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT) VALUES 
+(1227, '1234', '샐러드로', '이영애', '741-22-18872', '서울시 금천구 독산동', '291-1 현대지식산업센터 T-L124호', '서울특별시', '금천구', '02-2181-3580', '010-1234-1234', 'mimi@naver.com', SYSDATE, '126.899393', '37.468141', 'resources/rest_upfiles/20220430_142336.jpg', 'western', '13');  
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT) VALUES 
+(1228, '1234', '매드포갈릭', '김철수', '195-28-17242', '서울시 금천구 가산동', '60-8 현대시티아울렛 8F', '서울특별시', '금천구', '02-2136-9982', '010-1234-1234', 'mimi@naver.com', SYSDATE, '126.891778', '37.476875', 'resources/rest_upfiles/MFG_logo_300x300.jpg', 'western', '42');  
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT) VALUES
+(1229, '1234', '라티시크릿셰프', '박라희', '144-55-19642', '서울시 금천구 독산동', '1156 롯데캐슬골드파크타워 B1', '서울특별시', '금천구', '02-2136-9982', '010-6487-4545', 'mimi@naver.com', SYSDATE, 
+'126.899393', '37.468141', 'resources/rest_upfiles/p8cvJYs76mBOK8dBfTh3X5lr.jpg', 'western', '55');  
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT)VALUES 
+(1230, '1234', '더제이케이키친박스', '안제희', '177-33-19112', '서울시 금천구 가산동', '371-50 에이스하이앤드타워3차', '서울특별시', '금천구', '02-2136-9982', '010-8524-4111', 'mimi@naver.com', SYSDATE, '126.891778', '37.476875', 'resources/rest_upfiles/1675687606499.jpg', 'western', '95');
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT)VALUES 
+(1231, '1234', '오픈더그린', '서유리', '124-88-16941', '서울시 금천구 가산동', '345-29', '서울특별시', '금천구', '02-2135-9209', '010-7412-9652', 'mimi@naver.com', SYSDATE, '126.891447', '37.477262', 'resources/rest_upfiles/FBE9D480-5C50-4C61-83D0-8D467372F5D3.jpeg', 'western', '142');
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT)VALUES 
+(1232, '1234', '화덕피자모넬로', '시우민', '142-66-19222', '서울시 금천구 독산동', '1155 롯데캐슬골드파크 3차상가 LF 08호', '서울특별시', '금천구', '010-6465-1373', '02-7466-7496', 'mimi@naver.com', SYSDATE, '126.899393', '37.468141', 'resources/rest_upfiles/BusKENP5VZEoBMZaLAnOmVmQ.jpg', 'western', '96');
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT)VALUES 
+(1233, '1234', '빅터스버거', '김제니', '141-77-77112', '서울시 금천구 독산동', '1155 롯데캐슬골드파크3차 126호', '서울특별시', '금천구', '02-803-5668', '010-1475-9856', 'mimi@naver.com', SYSDATE, '126.899393', '37.468141', 'resources/rest_upfiles/GoTpungvmBuvJfa-bEy3abVP.jpg', 'western', '74');
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT) VALUES 
+(1234, '1234', '셀렉티', '라리사', '162-13-54693', '서울시 금천구 가산동', '152-30', '서울특별시', '금천구', '02-303-7735', '010-1111-2222', 'mimi@naver.com', SYSDATE, '126.891778', '37.476875', 'resources/rest_upfiles/VJ2BwRSY8Y2SbJ5VIHqlE9Fa.jpg', 'western', '86');
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT) VALUES 
+(1235, '1234', '롱블랙스푼', '김민지', '112-42-34569', '서울시 금천구 가산동', '371-17 BYC하이시티', '서울특별시', '금천구', '02-6947-7788', '010-1245-4545', 'mimi@naver.com', SYSDATE, '126.892524', '37.477006', 'resources/rest_upfiles/_xYurc2aKTOBaJF59H-QO22V.jpeg.jpg', 'western', '36');
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT) VALUES 
+(1236, '1234', '마피아피자펍', '성해은', '155-32-19112', '서울시 금천구 가산동', '371-28 우림라이온스밸리 A동 B1 B106-1호', '서울특별시', '금천구', '02-2136-9982', '010-4258-4545', 'mimi@naver.com', SYSDATE, 
+'126.891778', '37.476875', 'resources/rest_upfiles/hs4cdu67K71zjvN-YpAtsAYc.jpg', 'western', '76');
+INSERT INTO RESTAURANT (RES_NO, USER_PWD, RES_NAME, CEO, PERMIT_NO, ADDRESS, D_ADDRESS, LOCAL_CT, DLOCAL_CT, PHONE, CELLPHONE, EMAIL, APPLY_DATE, LONGTITUDE, LATITUDE, R_IMG, FOOD_CT, COUNT) VALUES 
+(1237, '1234', '리샐러드', '정규민', '127-47-19241', '서울시 금천구 독산동', '1150 113호', '서울특별시', '금천구', '02-5853-4322', '010-1428-4545', 'mimi@naver.com', SYSDATE, '126.901283', '37.468751', 'resources/rest_upfiles/크기변환Instagram_포스트__1.png', 'western', '93');
 
 
 --------------------------------------------TB_USER--------------------------------------------
@@ -128,6 +155,21 @@ Insert into FOODING.TB_USER (USER_NO,USER_ID,USER_PWD,USER_NAME,NICKNAME,USER_EM
 (33,'user30','1','황현진','황자님','prince25@naver.com','01067891111','M','20040401',to_date('23/02/07','RR/MM/DD'),to_date('23/02/07','RR/MM/DD'),'N');
 
 --------------------------------------------업체 시연용 데이터 --------------------------------------------
+------------- BOOK 예약 -------------
+--1200 업체
+INSERT INTO BOOK VALUES (1, 1, 1200, '팜하니', '01055556666'
+, '2023/02/11', '18:00', 3, 'hello@gmail.com', NULL, 'D', SYSDATE, SYSDATE);
+INSERT INTO BOOK VALUES (2, 2, 1200, '김미미', '01055556666'
+, '2023/02/19', '12:30', 2, 'nice@gmail.com', NULL, 'C', SYSDATE, SYSDATE);
+--1201 업체
+INSERT INTO BOOK VALUES (25, 1, 1201, '팜하니', '01055556666'
+, '2023/02/01', '18:30', 3, 'hello@gmail.com', NULL, 'D', SYSDATE, SYSDATE);
+INSERT INTO BOOK VALUES (30, 2, 1201, '김미미', '01055556666'
+, '2023/02/19', '12:30', 2, 'nice@gmail.com', NULL, 'C', SYSDATE, SYSDATE);
+INSERT INTO BOOK VALUES (38, 3, 1201, '한나', '01055556666'
+, '2023/02/12', '17:00', 4, 'true@gmail.com', '주차관련으로 문의남겨놨어요', 'B', SYSDATE, SYSDATE);
+
+
 ------------- BOOK_MENU 주문메뉴 -------------
 --25번주문
 INSERT INTO BOOK_MENU VALUES (SEQ_BMNO.NEXTVAL, 25, 2, 1, 18000); 
@@ -351,3 +393,7 @@ INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE,
 
 - 결제하신 주문건의 영수증 출력과 관련하여 직접 조회가 어려우십니다.
   해당 내용은 푸딩 고객센터로 문의 부탁드립니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
+
+COMMIT;
+
+

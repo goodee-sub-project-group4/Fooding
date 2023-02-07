@@ -87,7 +87,7 @@
     .searchRes{display:inline-block; margin: 30px; }
 
     /*찜하기*/
-    .zzim{float:right;box-sizing: border-box; }
+    .zzim {float:right;box-sizing: border-box;}
 
     /* 리뷰 페이징 */
     .paging-area{height: 50px; text-align: center; padding-top: 20px;}
