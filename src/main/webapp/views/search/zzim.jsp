@@ -80,6 +80,7 @@
 	                            	<br>
 	                                음식점 이름: <%= r.getResName()%> <br> 
 	                                주소: <%= r.getAddress() %> <br>
+	                                전화번호: <%= r.getPhone() %>
 	                            </div>
 	                        </td> 
 	                        <td class="input-area3-id">
