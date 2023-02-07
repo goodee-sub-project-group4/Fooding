@@ -314,4 +314,11 @@ public class RestaurantService {
 		return rest;
 	}
 
+	public ArrayList<Restaurant> selectRestCount() {
+		Connection conn = getConnection();
+		ArrayList<Restaurant> rest = new RestaurantDao().selectRestCount(conn);
+		close(conn);
+		return rest;
+	}
+
 }
