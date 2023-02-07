@@ -1,18 +1,18 @@
 -----------------삭제------------------
 
+--해당 계정의 모든테이블 및 제약조건 삭제
+BEGIN
+    FOR C IN (SELECT * FROM USER_TABLES) LOOP
+    EXECUTE IMMEDIATE ('DROP TABLE "'||C.TABLE_NAME||'" CASCADE CONSTRAINTS');
+    END LOOP;
+END;
+/
 
 -- 해당 계정의 모든 트리거 삭제
 BEGIN
 FOR C IN (SELECT * FROM USER_TRIGGERS) LOOP
   EXECUTE IMMEDIATE 'DROP TRIGGER '||C.TRIGGER_NAME;
 END LOOP;
-END;
-
---해당 계정의 모든테이블 및 제약조건 삭제
-BEGIN
-    FOR C IN (SELECT * FROM USER_TABLES) LOOP
-    EXECUTE IMMEDIATE ('DROP TABLE "'||C.TABLE_NAME||'" CASCADE CONSTRAINTS');
-    END LOOP;
 END;
 /
 
