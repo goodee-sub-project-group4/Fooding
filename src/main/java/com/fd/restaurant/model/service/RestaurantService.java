@@ -307,4 +307,18 @@ public class RestaurantService {
 		return list;
 	}
 
+	public ArrayList<Restaurant> selectRestReviewAvg() {
+		Connection conn = getConnection();
+		ArrayList<Restaurant> rest = new RestaurantDao().selectRestReviewAvg(conn);
+		close(conn);
+		return rest;
+	}
+
+	public ArrayList<Restaurant> selectRestCount() {
+		Connection conn = getConnection();
+		ArrayList<Restaurant> rest = new RestaurantDao().selectRestCount(conn);
+		close(conn);
+		return rest;
+	}
+
 }

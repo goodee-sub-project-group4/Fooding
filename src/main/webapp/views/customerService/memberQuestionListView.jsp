@@ -29,9 +29,12 @@
     /*페이징바*/
     .pagination a{color:red;}
     
+    /* 상태 컬러 */
     .done {color:red;}
-
-
+    
+    .res-list>td:hover {cursor:pointer;}
+	
+	
 </style>
 </head>
 <body>
@@ -130,6 +133,15 @@
 	            $(".res-list").hide();
 	        });
 	       
+	        // 리스트 상세조회시 번호 넘김
+	        $(function() {
+	        	$(".table>tbody>tr").click(function() {
+	        		location.href='<%=contextPath%>/questionDetail.me?no='+ $(this).children().eq(1).text();
+	        	});
+	        });
+	        
+	        
+	        
         </script>
         
 

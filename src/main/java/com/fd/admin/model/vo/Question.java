@@ -50,6 +50,19 @@ public class Question {
 	}
 	
 	
+	   // 1:1 문의상세조회
+	   public Question(int qNo, String category, String qTitle, String qContent, String aContent) {
+	      super();
+	      this.qNo = qNo;
+	      this.category = category;
+	      this.qTitle = qTitle;
+	      this.qContent = qContent;
+	      this.aContent = aContent;
+	   }
+	
+	
+	
+	
 	// 관리자 - 회원, 업체 1:1리스트 조회
 	public Question(int qNo, String category, String qTitle, String qContent, String createDate, String status, String qPerson) {
 		super();
@@ -60,6 +73,7 @@ public class Question {
 		this.createDate = createDate;
 		this.status = status;
 		this.qPerson = qPerson;
+		this.aContent = aContent;
 	}
 
 	public int getqNo() {

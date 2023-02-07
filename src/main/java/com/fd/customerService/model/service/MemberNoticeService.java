@@ -137,7 +137,48 @@ public class MemberNoticeService {
 		
 	}
 	
+	/** 1:1문의 조회수
+	 * @param qNo
+	 * @return result
+	 */
+	public int increaseCountQ(int qNo) {
+		
+		Connection conn = getConnection();
+		int result = new MemberNoticeDao().increaseCount(conn, qNo);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
+	/** 1:1문의 상세조회
+	 * @param qNo
+	 * @return q
+	 */
+	public Question selectQuestion(int qNo) {
+		
+		Connection conn = getConnection();
+		Question q = new MemberNoticeDao().selectQuestion(conn, qNo);
+		close(conn);
+		return q;
+		
+	}
+	
+	/** 1:1문의 상세조회 사진첨부
+	 * @param qNo
+	 * @return at
+	 */
+	public Attachment selectAttachment(int qNo) {
+		
+		Connection conn = getConnection();
+		Attachment at = new MemberNoticeDao().selectAttachment(conn, qNo);
+		close(conn);
+		return at;
+		
+	}
 	
 	
 	
