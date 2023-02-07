@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Question" %>
+<% 
+   ArrayList<Question> listU = (ArrayList)request.getAttribute("listU");
+   ArrayList<Question> listR = (ArrayList)request.getAttribute("listR");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,6 +107,10 @@
     	cursor:pointer;
     }
     
+    .restList{
+        display: none;
+    }
+    
     
     
 </style>
@@ -132,11 +141,11 @@
                 
                 <div class="right">
                     <!--회원/업체-->
-                    <input type="radio" id="member" name="selectNotice" value="M" checked>
-                    <label for="member">회원</label>&nbsp&nbsp
-                    <input type="radio" id="restaurant" name="selectNotice" value="R">
+                    <input type="radio" id="member" name="toWhom" value="M" value="U" checked onchange="listDisplay()">
+                    <label for="member">회원</label>&nbsp;&nbsp;
+                    <input type="radio" id="restaurant" name="toWhom" value="R" onchange="listDisplay()">
                     <label for="restaurant">업체</label>
-                    &nbsp&nbsp&nbsp&nbsp
+                    &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <!--삭제-->
                     <button type="button" class="btn btn-danger btn-sm" id="deleteNotice">삭제</button>
@@ -146,7 +155,7 @@
 
 
                 <!--1:1문의 표-->
-                <table class="table">
+                <table class="table list-area">
                     <thead>
                         <tr>
                             <th><input type="checkbox"></th>
@@ -158,86 +167,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr id="">
+                    	<% for(Question q1 : listU) {%>
+                        <tr class="memberList">
                             <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2023.01.22</td>
-                            <td>user01</td>
-                            <td>결제가 안돼요 ~~~~~~~~~~~~</td>
-                            <td>미답변</td>
+                            <td><%= q1.getqNo() %></td>
+                            <td><%= q1.getCreateDate() %></td>
+                            <td><%= q1.getqPerson() %></td>
+                            <td><%= q1.getqTitle() %></td>
+                            <td><%=(q1.getStatus().equals("Y")) ? "처리완료" : "처리중" %></td>
                         </tr>
-                        <tr id="">
+                        <% } %>
+                        
+                        <% for(Question q2 : listR) {%>
+                        <tr class="restList">
                             <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2023.01.22</td>
-                            <td>user01</td>
-                            <td>결제가 안돼요 ~~~~~~~~~~~~</td>
-                            <td>미답변</td>
+                            <td><%= q2.getqNo() %></td>
+                            <td><%= q2.getCreateDate() %></td>
+                            <td><%= q2.getqPerson() %></td>
+                            <td><%= q2.getqTitle() %></td>
+                            <td><%=(q2.getStatus().equals("Y")) ? "처리완료" : "처리중" %></td>
                         </tr>
-                        <tr id="">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2023.01.22</td>
-                            <td>user01</td>
-                            <td>결제가 안돼요 ~~~~~~~~~~~~</td>
-                            <td>미답변</td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2023.01.22</td>
-                            <td>user01</td>
-                            <td>결제가 안돼요 ~~~~~~~~~~~~</td>
-                            <td>미답변</td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2023.01.22</td>
-                            <td>user01</td>
-                            <td>결제가 안돼요 ~~~~~~~~~~~~</td>
-                            <td>미답변</td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2023.01.22</td>
-                            <td>user01</td>
-                            <td>결제가 안돼요 ~~~~~~~~~~~~</td>
-                            <td>미답변</td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2023.01.22</td>
-                            <td>user01</td>
-                            <td>결제가 안돼요 ~~~~~~~~~~~~</td>
-                            <td>미답변</td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2023.01.22</td>
-                            <td>user01</td>
-                            <td>결제가 안돼요 ~~~~~~~~~~~~</td>
-                            <td>미답변</td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2023.01.22</td>
-                            <td>user01</td>
-                            <td>결제가 안돼요 ~~~~~~~~~~~~</td>
-                            <td>미답변</td>
-                        </tr>
-                        <tr id="">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2023.01.22</td>
-                            <td>user01</td>
-                            <td>결제가 안돼요 ~~~~~~~~~~~~</td>
-                            <td>미답변</td>
-                        </tr>
+                        <% } %>
+                       
                         
                     </tbody>	
                 </table>
@@ -274,6 +225,29 @@
                $("#menu4").addClass("active");
                $("#menu4-detail-3").addClass("active");
                
+        })
+        
+        function listDisplay(){
+			if($('input:radio[id=member]').is(':checked')){
+                $(".memberList").show();
+                $(".restList").hide();
+            }
+            if($('input:radio[id=restaurant]').is(':checked')){
+                $(".restList").show();
+                $(".memberList").hide();
+            }
+		}
+		
+		$(function(){
+            $(".list-area tbody").on('click', 'tr td:not(:first-child)', function(){
+                const tr = $(this).parent('tr');
+                const td = tr.children();
+                let tdArray = new Array();
+                td.each(function(i){
+                    tdArray.push(td.eq(i).text());
+                });
+                location.href = '<%=contextPath%>/quEnroll.ad?no=' + tdArray[1];
+            })
         })
         
 	</script>

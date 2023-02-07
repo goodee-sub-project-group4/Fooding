@@ -78,7 +78,7 @@
                     <tr>
                         <td>
                             <button type="submit" class="btn btn-danger">등록하기</button>
-                            <button type="reset" class="btn btn-danger">삭제하기</button>
+                            <!-- <button type="reset" class="btn btn-danger">삭제하기</button> -->
                         </td>
                     </tr>               
                 </table>

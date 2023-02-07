@@ -15,6 +15,7 @@ public class Question {
 	private String qWho;
 	private String aPerson; //회원번호와 회원아이디 둘다 저장하는 필드
 	private String aWho;
+
 	
 	public Question () {}
 
@@ -48,6 +49,19 @@ public class Question {
 		
 	}
 	
+	
+	// 관리자 - 회원, 업체 1:1리스트 조회
+	public Question(int qNo, String category, String qTitle, String qContent, String createDate, String status, String qPerson) {
+		super();
+		this.qNo = qNo;
+		this.category = category;
+		this.qTitle = qTitle;
+		this.qContent = qContent;
+		this.createDate = createDate;
+		this.status = status;
+		this.qPerson = qPerson;
+	}
+
 	public int getqNo() {
 		return qNo;
 	}

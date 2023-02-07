@@ -12,6 +12,7 @@ import static com.fd.common.JDBCTemplate.*;
 
 import com.fd.admin.model.vo.Faq;
 import com.fd.admin.model.vo.Notice;
+import com.fd.admin.model.vo.Question;
 import com.fd.book.model.vo.Book;
 import com.fd.book.model.vo.Point;
 import com.fd.common.model.vo.Attachment;
@@ -571,7 +572,7 @@ public class AdminDao {
 	 * @param conn
 	 * @return
 	 */
-	public ArrayList<Attachment> selectBanner(Connection conn) {
+	public ArrayList selectBanner(Connection conn) {
 		ArrayList<Attachment> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -868,6 +869,43 @@ public class AdminDao {
 		}
 		return r;
 	}
+	
+	
+	/**업체 상세 수정
+	 * @param conn
+	 * @param r
+	 * @return
+	 */
+	public int updateRest(Connection conn, Restaurant r) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateRest");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, r.getResName());
+			pstmt.setString(2, r.getCeo());
+			pstmt.setString(3, r.getPermitNo());
+			pstmt.setString(4, r.getAddress());
+			pstmt.setString(5, r.getdAddress());
+			pstmt.setString(6, r.getPhone());
+			pstmt.setString(7, r.getCellphone());
+			pstmt.setString(8, r.getEmail());
+			pstmt.setString(9, r.getFoodCt());
+			pstmt.setString(10, r.getParking());
+			pstmt.setString(11, r.getOpen());
+			pstmt.setString(12, r.getClose());
+			pstmt.setString(13, r.getBreakS());
+			pstmt.setString(14, r.getBreakE());
+			pstmt.setString(15, r.getStatus());
+			pstmt.setInt(16, r.getResNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	
 	/**업체 예약 리스트 조회
@@ -1037,6 +1075,108 @@ public class AdminDao {
 		}	
 		return result;
 	}
+
+
+	// ==========================================================================
+
+	/**1:1 문의 조회(회원)
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Question> selectQuestionListU(Connection conn) {
+		ArrayList<Question> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectQuestionListU");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Question(rset.getInt("Q_NO"),
+									  rset.getString("CATEGORY"),
+									  rset.getString("Q_TITLE"),
+									  rset.getString("Q_CONTENT"),
+									  rset.getString("CREATE_DATE"),
+									  rset.getString("STATUS"),
+									  rset.getString("USER_ID")));
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/**1:1 문의 조회(업체_
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Question> selectQuestionListR(Connection conn) {
+		ArrayList<Question> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectQuestionListR");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Question(rset.getInt("Q_NO"),
+									  rset.getString("CATEGORY"),
+									  rset.getString("Q_TITLE"),
+									  rset.getString("Q_CONTENT"),
+									  rset.getString("CREATE_DATE"),
+									  rset.getString("STATUS"),
+									  rset.getString("Q_PERSON")));
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/**1:1 문의 상세 조회
+	 * @param conn
+	 * @param qNo
+	 * @return
+	 */
+	public Question selectDetailQuestion(Connection conn, int qNo) {
+		Question q = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectDetailQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				q = new Question();
+				q.setqNo(rset.getInt("q_no"));
+				q.setCategory(rset.getString("category"));
+				q.setqTitle(rset.getString("q_title"));
+				q.setqPerson(rset.getString("q_person"));
+				q.setStatus(rset.getString("status"));
+				q.setCreateDate(rset.getString("create_date"));
+				q.setqContent(rset.getString("q_content"));
+				q.setaContent(rset.getString("a_content"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return q;
+	}
+
+
 
 
 	

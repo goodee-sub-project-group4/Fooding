@@ -353,7 +353,7 @@ public class AdminService {
 
 
 	/**회원 상세 수정
-	 * @param userNo
+	 * @param u
 	 * @return
 	 */
 	public int updateMember(Member u) {
@@ -420,6 +420,23 @@ public class AdminService {
 		Restaurant r = new AdminDao().selectRest(conn, resNo);
 		close(conn);
 		return r;
+	}
+	
+	
+	/**업체 상세 수정
+	 * @param r
+	 * @return
+	 */
+	public int updateRest(Restaurant r) {
+		Connection conn = getConnection();
+		int result = new AdminDao().updateRest(conn, r);
+		if(result>0){
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 
@@ -537,14 +554,40 @@ public class AdminService {
 
 	// ==========================================================================
 
-	/**1:1 문의 조회(업체)
+	/**1:1 문의 리스트 조회(회원)
 	 * @return
 	 */
 	public ArrayList<Question> selectQuestionListU() {
-		
-		return null;
+		Connection conn = getConnection();
+		ArrayList<Question> list = new AdminDao().selectQuestionListU(conn);
+		close(conn);
+		return list;
 	}
 
+	/**1:1 문의 리스트 조회(업체)
+	 * @return
+	 */
+	public ArrayList<Question> selectQuestionListR() {
+		Connection conn = getConnection();
+		ArrayList<Question> list = new AdminDao().selectQuestionListR(conn);
+		close(conn);
+		return list;
+	}
+
+
+	/**1:1 문의 상세 조회
+	 * @param qNo
+	 * @return
+	 */
+	public Question selectDetailQuestion(int qNo) {
+		Connection conn = getConnection();
+		Question q = new AdminDao().selectDetailQuestion(conn,qNo);
+		close(conn);
+		return q;
+	}
+
+
+	
 
 
 
