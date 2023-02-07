@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fd.book.model.service.BookService;
 import com.fd.common.model.vo.Attachment;
+import com.fd.member.model.vo.Member;
 import com.fd.restaurant.model.vo.Menu;
 import com.fd.restaurant.model.vo.Restaurant;
 import com.fd.review.model.vo.Review;
@@ -34,9 +36,15 @@ public class BookMainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getParameter("userNo") != null) {
+			int userNo = Integer.parseInt(request.getParameter("userNo"));
+			int pointNow = new BookService().selectPoint(userNo);
+			System.out.println(pointNow);
+			request.setAttribute("pointNow", pointNow);
+		}
+		
 		int resNo = Integer.parseInt(request.getParameter("resNo"));
 		// 식당 조회수 1 증가
-		System.out.println(resNo);
 		int countUp = new BookService().selectCountUp(resNo);
 		// 메뉴 정보 조회
 		ArrayList<Menu> menuList = new BookService().selectMenu(resNo);
@@ -48,7 +56,6 @@ public class BookMainController extends HttpServlet {
 		ArrayList<Attachment> attachment = new BookService().selectAttachment(reviewList, resNo);
 		// 식당 정보 조회
 		Restaurant restaurant = new BookService().selectRes(resNo);	
-		System.out.println(restaurant);
 		if(restaurant == null) {
 			request.setAttribute("errorMsg", "식당 조회 오류발생");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

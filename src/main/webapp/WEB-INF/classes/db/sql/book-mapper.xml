@@ -95,7 +95,7 @@
 	
 	<entry key="selectPoint">
 		SELECT POINT_NOW
-          FROM (SELECT POINT_NOW
+          FROM (SELECT NVL(POINT_NOW, 0) "POINT_NOW"
                   FROM POINT
                  WHERE USER_NO = ?
                  ORDER 
@@ -184,7 +184,7 @@
 		     , 'U'
 		     , ?
 		     , (SELECT POINT_NOW - ?
-                  FROM (SELECT POINT_NOW
+                  FROM (SELECT NVL(POINT_NOW, 0) "POINT_NOW"
                           FROM POINT
                          WHERE USER_NO = ?
                          ORDER 
@@ -216,7 +216,7 @@
 		     , 'B'
 		     , ?
 		     , (SELECT POINT_NOW + ?
-                  FROM (SELECT POINT_NOW
+                  FROM (SELECT NVL(POINT_NOW, 0) "POINT_NOW"
                           FROM POINT
                          WHERE USER_NO = ?
                          ORDER 
@@ -226,20 +226,140 @@
 	</entry>
 	
 	<entry key="selectBookList">
-		SELECT BOOK_NO
-		     , USER_NO
-		     , RES_NO
+		SELECT B.BOOK_NO
+		     , B.USER_NO
+		     , B.RES_NO
+		     , RES_NAME
 		     , BOOK_NAME
 		     , BOOK_PHONE
 		     , BOOK_DATE
 		     , BOOK_TIME
 		     , PEOPLE
-		     , EMAIL
+		     , B.EMAIL
 		     , REQUEST
-		     , STATUS
-		     , MODIFY_DATE
+		     , B.STATUS
+		     , B.MODIFY_DATE
 		     , BOOK_A
-		  FROM BOOK
-		 WHERE USER_NO = ?
+             , PAY_TOTAL
+             , PAY_POINT
+             , PAY_OP
+             , R_IMG
+		  FROM BOOK B
+		  JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
+          JOIN PAYMENT P ON (B.BOOK_NO = P.BOOK_NO)
+		 WHERE B.USER_NO = ?
+		   AND B.STATUS = 'B'
 	</entry>
+	
+	<entry key="selectBook">
+		SELECT
+		       B.BOOK_NO
+		     , RES_NAME
+		     , BOOK_NAME
+		     , BOOK_PHONE
+		     , BOOK_DATE
+		     , BOOK_TIME
+		     , PEOPLE
+		     , NVL(B.EMAIL, '') "EMAIL"
+		     , REQUEST
+		     , B.STATUS
+		     , B.MODIFY_DATE
+		     , BOOK_A
+		     , PAY_TOTAL
+		     , PAY_POINT
+		     , PAY_OP
+		     , ADDRESS
+		     , D_ADDRESS
+		     , LONGTITUDE
+		     , LATITUDE
+		     , PAY_DATE
+		     , POINT_TRADE
+		     , POINT_NOW
+		     , PHONE "res_phone"
+		  FROM BOOK B
+		  JOIN RESTAURANT RE ON (B.RES_NO = RE.RES_NO)
+		  JOIN PAYMENT P ON (B.BOOK_NO = P.BOOK_NO)
+		  JOIN POINT PO ON (P.PAY_NO = PO.PAY_NO)
+		 WHERE B.BOOK_NO = ?
+	</entry>
+	
+	<entry key="bookCancel">
+		UPDATE 
+		       BOOK
+		   SET STATUS = 'C'
+		 WHERE BOOK_NO = ?
+	</entry>
+	
+	<entry key="selectBookCancel">
+		SELECT 
+			   B.USER_NO
+			 , B.RES_NO
+		     , P.STATUS
+		     , PAY_TOTAL
+		     , PAY_POINT
+		     , PAY_OP
+		     , PAY_NO
+             , RES_NAME
+		  FROM BOOK B
+		  JOIN PAYMENT P ON (B.BOOK_NO = P.BOOK_NO)
+          JOIN restaurant R ON (B.RES_NO = R.RES_NO)
+		 WHERE B.BOOK_NO = ?
+	</entry>
+	
+	<entry key="paymentCancel">
+		INSERT
+		  INTO PAYMENT
+		     (
+		       PAY_NO
+			 , BOOK_NO
+			 , RES_NO
+			 , USER_NO
+			 , PAY_POINT
+			 , PAY_TOTAL
+			 , PAY_OP
+			 , STATUS
+		     )
+		VALUES
+			 (
+			   SEQ_PMNO.NEXTVAL
+			 , ?
+			 , ?
+			 , ?
+			 , - ?
+			 , - ?
+			 , ?
+			 , 'C'
+			 )
+	</entry>
+	
+	<entry key="pointCancel">
+		INSERT
+		  INTO POINT
+		     (
+		       POINT_NO
+		     , PAY_NO
+			 , USER_NO
+			 , RES_NO
+			 , POINT_NAME
+			 , STATUS
+			 , POINT_TRADE
+			 , POINT_NOW
+		     )
+		VALUES
+		     (
+		       SEQ_PNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , 'C'
+		     , ?
+		     , (SELECT (POINT_NOW + ?) "POINT_NEW"
+                  FROM POINT
+                 WHERE PAY_NO = ?
+                   AND STATUS = 'U')
+		     )
+	</entry>
+	
+	
 </properties>

@@ -173,20 +173,20 @@
             <br><br>
             <form action="">
                 <!--표 위에 버튼-->
-                <select id="select">
+                <!-- <select id="select">
                     <option value="">최신 순</option>
                     <option value="">오래된 순</option>
                     <option value="">예약 순</option>
                     <option value="">리뷰 순</option>
                 </select>
-                <input type="text" id="search" placeholder="아이디 검색" name="keyword"> <!--data-toggle="modal" data-target="#moneyModal"-->
-                <input type="submit" id="sButton" value="검색">
+                <input type="text" id="search" placeholder="아이디 검색" name="keyword">
+                <input type="submit" id="sButton" value="검색"> -->
             
             
-                <button type="button" class="btn btn-danger btn-sm" id="deleteMember" data-toggle="modal" data-target="#deleteModal">회원 탈퇴</button>
+                <!-- <button type="button" class="btn btn-danger btn-sm" id="deleteMember" data-toggle="modal" data-target="#deleteModal">회원 탈퇴</button> -->
                 <button type="button" class="btn btn-danger btn-sm" id="giveMoney" onclick="clickPoint()">적립금 지급</button>
                 <div></div>
-                <br> 
+                <br><br>
 
                 <!--회원조회 표-->
                 <table class="table">

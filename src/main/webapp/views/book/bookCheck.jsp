@@ -45,6 +45,7 @@
 	width: 95%;
 	display: inline-block;
 	margin-left: 2.5%;
+	margin-bottom: 50px;
 }
 
 .selectList-no {
@@ -442,14 +443,14 @@
 		
 					<div>
 						<div class="selectList-no" style="font-size: 20px;"><%= b.getBookNo() %></div>
-						<img src="asdasd" alt="" class="selectList-img">
+						<img src="<%= b.getrImg() %>" alt="" class="selectList-img">
 						<div>
 							<div class="selectList-text">
 		
 								<table>
 									<tr>
 										<th style="width: 80px; height: 70px;">업체명</th>
-										<td style="width: 250px;" class="ResName"><%= b.getResNo() %></td>
+										<td style="width: 250px;" class="ResName"><%= b.getResName() %></td>
 									</tr>
 									<tr>
 										<td style="height: 40px;">예약일시</td>
@@ -461,19 +462,20 @@
 									</tr>
 									<tr>
 										<td style="height: 40px;">결제금액</td>
-										<td>53,000원</td>
+										<td><%= b.getPayTotal() %>원</td>
 									</tr>
 								</table>
 							</div>
 							<div class="selectList-btn">
 								<div class="allways-btn">
 									<div>
-										<button type="button" class="btn btn-outline-secondary">상세조회</button>
+										<button type="button" class="btn btn-outline-secondary select">상세조회</button>
 									</div>
 									<div>
 										<button type="button" class="btn btn-outline-secondary">문의하기</button>
 									</div>
 								</div>
+								<% if(b.getStatus() == "B") { %>
 								<div class="service-complete-btn">
 									<div>
 										<button id="<%= b.getResNo() %>" type="button" class="btn btn-outline-danger review"
@@ -483,17 +485,26 @@
 										<button type="button" class="btn btn-outline-danger">신고하기</button>
 									</div>
 								</div>
+								<% } %>
 							</div>
 						</div>
 					</div>
 				</div>
 			<% } %>
 		<% } %>
+		<script>
+			$(function(){
+				$('.select').click(function(){
+					let bookNo = $(this).parent().parent().parent().parent().prev().prev().text()
+					$('#bookNo').attr('value', bookNo);
+					location.href = "<%= contextPath %>/checkDetail.bo?bookNo="+bookNo
+				})
+			})
+		</script>
+
 		<br>
 		<br>
-		<br>
-		<br>
-		<div class="paging">< 1 2 3 4 5 6 7 8 9></div>
+		
 	</div>
 
 	<script>

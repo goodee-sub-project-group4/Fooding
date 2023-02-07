@@ -349,7 +349,6 @@ public class BookDao {
 				}
 			}
 			
-			System.out.println(at);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -372,7 +371,9 @@ public class BookDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				list.add(new Book(rset.getInt("book_no")
+								, rset.getInt("user_no")
 								, rset.getInt("res_no")
+								, rset.getString("res_name")
 								, rset.getString("book_name")
 								, rset.getString("book_phone")
 								, rset.getString("book_date")
@@ -382,9 +383,12 @@ public class BookDao {
 								, rset.getString("request")
 								, rset.getString("status")
 								, rset.getString("modify_date")
-								, rset.getString("book_a")));
+								, rset.getString("book_a")
+								, rset.getInt("pay_total")
+								, rset.getInt("pay_point")
+								, rset.getString("pay_op")
+								, rset.getString("r_img")));
 			}
-			System.out.println(list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -395,6 +399,146 @@ public class BookDao {
 		return list;
 	}
 
+	public Book selectBook(Connection conn, int bookNo) {
+		Book book = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBook");
+			
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				book = new Book(rset.getInt("book_no")
+							  , rset.getString("res_name")
+							  , rset.getString("book_name")
+							  , rset.getString("book_phone")
+							  , rset.getString("book_date")
+							  , rset.getString("book_time")
+							  , rset.getInt("people")
+							  , rset.getString("email")
+							  , rset.getString("request")
+							  , rset.getString("status")
+							  , rset.getString("modify_date")
+							  , rset.getString("book_a")
+							  , rset.getInt("pay_total")
+							  , rset.getInt("pay_point")
+							  , rset.getString("pay_op")
+							  , rset.getString("address")
+							  , rset.getString("d_address")
+							  , rset.getDouble("LONGTITUDE")
+							  , rset.getDouble("LATITUDE")
+							  , rset.getString("pay_date")
+							  , rset.getInt("point_trade")
+							  , rset.getInt("point_now")
+							  , rset.getString("res_phone"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return book;
+	}
+
+	public int bookCancel(Connection conn, int bookNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("bookCancel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public Book selectBookCancel(Connection conn, int bookNo) {
+		Book book = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBookCancel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				book = new Book(rset.getInt("user_no")
+							  , rset.getInt("res_no")
+							  , rset.getString("status")
+							  , rset.getInt("pay_total")
+							  , rset.getInt("pay_point")
+							  , rset.getString("pay_op")
+							  , rset.getInt("pay_no")
+							  , rset.getString("res_name")
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return book;
+	}
+	
+	public int paymentCancel(Connection conn, int bookNo, Book book) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("paymentCancel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookNo);
+			pstmt.setInt(2, book.getResNo());
+			pstmt.setInt(3, book.getUserNo());
+			pstmt.setInt(4, book.getPayPoint());
+			pstmt.setInt(5, book.getPayTotal());
+			pstmt.setString(6, book.getPayOp());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int pointCancel(Connection conn, int bookNo, Book book) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("pointCancel");
+		System.out.println(book.getPayNo());
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, book.getPayNo());
+			pstmt.setInt(2, book.getUserNo());
+			pstmt.setInt(3, book.getResNo());
+			pstmt.setString(4, book.getResName());
+			pstmt.setInt(5, book.getPayPoint());
+			pstmt.setInt(6, book.getPayPoint());
+			pstmt.setInt(7, book.getPayNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+		
+		
+	
 
 
 }

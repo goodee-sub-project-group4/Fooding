@@ -104,9 +104,6 @@
                		for(let i=0; i<list.length; i++) { 
                			$('#banner'+i).attr('src', list[i].filePath + '/' + list[i].changeName);
                		} 
-                },
-                error:function(){
-                	
                 }
             });
 			$.ajax({
@@ -118,7 +115,11 @@
 					for(let i=0; i<3; i++) {
 						if(restStar[i] != null){
 							list += "<div class='restaurant'>"
-								  + "<a href='<%= contextPath %>/main.bo?resNo=" + restStar[i].resNo + "'>"
+								<% if(loginUser != null) { %>
+									+ "<a href='<%= contextPath %>/main.bo?resNo=" + restStar[i].resNo + "&&userNo=<%= loginUser.getUserNo() %>" + "'>"
+							  	<% }else{ %>
+							  		+ "<a href='<%= contextPath %>/main.bo?resNo=" + restStar[i].resNo + "'>"
+							  	<% } %>
 								  + "<img src=" + restStar[i].rImg + "><br>"
 								  + "<span class='rest-name'>" + restStar[i].resName + "</span><span style='float:right;'>★" + Math.round(restStar[i].reviewAvg * 100) / 100 + " (" + restStar[i].count + ")</span><br>"
 						          + "</a></div>"
@@ -135,7 +136,11 @@
 					for(let i=0; i<3; i++) {
 						if(restCount[i] != null){
 							list += "<div class='restaurant'>"
-								  + "<a href='<%= contextPath %>/main.bo?resNo=" + restCount[i].resNo + "'>"
+								<% if(loginUser != null) { %>
+									+ "<a href='<%= contextPath %>/main.bo?resNo=" + restCount[i].resNo + "&&userNo=<%= loginUser.getUserNo() %>" + "'>"
+							  	<% }else{ %>
+							  		+ "<a href='<%= contextPath %>/main.bo?resNo=" + restCount[i].resNo + "'>"
+							  	<% } %>
 								  + "<img src=" + restCount[i].rImg + "><br>"
 								  + "<span class='rest-name'>" + restCount[i].resName + "</span><span style='float:right;'>★" + Math.round(restCount[i].reviewAvg * 100) / 100 + " (" + restCount[i].count + ")</span><br>"
 								  + "</a></div>"
