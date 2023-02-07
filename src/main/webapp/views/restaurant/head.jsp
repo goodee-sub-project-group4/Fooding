@@ -103,7 +103,7 @@
             <% if(loginRest.getrImg() == null) {%>
             <img id="rest-img" src="<%= contextPath %>/resources/images/userIcon.png">
             <% }else { %>
-            <img id="rest-img" src="<%= loginRest.getrImg() %>">
+            <img id="rest-img" src="<%=contextPath %>/<%= loginRest.getrImg() %>">
             <% } %>
         </div>
         <hr>
