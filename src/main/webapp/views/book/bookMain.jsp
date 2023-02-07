@@ -736,8 +736,6 @@
                             <% if(loginUser != null) { %>
                             const menuChoice = document.querySelectorAll(".menuName"); // [td, td, ..]
                             let menu = [];
-                            let num = f + 1;
-                            console.log(f)
                             for(let i=0; i<menuChoice.length; i++){
                                 menu.push(menuChoice[i].innerText);
                             }
