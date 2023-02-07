@@ -157,7 +157,7 @@
             </div>
             <div id="review-content5">★ <%= r.getStar() %></div>
             <div id="review-content6"><%= r.getCreateDate() %></div>
-            <div id="review-content7"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reviewDetailModal">수정</button></div>
+            <div id="review-content7"><button type="button" class="btn btn-danger">수정</button></div>
             
         </div>
        <% } %>

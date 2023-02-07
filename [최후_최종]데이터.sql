@@ -351,4 +351,3 @@ INSERT INTO FAQ (FAQ_NO, USER_NO, CATEGORY, FAQ_TITLE, FAQ_CONTENT, CREATE_DATE,
 
 - 결제하신 주문건의 영수증 출력과 관련하여 직접 조회가 어려우십니다.
   해당 내용은 푸딩 고객센터로 문의 부탁드립니다.',to_date('01/01/2023', 'MM/DD/RRRR'),NULL,0,'R','Y');
-

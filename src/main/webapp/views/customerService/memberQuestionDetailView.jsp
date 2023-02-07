@@ -58,13 +58,18 @@
                         <tr>
                             <th width="70">유형</th>
                             <td>
-                                <select name="category" id="qCategory">
-                                    <option value="<%=q.getCategory()%>">유형선택</option>
+                                <select name="category" id="qCategory" ">
+                                    <option value="">유형선택</option>
                                     <option value="MP">적립금</option>
                                     <option value="MU">이용문의</option>
                                     <option value="ME">기타문의</option>
                                 </select>
                             </td>
+                            <script>
+                            	
+                            
+                            </script>
+                            
                         </tr>
 
                         <tr><td height="20px"></td></tr>
@@ -101,7 +106,7 @@
                         <tr>
                             <th>답변</th>
                             <td colspan="2">
-                                <textarea name="aContent" id="aContent" cols="30" rows="10" style="resize:none" placeholder="아직 답변내용이 없습니다."><%=q.getaContent()%></textarea>
+                                <textarea name="aContent" id="aContent" cols="30" rows="10" style="resize:none" placeholder="아직 답변내용이 없습니다."><%=(q.getaContent() == null)? "" : q.getaContent()%></textarea>
                             </td>
                         </tr>
 
@@ -115,6 +120,7 @@
                     </div>
                     <br><br><br><br>
                 </form>
+                
 
             </div>
         </div>
