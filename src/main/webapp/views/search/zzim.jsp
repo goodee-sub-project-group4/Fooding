@@ -49,7 +49,7 @@
 		/* 페이징 */
     	.paging-area{height: 50px; text-align: center; padding-top: 20px;}
     	
-    	.trStyle{border:1px solid red; margin-bottom:10px;}
+    	.trStyle{border-bottom:1px solid black; margin-bottom:10px;}
     	
     </style>
 </head>
