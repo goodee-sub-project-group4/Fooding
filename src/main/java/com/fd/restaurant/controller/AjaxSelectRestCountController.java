@@ -14,16 +14,16 @@ import com.fd.restaurant.model.vo.Restaurant;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class AjaxSelectRestReviewAvgController
+ * Servlet implementation class AjaxSelectRestReviewCountController
  */
-@WebServlet("/selectRest.ra")
-public class AjaxSelectRestReviewAvgController extends HttpServlet {
+@WebServlet("/selectRest.rc")
+public class AjaxSelectRestCountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxSelectRestReviewAvgController() {
+    public AjaxSelectRestCountController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,7 @@ public class AjaxSelectRestReviewAvgController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json; charset=UTF-8");
-		ArrayList<Restaurant> rest = new RestaurantService().selectRestReviewAvg();
+		ArrayList<Restaurant> rest = new RestaurantService().selectRestCount();
 		
 		new Gson().toJson(rest, response.getWriter());
 	}
