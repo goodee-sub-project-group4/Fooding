@@ -93,6 +93,7 @@ Insert into FOODING.TB_USER (USER_NO,USER_ID,USER_PWD,USER_NAME,NICKNAME,USER_EM
 (2,'fooding02','2222','푸딩02',null,null,null,null,null,null,null,'A');
 Insert into FOODING.TB_USER (USER_NO,USER_ID,USER_PWD,USER_NAME,NICKNAME,USER_EMAIL,USER_PHONE,GENDER,BIRTH,ENROLL_DATE,MODIFY_DATE,STATUS) values 
 (3,'fooding03','3333','푸딩03',null,null,null,null,null,null,null,'A');
+
 Insert into FOODING.TB_USER (USER_NO,USER_ID,USER_PWD,USER_NAME,NICKNAME,USER_EMAIL,USER_PHONE,GENDER,BIRTH,ENROLL_DATE,MODIFY_DATE,STATUS) values 
 (4,'user01','1','팜하니','빵하니','hanni01@naver.com','01000001111','F','20040101',to_date('23/02/07','RR/MM/DD'),to_date('23/02/07','RR/MM/DD'),'Y');
 Insert into FOODING.TB_USER (USER_NO,USER_ID,USER_PWD,USER_NAME,NICKNAME,USER_EMAIL,USER_PHONE,GENDER,BIRTH,ENROLL_DATE,MODIFY_DATE,STATUS) values 
@@ -107,6 +108,9 @@ Insert into FOODING.TB_USER (USER_NO,USER_ID,USER_PWD,USER_NAME,NICKNAME,USER_EM
 (9,'user06','1','김민지','곰돌이','minji33@naver.com','01000003333','N','20040103',to_date('23/02/07','RR/MM/DD'),to_date('23/02/07','RR/MM/DD'),'Y');
 Insert into FOODING.TB_USER (USER_NO,USER_ID,USER_PWD,USER_NAME,NICKNAME,USER_EMAIL,USER_PHONE,GENDER,BIRTH,ENROLL_DATE,MODIFY_DATE,STATUS) values 
 (10,'user07','1','다니엘','해바라기','danielle04@naver.com','01000004444','F','20040104',to_date('23/02/07','RR/MM/DD'),to_date('23/02/07','RR/MM/DD'),'Y');
+
+
+
 Insert into FOODING.TB_USER (USER_NO,USER_ID,USER_PWD,USER_NAME,NICKNAME,USER_EMAIL,USER_PHONE,GENDER,BIRTH,ENROLL_DATE,MODIFY_DATE,STATUS) values 
 (11,'user08','1','강동원','참치','tuna26@naver.com','01012311111','M','19810101',to_date('23/02/07','RR/MM/DD'),to_date('23/02/07','RR/MM/DD'),'S');
 Insert into FOODING.TB_USER (USER_NO,USER_ID,USER_PWD,USER_NAME,NICKNAME,USER_EMAIL,USER_PHONE,GENDER,BIRTH,ENROLL_DATE,MODIFY_DATE,STATUS) values 
@@ -156,7 +160,7 @@ Insert into FOODING.TB_USER (USER_NO,USER_ID,USER_PWD,USER_NAME,NICKNAME,USER_EM
 
 --------------------------------------------업체 시연용 데이터 --------------------------------------------
 ------------- BOOK 예약 -------------
---1200 업체
+--1203 업체
 INSERT INTO BOOK VALUES (1, 1, 1203, '팜하니', '01055556666'
 , '2023/02/11', '18:00', 3, 'hello@gmail.com', NULL, 'D', SYSDATE, SYSDATE);
 INSERT INTO BOOK VALUES (2, 2, 1203, '김미미', '01055556666'
@@ -169,9 +173,9 @@ INSERT INTO BOOK VALUES (30, 2, 1201, '김미미', '01055556666'
 INSERT INTO BOOK VALUES (38, 3, 1201, '한나', '01055556666'
 , '2023/02/12', '17:00', 4, 'true@gmail.com', '주차관련으로 문의남겨놨어요', 'B', SYSDATE, SYSDATE);
 ------------- 시연용 MENU 메뉴 -------------
-INSERT INTO MENU VALUES (SEQ_MNO.NEXTVAL, 1201, '모짜렐라비프라자냐', 15000, NULL, 'resources/restaurantSample/모짜렐라비프라자냐.jpg');
-INSERT INTO MENU VALUES (SEQ_MNO.NEXTVAL, 1201, '멕시칸비프파히타', 18000, NULL, 'resources/restaurantSample/멕시칸비프파히타.jpg');
-INSERT INTO MENU VALUES (SEQ_MNO.NEXTVAL, 1201, '콜라', 2000, NULL, 'resources/restaurantSample/콜라.jpg');
+INSERT INTO MENU VALUES (1, 1201, '모짜렐라비프라자냐', 15000, NULL, 'resources/restaurantSample/모짜렐라비프라자냐.jpg');
+INSERT INTO MENU VALUES (2, 1201, '멕시칸비프파히타', 18000, NULL, 'resources/restaurantSample/멕시칸비프파히타.jpg');
+INSERT INTO MENU VALUES (3, 1201, '콜라', 2000, NULL, 'resources/restaurantSample/콜라.jpg');
 
 ------------- BOOK_MENU 주문메뉴 -------------
 --25번주문

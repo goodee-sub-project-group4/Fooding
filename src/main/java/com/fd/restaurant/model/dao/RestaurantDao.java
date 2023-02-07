@@ -263,7 +263,6 @@ public class RestaurantDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("deleteMenu");
-		System.out.println(menuNo);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, menuNo);
@@ -817,7 +816,6 @@ public class RestaurantDao {
 									  , rset.getDouble("avg_star")
 									  , rset.getInt("count")));
 			}
-			System.out.println(rest);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -847,7 +845,6 @@ public class RestaurantDao {
 									  , rset.getDouble("avg_star")
 									  , rset.getInt("count")));
 			}
-			System.out.println(rest);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
