@@ -103,9 +103,6 @@
                		for(let i=0; i<list.length; i++) { 
                			$('#banner'+i).attr('src', list[i].filePath + '/' + list[i].changeName);
                		} 
-                },
-                error:function(){
-                	
                 }
             });
 		})
