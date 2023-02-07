@@ -83,18 +83,26 @@
 	                            </div>
 	                        </td> 
 	                        <td class="input-area3-id">
-	                        	<!-- 
-	                            <button type="button" class="btn btn-danger";">삭제</button>
-	                        	 -->
+	                        	
+	                            <button type="button" class="btn btn-danger";" onclick="deleteHeart(<%=r.getResNo()%>);">삭제</button>
+	                        	 
 	                        </td>
 	                    </tr>
 					<% } %>
 				<% } %>
+				
 			</table>			 
          </div>
 
     </div>
  
+ 	<script>
+ 	
+ 		function deleteHeart(resNo){
+ 			
+ 			location.href="<%=contextPath%>/deleteListZzim.sh?resNo="+resNo;
+ 		}
+ 	</script>
 
 </body>
 </html>
