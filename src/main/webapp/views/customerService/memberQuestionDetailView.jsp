@@ -58,18 +58,24 @@
                         <tr>
                             <th width="70">유형</th>
                             <td>
-                                <select name="category" id="qCategory" ">
+                            	<script>
+                                    $(function(){
+                                        let category = "<%= q.getCategory()%>"
+                                        $("#qCategory option").each(function() {
+                                            if($(this).val() == category){
+                                                $(this).val(category).prop('selected', true)
+                                            }
+                                        });
+                                    })
+                            	</script>
+                            	
+                                <select name="category" id="qCategory">
                                     <option value="">유형선택</option>
                                     <option value="MP">적립금</option>
                                     <option value="MU">이용문의</option>
                                     <option value="ME">기타문의</option>
                                 </select>
                             </td>
-                            <script>
-                            	
-                            
-                            </script>
-                            
                         </tr>
 
                         <tr><td height="20px"></td></tr>

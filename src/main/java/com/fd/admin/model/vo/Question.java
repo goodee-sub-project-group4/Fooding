@@ -47,7 +47,7 @@ public class Question {
 		this.status = status;
 		
 	}
-	// 1:1문의상세조회
+	// 1:1 문의상세조회
 	public Question(int qNo, String category, String qTitle, String qContent, String aContent) {
 		super();
 		this.qNo = qNo;
