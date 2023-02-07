@@ -142,7 +142,6 @@
 	                            <!-- 음식점 사진 아래 간단 설명 -->
 	                            <div class="resDescription" style="width:370px; padding:5px">
 	                                음식점 이름 : <%= r.getResName()%> <br>
-	                                업체번호 : <%= r.getResNo() %> <br>
 	                                주소 : <%= r.getAddress() %> <br>
 	                                음식카테고리 : <%= r.getFoodCt() %> <br>
 	                                
