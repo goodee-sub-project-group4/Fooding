@@ -120,7 +120,7 @@
 							list += "<div class='restaurant'>"
 								  + "<a href='<%= contextPath %>/main.bo?resNo=" + restStar[i].resNo + "'>"
 								  + "<img src=" + restStar[i].rImg + "><br>"
-								  + "<span class='rest-name'>" + restStar[i].resName + "</span><span style='float:right;'>★" + Math.round(restStar[i].reviewAvg) + " (" + restStar[i].count + ")</span><br>"
+								  + "<span class='rest-name'>" + restStar[i].resName + "</span><span style='float:right;'>★" + Math.round(restStar[i].reviewAvg * 100) / 100 + " (" + restStar[i].count + ")</span><br>"
 						          + "</a></div>"
 						}
 					}
@@ -137,7 +137,7 @@
 							list += "<div class='restaurant'>"
 								  + "<a href='<%= contextPath %>/main.bo?resNo=" + restCount[i].resNo + "'>"
 								  + "<img src=" + restCount[i].rImg + "><br>"
-								  + "<span class='rest-name'>" + restCount[i].resName + "</span><span style='float:right;'>★" + Math.round(restCount[i].reviewAvg) + " (" + restCount[i].count + ")</span><br>"
+								  + "<span class='rest-name'>" + restCount[i].resName + "</span><span style='float:right;'>★" + Math.round(restCount[i].reviewAvg * 100) / 100 + " (" + restCount[i].count + ")</span><br>"
 						          + "</a></div>"
 						}
 					}
