@@ -120,7 +120,7 @@
     <div id="content2-padding">
         <div id="review-area">
             <b>내가 쓴 리뷰</b>
-            <div id="revise-btn"><button type="button" class="btn btn-outline-danger">삭제</button></div>
+            <!-- <div id="revise-btn"><button type="button" class="btn btn-outline-danger">삭제</button></div> -->
         </div>
         <div id="review-title">
             <div id="review-title1"></div>
@@ -138,7 +138,7 @@
         <!-- case2. 리뷰가 있을 경우 -->
         <% for(Review r : list) { %>
         <div id="review-content">
-            <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div>
+            <!-- <div id="review-content1"><input type="checkbox" style="width:20px; height:20px; accent-color: rgb(222, 66, 66); "></div> -->
             <div id="review-content2"><%= r.getReviewNo() %></div>
             <div id="review-content3"><img src="" width="125" height="140" data-toggle="modal" data-target="#reviewDetailModal"></div>
             <div id="review-content4" data-toggle="modal" data-target="#reviewDetailModal">
@@ -157,7 +157,7 @@
             </div>
             <div id="review-content5">★ <%= r.getStar() %></div>
             <div id="review-content6"><%= r.getCreateDate() %></div>
-            <div id="review-content7"><button type="button" class="btn btn-danger">수정</button></div>
+            <!-- <div id="review-content7"><button type="button" class="btn btn-danger">수정</button></div> -->
             
         </div>
        <% } %>
