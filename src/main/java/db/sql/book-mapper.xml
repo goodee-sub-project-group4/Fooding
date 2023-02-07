@@ -25,6 +25,8 @@
 			 , CLOSE
 			 , BREAK_S
 			 , BREAK_E
+			 , NVL(BREAK_S, '') "BREAK_S"
+			 , NVL(BREAK_E, '') "BREAK_E"
 			 , FOOD_CT
 		  FROM RESTAURANT RS
 		 WHERE RS.RES_NO = ?
