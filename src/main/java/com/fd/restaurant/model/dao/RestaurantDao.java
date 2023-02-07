@@ -792,4 +792,22 @@ public class RestaurantDao {
 		}
 		return list;
 	}
+
+	public ArrayList<Restaurant> selectRestReviewAvg(Connection conn) {
+		ArrayList<Restaurant> rest = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRestReviewAvg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				rest.add(new Restaurant())
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rest;
+	}
 }
