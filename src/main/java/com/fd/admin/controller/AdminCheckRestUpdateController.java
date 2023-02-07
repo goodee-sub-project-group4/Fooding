@@ -50,7 +50,7 @@ public class AdminCheckRestUpdateController extends HttpServlet {
 		String status = request.getParameter("status");
 		
 		Restaurant r = new Restaurant();
-		r.setUserNo(resNo);
+		r.setResNo(resNo);
 		r.setResName(resName);
 		r.setCeo(ceo);
 		r.setPermitNo(permitNo);
@@ -68,13 +68,13 @@ public class AdminCheckRestUpdateController extends HttpServlet {
 		r.setStatus(status);
 		
 		int result = new AdminService().updateRest(r);
-		
+		System.out.println("result : "+result);
 		if(result>0) {
 			request.getSession().setAttribute("alertMsg", "업체 수정 완료");
 			response.sendRedirect(request.getContextPath() + "/rest.ad");
 		}else {
-			request.getSession().setAttribute("errorMsg", "업체 수정 실패");
-			response.sendRedirect(request.getContextPath() + "/rest.ad");
+			request.getSession().setAttribute("errorMsg", "업체 수정 실패"); //에러페이지용이라서 안떴던것
+			response.sendRedirect(request.getContextPath() + "/rest.ad"); //에러페이지로 보내야함
 		}
 	}
 
