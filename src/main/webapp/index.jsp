@@ -138,7 +138,7 @@
 								  + "<a href='<%= contextPath %>/main.bo?resNo=" + restCount[i].resNo + "'>"
 								  + "<img src=" + restCount[i].rImg + "><br>"
 								  + "<span class='rest-name'>" + restCount[i].resName + "</span><span style='float:right;'>★" + Math.round(restCount[i].reviewAvg * 100) / 100 + " (" + restCount[i].count + ")</span><br>"
-						          + "</a></div>"
+								  + "</a></div>"
 						}
 					}
 					$('#reviewCount').html(list);

@@ -160,7 +160,7 @@
                 <div id="content2">
                     <div id="content2-1">
                         <div id="thumbnail">
-                            <img style="width: 100%; height: 100%;" src="<%= contextPath %>/resources/restaurantSample/4_loosedoor.jpg" alt="">
+                            <img style="width: 100%; height: 100%;" src="<%= contextPath %>/<%= restaurant.getrImg() %>" alt="">
                         </div>
                         <div id="content-main">
                             <div id="main1">

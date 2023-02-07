@@ -396,6 +396,7 @@
 		     , RS.COUNT "COUNT"
 		  FROM REVIEW RE
 		  JOIN restaurant RS ON (RE.RES_NO = RS.RES_NO)
+		 WHERE RS.STATUS = 'Y'
 		 GROUP
 		    BY RE.RES_NO
 		     , RES_NAME
@@ -427,6 +428,7 @@
 		     , RS.COUNT
 		  FROM RESTAURANT RS
 		  LEFT JOIN REVIEW RE ON (RS.RES_NO = RE.RES_NO)
+		 WHERE RS.STATUS = 'Y'
 		 GROUP
 		    BY RS.RES_NO
 		     , RES_NAME
