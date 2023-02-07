@@ -43,6 +43,13 @@ public class RestCalendarController extends HttpServlet {
 			//달력 구성에 필요한 정보 담기
 			String year = (String)session.getAttribute("sessionYear");
 			String month = (String)session.getAttribute("sessionMonth");
+			
+			//다음버튼으로 넘어가는 경우
+			if(request.getParameter("flag") != null) {
+				year = request.getParameter("year");
+				month = request.getParameter("month");
+			}
+			
 			request.setAttribute("year", year);
 			request.setAttribute("month", month);
 			
