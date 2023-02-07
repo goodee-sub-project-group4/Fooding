@@ -129,13 +129,13 @@
             <form action="">
                 <div class="left">
                     <!--카테고리-->
-                    <select id="select">
+                    <!-- <select id="select">
                         <option value="">처리결과</option>
                         <option value="">미답변</option>
                         <option value="">답변</option>
                     </select>
                     <input type="text" id="search" placeholder="아이디 검색" name="keyword">
-                    <input type="submit" id="sButton" value="검색">
+                    <input type="submit" id="sButton" value="검색"> -->
                 </div>
                 
                 
@@ -148,7 +148,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <!--삭제-->
-                    <button type="button" class="btn btn-danger btn-sm" id="deleteNotice">삭제</button>
+                    <!-- <button type="button" class="btn btn-danger btn-sm" id="deleteNotice">삭제</button> -->
                     
                     <br> <br>
                 </div>

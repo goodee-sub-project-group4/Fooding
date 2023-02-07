@@ -98,17 +98,17 @@
             <form action="">
 
                 <!--카테고리-->
-                <select id="select">
+                <!-- <select id="select">
                     <option value="">상태</option>
                     <option value="">미확인</option>
                     <option value="">승인</option>
                     <option value="">승인대기</option>
                     <option value="">반려</option>
-                </select>
+                </select> -->
 
                 <div class="right">
                     <!--삭제-->
-                    <a class="btn btn-danger btn-sm" id="insertNotice">삭제</a>
+                    <!-- <a class="btn btn-danger btn-sm" id="insertNotice">삭제</a> -->
                     <br> <br>
                 </div>
 
@@ -137,6 +137,7 @@
 	                            </td>
 	                        </tr>  
 	                        <% } %>
+                        <% } else { %>
 	                        <tr>조회된 업체가 없습니다</tr>
 	                	<% } %>                      
                     </tbody>	

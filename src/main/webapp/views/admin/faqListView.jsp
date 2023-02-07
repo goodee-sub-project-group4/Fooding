@@ -157,7 +157,7 @@
                 
                 <div class="left">
                 <!--카테고리-->
-                <div class="categoryU">
+                <!-- <div class="categoryU">
                     <select class="select" name="category" onchange="changeCategory()">
                         <option>구분</option>
                         <option value="caM">회원</option>
@@ -165,10 +165,10 @@
                         <option value="caP">적립금</option>
                         <option value="caS">서비스이용</option>
                     </select>
-                </div>
+                </div> -->
 
                 <!--카테고리-->
-                <div class="categoryR">
+                <!-- <div class="categoryR">
                     <select class="select" name="category" onchange="changeCategory()">
                         <option>구분</option>
                         <option value="caR">업체</option>
@@ -176,7 +176,7 @@
                         <option value="caP">적립금</option>
                         <option value="caS">서비스이용</option>
                     </select>
-                </div>
+                </div> -->
                 </div>
 
                 <div class="right">
@@ -188,7 +188,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <!--등록 삭제-->
-                    <button type="button" class="btn btn-outline-danger btn-sm" id="deleteFaq">삭제</button>
+                    <!-- <button type="button" class="btn btn-outline-danger btn-sm" id="deleteFaq">삭제</button> -->
                     <button class="btn btn-danger btn-sm" id="insertFaq">등록</button> 
                     <br> <br>
                 </div>
