@@ -263,6 +263,7 @@ public class RestaurantDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("deleteMenu");
+		System.out.println(menuNo);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, menuNo);
@@ -791,5 +792,23 @@ public class RestaurantDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public ArrayList<Restaurant> selectRestReviewAvg(Connection conn) {
+		ArrayList<Restaurant> rest = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRestReviewAvg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				rest.add(new Restaurant())
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rest;
 	}
 }

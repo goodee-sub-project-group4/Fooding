@@ -158,6 +158,7 @@
 		    </div><br>
 		    <div id="area2" align="center">
 		        <h2>리뷰 best ></h2>
+		        
 		        <div class="restaurant">
 	       			<a href="<%= contextPath %>/main.bo?resNo=1201">
 		            <img src="/Fooding/resources/images/forTest.png"><br>

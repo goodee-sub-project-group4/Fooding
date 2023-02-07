@@ -380,4 +380,7 @@
 		   AND SUBSTR(BOOK_DATE,0,4) = ?
 		   AND SUBSTR(BOOK_DATE,6,2) = ?
 	</entry>
+	<entry key="selectRestReviewAvg">
+		
+	</entry>
 </properties>
