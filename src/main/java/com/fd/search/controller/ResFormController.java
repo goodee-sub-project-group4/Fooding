@@ -94,14 +94,13 @@ public class ResFormController extends HttpServlet {
 		
 		
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(ServletFileUpload.isMultipartContent(request));
 		if(ServletFileUpload.isMultipartContent(request)) {
-			
+			//1) 파일업로드하기
 			int maxSize = 10*1024*1024;
-			
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/search_upfiles/");
-			
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/rest_upfiles/");
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+			
+			//2) 데이터 뽑아서 담기
 			String resName = multiRequest.getParameter("resName");
 			String ceo = multiRequest.getParameter("ceo");
 			String permitNo = multiRequest.getParameter("permitNo"); 
