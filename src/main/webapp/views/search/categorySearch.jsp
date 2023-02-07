@@ -84,13 +84,13 @@
     #content-main{width: 100%; padding: 5px; float: left;}
     
     /*음식점정보(음식점 썸네일 사진+음식점 간단설명) 옆으로 붙도록 인라인 블럭처리*/
-    .searchRes{display:inline-block; margin: 15px; }
+    .searchRes{float:left; margin: 15px; height:500px; }
 
     /*찜하기*/
     .zzim {float:right;box-sizing: border-box;}
 
     /* 리뷰 페이징 */
-    .paging-area{height: 50px; text-align: center; padding-top: 20px;}
+    .paging-area{ height: 50px; text-align: center; padding-top: 20px; width:300px; margin:auto;}
     
    
 </style>
@@ -169,9 +169,9 @@
 	                        </div>
 	                        <% } %>
                         <% } %>
-                        
-						
-						<div class="paging-area">
+
+                    </div>
+                    <div class="paging-area">
 						
 							<%if(!list.isEmpty()) {%>
 
@@ -222,9 +222,6 @@
                         	</script>       
 
 				        </div>
-
-                    </div>
-                      
                 </div>
             </div>
         </div>
