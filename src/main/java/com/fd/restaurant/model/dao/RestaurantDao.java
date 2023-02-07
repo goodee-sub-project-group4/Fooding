@@ -263,6 +263,7 @@ public class RestaurantDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("deleteMenu");
+		System.out.println(menuNo);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, menuNo);
