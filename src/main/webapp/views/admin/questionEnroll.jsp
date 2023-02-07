@@ -128,8 +128,8 @@
                     <tr>
                         <th></th>
                         <td id="qImg">
-                            <img src="../../resources/images/chicken.jpg" width="320" height="210">
-                            <img src="../../resources/images/chicken.jpg" width="320" height="210">
+                            <img src="" width="320" height="210">
+                            <img src="" width="320" height="210">
                         </td>
                     </tr>
                     <tr><td><br></td></tr>

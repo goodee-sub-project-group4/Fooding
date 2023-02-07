@@ -129,19 +129,19 @@
         height: 40px;
     }
     #updateModal-body th{
-        padding-left: 40px;
+        padding-left: 20px;
         text-align: left;
         color: gray;
         font-weight: 500;
-        width: 300px;
+        width: 400px;
     }
     #updateModal-body td{
         padding-left: 40px;
         text-align: left;
-        width: 400px;
+        width: 350px;
     }
     #updateModal-body input{
-        width:240px;
+        width:220px;
     }
     
     /*예약현황 조회 모달*/
@@ -688,7 +688,7 @@
                     $('#foodCt').text(r.foodCt);
                     if(r.parking=="Y"){
                         $('#parking').text("주차가능")
-                    }else if(r.parking=="S"){
+                    }else if(r.parking=="N"){
                         $('#parking').text("주차불가")
                     };
                     $('#open').text(r.open);
