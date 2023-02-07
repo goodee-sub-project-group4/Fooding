@@ -817,9 +817,10 @@ public class RestaurantDao {
 									  , rset.getDouble("avg_star")
 									  , rset.getInt("count")));
 			}
-			System.out.println(rest);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		return rest;
 	}
@@ -847,9 +848,10 @@ public class RestaurantDao {
 									  , rset.getDouble("avg_star")
 									  , rset.getInt("count")));
 			}
-			System.out.println(rest);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		return rest;
 	}

@@ -413,7 +413,7 @@
 	</entry>
 	<entry key="selectRestCount">
 		SELECT 
-		       RE.RES_NO
+		       RS.RES_NO
 		     , RES_NAME
 		     , ADDRESS
 		     , D_ADDRESS
@@ -423,12 +423,12 @@
 		     , CLOSE
 		     , BREAK_S
 		     , BREAK_E
-		     , AVG(STAR) "AVG_STAR"
+		     , NVL(AVG(STAR), 0) "AVG_STAR"
 		     , RS.COUNT
-		  FROM REVIEW RE
-		  JOIN restaurant RS ON (RE.RES_NO = RS.RES_NO)
+		  FROM RESTAURANT RS
+		  LEFT JOIN REVIEW RE ON (RS.RES_NO = RE.RES_NO)
 		 GROUP
-		    BY RE.RES_NO
+		    BY RS.RES_NO
 		     , RES_NAME
 		     , ADDRESS
 		     , D_ADDRESS
@@ -439,9 +439,8 @@
 		     , BREAK_S
 		     , BREAK_E
 		     , RS.COUNT
-             , RE.COUNT
 		 ORDER
-		    BY RS.COUNT DESC
-             , AVG(STAR) DESC
+		    BY COUNT DESC
+		     , AVG(STAR) ASC
 	</entry>
 </properties>
