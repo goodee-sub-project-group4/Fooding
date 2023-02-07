@@ -94,7 +94,6 @@
 
 	<%@ include file="views/common/head.jsp" %>
 	<%@ include file="views/common/searchSidebar.jsp" %>
-	<%@ include file="views/book/point.jsp" %>
 	
 	<script>
 		$(function(){
