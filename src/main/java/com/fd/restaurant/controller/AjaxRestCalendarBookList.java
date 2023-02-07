@@ -1,4 +1,4 @@
-package com.fd.book.controller;
+package com.fd.restaurant.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,21 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fd.book.model.service.BookService;
 import com.fd.book.model.vo.Book;
-import com.fd.member.model.vo.Member;
+import com.fd.restaurant.model.service.RestaurantService;
+import com.fd.restaurant.model.vo.Restaurant;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class BookCheckController
+ * Servlet implementation class AjaxRestCalendarBookList
  */
-@WebServlet("/check.bo")
-public class BookCheckController extends HttpServlet {
+@WebServlet("/selectDateBook.re")
+public class AjaxRestCalendarBookList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookCheckController() {
+    public AjaxRestCalendarBookList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,12 +35,24 @@ public class BookCheckController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-		ArrayList<Book> list = new BookService().selectBookList(userNo);
+		int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
+		String date  = request.getParameter("date");
 		
-		int result = new BookService().selectBookList(userNo);
-
-		request.getRequestDispatcher("views/book/bookCheck.jsp").forward(request, response);
+		if(month.length()==1) {
+			month="0"+month;
+		}
+		if(date.length()==1) {
+			date="0"+date;
+		}
+		String bookDate = year+"/"+month+"/"+date;
+		
+		ArrayList<Book> list = new RestaurantService().selectCalendarBook(resNo, bookDate);
+		//데이터 넘기기
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
+	
 	}
 
 	/**

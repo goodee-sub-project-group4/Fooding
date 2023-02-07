@@ -263,7 +263,6 @@ public class RestaurantDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("deleteMenu");
-		System.out.println(menuNo);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, menuNo);
@@ -817,9 +816,10 @@ public class RestaurantDao {
 									  , rset.getDouble("avg_star")
 									  , rset.getInt("count")));
 			}
-			System.out.println(rest);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		return rest;
 	}
@@ -847,10 +847,37 @@ public class RestaurantDao {
 									  , rset.getDouble("avg_star")
 									  , rset.getInt("count")));
 			}
-			System.out.println(rest);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		return rest;
+	}
+	public ArrayList<Book> selectCalendarBook(Connection conn, int resNo, String bookDate){
+		ArrayList<Book> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCalendarBook");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, resNo);
+			pstmt.setString(2, bookDate);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Book b = new Book();
+				b.setBookTime(rset.getString("book_time"));
+				b.setBookName(rset.getString("book_name"));
+				b.setPeople(rset.getInt("people"));
+				
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 }

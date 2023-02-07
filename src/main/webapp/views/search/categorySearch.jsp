@@ -90,7 +90,7 @@
     .zzim {float:right;box-sizing: border-box;}
 
     /* 리뷰 페이징 */
-    .paging-area{ height: 50px; text-align: center; padding-top: 20px; width:300px; margin:auto;}
+    .paging-area{ height: 50px; text-align: center; padding-top: 20px; margin:auto;}
     
    
 </style>
@@ -117,13 +117,6 @@
                         <b>총 <%= pi.getListCount() %>건</b>
                     </div>
 
-                    <!-- 검색결과 필터링: 별점순|방문자순|리뷰순-->
-                    <!--  
-                    <div id="searchFilter">
-                        <b>별점순</b> | 방문자순 | 리뷰순
-                    </div>
-					-->
-					
                     <!-- 검색결과 조회된 음식점 목록들 -->
                     <div id="content-main">
                     

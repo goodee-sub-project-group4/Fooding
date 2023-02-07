@@ -121,8 +121,8 @@
                     <br><br>
                     <div align="center">
                         <button type="button" class="btn btn-danger" style="width:90px;" onclick="location.href='<%=contextPath%>/question.me'">확인</button>
-                        <button type="button" class="btn btn-outline-danger" style="width:90px;">수정</button>
-                        <button type="button" class="btn btn-outline-danger" style="width:90px;">삭제</button>
+                        <!-- <button type="button" class="btn btn-outline-danger" style="width:90px;">수정</button> -->
+                        <!-- <button type="button" class="btn btn-outline-danger" style="width:90px;">삭제</button> -->
                     </div>
                     <br><br><br><br>
                 </form>

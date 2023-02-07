@@ -160,7 +160,7 @@
                 <div id="content2">
                     <div id="content2-1">
                         <div id="thumbnail">
-                            <img style="width: 100%; height: 100%;" src="<%= contextPath %>/resources/restaurantSample/4_loosedoor.jpg" alt="">
+                            <img style="width: 100%; height: 100%;" src="<%= contextPath %>/<%= restaurant.getrImg() %>" alt="">
                         </div>
                         <div id="content-main">
                             <div id="main1">
@@ -508,7 +508,6 @@
                     <!-- 메뉴 / 결제창 -->
                     <script>
                         const transNumber = /[^0-9]/g;
-                        let f = 1; // 결제 번호 증가용
 
                         // 결제 박스
                         $(document).on('keyup', '#pointUse', function(e){
@@ -737,8 +736,6 @@
                             <% if(loginUser != null) { %>
                             const menuChoice = document.querySelectorAll(".menuName"); // [td, td, ..]
                             let menu = [];
-                            let num = f + 1;
-                            console.log(f)
                             for(let i=0; i<menuChoice.length; i++){
                                 menu.push(menuChoice[i].innerText);
                             }
@@ -748,7 +745,7 @@
                             IMP.request_pay({ // param
                                 pg: "html5_inicis",
                                 pay_method: "card",
-                                merchant_uid: "FOODING-pay" + "exam8"+ num,
+                                merchant_uid: $('.bookDate').val() + $('.bookTime').val() + $('#sum-payment').text().replace(transNumber, ""),
                                 name: menu.join("<br>"),
                                 amount: $('#sum-payment').text().replace(transNumber, ""),
                                 buyer_email: $('.email').val(),
@@ -1085,7 +1082,8 @@
 
             
         </script>
-        <%@ include file="/views/common/footer.jsp" %>
+        
     </div>
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

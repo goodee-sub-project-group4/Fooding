@@ -221,16 +221,9 @@
 				<h4 id="book-list-title">
 					<span id="book-date">2023-02-10</span><br>
 					예약내역
-				</h4><br>
-				<h4 class="book-info">
-					15:30 채치수(2명)
+					<span id="book-list"></span>
 				</h4>
-				<h4 class="book-info">
-					18:30 정대만(2명)
-				</h4>
-				<h4 class="book-info">
-					15:30 강백호(5명)
-				</h4><br>
+				<br>
 			</div>
 	
 			<!-- Modal footer -->
@@ -346,13 +339,18 @@
 				url:"<%=contextPath%>/selectDateBook.re",
 				data:{date:date, month:month, year:year},
 				success:function(result) {
-					console.log(result[1]);
+					
+					//이전내역지우기
+					$('#book-list-title').children('h4').remove();
+					$('#book-list-title').children('br').remove();
+					
+					//해당 예약 정보 띄우기
 					$('#book-date').text(year+"-"+month+"-"+date);
-					console.log(res)
-					//for(result.size) {
-					//	$('#book-list-title').append("<h4 class='book-info'>"+
-					//			result[i].bookTime+" "+rest[i]+"("+result[i].people+")"+"</h4>");
-					//}
+					$('#book-list-title').append('<br><br><br>');
+					for(let i=0; i<result.length; i++) {
+						$('#book-list-title').append("<h4 class='book-info'>"+
+								result[i].bookTime+" "+result[i].bookName+"("+result[i].people+")"+"</h4>");
+					}
 				}, error:function(){
 					console.log('예약내역조회 ajax통신 실패');
 				}

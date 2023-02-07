@@ -183,10 +183,10 @@ public class ReviewDao {
 			
 			if (rset.next()) {
 				detailVo = new ReviewDetailVo(rset.getInt("REVIEW_NO")
-												,rset.getString("RES_NO")
-												,rset.getString("REVIEW_CONTENT")
-												,rset.getString("STAR")
-												,rset.getString("RES_NAME"));
+											, rset.getString("RES_NO")
+											, rset.getString("REVIEW_CONTENT")
+											, rset.getString("STAR")
+											, rset.getString("RES_NAME"));
 			}
 			
 		} catch (SQLException e) {
@@ -220,8 +220,8 @@ public class ReviewDao {
 			
 			while(rset.next()) {
 				list.add(new ReviewDetailFileVo(rset.getInt("ref_bno")
-									            ,rset.getString("change_name")
-									            ,rset.getString("file_path")));
+									          , rset.getString("change_name")
+									          , rset.getString("file_path")));
 			}
 			
 		} catch (SQLException e) {
