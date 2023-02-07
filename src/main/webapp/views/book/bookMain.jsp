@@ -508,7 +508,6 @@
                     <!-- 메뉴 / 결제창 -->
                     <script>
                         const transNumber = /[^0-9]/g;
-                        let f = 1; // 결제 번호 증가용
 
                         // 결제 박스
                         $(document).on('keyup', '#pointUse', function(e){
@@ -748,7 +747,7 @@
                             IMP.request_pay({ // param
                                 pg: "html5_inicis",
                                 pay_method: "card",
-                                merchant_uid: "FOODING-pay" + "exam8"+ num,
+                                merchant_uid: $('.bookDate').val() + $('.bookTime').val() + $('#sum-payment').text().replace(transNumber, ""),
                                 name: menu.join("<br>"),
                                 amount: $('#sum-payment').text().replace(transNumber, ""),
                                 buyer_email: $('.email').val(),
