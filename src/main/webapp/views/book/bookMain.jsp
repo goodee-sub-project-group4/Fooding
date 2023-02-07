@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ 
 	page import="com.fd.restaurant.model.vo.Restaurant, com.fd.restaurant.model.vo.Menu,
-				 com.fd.review.model.vo.Review, com.fd.book.model.vo.Point, com.fd.common.model.vo.Attachment"
+				 com.fd.review.model.vo.Review, com.fd.book.model.vo.Point, com.fd.common.model.vo.Attachment,
+				 com.fd.book.model.vo.Point"
 %>
 
 <%@ page import="java.util.ArrayList" %>
@@ -10,7 +11,10 @@
 	ArrayList<Menu> menuList = (ArrayList<Menu>)request.getAttribute("menuList");
 	Review review = (Review)request.getAttribute("review");
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
-    Point point = (Point)request.getAttribute("point");
+	if(request.getAttribute("pointNow") != null) {
+		int point = (int)request.getAttribute("pointNow");
+		System.out.println(point);
+	}
     ArrayList<Attachment> attachment = (ArrayList<Attachment>)request.getAttribute("attachment");
 %>
 <!DOCTYPE html>
@@ -36,9 +40,9 @@
         #content1-padding, #content2-padding, #content3-padding{float: left; margin: auto; padding: 5px; box-sizing: border-box;}
 
         /* 컨텐트 가운데 영역 */
-        #content2-padding{width: 50%; height: 100%;}
+        #content2-padding{width: 50%; height: 2300px;}
         /* 컨텐트 가운데 전체 높이 */
-        #content2{max-height: 2450px;}
+        #content2{max-height: 2500px;}
         #content2-1{max-height: 1050px;}
         #content2-1 div{box-sizing: border-box;}
         
@@ -189,10 +193,12 @@
                                         <th>영업시간</th>
                                         <td><b id="open"><%= restaurant.getOpen() %></b> ~ <b id="close"><%= restaurant.getClose() %></b></td>
                                     </tr>
+                                    <% if(restaurant.getBreakS() != null) { %>
                                     <tr>
                                         <th>브레이크 타임</th>
                                         <td><b id="breakS"><%= restaurant.getBreakS() %></b> ~ <b id="breakE"><%= restaurant.getBreakE() %></b></td>
                                     </tr>
+                                    <% } %>
                                     <tr>
                                         <th>주차</th>
                   	                    <% if(restaurant.getParking().equals("Y")){ %> 
@@ -407,7 +413,11 @@
 	                                            <div class="menu-datail1">
 	                                                <div style="font-weight: 1000; font-size: 20px;"><%= m.getMenuName() %></div>
 	                                                <div style="color: brown; text-align: right; font-weight: 850; margin-bottom: 5px;"><b><%= m.getPrice() %></b></div>
-	                                                <div style="font-size: 13px; height: 80px; overflow: hidden;"><%= m.getMenuDes() %></div>
+	                                                <div style="font-size: 13px; height: 80px; overflow: hidden;">
+	                                                	<% if(m.getMenuDes() != null) { %> 
+                                                        	<%= m.getMenuDes() %>
+                                                    	<% } %>
+	                                                </div>
 	                                            </div>
 	                                            <div class="menu-datail2">
 	                                                <button type="button" class="menuAdd btn btn-secondary btn-sm">추가</button>
@@ -450,7 +460,12 @@
                                     <table style="width: 100%;">
                                         <tr>
                                             <td style="width: 50%;">현재 적립금</td>
-                                            <td style="width: 50%; text-align: right;" id="pointNow">0원</td>
+                                            <td style="width: 50%; text-align: right;" id="pointNow">
+                                            <% if(request.getAttribute("pointNow") != null) { %>
+                                            	<%= request.getAttribute("pointNow") %>원</td>
+                                            <% }else{ %>
+                                            	0원</td>
+                                            <% } %>
                                         </tr>
                                         <tr>
                                             <td>적립금 사용</td>
@@ -736,16 +751,16 @@
                             <% if(loginUser != null) { %>
                             const menuChoice = document.querySelectorAll(".menuName"); // [td, td, ..]
                             let menu = [];
+                            let payPortNum = Math.floor(Math.random()*10000) + $('.bookDate').val() + Math.floor(Math.random()*10000);
                             for(let i=0; i<menuChoice.length; i++){
                                 menu.push(menuChoice[i].innerText);
                             }
                             // ["xx", "bb"]
                             // IMP.request_pay(param, callback)
-                            console.log($('#pointUse').val())
                             IMP.request_pay({ // param
                                 pg: "html5_inicis",
                                 pay_method: "card",
-                                merchant_uid: $('.bookDate').val() + $('.bookTime').val() + $('#sum-payment').text().replace(transNumber, ""),
+                                merchant_uid: "Fooding-" + payPortNum ,
                                 name: menu.join("<br>"),
                                 amount: $('#sum-payment').text().replace(transNumber, ""),
                                 buyer_email: $('.email').val(),
@@ -851,7 +866,7 @@
                     <br>
                     <div>
                         <div class="book-category" style="margin-bottom: 10px;">서비스 약관</div>
-                        <div class="general-condition"><input type="checkbox"> 개인정보 수집 동의</div>
+                        <div class="general-condition"><input id="general-condition1"  type="checkbox"> 개인정보 수집 동의</div>
                         <div id="general-condition-detail1" style="overflow: auto;">
                             <p style="padding: 5px;"> -개인정보 수집 동의-
                             <br><br>1. 기본수집항목: [필수] 푸딩 아이디, 이름, (휴대)전화번호, [선택] 이메일 주소
@@ -861,7 +876,7 @@
                             <br>&nbsp;&nbsp;- 단, 관련 법령에 의하여 일정 기간 보관이 필요한 경우에는 해당 기간 동안 보관함
                             <br><br>4. 동의 거부권 등에 대한 고지: 정보주체는 개인정보의 수집 및 이용 동의를 거부할 권리가 있으나, 이 경우 상품 및 서비스 예약이 제한될 수 있습니다. 그 밖의 내용은 푸딩 개인정보 처리방침을 따릅니다.</p>
                         </div>
-                        <div class="general-condition"><input type="checkbox"> 개인정보 제공 동의</div>
+                        <div class="general-condition"><input id="general-condition2"  type="checkbox"> 개인정보 제공 동의</div>
                         <div id="general-condition-detail2" style="overflow: auto;">
                             <p style="padding: 5px;"> -개인정보 제공 동의-
                             <br><br>1. 개인정보를 제공받는 자 : 이용업체
@@ -891,8 +906,8 @@
                                     data:{userNo:<%= loginUser.getUserNo() %>},
                                     type:"post",
                                     success:function(pointNow){
-                                    	if(pointNow != null){
-                                    		$('#pointNow').text(pointNow + "원");
+                                    	if(<%= request.getAttribute("pointNow") %>!= null){
+                                    		$('#pointNow').text(<%= request.getAttribute("pointNow") %>+ "원");
                                     	}else{
                                     		$('#pointNow').text("0원")
                                     	}
@@ -902,8 +917,8 @@
                                     }
                                 });
                         <% } %>
-
-
+                            console.log($('.general-condition').attr('checked'))
+                            
                             $('#general-condition-detail1').slideUp();
                             $('#general-condition-detail2').slideUp();
                             $('.bookName').val($('.bookUserName').val());
@@ -924,6 +939,8 @@
                                 alert("예약자명을 입력해주세요")
                             }else if($('.bookPhone').val() == ""){
                                 alert("예약자 연락처를 입력해주세요")
+                            }else if($('#general-condition1').prop('checked') == false || $('#general-condition2').prop('checked') == false){
+                                alert("개인정보 수집 및 제공 동의해주세요")
                             }else{
                                 $('.menu-select').css('display', 'block');
                                 $('#menu-select-border3').css('display', 'block');

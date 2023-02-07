@@ -127,5 +127,36 @@ public class BookService {
 		return list;
 	}
 
+
+
+	public Book selectBook(int bookNo) {
+		Connection conn = getConnection();
+		Book book = new BookDao().selectBook(conn, bookNo);
+		close(conn);
+		return book;
+	}
+
+
+	public Book bookCancel(int bookNo) {
+		Connection conn = getConnection();
+		int result1 = new BookDao().bookCancel(conn, bookNo);
+		if(result1 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		Book book = new BookDao().selectBookCancel(conn, bookNo);
+		int result2 = new BookDao().paymentCancel(conn, bookNo, book);
+		int result3 = new BookDao().pointCancel(conn, bookNo, book);
+		if(result1 > 0 && result2 > 0 && result3 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return book;
+	}
+
 	
 }
