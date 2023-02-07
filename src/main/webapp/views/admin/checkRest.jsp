@@ -129,19 +129,19 @@
         height: 40px;
     }
     #updateModal-body th{
-        padding-left: 40px;
+        padding-left: 20px;
         text-align: left;
         color: gray;
         font-weight: 500;
-        width: 300px;
+        width: 400px;
     }
     #updateModal-body td{
         padding-left: 40px;
         text-align: left;
-        width: 400px;
+        width: 350px;
     }
     #updateModal-body input{
-        width:240px;
+        width:220px;
     }
     
     /*예약현황 조회 모달*/
@@ -170,19 +170,19 @@
             <br><br>
             <form action="">
                 <!--표 위에 버튼-->
-                <select id="select">
+                <!-- <select id="select">
                     <option value="">최신 순</option>
                     <option value="">오래된 순</option>
                     <option value="">예약 순</option>
                     <option value="">리뷰 순</option>
                 </select>
                 <input type="text" id="search" placeholder="아이디 검색" name="keyword">
-                <input type="submit" id="sButton" value="검색">
+                <input type="submit" id="sButton" value="검색"> -->
             
             
-                <button type="button" class="btn btn-danger btn-sm" id="deleteMember" data-toggle="modal" data-target="#deleteModal">업체 탈퇴</button>
+                <!-- <button type="button" class="btn btn-danger btn-sm" id="deleteMember" data-toggle="modal" data-target="#deleteModal">업체 탈퇴</button> -->
                 <div></div>
-                <br> 
+                <br><br>
 
                 <!--업체조회 표-->
                 <table class="table">
@@ -688,7 +688,7 @@
                     $('#foodCt').text(r.foodCt);
                     if(r.parking=="Y"){
                         $('#parking').text("주차가능")
-                    }else if(r.parking=="S"){
+                    }else if(r.parking=="N"){
                         $('#parking').text("주차불가")
                     };
                     $('#open').text(r.open);

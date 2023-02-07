@@ -131,14 +131,14 @@
             <li id="menu2" onclick = "location.href='<%= request.getContextPath()%>/rest.ad'">업체 관리<span>></span></a></li>
             <li id="menu3">사이트 관리<span>></span></li>
             <li id="menu4">고객센터 관리<span>></span></li>
-            <li id="menu5">신고 관리<span>></span></li>
+            <!-- <li id="menu5">신고 관리<span>></span></li> -->
         </ul>
     </div>    
     
     <div id="menu3-detail" class="detail">
         <ul>
             <li id="menu3-detail-1" onclick = "location.href='<%= request.getContextPath()%>/baEnroll.ad'">메인 배너<span>></span></a></li>
-            <li id="menu3-detail-2" onclick = "location.href='<%= request.getContextPath()%>/terms.ad'">이용약관<span>></span></a></li>
+            <!-- <li id="menu3-detail-2" onclick = "location.href='<%= request.getContextPath()%>/terms.ad'">이용약관<span>></span></a></li> -->
         </ul>
     </div>
 

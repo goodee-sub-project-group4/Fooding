@@ -121,7 +121,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <!--등록 삭제-->
-                    <button type="button" class="btn btn-outline-danger btn-sm" id="deleteNotice">삭제</button>
+                    <!-- <button type="button" class="btn btn-outline-danger btn-sm" id="deleteNotice">삭제</button> -->
                     <button class="btn btn-danger btn-sm" id="insertNotice">등록</button> 
                     
                     <br> <br>
