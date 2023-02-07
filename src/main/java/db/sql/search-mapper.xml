@@ -199,12 +199,13 @@
 		 WHERE USER_NO = ?
 	</entry>
 	
+	
 	<entry key="selectGoodList">
 		SELECT RES_NO
 		      , RES_NAME
 		      , ADDRESS || ' ' || D_ADDRESS "ADDRESS"
 		      , R_IMG
-		      , FOOD_CT
+		      , PHONE
 		  FROM RESTAURANT
 		  LEFT JOIN GOOD USING (RES_NO)
 		  WHERE USER_NO = ?

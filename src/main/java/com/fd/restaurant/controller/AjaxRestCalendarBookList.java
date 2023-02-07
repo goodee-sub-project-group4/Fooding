@@ -8,24 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fd.book.model.vo.Book;
-import com.fd.book.model.vo.BookMenu;
-import com.fd.book.model.vo.Payment;
 import com.fd.restaurant.model.service.RestaurantService;
+import com.fd.restaurant.model.vo.Restaurant;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class AjaxRestBookDetailController
+ * Servlet implementation class AjaxRestCalendarBookList
  */
-@WebServlet("/bookDetail.re")
-public class AjaxRestBookDetailController extends HttpServlet {
+@WebServlet("/selectDateBook.re")
+public class AjaxRestCalendarBookList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxRestBookDetailController() {
+    public AjaxRestCalendarBookList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,21 +34,25 @@ public class AjaxRestBookDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bookNo = Integer.parseInt(request.getParameter("no"));
-		RestaurantService rs = new RestaurantService();
-		//정보 각각 조회해오기
-		Book b = rs.selectBook(bookNo);
-		ArrayList<BookMenu> bmList = rs.selectBookMenu(bookNo);
-		Payment p = rs.selectPayment(bookNo);
-		//정보 한군데에 담기
-		ArrayList set = new ArrayList();
-		set.add(b);
-		set.add(bmList);
-		set.add(p);
-		System.out.println(bmList);
+		HttpSession session = request.getSession();
+		int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
+		String date  = request.getParameter("date");
+		
+		if(month.length()==1) {
+			month="0"+month;
+		}
+		if(date.length()==1) {
+			date="0"+date;
+		}
+		String bookDate = year+"/"+month+"/"+date;
+		
+		ArrayList<Book> list = new RestaurantService().selectCalendarBook(resNo, bookDate);
 		//데이터 넘기기
 		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(set, response.getWriter());
+		new Gson().toJson(list, response.getWriter());
+	
 	}
 
 	/**

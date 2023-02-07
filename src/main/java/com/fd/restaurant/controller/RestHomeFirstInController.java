@@ -67,6 +67,14 @@ public class RestHomeFirstInController extends HttpServlet {
 				ArrayList<NotAble> naList = new RestaurantService().selectNotAble(na);
 				request.setAttribute("naList", naList);
 				
+				//일별예약정보담기(달력용)
+				if(month.length()==1) {
+					month = "0"+month;
+				}
+				ArrayList<Book> calBookList = new RestaurantService().selectBookForCalendar(resNo, year, month);
+				request.setAttribute("calBookList", calBookList);
+				System.out.println(calBookList);
+				
 				//새로운 문의 조회해오기
 				ArrayList<Question> qList = new RestaurantService().selectNewQuestion(resNo);
 				request.setAttribute("qList", qList);
