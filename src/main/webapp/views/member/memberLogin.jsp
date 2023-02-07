@@ -53,7 +53,7 @@
                 <div id="login"><h2>로그인</h2></div>
                 <div id="login-id"><input type="text" name="userId" placeholder="아이디를 입력해주세요" required></div>
                 <div id="login-pwd"><input type="password" name="userPwd" placeholder="비밀번호를 입력해주세요" required></div>
-                <div id="find-id-pwd"><a href="">아이디찾기</a><span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="">비밀번호 찾기</a></div>
+                <!-- <div id="find-id-pwd"><a href="">아이디찾기</a><span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="">비밀번호 찾기</a></div> -->
                 <div id="login-btn"><input type="submit" class="btn btn-danger" value="로그인"></div>
                 <div id="enroll-btn"><button type="button" class="btn btn-outline-danger" onclick="location.href='<%=contextPath%>/enrollForm.me'">회원가입</button></div>
 
