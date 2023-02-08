@@ -5,6 +5,7 @@
 	String alertMsg = (String)session.getAttribute("alertMsg"); // Alert
 
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	System.out.println(loginUser);
 %>
 <!DOCTYPE html>
 <html>
@@ -125,6 +126,7 @@
                             <button type="button" data-toggle="dropdown">마이페이지</button>
                             <span class="dropdown-menu">
 	                            <a class="dropdown-item" href="<%=contextPath%>/check.bo">예약/결제 내역</a>
+	                            <a class="dropdown-item" href="<%=contextPath%>/check.bo?user="<%= loginUser.getUserNo() %>>예약/결제 내역</a>
 	                            <a class="dropdown-item" href="<%= contextPath%>/reviewList.me">리뷰</a>
 	                            <a class="dropdown-item" href="<%=contextPath%>/zzim.is">찜하기</a>
 	                            <a class="dropdown-item" href="#">적립금</a>
