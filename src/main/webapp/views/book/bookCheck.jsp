@@ -475,7 +475,8 @@
 										<button type="button" class="btn btn-outline-secondary">문의하기</button>
 									</div>
 								</div>
-								<% if(b.getStatus() == "B") { %>
+								<% System.out.println(b.getStatus()); %>
+								<% if(b.getStatus().equals("D")) { %>
 								<div class="service-complete-btn">
 									<div>
 										<button id="<%= b.getResNo() %>" type="button" class="btn btn-outline-danger review"
@@ -513,7 +514,7 @@
 			const imgSrc = $(this).parent().parent().parent().parent().prev().attr('src');
 			const bookNo = $(this).parent().parent().parent().parent().prev().prev().text();
 			const a = $('#review-content2-1').children().attr('src', imgSrc);
-
+			
 			console.log(bookNo)
 			$('#review-content2-2').text(resName);
 			$('#bookNo').val(bookNo);

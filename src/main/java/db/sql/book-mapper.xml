@@ -250,7 +250,8 @@
 		  JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
           JOIN PAYMENT P ON (B.BOOK_NO = P.BOOK_NO)
 		 WHERE B.USER_NO = ?
-		   AND B.STATUS = 'B'
+		   AND B.STATUS IN ('B', 'D')
+		   
 	</entry>
 	
 	<entry key="selectBook">

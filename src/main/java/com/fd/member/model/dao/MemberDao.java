@@ -65,7 +65,7 @@ public class MemberDao {
 							   rset.getDate("modify_date"),
 							   rset.getString("status"));
 			}
-			
+			System.out.println(m);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

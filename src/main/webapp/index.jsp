@@ -209,10 +209,5 @@
 		<%@ include file="views/common/footer.jsp" %>
 	</div>
 
-	<script>
-		$(function(){
-			$()
-		})
-	</script>
 </body>
 </html>
