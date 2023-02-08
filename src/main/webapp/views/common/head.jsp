@@ -125,7 +125,6 @@
                         <span>
                             <button type="button" data-toggle="dropdown">마이페이지</button>
                             <span class="dropdown-menu">
-	                            <a class="dropdown-item" href="<%=contextPath%>/check.bo">예약/결제 내역</a>
 	                            <a class="dropdown-item" href="<%=contextPath%>/check.bo?user="<%= loginUser.getUserNo() %>>예약/결제 내역</a>
 	                            <a class="dropdown-item" href="<%= contextPath%>/reviewList.me">리뷰</a>
 	                            <a class="dropdown-item" href="<%=contextPath%>/zzim.is">찜하기</a>
