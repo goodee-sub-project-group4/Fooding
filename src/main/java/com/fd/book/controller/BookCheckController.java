@@ -33,8 +33,7 @@ public class BookCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		System.out.println(userNo);
 		ArrayList<Book> book = new BookService().selectBookList(userNo);
 		request.setAttribute("book", book);
