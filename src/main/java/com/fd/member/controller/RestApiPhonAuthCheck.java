@@ -43,8 +43,6 @@ public class RestApiPhonAuthCheck extends HttpServlet {
 		map.put("text", text);
 		map.put("type", "SMS");
 		
-		System.out.println("map ==>" + map);
-		
 		try {
 			new MemberService().sendMessage(map);
 			

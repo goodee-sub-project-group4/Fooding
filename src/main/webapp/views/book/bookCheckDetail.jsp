@@ -28,13 +28,14 @@
 	#content1-text2{width: 900px; float: left; padding: 5px; font-size: 20px;}
 
 	/* 메뉴정보 */
-	.detail-menu{width: 800px; height: 100%; padding-left: 5px; margin-bottom: 15px;}
-	.detail-menuName{width: 100%; float: left; font-size: 20px;}
-	.detail-menuPrice{width: 100%; float: right; margin-bottom: 5px; text-align: right; font-size: 25px;}
-	.detail-line{width: 100%; height: 1px; background-color: gainsboro; float: right; margin-bottom: 15px;}
+	.menu-details{width: 800px; min-height: 50px; max-height: 300px; overflow-y: auto; margin-top: 20px; margin-bottom: 15px;}
+	.menu-one{width: 800px; height: 100%; margin-bottom: 15px;}
+	.detail-menuName{width: 50%; float: left; font-size: 15px;}
+	.detail-menuPrice{width: 50%; float: left; text-align: right; font-size: 20px;}
+	#detail-content3{width: 100%; background-color: whitesmoke; margin-top: 30px; margin-bottom: 50px;}
 
 	/* 결제정보 */
-	#detail-content3{width: 100%; display: block; margin-bottom: 50px;}
+	#detail-content4{width: 100%; display: block; margin-bottom: 50px;}
 	#detail-payment{width: 100%; float: right; text-align: right;}
 	
 	/* 예약취소 버튼 */
@@ -178,24 +179,23 @@
            		});
 			</script>
 		</div>
-		<!-- <div id="detail-content2">
+		<div id="detail-content2">
 			<b class="detail-index">예약메뉴</b>
-			<br><br>
-			<div class="detail-menu">
-				<div class="detail-menuName">1. 도쿄 수제 함바그 고젠</div>
-				<div class="detail-menuPrice">12,000 원</div>
-				<div class="detail-line"></div>
+			<div class="menu-details">
+				<div class="menu-one">
+					<div class="detail-menuName">1. 도쿄 수제 함바그 고젠</div>
+					<div class="detail-menuPrice">12,000 원</div>
+				</div>
+				<div class="menu one">
+					<div class="detail-menuName">2. 치킨 스테이크 고젠</div>
+					<div class="detail-menuPrice">25,000 원</div>
+				</div>
 			</div>
-			<div class="detail-menu">
-				<div class="detail-menuName">2. 치킨 스테이크 고젠</div>
-				<div class="detail-menuPrice">25,000 원</div>
-				<div class="detail-line"></div>
-			</div>
-			<div>
+			<div id="detail-price">
 				<div style="width: 50%; float: left; font-size: 25px;">합 계</div>
 				<div style="width: 50%; float: right; text-align: right; font-size: 25px;"><%= book.getPayTotal() %> 원</div>
 			</div>
-		</div> -->
+		</div>
 		<div id="detail-content3">
 			<b class="detail-index">결제내역</b>
 			<br><br>
@@ -233,7 +233,7 @@
 				<% } %>
 			</table>
 			<br>
-			<div style="background-color: whitesmoke; width: 100%; height: 50px; line-height: 50px; float: left;">
+			<div class="" style="background-color: whitesmoke; width: 100%; height: 50px; line-height: 50px; float: left;">
 				<div style="width: 50%; float: left; font-size: 25px;">결제 금액</div>
 				<% if(book.getStatus() != "C") { %>
 				<div style="width: 50%; float: right; text-align: right; font-size: 25px;"><%= book.getPayTotal() %> 원</div>

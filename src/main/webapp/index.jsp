@@ -106,28 +106,33 @@
                		} 
                 }
             });
+
+			// 별점 순
 			$.ajax({
 				url:"<%= contextPath %>/selectRest.ra",
 				type:"post",
 				success:function(restStar){
 					let list = "";
-					console.log(restStar)
 					for(let i=0; i<3; i++) {
 						if(restStar[i] != null){
-							list += "<div class='restaurant'>"
+							list += "<form class='restaurant' action='<%= contextPath %>/main.bo' method='POST' onclick='selectRes(this)'>"
 								<% if(loginUser != null) { %>
-									+ "<a href='<%= contextPath %>/main.bo?resNo=" + restStar[i].resNo + "&&userNo=<%= loginUser.getUserNo() %>" + "'>"
+									+ "<input type='hidden' name='resNo' value='" + restStar[i].resNo + "'>"	
+									+ "<input type='hidden' name='userNo' value='" + <%= loginUser.getUserNo() %> + "'>"
 							  	<% }else{ %>
-							  		+ "<a href='<%= contextPath %>/main.bo?resNo=" + restStar[i].resNo + "'>"
+									+ "<input type='hidden' name='resNo' value='" + restStar[i].resNo + "'>"
+									+ "<input type='hidden' name='userNo' value='0'>"	
 							  	<% } %>
-								  + "<img src=" + restStar[i].rImg + "><br>"
-								  + "<span class='rest-name'>" + restStar[i].resName + "</span><span style='float:right;'>★" + Math.round(restStar[i].reviewAvg * 100) / 100 + " (" + restStar[i].count + ")</span><br>"
-						          + "</a></div>"
+									+ "<img src=" + restStar[i].rImg + "><br>"
+									+ "<span class='rest-name'>" + restStar[i].resName + "</span><span style='float:right;'>★" + Math.round(restStar[i].reviewAvg * 100) / 100 + " (" + restStar[i].count + ")</span><br>"
+								 + "</form>"
 						}
 					}
 					$('#starBest').html(list);
 				}
 			});
+
+			// 조회수 순
 			$.ajax({
 				url:"<%= contextPath %>/selectRest.rc",
 				type:"post",
@@ -135,21 +140,29 @@
 					let list = "";
 					for(let i=0; i<3; i++) {
 						if(restCount[i] != null){
-							list += "<div class='restaurant'>"
+							list += "<form class='restaurant' action='<%= contextPath %>/main.bo' method='POST' onclick='selectRes(this)'>"
 								<% if(loginUser != null) { %>
-									+ "<a href='<%= contextPath %>/main.bo?resNo=" + restCount[i].resNo + "&&userNo=<%= loginUser.getUserNo() %>" + "'>"
+									+ "<input type='hidden' name='resNo' value='" + restCount[i].resNo + "'>"	
+									+ "<input type='hidden' name='userNo' value='" + <%= loginUser.getUserNo() %> + "'>"
 							  	<% }else{ %>
-							  		+ "<a href='<%= contextPath %>/main.bo?resNo=" + restCount[i].resNo + "'>"
+									+ "<input type='hidden' name='resNo' value='" + restCount[i].resNo + "'>"	
+									+ "<input type='hidden' name='userNo' value='0'>"
 							  	<% } %>
-								  + "<img src=" + restCount[i].rImg + "><br>"
-								  + "<span class='rest-name'>" + restCount[i].resName + "</span><span style='float:right;'>★" + Math.round(restCount[i].reviewAvg * 100) / 100 + " (" + restCount[i].count + ")</span><br>"
-								  + "</a></div>"
+									+ "<img src=" + restCount[i].rImg + "><br>"
+									+ "<span class='rest-name'>" + restCount[i].resName + "</span><span style='float:right;'>★" + Math.round(restCount[i].reviewAvg * 100) / 100 + " (" + restCount[i].count + ")</span><br>"
+								 + "</form>"
 						}
 					}
 					$('#reviewCount').html(list);
 				}
 			});
 		});
+
+		// 식당 조회
+		function selectRes(value){
+			$(value).submit();
+			console.log($(value).children('input[name=userNo]').val())
+		}
 	</script>
    
 	<!-- 메인영역 -->

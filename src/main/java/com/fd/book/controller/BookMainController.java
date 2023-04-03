@@ -36,24 +36,31 @@ public class BookMainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("userNo") != null) {
-			int userNo = Integer.parseInt(request.getParameter("userNo"));
+		String loginUserNo = request.getParameter("userNo");
+		
+		// 로그인 유저의 포인트 정보 조회
+		if(loginUserNo != null) {
+			int userNo = Integer.parseInt(loginUserNo);
 			int pointNow = new BookService().selectPoint(userNo);
-			System.out.println(pointNow);
 			request.setAttribute("pointNow", pointNow);
 		}
 		
+		// 식당 식별키 얻기
 		int resNo = Integer.parseInt(request.getParameter("resNo"));
+		
 		// 식당 조회수 1 증가
-		int countUp = new BookService().selectCountUp(resNo);
+		new BookService().selectCountUp(resNo);
+		
 		// 메뉴 정보 조회
 		ArrayList<Menu> menuList = new BookService().selectMenu(resNo);
+		System.out.println(menuList);
 		// 리뷰 평점, 조회수, 개수 조회
 		Review review = new BookService().selectReviewData(resNo);
 		// 리뷰 정보 조회
 		ArrayList<Review> reviewList = new BookService().selectReview(resNo);
 		// 첨부 파일 조회
 		ArrayList<Attachment> attachment = new BookService().selectAttachment(reviewList, resNo);
+		
 		// 식당 정보 조회
 		Restaurant restaurant = new BookService().selectRes(resNo);	
 		if(restaurant == null) {

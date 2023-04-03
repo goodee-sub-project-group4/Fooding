@@ -53,6 +53,7 @@
 	<entry key="selectMenu">
 		SELECT 
 			   MENU_NO
+			 , RS.RES_NO
 			 , MENU_NAME
 			 , PRICE
 			 , MENU_DES
@@ -101,7 +102,7 @@
                   FROM POINT
                  WHERE USER_NO = ?
                  ORDER 
-                    BY POINT_NOW DESC)
+                    BY POINT_NO DESC)
           WHERE ROWNUM = 1
 	</entry>
 	
@@ -222,7 +223,7 @@
                           FROM POINT
                          WHERE USER_NO = ?
                          ORDER 
-                            BY POINT_NOW DESC)
+                            BY POINT_NO DESC)
                   WHERE ROWNUM = 1)
 		     )
 	</entry>
@@ -251,6 +252,8 @@
           JOIN PAYMENT P ON (B.BOOK_NO = P.BOOK_NO)
 		 WHERE B.USER_NO = ?
 		   AND B.STATUS IN ('B', 'D')
+		 ORDER
+		    BY B.BOOK_NO DESC
 		   
 	</entry>
 	
@@ -335,7 +338,7 @@
 			 )
 	</entry>
 	
-	<entry key="pointCancel">
+	<entry key="cancelPayPoint">
 		INSERT
 		  INTO POINT
 		     (
@@ -356,12 +359,28 @@
 		     , ?
 		     , ?
 		     , 'C'
-		     , ?
-		     , (SELECT (POINT_NOW + ?) "POINT_NEW"
-                  FROM POINT
-                 WHERE PAY_NO = ?
-                   AND STATUS = 'U')
-		     )
+		     , SELECT NVL(SUM(-POINT_TRADE), 0) 
+				 FROM POINT
+				WHERE PAY_NO = ?
+				  AND STATUS = 'B';
+				 FROM POINT
+				WHERE PAY_NO = ?
+		     , SELECT POINT_NOW - SELECT NVL(SUM((SELECT SUM(-POINT_TRADE) 
+                 				 					FROM POINT
+                 								   WHERE PAY_NO = ?
+                   				  					 AND STATUS = 'B') + (SELECT SUM(POINT_TRADE)
+                                         				 					FROM POINT
+                                         								   WHERE PAY_NO = ?
+                                           				  					 AND STATUS = 'U')), 0) "POINT_NOW"
+			     FROM POINT
+			    WHERE PAY_NO = ?
+			      AND ROWNUM = 1
+			    ORDER
+			       BY POINT_NO ASC
+	</entry>
+	
+	<entry key="cancelSavePoint">
+	
 	</entry>
 	
 	

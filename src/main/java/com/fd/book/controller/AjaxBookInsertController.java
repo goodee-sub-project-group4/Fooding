@@ -71,7 +71,7 @@ public class AjaxBookInsertController extends HttpServlet {
 		Point point = new Point(userNo, resNo, pointName, pointTrade, payPoint);
 		
 		
-		new BookService().insertBook(book, payment, point);
+//		new BookService().insertBook(book, payment, point);
 		
 		
 		response.setContentType("application/json; charset=UTF-8");

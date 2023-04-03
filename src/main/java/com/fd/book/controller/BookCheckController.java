@@ -33,11 +33,11 @@ public class BookCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userNo = Integer.parseInt(request.getParameter("user"));
-		System.out.println(userNo);
+		HttpSession session = request.getSession();
+		
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
 		ArrayList<Book> book = new BookService().selectBookList(userNo);
 		request.setAttribute("book", book);
-		System.out.println(book);
 		request.getRequestDispatcher("views/book/bookCheck.jsp").forward(request, response);
 	}
 

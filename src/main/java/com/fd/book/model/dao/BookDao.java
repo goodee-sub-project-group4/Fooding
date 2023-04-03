@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.fd.book.model.vo.Book;
+import com.fd.book.model.vo.BookMenu;
 import com.fd.book.model.vo.Payment;
 import com.fd.book.model.vo.Point;
 import com.fd.common.model.vo.Attachment;
@@ -101,6 +102,7 @@ public class BookDao {
 			
 			while(rset.next()) {
 				list.add(new Menu(rset.getInt("menu_no")
+						        , rset.getInt("res_no")
 								, rset.getString("menu_name")
 								, rset.getInt("price")
 								, rset.getString("menu_des")
@@ -218,6 +220,14 @@ public class BookDao {
 		} finally {
 			close(pstmt);
 		}
+		
+		return result;
+	}
+	
+	public int insertBookMenu(Connection conn, BookMenu bookMenu) {
+		int result = 0;
+		
+		
 		
 		return result;
 	}
@@ -518,16 +528,17 @@ public class BookDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("pointCancel");
-		System.out.println(book.getPayNo());
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, book.getPayNo());
 			pstmt.setInt(2, book.getUserNo());
 			pstmt.setInt(3, book.getResNo());
 			pstmt.setString(4, book.getResName());
-			pstmt.setInt(5, book.getPayPoint());
-			pstmt.setInt(6, book.getPayPoint());
+			pstmt.setInt(5, book.getPayNo());
+			pstmt.setInt(6, book.getPayNo());
 			pstmt.setInt(7, book.getPayNo());
+			pstmt.setInt(8, book.getPayNo());
+			pstmt.setInt(9, book.getPayNo());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

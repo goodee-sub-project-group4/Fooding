@@ -231,6 +231,7 @@
                                         <img src="<%= m.getmImg() %>" alt=""><br>
                                         <%= m.getMenuName() %> <br>
                                         <%= m.getPrice() %>
+                                        <div style="visibility: hidden;"><%= m.getMenuNo() %></div>
                                     </div>
                                     <% } %>
                                 <% } %>
@@ -251,8 +252,7 @@
                         <% }else{ %>
                         	<% for(Review r : reviewList) { %>
 	                        <div class="review-content">
-	                            <div class="review-content1-1">
-	                            </div>
+	                            <div class="review-content1-1"></div>
 	                            <div class="review-content1-2">
 	                                <%= r.getCreateDate() %>
 	                            </div>
@@ -265,13 +265,13 @@
                                         <%= r.getReviewContent() %>
                                     </div>
                                     <% if(!attachment.isEmpty()) { %>
-	                                <div class="review-picture">
-	                                	<% for(Attachment at : attachment) { %>
-	                                		<% if(r.getReviewNo() == at.getRefBoardNo()) { %>
-	                                    		<img src="<%= at.getFilePath() %>/<%= at.getChangeName() %>" alt="">
-	                                    	<% } %>
-	                                    <% } %>
-	                                </div>
+                                        <div class="review-picture">
+                                            <% for(Attachment at : attachment) { %>
+                                                <% if(r.getReviewNo() == at.getRefBoardNo()) { %>
+                                                    <img src="<%= at.getFilePath() %>/<%= at.getChangeName() %>" alt="">
+                                                <% } %>
+                                            <% } %>
+                                        </div>
 	                                <% } %>
 	                            </div>
 	                        </div>
@@ -515,11 +515,14 @@
                             </div>
                         </div>
                     </form>
+
                     <!-- 메뉴 / 결제창 -->
                     <script>
+                        // 숫자 변환 정규표현식
                         const transNumber = /[^0-9]/g;
 
                         // 결제 박스
+                        /-- 포인트 입력 창 문자, 특수문자 제한 스크립트 --/
                         $(document).on('keyup', '#pointUse', function(e){
                             if(!((e.keyCode > 95 && e.keyCode < 106)
                             || (e.keyCode > 47 && e.keyCode < 58) 
@@ -528,6 +531,7 @@
                             }
                         });
                             
+                        /-- 포인트 사용 예외조건 검증 --/
                         $('#pointUse').keyup(function(){
                             let pointUse = $('#pointUse');
                             let pointUse2 =  $('#pointUse2');
@@ -539,10 +543,13 @@
                                 pointUse.val(0)
                                 pointUse2.text(0 + '원')
                             }
+
                             let price = parseInt($('#sum').text().replace(transNumber, ""));
                             let point = parseInt(pointUse.val());
                             orderPrice = parseInt($('#sum').text().replace(/[^0-9]/g, ""));
-                            let paymentReuslt = price - point
+                            let paymentReuslt = price - point;
+
+                            /-- 사용자 노출용 숫자 -> 문자 변환 정규표현식 --/
                             if(pointUse.val() != ""){
                                 pointUse2.text(String(point).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                                 $('.sum-payment').text(String(paymentReuslt).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
@@ -560,6 +567,7 @@
                             const table = $('#menu-select-border2>table>tbody>tr').length;
                             const tableData = $('#menu-select-border2>table>tbody>tr').text();
 
+                            /-- 메뉴 최초 추가 --/
                             if(table == 0) {
                                     $('#menu-select-border2 tbody:first').append(
                                     '<tr class="menu-choice">'
@@ -572,6 +580,8 @@
                                     + '<td id="price' + variable + '" style="text-align: right;" >' + addMenu.eq(1).text().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원' + '</td>'
                                     + '</tr>'
                                 );
+
+                            /-- 새로운 메뉴 추가 --/
                             }else if(tableData.indexOf(addMenu.eq(0).text()) < 0){
                                 variable++;
                                 $('#menu-select-border2 tbody:first').append(
@@ -585,6 +595,8 @@
                                     + '<td id="price' + variable + '"style="text-align: right;" >' + addMenu.eq(1).text().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원' + '</td>'
                                     + '</tr>'
                                 );
+
+                            /-- 기존 메뉴에 추가로 추가 버튼을 누르는 경우 --/
                             }else{
                                 $(".menu-choice").each(function(){
                                     if($(this).children().eq(0).text() == addMenu.eq(0).text()){
@@ -609,6 +621,7 @@
                             $('.sum-payment').text(String(parseInt($('#sum').text().replace(transNumber, "")) - parseInt($('#pointUse').val())).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         });
                         
+                        // 메뉴 삭제
                         $('.menuRemove.btn.btn-danger.btn-sm').click(function(){
                             const addMenu = $(this).parent().prev().children();
 
@@ -631,7 +644,7 @@
                             $('.sum-payment').text(String(parseInt($('#sum').text().replace(transNumber, "")) - parseInt($('#pointUse').val())).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         })
                             
-                        // 수량 추가, 삭제
+                        // 메뉴 수량 감소
                         $(document).on('click', '.minus', function(){
                             const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
                             const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
@@ -663,6 +676,8 @@
                             $('#pointResult').text(String(parseInt(orderPrice/100)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                             $('.sum-payment').text(String(parseInt($('#sum').text().replace(transNumber, "")) - parseInt($('#pointUse').val())).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         });
+
+                        // 메뉴 수량 증가
                         $(document).on('click', '.plus', function(){
                             const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
                             const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
@@ -692,6 +707,8 @@
                             $('#pointResult').text(String(parseInt(orderPrice/100)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                             $('.sum-payment').text(String(parseInt($('#sum').text().replace(transNumber, "")) - parseInt($('#pointUse').val())).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                         });
+
+                        // 메뉴 수량 직접 입력
                         $(document).on('keyup', '.quantity', function(){
                             const addedMenuName = $(this).parents('.menu-choice').children().eq(0).text();
                             const MenuPrice = $(this).parents('.menu-choice').children().eq(2).text();
@@ -726,6 +743,7 @@
                                 $('.sum-payment').text(String(parseInt($('#sum').text().replace(transNumber, "")) - parseInt($('#pointUse').val())).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
                             });
                         });
+
                         // - / + 입력 방지
                         $(document).on('keydown', '.quantity', function(e){
                             if(!((e.keyCode > 95 && e.keyCode < 106)
@@ -734,64 +752,66 @@
                                 return false;
                             }
                         });
+
                         // 메뉴 취소 버튼
                         $('.cancel').click(function(){
                             $('.menu-select').css('display', 'none');
                         });
                             
+                        // 아임포트 결제 api
                         const IMP = window.IMP; 
                         IMP.init("imp44408883"); 
 
                         function payment() {
                             <% if(loginUser != null) { %>
-                            const menuChoice = document.querySelectorAll(".menuName"); // [td, td, ..]
-                            let menu = [];
-                            let payPortNum = Math.floor(Math.random()*10000) + $('.bookDate').val() + Math.floor(Math.random()*10000);
-                            for(let i=0; i<menuChoice.length; i++){
-                                menu.push(menuChoice[i].innerText);
-                            }
-                            // ["xx", "bb"]
-                            // IMP.request_pay(param, callback)
-                            IMP.request_pay({ // param
-                                pg: "html5_inicis",
-                                pay_method: "card",
-                                merchant_uid: "Fooding-" + payPortNum ,
-                                name: menu.join("<br>"),
-                                amount: $('#sum-payment').text().replace(transNumber, ""),
-                                buyer_email: $('.email').val(),
-                                buyer_name: $('.bookName').val(),
-                                buyer_tel: $('.bookPhone').val()
-                            }, function (rsp) { // callback
-                                let reservation = {
-                                    payPoint: $('#pointUse').val(),
-                                    savePoint: $('#pointResult').text().replace(transNumber, ""),
-                                    amount: $('#sum-payment').text().replace(transNumber, ""),
-                                    payMethod: rsp.pay_method,
-                                    bookName: rsp.buyer_name,
-                                    bookPhone: rsp.buyer_tel,
-                                    email: rsp.buyer_email,
-                                    bookDate: $('.bookDate').val(),
-                                    bookTime: $('.bookTime').val(),
-                                    people: $('.people').val(),
-                                    request: $('.request').val(),
-                                    userNo: <%= loginUser.getUserNo() %>,
-                                    resNo: <%= restaurant.getResNo() %>,
-                                    resName: "<%= restaurant.getResName() %>"
+                                const menuChoice = document.querySelectorAll(".menuName"); // [td, td, ..]
+                                let menu = [];
+                                let payPortNum = Math.floor(Math.random()*10000) + $('.bookDate').val() + Math.floor(Math.random()*10000);
+                                for(let i=0; i<menuChoice.length; i++){
+                                    menu.push(menuChoice[i].innerText);
                                 }
-                                if (rsp.success) {
-                                    $.ajax({
-                                        url: "<%= contextPath %>/insert.bo", // 예: https://www.myservice.com/payments/complete
-                                        method: "POST",
-                                        headers: { "Content-Type": "application/json" },
-                                        data: JSON.stringify(reservation),
-                                        dataType:"json",
-                                        contentType:"application/json; charset=UTF-8"
-                                    })
-                                    location.href = "<%= contextPath %>/check.bo"
-                                } else {
-                                    alert("결제에 실패했습니다.")
-                                };
-                            });
+                                // ["xx", "bb"]
+                                // IMP.request_pay(param, callback)
+                                IMP.request_pay({ // param
+                                    pg: "html5_inicis",
+                                    pay_method: "card",
+                                    merchant_uid: "Fooding-" + payPortNum ,
+                                    name: menu.join("<br>"),
+                                    amount: $('#sum-payment').text().replace(transNumber, ""),
+                                    buyer_email: $('.email').val(),
+                                    buyer_name: $('.bookName').val(),
+                                    buyer_tel: $('.bookPhone').val()
+                                }, function (rsp) { // callback
+                                    let reservation = {
+                                        payPoint: $('#pointUse').val(),
+                                        savePoint: $('#pointResult').text().replace(transNumber, ""),
+                                        amount: $('#sum-payment').text().replace(transNumber, ""),
+                                        payMethod: rsp.pay_method,
+                                        bookName: rsp.buyer_name,
+                                        bookPhone: rsp.buyer_tel,
+                                        email: rsp.buyer_email,
+                                        bookDate: $('.bookDate').val(),
+                                        bookTime: $('.bookTime').val(),
+                                        people: $('.people').val(),
+                                        request: $('.request').val(),
+                                        userNo: <%= loginUser.getUserNo() %>,
+                                        resNo: <%= restaurant.getResNo() %>,
+                                        resName: "<%= restaurant.getResName() %>"
+                                    }
+                                    if (rsp.success) {
+                                        $.ajax({
+                                            url: "<%= contextPath %>/insert.bo", // 예: https://www.myservice.com/payments/complete
+                                            method: "POST",
+                                            headers: { "Content-Type": "application/json" },
+                                            data: JSON.stringify(reservation),
+                                            dataType:"json",
+                                            contentType:"application/json; charset=UTF-8"
+                                        })
+                                        location.href = "<%= contextPath %>/check.bo"
+                                    } else {
+                                        alert("결제에 실패했습니다.")
+                                    };
+                                });
                             <% } %>
                         };
                       </script>
@@ -912,7 +932,6 @@
                                     }
                                 });
                         <% } %>
-                            console.log($('.general-condition').attr('checked'))
                             
                             $('#general-condition-detail1').slideUp();
                             $('#general-condition-detail2').slideUp();
