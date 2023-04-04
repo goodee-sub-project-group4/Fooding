@@ -224,11 +224,25 @@ public class BookDao {
 		return result;
 	}
 	
-	public int insertBookMenu(Connection conn, BookMenu bookMenu) {
+	public int insertBookMenu(Connection conn, String[] menuName, String[] menuQuantity) {
 		int result = 0;
-		
-		
-		
+		for(int i=0; i<menuName.length; i++) {
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("insertBookMenu");
+			
+			try {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, menuName[i]);
+					pstmt.setString(2, menuQuantity[i]);
+					pstmt.setString(3, menuName[i]);
+					
+					result += pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		}
 		return result;
 	}
 
@@ -524,21 +538,18 @@ public class BookDao {
 		return result;
 	}
 	
-	public int pointCancel(Connection conn, int bookNo, Book book) {
+	public int payPointCancel(Connection conn, int bookNo, Book book, int pointNow, int payPoint) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("pointCancel");
+		String sql = prop.getProperty("payPointCancel");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, book.getPayNo());
 			pstmt.setInt(2, book.getUserNo());
 			pstmt.setInt(3, book.getResNo());
-			pstmt.setString(4, book.getResName());
-			pstmt.setInt(5, book.getPayNo());
-			pstmt.setInt(6, book.getPayNo());
-			pstmt.setInt(7, book.getPayNo());
-			pstmt.setInt(8, book.getPayNo());
-			pstmt.setInt(9, book.getPayNo());
+			pstmt.setString(4, "포인트 사용 취소 " + book.getResName());
+			pstmt.setInt(5, payPoint);
+			pstmt.setInt(6, pointNow + payPoint);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -547,9 +558,53 @@ public class BookDao {
 		}
 		return result;
 	}
-		
-		
 	
+	public int savePointCancel(Connection conn, int bookNo, Book book, int pointNow, int savePoint) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("savePointCancel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, book.getPayNo());
+			pstmt.setInt(2, book.getUserNo());
+			pstmt.setInt(3, book.getResNo());
+			pstmt.setString(4, "포인트 적립 취소 " + book.getResName());
+			pstmt.setInt(5, savePoint);
+			pstmt.setInt(6, pointNow - savePoint);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
+	public ArrayList<BookMenu> selectBookMenuList(Connection conn, int bookNo) {
+		ArrayList<BookMenu> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBookMenuList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new BookMenu(rset.getString("menu_name")
+						            , rset.getInt("price")
+								    , rset.getInt("menu_count")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 
 }

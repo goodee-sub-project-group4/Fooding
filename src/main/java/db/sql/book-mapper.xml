@@ -138,6 +138,30 @@
 		     )
 	</entry>
 	
+	<entry key="insertBookMenu">
+		INSERT
+		  INTO BOOK_MENU
+		  (
+		  	BM_NO
+		  , BOOK_NO
+		  , MENU_NO
+		  , MENU_COUNT
+		  , BM_PRICE
+		  )
+		  VALUES
+		  (
+		    SEQ_BMNO.NEXTVAL
+		  , SEQ_BKNO.CURRVAL
+		  , (SELECT MENU_NO
+		       FROM MENU
+		      WHERE MENU_NAME = ?)
+		  , ?
+		  , (SELECT PRICE
+		       FROM MENU
+		      WHERE MENU_NAME = ?)
+		  )
+	</entry>
+	
 	<entry key="insertPayment">
 		INSERT 
 		  INTO PAYMENT
@@ -229,7 +253,9 @@
 	</entry>
 	
 	<entry key="selectBookList">
-		SELECT B.BOOK_NO
+		SELECT 
+	  DISTINCT
+			   B.BOOK_NO
 		     , B.USER_NO
 		     , B.RES_NO
 		     , RES_NAME
@@ -251,14 +277,12 @@
 		  JOIN RESTAURANT R ON (B.RES_NO = R.RES_NO)
           JOIN PAYMENT P ON (B.BOOK_NO = P.BOOK_NO)
 		 WHERE B.USER_NO = ?
-		   AND B.STATUS IN ('B', 'D')
 		 ORDER
 		    BY B.BOOK_NO DESC
-		   
 	</entry>
 	
 	<entry key="selectBook">
-		SELECT
+		SELECT 
 		       B.BOOK_NO
 		     , RES_NAME
 		     , BOOK_NAME
@@ -293,6 +317,8 @@
 		UPDATE 
 		       BOOK
 		   SET STATUS = 'C'
+		     , BOOK_DATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+		     , BOOK_TIME = TO_CHAR(SYSDATE, 'HH-MI-SS')
 		 WHERE BOOK_NO = ?
 	</entry>
 	
@@ -331,14 +357,14 @@
 			 , ?
 			 , ?
 			 , ?
-			 , - ?
-			 , - ?
+			 , ?
+			 , ?
 			 , ?
 			 , 'C'
 			 )
 	</entry>
 	
-	<entry key="cancelPayPoint">
+	<entry key="payPointCancel">
 		INSERT
 		  INTO POINT
 		     (
@@ -359,29 +385,44 @@
 		     , ?
 		     , ?
 		     , 'C'
-		     , SELECT NVL(SUM(-POINT_TRADE), 0) 
-				 FROM POINT
-				WHERE PAY_NO = ?
-				  AND STATUS = 'B';
-				 FROM POINT
-				WHERE PAY_NO = ?
-		     , SELECT POINT_NOW - SELECT NVL(SUM((SELECT SUM(-POINT_TRADE) 
-                 				 					FROM POINT
-                 								   WHERE PAY_NO = ?
-                   				  					 AND STATUS = 'B') + (SELECT SUM(POINT_TRADE)
-                                         				 					FROM POINT
-                                         								   WHERE PAY_NO = ?
-                                           				  					 AND STATUS = 'U')), 0) "POINT_NOW"
-			     FROM POINT
-			    WHERE PAY_NO = ?
-			      AND ROWNUM = 1
-			    ORDER
-			       BY POINT_NO ASC
+		     , ?
+		     , ?
+		     )
 	</entry>
 	
-	<entry key="cancelSavePoint">
-	
+	<entry key="savePointCancel">
+		INSERT
+		  INTO POINT
+	      (
+	        POINT_NO
+	      , PAY_NO
+		  , USER_NO
+		  , RES_NO
+		  , POINT_NAME
+		  , STATUS
+		  , POINT_TRADE
+		  , POINT_NOW
+	      )
+		  VALUES
+		  (
+	        SEQ_PNO.NEXTVAL
+	      , ?
+	      , ?
+	      , ?
+	      , ?
+	      , 'C'
+	      , ?
+	      , ?
+	      )
 	</entry>
 	
+	<entry key="selectBookMenuList">
+		SELECT MENU_NAME
+		     , PRICE
+		     , MENU_COUNT
+		  FROM BOOK_MENU BM
+		  JOIN MENU M ON M.MENU_NO = BM.MENU_NO
+		 WHERE BM.BOOK_NO = ?
+	</entry>
 	
 </properties>

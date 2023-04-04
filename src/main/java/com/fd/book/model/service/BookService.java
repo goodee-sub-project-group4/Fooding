@@ -71,21 +71,17 @@ public class BookService {
 	}
 
 	// 예약 등록
-	public void insertBook(Book book, BookMenu bookMenu,  Payment payment, Point point) {
+	public void insertBook(Book book, Payment payment, Point point, String[] menuName, String[] menuQuantity) {
 		Connection conn = getConnection();
 		int insertBook = new BookDao().insertBook(conn, book);
-		int insertBookMenu = new BookDao().insertBookMenu(conn, bookMenu);
+		int insertBookMenu = new BookDao().insertBookMenu(conn, menuName, menuQuantity);
 		int insertPayment = new BookDao().insertPayment(conn, payment);
+		int insertPayPoint = 1;
 		if(payment.getPayPoint() > 0) {
-			int insertPayPoint = new BookDao().insertPayPoint(conn, point);
-			if(insertPayPoint > 0) {
-				commit(conn);
-			}else {
-				rollback(conn);
-			}
+			insertPayPoint = new BookDao().insertPayPoint(conn, point);
 		}
 		int insertSavePoint = new BookDao().insertSavePoint(conn, point);
-		if(insertBook > 0 && insertPayment > 0 && insertSavePoint > 0) {
+		if(insertBook * insertBookMenu * insertPayment * insertSavePoint * insertPayPoint > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
@@ -134,26 +130,35 @@ public class BookService {
 	}
 
 	// 예약 취소
-	public Book bookCancel(int bookNo) {
+	public Book bookCancel(int bookNo, int payPoint, int savePoint, int userNo) {
 		Connection conn = getConnection();
-		int result1 = new BookDao().bookCancel(conn, bookNo);
-		if(result1 > 0) {
+		int bookCancel = new BookDao().bookCancel(conn, bookNo);
+		if(bookCancel > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		Book book = new BookDao().selectBookCancel(conn, bookNo);
-		int result2 = new BookDao().paymentCancel(conn, bookNo, book);
-		int result3 = new BookDao().pointCancel(conn, bookNo, book);
-		if(result1 > 0 && result2 > 0 && result3 > 0) {
+		int paymentCancel = new BookDao().paymentCancel(conn, bookNo, book);
+		int payPointCancel = 1;
+		int pointNow = new BookDao().selectPoint(conn, userNo);
+		if(payPoint > 0) {
+			payPointCancel = new BookDao().payPointCancel(conn, bookNo, book, pointNow, payPoint);
+			pointNow = new BookDao().selectPoint(conn, userNo);
+		}
+		int savePointCancel = new BookDao().savePointCancel(conn, bookNo, book, pointNow, savePoint);
+		if(bookCancel * paymentCancel * payPointCancel * savePointCancel > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
-		
 		close(conn);
 		return book;
 	}
 
-	
+	public ArrayList<BookMenu> selectBookMenuList(int bookNo) {
+		Connection conn = getConnection();
+		return new BookDao().selectBookMenuList(conn, bookNo);
+	}
+
 }

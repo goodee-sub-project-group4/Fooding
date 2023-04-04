@@ -416,6 +416,18 @@
 	margin: auto;
 	padding-top: 30px;
 }
+
+#bookListEmpty{
+	width: 100%;
+    font-size: 20px;
+    color: gray;
+    height: 450px;
+    text-align: center;
+    line-height: 450px;
+    border: 2px solid gainsboro;
+	background-color: whitesmoke;
+    font-weight: 600;
+}
 </style>
 
 </head>
@@ -436,79 +448,126 @@
 		</div>
 		<% if(!book.isEmpty()) { %>
 			<% for(Book b : book) { %>
-				<div class="selectList-main">
-					<b style="font-size: larger;">결제일시 &nbsp;&nbsp;&nbsp; <%= b.getBookA() %></b>
-					<hr
-						style="display: block; margin-top: 5px; margin-bottom: 30px; background: black; height: 2px;">
-		
-					<div>
-						<div class="selectList-no" style="font-size: 20px;"><%= b.getBookNo() %></div>
-						<img src="<%= b.getrImg() %>" alt="" class="selectList-img">
+				<% if(b.getStatus().equals("B")) { %>
+					<div class="selectList-main">
+						<b style="font-size: larger;">결제일시 &nbsp;&nbsp;&nbsp; <%= b.getBookA() %></b>
+						<hr
+							style="display: block; margin-top: 5px; margin-bottom: 30px; background: black; height: 2px;">
+			
 						<div>
-							<div class="selectList-text">
-		
-								<table>
-									<tr>
-										<th style="width: 80px; height: 70px;">업체명</th>
-										<td style="width: 250px;" class="ResName"><%= b.getResName() %></td>
-									</tr>
-									<tr>
-										<td style="height: 40px;">예약일시</td>
-										<td><%= b.getBookDate() %> <%= b.getBookTime() %></td>
-									</tr>
-									<tr>
-										<td style="height: 40px;">예약인원</td>
-										<td><%= b.getPeople() %>명</td>
-									</tr>
-									<tr>
-										<td style="height: 40px;">결제금액</td>
-										<td><%= b.getPayTotal() %>원</td>
-									</tr>
-								</table>
-							</div>
-							<div class="selectList-btn">
-								<div class="allways-btn">
-									<div>
-										<button type="button" class="btn btn-outline-secondary select">상세조회</button>
-									</div>
-									<div>
-										<button type="button" class="btn btn-outline-secondary">문의하기</button>
-									</div>
+							<div class="selectList-no" style="font-size: 20px;"><%= b.getBookNo() %></div>
+							<img src="<%= b.getrImg() %>" alt="" class="selectList-img">
+							<div>
+								<div class="selectList-text">
+			
+									<table>
+										<tr>
+											<th style="width: 80px; height: 70px;">업체명</th>
+											<td style="width: 250px;" class="ResName"><%= b.getResName() %></td>
+										</tr>
+										<tr>
+											<td style="height: 40px;">예약일시</td>
+											<td><%= b.getBookDate() %> <%= b.getBookTime() %></td>
+										</tr>
+										<tr>
+											<td style="height: 40px;">예약인원</td>
+											<td><%= b.getPeople() %>명</td>
+										</tr>
+										<tr>
+											<td style="height: 40px;">결제금액</td>
+											<td><%= b.getPayTotal() %>원</td>
+										</tr>
+									</table>
 								</div>
-								<% System.out.println(b.getStatus()); %>
-								<% if(b.getStatus().equals("D")) { %>
-								<div class="service-complete-btn">
-									<div>
-										<button id="<%= b.getResNo() %>" type="button" class="btn btn-outline-danger review"
-											data-toggle="modal" data-target="#reviewModal">리뷰쓰기</button>
+								<div class="selectList-btn">
+									<div class="allways-btn">
+										<div>
+											<button type="button" class="btn btn-outline-secondary select">상세조회</button>
+										</div>
+										<div>
+											<button type="button" class="btn btn-outline-secondary">문의하기</button>
+										</div>
 									</div>
-									<div>
-										<button type="button" class="btn btn-outline-danger">신고하기</button>
-									</div>
+									<% if(b.getStatus().equals("D")) { %>
+										<div class="service-complete-btn">
+											<div>
+												<button id="<%= b.getResNo() %>" type="button" class="btn btn-outline-danger review"
+													data-toggle="modal" data-target="#reviewModal">리뷰쓰기</button>
+											</div>
+											<div>
+												<button type="button" class="btn btn-outline-danger">신고하기</button>
+											</div>
+										</div>
+									<% } %>
 								</div>
-								<% } %>
 							</div>
 						</div>
 					</div>
-				</div>
+				<% } else if(b.getStatus().equals("C")) { %>
+					<div class="selectList-main">
+						<b style="font-size: larger; color: crimson;">결제일시 &nbsp;&nbsp;&nbsp; <%= b.getBookA() %></b>
+						<hr
+							style="display: block; margin-top: 5px; margin-bottom: 30px; background: crimson; height: 2px;">
+			
+						<div>
+							<div class="selectList-no"><b style="font-size: 20px; color: crimson;"><%= b.getBookNo() %></b></div>
+							<img src="<%= b.getrImg() %>" alt="" class="selectList-img">
+							<div>
+								<div class="selectList-text">
+			
+									<table>
+										<tr>
+											<th style="width: 80px; height: 70px; color: gray;"><b>업체명</b></th>
+											<td style="width: 250px; color: crimson;" class="ResName"><b><%= b.getResName() %></b> 
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:crimson">예약 취소</b>
+											</td>
+										</tr>
+										<tr>
+											<td style="height: 40px;">취소일시</td>
+											<td style="color: crimson"><b><%= b.getBookDate() %> <%= b.getBookTime() %></b></td>
+										</tr>
+										<tr>
+											<td style="height: 40px;">예약인원</td>
+											<td style="color: crimson"><b><%= b.getPeople() %>명</b></td>
+										</tr>
+										<tr>
+											<td style="height: 40px;">환불금액</td>
+											<td style="color: crimson"><b>-<%= b.getPayTotal() %>원</b></td>
+										</tr>
+									</table>
+								</div>
+								<div class="selectList-btn">
+									<div class="allways-btn">
+										<div>
+											<button type="button" class="btn btn-outline-danger select">상세조회</button>
+										</div>
+										<div>
+											<button type="button" class="btn btn-outline-danger">문의하기</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% } %>
 			<% } %>
+		<% } else { %>
+			<div id="bookListEmpty">
+				예약내역이 없습니다.
+			</div>
 		<% } %>
-		<script>
-			$(function(){
-				$('.select').click(function(){
-					let bookNo = $(this).parent().parent().parent().parent().prev().prev().text()
-					$('#bookNo').attr('value', bookNo);
-					location.href = "<%= contextPath %>/checkDetail.bo?bookNo="+bookNo
-				})
-			})
-		</script>
-
-		<br>
-		<br>
-		
+		<br><br>
 	</div>
 
 	<script>
+		$(function(){
+			$('.select').click(function(){
+				let bookNo = $(this).parent().parent().parent().parent().prev().prev().text()
+				$('#bookNo').attr('value', bookNo);
+				location.href = "<%= contextPath %>/checkDetail.bo?bookNo="+bookNo
+			})
+		})
+
 		$('.btn.btn-outline-danger.review').click(function(){
 			const resName = $(this).parent().parent().parent().prev().children().children().children().eq(0).children().eq(1).text();
 			const imgSrc = $(this).parent().parent().parent().parent().prev().attr('src');

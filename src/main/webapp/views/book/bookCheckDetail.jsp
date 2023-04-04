@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.fd.book.model.vo.Book" %>
+<%@ page import="com.fd.book.model.vo.Book, com.fd.book.model.vo.BookMenu"%>
+<%@ page import="java.util.ArrayList" %>
 <%
 	Book book = (Book)request.getAttribute("book");
+	ArrayList<BookMenu> bookMenu = (ArrayList<BookMenu>)request.getAttribute("bookMenu");
 %>
 <!DOCTYPE html>
 <html>
@@ -29,9 +31,10 @@
 
 	/* 메뉴정보 */
 	.menu-details{width: 800px; min-height: 50px; max-height: 300px; overflow-y: auto; margin-top: 20px; margin-bottom: 15px;}
-	.menu-one{width: 800px; height: 100%; margin-bottom: 15px;}
-	.detail-menuName{width: 50%; float: left; font-size: 15px;}
-	.detail-menuPrice{width: 50%; float: left; text-align: right; font-size: 20px;}
+	.menu-one{width: 800px; height: 20px; margin-bottom: 15px;}
+	.detail-menuName{width: 70%; float: left; font-size: 15px;}
+	.detail-menuCount{width: 5%; float: left; font-size: 15px;}
+	.detail-menuPrice{width: 25%; float: left; text-align: right; font-size: 20px; line-height: 20px;}
 	#detail-content3{width: 100%; background-color: whitesmoke; margin-top: 30px; margin-bottom: 50px;}
 
 	/* 결제정보 */
@@ -182,14 +185,15 @@
 		<div id="detail-content2">
 			<b class="detail-index">예약메뉴</b>
 			<div class="menu-details">
-				<div class="menu-one">
-					<div class="detail-menuName">1. 도쿄 수제 함바그 고젠</div>
-					<div class="detail-menuPrice">12,000 원</div>
-				</div>
-				<div class="menu one">
-					<div class="detail-menuName">2. 치킨 스테이크 고젠</div>
-					<div class="detail-menuPrice">25,000 원</div>
-				</div>
+				<% if(!bookMenu.isEmpty()) { %> 
+					<% for(BookMenu bm : bookMenu) { %>
+						<div class="menu-one">
+							<div class="detail-menuName"><%= bm.getMenuName() %></div>
+							<div class="detail-menuCount"><%= bm.getMenuCount() %> 개</div>
+							<div class="detail-menuPrice"><%= bm.getMenuCount() * bm.getPrice() %> 원</div>
+						</div>
+					<% } %>
+				<% } %>
 			</div>
 			<div id="detail-price">
 				<div style="width: 50%; float: left; font-size: 25px;">합 계</div>
@@ -249,6 +253,9 @@
 				<form action="<%= contextPath %>/cancel.bo">
 					<button type="submit" id="btn" class="btn btn-outline-danger btn-lg">예약취소</button>
 					<input type="hidden" name="bookNo" value="<%= book.getBookNo() %>">
+					<input type="hidden" name="pointNow" value="<%= book.getPointNow() %>">
+					<input type="hidden" name="payPoint" value="<%= book.getPayPoint() %>">
+					<input type="hidden" name="savePoint" value="<%= book.getPayTotal() / 100 %>">
 				</form>
 			<% } %>
 		</div>

@@ -53,7 +53,6 @@ public class BookMainController extends HttpServlet {
 		
 		// 메뉴 정보 조회
 		ArrayList<Menu> menuList = new BookService().selectMenu(resNo);
-		System.out.println(menuList);
 		// 리뷰 평점, 조회수, 개수 조회
 		Review review = new BookService().selectReviewData(resNo);
 		// 리뷰 정보 조회

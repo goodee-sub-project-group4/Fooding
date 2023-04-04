@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fd.book.model.service.BookService;
 import com.fd.book.model.vo.Book;
+import com.fd.member.model.vo.Member;
 
 /**
  * Servlet implementation class BookCancelController
@@ -31,9 +32,13 @@ public class BookCancelController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bookNo = Integer.parseInt(request.getParameter("bookNo"));
+		HttpSession session = request.getSession();
 		
-		Book b = new BookService().bookCancel(bookNo);
+		int bookNo = Integer.parseInt(request.getParameter("bookNo"));
+		int payPoint = Integer.parseInt(request.getParameter("payPoint"));
+		int savePoint = Integer.parseInt(request.getParameter("savePoint"));
+		int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		Book b = new BookService().bookCancel(bookNo, payPoint, savePoint, userNo);
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

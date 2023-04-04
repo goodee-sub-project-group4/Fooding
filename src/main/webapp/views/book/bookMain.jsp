@@ -765,10 +765,15 @@
                         function payment() {
                             <% if(loginUser != null) { %>
                                 const menuChoice = document.querySelectorAll(".menuName"); // [td, td, ..]
+                                const menuQuantity = document.querySelectorAll(".quantity"); 
                                 let menu = [];
+                                let menuName = '';
+                                let quantity = '';
                                 let payPortNum = Math.floor(Math.random()*10000) + $('.bookDate').val() + Math.floor(Math.random()*10000);
                                 for(let i=0; i<menuChoice.length; i++){
                                     menu.push(menuChoice[i].innerText);
+                                    menuName += menuChoice[i].innerText + ',';
+                                    quantity += menuQuantity[i].value + ',';
                                 }
                                 // ["xx", "bb"]
                                 // IMP.request_pay(param, callback)
@@ -796,7 +801,9 @@
                                         request: $('.request').val(),
                                         userNo: <%= loginUser.getUserNo() %>,
                                         resNo: <%= restaurant.getResNo() %>,
-                                        resName: "<%= restaurant.getResName() %>"
+                                        resName: "<%= restaurant.getResName() %>",
+                                        menuName: menuName,
+                                        menuQuantity: quantity
                                     }
                                     if (rsp.success) {
                                         $.ajax({
@@ -804,10 +811,17 @@
                                             method: "POST",
                                             headers: { "Content-Type": "application/json" },
                                             data: JSON.stringify(reservation),
-                                            dataType:"json",
-                                            contentType:"application/json; charset=UTF-8"
+                                            // dataType:"json",
+                                            contentType:"application/json; charset=UTF-8",
+                                            success:function(result){
+                                                if(result > 0){
+                                                    location.href = "<%= contextPath %>/check.bo"
+                                                }
+                                            }, error:function(){
+                                                alert('결제에 실패했습니다.')
+                                            }
                                         })
-                                        location.href = "<%= contextPath %>/check.bo"
+                                        
                                     } else {
                                         alert("결제에 실패했습니다.")
                                     };

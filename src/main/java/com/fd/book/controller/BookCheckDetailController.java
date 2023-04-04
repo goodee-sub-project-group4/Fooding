@@ -1,6 +1,7 @@
 package com.fd.book.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fd.book.model.service.BookService;
 import com.fd.book.model.vo.Book;
+import com.fd.book.model.vo.BookMenu;
 
 /**
  * Servlet implementation class BookCheckDetailController
@@ -32,8 +34,10 @@ public class BookCheckDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int bookNo = Integer.parseInt(request.getParameter("bookNo"));
 		Book book = new BookService().selectBook(bookNo);
+		ArrayList<BookMenu> bookMenu = new BookService().selectBookMenuList(bookNo);
 		
 		request.setAttribute("book", book);
+		request.setAttribute("bookMenu", bookMenu);
 		request.getRequestDispatcher("views/book/bookCheckDetail.jsp").forward(request, response);
 	}
 
