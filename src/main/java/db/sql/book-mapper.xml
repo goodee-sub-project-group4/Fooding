@@ -284,6 +284,7 @@
 	<entry key="selectBook">
 		SELECT 
 		       B.BOOK_NO
+		     , POINT_NO
 		     , RES_NAME
 		     , BOOK_NAME
 		     , BOOK_PHONE
@@ -311,6 +312,8 @@
 		  JOIN PAYMENT P ON (B.BOOK_NO = P.BOOK_NO)
 		  JOIN POINT PO ON (P.PAY_NO = PO.PAY_NO)
 		 WHERE B.BOOK_NO = ?
+		 ORDER
+		    BY POINT_NO DESC
 	</entry>
 	
 	<entry key="bookCancel">

@@ -41,6 +41,7 @@ public class RestBookListController extends HttpServlet {
 			int resNo = ((Restaurant)session.getAttribute("loginRest")).getResNo();
 			ArrayList<Book> list = new RestaurantService().selectBookList(resNo);
 			request.setAttribute("list", list);
+			System.out.println(list);
 			request.getRequestDispatcher("views/restaurant/restBook.jsp").forward(request, response);
 		}
 			
