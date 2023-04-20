@@ -1,4 +1,5 @@
-# Fooding
+<img src="https://user-images.githubusercontent.com/115603203/233257709-e43d4700-0b28-4065-8916-6e6ca982de1f.png">
+
 
 
 ### 맛집 검색&예약 웹사이트
