@@ -488,17 +488,6 @@
 											<button type="button" class="btn btn-outline-secondary">문의하기</button>
 										</div>
 									</div>
-									<% if(b.getStatus().equals("D")) { %>
-										<div class="service-complete-btn">
-											<div>
-												<button id="<%= b.getResNo() %>" type="button" class="btn btn-outline-danger review"
-													data-toggle="modal" data-target="#reviewModal">리뷰쓰기</button>
-											</div>
-											<div>
-												<button type="button" class="btn btn-outline-danger">신고하기</button>
-											</div>
-										</div>
-									<% } %>
 								</div>
 							</div>
 						</div>
@@ -510,41 +499,97 @@
 							style="display: block; margin-top: 5px; margin-bottom: 30px; background: crimson; height: 2px;">
 			
 						<div>
-							<div class="selectList-no"><b style="font-size: 20px; color: crimson;"><%= b.getBookNo() %></b></div>
+							<div class="selectList-no" style="font-size: 20px;"><%= b.getBookNo() %></div>
 							<img src="<%= b.getrImg() %>" alt="" class="selectList-img">
 							<div>
 								<div class="selectList-text">
 			
 									<table>
 										<tr>
-											<th style="width: 80px; height: 70px; color: gray;"><b>업체명</b></th>
-											<td style="width: 250px; color: crimson;" class="ResName"><b><%= b.getResName() %></b> 
+											<th style="width: 80px; height: 70px;"><b>업체명</b></th>
+											<td style="width: 250px;" class="ResName"><%= b.getResName() %> 
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:crimson">예약 취소</b>
 											</td>
 										</tr>
 										<tr>
 											<td style="height: 40px;">취소일시</td>
-											<td style="color: crimson"><b><%= b.getBookDate() %> <%= b.getBookTime() %></b></td>
+											<td><%= b.getBookDate() %> <%= b.getBookTime() %></td>
 										</tr>
 										<tr>
 											<td style="height: 40px;">예약인원</td>
-											<td style="color: crimson"><b><%= b.getPeople() %>명</b></td>
+											<td><%= b.getPeople() %>명</td>
 										</tr>
 										<tr>
 											<td style="height: 40px;">환불금액</td>
-											<td style="color: crimson"><b>-<%= b.getPayTotal() %>원</b></td>
+											<td>-<%= b.getPayTotal() %>원</td>
 										</tr>
 									</table>
 								</div>
 								<div class="selectList-btn">
 									<div class="allways-btn">
 										<div>
-											<button type="button" class="btn btn-outline-danger select">상세조회</button>
+											<button type="button" class="btn btn-outline-secondary select">상세조회</button>
 										</div>
 										<div>
-											<button type="button" class="btn btn-outline-danger">문의하기</button>
+											<button type="button" class="btn btn-outline-secondary">문의하기</button>
 										</div>
 									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% } else { %>
+					<div class="selectList-main">
+						<b style="font-size: larger; color: dodgerblue;">결제일시 &nbsp;&nbsp;&nbsp; <%= b.getBookA() %></b>
+						<hr
+							style="display: block; margin-top: 5px; margin-bottom: 30px; background: dodgerblue; height: 2px;">
+			
+						<div>
+							<div class="selectList-no" style="font-size: 20px;"><%= b.getBookNo() %></div>
+							<img src="<%= b.getrImg() %>" alt="" class="selectList-img">
+							<div>
+								<div class="selectList-text">
+			
+									<table>
+										<tr>
+											<th style="width: 80px; height: 70px;">업체명</th>
+											<td style="width: 250px;" class="ResName"><%= b.getResName() %>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:dodgerblue">이용 완료</b></td>
+										</tr>
+										<tr>
+											<td style="height: 40px;">예약일시</td>
+											<td><%= b.getBookDate() %> <%= b.getBookTime() %></td>
+										</tr>
+										<tr>
+											<td style="height: 40px;">예약인원</td>
+											<td><%= b.getPeople() %>명</td>
+										</tr>
+										<tr>
+											<td style="height: 40px;">결제금액</td>
+											<td><%= b.getPayTotal() %>원</td>
+										</tr>
+									</table>
+								</div>
+								<div class="selectList-btn">
+									<div class="allways-btn">
+										<div>
+											<button type="button" class="btn btn-outline-secondary select">상세조회</button>
+										</div>
+										<div>
+											<button type="button" class="btn btn-outline-secondary">문의하기</button>
+										</div>
+									</div>
+									<% if(b.getStatus().equals("D")) { %>
+										<div class="service-complete-btn">
+											<div>
+												<button id="<%= b.getResNo() %>" type="button" class="btn btn-outline-primary review"
+													data-toggle="modal" data-target="#reviewModal">리뷰쓰기</button>
+											</div>
+											<div>
+												<button type="button" class="btn btn-outline-primary">신고하기</button>
+											</div>
+										</div>
+									<% } %>
 								</div>
 							</div>
 						</div>
@@ -564,7 +609,17 @@
 			$('.select').click(function(){
 				let bookNo = $(this).parent().parent().parent().parent().prev().prev().text()
 				$('#bookNo').attr('value', bookNo);
-				location.href = "<%= contextPath %>/checkDetail.bo?bookNo="+bookNo
+				const form = document.createElement('form');
+				form.setAttribute('type', 'hidden');
+				form.setAttribute('action', 'checkDetail.bo');
+				form.setAttribute('method', 'POST');
+				const input = document.createElement('input');
+				input.setAttribute('type', 'hidden');
+				input.setAttribute('name', 'bookNo');
+				input.setAttribute('value', bookNo);
+				form.append(input);
+				document.body.append(form);
+				form.submit();
 			})
 		})
 

@@ -5,6 +5,7 @@
 <%
 	Book book = (Book)request.getAttribute("book");
 	ArrayList<BookMenu> bookMenu = (ArrayList<BookMenu>)request.getAttribute("bookMenu");
+	int point = (int)request.getAttribute("point");
 %>
 <!DOCTYPE html>
 <html>
@@ -52,7 +53,7 @@
 	<%@ include file="/views/common/myPageSidebar.jsp" %>
 
 	<div id="detail-main">
-		<% if(book.getStatus() == "C") { %>
+		<% if(book.getStatus().equals("C")) { %>
 		<!-- 예약 취소 -->
 		<b style="font-size: 30px; color: crimson;">취소 처리된 예약입니다</b>
 		<br><br>
@@ -60,7 +61,7 @@
 			<!-- <b style="font-size: 20px;">&lt;취소 사유 : 업체 취소&gt;</b> -->
 			<!-- 사용자 취소 -->
 			<!-- <b style="font-size: 20px;">&lt;취소 사유 : 사용자 취소&gt;</b> -->
-		<% }else if(book.getStatus() == "D"){ %>
+		<% }else if(book.getStatus().equals("D")){ %>
 		<!-- 이용 완료 -->
 		<b style="font-size: 30px; color: dodgerblue;">이용 완료된 예약입니다</b>
 		<% }else{ %>
@@ -201,14 +202,36 @@
 			</div>
 		</div>
 		<div id="detail-content3">
-			<b class="detail-index">결제내역</b>
-			<br><br>
-			<b>결제방법 - 카드결제</b>
-			<br>
-			<b>적립금내역</b>
-			<br><br>
+			<% if(book.getStatus().equals("C")) { %>
+				<b class="detail-index" style="color: crimson">취소내역</b>
+				<br><br>
+				<b>결제방법 - 카드결제</b>
+				<br>
+				<b>적립금 취소 내역</b>
+				<br><br>
+			<% } else { %>
+				<b class="detail-index">결제내역</b>
+				<br><br>
+				<b>결제방법 - 카드결제</b>
+				<br>
+				<b>적립금내역</b>
+				<br><br>
+			<% } %>
 			<table style="width: 100%; font-size: 20px;">
-				<% if(book.getStatus() != "C") { %>
+				<% if(book.getStatus().equals("C")) { %>
+				<tr>
+					<td style="width: 50%;">적립금 사용 취소</td>
+					<td style="width: 50%; text-align: right;">+ <%= book.getPayPoint() %> 원</td>
+				</tr>
+				<tr>
+					<td>적립 취소</td>
+					<td style="text-align: right;">- <%= book.getPayTotal() / 100 %> 원</td>
+				</tr>
+				<tr>
+					<td>적립금 잔액</td>
+					<td style="text-align: right;"><%= book.getPointNow() %> 원</td>
+				</tr>
+				<% }else{ %>
 				<tr>
 					<td style="width: 50%;">적립금 사용</td>
 					<td style="width: 50%; text-align: right;">- <%= book.getPayPoint() %> 원</td>
@@ -220,36 +243,24 @@
 				<tr>
 					<td>적립금 잔액</td>
 					<td style="text-align: right;"><%= book.getPointNow() %> 원</td>
-				</tr>
-				<% }else{ %>
-				<tr>
-					<td style="width: 50%;">적립금 사용</td>
-					<td style="width: 50%; text-align: right;">+ <%= book.getPayPoint() %> 원</td>
-				</tr>
-				<tr>
-					<td>적립</td>
-					<td style="text-align: right;">- <%= book.getPayTotal() / 100 %> 원</td>
-				</tr>
-				<tr>
-					<td>적립금 잔액</td>
-					<td style="text-align: right;"><%= book.getPointNow() %> 원</td>
+					
 				</tr>
 				<% } %>
 			</table>
 			<br>
 			<div class="" style="background-color: whitesmoke; width: 100%; height: 50px; line-height: 50px; float: left;">
-				<div style="width: 50%; float: left; font-size: 25px;">결제 금액</div>
-				<% if(book.getStatus() != "C") { %>
-				<div style="width: 50%; float: right; text-align: right; font-size: 25px;"><%= book.getPayTotal() %> 원</div>
+				<% if(book.getStatus().equals("C")) { %>
+					<!-- 결제 취소 -->
+					<div style="width: 50%; float: left; font-size: 25px;">결제 취소</div>
+					<div style="width: 50%; float: right; text-align: right; font-size: 25px;">-&nbsp;<%= book.getPayTotal() %> 원</div>
 				<% }else{ %>
-				<!-- 결제 취소 -->
-				<div style="width: 50%; float: left; font-size: 25px;">결제 취소</div>
-				<div style="width: 50%; float: right; text-align: right; font-size: 25px;"><%= book.getPayTotal() %> 원</div>
+					<div style="width: 50%; float: left; font-size: 25px;">결제 금액</div>
+					<div style="width: 50%; float: right; text-align: right; font-size: 25px;"><%= book.getPayTotal() %> 원</div>
 				<% } %>
 			</div>
 		</div>
 		<div style="width: 100%; height: 150px; margin-top: 50px;">
-			<% if(book.getStatus() != "C") { %>
+			<% if(book.getStatus().equals("B")) { %>
 				<form action="<%= contextPath %>/cancel.bo">
 					<button type="submit" id="btn" class="btn btn-outline-danger btn-lg">예약취소</button>
 					<input type="hidden" name="bookNo" value="<%= book.getBookNo() %>">
