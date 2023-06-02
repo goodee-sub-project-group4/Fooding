@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Notice" %>
+<%@ page import="java.util.ArrayList, com.fd.admin.model.vo.Notice, com.fd.common.model.vo.PageInfo" %>
 <%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
@@ -31,7 +32,7 @@
         line-height: 25px;     
         }
         
-        tbody:hover {cursor:pointer;}
+        tbody tr:hover {cursor:pointer; background-color:rgb(250, 249, 249);}
 
         /*페이징바*/
         .pagination a{
@@ -99,15 +100,20 @@
     
             <div>
                 <ul class="pagination justify-content-center" style="margin:50px 0">
-                    <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+                	<% if(pi.getCurrentPage() != 1) { %>
+                    	<li class="page-item"><button class="page-link">&lt;</button></li>
+                    <% } %>
+                    
+                    <% for(int p=pi.getStartPage(); p<pi.getEndPage(); p++) { %>
+                    	<li class="page-item"><button class="page-link" onclick="location.href='/Fooding/notice.me?cpage=<%=p%>'"><%=p%></button></li>
+                    <% } %>
+                    
+                    <% if(pi.getCurrentPage() != pi.getMaxPage()) { %>
+                    <li class="page-item"><button class="page-link">&gt;</button></li>
+                    <% } %>
                 </ul>
             </div> 
+            
             <br><br><br>
         </div>
         

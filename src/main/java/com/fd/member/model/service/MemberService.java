@@ -88,13 +88,13 @@ public class MemberService {
 		Connection conn = getConnection();
 		int result = new MemberDao().updateMember(conn, m);
 		Member updateMem = null;
-		if(result > 0) {
+		if(result > 0) { //  변경 성공시
 			commit(conn);
 			// 갱신된 회원 객체 다시 조회 m대신 updateMem
 			updateMem = new MemberDao().selectMember(conn, m.getUserId(), m.getUpdatePwd());
 			
 		} else {
-			rollback(conn); // 변경에 실패 시 null
+			rollback(conn); // 변경에 실패시 null
 		}
 		
 		close(conn);

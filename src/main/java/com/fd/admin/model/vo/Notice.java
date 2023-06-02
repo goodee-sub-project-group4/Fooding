@@ -6,6 +6,7 @@ public class Notice {
 	
 	private int noticeNo;
 	private String userNo;
+	private String userId;
 	private String noticeTitle;
 	private String noticeContent;
 	private Date createDate;
@@ -13,9 +14,7 @@ public class Notice {
 	private int count;
 	private String toWhom;
 	private String status;
-	
 	private String boardType;	// 공지사항 공지사항 N / 리뷰 R / 1:1문의 Q
-
 
 	public Notice() {}
 
@@ -59,7 +58,6 @@ public class Notice {
 		this.createDate = createDate;
 	}
 	
-	
 	// 공지사항 게시글 정보 조회
 	public Notice(int noticeNo, String noticeTitle, String noticeContent, String userNo, Date createDate) {
 		super();
@@ -68,6 +66,16 @@ public class Notice {
 		this.noticeContent = noticeContent;
 		this.userNo = userNo;
 		this.createDate = createDate;
+	}
+	
+	// 공지사항 페이징
+	public Notice(int noticeNo, String userId, String noticeTitle, Date modifyDate, int count) {
+		super();
+		this.noticeNo = noticeNo;
+		this.userId = userId;
+		this.noticeTitle = noticeTitle;
+		this.modifyDate = modifyDate;
+		this.count = count;
 	}
 
 	public int getNoticeNo() {
@@ -148,6 +156,14 @@ public class Notice {
 
 	public void setBoardType(String boardType) {
 		this.boardType = boardType;
+	}
+	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	@Override

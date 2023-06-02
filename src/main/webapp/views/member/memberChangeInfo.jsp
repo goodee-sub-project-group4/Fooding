@@ -98,7 +98,7 @@
                     <tr>
                         <th>닉네임</th>
                         <td class="input-area2"><input type="text" size="55" name="nickname" value="<%=nickname%>" placeholder="닉네임을 입력해주세요" required></td>
-                        <!-- <td class="input-area3-nickname"><button type="button" class="btn btn-danger">중복확인</button></td> -->
+                        <td class="input-area3-nickname"><button type="button" class="btn btn-danger">중복확인</button></td>
                     </tr>
                     <tr>
                         <th>이메일</th>
@@ -108,12 +108,12 @@
                     <tr>
                         <th>휴대폰</th>
                         <td class="input-area2"><input type="text" size="55" name="userPhone" value="<%=userPhone%>" placeholder="-빼고 숫자만 입력해주세요"></td>
-                        <!-- <td class="input-area3-phone"><button type="button" class="btn btn-danger">다른번호 인증</button></td> -->
+                        <td class="input-area3-phone"><button type="button" class="btn btn-danger">다른번호 인증</button></td>
                     </tr>
                     <tr>
                         <th></th>
                         <td class="input-area2"><input type="text" size="55"></td>
-                        <!-- <td class="input-area3-phone"><button type="button" class="btn btn-danger">인증번호 확인</button></td> -->
+                        <td class="input-area3-phone"><button type="button" class="btn btn-danger">인증번호 확인</button></td>
                     </tr>
                     <tr>
                         <th>성별&nbsp;&nbsp;&nbsp; </th>
@@ -155,19 +155,16 @@
         $(function() {
             const gender = "<%=gender%>";
             $("input[type=radio]").each(function() {
-                console.log($(this).val())
                 if(gender.search($(this).val()) != -1) {
                     $(this).attr("checked", true);
                 }
             })
             const birth = "<%=birth%>";
-            console.log(birth);
             const year = birth.substr(0, 4);
             const month = birth.substr(4, 2);
             const day = birth.substr(6, 2);
             const birthArr = [year, month, day]     
             $('.birth-area').children('input').each(function(i) {
-                console.log($(this));
                 $(this).val(birthArr[i]);
             });
         })

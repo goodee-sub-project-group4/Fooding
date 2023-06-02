@@ -22,10 +22,10 @@ public class MemberNoticeService {
 	 * @author 빛나
 	 * @return list
 	 */
-	public ArrayList<Notice> selectMemberNoticeList() {
+	public ArrayList<Notice> selectMemberNoticeList(PageInfo pi) {
 		
 		Connection conn = getConnection();
-		ArrayList<Notice> list = new MemberNoticeDao().selectMemberNoticeList(conn);
+		ArrayList<Notice> list = new MemberNoticeDao().selectMemberNoticeList(pi, conn);
 		close(conn);
 		return list;
 		
@@ -86,6 +86,19 @@ public class MemberNoticeService {
 		return listCount;
 		
 	}
+	
+	/** 공지사항 페이징
+	 * @return listCount
+	 */
+	public int selectListCountN() {
+		
+		Connection conn = getConnection();
+		int listCount = new MemberNoticeDao().selectListCountN(conn);
+		close(conn);
+		return listCount;
+		
+	}
+	
 	
 	
 	/** 1:1문의(업체)리스트

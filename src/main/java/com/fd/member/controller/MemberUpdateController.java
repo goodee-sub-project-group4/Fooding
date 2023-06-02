@@ -31,7 +31,6 @@ public class MemberUpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		// 1)
 		request.setCharacterEncoding("UTF-8");
 		
@@ -69,7 +68,6 @@ public class MemberUpdateController extends HttpServlet {
 			
 			// 성공 => 회원정보수정 페이지 (views/member/memberChangeInfo.jsp) == /changeInfo.me + 알람
 			response.sendRedirect(request.getContextPath() + "/myPageConfirmPwd.me");
-			
 			
 		}
 		

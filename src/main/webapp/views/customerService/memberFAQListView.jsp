@@ -4,7 +4,6 @@
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -45,6 +44,7 @@
         #number {width: 70px; text-align: center;}
         #category {width: 150px; text-align: center;}
         #faqTitle { padding-left:10px;}
+        
 
         /*페이징바*/
         .pagination button {color:red; margin-top:20px;}
@@ -72,7 +72,6 @@
 				<% for(Faq f : list) { %>
                 <ul>
                     <div class="list">
-                    
                         <div>
                             <div id="number"><%=f.getFaqNo()%></div>
                             <div id="category"><%= (f.getCategory().equals("caM")) ? "회원" : (f.getCategory().equals("caB")) ? "예약/결제/취소" : (f.getCategory().equals("caP")) ? "적립금" : "서비스이용" %></div>
@@ -80,15 +79,12 @@
                                 <div><%=f.getFaqTitle()%></div>
                             </div>
                         </div>
-                        
                     </div>
                    
                     <div class="content">
-                    
                         <div id="answer">
                            <%=f.getFaqContent()%>
                         </div>
-                        
                     </div>
                 </ul>
                 <% } %>
@@ -109,6 +105,8 @@
                     <% } %>
                 </ul>
             </div> 
+            
+            
         </div>
         <%@ include file="/views/common/footer.jsp" %>
     </div>

@@ -85,7 +85,7 @@
                 <form action="/Fooding/keyword.sh" id="header2-search">
                     <!-- 돋보기 클릭시 검색가능 -->
                     <div id="search">
-                        <input type="text" name="keyword" size="45">&nbsp;&nbsp; <!--  <img src="/Fooding/resources/images/search.png" width="25" height="25" > --> 
+                        <input type="text" name="keyword" size="45">&nbsp;&nbsp; <img src="/Fooding/resources/images/search.png" width="25" height="25" >
                     </div>
                     <input type="hidden" name="cpage" value="1">
                 </form>
@@ -105,7 +105,7 @@
                         <span class="dropdown">
                             <button type="button" data-toggle="dropdown">고객센터▼ &nbsp;</button>
                             <span class="dropdown-menu">
-                                <a class="dropdown-item" href="<%=contextPath%>/notice.me">공지사항</a>
+                                <a class="dropdown-item" href="<%=contextPath%>/notice.me?cpage=1">공지사항</a>
                                 <a class="dropdown-item" href="<%=contextPath%>/faq.me?cpage=1">FAQ</a>
                                 <a class="dropdown-item" href="<%=contextPath%>/question.me">1:1문의</a>
                                 <a class="dropdown-item" href="<%= contextPath %>/enrollForm.re">업체등록</a>

@@ -30,11 +30,12 @@ public class MemberNoticeDao {
 		}
 	}
 	
-	/** 공지사항 리스트
+	/** 페이징 포함 공지사항 리스트
 	 * @param conn
-	 * @return list
+	 * @param pi
+	 * @return
 	 */
-	public ArrayList<Notice> selectMemberNoticeList(Connection conn) {
+	public ArrayList<Notice> selectMemberNoticeList(PageInfo pi, Connection conn) {
 		// select
 		ArrayList<Notice> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -45,6 +46,12 @@ public class MemberNoticeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -54,8 +61,7 @@ public class MemberNoticeDao {
 						            rset.getInt("count"),
 						            rset.getDate("create_date")));
 			}
-			
-			
+		    
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -65,6 +71,38 @@ public class MemberNoticeDao {
 		
 		return list;
 		
+	}
+	
+	/** 공지사항 페이징 카운트
+	 * @param conn
+	 * @return
+	 */
+	public int selectListCountN(Connection conn) {
+		// select
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectListCountN");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	
 	}
 	
 	/** 조회수
@@ -175,7 +213,7 @@ public class MemberNoticeDao {
 		
 	}
 	
-	/** FAQ 페이징
+	/** FAQ 페이징 카운트
 	 * @author 빛나
 	 * @param conn
 	 * @return listCount

@@ -80,12 +80,12 @@
             .gender-area input {
                 margin: 20px;
                 accent-color: crimson;
-                
+
             }
 
             .gender-area {
                 font-weight: 600;
-                
+
             }
 
             .birth-area input {
@@ -209,19 +209,19 @@
                                         class="btn btn-danger doubleCheck">인증번호 확인</button></td>
 
                             </tr>
-                            
-                            
-                            
+
+
+
                             <tr>
-                            	<th>성별&nbsp;&nbsp;&nbsp; </th>
+                                <th>성별&nbsp;&nbsp;&nbsp; </th>
                                 <td class="gender-area">
                                     <input type="radio" style="width:30px; height:17px;" name="gender" value="M">남자
                                     <input type="radio" style="width:30px; height:17px;" name="gender" value="F">여자
                                     <input type="radio" style="width:30px; height:17px;" name="gender" value="N">선택안함
                                 </td>
                                 <td class="input-area3"></td>
-                           	</tr>
-                            
+                            </tr>
+
                             <tr>
                                 <th>생년월일&nbsp;&nbsp;&nbsp; </th>
                                 <td class="birth-area" width="500px">
@@ -331,7 +331,7 @@
                                             $nicknameInput.focus();
                                         }
                                     }
-                                }, 
+                                },
                                 error: function () {
                                     cosole.log("닉네임 중복체크 ajax 실패");
                                 }
@@ -355,82 +355,82 @@
                             });
                         });
 
-                        
+
                         const randomNumber = Math.floor(Math.random() * 10000) + 1;
-                
-                		// 인증번호 발송
-    					$('#sendNum').click(function() {
-    						const phone = document.getElementById("phone").value;
-        					if (phone.length == 0) {
-        						alert("번호를 입력해 주세요.");
-        						return false;
-        					}
-        					
-        					console.log(phone)
-        					console.log("숫자 4자리 : ", randomNumber)
-        					
-                            $.ajax ({
-                            	url: "<%=contextPath%>/RestApiPhonAuthCheck.me",
+
+                        // 인증번호 발송
+                        $('#sendNum').click(function () {
+                            const phone = document.getElementById("phone").value;
+                            if (phone.length == 0) {
+                                alert("번호를 입력해 주세요.");
+                                return false;
+                            }
+
+                            console.log(phone)
+                            console.log("숫자 4자리 : ", randomNumber)
+
+                            $.ajax({
+                                url: "<%=contextPath%>/RestApiPhonAuthCheck.me",
                                 type: 'POST',
                                 data: {
-                                to : phone,
-    	                		text : randomNumber },
-                            	success: function(resData) {
-                            		alert("암호를 발송했습니다.");
-                            	}
-    	                		
+                                    to: phone,
+                                    text: randomNumber
+                                },
+                                success: function (resData) {
+                                    alert("암호를 발송했습니다.");
+                                }
+
                             });
-    	
-    					});
-                            
-                            	// 인증번호 확인
-        	    				$('#sendNum2').click(function() {
-        	    					
-        	    					console.log(randomNumber)
-        	    					console.log(document.querySelector("#phone2").value)
-        	    					
-        	    					if (randomNumber == document.querySelector("#phone2").value) {
-        	    						alert("같다")
-        	    					} else {
-        	    						alert("다르다")
-        	    					}
-        	    					
-        	    					
-        	                    });
+
+                        });
+
+                        // 인증번호 확인
+                        $('#sendNum2').click(function () {
+
+                            console.log(randomNumber)
+                            console.log(document.querySelector("#phone2").value)
+
+                            if (randomNumber == document.querySelector("#phone2").value) {
+                                alert("인증번호가 확인되었습니다.")
+                            } else {
+                                alert("인증번호가 틀렸습니다. 다시 한 번 확인해주세요.")
+                            }
+
+                        });
                             	
     	                 	
                         
                         
-                        <%-- const code = "";
-                        $("#sendNum").click(function() {
-                        	alert("인증번호가 발송되었습니다.");
+                        <!-- const code = "";
+                        $("#sendNum").click(function () {
+                            alert("인증번호가 발송되었습니다.");
 
-                        	const phone = $("#phone").val();
+                            const phone = $("#phone").val();
 
-                        	$.ajax({
-                        		type:"get",
-                        		url:"<%=contextPath%>/phoneCheck.me",
+                            $.ajax({
+                                type: "get",
+                                url: "<%=contextPath%>/phoneCheck.me",
                                 data: { "userPhone": phone },
-                        		success:function(data) {
+                                success: function (data) {
                                     const checkNum = data;
                                     alert("checkNum:" + checkNum);
 
-                                    $("#sendNum2").click(function() {
+                                    $("#sendNum2").click(function () {
                                         const phone2 = $("#phone2").val();
 
-                                        if(phone === phone2) {
+                                        if (phone === phone2) {
                                             alert("인증에 성공하였습니다.");
                                         } else {
                                             alert("인증에 실패하였습니다. 다시 입력해주세요.");
                                         }
 
                                     });
-              
-                        		} 
 
-                        	});
+                                }
 
-                        });--%>
+                            });
+
+                        }); --%>
 
                     </script>
 
