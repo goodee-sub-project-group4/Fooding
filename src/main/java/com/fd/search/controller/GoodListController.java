@@ -42,26 +42,22 @@ public class GoodListController extends HttpServlet {
 		System.out.println(userNo);
 		
 		// 페이징처리 
-		int listCount;		// 현재 게시글 총 갯수
-		int currentPage;	// 사용자가 요청한 페이지 (== 현재 페이지)
-		int pageLimit;		// 페이지 하단에 보여질 페이징바의 페이지 최대갯수(몇개 단위씩)
-		int boardLimit;		// 한 페이지 내에 보여질 게시글 최대갯수(몇개 단위씩)
+		int listCount;		
+		int currentPage;	
+		int pageLimit;		
+		int boardLimit;		
 		
-		int maxPage;		// 가장 마지막페이지 (총 페이지 수)
-		int startPage;		// 사용자가 요청한 페이지 하단의 페이징바의 시작수
+		int maxPage;		
+		int startPage;		
 		int endPage;
 		
-		// * listCount : 총 게시글 갯수
 		listCount = new SearchService().selectGoodCount(userNo);
 		System.out.println(listCount); 
 		
-		// * currentPage : 사용자가 요청한 페이지 (현재 페이지)
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		
-		// * pageLimit : 페이징바의 페이지 최대 갯수 (단위)
 		pageLimit = 10;
 	
-		// * boardLimit : 한 페이지당 보여질 게시글 최대 갯수 (단위)
 		boardLimit = 10;
 		
 		maxPage = (int)Math.ceil( (double)listCount / boardLimit );

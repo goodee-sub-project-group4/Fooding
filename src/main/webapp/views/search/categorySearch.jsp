@@ -119,8 +119,6 @@
 
                     <!-- 검색결과 조회된 음식점 목록들 -->
                     <div id="content-main">
-                    
-                    
                     	<% if(list.isEmpty()){ %>
 							<!-- case1. 조회된 음식점이 없을 경우  -->
 							<div align="center">조회된 음식점이 없습니다.</div>
